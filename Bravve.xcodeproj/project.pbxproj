@@ -13,6 +13,8 @@
 		2EAEDF012881DEAB00C88374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF002881DEAB00C88374 /* Assets.xcassets */; };
 		2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */; };
 		2EAEDF0D2881E11C00C88374 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF0C2881E11C00C88374 /* SplashView.swift */; };
+		2EAEDF132881E42A00C88374 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF122881E42A00C88374 /* SplashViewModel.swift */; };
+		2EAEDF152881E43900C88374 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF142881E43900C88374 /* SplashModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		2EAEDF032881DEAC00C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAEDF052881DEAC00C88374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EAEDF0C2881E11C00C88374 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		2EAEDF122881E42A00C88374 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		2EAEDF142881E43900C88374 /* SplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 		2EAEDF102881E18F00C88374 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2EAEDF142881E43900C88374 /* SplashModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 		2EAEDF112881E19600C88374 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2EAEDF122881E42A00C88374 /* SplashViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -177,6 +183,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EAEDF152881E43900C88374 /* SplashModel.swift in Sources */,
+				2EAEDF132881E42A00C88374 /* SplashViewModel.swift in Sources */,
 				2EAEDF0D2881E11C00C88374 /* SplashView.swift in Sources */,
 				2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
