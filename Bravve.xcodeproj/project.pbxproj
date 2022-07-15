@@ -9,23 +9,21 @@
 /* Begin PBXBuildFile section */
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
-		2EAEDEF92881DEA900C88374 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF82881DEA900C88374 /* ViewController.swift */; };
-		2EAEDEFC2881DEA900C88374 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFA2881DEA900C88374 /* Main.storyboard */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
 		2EAEDF012881DEAB00C88374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF002881DEAB00C88374 /* Assets.xcassets */; };
 		2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */; };
+		2EAEDF0D2881E11C00C88374 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF0C2881E11C00C88374 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2EAEDEF82881DEA900C88374 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2EAEDEFB2881DEA900C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EAEDEFE2881DEA900C88374 /* Bravve.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bravve.xcdatamodel; sourceTree = "<group>"; };
 		2EAEDF002881DEAB00C88374 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDF032881DEAC00C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAEDF052881DEAC00C88374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EAEDF0C2881E11C00C88374 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +56,55 @@
 		2EAEDEF32881DEA900C88374 /* Bravve */ = {
 			isa = PBXGroup;
 			children = (
-				2EAEDEF42881DEA900C88374 /* AppDelegate.swift */,
-				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
-				2EAEDEF82881DEA900C88374 /* ViewController.swift */,
-				2EAEDEFA2881DEA900C88374 /* Main.storyboard */,
+				2EAEDF0E2881E16E00C88374 /* Splash */,
+				2EAEDF0B2881DFB300C88374 /* Delegate */,
 				2EAEDF002881DEAB00C88374 /* Assets.xcassets */,
 				2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */,
 				2EAEDF052881DEAC00C88374 /* Info.plist */,
 				2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */,
 			);
 			path = Bravve;
+			sourceTree = "<group>";
+		};
+		2EAEDF0B2881DFB300C88374 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				2EAEDEF42881DEA900C88374 /* AppDelegate.swift */,
+				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		2EAEDF0E2881E16E00C88374 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				2EAEDF112881E19600C88374 /* ViewModel */,
+				2EAEDF102881E18F00C88374 /* Model */,
+				2EAEDF0F2881E17E00C88374 /* View */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		2EAEDF0F2881E17E00C88374 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EAEDF0C2881E11C00C88374 /* SplashView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EAEDF102881E18F00C88374 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EAEDF112881E19600C88374 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +167,6 @@
 			files = (
 				2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */,
 				2EAEDF012881DEAB00C88374 /* Assets.xcassets in Resources */,
-				2EAEDEFC2881DEA900C88374 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EAEDEF92881DEA900C88374 /* ViewController.swift in Sources */,
+				2EAEDF0D2881E11C00C88374 /* SplashView.swift in Sources */,
 				2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */,
@@ -151,14 +187,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2EAEDEFA2881DEA900C88374 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EAEDEFB2881DEA900C88374 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,7 +323,6 @@
 				INFOPLIST_FILE = Bravve/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -322,7 +349,6 @@
 				INFOPLIST_FILE = Bravve/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
