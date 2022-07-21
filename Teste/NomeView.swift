@@ -135,11 +135,11 @@ class NomeView: UIViewController {
         view.addSubviews([bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, viewElements.registerStackView, registerButton])
         
         setupDefault()
-            
-//        viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
-//
-//            self.viewElements.ddiChoseLabel.text = action.title
-//        }))
+        
+        viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
+
+            self.viewElements.ddiChoseLabel.text = action.title
+        }))
         
         setupConstraints()
         
@@ -160,7 +160,6 @@ class NomeView: UIViewController {
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         viewElements.registerStackView.addGestureRecognizer(stackViewTap)
-        viewElements.ddisButton.addGestureRecognizer(stackViewTap)
         
         super.viewDidLoad()
     }
@@ -181,6 +180,7 @@ class NomeView: UIViewController {
         
         viewElements.rightTextField.isHidden = false
         viewElements.ddiChoseLabel.isHidden = false
+        viewElements.ddisButton.isEnabled = true
         
         viewElements.rightTextField.addTarget(self,
                                               action: #selector(changeText),
@@ -253,6 +253,7 @@ extension NomeView: NomeViewModelProtocol {
         
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
+        viewElements.ddisButton.isEnabled = false
         viewElements.rightTextField.isHidden = rightTextField
     }
     
