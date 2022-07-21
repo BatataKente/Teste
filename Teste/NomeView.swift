@@ -248,13 +248,12 @@ class NomeView: UIViewController {
 extension NomeView: NomeViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool,
-                     rightTextField: Bool) {
+                     ddiChoseLabel: Bool) {
         
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
         viewElements.ddisButton.isEnabled = false
-        viewElements.rightTextField.isHidden = rightTextField
+        viewElements.rightTextField.isHidden = true
     }
     
     func setFont(font: UIFont) {
