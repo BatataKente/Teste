@@ -119,12 +119,12 @@ extension UIButton {
         self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
     }
     
-    open func setToBackButtonDefault() {
+    open func setToBackButtonDefault(_ imageName: String = "backButtonWhite", _ constant: CGFloat = 15) {
         
-        self.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        self.tintColor = UIColor(named: "BravveColor")
+        self.setImage(UIImage(named: imageName ), for: .normal)
         
-        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, 22)
+        
+        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
         
         if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
