@@ -29,12 +29,22 @@ class NomeViewModel {
         
         switch sender.currentImage {
             
-            case UIImage(systemName: "person.circle.fill"):
+            case UIImage(named: "userBlue"):
             
                 makeNameScreen()
                 stage = .first
             
-            case UIImage(systemName: "iphone.circle.fill"):
+            case UIImage(named: "userGray"):
+            
+                makeNameScreen()
+                stage = .first
+            
+            case UIImage(named: "cellBlue"):
+            
+                makePhoneScreen()
+                stage = .second
+            
+            case UIImage(named: "cellGray"):
             
                 makePhoneScreen()
                 stage = .second
@@ -93,12 +103,12 @@ class NomeViewModel {
                           rightTextField: "",
                           infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!")
         
-        delegate?.setProgressBar(personalDataTitle: " Dados pessoais",
-                                 personalDataTint: .systemBlue,
+        delegate?.setProgressBar(personalDataTitle: "",
+                                 personalDataImage: "userBlue",
                                  phoneNumberTitle: "",
-                                 phoneNumberTint: .gray,
+                                 phoneNumberImage: "cellGray",
                                  emailTitle: "",
-                                 emailTint: .gray)
+                                 emailImage: "emailGray")
         
         delegate?.freezeButton()
         
@@ -117,11 +127,11 @@ class NomeViewModel {
                           infoLabel: "Precisamos do seu telefone com DDD!\n Por favor, informe o seu país também.")
         
         delegate?.setProgressBar(personalDataTitle: "",
-                                 personalDataTint: .gray,
-                                 phoneNumberTitle: " Celular",
-                                 phoneNumberTint: .systemBlue,
+                                 personalDataImage: "userGray",
+                                 phoneNumberTitle: "",
+                                 phoneNumberImage: "cellBlue",
                                  emailTitle: "",
-                                 emailTint: .gray)
+                                 emailImage: "emailGray")
         
         delegate?.freezeButton()
         
@@ -140,11 +150,11 @@ class NomeViewModel {
                           infoLabel: "Qual seu email? Não se preocupe, não vamos encher sua caixa de entrada.")
         
         delegate?.setProgressBar(personalDataTitle: "",
-                                 personalDataTint: .gray,
+                                 personalDataImage: "userGray",
                                  phoneNumberTitle: "",
-                                 phoneNumberTint: .gray,
-                                 emailTitle: " Email",
-                                 emailTint: .systemBlue)
+                                 phoneNumberImage: "cellGray",
+                                 emailTitle: "",
+                                 emailImage: "emailBlue")
         
         delegate?.freezeButton()
         
@@ -164,11 +174,11 @@ protocol NomeViewModelProtocol {
                  infoLabel: String)
     
     func setProgressBar(personalDataTitle: String,
-                        personalDataTint: UIColor,
+                        personalDataImage: String,
                         phoneNumberTitle: String,
-                        phoneNumberTint: UIColor,
+                        phoneNumberImage: String,
                         emailTitle: String,
-                        emailTint: UIColor)
+                        emailImage: String)
     
     func freezeButton()
     

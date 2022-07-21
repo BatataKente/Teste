@@ -16,6 +16,8 @@
 		14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDD2889B80400EA8EDD /* NomeView.swift */; };
 		14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */; };
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
+		14F55C342889ECE2003A8A34 /* ConstraintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */; };
+		14F55C362889EDD7003A8A34 /* DefaultUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F55C352889EDD7003A8A34 /* DefaultUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		14CBDBDD2889B80400EA8EDD /* NomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeView.swift; sourceTree = "<group>"; };
 		14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeModel.swift; sourceTree = "<group>"; };
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
+		14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintUtils.swift; sourceTree = "<group>"; };
+		14F55C352889EDD7003A8A34 /* DefaultUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14CBDBD92889B7C900EA8EDD /* AppUtils.swift */,
+				14F55C352889EDD7003A8A34 /* DefaultUtils.swift */,
+				14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				14CBDBCE2889B72500EA8EDD /* Assets.xcassets */,
@@ -148,10 +154,12 @@
 			files = (
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
+				14F55C362889EDD7003A8A34 /* DefaultUtils.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
+				14F55C342889ECE2003A8A34 /* ConstraintUtils.swift in Sources */,
 				14CBDBDA2889B7C900EA8EDD /* AppUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

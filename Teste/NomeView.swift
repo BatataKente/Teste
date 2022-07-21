@@ -21,13 +21,12 @@ class NomeView: UIViewController {
                                email: UIButton) = {
         
         let stackView = UIStackView()
-        let buttons = stackView.createProgressBarButtons(["person.circle.fill",
-                                                          "iphone.circle.fill",
-                                                          "mail.stack.fill",
-                                                          "lock.circle.fill",
-                                                          "pencil.circle.fill"])
-        buttons[0].setTitle(" Dados pessoais", for: .normal)
-        buttons[0].tintColor = .systemBlue
+        let buttons = stackView.createProgressBarButtons(["userBlue",
+                                                          "cellGray",
+                                                          "emailGray",
+                                                          "padlockGray",
+                                                          "hobbiesGray"])
+//        buttons[0].setTitle(" Dados pessoais", for: .normal)
         
         stackView.backgroundColor = .white
         stackView.spacing = 7
@@ -168,7 +167,7 @@ class NomeView: UIViewController {
         
         registerButton.setToBottomButtonDefault()
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault()
+        backButton.setToBackButtonDefault("backButtonPink")
     }
     
     @objc func stackViewTapped() {
@@ -191,6 +190,7 @@ class NomeView: UIViewController {
         
         progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        progressBarStackView.stack.heightAnchorInSuperview()
         
         infoLabel.constraintOutsideTo(.top, progressBarStackView.stack, 50)
         infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
@@ -273,18 +273,18 @@ extension NomeView: NomeViewModelProtocol {
     }
     
     func setProgressBar(personalDataTitle: String,
-                        personalDataTint: UIColor,
+                        personalDataImage: String,
                         phoneNumberTitle: String,
-                        phoneNumberTint: UIColor,
+                        phoneNumberImage: String,
                         emailTitle: String,
-                        emailTint: UIColor) {
+                        emailImage: String) {
         
         progressBarStackView.personalData.setTitle(personalDataTitle, for: .normal)
-        progressBarStackView.personalData.tintColor = personalDataTint
+        progressBarStackView.personalData.setImage(UIImage(named: personalDataImage), for: .normal)
         progressBarStackView.phone.setTitle(phoneNumberTitle, for: .normal)
-        progressBarStackView.phone.tintColor = phoneNumberTint
+        progressBarStackView.phone.setImage(UIImage(named: phoneNumberImage), for: .normal)
         progressBarStackView.email.setTitle(emailTitle, for: .normal)
-        progressBarStackView.email.tintColor = emailTint
+        progressBarStackView.email.setImage(UIImage(named: emailImage), for: .normal)
     }
     
     func freezeButton() {
