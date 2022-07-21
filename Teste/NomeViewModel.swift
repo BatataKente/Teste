@@ -103,7 +103,7 @@ class NomeViewModel {
                           rightTextField: "",
                           infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!")
         
-        delegate?.setProgressBar(personalDataTitle: "",
+        delegate?.setProgressBar(personalDataTitle: " Dados pessoais",
                                  personalDataImage: "userBlue",
                                  phoneNumberTitle: "",
                                  phoneNumberImage: "cellGray",
@@ -128,8 +128,8 @@ class NomeViewModel {
         
         delegate?.setProgressBar(personalDataTitle: "",
                                  personalDataImage: "userGray",
-                                 phoneNumberTitle: "",
-                                 phoneNumberImage: "cellBlue",
+                                 phoneNumberTitle: " Celular",
+                                 phoneNumberImage: "cellBlueSmall",
                                  emailTitle: "",
                                  emailImage: "emailGray")
         
@@ -153,8 +153,8 @@ class NomeViewModel {
                                  personalDataImage: "userGray",
                                  phoneNumberTitle: "",
                                  phoneNumberImage: "cellGray",
-                                 emailTitle: "",
-                                 emailImage: "emailBlue")
+                                 emailTitle: " Email",
+                                 emailImage: "emailBlueSmall")
         
         delegate?.freezeButton()
         
