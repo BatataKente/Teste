@@ -7,6 +7,14 @@
 
 import UIKit
 
+extension UIViewController {
+    
+    open func setToDefaultBackgroundColor() {
+        
+        view.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
+    }
+}
+
 extension UIImageView {
     
     open func setWayToDefault(_ imageName: String) {
@@ -81,7 +89,7 @@ extension UILabel {
 
 extension UIButton {
     
-    open func setToJumpButtonDefault(_ buttonTitle: String = "Pular",
+    open func setToJumpButtonDefault(buttonTitle: String = "Pular",
                                      _ constant: CGFloat = 70) {
         
         self.setTitle(buttonTitle, for: .normal)
@@ -104,7 +112,7 @@ extension UIButton {
     }
     
     open func setToButtonDefault(_ aboveWhom: Any?,
-                                 _ buttonTitle: String = "Continuar",
+                                 buttonTitle: String = "Continuar",
                                  _ constant: CGFloat = 30) {
         
         self.setTitle(buttonTitle, for: .normal)
