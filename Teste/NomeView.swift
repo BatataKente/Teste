@@ -9,6 +9,8 @@ import UIKit
 
 class NomeView: UIViewController {
     
+    let way = UIImageView()
+    
     let backButton = UIButton()
     
     let bravveIcon = UIImageView()
@@ -26,9 +28,8 @@ class NomeView: UIViewController {
                                                           "emailGray",
                                                           "padlockGray",
                                                           "hobbiesGray"])
-//        buttons[0].setTitle(" Dados pessoais", for: .normal)
+        buttons[0].setTitle(" Dados pessoais", for: .normal)
         
-        stackView.backgroundColor = .white
         stackView.spacing = 7
         
         return (stack: stackView,
@@ -131,18 +132,65 @@ class NomeView: UIViewController {
     
     override func viewDidLoad() {
         
-        view.addSubviews([bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, viewElements.registerStackView, registerButton])
+        setupView()
+        setupDefaults()
+        setupTargets()
         
-        setupDefault()
+        super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        setupConstraints()
+        
+        super.viewDidAppear(animated)
+    }
+    
+    func setupView() {
+        
+        view.addSubviews([way, bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, viewElements.registerStackView, registerButton])
+        
+        view.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
+    }
+    
+    func setupDefaults() {
+        
+        registerButton.setToBottomButtonDefault()
+        bravveIcon.setLogoToDefault()
+        backButton.setToBackButtonDefault("backButtonPink")
+        way.setWayToDefault("way3")
+    }
+    
+    func setupConstraints() {
+        
+        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
+        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        progressBarStackView.stack.heightAnchorInSuperview()
+        
+        infoLabel.constraintOutsideTo(.top, progressBarStackView.stack, 50)
+        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
+        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
+        
+        viewElements.registerStackView.constraintOutsideTo(.top, infoLabel, 50)
+        viewElements.registerStackView.constraintInsideTo(.leading, infoLabel)
+        viewElements.registerStackView.constraintInsideTo(.trailing, infoLabel)
+        viewElements.registerStackView.heightAnchorInSuperview(60)
+        
+        customShaddow.constraintInsideTo(.top, viewElements.registerStackView)
+        customShaddow.constraintInsideTo(.leading, viewElements.registerStackView)
+        customShaddow.constraintInsideTo(.trailing, viewElements.registerStackView)
+        customShaddow.constraintTo(.bottom, viewElements.registerStackView, 1)
+        
+        viewElements.leftStackView.widthAnchorInSuperview(80)
+        viewElements.ddisButton.widthAnchorInSuperview()
+    }
+    
+    func setupTargets() {
         
         viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
 
             self.viewElements.ddiChoseLabel.text = action.title
         }))
-        
-        setupConstraints()
-        
-        view.backgroundColor = .white
         
         backButton.addTarget(self,
                              action: #selector(back),
@@ -159,15 +207,6 @@ class NomeView: UIViewController {
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         viewElements.registerStackView.addGestureRecognizer(stackViewTap)
-        
-        super.viewDidLoad()
-    }
-    
-    func setupDefault() {
-        
-        registerButton.setToBottomButtonDefault()
-        bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault("backButtonPink")
     }
     
     @objc func stackViewTapped() {
@@ -184,29 +223,6 @@ class NomeView: UIViewController {
         viewElements.rightTextField.addTarget(self,
                                               action: #selector(changeText),
                                               for: .editingChanged)
-    }
-    
-    func setupConstraints() {
-        
-        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        progressBarStackView.stack.heightAnchorInSuperview()
-        
-        infoLabel.constraintOutsideTo(.top, progressBarStackView.stack, 50)
-        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
-        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
-        
-        viewElements.registerStackView.constraintOutsideTo(.top, infoLabel, 50)
-        viewElements.registerStackView.constraintInsideTo(.leading, infoLabel)
-        viewElements.registerStackView.constraintInsideTo(.trailing, infoLabel)
-        
-        customShaddow.constraintInsideTo(.top, viewElements.registerStackView)
-        customShaddow.constraintInsideTo(.leading, viewElements.registerStackView)
-        customShaddow.constraintInsideTo(.trailing, viewElements.registerStackView)
-        customShaddow.constraintTo(.bottom, viewElements.registerStackView, 1)
-        
-        viewElements.leftStackView.widthAnchorInSuperview(80)
-        viewElements.ddisButton.widthAnchorInSuperview()
     }
         
     @objc func changeScreen() {
@@ -233,14 +249,14 @@ class NomeView: UIViewController {
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
-            registerButton.backgroundColor = .red
+            registerButton.backgroundColor = UIColor(named: "PinkBravve")
         }
         else {
             
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
-            registerButton.backgroundColor = .gray
+            registerButton.backgroundColor = UIColor(named: "GrayBravve")
         }
     }
 }
@@ -292,7 +308,7 @@ extension NomeView: NomeViewModelProtocol {
         registerButton.removeTarget(nil,
                                     action: #selector(changeScreen),
                                     for: .touchUpInside)
-        registerButton.backgroundColor = .gray
+        registerButton.backgroundColor = UIColor(named: "GrayBravve")
         
         viewElements.registerStackView.layer.shadowOpacity = 0
     }

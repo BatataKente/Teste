@@ -9,6 +9,44 @@ import UIKit
 
 extension UIImageView {
     
+    open func setWayToDefault(_ imageName: String) {
+        
+        switch imageName {
+            
+            case "way1":
+            
+                self.image = UIImage(named: imageName)
+            
+                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
+            
+            case "way2":
+            
+                self.image = UIImage(named: imageName)
+            
+                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+        
+            case "way3":
+            
+                self.image = UIImage(named: imageName)
+            
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
+            
+            case "way4":
+            
+                self.image = UIImage(named: imageName)
+            
+                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(110)
+                self.widthAnchorInSuperview(280)
+            
+            default: return
+        }
+    }
+    
     open func setLogoToDefault(_ ImageName: String = "logoBlue") {
         
         self.image = UIImage(named: ImageName)
@@ -17,12 +55,12 @@ extension UIImageView {
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
         
         if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
+
             self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.045)
             self.constraintInsideTo(.width, superview?.safeAreaLayoutGuide, multiplier: 0.20)
         }
         else {
-            
+
             self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
             self.constraintInsideTo(.width, superview?.safeAreaLayoutGuide, multiplier: 0.3)
         }
@@ -47,11 +85,11 @@ extension UIButton {
                                      _ constant: CGFloat = 70) {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.setTitleColor(.blue, for: .normal)
+        self.setTitleColor(UIColor(named: "BlueBravve"), for: .normal)
         self.titleLabel?.font = UIFont(name: "Ubuntu-Regular", size: 15)
         self.layer.cornerRadius = 8
         
-        self.addBottomLineWithColor(color: .blue, width: 1, y: -7)
+        self.addBottomLineWithColor(color: UIColor(named: "BlueBravve") ?? UIColor(), width: 1, y: -7)
         
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide, constant)
@@ -62,19 +100,17 @@ extension UIButton {
         self.setImage(UIImage(named: buttonImageName),
                                       for: .normal)
         self.titleLabel?.font = UIFont(name: "Ubuntu-Medium", size: 14)
-        self.setTitleColor(.black, for: .normal)
-        self.tintColor = .gray
+        self.setTitleColor(UIColor(named: "BlueBravve"), for: .normal)
     }
     
     open func setToButtonDefault(_ aboveWhom: Any?,
                                  _ buttonTitle: String = "Continuar",
                                  _ constant: CGFloat = 30) {
         
-        
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.textColor = .white
         self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        self.backgroundColor = .gray
+        self.backgroundColor = UIColor(named: "PinkBravve")
         self.layer.cornerRadius = 8
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
@@ -90,7 +126,7 @@ extension UIButton {
         
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        self.backgroundColor = .gray
+        self.backgroundColor = UIColor(named: "GrayBravve")
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
