@@ -150,7 +150,7 @@ class NomeView: UIViewController {
         
         view.addSubviews([way, bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, viewElements.registerStackView, registerButton])
         
-        view.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
+        setToDefaultBackgroundColor()
     }
     
     func setupDefaults() {
