@@ -202,7 +202,7 @@ class Recuperar1View: UIViewController {
         
         buttonContinue.removeTarget(nil, action: #selector(changeScreen_), for: .touchUpInside)
         
-        buttonContinue.backgroundColor = .gray
+        buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
     }
 
 
