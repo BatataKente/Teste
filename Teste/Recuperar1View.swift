@@ -113,7 +113,7 @@ class Recuperar1View: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "Color6")
+        view.backgroundColor = UIColor(named: "WhiteBrave")
 
         addSubviews()
         addConstraints()
