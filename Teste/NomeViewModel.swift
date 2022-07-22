@@ -9,9 +9,13 @@ import UIKit
 
 class NomeViewModel {
     
-    var stage: Stage = .first
-    
+    var stage: Stage
     var delegate: NomeViewModelProtocol?
+    
+    init(_ stage: Stage) {
+        
+        self.stage = stage
+    }
     
     func createDDIs(_ handler: @escaping UIActionHandler) -> [UIAction] {
         
@@ -53,6 +57,24 @@ class NomeViewModel {
                 
                 makeEmailScreen()
                 stage = .thirdy
+        }
+    }
+    
+    func makeScreen() {
+        
+        switch stage {
+            
+            case .first:
+            
+                makeNameScreen()
+            
+            case .second:
+            
+                makePhoneScreen()
+            
+            default:
+            
+                makeEmailScreen()
         }
     }
     

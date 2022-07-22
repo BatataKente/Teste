@@ -128,7 +128,19 @@ class NomeView: UIViewController {
                 ddisButton: ddisButton)
     }()
     
-    let nomeViewModel = NomeViewModel()
+    let nomeViewModel: NomeViewModel
+    
+    init(_ stage: Stage = .first) {
+        
+        nomeViewModel = NomeViewModel(stage)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         
@@ -147,6 +159,9 @@ class NomeView: UIViewController {
     }
     
     func setupView() {
+        
+        nomeViewModel.delegate = self
+        nomeViewModel.makeScreen()
         
         view.addSubviews([way, bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, viewElements.registerStackView, registerButton])
         
@@ -227,13 +242,11 @@ class NomeView: UIViewController {
         
     @objc func changeScreen() {
         
-        nomeViewModel.delegate = self
         nomeViewModel.advanceScreen()
     }
     
     @objc func progressBarAction(_ sender: UIButton) {
         
-        nomeViewModel.delegate = self
         nomeViewModel.changeScreenWithProgressBar(sender)
     }
     
