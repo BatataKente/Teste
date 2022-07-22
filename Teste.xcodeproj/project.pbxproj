@@ -19,6 +19,7 @@
 		14F55C342889ECE2003A8A34 /* ConstraintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */; };
 		14F55C382889FB82003A8A34 /* DefaultUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F55C372889FB82003A8A34 /* DefaultUtils.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
+		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintUtils.swift; sourceTree = "<group>"; };
 		14F55C372889FB82003A8A34 /* DefaultUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUtils.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
+		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
+				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
 				14CBDBD92889B7C900EA8EDD /* AppUtils.swift */,
 				14F55C372889FB82003A8A34 /* DefaultUtils.swift */,
 				14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */,
@@ -158,6 +161,7 @@
 			files = (
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
+				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14F55C382889FB82003A8A34 /* DefaultUtils.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
