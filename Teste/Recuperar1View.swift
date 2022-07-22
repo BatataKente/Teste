@@ -118,7 +118,7 @@ class Recuperar1View: UIViewController {
         addSubviews()
         addConstraints()
         
-        buttonBack.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        buttonBack.addTarget(self, action: #selector(actionButtonBack), for: .touchUpInside)
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         stackViewEmail.addGestureRecognizer(stackViewTap)
@@ -188,7 +188,7 @@ class Recuperar1View: UIViewController {
     }
 
     
-    @objc func actionButton(sender: UIButton){
+    @objc func actionButtonBack(sender: UIButton){
         
     }
   
