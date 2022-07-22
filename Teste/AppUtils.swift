@@ -54,7 +54,7 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(systemName: "downButtonBlue"), for: .normal)
+        self.setImage(UIImage(named: "downButtonBlue"), for: .normal)
         self.tintColor = .systemBlue
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
