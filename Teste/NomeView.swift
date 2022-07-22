@@ -28,7 +28,6 @@ class NomeView: UIViewController {
                                                           "emailGray",
                                                           "padlockGray",
                                                           "hobbiesGray"])
-        buttons[0].setTitle(" Dados pessoais", for: .normal)
         
         stackView.spacing = 7
         
@@ -41,7 +40,6 @@ class NomeView: UIViewController {
     let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
-        infoLabel.setToDefault(text: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!")
         
         return infoLabel
     }()
@@ -68,11 +66,9 @@ class NomeView: UIViewController {
         
         let ddisLabel = UILabel()
         ddisLabel.text = "+55"
-        ddisLabel.font = UIFont(name: "Ubuntu-Light", size: 15)
         
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
-        ddiChoseLabel.isHidden = true
         ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
@@ -82,7 +78,6 @@ class NomeView: UIViewController {
         let ddisButton = UIButton()
         
         let leftStackView = UIStackView(arrangedSubviews: [stackView, ddisButton])
-        leftStackView.isHidden = true
         leftStackView.backgroundColor = .white
         leftStackView.layer.cornerRadius = 10
         leftStackView.isLayoutMarginsRelativeArrangement = true
@@ -92,13 +87,12 @@ class NomeView: UIViewController {
                                                    right: 0)
         
         let rightLabel = UILabel()
-        rightLabel.text = "Nome Completo"
-        rightLabel.font = UIFont(name: "Ubuntu-Light", size: 15)
+//        rightLabel.text = "Nome Completo"
+//        rightLabel.font = UIFont(name: "Ubuntu-Light", size: 15)
         
         let rightTextField = UITextField()
         rightTextField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        rightTextField.isHidden = true
-        rightTextField.keyboardType = .namePhonePad
+//        rightTextField.isHidden = true
         
         let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
                                                             rightTextField])
