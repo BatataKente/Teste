@@ -9,7 +9,7 @@ import UIKit
 
 class NomeView: UIViewController {
     
-    let way = UIImageView()
+    let ways = [UIImageView(), UIImageView(), UIImageView()]
     
     let backButton = UIButton()
     
@@ -54,7 +54,7 @@ class NomeView: UIViewController {
         return customShaddow
     }()
     
-    let viewElements: (registerStackView: UIStackView,
+    let viewElements: (rightStackView: UIStackView,
                        leftStackView: UIStackView,
                        rightTextField: UITextField,
                        rightLabel: UILabel,
@@ -87,12 +87,9 @@ class NomeView: UIViewController {
                                                    right: 0)
         
         let rightLabel = UILabel()
-//        rightLabel.text = "Nome Completo"
-//        rightLabel.font = UIFont(name: "Ubuntu-Light", size: 15)
         
         let rightTextField = UITextField()
         rightTextField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-//        rightTextField.isHidden = true
         
         let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
                                                             rightTextField])
@@ -106,20 +103,25 @@ class NomeView: UIViewController {
                                                        bottom: stackMargins,
                                                        right: stackMargins)
         
-        let registerStackView = UIStackView(arrangedSubviews: [leftStackView,
-                                                               rightStackView])
-        registerStackView.backgroundColor = .white
-        registerStackView.layer.borderWidth = 1
-        registerStackView.spacing = 15
-        registerStackView.layer.cornerRadius = 8
         
-        return (registerStackView: registerStackView,
+        return (rightStackView: rightStackView,
                 leftStackView: leftStackView,
                 rightTextField: rightTextField,
                 rightLabel: rightLabel,
                 ddiChoseLabel: ddiChoseLabel,
                 ddisLabel: ddisLabel,
                 ddisButton: ddisButton)
+    }()
+    
+    let registerStackView: UIStackView = {
+
+        let registerStackView = UIStackView()
+        registerStackView.backgroundColor = .white
+        registerStackView.layer.borderWidth = 1
+        registerStackView.spacing = 15
+        registerStackView.layer.cornerRadius = 8
+
+        return registerStackView
     }()
     
     let nomeViewModel: NomeViewModel
@@ -157,7 +159,7 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews([way, bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, viewElements.registerStackView, registerButton])
+        view.addSubviews(ways + [bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
         
         setToDefaultBackgroundColor()
     }
@@ -167,7 +169,9 @@ class NomeView: UIViewController {
         registerButton.setToBottomButtonDefault()
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault("backButtonPink")
-        way.setWayToDefault("way3")
+        ways[0].setWayToDefault("way3")
+        ways[1].setWayToDefault("way1")
+        ways[2].setWayToDefault("way4")
     }
     
     func setupConstraints() {
@@ -180,15 +184,15 @@ class NomeView: UIViewController {
         infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
         infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
         
-        viewElements.registerStackView.constraintOutsideTo(.top, infoLabel, 50)
-        viewElements.registerStackView.constraintInsideTo(.leading, infoLabel)
-        viewElements.registerStackView.constraintInsideTo(.trailing, infoLabel)
-        viewElements.registerStackView.heightAnchorInSuperview(60)
+        registerStackView.constraintOutsideTo(.top, infoLabel, 50)
+        registerStackView.constraintInsideTo(.leading, infoLabel)
+        registerStackView.constraintInsideTo(.trailing, infoLabel)
+        registerStackView.heightAnchorInSuperview(60)
         
-        customShaddow.constraintInsideTo(.top, viewElements.registerStackView)
-        customShaddow.constraintInsideTo(.leading, viewElements.registerStackView)
-        customShaddow.constraintInsideTo(.trailing, viewElements.registerStackView)
-        customShaddow.constraintTo(.bottom, viewElements.registerStackView, 1)
+        customShaddow.constraintInsideTo(.top, registerStackView)
+        customShaddow.constraintInsideTo(.leading, registerStackView)
+        customShaddow.constraintInsideTo(.trailing, registerStackView)
+        customShaddow.constraintTo(.bottom, registerStackView, 1)
         
         viewElements.leftStackView.widthAnchorInSuperview(80)
         viewElements.ddisButton.widthAnchorInSuperview()
@@ -215,7 +219,10 @@ class NomeView: UIViewController {
                                              for: .touchUpInside)
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
-        viewElements.registerStackView.addGestureRecognizer(stackViewTap)
+        registerStackView.addGestureRecognizer(stackViewTap)
+        
+        registerStackView.addArrangedSubview(viewElements.leftStackView)
+        registerStackView.addArrangedSubview(viewElements.rightStackView)
     }
     
     @objc func stackViewTapped() {
@@ -259,7 +266,7 @@ class NomeView: UIViewController {
             registerButton.backgroundColor = UIColor(named: "PinkBravve")
         }
         else {
-            
+
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
@@ -271,12 +278,17 @@ class NomeView: UIViewController {
 extension NomeView: NomeViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool) {
+                     ddiChoseLabel: Bool,
+                     ways: [Bool]) {
         
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
         viewElements.ddisButton.isEnabled = false
         viewElements.rightTextField.isHidden = true
+        
+        self.ways[0].isHidden = ways[0]
+        self.ways[1].isHidden = ways[1]
+        self.ways[2].isHidden = ways[2]
     }
     
     func setFont(font: UIFont) {
@@ -316,8 +328,6 @@ extension NomeView: NomeViewModelProtocol {
                                     action: #selector(changeScreen),
                                     for: .touchUpInside)
         registerButton.backgroundColor = UIColor(named: "GrayBravve")
-        
-        viewElements.registerStackView.layer.shadowOpacity = 0
     }
     
     func setKeyboardType(keyboardType: UIKeyboardType) {

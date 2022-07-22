@@ -117,7 +117,8 @@ class NomeViewModel {
     func makeNameScreen() {
         
         delegate?.setIshidden(leftStackView: true,
-                              ddiChoseLabel: false)
+                              ddiChoseLabel: false,
+                              ways: [true, true, false])
         
         delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
         
@@ -140,7 +141,8 @@ class NomeViewModel {
     func makePhoneScreen() {
         
         delegate?.setIshidden(leftStackView: false,
-                              ddiChoseLabel: true)
+                              ddiChoseLabel: true,
+                              ways: [true, false, true])
         
         delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
         
@@ -163,7 +165,8 @@ class NomeViewModel {
     func makeEmailScreen() {
         
         delegate?.setIshidden(leftStackView: true,
-                              ddiChoseLabel: false)
+                              ddiChoseLabel: false,
+                              ways: [false, true, true])
         
         delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
         
@@ -187,7 +190,8 @@ class NomeViewModel {
 protocol NomeViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool)
+                     ddiChoseLabel: Bool,
+                     ways: [Bool])
     
     func setFont(font: UIFont)
     
