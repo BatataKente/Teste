@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeAbertaView.swift */; };
 		14509954288B32AE006AC775 /* ValidateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14509953288B32AE006AC775 /* ValidateUtils.swift */; };
+		14A1E442288C568E001B046B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 14A1E441288C568E001B046B /* Fonts */; };
 		14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBC52889B72300EA8EDD /* AppDelegate.swift */; };
 		14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */; };
 		14CBDBCF2889B72500EA8EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14CBDBCE2889B72500EA8EDD /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		1415AB75288B07100077CE08 /* HomeAbertaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaView.swift; sourceTree = "<group>"; };
 		14509953288B32AE006AC775 /* ValidateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateUtils.swift; sourceTree = "<group>"; };
+		14A1E441288C568E001B046B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		14CBDBC22889B72300EA8EDD /* Teste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14CBDBC52889B72300EA8EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				14A1E441288C568E001B046B /* Fonts */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
 				14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
@@ -155,6 +158,7 @@
 				14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */,
 				14CBDBCF2889B72500EA8EDD /* Assets.xcassets in Resources */,
 				14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */,
+				14A1E442288C568E001B046B /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
