@@ -86,7 +86,7 @@ class HomeAbertaView: UIViewController {
     }()
     
 //    let tabBar: UITabBar = {
-//        
+//
 //        let tabBar = UITabBar()
 //        tabBar.backgroundColor = .red
 //
@@ -104,7 +104,7 @@ class HomeAbertaView: UIViewController {
     
     func setupView() {
         
-        view.addSubviews([titleLabel, tabBar])
+        view.addSubviews([titleLabel])
         view.setToDefaultBackgroundColor()
     }
     
