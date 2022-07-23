@@ -79,7 +79,7 @@ class FotoView: UIViewController {
         
         view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, jumpButton, imageView, editButton, tutorialLabel])
         
-        setToDefaultBackgroundColor()
+        view.setToDefaultBackgroundColor()
     }
     
     func setupDefaults() {

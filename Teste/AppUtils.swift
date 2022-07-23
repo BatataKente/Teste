@@ -98,4 +98,16 @@ extension UIView {
 
         self.layer.addSublayer(bottomBorderLine)
     }
+    
+    func addLeadingLineWithColor(color: UIColor = .gray, height: CGFloat = 0.8, x: CGFloat = 0) {
+
+        let leadingBorderLine = CALayer()
+        leadingBorderLine.backgroundColor = color.cgColor
+        leadingBorderLine.frame = CGRect(x: self.frame.size.width - height + x,
+                                        y: 0,
+                                        width: self.frame.size.height,
+                                        height: height)
+
+        self.layer.addSublayer(leadingBorderLine)
+    }
 }
