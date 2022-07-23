@@ -9,9 +9,9 @@ import UIKit
 
 class HomeAbertaView: UIViewController {
     
-    let titleLabel = UILabel()
+    private let titleLabel = UILabel()
     
-    lazy var navigationBar: UINavigationBar = {
+    private lazy var navigationBar: UINavigationBar = {
         
         guard let navigationBar = navigationController?.navigationBar else {return UINavigationBar()}
         
@@ -40,7 +40,7 @@ class HomeAbertaView: UIViewController {
         return navigationBar
     }()
     
-    let viewElements: (leftStackView: UIStackView,
+    private let viewElements: (leftStackView: UIStackView,
                        leftButton: UIButton,
                        rightStackView: UIStackView,
                        rightButton: UIButton) = {
@@ -102,18 +102,18 @@ class HomeAbertaView: UIViewController {
         setupConstraints()
     }
     
-    func setupView() {
+    private func setupView() {
         
         view.addSubviews([titleLabel])
         view.setToDefaultBackgroundColor()
     }
     
-    func setupDefaults() {
+    private func setupDefaults() {
         
         titleLabel.setToDefault(text: "Espaços")
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         
         viewElements.leftStackView.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
         viewElements.leftButton.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
