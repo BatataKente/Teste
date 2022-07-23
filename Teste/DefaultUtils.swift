@@ -7,11 +7,11 @@
 
 import UIKit
 
-extension UIViewController {
+extension UIView {
     
     open func setToDefaultBackgroundColor() {
         
-        view.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
+        self.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
     }
 }
 

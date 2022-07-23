@@ -161,7 +161,7 @@ class NomeView: UIViewController {
         
         view.addSubviews(ways + [bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
         
-        setToDefaultBackgroundColor()
+        view.setToDefaultBackgroundColor()
     }
     
     func setupDefaults() {
@@ -304,7 +304,7 @@ extension NomeView: NomeViewModelProtocol {
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
 
-        self.infoLabel.text = infoLabel
+        self.infoLabel.setToDefault(text: infoLabel)
     }
     
     func setProgressBar(personalDataTitle: String,
