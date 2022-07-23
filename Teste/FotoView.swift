@@ -9,18 +9,18 @@ import UIKit
 
 class FotoView: UIViewController {
     
-    let bravveIcon = UIImageView()
+    private let bravveIcon = UIImageView()
     
-    let backButton = UIButton()
+    private let backButton = UIButton()
     
-    let registerButton = UIButton()
+    private let registerButton = UIButton()
     
-    let jumpButton = UIButton()
+    private let jumpButton = UIButton()
     
-    let firstWay = UIImageView(),
+    private let firstWay = UIImageView(),
         secondWay = UIImageView()
     
-    let progressBarStackView: UIStackView = {
+    private let progressBarStackView: UIStackView = {
         
         let stackView = UIStackView()
         let buttons = stackView.createProgressBarButtons(["photoBlue",
@@ -33,7 +33,7 @@ class FotoView: UIViewController {
         return stackView
     }()
     
-    let infoLabel: UILabel = {
+    private let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
         infoLabel.setToDefault(text: "Quer adicionar uma foto ao seu perfil, agora? Esse passo é opcional!")
@@ -41,7 +41,7 @@ class FotoView: UIViewController {
         return infoLabel
     }()
     
-    let tutorialLabel: UILabel = {
+    private let tutorialLabel: UILabel = {
         
         let infoLabel = UILabel()
         infoLabel.setToDefault(text: "Recomendado: 512x512\nMáximo: 2MB")
@@ -49,9 +49,9 @@ class FotoView: UIViewController {
         return infoLabel
     }()
     
-    let imageView = UIImageView()
+    private let imageView = UIImageView()
     
-    let editButton: UIButton = {
+    private let editButton: UIButton = {
         
         let editButton = UIButton()
         editButton.setImage(UIImage(named: "photoPink"), for: .normal)
@@ -75,14 +75,14 @@ class FotoView: UIViewController {
         super.viewDidLoad()
     }
     
-    func setupView() {
+    private func setupView() {
         
         view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, jumpButton, imageView, editButton, tutorialLabel])
         
         view.setToDefaultBackgroundColor()
     }
     
-    func setupDefaults() {
+    private func setupDefaults() {
         
         firstWay.setWayToDefault("way4")
         secondWay.setWayToDefault("way1")
@@ -92,7 +92,7 @@ class FotoView: UIViewController {
         jumpButton.setToJumpButtonDefault(50)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         
         progressBarStackView.constraintOutsideTo(.top, bravveIcon, 50)
         progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
@@ -111,7 +111,7 @@ class FotoView: UIViewController {
         editButton.sizeAnchorInSuperview()
     }
     
-    func imageSetup() {
+    private func imageSetup() {
         
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = imageView.frame.size.height/2

@@ -9,15 +9,15 @@ import UIKit
 
 class NomeView: UIViewController {
     
-    let ways = [UIImageView(), UIImageView(), UIImageView()]
+    private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
-    let backButton = UIButton()
+    private let backButton = UIButton()
     
-    let bravveIcon = UIImageView()
+    private let bravveIcon = UIImageView()
     
-    let registerButton = UIButton()
+    private let registerButton = UIButton()
     
-    let progressBarStackView: (stack: UIStackView,
+    private let progressBarStackView: (stack: UIStackView,
                                personalData: UIButton,
                                phone: UIButton,
                                email: UIButton) = {
@@ -37,14 +37,14 @@ class NomeView: UIViewController {
                 email: buttons[2])
     }()
     
-    let infoLabel: UILabel = {
+    private let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
         
         return infoLabel
     }()
     
-    let customShaddow: UIView = {
+    private let customShaddow: UIView = {
         
         let customShaddow = UIView()
         customShaddow.backgroundColor = .blue
@@ -54,7 +54,7 @@ class NomeView: UIViewController {
         return customShaddow
     }()
     
-    let viewElements: (rightStackView: UIStackView,
+    private let viewElements: (rightStackView: UIStackView,
                        leftStackView: UIStackView,
                        rightTextField: UITextField,
                        rightLabel: UILabel,
@@ -113,7 +113,7 @@ class NomeView: UIViewController {
                 ddisButton: ddisButton)
     }()
     
-    let registerStackView: UIStackView = {
+    private let registerStackView: UIStackView = {
 
         let registerStackView = UIStackView()
         registerStackView.backgroundColor = .white
@@ -124,7 +124,7 @@ class NomeView: UIViewController {
         return registerStackView
     }()
     
-    let nomeViewModel: NomeViewModel
+    private let nomeViewModel: NomeViewModel
     
     init(_ stage: Stage = .first) {
         
@@ -154,7 +154,7 @@ class NomeView: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    func setupView() {
+    private func setupView() {
         
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
@@ -164,7 +164,7 @@ class NomeView: UIViewController {
         view.setToDefaultBackgroundColor()
     }
     
-    func setupDefaults() {
+    private func setupDefaults() {
         
         registerButton.setToBottomButtonDefault()
         bravveIcon.setLogoToDefault()
@@ -174,7 +174,7 @@ class NomeView: UIViewController {
         ways[2].setWayToDefault("way4")
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         
         progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
@@ -198,7 +198,7 @@ class NomeView: UIViewController {
         viewElements.ddisButton.widthAnchorInSuperview()
     }
     
-    func setupTargets() {
+    private func setupTargets() {
         
         viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
 

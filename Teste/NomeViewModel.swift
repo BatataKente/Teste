@@ -9,7 +9,7 @@ import UIKit
 
 class NomeViewModel {
     
-    var stage: Stage
+    private var stage: Stage
     var delegate: NomeViewModelProtocol?
     
     init(_ stage: Stage) {
@@ -114,7 +114,7 @@ class NomeViewModel {
         }
     }
     
-    func makeNameScreen() {
+    private func makeNameScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
@@ -138,7 +138,7 @@ class NomeViewModel {
         delegate?.setKeyboardType(keyboardType: .namePhonePad)
     }
     
-    func makePhoneScreen() {
+    private func makePhoneScreen() {
         
         delegate?.setIshidden(leftStackView: false,
                               ddiChoseLabel: true,
@@ -162,7 +162,7 @@ class NomeViewModel {
         delegate?.setKeyboardType(keyboardType: .numberPad)
     }
     
-    func makeEmailScreen() {
+    private func makeEmailScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
