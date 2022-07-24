@@ -85,13 +85,27 @@ class HomeAbertaView: UIViewController {
                 rightButton: rightButton)
     }()
     
-//    let tabBar: UITabBar = {
+    let tableView: UITableView = {
+        
+        let tableView = UITableView()
+        tableView.backgroundColor = .systemBlue
+        tableView.register(HomeAbertaTableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        return tableView
+    }()
+    
+    let tabBar: UITabBar = {
+
+        let tabBar = UITabBar()
+        tabBar.barTintColor = .red
+        
+//        let tabBarItem = UITabBarItem()
+//        tabBarItem.image = UIImage(named: "activiesBlue")
 //
-//        let tabBar = UITabBar()
-//        tabBar.backgroundColor = .red
-//
-//        return tabBar
-//    }()
+//        tabBar.setItems([tabBarItem], animated: true)
+
+        return tabBar
+    }()
     
     override func viewDidLoad() {
         
@@ -104,13 +118,16 @@ class HomeAbertaView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([titleLabel])
+        view.addSubviews([titleLabel, tabBar, tableView])
         view.setToDefaultBackgroundColor()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func setupDefaults() {
         
-        titleLabel.setToDefault(text: "Espaços")
+        titleLabel.setToDefault(text: "Espaços", .left)
     }
     
     private func setupConstraints() {
@@ -122,10 +139,30 @@ class HomeAbertaView: UIViewController {
         
         titleLabel.constraintInsideTo(.top, view.safeAreaLayoutGuide, 15)
         titleLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 20)
+        titleLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 20)
         
-//        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-//        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-//        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        tableView.constraintOutsideTo(.top, titleLabel, 15)
+        tableView.constraintInsideTo(.leading, titleLabel)
+        tableView.constraintInsideTo(.trailing, titleLabel)
+        tableView.constraintOutsideTo(.bottom, tabBar)
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
 
+extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        return cell
+    }
+}
