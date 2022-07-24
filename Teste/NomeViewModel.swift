@@ -9,9 +9,13 @@ import UIKit
 
 class NomeViewModel {
     
-    var stage: Stage = .first
-    
+    private var stage: Stage
     var delegate: NomeViewModelProtocol?
+    
+    init(_ stage: Stage) {
+        
+        self.stage = stage
+    }
     
     func createDDIs(_ handler: @escaping UIActionHandler) -> [UIAction] {
         
@@ -29,12 +33,22 @@ class NomeViewModel {
         
         switch sender.currentImage {
             
-            case UIImage(systemName: "person.circle.fill"):
+            case UIImage(named: "userBlue"):
             
                 makeNameScreen()
                 stage = .first
             
-            case UIImage(systemName: "iphone.circle.fill"):
+            case UIImage(named: "userGray"):
+            
+                makeNameScreen()
+                stage = .first
+            
+            case UIImage(named: "cellBlue"):
+            
+                makePhoneScreen()
+                stage = .second
+            
+            case UIImage(named: "cellGray"):
             
                 makePhoneScreen()
                 stage = .second
@@ -43,6 +57,24 @@ class NomeViewModel {
                 
                 makeEmailScreen()
                 stage = .thirdy
+        }
+    }
+    
+    func makeScreen() {
+        
+        switch stage {
+            
+            case .first:
+            
+                makeNameScreen()
+            
+            case .second:
+            
+                makePhoneScreen()
+            
+            default:
+            
+                makeEmailScreen()
         }
     }
     
@@ -82,11 +114,11 @@ class NomeViewModel {
         }
     }
     
-    func makeNameScreen() {
+    private func makeNameScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
-                              rightTextField: true)
+                              ways: [true, true, false])
         
         delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
         
@@ -95,22 +127,22 @@ class NomeViewModel {
                           infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!")
         
         delegate?.setProgressBar(personalDataTitle: " Dados pessoais",
-                                 personalDataTint: .systemBlue,
+                                 personalDataImage: "userBlue",
                                  phoneNumberTitle: "",
-                                 phoneNumberTint: .gray,
+                                 phoneNumberImage: "cellGray",
                                  emailTitle: "",
-                                 emailTint: .gray)
+                                 emailImage: "emailGray")
         
         delegate?.freezeButton()
         
         delegate?.setKeyboardType(keyboardType: .namePhonePad)
     }
     
-    func makePhoneScreen() {
+    private func makePhoneScreen() {
         
         delegate?.setIshidden(leftStackView: false,
                               ddiChoseLabel: true,
-                              rightTextField: true)
+                              ways: [true, false, true])
         
         delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
         
@@ -119,22 +151,22 @@ class NomeViewModel {
                           infoLabel: "Precisamos do seu telefone com DDD!\n Por favor, informe o seu país também.")
         
         delegate?.setProgressBar(personalDataTitle: "",
-                                 personalDataTint: .gray,
+                                 personalDataImage: "userGray",
                                  phoneNumberTitle: " Celular",
-                                 phoneNumberTint: .systemBlue,
+                                 phoneNumberImage: "cellBlueSmall",
                                  emailTitle: "",
-                                 emailTint: .gray)
+                                 emailImage: "emailGray")
         
         delegate?.freezeButton()
         
         delegate?.setKeyboardType(keyboardType: .numberPad)
     }
     
-    func makeEmailScreen() {
+    private func makeEmailScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
-                              rightTextField: true)
+                              ways: [false, true, true])
         
         delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
         
@@ -143,11 +175,11 @@ class NomeViewModel {
                           infoLabel: "Qual seu email? Não se preocupe, não vamos encher sua caixa de entrada.")
         
         delegate?.setProgressBar(personalDataTitle: "",
-                                 personalDataTint: .gray,
+                                 personalDataImage: "userGray",
                                  phoneNumberTitle: "",
-                                 phoneNumberTint: .gray,
+                                 phoneNumberImage: "cellGray",
                                  emailTitle: " Email",
-                                 emailTint: .systemBlue)
+                                 emailImage: "emailBlueSmall")
         
         delegate?.freezeButton()
         
@@ -159,7 +191,7 @@ protocol NomeViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
-                     rightTextField: Bool)
+                     ways: [Bool])
     
     func setFont(font: UIFont)
     
@@ -168,11 +200,11 @@ protocol NomeViewModelProtocol {
                  infoLabel: String)
     
     func setProgressBar(personalDataTitle: String,
-                        personalDataTint: UIColor,
+                        personalDataImage: String,
                         phoneNumberTitle: String,
-                        phoneNumberTint: UIColor,
+                        phoneNumberImage: String,
                         emailTitle: String,
-                        emailTint: UIColor)
+                        emailImage: String)
     
     func freezeButton()
     

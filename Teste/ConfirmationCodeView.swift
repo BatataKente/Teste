@@ -1,0 +1,384 @@
+//
+//  ConfirmationCodeView.swift
+//  TestB
+//
+//  Created by user220237 on 7/20/22.
+//
+
+import UIKit
+
+class ConfirmationCodeView: UIViewController, UITextFieldDelegate {
+
+    let backgroundImage: UIImageView = {
+        let image = UIImage(named: "way3")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let bravveIcon = UIImageView()
+
+    let messageSentLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Enviamos o código de confirmação por SMS e precisamos dele!"
+        label.numberOfLines = 10
+        label.textAlignment = .center
+        label.font = UIFont(name: "Ubuntu", size: 16)
+        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        return label
+    }()
+    
+    let codeImage: UIImageView = {
+        let image = UIImage(named: "passwordRecovery")
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    let insertCodeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Insira o código"
+        label.numberOfLines = 10
+        label.textAlignment = .center
+        label.font = UIFont(name: "Ubuntu-Medium", size: 16)
+        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        return label
+    }()
+    
+    lazy var code1TextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.font = UIFont(name: "Ubuntu-Regular", size: 26)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textAlignment = .center
+        textField.becomeFirstResponder()
+        return textField
+    }()
+    
+    lazy var code2TextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.font = UIFont(name: "Ubuntu-Regular", size: 26)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    lazy var code3TextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.font = UIFont(name: "Ubuntu-Regular", size: 26)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    lazy var code4TextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.font = UIFont(name: "Ubuntu-Regular", size: 26)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    lazy var code5TextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.font = UIFont(name: "Ubuntu-Regular", size: 26)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    lazy var code6TextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.font = UIFont(name: "Ubuntu-Regular", size: 26)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.textAlignment = .center
+        return textField
+    }()
+        
+    lazy var textFieldStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [code1TextField, code2TextField, code3TextField, code4TextField, code5TextField,code6TextField])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+        
+    let messageNotReceivedLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let begginingText = "Não recebeu? Aguarde "
+        let normalAttrs = [NSMutableAttributedString.Key.font: UIFont(name: "Ubuntu", size: 14)]
+        let labelattributedString = NSMutableAttributedString(string: begginingText, attributes: normalAttrs as [NSAttributedString.Key : Any])
+        let boldString = "30 "
+        let attrs = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Bold", size: 14)]
+        let boldMutableString = NSMutableAttributedString(string: boldString, attributes: attrs as [NSAttributedString.Key : Any])
+        labelattributedString.append(boldMutableString)
+        let endingString = "segundos"
+        let endingMutableString = NSMutableAttributedString(string: endingString, attributes: normalAttrs as [NSAttributedString.Key : Any])
+        labelattributedString.append(endingMutableString)
+        label.attributedText = labelattributedString
+        label.textAlignment = .center
+        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        return label
+    }()
+    
+    let continueButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 331, height: 52))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Continuar", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(red: 0.44, green: 0.45, blue: 0.47, alpha: 1.0)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    let resendCodeButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 109, height: 17))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Reenviar código", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Ubuntu-Regular", size: 15)
+        let frame = CGRect(x: 0, y: button.frame.size.height + 6, width: button.frame.size.width, height: 1)
+        let borderBottom = UIView(frame: frame)
+        borderBottom.backgroundColor = UIColor(red: 0.02, green: 0.0, blue: 0.37, alpha: 1.0)
+        button.addSubview(borderBottom)
+        button.setTitleColor(UIColor(red: 0.02, green: 0.0, blue: 0.37, alpha: 1.0), for: .normal)
+        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    func textFieldActive(textField: UITextField) {
+        
+        if textField.textInputMode != nil {
+            textField.layer.borderWidth = 1
+            textField.layer.borderColor = UIColor(red: 1.0, green: 0.13, blue: 0.47, alpha: 1.0).cgColor
+            textField.layer.cornerRadius = 5
+        }
+    }
+
+    func filledCode() {
+        
+        if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
+
+            continueButton.addTarget(nil,
+                                     action: #selector(continueButtonTapped),
+                                     for: .touchUpInside)
+            continueButton.backgroundColor = UIColor(red: 1.0, green: 0.13, blue: 0.47, alpha: 1.0)
+            resendCodeButton.isHidden = true
+        }
+        else {
+            
+            continueButton.removeTarget(nil,
+                                        action: #selector(continueButtonTapped),
+                                        for: .touchUpInside)
+            continueButton.backgroundColor = UIColor(red: 0.44, green: 0.45, blue: 0.47, alpha: 1.0)
+            resendCodeButton.isHidden = false
+        }
+    }
+    
+    @objc func continueButtonTapped() {
+            
+        print("Chamando próxima tela")
+    }
+    
+    @objc func resendCodeButtonTapped() {
+            
+        print("Novo código enviado")
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        textField.becomeFirstResponder()
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(named: "PinkBravve")?.cgColor
+        textField.layer.cornerRadius = 5
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        textField.layer.borderWidth = 0
+        filledCode()
+    }
+    
+    override func viewDidLoad() {
+        
+        setupView()
+        setupDefaults()
+        setupConstraints()
+        
+        self.code1TextField.delegate = self
+        self.code2TextField.delegate = self
+        self.code3TextField.delegate = self
+        self.code4TextField.delegate = self
+        self.code5TextField.delegate = self
+        self.code6TextField.delegate = self
+    }
+    
+    func setupView() {
+        
+        view.addSubviews([backgroundImage, bravveIcon, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
+        
+        //setToDefaultBackgroundColor()
+        view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
+    }
+    
+    func setupDefaults() {
+        
+        bravveIcon.setLogoToDefault()
+    }
+    
+    private func setupConstraints() {
+        
+        setMessageSentLabelConstraints()
+        setCodeImageConstraints()
+        setInsertCodeLabelConstraints()
+        setCodeTextFieldConstraints()
+        setBackgroundImageConstraints()
+        setTextFieldStackViewConstraints()
+        setMessageNotReceivedLabelConstraints()
+        setContinueButtonConstraints()
+        setResendCodeButtonConstraints()
+    }
+    
+    
+    private func setMessageSentLabelConstraints() {
+        
+        let constraint = [
+            messageSentLabel.topAnchor.constraint(equalTo: bravveIcon.bottomAnchor, constant: 55),
+            messageSentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22.5),
+            messageSentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22.5),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setCodeImageConstraints() {
+        
+        let constraint = [
+            codeImage.topAnchor.constraint(equalTo: messageSentLabel.bottomAnchor, constant: 48.1),
+            codeImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            codeImage.widthAnchor.constraint(equalToConstant: 58.8),
+            codeImage.heightAnchor.constraint(equalToConstant: 87.8)
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setBackgroundImageConstraints() {
+        
+        let constraint = [
+            backgroundImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 250),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setInsertCodeLabelConstraints() {
+        
+        let constraint = [
+            insertCodeLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: 48.1),
+            insertCodeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setCodeTextFieldConstraints() {
+        
+        let constraint = [
+            code1TextField.widthAnchor.constraint(equalToConstant: 50),
+            code1TextField.heightAnchor.constraint(equalToConstant: 50),
+            code2TextField.widthAnchor.constraint(equalToConstant: 50),
+            code2TextField.heightAnchor.constraint(equalToConstant: 50),
+            code3TextField.widthAnchor.constraint(equalToConstant: 50),
+            code3TextField.heightAnchor.constraint(equalToConstant: 50),
+            code4TextField.widthAnchor.constraint(equalToConstant: 50),
+            code4TextField.heightAnchor.constraint(equalToConstant: 50),
+            code5TextField.widthAnchor.constraint(equalToConstant: 50),
+            code5TextField.heightAnchor.constraint(equalToConstant: 50),
+            code6TextField.widthAnchor.constraint(equalToConstant: 50),
+            code6TextField.heightAnchor.constraint(equalToConstant: 50),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setTextFieldStackViewConstraints() {
+        
+        let constraint = [
+            textFieldStackView.topAnchor.constraint(equalTo: insertCodeLabel.bottomAnchor, constant: 20),
+            textFieldStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            textFieldStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setMessageNotReceivedLabelConstraints() {
+        
+        let constraint = [
+            messageNotReceivedLabel.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor, constant: 41.33),
+            messageNotReceivedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setContinueButtonConstraints() {
+        
+        let constraint = [
+            continueButton.topAnchor.constraint(equalTo: messageNotReceivedLabel.bottomAnchor, constant: 41.33),
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            continueButton.widthAnchor.constraint(equalToConstant: 331),
+            continueButton.heightAnchor.constraint(equalToConstant: 52)
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setResendCodeButtonConstraints() {
+        
+        let constraint = [
+            resendCodeButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 26),
+            resendCodeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+
+}
+
+
