@@ -32,7 +32,7 @@ extension UIImageView {
             
                 self.image = UIImage(named: imageName)
             
-                self.constraintInsideTo(.top, superview)
+            self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         
             case "way3":
@@ -46,7 +46,7 @@ extension UIImageView {
             
                 self.image = UIImage(named: imageName)
             
-                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(110)
                 self.widthAnchorInSuperview(280)

@@ -22,6 +22,7 @@ class HomeAbertaView: UIViewController {
         let scrollView = UIScrollView()
         scrollView.addSubview(detailsView)
         scrollView.isHidden = true
+        scrollView.alwaysBounceVertical = false
         
         return scrollView
     }()
@@ -38,33 +39,40 @@ class HomeAbertaView: UIViewController {
         return reserveButton
     }()
     
-    private lazy var navigationBar: UINavigationBar = {
+    private lazy var navigationBarController: (navigationBar: UINavigationBar,
+                                               navigationBarStackView: UIStackView) = {
         
-        guard let navigationBar = navigationController?.navigationBar else {return UINavigationBar()}
+        guard let navigationBar = navigationController?.navigationBar else {
+            
+            return (navigationBar: UINavigationBar(),
+                    navigationBarStackView: UIStackView())
+        }
         
-        let firstFrame = CGRect(x: 25,
-                                y: navigationBar.frame.size.height/4,
-                                width: navigationBar.frame.size.width*0.8,
-                                height: navigationBar.frame.size.height/2)
+        let navigationBarStackViewFrame = CGRect(x: 25,
+                                                 y: navigationBar.frame.size.height/4,
+                                                 width: navigationBar.frame.size.width*0.8,
+                                                 height: navigationBar.frame.size.height/2)
         
-        let stackView = UIStackView(frame: firstFrame)
+        let navigationBarStackView = UIStackView(frame: navigationBarStackViewFrame)
         
-        stackView.addArrangedSubview(viewElements.leftStackView)
-        stackView.addArrangedSubview(viewElements.leftButton)
-        stackView.addArrangedSubview(viewElements.rightStackView)
-        stackView.addArrangedSubview(viewElements.rightButton)
+        navigationBarStackView.addArrangedSubview(viewElements.leftStackView)
+        navigationBarStackView.addArrangedSubview(viewElements.leftButton)
+        navigationBarStackView.addArrangedSubview(viewElements.rightStackView)
+        navigationBarStackView.addArrangedSubview(viewElements.rightButton)
         
-        stackView.backgroundColor = .white
-        stackView.layer.cornerRadius = 8
-        stackView.setToDefaultBackgroundColor()
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 10,
+        navigationBarStackView.backgroundColor = .white
+        navigationBarStackView.layer.cornerRadius = 8
+        navigationBarStackView.setToDefaultBackgroundColor()
+        navigationBarStackView.isLayoutMarginsRelativeArrangement = true
+        navigationBarStackView.layoutMargins = UIEdgeInsets(top: 10,
                                                left: 10,
                                                bottom: 10,
                                                right: 10)
-        navigationBar.addSubview(stackView)
         
-        return navigationBar
+        navigationBar.addSubview(navigationBarStackView)
+        
+        return (navigationBar: navigationBar,
+                navigationBarStackView: navigationBarStackView)
     }()
     
     let filterLabels: [UILabel] = {
@@ -132,9 +140,9 @@ class HomeAbertaView: UIViewController {
     }()
     
     private let viewElements: (leftStackView: UIStackView,
-                       leftButton: UIButton,
-                       rightStackView: UIStackView,
-                       rightButton: UIButton) = {
+                               leftButton: UIButton,
+                               rightStackView: UIStackView,
+                               rightButton: UIButton) = {
         
         let leftButton = UIButton(),
             stateLabel = UILabel(),
@@ -219,10 +227,10 @@ class HomeAbertaView: UIViewController {
     
     private func setupConstraints() {
         
-        viewElements.leftStackView.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
-        viewElements.leftButton.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
+        viewElements.leftStackView.widthAnchorInSuperview(navigationBarController.navigationBar.frame.size.width*0.1)
+        viewElements.leftButton.widthAnchorInSuperview(navigationBarController.navigationBar.frame.size.width*0.1)
         viewElements.rightStackView.addLeadingLineWithColor(color: .red)
-        viewElements.rightButton.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
+        viewElements.rightButton.widthAnchorInSuperview(navigationBarController.navigationBar.frame.size.width*0.1)
         
         stackView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
@@ -246,7 +254,7 @@ class HomeAbertaView: UIViewController {
         detailsView.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
         detailsView.constraintInsideTo(.width, scrollView.frameLayoutGuide)
         
-        detailsView.heightAnchorInSuperview(1500)
+        detailsView.heightAnchorInSuperview(3500)
     }
 }
 
@@ -286,6 +294,7 @@ extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
     
     func chosePlace() {
         
+        navigationBarController.navigationBarStackView.isHidden = true
         reserveButton.isHidden = false
         stackView.isHidden = true
         scrollView.isHidden = false
