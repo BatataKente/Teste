@@ -11,7 +11,7 @@ extension UIView {
     
     open func setToDefaultBackgroundColor() {
         
-        self.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
+        self.backgroundColor = .white
     }
 }
 
@@ -130,7 +130,7 @@ extension UIButton {
         self.constraintOutsideTo(.bottom, aboveWhom, constant)
     }
     
-    open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar") {
+    open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar") {
         
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
@@ -140,6 +140,19 @@ extension UIButton {
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
+    }
+    
+    open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
+                                       aboveWhom: Any?) {
+        
+        self.setTitle(buttonTitle, for: .normal)
+        self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
+        self.backgroundColor = UIColor(named: "GrayBravve")
+        
+        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
+        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+        self.constraintOutsideTo(.bottom, aboveWhom)
     }
     
     open func setToBackButtonDefault(_ imageName: String = "backButtonWhite",_ constant: CGFloat = 22) {

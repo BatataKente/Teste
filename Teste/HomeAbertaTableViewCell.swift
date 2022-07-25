@@ -9,19 +9,15 @@ import UIKit
 
 class HomeAbertaTableViewCell: UITableViewCell {
     
-    lazy var photosCollecrionView: UICollectionView = {
+    var delegate: HomeAbertaTableViewCellProtocol?
+    
+    let photoView: UIImageView = {
         
-        let collectionViewLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.scrollDirection = .horizontal
-        collectionViewLayout.itemSize = CGSize(width: 64, height: 64)
+        let photoView = UIImageView()
+        photoView.backgroundColor = .cyan
+        photoView.layer.cornerRadius = 12
         
-        let photosCollecrionView = UICollectionView(frame: contentView.frame,
-                                                    collectionViewLayout: collectionViewLayout)
-        photosCollecrionView.backgroundColor = .cyan
-        photosCollecrionView.layer.cornerRadius = 12
-        photosCollecrionView.register(HomeAbertaCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        
-        return photosCollecrionView
+        return photoView
     }()
     
     let viewElements: (view: UIView,
@@ -36,11 +32,18 @@ class HomeAbertaTableViewCell: UITableViewCell {
         let descriptionLabel = UILabel()
         
         let view = UIView()
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
         view.layer.cornerRadius = 12
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 8
+//        view.layer.shadowOffset
         
         let detailsButton = UIButton()
         detailsButton.setTitle("Botao", for: .normal)
+        detailsButton.setTitleColor(.black, for: .normal)
         
         view.addSubviews([titleLabel, descriptionLabel, detailsButton])
         
@@ -69,10 +72,7 @@ class HomeAbertaTableViewCell: UITableViewCell {
         contentView.addSubviews([viewElements.view])
         contentView.setToDefaultBackgroundColor()
         
-        viewElements.view.addSubview(photosCollecrionView)
-        
-        photosCollecrionView.delegate = self
-        photosCollecrionView.dataSource = self
+        viewElements.view.addSubview(photoView)
         
         viewElements.detailsButton.addTarget(self,
                                              action: #selector(showDetails),
@@ -87,7 +87,10 @@ class HomeAbertaTableViewCell: UITableViewCell {
     
     func setupConstraints() {
         
-        viewElements.view.fillSuperview()
+        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
 //        viewElements.view.heightAnchorInSuperview(100)
         
         viewElements.titleLabel.constraintInsideTo(.top, viewElements.view)
@@ -97,33 +100,23 @@ class HomeAbertaTableViewCell: UITableViewCell {
         viewElements.descriptionLabel.constraintInsideTo(.leading, viewElements.titleLabel)
         viewElements.descriptionLabel.widthAnchorInSuperview(215)
         
-        photosCollecrionView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
-        photosCollecrionView.constraintInsideTo(.leading, viewElements.descriptionLabel)
-        photosCollecrionView.constraintInsideTo(.trailing, viewElements.view)
-        photosCollecrionView.heightAnchorInSuperview(100)
+        photoView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
+        photoView.constraintInsideTo(.leading, viewElements.descriptionLabel)
+        photoView.constraintInsideTo(.trailing, viewElements.view)
+        photoView.heightAnchorInSuperview(100)
         
-        viewElements.detailsButton.constraintOutsideTo(.top, photosCollecrionView, 21)
+        viewElements.detailsButton.constraintOutsideTo(.top, photoView, 21)
         viewElements.detailsButton.constraintInsideTo(.trailing, viewElements.view, 27)
         viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 18)
     }
     
     @objc func showDetails() {
         
-        print("zoio")
+        delegate?.chosePlace()
     }
 }
 
-extension HomeAbertaTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+protocol HomeAbertaTableViewCellProtocol {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = photosCollecrionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        
-        return cell
-    }
+    func chosePlace()
 }

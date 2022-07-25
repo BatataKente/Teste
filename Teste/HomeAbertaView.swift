@@ -9,7 +9,34 @@ import UIKit
 
 class HomeAbertaView: UIViewController {
     
+    private let detailsView: UIView = {
+        
+        let detailsView = UIView()
+        detailsView.backgroundColor = .yellow
+        
+        return detailsView
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        
+        let scrollView = UIScrollView()
+        scrollView.addSubview(detailsView)
+        scrollView.isHidden = true
+        
+        return scrollView
+    }()
+    
+    private var espacos = 10
+    
     private let titleLabel = UILabel()
+    
+    private let reserveButton: UIButton = {
+        
+        let reserveButton = UIButton()
+        reserveButton.isHidden = true
+        
+        return reserveButton
+    }()
     
     private lazy var navigationBar: UINavigationBar = {
         
@@ -38,6 +65,70 @@ class HomeAbertaView: UIViewController {
         navigationBar.addSubview(stackView)
         
         return navigationBar
+    }()
+    
+    let filterLabels: [UILabel] = {
+        
+        var filterLabels: [UILabel] = []
+        
+        let label1 = UILabel()
+        label1.text = "Colaborativo"
+        label1.numberOfLines = 0
+        label1.backgroundColor = .blue
+        label1.layer.masksToBounds = true
+        label1.textColor = .white
+        label1.textAlignment = .center
+        
+        filterLabels.append(label1)
+        
+        let label2 = UILabel()
+        label2.text = "Colaborativo"
+        label2.numberOfLines = 0
+        label2.backgroundColor = .blue
+        label2.layer.masksToBounds = true
+        label2.textColor = .white
+        label2.textAlignment = .center
+        
+        filterLabels.append(label2)
+        
+        return filterLabels
+    }()
+    
+    private lazy var filterStackView: UIStackView = {
+        
+        let stackView = UIStackView(arrangedSubviews: filterLabels)
+        stackView.backgroundColor = .white
+        stackView.isHidden = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.alignment = .leading
+        stackView.layoutMargins = UIEdgeInsets(top: 10,
+                                               left: 10,
+                                               bottom: 10,
+                                               right: 10)
+        
+        return stackView
+    }()
+    
+    let tableView: UITableView = {
+        
+        let tableView = UITableView()
+        tableView.register(HomeAbertaTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.layoutMargins = UIEdgeInsets(top: 20,
+                                               left: 20,
+                                               bottom: 20,
+                                               right: 20)
+        
+        return tableView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        
+        let stackView = UIStackView(arrangedSubviews: [filterStackView,
+                                                       tableView])
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        
+        return stackView
     }()
     
     private let viewElements: (leftStackView: UIStackView,
@@ -85,41 +176,36 @@ class HomeAbertaView: UIViewController {
                 rightButton: rightButton)
     }()
     
-    let tableView: UITableView = {
-        
-        let tableView = UITableView()
-        tableView.backgroundColor = .systemBlue
-        tableView.register(HomeAbertaTableViewCell.self, forCellReuseIdentifier: "Cell")
-        
-        return tableView
-    }()
-    
     let tabBar: UITabBar = {
 
         let tabBar = UITabBar()
         tabBar.barTintColor = .red
-        
-//        let tabBarItem = UITabBarItem()
-//        tabBarItem.image = UIImage(named: "activiesBlue")
-//
-//        tabBar.setItems([tabBarItem], animated: true)
 
         return tabBar
     }()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        for label in filterLabels {
+            
+            label.layer.cornerRadius = label.frame.size.height/2
+        }
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         setupView()
-        setupDefaults()
         setupConstraints()
+        setupDefaults()
     }
     
     private func setupView() {
         
-        view.addSubviews([titleLabel, tabBar, tableView])
-        view.setToDefaultBackgroundColor()
+        view.addSubviews([scrollView, stackView, tabBar, reserveButton])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -127,7 +213,8 @@ class HomeAbertaView: UIViewController {
     
     private func setupDefaults() {
         
-        titleLabel.setToDefault(text: "Espaços", .left)
+        view.setToDefaultBackgroundColor()
+        reserveButton.setToBottomButtonDefault(aboveWhom: tabBar)
     }
     
     private func setupConstraints() {
@@ -137,18 +224,29 @@ class HomeAbertaView: UIViewController {
         viewElements.rightStackView.addLeadingLineWithColor(color: .red)
         viewElements.rightButton.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
         
-        titleLabel.constraintInsideTo(.top, view.safeAreaLayoutGuide, 15)
-        titleLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 20)
-        titleLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 20)
+        stackView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        stackView.constraintOutsideTo(.bottom, tabBar)
         
-        tableView.constraintOutsideTo(.top, titleLabel, 15)
-        tableView.constraintInsideTo(.leading, titleLabel)
-        tableView.constraintInsideTo(.trailing, titleLabel)
-        tableView.constraintOutsideTo(.bottom, tabBar)
+        tableView.widthAnchorInSuperview(view.frame.size.width)
         
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
+        scrollView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        scrollView.constraintOutsideTo(.bottom, reserveButton)
+        
+        detailsView.constraintInsideTo(.top, scrollView.contentLayoutGuide)
+        detailsView.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
+        detailsView.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
+        detailsView.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
+        detailsView.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        
+        detailsView.heightAnchorInSuperview(1500)
     }
 }
 
@@ -156,18 +254,40 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return espacos
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if espacos > 1 {
+            
+            if indexPath.row == 0 {
+                
+                let cell = UITableViewCell()
+                cell.textLabel?.setToDefault(text: "Espaços", .left)
+                
+                return cell
+            }
+            else {
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeAbertaTableViewCell
+                cell?.delegate = self
+                
+                return cell ?? UITableViewCell()
+            }
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         return cell
     }
+}
+
+extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func chosePlace() {
         
-        print(indexPath.row)
+        reserveButton.isHidden = false
+        stackView.isHidden = true
+        scrollView.isHidden = false
     }
 }
