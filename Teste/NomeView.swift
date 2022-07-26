@@ -18,9 +18,9 @@ class NomeView: UIViewController {
     private let registerButton = UIButton()
     
     private let progressBarStackView: (stack: UIStackView,
-                               personalData: UIButton,
-                               phone: UIButton,
-                               email: UIButton) = {
+                                       personalData: UIButton,
+                                       phone: UIButton,
+                                       email: UIButton) = {
         
         let stackView = UIStackView()
         let buttons = stackView.createProgressBarButtons(["userBlue",
@@ -184,7 +184,7 @@ class NomeView: UIViewController {
         infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
         infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
         
-        registerStackView.constraintOutsideTo(.top, infoLabel, 50)
+        registerStackView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 50)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         registerStackView.heightAnchorInSuperview(60)
