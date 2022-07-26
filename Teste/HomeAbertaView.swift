@@ -9,19 +9,70 @@ import UIKit
 
 class HomeAbertaView: UIViewController {
     
-    private let detailsView: UIView = {
+    let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         
-        let detailsView = UIView()
-        detailsView.backgroundColor = .yellow
+        let collectionViewFlowLayout = UICollectionViewFlowLayout()
+        collectionViewFlowLayout.scrollDirection = .horizontal
+        collectionViewFlowLayout.itemSize = CGSize(width: 256, height: 256)
         
-        return detailsView
+        return collectionViewFlowLayout
+    }()
+    
+    lazy var scrollViewElements: (view: UIView,
+                                  titleLabel: UILabel,
+                                  descriptionLabel: UILabel,
+                                  photoCollectionView: UICollectionView,
+                                  nameLabel: UILabel,
+                                  hourPriceLabel: UILabel,
+                                  dayPriceLabel: UILabel) = {
+        
+        let titleLabel = UILabel()
+        titleLabel.backgroundColor = .systemGreen
+        titleLabel.text = "BOXOFFICE"
+        
+        let descriptionLabel = UILabel()
+        
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 12
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 8
+//        view.layer.shadowOffset
+        
+        let photoCollectionView = UICollectionView(frame: self.view.frame,
+                                                   collectionViewLayout: collectionViewFlowLayout)
+        
+        photoCollectionView.register(HomeAbertaCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        
+        let nameLabel = UILabel()
+        nameLabel.text = "Hotel Saint"
+        
+        let hourPriceLabel = UILabel()
+        hourPriceLabel.text = "3,50 crédito/ hora"
+        
+        let dayPriceLabel = UILabel()
+        dayPriceLabel.text = "18,20 crédito/dia"
+        
+        view.addSubviews([titleLabel, descriptionLabel, photoCollectionView, nameLabel, hourPriceLabel, dayPriceLabel])
+        
+        return (view: view,
+                titleLabel: titleLabel,
+                descriptionLabel: descriptionLabel,
+                photoCollectionView: photoCollectionView,
+                nameLabel: nameLabel,
+                hourPriceLabel: hourPriceLabel,
+                dayPriceLabel: dayPriceLabel)
     }()
     
     private lazy var scrollView: UIScrollView = {
         
         let scrollView = UIScrollView()
-        scrollView.addSubview(detailsView)
+        scrollView.addSubview(scrollViewElements.view)
         scrollView.isHidden = true
+        scrollView.alwaysBounceVertical = false
         
         return scrollView
     }()
@@ -38,16 +89,76 @@ class HomeAbertaView: UIViewController {
         return reserveButton
     }()
     
-    private lazy var navigationBar: UINavigationBar = {
+    private let viewElements: (leftStackView: UIStackView,
+                               leftButton: UIButton,
+                               rightStackView: UIStackView,
+                               rightButton: UIButton) = {
         
-        guard let navigationBar = navigationController?.navigationBar else {return UINavigationBar()}
+        let leftButton = UIButton()
+        let stateLabel = UILabel()
+        let stateChosedLabel = UILabel()
+        let rightButton = UIButton()
+        let cityLabel = UILabel()
+        let cityChosedLabel = UILabel()
         
-        let firstFrame = CGRect(x: 25,
-                                y: navigationBar.frame.size.height/4,
-                                width: navigationBar.frame.size.width*0.8,
-                                height: navigationBar.frame.size.height/2)
+        let stateHandler = {(action: UIAction) in
+
+            stateChosedLabel.text = action.title
+            stateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        }
+
+        stateLabel.text = "UF"
+        leftButton.setMenuForButton([
+            
+            UIAction(title: "action1",handler: stateHandler),
+            UIAction(title: "action2",handler: stateHandler)
+
+        ])
+        leftButton.setTitle("", for: .normal)
         
-        let stackView = UIStackView(frame: firstFrame)
+        let cityHandler = {(action: UIAction) in
+
+            cityChosedLabel.text = action.title
+            cityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        }
+        
+        cityLabel.text = "Cidade"
+        rightButton.setMenuForButton([
+
+            UIAction(title: "action1",handler: cityHandler),
+            UIAction(title: "action2",handler: cityHandler)
+
+        ])
+        rightButton.setTitle("", for: .normal)
+        
+        let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
+                                                           stateChosedLabel])
+        leftStackView.axis = .vertical
+        let rightStackView = UIStackView(arrangedSubviews: [cityLabel,
+                                                            cityChosedLabel])
+        rightStackView.axis = .vertical
+        
+        return (leftStackView: leftStackView,
+                leftButton: leftButton,
+                rightStackView: rightStackView,
+                rightButton: rightButton)
+    }()
+    
+    private lazy var navigationBar: (bar: UINavigationBar,
+                                     stackView: UIStackView,
+                                     backButton: UIButton) = {
+        
+        guard let bar = navigationController?.navigationBar else {
+            
+            return (bar: UINavigationBar(),
+                    stackView: UIStackView(),
+                    backButton: UIButton())
+        }
+        
+        let stackView = UIStackView(frame: CGRect(x: 25,
+                                                  y: bar.frame.size.height/4,
+                                                  width: bar.frame.size.width*0.8,
+                                                  height: bar.frame.size.height/2))
         
         stackView.addArrangedSubview(viewElements.leftStackView)
         stackView.addArrangedSubview(viewElements.leftButton)
@@ -62,9 +173,34 @@ class HomeAbertaView: UIViewController {
                                                left: 10,
                                                bottom: 10,
                                                right: 10)
-        navigationBar.addSubview(stackView)
         
-        return navigationBar
+        let backButton = UIButton()
+        backButton.setImage(UIImage(named: "backButtonWhite"), for: .normal)
+        
+        let view = UIView(frame: CGRect(x: 0,
+                                        y: 0,
+                                        width: bar.frame.size.width,
+                                        height: bar.frame.size.height))
+        view.backgroundColor = UIColor(named: "BlueBravve")
+        
+        view.addSubview(backButton)
+        
+        backButton.constraintInsideTo(.centerY, view)
+        backButton.constraintInsideTo(.leading, view, 35)
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: bar.frame.size.width,
+                                               height: bar.frame.size.height))
+        titleLabel.text = "Espaço"
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        
+        bar.addSubviews([view, titleLabel, stackView])
+        
+        return (bar: bar,
+                stackView: stackView,
+                backButton: backButton)
     }()
     
     let filterLabels: [UILabel] = {
@@ -131,55 +267,10 @@ class HomeAbertaView: UIViewController {
         return stackView
     }()
     
-    private let viewElements: (leftStackView: UIStackView,
-                       leftButton: UIButton,
-                       rightStackView: UIStackView,
-                       rightButton: UIButton) = {
-        
-        let leftButton = UIButton(),
-            stateLabel = UILabel(),
-            stateChosedLabel = UILabel(),
-            leftStackView = UIStackView(arrangedSubviews: [stateLabel,
-                                                           stateChosedLabel]),
-            rightButton = UIButton(),
-            cityLabel = UILabel(),
-            cityChosedLabel = UILabel(),
-            rightStackView = UIStackView(arrangedSubviews: [cityLabel,
-                                                            cityChosedLabel])
-        
-        let handler = {(action: UIAction) in
-            
-            print(action.title)
-        }
-        
-        stateLabel.text = "UF"
-        leftButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: handler),
-            UIAction(title: "action2",handler: handler)
-        
-        ])
-        leftButton.setTitle("", for: .normal)
-        
-        cityLabel.text = "Cidade"
-        rightButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: handler),
-            UIAction(title: "action2",handler: handler)
-        
-        ])
-        rightButton.setTitle("", for: .normal)
-        
-        return (leftStackView: leftStackView,
-                leftButton: leftButton,
-                rightStackView: rightStackView,
-                rightButton: rightButton)
-    }()
-    
     let tabBar: UITabBar = {
 
         let tabBar = UITabBar()
-        tabBar.barTintColor = .red
+        tabBar.barTintColor = .white
 
         return tabBar
     }()
@@ -209,6 +300,9 @@ class HomeAbertaView: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        scrollViewElements.photoCollectionView.dataSource = self
+        scrollViewElements.photoCollectionView.delegate = self
     }
     
     private func setupDefaults() {
@@ -219,10 +313,10 @@ class HomeAbertaView: UIViewController {
     
     private func setupConstraints() {
         
-        viewElements.leftStackView.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
-        viewElements.leftButton.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
+        viewElements.leftStackView.widthAnchorInSuperview(navigationBar.bar.frame.size.width*0.1)
+        viewElements.leftButton.widthAnchorInSuperview(navigationBar.bar.frame.size.width*0.1)
         viewElements.rightStackView.addLeadingLineWithColor(color: .red)
-        viewElements.rightButton.widthAnchorInSuperview(navigationBar.frame.size.width*0.1)
+        viewElements.rightButton.widthAnchorInSuperview(navigationBar.bar.frame.size.width*0.1)
         
         stackView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
@@ -240,13 +334,33 @@ class HomeAbertaView: UIViewController {
         scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         scrollView.constraintOutsideTo(.bottom, reserveButton)
         
-        detailsView.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        detailsView.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        detailsView.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        detailsView.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        detailsView.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        scrollViewElements.view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
+        scrollViewElements.view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
+        scrollViewElements.view.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
+        scrollViewElements.view.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
+        scrollViewElements.view.constraintInsideTo(.width, scrollView.frameLayoutGuide)
         
-        detailsView.heightAnchorInSuperview(1500)
+        scrollViewElements.titleLabel.constraintInsideTo(.top, scrollViewElements.view)
+        scrollViewElements.titleLabel.constraintInsideTo(.leading, scrollViewElements.view, 21)
+        
+        scrollViewElements.descriptionLabel.constraintOutsideTo(.top, scrollViewElements.titleLabel, 23)
+        scrollViewElements.descriptionLabel.constraintInsideTo(.leading, scrollViewElements.titleLabel)
+        scrollViewElements.descriptionLabel.widthAnchorInSuperview(215)
+        
+        scrollViewElements.photoCollectionView.constraintOutsideTo(.top, scrollViewElements.descriptionLabel, 22)
+        scrollViewElements.photoCollectionView.constraintInsideTo(.leading, scrollViewElements.descriptionLabel)
+        scrollViewElements.photoCollectionView.constraintInsideTo(.trailing, scrollViewElements.view)
+        scrollViewElements.photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
+        
+        scrollViewElements.nameLabel.constraintOutsideTo(.top, scrollViewElements.photoCollectionView, 23)
+        scrollViewElements.nameLabel.constraintInsideTo(.leading, scrollViewElements.photoCollectionView)
+        
+        scrollViewElements.hourPriceLabel.constraintOutsideTo(.top, scrollViewElements.nameLabel, 23)
+        scrollViewElements.hourPriceLabel.constraintInsideTo(.leading, scrollViewElements.nameLabel)
+        
+        scrollViewElements.dayPriceLabel.constraintOutsideTo(.top, scrollViewElements.hourPriceLabel)
+        scrollViewElements.dayPriceLabel.constraintInsideTo(.leading, scrollViewElements.hourPriceLabel)
+        scrollViewElements.dayPriceLabel.constraintInsideTo(.bottom, scrollViewElements.view, 18)
     }
 }
 
@@ -254,12 +368,12 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return espacos
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if espacos > 1 {
+        if indexPath.count > 1 {
             
             if indexPath.row == 0 {
                 
@@ -282,10 +396,26 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension HomeAbertaView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = scrollViewElements.photoCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HomeAbertaCollectionViewCell
+        
+        return cell ?? UICollectionViewCell()
+    }
+}
+
 extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
     
     func chosePlace() {
         
+        navigationBar.stackView.isHidden = true
         reserveButton.isHidden = false
         stackView.isHidden = true
         scrollView.isHidden = false

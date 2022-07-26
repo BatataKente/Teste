@@ -11,19 +11,14 @@ class HomeAbertaTableViewCell: UITableViewCell {
     
     var delegate: HomeAbertaTableViewCellProtocol?
     
-    let photoView: UIImageView = {
-        
-        let photoView = UIImageView()
-        photoView.backgroundColor = .cyan
-        photoView.layer.cornerRadius = 12
-        
-        return photoView
-    }()
-    
     let viewElements: (view: UIView,
                        titleLabel: UILabel,
                        descriptionLabel: UILabel,
-                       detailsButton: UIButton) = {
+                       detailsButton: UIButton,
+                       photoView: UIImageView,
+                       nameLabel: UILabel,
+                       priceLabel: UILabel,
+                       detailsLabel: UILabel) = {
         
         let titleLabel = UILabel()
         titleLabel.backgroundColor = .systemGreen
@@ -41,16 +36,34 @@ class HomeAbertaTableViewCell: UITableViewCell {
         view.layer.shadowRadius = 8
 //        view.layer.shadowOffset
         
+        let photoView = UIImageView()
+        photoView.backgroundColor = .cyan
+        photoView.layer.cornerRadius = 12
+        
+        let nameLabel = UILabel()
+        nameLabel.text = "Hotel Saint"
+        
+        let priceLabel = UILabel()
+        priceLabel.text = "3,50 crédito/ hora"
+        
+        let detailsLabel = UILabel()
+        detailsLabel.text = "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
+        detailsLabel.numberOfLines = 0
+        
         let detailsButton = UIButton()
         detailsButton.setTitle("Botao", for: .normal)
         detailsButton.setTitleColor(.black, for: .normal)
         
-        view.addSubviews([titleLabel, descriptionLabel, detailsButton])
+        view.addSubviews([titleLabel, descriptionLabel, detailsButton, photoView, nameLabel, priceLabel, detailsLabel])
         
         return (view: view,
                 titleLabel: titleLabel,
                 descriptionLabel: descriptionLabel,
-                detailsButton: detailsButton)
+                detailsButton: detailsButton,
+                photoView: photoView,
+                nameLabel: nameLabel,
+                priceLabel: priceLabel,
+                detailsLabel: detailsLabel)
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -71,8 +84,6 @@ class HomeAbertaTableViewCell: UITableViewCell {
         
         contentView.addSubviews([viewElements.view])
         contentView.setToDefaultBackgroundColor()
-        
-        viewElements.view.addSubview(photoView)
         
         viewElements.detailsButton.addTarget(self,
                                              action: #selector(showDetails),
@@ -100,14 +111,23 @@ class HomeAbertaTableViewCell: UITableViewCell {
         viewElements.descriptionLabel.constraintInsideTo(.leading, viewElements.titleLabel)
         viewElements.descriptionLabel.widthAnchorInSuperview(215)
         
-        photoView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
-        photoView.constraintInsideTo(.leading, viewElements.descriptionLabel)
-        photoView.constraintInsideTo(.trailing, viewElements.view)
-        photoView.heightAnchorInSuperview(100)
+        viewElements.photoView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
+        viewElements.photoView.constraintInsideTo(.leading, viewElements.descriptionLabel)
+        viewElements.photoView.constraintInsideTo(.trailing, viewElements.view)
+        viewElements.photoView.heightAnchorInSuperview(100)
         
-        viewElements.detailsButton.constraintOutsideTo(.top, photoView, 21)
+        viewElements.nameLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
+        viewElements.nameLabel.constraintInsideTo(.leading, viewElements.photoView)
+        
+        viewElements.priceLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
+        viewElements.priceLabel.constraintInsideTo(.trailing, viewElements.photoView, 18)
+        
+        viewElements.detailsLabel.constraintOutsideTo(.top, viewElements.nameLabel, 23)
+        viewElements.detailsLabel.constraintInsideTo(.leading, viewElements.nameLabel)
+        viewElements.detailsLabel.constraintInsideTo(.bottom, viewElements.view, 18)
+        
         viewElements.detailsButton.constraintInsideTo(.trailing, viewElements.view, 27)
-        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 18)
+        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.detailsLabel)
     }
     
     @objc func showDetails() {
