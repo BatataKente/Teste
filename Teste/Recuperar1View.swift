@@ -142,7 +142,7 @@ class Recuperar1View: UIViewController {
         
         buttonBack.setToBackButtonDefault()
         imageLogo.setLogoToDefault()
-        buttonContinue.setToBottomButtonDefault()
+        buttonContinue.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault("way1")
         
         NSLayoutConstraint.activate([
