@@ -51,6 +51,24 @@ extension UIImageView {
                 self.heightAnchorInSuperview(110)
                 self.widthAnchorInSuperview(280)
             
+            case "wayReservation2":
+            
+                self.image = UIImage(named: imageName)
+            
+                self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(140)
+                self.widthAnchorInSuperview(150)
+            
+            case "wayReservation1":
+            
+                self.image = UIImage(named: imageName)
+            
+                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(200)
+                self.widthAnchorInSuperview(150)
+            
             default: return
         }
     }
