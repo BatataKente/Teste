@@ -7,11 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		134D680D28900FD200D5572B /* RegExUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D680C28900FD200D5572B /* RegExUtils.swift */; };
+		134D68112890151C00D5572B /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68102890151C00D5572B /* BulletPoint.swift */; };
+		134D68132890154E00D5572B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68122890154E00D5572B /* TextField.swift */; };
+		134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */; };
+		13B1C1332890167B003F9D3A /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12A2890167B003F9D3A /* Ubuntu-Medium.ttf */; };
+		13B1C1342890167B003F9D3A /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12B2890167B003F9D3A /* Ubuntu-LightItalic.ttf */; };
+		13B1C1352890167B003F9D3A /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12C2890167B003F9D3A /* Ubuntu-Regular.ttf */; };
+		13B1C1362890167B003F9D3A /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12D2890167B003F9D3A /* Ubuntu-Bold.ttf */; };
+		13B1C1372890167B003F9D3A /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12E2890167B003F9D3A /* Ubuntu-MediumItalic.ttf */; };
+		13B1C1382890167B003F9D3A /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12F2890167B003F9D3A /* Ubuntu-BoldItalic.ttf */; };
+		13B1C1392890167B003F9D3A /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C1302890167B003F9D3A /* Ubuntu-Italic.ttf */; };
+		13B1C13A2890167B003F9D3A /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C1312890167B003F9D3A /* Ubuntu-Light.ttf */; };
+		13B1C13B2890167B003F9D3A /* UFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C1322890167B003F9D3A /* UFL.txt */; };
 		1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeAbertaView.swift */; };
 		14509954288B32AE006AC775 /* ValidateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14509953288B32AE006AC775 /* ValidateUtils.swift */; };
 		145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */; };
 		145663C8288D73C500852049 /* HomeAbertaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* HomeAbertaCollectionViewCell.swift */; };
-		14A1E442288C568E001B046B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 14A1E441288C568E001B046B /* Fonts */; };
 		14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBC52889B72300EA8EDD /* AppDelegate.swift */; };
 		14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */; };
 		14CBDBCF2889B72500EA8EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14CBDBCE2889B72500EA8EDD /* Assets.xcassets */; };
@@ -28,11 +40,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		134D680C28900FD200D5572B /* RegExUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegExUtils.swift; sourceTree = "<group>"; };
+		134D68102890151C00D5572B /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
+		134D68122890154E00D5572B /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3.swift; sourceTree = "<group>"; };
+		13B1C12A2890167B003F9D3A /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		13B1C12B2890167B003F9D3A /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
+		13B1C12C2890167B003F9D3A /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		13B1C12D2890167B003F9D3A /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		13B1C12E2890167B003F9D3A /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
+		13B1C12F2890167B003F9D3A /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
+		13B1C1302890167B003F9D3A /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
+		13B1C1312890167B003F9D3A /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
+		13B1C1322890167B003F9D3A /* UFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UFL.txt; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeAbertaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaView.swift; sourceTree = "<group>"; };
 		14509953288B32AE006AC775 /* ValidateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateUtils.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* HomeAbertaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaCollectionViewCell.swift; sourceTree = "<group>"; };
-		14A1E441288C568E001B046B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		14CBDBC22889B72300EA8EDD /* Teste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14CBDBC52889B72300EA8EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +85,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13B1C1292890167B003F9D3A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				13B1C12A2890167B003F9D3A /* Ubuntu-Medium.ttf */,
+				13B1C12B2890167B003F9D3A /* Ubuntu-LightItalic.ttf */,
+				13B1C12C2890167B003F9D3A /* Ubuntu-Regular.ttf */,
+				13B1C12D2890167B003F9D3A /* Ubuntu-Bold.ttf */,
+				13B1C12E2890167B003F9D3A /* Ubuntu-MediumItalic.ttf */,
+				13B1C12F2890167B003F9D3A /* Ubuntu-BoldItalic.ttf */,
+				13B1C1302890167B003F9D3A /* Ubuntu-Italic.ttf */,
+				13B1C1312890167B003F9D3A /* Ubuntu-Light.ttf */,
+				13B1C1322890167B003F9D3A /* UFL.txt */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		14CBDBB92889B72300EA8EDD = {
 			isa = PBXGroup;
 			children = (
@@ -80,7 +120,10 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
-				14A1E441288C568E001B046B /* Fonts */,
+				13B1C1292890167B003F9D3A /* Fonts */,
+				134D68102890151C00D5572B /* BulletPoint.swift */,
+				134D68122890154E00D5572B /* TextField.swift */,
+				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
 				14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
@@ -93,6 +136,7 @@
 				14F55C372889FB82003A8A34 /* DefaultUtils.swift */,
 				14509953288B32AE006AC775 /* ValidateUtils.swift */,
 				14F55C332889ECE2003A8A34 /* ConstraintUtils.swift */,
+				134D680C28900FD200D5572B /* RegExUtils.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				14CBDBCE2889B72500EA8EDD /* Assets.xcassets */,
@@ -161,10 +205,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13B1C13B2890167B003F9D3A /* UFL.txt in Resources */,
+				13B1C1352890167B003F9D3A /* Ubuntu-Regular.ttf in Resources */,
+				13B1C1342890167B003F9D3A /* Ubuntu-LightItalic.ttf in Resources */,
+				13B1C1382890167B003F9D3A /* Ubuntu-BoldItalic.ttf in Resources */,
+				13B1C1392890167B003F9D3A /* Ubuntu-Italic.ttf in Resources */,
+				13B1C13A2890167B003F9D3A /* Ubuntu-Light.ttf in Resources */,
+				13B1C1372890167B003F9D3A /* Ubuntu-MediumItalic.ttf in Resources */,
 				14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */,
 				14CBDBCF2889B72500EA8EDD /* Assets.xcassets in Resources */,
+				13B1C1362890167B003F9D3A /* Ubuntu-Bold.ttf in Resources */,
+				13B1C1332890167B003F9D3A /* Ubuntu-Medium.ttf in Resources */,
 				14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */,
-				14A1E442288C568E001B046B /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,11 +228,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
+				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				145663C8288D73C500852049 /* HomeAbertaCollectionViewCell.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14F55C382889FB82003A8A34 /* DefaultUtils.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
+				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */,
 				14509954288B32AE006AC775 /* ValidateUtils.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */,
@@ -188,6 +242,8 @@
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				14F55C342889ECE2003A8A34 /* ConstraintUtils.swift in Sources */,
+				134D680D28900FD200D5572B /* RegExUtils.swift in Sources */,
+				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				14CBDBDA2889B7C900EA8EDD /* AppUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

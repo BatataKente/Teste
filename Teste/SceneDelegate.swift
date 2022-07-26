@@ -21,8 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.backgroundColor = UIColor(named: "BlueBravve")
 
-        window.rootViewController = navigationController
-//        window.rootViewController = ConfirmationCodeView()
+//        window.rootViewController = navigationController
+        window.rootViewController = RecuperacaoDeSenha3()
         window.makeKeyAndVisible()
         
         self.window = window
