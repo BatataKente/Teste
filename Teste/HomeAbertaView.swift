@@ -89,21 +89,76 @@ class HomeAbertaView: UIViewController {
         return reserveButton
     }()
     
+    private let viewElements: (leftStackView: UIStackView,
+                               leftButton: UIButton,
+                               rightStackView: UIStackView,
+                               rightButton: UIButton) = {
+        
+        let leftButton = UIButton()
+        let stateLabel = UILabel()
+        let stateChosedLabel = UILabel()
+        let rightButton = UIButton()
+        let cityLabel = UILabel()
+        let cityChosedLabel = UILabel()
+        
+        let stateHandler = {(action: UIAction) in
+
+            stateChosedLabel.text = action.title
+            stateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        }
+
+        stateLabel.text = "UF"
+        leftButton.setMenuForButton([
+            
+            UIAction(title: "action1",handler: stateHandler),
+            UIAction(title: "action2",handler: stateHandler)
+
+        ])
+        leftButton.setTitle("", for: .normal)
+        
+        let cityHandler = {(action: UIAction) in
+
+            cityChosedLabel.text = action.title
+            cityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        }
+        
+        cityLabel.text = "Cidade"
+        rightButton.setMenuForButton([
+
+            UIAction(title: "action1",handler: cityHandler),
+            UIAction(title: "action2",handler: cityHandler)
+
+        ])
+        rightButton.setTitle("", for: .normal)
+        
+        let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
+                                                           stateChosedLabel])
+        leftStackView.axis = .vertical
+        let rightStackView = UIStackView(arrangedSubviews: [cityLabel,
+                                                            cityChosedLabel])
+        rightStackView.axis = .vertical
+        
+        return (leftStackView: leftStackView,
+                leftButton: leftButton,
+                rightStackView: rightStackView,
+                rightButton: rightButton)
+    }()
+    
     private lazy var navigationBar: (bar: UINavigationBar,
-                                     stackView: UIStackView) = {
+                                     stackView: UIStackView,
+                                     backButton: UIButton) = {
         
         guard let bar = navigationController?.navigationBar else {
             
             return (bar: UINavigationBar(),
-                    stackView: UIStackView())
+                    stackView: UIStackView(),
+                    backButton: UIButton())
         }
         
-        let navigationBarStackViewFrame = CGRect(x: 25,
-                                                 y: bar.frame.size.height/4,
-                                                 width: bar.frame.size.width*0.8,
-                                                 height: bar.frame.size.height/2)
-        
-        let stackView = UIStackView(frame: navigationBarStackViewFrame)
+        let stackView = UIStackView(frame: CGRect(x: 25,
+                                                  y: bar.frame.size.height/4,
+                                                  width: bar.frame.size.width*0.8,
+                                                  height: bar.frame.size.height/2))
         
         stackView.addArrangedSubview(viewElements.leftStackView)
         stackView.addArrangedSubview(viewElements.leftButton)
@@ -119,10 +174,33 @@ class HomeAbertaView: UIViewController {
                                                bottom: 10,
                                                right: 10)
         
-        bar.addSubview(stackView)
+        let backButton = UIButton()
+        backButton.setImage(UIImage(named: "backButtonWhite"), for: .normal)
+        
+        let view = UIView(frame: CGRect(x: 0,
+                                        y: 0,
+                                        width: bar.frame.size.width,
+                                        height: bar.frame.size.height))
+        view.backgroundColor = UIColor(named: "BlueBravve")
+        
+        view.addSubview(backButton)
+        
+        backButton.constraintInsideTo(.centerY, view)
+        backButton.constraintInsideTo(.leading, view, 35)
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: bar.frame.size.width,
+                                               height: bar.frame.size.height))
+        titleLabel.text = "Espaço"
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        
+        bar.addSubviews([view, titleLabel, stackView])
         
         return (bar: bar,
-                stackView: stackView)
+                stackView: stackView,
+                backButton: backButton)
     }()
     
     let filterLabels: [UILabel] = {
@@ -189,55 +267,10 @@ class HomeAbertaView: UIViewController {
         return stackView
     }()
     
-    private let viewElements: (leftStackView: UIStackView,
-                               leftButton: UIButton,
-                               rightStackView: UIStackView,
-                               rightButton: UIButton) = {
-        
-        let leftButton = UIButton(),
-            stateLabel = UILabel(),
-            stateChosedLabel = UILabel(),
-            leftStackView = UIStackView(arrangedSubviews: [stateLabel,
-                                                           stateChosedLabel]),
-            rightButton = UIButton(),
-            cityLabel = UILabel(),
-            cityChosedLabel = UILabel(),
-            rightStackView = UIStackView(arrangedSubviews: [cityLabel,
-                                                            cityChosedLabel])
-        
-        let handler = {(action: UIAction) in
-            
-            print(action.title)
-        }
-        
-        stateLabel.text = "UF"
-        leftButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: handler),
-            UIAction(title: "action2",handler: handler)
-        
-        ])
-        leftButton.setTitle("", for: .normal)
-        
-        cityLabel.text = "Cidade"
-        rightButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: handler),
-            UIAction(title: "action2",handler: handler)
-        
-        ])
-        rightButton.setTitle("", for: .normal)
-        
-        return (leftStackView: leftStackView,
-                leftButton: leftButton,
-                rightStackView: rightStackView,
-                rightButton: rightButton)
-    }()
-    
     let tabBar: UITabBar = {
 
         let tabBar = UITabBar()
-        tabBar.barTintColor = .red
+        tabBar.barTintColor = .white
 
         return tabBar
     }()
