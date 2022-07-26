@@ -17,12 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-//        let navigationController = UINavigationController(rootViewController: HomeAbertaView())
-//        navigationController.navigationBar.prefersLargeTitles = true
-//        navigationController.navigationBar.backgroundColor = UIColor(named: "BlueBravve")
-//
-//        window.rootViewController = navigationController
-        window.rootViewController = Recuperar1View()
+        let navigationController = UINavigationController(rootViewController: HomeAbertaView())
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.backgroundColor = UIColor(named: "BlueBravve")
+
+        window.rootViewController = navigationController
+//        window.rootViewController = Recuperar1View()
         window.makeKeyAndVisible()
         
         self.window = window

@@ -51,7 +51,7 @@ class HomeAbertaTableViewCell: UITableViewCell {
         detailsLabel.numberOfLines = 0
         
         let detailsButton = UIButton()
-        detailsButton.setTitle("Botao", for: .normal)
+        detailsButton.setImage(UIImage(named: "arrowPink"), for: .normal)
         detailsButton.setTitleColor(.black, for: .normal)
         
         view.addSubviews([titleLabel, descriptionLabel, detailsButton, photoView, nameLabel, priceLabel, detailsLabel])
@@ -123,11 +123,11 @@ class HomeAbertaTableViewCell: UITableViewCell {
         viewElements.priceLabel.constraintInsideTo(.trailing, viewElements.photoView, 18)
         
         viewElements.detailsLabel.constraintOutsideTo(.top, viewElements.nameLabel, 23)
-        viewElements.detailsLabel.constraintInsideTo(.leading, viewElements.nameLabel)
-        viewElements.detailsLabel.constraintInsideTo(.bottom, viewElements.view, 18)
+        viewElements.detailsLabel.constraintInsideTo(.leading, viewElements.nameLabel, 17)
+        viewElements.detailsLabel.constraintInsideTo(.bottom, viewElements.view, 33)
         
         viewElements.detailsButton.constraintInsideTo(.trailing, viewElements.view, 27)
-        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.detailsLabel)
+        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 19)
     }
     
     @objc func showDetails() {
