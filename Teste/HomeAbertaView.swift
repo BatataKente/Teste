@@ -23,8 +23,8 @@ class HomeAbertaView: UIViewController {
                                   descriptionLabel: UILabel,
                                   photoCollectionView: UICollectionView,
                                   nameLabel: UILabel,
-                                  priceLabel: UILabel,
-                                  detailsLabel: UILabel) = {
+                                  hourPriceLabel: UILabel,
+                                  dayPriceLabel: UILabel) = {
         
         let titleLabel = UILabel()
         titleLabel.backgroundColor = .systemGreen
@@ -50,22 +50,21 @@ class HomeAbertaView: UIViewController {
         let nameLabel = UILabel()
         nameLabel.text = "Hotel Saint"
         
-        let priceLabel = UILabel()
-        priceLabel.text = "3,50 crédito/ hora"
+        let hourPriceLabel = UILabel()
+        hourPriceLabel.text = "3,50 crédito/ hora"
         
-        let detailsLabel = UILabel()
-        detailsLabel.text = "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
-        detailsLabel.numberOfLines = 0
+        let dayPriceLabel = UILabel()
+        dayPriceLabel.text = "18,20 crédito/dia"
         
-        view.addSubviews([titleLabel, descriptionLabel, photoCollectionView, nameLabel, priceLabel, detailsLabel])
+        view.addSubviews([titleLabel, descriptionLabel, photoCollectionView, nameLabel, hourPriceLabel, dayPriceLabel])
         
         return (view: view,
                 titleLabel: titleLabel,
                 descriptionLabel: descriptionLabel,
                 photoCollectionView: photoCollectionView,
                 nameLabel: nameLabel,
-                priceLabel: priceLabel,
-                detailsLabel: detailsLabel)
+                hourPriceLabel: hourPriceLabel,
+                dayPriceLabel: dayPriceLabel)
     }()
     
     private lazy var scrollView: UIScrollView = {
@@ -323,12 +322,12 @@ class HomeAbertaView: UIViewController {
         scrollViewElements.nameLabel.constraintOutsideTo(.top, scrollViewElements.photoCollectionView, 23)
         scrollViewElements.nameLabel.constraintInsideTo(.leading, scrollViewElements.photoCollectionView)
         
-        scrollViewElements.priceLabel.constraintOutsideTo(.top, scrollViewElements.photoCollectionView, 23)
-        scrollViewElements.priceLabel.constraintInsideTo(.trailing, scrollViewElements.photoCollectionView, 18)
+        scrollViewElements.hourPriceLabel.constraintOutsideTo(.top, scrollViewElements.nameLabel, 23)
+        scrollViewElements.hourPriceLabel.constraintInsideTo(.leading, scrollViewElements.nameLabel)
         
-        scrollViewElements.detailsLabel.constraintOutsideTo(.top, scrollViewElements.nameLabel, 23)
-        scrollViewElements.detailsLabel.constraintInsideTo(.leading, scrollViewElements.nameLabel)
-        scrollViewElements.detailsLabel.constraintInsideTo(.bottom, scrollViewElements.view, 18)
+        scrollViewElements.dayPriceLabel.constraintOutsideTo(.top, scrollViewElements.hourPriceLabel)
+        scrollViewElements.dayPriceLabel.constraintInsideTo(.leading, scrollViewElements.hourPriceLabel)
+        scrollViewElements.dayPriceLabel.constraintInsideTo(.bottom, scrollViewElements.view, 18)
     }
 }
 

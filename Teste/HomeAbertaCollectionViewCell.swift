@@ -9,21 +9,22 @@ import UIKit
 
 class HomeAbertaCollectionViewCell: UICollectionViewCell {
     
-    let view: UIView = {
+    let imageView: UIImageView = {
         
-        let view = UIView()
-        view.backgroundColor = .darkGray
+        let imageView = UIImageView()
+        imageView.backgroundColor = .darkGray
+        imageView.layer.cornerRadius = 12
         
-        return view
+        return imageView
     }()
     
     override init(frame: CGRect) {
         
         super.init(frame: frame)
         
-        contentView.addSubview(view)
+        contentView.addSubview(imageView)
         
-        view.fillSuperview()
+        imageView.fillSuperview()
     }
     
     required init?(coder: NSCoder) {
