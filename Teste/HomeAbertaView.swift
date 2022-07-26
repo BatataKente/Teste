@@ -218,32 +218,13 @@ class HomeAbertaView: UIViewController {
                 filterButton: filterButton)
     }()
     
-    let filterLabels: [UILabel] = {
-        
-        var filterLabels: [UILabel] = []
-        
-        let firstLabel = UILabel()
-        firstLabel.text = "Colaborativo"
-        firstLabel.textColor = .white
-        
-        filterLabels.append(firstLabel)
-        
-        let secondLabel = UILabel()
-        secondLabel.text = "Colaborativo"
-        secondLabel.textColor = .white
-        
-        filterLabels.append(secondLabel)
-        
-        return filterLabels
-    }()
-    
     private lazy var filterStackView: UIStackView = {
         
-        let stackView = UIStackView(arrangedSubviews: filterLabels)
+        let stackView = UIStackView()
         stackView.backgroundColor = .white
         stackView.isHidden = false
-        stackView.isLayoutMarginsRelativeArrangement = true
         stackView.alignment = .leading
+        stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 10,
                                                left: 10,
                                                bottom: 10,
@@ -295,14 +276,11 @@ class HomeAbertaView: UIViewController {
         return tabBar
     }()
     
+    var filterButtons: [UIButton] = []
+    
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        
-        for label in filterLabels {
-            
-            label.layer.cornerRadius = label.frame.size.height/2
-        }
     }
     
     override func viewDidLoad() {
@@ -323,6 +301,9 @@ class HomeAbertaView: UIViewController {
         
         scrollViewElements.photoCollectionView.dataSource = self
         scrollViewElements.photoCollectionView.delegate = self
+        
+        filterButtons = createCapsuleButtons(["a", "b", "c"])
+        filterStackView.addArrangedSubviews(filterButtons)
     }
     
     private func setupDefaults() {
@@ -382,11 +363,6 @@ class HomeAbertaView: UIViewController {
         scrollViewElements.dayPriceLabel.constraintOutsideTo(.top, scrollViewElements.hourPriceLabel)
         scrollViewElements.dayPriceLabel.constraintInsideTo(.leading, scrollViewElements.hourPriceLabel)
         scrollViewElements.dayPriceLabel.constraintInsideTo(.bottom, scrollViewElements.view, 18)
-        
-        for label in filterLabels {
-            
-            label.heightAnchorInSuperview(40)
-        }
     }
 }
 
