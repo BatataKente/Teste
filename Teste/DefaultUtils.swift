@@ -161,11 +161,12 @@ extension UIButton {
     }
     
     open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
+                                       colorName: String = "PinkBravve",
                                        aboveWhom: Any?) {
         
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        self.backgroundColor = UIColor(named: "GrayBravve")
+        self.backgroundColor = UIColor(named: colorName)
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
