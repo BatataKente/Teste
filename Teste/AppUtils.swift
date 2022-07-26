@@ -7,6 +7,36 @@
 
 import UIKit
 
+extension UIViewController {
+    
+    func createCapsuleButtons(_ buttonTitles: [String],
+                              _ backgroundColor: UIColor = UIColor(named: "BlueBravve") ?? UIColor()) -> [UIButton] {
+        
+        var titleColor: UIColor = .black,
+            buttons: [UIButton] = []
+        
+        if backgroundColor != .white {
+            
+            titleColor = .white
+        }
+        
+        for title in buttonTitles {
+            
+            let button = UIButton()
+            
+            button.setTitle(title, for: .normal)
+            button.configuration = .filled()
+            button.setTitleColor(titleColor, for: .normal)
+            button.configuration?.baseBackgroundColor = backgroundColor
+            button.configuration?.cornerStyle = .capsule
+            
+            buttons.append(button)
+        }
+        
+        return buttons
+    }
+}
+
 extension UIStackView {
     
     open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
@@ -81,6 +111,17 @@ extension UIView {
         for view in views {
             
             self.addSubview(view)
+        }
+    }
+}
+
+extension UIStackView {
+    
+    func addArrangedSubviews(_ views: [UIView]) {
+        
+        for view in views {
+            
+            self.addArrangedSubview(view)
         }
     }
 }

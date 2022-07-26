@@ -107,6 +107,19 @@ extension UILabel {
 
 extension UIButton {
     
+    open func setToDefaultCapsuleButton(_ buttonTitle: String,
+                                   _ backgroundColor: UIColor = UIColor(named: "BlueBravve") ?? UIColor()) {
+        
+        self.setTitle(buttonTitle, for: .normal)
+        self.configuration = .filled()
+        if backgroundColor != .white {
+            
+            self.setTitleColor(.white, for: .normal)
+        }
+        self.configuration?.baseBackgroundColor = backgroundColor
+        self.configuration?.cornerStyle = .capsule
+    }
+    
     open func setToJumpButtonDefault(buttonTitle: String = "Pular",
                                      _ constant: CGFloat = 70) {
         
