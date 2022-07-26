@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.backgroundColor = UIColor(named: "BlueBravve")
 
         window.rootViewController = navigationController
-//        window.rootViewController = ConfirmationCodeView()
+//        window.rootViewController = RecuperacaoDeSenha3()
         window.makeKeyAndVisible()
         
         self.window = window
