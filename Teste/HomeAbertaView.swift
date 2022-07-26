@@ -176,6 +176,7 @@ class HomeAbertaView: UIViewController {
         
         let backButton = UIButton()
         backButton.setImage(UIImage(named: "backButtonWhite"), for: .normal)
+        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         
         let view = UIView(frame: CGRect(x: 0,
                                         y: 0,
@@ -186,7 +187,8 @@ class HomeAbertaView: UIViewController {
         view.addSubview(backButton)
         
         backButton.constraintInsideTo(.centerY, view)
-        backButton.constraintInsideTo(.leading, view, 35)
+        backButton.constraintInsideTo(.leading, view, 19)
+        backButton.sizeAnchorInSuperview()
         
         let titleLabel = UILabel(frame: CGRect(x: 0,
                                                y: 0,
@@ -408,6 +410,14 @@ extension HomeAbertaView: UICollectionViewDataSource, UICollectionViewDelegate {
         let cell = scrollViewElements.photoCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HomeAbertaCollectionViewCell
         
         return cell ?? UICollectionViewCell()
+    }
+    
+    @objc func backAction() {
+        
+        navigationBar.stackView.isHidden = false
+        reserveButton.isHidden = true
+        stackView.isHidden = false
+        scrollView.isHidden = true
     }
 }
 
