@@ -148,13 +148,15 @@ class HomeAbertaView: UIViewController {
     
     private lazy var navigationBar: (bar: UINavigationBar,
                                      stackView: UIStackView,
-                                     backButton: UIButton) = {
+                                     backButton: UIButton,
+                                     filterButton: UIButton) = {
         
         guard let bar = navigationController?.navigationBar else {
             
             return (bar: UINavigationBar(),
                     stackView: UIStackView(),
-                    backButton: UIButton())
+                    backButton: UIButton(),
+                    filterButton: UIButton())
         }
         
         let stackView = UIStackView(frame: CGRect(x: 25,
@@ -180,23 +182,31 @@ class HomeAbertaView: UIViewController {
         backButton.setImage(UIImage(named: "backButtonWhite"), for: .normal)
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         
+        let filterButton = UIButton()
+        filterButton.setImage(UIImage(named: "Filter-2"), for: .normal)
+        
         let view = UIView(frame: CGRect(x: 0,
                                         y: 0,
                                         width: bar.frame.size.width,
                                         height: bar.frame.size.height))
         view.backgroundColor = UIColor(named: "BlueBravve")
         
-        view.addSubview(backButton)
+        view.addSubviews([backButton, filterButton])
         
         backButton.constraintInsideTo(.centerY, view)
         backButton.constraintInsideTo(.leading, view, 19)
-        backButton.sizeAnchorInSuperview()
+        backButton.sizeAnchorInSuperview(50)
+        
+        filterButton.constraintInsideTo(.centerY, view)
+        filterButton.constraintInsideTo(.trailing, view, 5)
+        filterButton.sizeAnchorInSuperview(50)
         
         let titleLabel = UILabel(frame: CGRect(x: 0,
                                                y: 0,
                                                width: bar.frame.size.width,
                                                height: bar.frame.size.height))
         titleLabel.text = "Espaço"
+        titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         
@@ -204,7 +214,8 @@ class HomeAbertaView: UIViewController {
         
         return (bar: bar,
                 stackView: stackView,
-                backButton: backButton)
+                backButton: backButton,
+                filterButton: filterButton)
     }()
     
     let filterLabels: [UILabel] = {
@@ -279,6 +290,7 @@ class HomeAbertaView: UIViewController {
         user.image = UIImage(named: "userLoginGray")
         
         tabBar.setItems([location, calendar, user], animated: true)
+        tabBar.selectedItem = location
 
         return tabBar
     }()
@@ -316,7 +328,8 @@ class HomeAbertaView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        reserveButton.setToBottomButtonDefault(aboveWhom: tabBar)
+        reserveButton.setToBottomButtonDefault("reservar",
+                                               aboveWhom: tabBar)
     }
     
     private func setupConstraints() {
@@ -426,6 +439,7 @@ extension HomeAbertaView: UICollectionViewDataSource, UICollectionViewDelegate {
     @objc func backAction() {
         
         navigationBar.stackView.isHidden = false
+        navigationBar.filterButton.isHidden = false
         reserveButton.isHidden = true
         stackView.isHidden = false
         scrollView.isHidden = true
@@ -437,6 +451,7 @@ extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
     func chosePlace() {
         
         navigationBar.stackView.isHidden = true
+        navigationBar.filterButton.isHidden = true
         reserveButton.isHidden = false
         stackView.isHidden = true
         scrollView.isHidden = false
