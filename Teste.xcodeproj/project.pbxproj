@@ -12,14 +12,9 @@
 		134D68132890154E00D5572B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68122890154E00D5572B /* TextField.swift */; };
 		134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */; };
 		13B1C1332890167B003F9D3A /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12A2890167B003F9D3A /* Ubuntu-Medium.ttf */; };
-		13B1C1342890167B003F9D3A /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12B2890167B003F9D3A /* Ubuntu-LightItalic.ttf */; };
 		13B1C1352890167B003F9D3A /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12C2890167B003F9D3A /* Ubuntu-Regular.ttf */; };
 		13B1C1362890167B003F9D3A /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12D2890167B003F9D3A /* Ubuntu-Bold.ttf */; };
-		13B1C1372890167B003F9D3A /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12E2890167B003F9D3A /* Ubuntu-MediumItalic.ttf */; };
-		13B1C1382890167B003F9D3A /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C12F2890167B003F9D3A /* Ubuntu-BoldItalic.ttf */; };
-		13B1C1392890167B003F9D3A /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C1302890167B003F9D3A /* Ubuntu-Italic.ttf */; };
 		13B1C13A2890167B003F9D3A /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C1312890167B003F9D3A /* Ubuntu-Light.ttf */; };
-		13B1C13B2890167B003F9D3A /* UFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C1322890167B003F9D3A /* UFL.txt */; };
 		1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeAbertaView.swift */; };
 		14509954288B32AE006AC775 /* ValidateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14509953288B32AE006AC775 /* ValidateUtils.swift */; };
 		145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */; };
@@ -45,14 +40,9 @@
 		134D68122890154E00D5572B /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3.swift; sourceTree = "<group>"; };
 		13B1C12A2890167B003F9D3A /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
-		13B1C12B2890167B003F9D3A /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
 		13B1C12C2890167B003F9D3A /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		13B1C12D2890167B003F9D3A /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
-		13B1C12E2890167B003F9D3A /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
-		13B1C12F2890167B003F9D3A /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
-		13B1C1302890167B003F9D3A /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
 		13B1C1312890167B003F9D3A /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
-		13B1C1322890167B003F9D3A /* UFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UFL.txt; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeAbertaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaView.swift; sourceTree = "<group>"; };
 		14509953288B32AE006AC775 /* ValidateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateUtils.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
@@ -89,14 +79,9 @@
 			isa = PBXGroup;
 			children = (
 				13B1C12A2890167B003F9D3A /* Ubuntu-Medium.ttf */,
-				13B1C12B2890167B003F9D3A /* Ubuntu-LightItalic.ttf */,
 				13B1C12C2890167B003F9D3A /* Ubuntu-Regular.ttf */,
 				13B1C12D2890167B003F9D3A /* Ubuntu-Bold.ttf */,
-				13B1C12E2890167B003F9D3A /* Ubuntu-MediumItalic.ttf */,
-				13B1C12F2890167B003F9D3A /* Ubuntu-BoldItalic.ttf */,
-				13B1C1302890167B003F9D3A /* Ubuntu-Italic.ttf */,
 				13B1C1312890167B003F9D3A /* Ubuntu-Light.ttf */,
-				13B1C1322890167B003F9D3A /* UFL.txt */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -205,13 +190,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B1C13B2890167B003F9D3A /* UFL.txt in Resources */,
 				13B1C1352890167B003F9D3A /* Ubuntu-Regular.ttf in Resources */,
-				13B1C1342890167B003F9D3A /* Ubuntu-LightItalic.ttf in Resources */,
-				13B1C1382890167B003F9D3A /* Ubuntu-BoldItalic.ttf in Resources */,
-				13B1C1392890167B003F9D3A /* Ubuntu-Italic.ttf in Resources */,
 				13B1C13A2890167B003F9D3A /* Ubuntu-Light.ttf in Resources */,
-				13B1C1372890167B003F9D3A /* Ubuntu-MediumItalic.ttf in Resources */,
 				14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */,
 				14CBDBCF2889B72500EA8EDD /* Assets.xcassets in Resources */,
 				13B1C1362890167B003F9D3A /* Ubuntu-Bold.ttf in Resources */,
