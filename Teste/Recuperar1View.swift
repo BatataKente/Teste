@@ -61,7 +61,7 @@ class Recuperar1View: UIViewController {
     let textFieldEmail: UITextField = {
         let textField = UITextField()
         textField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        textField.textColor = UIColor(red: 0.03, green: 0.01, blue: 0.41, alpha: 1.0)
+        textField.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
         textField.backgroundColor = .white
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -98,14 +98,14 @@ class Recuperar1View: UIViewController {
     }()
 
     let customShaddow: UIView = {
-          
-          let customShaddow = UIView()
+        
+        let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(red: 0.03, green: 0.01, blue: 0.41, alpha: 1.0)
-          customShaddow.layer.cornerRadius = 8
-          customShaddow.isHidden = true
-          
-          return customShaddow
-      }()
+        customShaddow.layer.cornerRadius = 8
+        customShaddow.isHidden = true
+        
+        return customShaddow
+    }()
 
     
     let buttonContinue = UIButton()
