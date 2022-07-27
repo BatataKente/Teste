@@ -38,7 +38,10 @@ class HomeAbertaTableViewCell: UITableViewCell {
         
         let photoView = UIImageView()
         photoView.backgroundColor = .cyan
+        photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 12
+        
+        photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         let nameLabel = UILabel()
         nameLabel.text = "Hotel Saint"

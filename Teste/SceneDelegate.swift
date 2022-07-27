@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        navigationController.navigationBar.backgroundColor = UIColor(named: "BlueBravve")
 //
 //        window.rootViewController = navigationController
-        window.rootViewController = HomeAbertaView()
+        
+        window.rootViewController = DetalhesDoEspacoView()
         window.makeKeyAndVisible()
         
         self.window = window

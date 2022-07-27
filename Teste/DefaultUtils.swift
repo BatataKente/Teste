@@ -36,6 +36,11 @@ extension UIView {
         
         titleLabel.constraintInsideTo(.centerY, self)
         titleLabel.constraintInsideTo(.centerX, self)
+        
+        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+        self.heightAnchorInSuperview(100)
     }
     
     open func setToDefaultCustomBarWithFilter() {
@@ -121,6 +126,11 @@ extension UIView {
         titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
+        
+        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+        self.heightAnchorInSuperview(100)
     }
 }
 
