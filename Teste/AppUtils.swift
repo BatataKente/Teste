@@ -12,23 +12,12 @@ extension UIViewController {
     func createCapsuleButtons(_ buttonTitles: [String],
                               _ backgroundColor: UIColor = UIColor(named: "BlueBravve") ?? UIColor()) -> [UIButton] {
         
-        var titleColor: UIColor = .black,
-            buttons: [UIButton] = []
-        
-        if backgroundColor != .white {
-            
-            titleColor = .white
-        }
+        var buttons: [UIButton] = []
         
         for title in buttonTitles {
             
             let button = UIButton()
-            
-            button.setTitle(title, for: .normal)
-            button.configuration = .filled()
-            button.setTitleColor(titleColor, for: .normal)
-            button.configuration?.baseBackgroundColor = backgroundColor
-            button.configuration?.cornerStyle = .capsule
+            button.setToDefaultCapsuleButton(title, backgroundColor)
             
             buttons.append(button)
         }
