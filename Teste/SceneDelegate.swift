@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        window.rootViewController = navigationController
         
-        window.rootViewController = HomeAbertaView()
+        window.rootViewController = DetalhesDoEspacoView()
         window.makeKeyAndVisible()
         
         self.window = window
