@@ -91,102 +91,12 @@ class HomeAbertaView: UIViewController {
         return reserveButton
     }()
     
-    private let viewElements: (leftStackView: UIStackView,
-                               leftButton: UIButton,
-                               rightStackView: UIStackView,
-                               rightButton: UIButton) = {
+    private lazy var customBar: UIView = {
         
-        let leftButton = UIButton()
-        let stateLabel = UILabel()
-        let stateChosedLabel = UILabel()
-        let rightButton = UIButton()
-        let cityLabel = UILabel()
-        let cityChosedLabel = UILabel()
+        let customBar = UIView()
+        customBar.setToDefaultCustomBarWithFilter()
         
-        let stateHandler = {(action: UIAction) in
-
-            stateChosedLabel.text = action.title
-            stateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
-        }
-
-        stateLabel.text = "UF"
-        leftButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: stateHandler),
-            UIAction(title: "action2",handler: stateHandler)
-
-        ])
-        leftButton.setTitle("", for: .normal)
-        
-        let cityHandler = {(action: UIAction) in
-
-            cityChosedLabel.text = action.title
-            cityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
-        }
-        
-        cityLabel.text = "Cidade"
-        rightButton.setMenuForButton([
-
-            UIAction(title: "action1",handler: cityHandler),
-            UIAction(title: "action2",handler: cityHandler)
-
-        ])
-        rightButton.setTitle("", for: .normal)
-        
-        let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
-                                                           stateChosedLabel])
-        leftStackView.axis = .vertical
-        let rightStackView = UIStackView(arrangedSubviews: [cityLabel,
-                                                            cityChosedLabel])
-        rightStackView.axis = .vertical
-        
-        return (leftStackView: leftStackView,
-                leftButton: leftButton,
-                rightStackView: rightStackView,
-                rightButton: rightButton)
-    }()
-    
-    private lazy var navigationBar: (bar: UIView,
-                                     filterButton: UIButton) = {
-        
-        let bar = UIView()
-        bar.backgroundColor = UIColor(named: "BlueBravve")
-        
-        let stackView = UIStackView()
-        
-        stackView.addArrangedSubview(viewElements.leftStackView)
-        stackView.addArrangedSubview(viewElements.leftButton)
-        stackView.addArrangedSubview(viewElements.rightStackView)
-        stackView.addArrangedSubview(viewElements.rightButton)
-        
-        stackView.backgroundColor = .white
-        stackView.layer.cornerRadius = 8
-        stackView.setToDefaultBackgroundColor()
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 10,
-                                               left: 10,
-                                               bottom: 10,
-                                               right: 10)
-        
-        let filterButton = UIButton()
-        filterButton.setImage(UIImage(named: "Filter-2"), for: .normal)
-        
-        bar.addSubviews([filterButton])
-        
-        filterButton.constraintInsideTo(.centerY, bar)
-        filterButton.constraintInsideTo(.trailing, bar, 5)
-        filterButton.sizeAnchorInSuperview(50)
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Espaço"
-        titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        
-        bar.addSubviews([stackView])
-        
-        return (bar: bar,
-                filterButton: filterButton)
+        return customBar
     }()
     
     private lazy var filterStackView: UIStackView = {
@@ -265,7 +175,7 @@ class HomeAbertaView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([scrollView, stackView, navigationBar.bar, tabBar, reserveButton])
+        view.addSubviews([scrollView, stackView, customBar, tabBar, reserveButton])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -287,17 +197,12 @@ class HomeAbertaView: UIViewController {
     
     private func setupConstraints() {
         
-        navigationBar.bar.constraintInsideTo(.top, view.safeAreaLayoutGuide)
-        navigationBar.bar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        navigationBar.bar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        navigationBar.bar.heightAnchorInSuperview(100)
+        customBar.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        customBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        customBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        customBar.heightAnchorInSuperview(100)
         
-        viewElements.leftStackView.widthAnchorInSuperview(navigationBar.bar.frame.size.width*0.1)
-        viewElements.leftButton.widthAnchorInSuperview(navigationBar.bar.frame.size.width*0.1)
-        viewElements.rightStackView.addLeadingLineWithColor(color: .red)
-        viewElements.rightButton.widthAnchorInSuperview(navigationBar.bar.frame.size.width*0.1)
-        
-        stackView.constraintOutsideTo(.top, navigationBar.bar)
+        stackView.constraintOutsideTo(.top, customBar)
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         stackView.constraintOutsideTo(.bottom, tabBar)
@@ -308,7 +213,7 @@ class HomeAbertaView: UIViewController {
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
-        scrollView.constraintOutsideTo(.top, navigationBar.bar)
+        scrollView.constraintOutsideTo(.top, customBar)
         scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         scrollView.constraintOutsideTo(.bottom, reserveButton)
