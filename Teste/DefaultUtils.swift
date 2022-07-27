@@ -108,15 +108,17 @@ extension UILabel {
 extension UIButton {
     
     open func setToDefaultCapsuleButton(_ buttonTitle: String,
-                                   _ backgroundColor: UIColor = UIColor(named: "BlueBravve") ?? UIColor()) {
-        
-        self.setTitle(buttonTitle, for: .normal)
+                                        _ backgroundColor: UIColor = UIColor(named: "BlueBravve") ?? UIColor()) {
+
         self.configuration = .filled()
-        if backgroundColor != .white {
-            
-            self.setTitleColor(.white, for: .normal)
+        self.configuration?.title = buttonTitle
+        self.configuration?.background.backgroundColor = backgroundColor
+        if backgroundColor == .white {
+
+            self.configuration?.baseForegroundColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
+            self.configuration?.background.strokeWidth = 0.7
+            self.configuration?.background.strokeColor = UIColor(red: 0.847, green: 0.867, blue: 0.896, alpha: 1)
         }
-        self.configuration?.baseBackgroundColor = backgroundColor
         self.configuration?.cornerStyle = .capsule
     }
     
