@@ -13,6 +13,115 @@ extension UIView {
         
         self.backgroundColor = .white
     }
+    
+    open func setToDefaultCustomBarWithBackButton(_ handler: @escaping UIActionHandler) {
+        
+        self.backgroundColor = UIColor(named: "BlueBravve")
+        
+        let backButton = UIButton()
+        backButton.setImage(UIImage(named: "backButtonWhite"), for: .normal)
+        
+        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Espaco"
+        titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
+        titleLabel.textColor = .white
+        
+        self.addSubviews([backButton, titleLabel])
+        
+        backButton.constraintInsideTo(.centerY, self)
+        backButton.constraintInsideTo(.leading, self, 35)
+        backButton.sizeAnchorInSuperview(50)
+        
+        titleLabel.constraintInsideTo(.centerY, self)
+        titleLabel.constraintInsideTo(.centerX, self)
+    }
+    
+    open func setToDefaultCustomBarWithFilter() {
+        
+        self.backgroundColor = UIColor(named: "BlueBravve")
+        
+        let leftButton = UIButton()
+        let stateLabel = UILabel()
+        let stateChosedLabel = UILabel()
+        let rightButton = UIButton()
+        let cityLabel = UILabel()
+        let cityChosedLabel = UILabel()
+        
+        let stateHandler = {(action: UIAction) in
+
+            stateChosedLabel.text = action.title
+            stateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        }
+
+        stateLabel.text = "UF"
+        leftButton.setMenuForButton([
+            
+            UIAction(title: "action1",handler: stateHandler),
+            UIAction(title: "action2",handler: stateHandler)
+
+        ])
+        leftButton.setTitle("", for: .normal)
+        
+        let cityHandler = {(action: UIAction) in
+
+            cityChosedLabel.text = action.title
+            cityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        }
+        
+        cityLabel.text = "Cidade"
+        rightButton.setMenuForButton([
+
+            UIAction(title: "action1",handler: cityHandler),
+            UIAction(title: "action2",handler: cityHandler)
+
+        ])
+        rightButton.setTitle("", for: .normal)
+        
+        let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
+                                                           stateChosedLabel])
+        leftStackView.axis = .vertical
+        let rightStackView = UIStackView(arrangedSubviews: [cityLabel,
+                                                            cityChosedLabel])
+        rightStackView.axis = .vertical
+        
+        let stackView = UIStackView()
+        
+        stackView.addArrangedSubviews([leftStackView, leftButton, rightStackView, rightButton])
+        
+        leftStackView.constraintInsideTo(.width, stackView, multiplier: 0.2)
+        leftButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
+        rightButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
+        
+        stackView.backgroundColor = .white
+        stackView.layer.cornerRadius = 8
+        stackView.setToDefaultBackgroundColor()
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 10,
+                                               left: 10,
+                                               bottom: 10,
+                                               right: 10)
+        
+        let filterButton = UIButton()
+        filterButton.setImage(UIImage(named: "Filter-2"), for: .normal)
+        
+        self.addSubviews([filterButton, stackView])
+        
+        stackView.constraintInsideTo(.centerY, self)
+        stackView.constraintInsideTo(.leading, self, 20)
+        stackView.constraintOutsideTo(.trailing, filterButton, 20)
+        
+        filterButton.constraintInsideTo(.centerY, self)
+        filterButton.constraintInsideTo(.trailing, self, 20)
+        filterButton.sizeAnchorInSuperview(50)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Espaço"
+        titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+    }
 }
 
 extension UIImageView {

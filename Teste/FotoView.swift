@@ -49,7 +49,15 @@ class FotoView: UIViewController {
         return infoLabel
     }()
     
-    private let imageView = UIImageView()
+    private let imageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = false
+        imageView.image = UIImage(named: "MrMadruga")
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
     
     private let editButton: UIButton = {
         
@@ -58,13 +66,6 @@ class FotoView: UIViewController {
         
         return editButton
     }()
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        imageSetup()
-    }
     
     override func viewDidLoad() {
         
@@ -104,21 +105,13 @@ class FotoView: UIViewController {
         imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 30)
         imageView.sizeAnchorInSuperview(view.frame.size.height/5)
+        imageView.layer.cornerRadius = view.frame.size.height/10
         
         tutorialLabel.constraintOutsideTo(.top, imageView, 25)
         tutorialLabel.constraintOutsideTo(.centerX, view)
         
         editButton.sizeAnchorInSuperview()
-    }
-    
-    private func imageSetup() {
-        
-        imageView.layer.masksToBounds = false
-        imageView.layer.cornerRadius = imageView.frame.size.height/2
-        imageView.image = UIImage(named: "MrMadruga")
-        imageView.clipsToBounds = true
-        
-        editButton.constraintInsideTo(.centerX, imageView, imageView.frame.size.width/3)
-        editButton.constraintInsideTo(.centerY, imageView, imageView.frame.size.height/3)
+        editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
+        editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
     }
 }
