@@ -52,7 +52,7 @@ class Recuperar1View: UIViewController {
         label.text = "Informe seu e-mail para enviarmos um código de confirmação!"
         label.textAlignment = .center
         label.font = UIFont(name: "Ubuntu-Light", size: 16)
-        label.textColor = UIColor(named: "Color3")
+        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -61,7 +61,7 @@ class Recuperar1View: UIViewController {
     let textFieldEmail: UITextField = {
         let textField = UITextField()
         textField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        textField.textColor = UIColor(named: "Color2")
+        textField.textColor = UIColor(red: 0.03, green: 0.01, blue: 0.41, alpha: 1.0)
         textField.backgroundColor = .white
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +72,7 @@ class Recuperar1View: UIViewController {
         let label = UILabel()
         label.text = " E-mail"
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.textColor = UIColor(named: "Color4")
+        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -100,7 +100,7 @@ class Recuperar1View: UIViewController {
     let customShaddow: UIView = {
           
           let customShaddow = UIView()
-          customShaddow.backgroundColor = UIColor(named: "Color2")
+        customShaddow.backgroundColor = UIColor(red: 0.03, green: 0.01, blue: 0.41, alpha: 1.0)
           customShaddow.layer.cornerRadius = 8
           customShaddow.isHidden = true
           
@@ -193,14 +193,14 @@ class Recuperar1View: UIViewController {
     }
   
     
-    @objc func changeScreen_() {
+    @objc func actionButtonContinue() {
 
         print("ok")
     }
     
     func freezeButton_() {
         
-        buttonContinue.removeTarget(nil, action: #selector(changeScreen_), for: .touchUpInside)
+        buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
         
         buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
     }
@@ -210,12 +210,12 @@ class Recuperar1View: UIViewController {
            
            if sender.text != "" {
 
-               buttonContinue.addTarget(nil, action: #selector(changeScreen_), for: .touchUpInside)
+               buttonContinue.addTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
                buttonContinue.backgroundColor = UIColor(named: "PinkBravve")
            }
            else {
                
-               buttonContinue.removeTarget(nil, action: #selector(changeScreen_), for: .touchUpInside)
+               buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
                buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
            }
        }
