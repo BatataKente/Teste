@@ -28,7 +28,6 @@ class NomeView: UIViewController {
                                                           "emailGray",
                                                           "padlockGray",
                                                           "hobbiesGray"])
-        
         stackView.spacing = 7
         
         return (stack: stackView,
