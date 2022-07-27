@@ -18,13 +18,15 @@ class HomeAbertaView: UIViewController {
         return collectionViewFlowLayout
     }()
     
-    lazy var scrollViewElements: (view: UIView,
-                                  titleLabel: UILabel,
-                                  descriptionLabel: UILabel,
-                                  photoCollectionView: UICollectionView,
-                                  nameLabel: UILabel,
-                                  hourPriceLabel: UILabel,
-                                  dayPriceLabel: UILabel) = {
+    lazy var ViewElements: (view: UIView,
+                            titleLabel: UILabel,
+                            descriptionLabel: UILabel,
+                            photoCollectionView: UICollectionView,
+                            scrollView: UIScrollView) = {
+        
+        let scrollView = UIScrollView()
+        scrollView.isHidden = true
+        scrollView.alwaysBounceVertical = false
         
         let titleLabel = UILabel()
         titleLabel.backgroundColor = .systemGreen
@@ -35,6 +37,8 @@ class HomeAbertaView: UIViewController {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 12
+        
+        scrollView.addSubview(view)
         
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.5
@@ -60,36 +64,26 @@ class HomeAbertaView: UIViewController {
                           photoCollectionView, nameLabel,
                           hourPriceLabel, dayPriceLabel])
         
+        dayPriceLabel.constraintOutsideTo(.top, hourPriceLabel)
+        dayPriceLabel.constraintInsideTo(.leading, hourPriceLabel)
+        dayPriceLabel.constraintInsideTo(.bottom, view, 18)
+        
+        nameLabel.constraintOutsideTo(.top,  photoCollectionView, 23)
+        nameLabel.constraintInsideTo(.leading, photoCollectionView)
+        
+        hourPriceLabel.constraintOutsideTo(.top, nameLabel, 23)
+        hourPriceLabel.constraintInsideTo(.leading, nameLabel)
+        
         return (view: view,
                 titleLabel: titleLabel,
                 descriptionLabel: descriptionLabel,
                 photoCollectionView: photoCollectionView,
-                nameLabel: nameLabel,
-                hourPriceLabel: hourPriceLabel,
-                dayPriceLabel: dayPriceLabel)
-    }()
-    
-    private lazy var scrollView: UIScrollView = {
-        
-        let scrollView = UIScrollView()
-        scrollView.addSubview(scrollViewElements.view)
-        scrollView.isHidden = true
-        scrollView.alwaysBounceVertical = false
-        
-        return scrollView
+                scrollView: scrollView)
     }()
     
     private var espacos = 10
     
     private let titleLabel = UILabel()
-    
-    private let reserveButton: UIButton = {
-        
-        let reserveButton = UIButton()
-        reserveButton.isHidden = true
-        
-        return reserveButton
-    }()
     
     private lazy var customBar: UIView = {
         
@@ -136,28 +130,16 @@ class HomeAbertaView: UIViewController {
         return stackView
     }()
     
-    let tabBar: UITabBar = {
-
-        let tabBar = UITabBar()
-        tabBar.barTintColor = .white
-        tabBar.tintColor = UIColor(named: "PinkBravve")
-        
-        let location = UITabBarItem()
-        location.image = UIImage(named: "locationGray")
-        
-        let calendar = UITabBarItem()
-        calendar.image = UIImage(named: "calendarGray")
-        
-        let user = UITabBarItem()
-        user.image = UIImage(named: "userLoginGray")
-        
-        tabBar.setItems([location, calendar, user], animated: true)
-        tabBar.selectedItem = location
-
-        return tabBar
-    }()
+//    @objc func pushToNextVC() {
+//        let newVC = UIViewController()
+//        newVC.view.backgroundColor = UIColor.red
+//        self.navigationController?.pushViewController(newVC, animated:
+//        true)
+//    }
     
     var filterButtons = [UIButton]()
+    
+    lazy var tabBar = UITabBarController()
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -171,17 +153,38 @@ class HomeAbertaView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
+        
+//        let button: UIButton = UIButton(frame: CGRect(x: view.bounds.width / 2.50, y: view.bounds.height / 2, width: 100, height: 50))
+//        button.backgroundColor = UIColor.black
+//        button.addTarget(self, action: #selector(pushToNextVC), for: .touchUpInside)
+//        self.view.addSubview(button)
+        
+//        let favoritesVC = NomeView()
+//        favoritesVC.title = "Favorites"
+//        favoritesVC.view.backgroundColor = UIColor.orange
+//
+//        let downloadsVC = FotoView()
+//        downloadsVC.title = "Downloads"
+//        downloadsVC.view.backgroundColor = UIColor.blue
+//
+//        let historyVC = ConfirmationCodeView()
+//        historyVC.title = "History"
+//        historyVC.view.backgroundColor = UIColor.cyan
+//
+//        let controllers = [favoritesVC, downloadsVC, historyVC]
+//        tabBar.viewControllers = controllers
+//        tabBar.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
     }
     
     private func setupView() {
         
-        view.addSubviews([scrollView, stackView, customBar, tabBar, reserveButton])
+        view.addSubviews([ViewElements.scrollView, stackView, customBar])
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        scrollViewElements.photoCollectionView.dataSource = self
-        scrollViewElements.photoCollectionView.delegate = self
+        ViewElements.photoCollectionView.dataSource = self
+        ViewElements.photoCollectionView.delegate = self
         
         filterButtons = createCapsuleButtons(["a"])
         
@@ -191,8 +194,6 @@ class HomeAbertaView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        reserveButton.setToBottomButtonDefault("reservar",
-                                               aboveWhom: tabBar)
     }
     
     private func setupConstraints() {
@@ -205,46 +206,32 @@ class HomeAbertaView: UIViewController {
         stackView.constraintOutsideTo(.top, customBar)
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        stackView.constraintOutsideTo(.bottom, tabBar)
+        stackView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
         tableView.widthAnchorInSuperview(view.frame.size.width)
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        ViewElements.scrollView.constraintOutsideTo(.top, customBar)
+        ViewElements.scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        ViewElements.scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        ViewElements.scrollView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        scrollView.constraintOutsideTo(.bottom, reserveButton)
+        ViewElements.view.constraintInsideTo(.top, ViewElements.scrollView.contentLayoutGuide)
+        ViewElements.view.constraintInsideTo(.leading, ViewElements.scrollView.contentLayoutGuide)
+        ViewElements.view.constraintInsideTo(.trailing, ViewElements.scrollView.contentLayoutGuide)
+        ViewElements.view.constraintInsideTo(.bottom, ViewElements.scrollView.contentLayoutGuide)
+        ViewElements.view.constraintInsideTo(.width, ViewElements.scrollView.frameLayoutGuide)
         
-        scrollViewElements.view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        scrollViewElements.view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        scrollViewElements.view.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        scrollViewElements.view.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        scrollViewElements.view.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        ViewElements.titleLabel.constraintInsideTo(.top, ViewElements.view)
+        ViewElements.titleLabel.constraintInsideTo(.leading, ViewElements.view, 21)
         
-        scrollViewElements.titleLabel.constraintInsideTo(.top, scrollViewElements.view)
-        scrollViewElements.titleLabel.constraintInsideTo(.leading, scrollViewElements.view, 21)
+        ViewElements.descriptionLabel.constraintOutsideTo(.top, ViewElements.titleLabel, 23)
+        ViewElements.descriptionLabel.constraintInsideTo(.leading, ViewElements.titleLabel)
+        ViewElements.descriptionLabel.widthAnchorInSuperview(215)
         
-        scrollViewElements.descriptionLabel.constraintOutsideTo(.top, scrollViewElements.titleLabel, 23)
-        scrollViewElements.descriptionLabel.constraintInsideTo(.leading, scrollViewElements.titleLabel)
-        scrollViewElements.descriptionLabel.widthAnchorInSuperview(215)
-        
-        scrollViewElements.photoCollectionView.constraintOutsideTo(.top, scrollViewElements.descriptionLabel, 22)
-        scrollViewElements.photoCollectionView.constraintInsideTo(.leading, scrollViewElements.descriptionLabel)
-        scrollViewElements.photoCollectionView.constraintInsideTo(.trailing, scrollViewElements.view)
-        scrollViewElements.photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
-        
-        scrollViewElements.nameLabel.constraintOutsideTo(.top, scrollViewElements.photoCollectionView, 23)
-        scrollViewElements.nameLabel.constraintInsideTo(.leading, scrollViewElements.photoCollectionView)
-        
-        scrollViewElements.hourPriceLabel.constraintOutsideTo(.top, scrollViewElements.nameLabel, 23)
-        scrollViewElements.hourPriceLabel.constraintInsideTo(.leading, scrollViewElements.nameLabel)
-        
-        scrollViewElements.dayPriceLabel.constraintOutsideTo(.top, scrollViewElements.hourPriceLabel)
-        scrollViewElements.dayPriceLabel.constraintInsideTo(.leading, scrollViewElements.hourPriceLabel)
-        scrollViewElements.dayPriceLabel.constraintInsideTo(.bottom, scrollViewElements.view, 18)
+        ViewElements.photoCollectionView.constraintOutsideTo(.top, ViewElements.descriptionLabel, 22)
+        ViewElements.photoCollectionView.constraintInsideTo(.leading, ViewElements.descriptionLabel)
+        ViewElements.photoCollectionView.constraintInsideTo(.trailing, ViewElements.view)
+        ViewElements.photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
     }
 }
 
@@ -289,16 +276,9 @@ extension HomeAbertaView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = scrollViewElements.photoCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HomeAbertaCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HomeAbertaCollectionViewCell
         
         return cell ?? UICollectionViewCell()
-    }
-    
-    @objc func backAction() {
-        
-        reserveButton.isHidden = true
-        stackView.isHidden = false
-        scrollView.isHidden = true
     }
 }
 
@@ -306,8 +286,9 @@ extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
     
     func chosePlace() {
         
-        reserveButton.isHidden = false
         stackView.isHidden = true
-        scrollView.isHidden = false
+        ViewElements.scrollView.isHidden = false
     }
 }
+
+
