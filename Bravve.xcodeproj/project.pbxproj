@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14076BDC289309E7003EA2F1 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDB289309E7003EA2F1 /* ExtensionUIView.swift */; };
 		14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */; };
 		14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */; };
 		14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */; };
@@ -113,7 +112,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14076BDB289309E7003EA2F1 /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
 		14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
@@ -231,14 +229,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14076BDA289309A9003EA2F1 /* ExtensionUiView */ = {
-			isa = PBXGroup;
-			children = (
-				14076BDB289309E7003EA2F1 /* ExtensionUIView.swift */,
-			);
-			path = ExtensionUiView;
-			sourceTree = "<group>";
-		};
 		14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,7 +1045,6 @@
 				14076BE328930CAD003EA2F1 /* ExtensionUILabel */,
 				14076BE028930BE2003EA2F1 /* ExtensionUIButton */,
 				14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */,
-				14076BDA289309A9003EA2F1 /* ExtensionUiView */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1565,7 +1554,6 @@
 				C69616F42881E9C600281633 /* NomeView.swift in Sources */,
 				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */,
-				14076BDC289309E7003EA2F1 /* ExtensionUIView.swift in Sources */,
 				C69616DE2881E90000281633 /* HomeFechadaModel.swift in Sources */,
 				C696171F2881EAB200281633 /* FotoModel.swift in Sources */,
 				C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */,
