@@ -20,14 +20,14 @@ class FotoView: UIViewController {
     private let firstWay = UIImageView(),
         secondWay = UIImageView()
     
-    private let progressBarStackView: UIStackView = {
+    private lazy var progressBarStackView: UIStackView = {
         
-        let stackView = UIStackView()
-        let buttons = stackView.createProgressBarButtons(["photoBlue",
-                                                          "noteGray",
-                                                          "hobbiesGray",
-                                                          "activiesGray"])
-        buttons[0].setTitle(" Foto", for: .normal)
+        let buttons = createProgressBarButtons(["photoBlue",
+                                                "noteGray",
+                                                "hobbiesGray",
+                                                "activiesGray"])
+        let stackView = UIStackView(arrangedSubviews: buttons)
+        
         stackView.spacing = 7
         
         return stackView
