@@ -19,7 +19,7 @@ class RecuperacaoDeSenha3: UIViewController {
     
     let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "backgroundImage")
+        imageView.image = UIImage(named: "way2")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -27,7 +27,7 @@ class RecuperacaoDeSenha3: UIViewController {
     
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "LogoColor")
+        imageView.image = UIImage(named: "logoBlue")
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +36,7 @@ class RecuperacaoDeSenha3: UIViewController {
     
     let backButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "backButtonIcon"), for: .normal)
+        button.setImage(UIImage(named: "backButtonPink"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -44,7 +44,7 @@ class RecuperacaoDeSenha3: UIViewController {
     
     let emailButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "envelope-open-text"), for: .normal)
+        button.setImage(UIImage(named: "emailGray"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = UIColor(red: 0.613, green: 0.642, blue: 0.671, alpha: 1)
         button.layer.backgroundColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -54,7 +54,7 @@ class RecuperacaoDeSenha3: UIViewController {
     
     let passwordRecoveryButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "lock"), for: .normal)
+        button.setImage(UIImage(named: "padloclBlue"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
         button.layer.backgroundColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -91,11 +91,11 @@ class RecuperacaoDeSenha3: UIViewController {
         return label
     }()
     
-    let passwordTextFieldClass = TextField(placeHolderText: "Senha", buttonImageName: "eye-slash")
+    let passwordTextFieldClass = TextField(placeHolderText: "Senha", buttonImageName: "eyeClose")
     lazy var passwordStackView = passwordTextFieldClass.createStackView()
     
     
-    let confirmPasswordTextFieldClass = TextField(placeHolderText: "Repita a Senha", buttonImageName: "eye-slash")
+    let confirmPasswordTextFieldClass = TextField(placeHolderText: "Repita a Senha", buttonImageName: "eyeClose")
     lazy var confirmPasswordStackView = confirmPasswordTextFieldClass.createStackView()
     
     let passwordBulletPoint = BulletPoint(labelText: "No mínimo 6 caracteres")
@@ -326,11 +326,11 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         if passwordEyeSlash {
             passwordTextFieldClass.textField.isSecureTextEntry = true
             passwordEyeSlash = !passwordEyeSlash
-            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eye-slash"), for: .normal)
+            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeClose"), for: .normal)
         } else {
             passwordTextFieldClass.textField.isSecureTextEntry = false
             passwordEyeSlash = !passwordEyeSlash
-            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eye"), for: .normal)
+            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
         }
     }
     
@@ -339,11 +339,11 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         if confirmPasswordEyeSlash {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = true
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
-            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eye-slash"), for: .normal)
+            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeClose"), for: .normal)
         } else {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = false
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
-            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eye"), for: .normal)
+            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
         }
     }
 }
