@@ -17,13 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-//        let navigationController = UINavigationController(rootViewController: HomeAbertaView())
-//        navigationController.navigationBar.prefersLargeTitles = true
-//        navigationController.navigationBar.backgroundColor = UIColor(named: "BlueBravve")
-//
-//        window.rootViewController = navigationController
+        let vc1 = HomeAbertaView()
+        vc1.tabBarItem.image = UIImage(named: "locationGray")
         
-        window.rootViewController = DetalhesDoEspacoView()
+        let vc2 = NomeView()
+        vc2.tabBarItem.image = UIImage(named: "exiteGray")
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [vc1, vc2]
+        
+        tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
+        
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         
         self.window = window
