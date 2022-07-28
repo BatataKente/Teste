@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */; };
+		14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */; };
+		14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */; };
+		14076BE828930CFA003EA2F1 /* ExtensionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */; };
+		14076BEB28930DE6003EA2F1 /* ExtensionUIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
@@ -71,7 +76,6 @@
 		C69617432881EB7300281633 /* FinalizarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617422881EB7300281633 /* FinalizarModel.swift */; };
 		C69617452881EB7B00281633 /* FinalizarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617442881EB7B00281633 /* FinalizarView.swift */; };
 		C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617462881EB8700281633 /* FinalizarViewModel.swift */; };
-		C696174A2881EBAE00281633 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617492881EBAE00281633 /* AppUtils.swift */; };
 		C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617532881EC4C00281633 /* AvulsaModel.swift */; };
 		C69617562881EC5400281633 /* AvulsaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617552881EC5400281633 /* AvulsaView.swift */; };
 		C69617582881EC5C00281633 /* AvulsaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617572881EC5C00281633 /* AvulsaViewModel.swift */; };
@@ -105,6 +109,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
+		14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
+		14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
+		14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImageView.swift; sourceTree = "<group>"; };
+		14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIStackView.swift; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,7 +180,6 @@
 		C69617422881EB7300281633 /* FinalizarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizarModel.swift; sourceTree = "<group>"; };
 		C69617442881EB7B00281633 /* FinalizarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizarView.swift; sourceTree = "<group>"; };
 		C69617462881EB8700281633 /* FinalizarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizarViewModel.swift; sourceTree = "<group>"; };
-		C69617492881EBAE00281633 /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		C69617532881EC4C00281633 /* AvulsaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvulsaModel.swift; sourceTree = "<group>"; };
 		C69617552881EC5400281633 /* AvulsaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvulsaView.swift; sourceTree = "<group>"; };
 		C69617572881EC5C00281633 /* AvulsaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvulsaViewModel.swift; sourceTree = "<group>"; };
@@ -215,6 +223,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */,
+			);
+			path = ExtensionUIViewController;
+			sourceTree = "<group>";
+		};
+		14076BE028930BE2003EA2F1 /* ExtensionUIButton */ = {
+			isa = PBXGroup;
+			children = (
+				14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */,
+			);
+			path = ExtensionUIButton;
+			sourceTree = "<group>";
+		};
+		14076BE328930CAD003EA2F1 /* ExtensionUILabel */ = {
+			isa = PBXGroup;
+			children = (
+				14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */,
+			);
+			path = ExtensionUILabel;
+			sourceTree = "<group>";
+		};
+		14076BE628930CDD003EA2F1 /* ExtensionUIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */,
+			);
+			path = ExtensionUIImageView;
+			sourceTree = "<group>";
+		};
+		14076BE928930DD1003EA2F1 /* ExtensionUIStackView */ = {
+			isa = PBXGroup;
+			children = (
+				14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */,
+			);
+			path = ExtensionUIStackView;
+			sourceTree = "<group>";
+		};
 		2EAEDEE82881DEA900C88374 = {
 			isa = PBXGroup;
 			children = (
@@ -951,7 +999,11 @@
 		C69617482881EBA000281633 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C69617492881EBAE00281633 /* AppUtils.swift */,
+				14076BE928930DD1003EA2F1 /* ExtensionUIStackView */,
+				14076BE628930CDD003EA2F1 /* ExtensionUIImageView */,
+				14076BE328930CAD003EA2F1 /* ExtensionUILabel */,
+				14076BE028930BE2003EA2F1 /* ExtensionUIButton */,
+				14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1413,9 +1465,11 @@
 				C69617282881EADC00281633 /* ProfissaoModel.swift in Sources */,
 				C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */,
 				C69616B52881E79E00281633 /* Recuperar3ViewModel.swift in Sources */,
+				14076BEB28930DE6003EA2F1 /* ExtensionUIStackView.swift in Sources */,
 				C69617A82881EF0F00281633 /* PerfilPessoalViewModel.swift in Sources */,
 				C696176F2881ECDF00281633 /* ReservaFinalizadaView.swift in Sources */,
 				C69617352881EB1F00281633 /* HobbiesViewModel.swift in Sources */,
+				14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */,
 				C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */,
 				C69617432881EB7300281633 /* FinalizarModel.swift in Sources */,
 				C69617162881EA7C00281633 /* ConfirmarDadosView.swift in Sources */,
@@ -1425,6 +1479,9 @@
 				C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* Recuperar1ViewModel.swift in Sources */,
+				14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */,
+				2EAEDF132881E42A00C88374 /* SplashViewModel.swift in Sources */,
+				14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */,
 				C696170F2881EA5600281633 /* SenhaView.swift in Sources */,
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
@@ -1442,6 +1499,7 @@
 				C69616A82881E75500281633 /* Recuperar1View.swift in Sources */,
 				C69616CB2881E88600281633 /* HomeAbertaModel.swift in Sources */,
 				C69617802881EE1E00281633 /* CheckInModel.swift in Sources */,
+				14076BE828930CFA003EA2F1 /* ExtensionUIImageView.swift in Sources */,
 				C696178D2881EE6500281633 /* CheckOutViewModel.swift in Sources */,
 				C69616C72881E80600281633 /* Recuperar4ViewModel.swift in Sources */,
 				C696173E2881EB5400281633 /* AtividadesViewModel.swift in Sources */,
@@ -1472,7 +1530,6 @@
 				C69616AA2881E76000281633 /* Recuperar1Model.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */,
 				C696173A2881EB4000281633 /* AtividadesModel.swift in Sources */,
-				C696174A2881EBAE00281633 /* AppUtils.swift in Sources */,
 				C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */,
 				C69616E22881E91200281633 /* HomeFechadaViewModel.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
