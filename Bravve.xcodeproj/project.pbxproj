@@ -12,9 +12,6 @@
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
 		2EAEDF012881DEAB00C88374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF002881DEAB00C88374 /* Assets.xcassets */; };
 		2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */; };
-		2EAEDF0D2881E11C00C88374 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF0C2881E11C00C88374 /* SplashView.swift */; };
-		2EAEDF132881E42A00C88374 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF122881E42A00C88374 /* SplashViewModel.swift */; };
-		2EAEDF152881E43900C88374 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDF142881E43900C88374 /* SplashModel.swift */; };
 		5F3B69612891851E00E77D2D /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */; };
 		5F3B69622891851E00E77D2D /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */; };
 		5F3B69632891851E00E77D2D /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695E2891851E00E77D2D /* Ubuntu-Bold.ttf */; };
@@ -115,9 +112,6 @@
 		2EAEDF002881DEAB00C88374 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDF032881DEAC00C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAEDF052881DEAC00C88374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2EAEDF0C2881E11C00C88374 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		2EAEDF122881E42A00C88374 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
-		2EAEDF142881E43900C88374 /* SplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModel.swift; sourceTree = "<group>"; };
 		5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		5F3B695E2891851E00E77D2D /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -266,40 +260,6 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		2EAEDF0E2881E16E00C88374 /* Splash */ = {
-			isa = PBXGroup;
-			children = (
-				2EAEDF112881E19600C88374 /* ViewModel */,
-				2EAEDF102881E18F00C88374 /* Model */,
-				2EAEDF0F2881E17E00C88374 /* View */,
-			);
-			path = Splash;
-			sourceTree = "<group>";
-		};
-		2EAEDF0F2881E17E00C88374 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2EAEDF0C2881E11C00C88374 /* SplashView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2EAEDF102881E18F00C88374 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2EAEDF142881E43900C88374 /* SplashModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2EAEDF112881E19600C88374 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2EAEDF122881E42A00C88374 /* SplashViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		5F3B695B2891851E00E77D2D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				C69616A32881E71800281633 /* Login */,
-				2EAEDF0E2881E16E00C88374 /* Splash */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1450,7 +1409,6 @@
 				C69617962881EEA300281633 /* CancelarReservaViewModel.swift in Sources */,
 				C69617212881EAB900281633 /* FotoView.swift in Sources */,
 				C69617612881EC9000281633 /* Reserva2ViewModel.swift in Sources */,
-				2EAEDF152881E43900C88374 /* SplashModel.swift in Sources */,
 				C69616B32881E79400281633 /* Recuperar3Model.swift in Sources */,
 				C69617282881EADC00281633 /* ProfissaoModel.swift in Sources */,
 				C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */,
@@ -1467,7 +1425,6 @@
 				C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* Recuperar1ViewModel.swift in Sources */,
-				2EAEDF132881E42A00C88374 /* SplashViewModel.swift in Sources */,
 				C696170F2881EA5600281633 /* SenhaView.swift in Sources */,
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
@@ -1478,7 +1435,6 @@
 				C696175F2881EC7F00281633 /* Reserva2View.swift in Sources */,
 				C69617232881EAC200281633 /* FotoViewModel.swift in Sources */,
 				C696172C2881EAED00281633 /* ProfissaoViewModel.swift in Sources */,
-				2EAEDF0D2881E11C00C88374 /* SplashView.swift in Sources */,
 				C696173C2881EB4A00281633 /* AtividadesView.swift in Sources */,
 				C696179F2881EED900281633 /* DetalhesReservaView.swift in Sources */,
 				C69617562881EC5400281633 /* AvulsaView.swift in Sources */,
@@ -1676,6 +1632,7 @@
 				INFOPLIST_FILE = Bravve/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1703,6 +1660,7 @@
 				INFOPLIST_FILE = Bravve/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
