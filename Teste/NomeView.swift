@@ -17,23 +17,19 @@ class NomeView: UIViewController {
     
     private let registerButton = UIButton()
     
-    private let progressBarStackView: (stack: UIStackView,
-                                       personalData: UIButton,
-                                       phone: UIButton,
-                                       email: UIButton) = {
+    private lazy var progressBarStackView: (stack: UIStackView,
+                                            buttons: [UIButton]) = {
         
-        let stackView = UIStackView()
-        let buttons = stackView.createProgressBarButtons(["userBlue",
-                                                          "cellGray",
-                                                          "emailGray",
-                                                          "padlockGray",
-                                                          "hobbiesGray"])
+        let buttons = createProgressBarButtons(["userBlue",
+                                                "cellGray",
+                                                "emailGray",
+                                                "padlockGray",
+                                                "hobbiesGray"])
+        let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = 7
         
         return (stack: stackView,
-                personalData: buttons[0],
-                phone: buttons[1],
-                email: buttons[2])
+                buttons: buttons)
     }()
     
     private let infoLabel: UILabel = {
@@ -207,13 +203,13 @@ class NomeView: UIViewController {
         backButton.addTarget(self,
                              action: #selector(back),
                              for: .touchUpInside)
-        progressBarStackView.personalData.addTarget(self,
+        progressBarStackView.buttons[0].addTarget(self,
                                                     action: #selector(progressBarAction),
                                                     for: .touchUpInside)
-        progressBarStackView.phone.addTarget(self,
+        progressBarStackView.buttons[1].addTarget(self,
                                              action: #selector(progressBarAction),
                                              for: .touchUpInside)
-        progressBarStackView.email.addTarget(self,
+        progressBarStackView.buttons[2].addTarget(self,
                                              action: #selector(progressBarAction),
                                              for: .touchUpInside)
         
@@ -313,12 +309,14 @@ extension NomeView: NomeViewModelProtocol {
                         emailTitle: String,
                         emailImage: String) {
         
-        progressBarStackView.personalData.setTitle(personalDataTitle, for: .normal)
-        progressBarStackView.personalData.setImage(UIImage(named: personalDataImage), for: .normal)
-        progressBarStackView.phone.setTitle(phoneNumberTitle, for: .normal)
-        progressBarStackView.phone.setImage(UIImage(named: phoneNumberImage), for: .normal)
-        progressBarStackView.email.setTitle(emailTitle, for: .normal)
-        progressBarStackView.email.setImage(UIImage(named: emailImage), for: .normal)
+        progressBarStackView.buttons[0].configuration?.title = personalDataTitle
+        progressBarStackView.buttons[0].configuration?.image = UIImage(named: personalDataImage)
+        
+        progressBarStackView.buttons[1].configuration?.title = phoneNumberTitle
+        progressBarStackView.buttons[1].configuration?.image = UIImage(named: phoneNumberImage)
+        
+        progressBarStackView.buttons[2].configuration?.title = emailTitle
+        progressBarStackView.buttons[2].configuration?.image = UIImage(named: emailImage)
     }
     
     func freezeButton() {

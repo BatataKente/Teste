@@ -31,7 +31,7 @@ class NomeViewModel {
     
     func changeScreenWithProgressBar(_ sender: UIButton) {
         
-        switch sender.currentImage {
+        switch sender.configuration?.image {
             
             case UIImage(named: "userBlue"):
             

@@ -256,11 +256,70 @@ extension UIButton {
     }
     
     open func setToProgressBarButtonDefault(_ buttonImageName: String) {
+        
+        self.configuration = .plain()
+        self.configuration?.image = UIImage(named: buttonImageName)
+        self.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                                    leading: 0,
+                                                                    bottom: 0,
+                                                                    trailing: 0)
+            
+        switch buttonImageName {
 
-        self.setImage(UIImage(named: buttonImageName),
-                                      for: .normal)
+            case "userBlue":
+
+                self.configuration?.title = " Dados pessoais"
+
+            case "cellBlue":
+
+                self.configuration?.title = " Celular"
+
+            case "emailBlue":
+
+                self.configuration?.title = " Email"
+
+            case "padlockBlue":
+
+                self.configuration?.title = " Senha"
+
+            case "pencilBlue":
+
+                self.configuration?.title = " Confirmação"
+            
+            case "photoBlue":
+
+                self.configuration?.title = " Foto"
+
+            case "noteBlue":
+
+                self.configuration?.title = " Profissão"
+
+            case "hobbiesBlue":
+
+                self.configuration?.title = " Hobbies"
+
+            case "activiesBlue":
+
+                self.configuration?.title = " Atividades de interesse"
+            
+            case "":
+
+                let pendente = true
+                self.configuration?.title = " Agendamento"
+                
+            case "":
+
+                self.configuration?.title = " Carteira"
+                
+            case "":
+
+                self.configuration?.title = " Revisão"
+
+            default: break
+        }
+        
+        self.configuration?.baseForegroundColor = UIColor(named: "BlueBravve")
         self.titleLabel?.font = UIFont(name: "Ubuntu-Medium", size: 14)
-        self.setTitleColor(UIColor(named: "BlueBravve"), for: .normal)
     }
     
     open func setToButtonDefault(_ aboveWhom: Any?,

@@ -24,9 +24,6 @@ extension UIViewController {
         
         return buttons
     }
-}
-
-extension UIStackView {
     
     open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
         
@@ -35,13 +32,8 @@ extension UIStackView {
         for name in buttonImageNames {
             
             let button = UIButton()
-            button.setImage(UIImage(named: name), for: .normal)
+            button.setToProgressBarButtonDefault(name)
             
-            button.titleLabel?.font = UIFont(name: "Ubuntu-Medium", size: 14)
-            button.setTitleColor(.black, for: .normal)
-            button.imageView?.contentMode = .scaleAspectFit
-            
-            self.addArrangedSubview(button)
             buttons.append(button)
         }
         
