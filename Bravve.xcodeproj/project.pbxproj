@@ -17,6 +17,7 @@
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
 		2EAEDF012881DEAB00C88374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF002881DEAB00C88374 /* Assets.xcassets */; };
 		2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */; };
+		2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */; };
 		5F3B69612891851E00E77D2D /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */; };
 		5F3B69622891851E00E77D2D /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */; };
 		5F3B69632891851E00E77D2D /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695E2891851E00E77D2D /* Ubuntu-Bold.ttf */; };
@@ -121,6 +122,7 @@
 		2EAEDF002881DEAB00C88374 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDF032881DEAC00C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAEDF052881DEAC00C88374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		5F3B695E2891851E00E77D2D /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -306,6 +308,14 @@
 				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
 			);
 			path = Delegate;
+			sourceTree = "<group>";
+		};
+		2EF23F4628931B540078B6B8 /* ExtensionUIView */ = {
+			isa = PBXGroup;
+			children = (
+				2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */,
+			);
+			path = ExtensionUIView;
 			sourceTree = "<group>";
 		};
 		5F3B695B2891851E00E77D2D /* Fonts */ = {
@@ -999,6 +1009,7 @@
 		C69617482881EBA000281633 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2EF23F4628931B540078B6B8 /* ExtensionUIView */,
 				14076BE928930DD1003EA2F1 /* ExtensionUIStackView */,
 				14076BE628930CDD003EA2F1 /* ExtensionUIImageView */,
 				14076BE328930CAD003EA2F1 /* ExtensionUILabel */,
@@ -1480,11 +1491,11 @@
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* Recuperar1ViewModel.swift in Sources */,
 				14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */,
-				2EAEDF132881E42A00C88374 /* SplashViewModel.swift in Sources */,
 				14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */,
 				C696170F2881EA5600281633 /* SenhaView.swift in Sources */,
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
+				2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */,
 				C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetalhesAbertoView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeAbertaView.swift in Sources */,
@@ -1693,6 +1704,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1721,6 +1733,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
