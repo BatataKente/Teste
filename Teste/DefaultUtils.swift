@@ -14,7 +14,7 @@ extension UIView {
         self.backgroundColor = .white
     }
     
-    open func setToDefaultCustomBarWithBackButton(_ handler: @escaping UIActionHandler) {
+    open func setToDefaultCustomBarWithBackButton(viewTitle: String, _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: "BlueBravve")
         
@@ -24,7 +24,7 @@ extension UIView {
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         let titleLabel = UILabel()
-        titleLabel.text = "Espaco"
+        titleLabel.text = viewTitle
         titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
         titleLabel.textColor = .white
         
@@ -37,10 +37,10 @@ extension UIView {
         titleLabel.constraintInsideTo(.centerY, self)
         titleLabel.constraintInsideTo(.centerX, self)
         
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(100)
+        self.heightAnchorInSuperview(144)
     }
     
     open func setToDefaultCustomBarWithFilter() {

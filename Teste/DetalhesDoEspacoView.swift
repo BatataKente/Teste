@@ -109,7 +109,7 @@ class DetalhesDoEspacoView: UIViewController {
     
     private func setupDefaults() {
         
-        customBar.setToDefaultCustomBarWithBackButton {_ in
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço", { _ in
             
             let homeAbertaView = HomeAbertaView()
             homeAbertaView.modalPresentationStyle = .fullScreen
