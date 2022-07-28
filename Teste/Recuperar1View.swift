@@ -140,7 +140,7 @@ class Recuperar1View: UIViewController {
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault("PinkBravve", 22)
+        buttonBack.setToBackButtonDefault("backButtonPink")
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault("way1")
