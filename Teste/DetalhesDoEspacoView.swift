@@ -90,6 +90,8 @@ class DetalhesDoEspacoView: UIViewController {
         return scrollView
     }()
     
+    let reserveButton = UIButton()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -102,7 +104,7 @@ class DetalhesDoEspacoView: UIViewController {
     private func setupView() {
         
         view.setToDefaultBackgroundColor()
-        view.addSubviews([customBar, scrollView])
+        view.addSubviews([customBar, scrollView, reserveButton])
     }
     
     private func setupDefaults() {
@@ -113,6 +115,8 @@ class DetalhesDoEspacoView: UIViewController {
             homeAbertaView.modalPresentationStyle = .fullScreen
             self.present(homeAbertaView, animated: false)
         }
+        
+        reserveButton.setToBottomButtonKeyboardDefault("Reservar")
     }
     
     private func setupConstraints() {
@@ -120,7 +124,7 @@ class DetalhesDoEspacoView: UIViewController {
         scrollView.constraintOutsideTo(.top, customBar)
         scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        scrollView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        scrollView.constraintOutsideTo(.bottom, reserveButton)
     }
 }
 
