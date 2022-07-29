@@ -35,7 +35,7 @@ class Recuperar1View: UIViewController {
         label.text = "Informe seu e-mail para enviarmos um código de confirmação!"
         label.textAlignment = .center
         label.font = UIFont(name: "Ubuntu-Light", size: 16)
-        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        label.textColor = UIColor(named: "label")
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,7 +44,7 @@ class Recuperar1View: UIViewController {
     let textFieldEmail: UITextField = {
         let textField = UITextField()
         textField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        textField.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        textField.textColor = UIColor(named: "label")
         textField.backgroundColor = .white
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +55,7 @@ class Recuperar1View: UIViewController {
         let label = UILabel()
         label.text = "E-mail"
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
+        label.textColor = UIColor(named: "labelTextField")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -118,7 +118,7 @@ class Recuperar1View: UIViewController {
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault("backButtonPink")
+        buttonBack.setToBackButtonDefault("backPink")
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault("wayCell")
