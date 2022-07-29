@@ -187,7 +187,7 @@ class ConfirmarDadosView: UIViewController {
     
     func myButton() -> UIButton {
         let button = UIButton()
-        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.setImage(UIImage(named: "edit-blue"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
