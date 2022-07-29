@@ -17,10 +17,10 @@ extension UIView {
     
     open func setToDefaultCustomBarWithBackButton(viewTitle: String, _ handler: @escaping UIActionHandler) {
         
-        self.backgroundColor = UIColor(named: "BlueBravve")
+        self.backgroundColor = UIColor(named: "blueNav")
         
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: "backButtonWhite"), for: .normal)
+        backButton.setImage(UIImage(named: "backWhite"), for: .normal)
         
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
@@ -31,22 +31,22 @@ extension UIView {
         
         self.addSubviews([backButton, titleLabel])
         
-        backButton.constraintInsideTo(.centerY, self)
+        titleLabel.constraintInsideTo(.centerY, self, 15)
+        titleLabel.constraintInsideTo(.centerX, self)
+        
+        backButton.constraintInsideTo(.centerY, titleLabel)
         backButton.constraintInsideTo(.leading, self, 35)
         backButton.sizeAnchorInSuperview(50)
-        
-        titleLabel.constraintInsideTo(.centerY, self)
-        titleLabel.constraintInsideTo(.centerX, self)
         
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(144)
+        self.heightAnchorInSuperview(120)
     }
     
     open func setToDefaultCustomBarWithFilter() {
         
-        self.backgroundColor = UIColor(named: "BlueBravve")
+        self.backgroundColor = UIColor(named: "blueNav")
         
         let leftButton = UIButton()
         let stateLabel = UILabel()
@@ -68,7 +68,8 @@ extension UIView {
             UIAction(title: "action2",handler: stateHandler)
 
         ])
-        leftButton.setTitle("", for: .normal)
+        leftButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        leftButton.tintColor = UIColor(named: "blueNav")
         
         let cityHandler = {(action: UIAction) in
 
@@ -83,7 +84,8 @@ extension UIView {
             UIAction(title: "action2",handler: cityHandler)
 
         ])
-        rightButton.setTitle("", for: .normal)
+        rightButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        rightButton.tintColor = UIColor(named: "blueNav")
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
                                                            stateChosedLabel])
@@ -110,28 +112,22 @@ extension UIView {
                                                right: 10)
         
         let filterButton = UIButton()
-        filterButton.setImage(UIImage(named: "Filter-2"), for: .normal)
+        filterButton.setImage(UIImage(named: "filter"), for: .normal)
         
         self.addSubviews([filterButton, stackView])
         
-        stackView.constraintInsideTo(.centerY, self)
+        stackView.constraintInsideTo(.centerY, self, 15)
         stackView.constraintInsideTo(.leading, self, 20)
         stackView.constraintOutsideTo(.trailing, filterButton, 20)
         
-        filterButton.constraintInsideTo(.centerY, self)
+        filterButton.constraintInsideTo(.centerY, stackView)
         filterButton.constraintInsideTo(.trailing, self, 20)
         filterButton.sizeAnchorInSuperview(50)
         
-        let titleLabel = UILabel()
-        titleLabel.text = "Espaço"
-        titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(100)
+        self.heightAnchorInSuperview(120)
     }
 }
 
