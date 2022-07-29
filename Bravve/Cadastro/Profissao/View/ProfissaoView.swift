@@ -130,8 +130,54 @@ class ProfessionView: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
         
+        view.addSubviews([backButton,
+                                    infoLabel,
+                                    selectAreaStackView,
+                                    workRegimeStackView,
+                                    logoBravve,
+                                    continueButton,
+                                    progressBarStackView,
+                                    backgroundImageView])
+        
         backgroundImageView.setWayToDefault("way2")
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault()
+        
+        NSLayoutConstraint.activate([
+            
+            progressBarStackView.topAnchor.constraint(equalTo: logoBravve.bottomAnchor, constant: 50),
+            progressBarStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            progressBarStackView.heightAnchor.constraint(equalToConstant: 27),
+            
+            infoLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 238.5),
+            infoLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 22),
+            infoLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -22),
+            
+            selectAreaStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 15),
+            selectAreaStackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 22),
+            selectAreaStackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -22),
+            selectAreaStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            selectAreaTextStackView.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.8),
+
+            selectAreaButton.bottomAnchor.constraint(equalTo: selectAreaStackView.bottomAnchor, constant: 24.34),
+            selectAreaButton.trailingAnchor.constraint(equalTo: selectAreaStackView.trailingAnchor, constant: -18.36),
+            
+            workRegimeStackView.topAnchor.constraint(equalTo: selectAreaStackView.bottomAnchor, constant: 15),
+            workRegimeStackView.leadingAnchor.constraint(equalTo: selectAreaStackView.leadingAnchor),
+            workRegimeStackView.trailingAnchor.constraint(equalTo: selectAreaStackView.trailingAnchor),
+            workRegimeStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            workRegimeTextStackView.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.8),
+
+            workRegimeButton.bottomAnchor.constraint(equalTo: workRegimeStackView.bottomAnchor, constant: 24.34),
+            workRegimeButton.trailingAnchor.constraint(equalTo: workRegimeStackView.trailingAnchor, constant: -18.36),
+            
+            continueButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -125),
+            continueButton.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor),
+            continueButton.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor),
+            continueButton.heightAnchor.constraint(equalToConstant: 52),
+        ])
+        
     }
 }
