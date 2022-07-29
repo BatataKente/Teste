@@ -126,6 +126,8 @@ class ProfessionView: UIViewController {
         return button
     } ()
     
+    let professionViewModel = ProfessionViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
@@ -142,6 +144,13 @@ class ProfessionView: UIViewController {
         backgroundImageView.setWayToDefault("way2")
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault()
+        
+        selectAreaButton.setMenuForButton(professionViewModel.selectAreaMenu({ (action: UIAction) in
+            self.selectAreaAPILabel.text = action.title
+        }))
+        workRegimeButton.setMenuForButton(professionViewModel.workRegimeMenu({(action: UIAction) in
+            self.workRegimeAPILabel.text = action.title
+        }))
         
         NSLayoutConstraint.activate([
             
@@ -179,5 +188,26 @@ class ProfessionView: UIViewController {
             continueButton.heightAnchor.constraint(equalToConstant: 52),
         ])
         
+        let selectAreaTap = UITapGestureRecognizer(target: self, action: #selector(selectAreaTapped))
+        selectAreaStackView.addGestureRecognizer(selectAreaTap)
+        selectAreaButton.addGestureRecognizer(selectAreaTap)
+        
+        let workRegimeTap = UITapGestureRecognizer(target: self, action: #selector(workRegimeTapped))
+        workRegimeStackView.addGestureRecognizer(workRegimeTap)
+        workRegimeButton.addGestureRecognizer(workRegimeTap)
+    }
+    
+    @objc func selectAreaTapped() {
+        
+        selectAreaLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        selectAreaAPILabel.isHidden = false
+        selectAreaAPILabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
+    }
+    
+    @objc func workRegimeTapped() {
+        
+        workRegimeLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        workRegimeAPILabel.isHidden = false
+        workRegimeAPILabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
     }
 }
