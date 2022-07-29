@@ -12,6 +12,7 @@
 		14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */; };
 		14076BE828930CFA003EA2F1 /* ExtensionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */; };
 		14076BEB28930DE6003EA2F1 /* ExtensionUIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */; };
+		1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
@@ -124,6 +125,7 @@
 		14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
 		14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImageView.swift; sourceTree = "<group>"; };
 		14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIStackView.swift; sourceTree = "<group>"; };
+		1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 		C69616942881E68900281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */,
 				C69616CC2881E89200281633 /* HomeAbertaView.swift */,
 			);
 			path = View;
@@ -1665,6 +1668,7 @@
 				C69617042881EA1500281633 /* EmailModel.swift in Sources */,
 				C69616A02881E70700281633 /* LoginModel.swift in Sources */,
 				C69616D42881E8C000281633 /* DetalhesAbertoModel.swift in Sources */,
+				1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */,
 				C696171A2881EA9500281633 /* ConfirmarDadosViewModel.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */,
