@@ -9,25 +9,16 @@ import UIKit
 
 class HomeAbertaTableViewCell: UITableViewCell {
     
-    lazy var photosCollecrionView: UICollectionView = {
-        
-        let collectionViewLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.scrollDirection = .horizontal
-        collectionViewLayout.itemSize = CGSize(width: 64, height: 64)
-        
-        let photosCollecrionView = UICollectionView(frame: contentView.frame,
-                                                    collectionViewLayout: collectionViewLayout)
-        photosCollecrionView.backgroundColor = .cyan
-        photosCollecrionView.layer.cornerRadius = 12
-        photosCollecrionView.register(HomeAbertaCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        
-        return photosCollecrionView
-    }()
+    var delegate: HomeAbertaTableViewCellProtocol?
     
     let viewElements: (view: UIView,
                        titleLabel: UILabel,
                        descriptionLabel: UILabel,
-                       detailsButton: UIButton) = {
+                       detailsButton: UIButton,
+                       photoView: UIImageView,
+                       nameLabel: UILabel,
+                       priceLabel: UILabel,
+                       detailsLabel: UILabel) = {
         
         let titleLabel = UILabel()
         titleLabel.backgroundColor = .systemGreen
@@ -36,18 +27,46 @@ class HomeAbertaTableViewCell: UITableViewCell {
         let descriptionLabel = UILabel()
         
         let view = UIView()
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
         view.layer.cornerRadius = 12
         
-        let detailsButton = UIButton()
-        detailsButton.setTitle("Botao", for: .normal)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 8
+//        view.layer.shadowOffset
         
-        view.addSubviews([titleLabel, descriptionLabel, detailsButton])
+        let photoView = UIImageView()
+        photoView.backgroundColor = .cyan
+        photoView.clipsToBounds = true
+        photoView.layer.cornerRadius = 12
+        
+        photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        
+        let nameLabel = UILabel()
+        nameLabel.text = "Hotel Saint"
+        
+        let priceLabel = UILabel()
+        priceLabel.text = "3,50 crédito/ hora"
+        
+        let detailsLabel = UILabel()
+        detailsLabel.text = "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
+        detailsLabel.numberOfLines = 0
+        
+        let detailsButton = UIButton()
+        detailsButton.setImage(UIImage(named: "arrowPink"), for: .normal)
+        detailsButton.setTitleColor(.black, for: .normal)
+        
+        view.addSubviews([titleLabel, descriptionLabel, detailsButton, photoView, nameLabel, priceLabel, detailsLabel])
         
         return (view: view,
                 titleLabel: titleLabel,
                 descriptionLabel: descriptionLabel,
-                detailsButton: detailsButton)
+                detailsButton: detailsButton,
+                photoView: photoView,
+                nameLabel: nameLabel,
+                priceLabel: priceLabel,
+                detailsLabel: detailsLabel)
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -69,11 +88,6 @@ class HomeAbertaTableViewCell: UITableViewCell {
         contentView.addSubviews([viewElements.view])
         contentView.setToDefaultBackgroundColor()
         
-        viewElements.view.addSubview(photosCollecrionView)
-        
-        photosCollecrionView.delegate = self
-        photosCollecrionView.dataSource = self
-        
         viewElements.detailsButton.addTarget(self,
                                              action: #selector(showDetails),
                                              for: .touchUpInside)
@@ -87,7 +101,10 @@ class HomeAbertaTableViewCell: UITableViewCell {
     
     func setupConstraints() {
         
-        viewElements.view.fillSuperview()
+        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
 //        viewElements.view.heightAnchorInSuperview(100)
         
         viewElements.titleLabel.constraintInsideTo(.top, viewElements.view)
@@ -97,33 +114,32 @@ class HomeAbertaTableViewCell: UITableViewCell {
         viewElements.descriptionLabel.constraintInsideTo(.leading, viewElements.titleLabel)
         viewElements.descriptionLabel.widthAnchorInSuperview(215)
         
-        photosCollecrionView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
-        photosCollecrionView.constraintInsideTo(.leading, viewElements.descriptionLabel)
-        photosCollecrionView.constraintInsideTo(.trailing, viewElements.view)
-        photosCollecrionView.heightAnchorInSuperview(100)
+        viewElements.photoView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
+        viewElements.photoView.constraintInsideTo(.leading, viewElements.descriptionLabel)
+        viewElements.photoView.constraintInsideTo(.trailing, viewElements.view)
+        viewElements.photoView.heightAnchorInSuperview(100)
         
-        viewElements.detailsButton.constraintOutsideTo(.top, photosCollecrionView, 21)
+        viewElements.nameLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
+        viewElements.nameLabel.constraintInsideTo(.leading, viewElements.photoView)
+        
+        viewElements.priceLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
+        viewElements.priceLabel.constraintInsideTo(.trailing, viewElements.photoView, 18)
+        
+        viewElements.detailsLabel.constraintOutsideTo(.top, viewElements.nameLabel, 23)
+        viewElements.detailsLabel.constraintInsideTo(.leading, viewElements.nameLabel, 17)
+        viewElements.detailsLabel.constraintInsideTo(.bottom, viewElements.view, 33)
+        
         viewElements.detailsButton.constraintInsideTo(.trailing, viewElements.view, 27)
-        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 18)
+        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 19)
     }
     
     @objc func showDetails() {
         
-        print("zoio")
+        delegate?.chosePlace()
     }
 }
 
-extension HomeAbertaTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+protocol HomeAbertaTableViewCellProtocol {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = photosCollecrionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        
-        return cell
-    }
+    func chosePlace()
 }
