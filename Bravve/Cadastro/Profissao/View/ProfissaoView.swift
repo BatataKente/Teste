@@ -69,7 +69,7 @@ class ProfessionView: UIViewController {
         stackView.backgroundColor = UIColor(named: "textFieldBackgroud")
         stackView.distribution = .equalCentering
         stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = CGColor(red: 208.0/255.0, green: 213.0/255.0, blue: 221.0/225.0, alpha: 1.00)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,7 +108,7 @@ class ProfessionView: UIViewController {
         stackView.axis = .horizontal
         stackView.backgroundColor = UIColor(named: "textFieldBackgroud")
         stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = CGColor(red: 208.0/255.0, green: 213.0/255.0, blue: 221.0/225.0, alpha: 1.00)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
