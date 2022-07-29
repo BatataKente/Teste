@@ -135,9 +135,9 @@ extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
     
     func chosePlace() {
         
-        let detalhesDoEspacoView = DetalhesDoEspacoView()
-        detalhesDoEspacoView.modalPresentationStyle = .fullScreen
-        present(detalhesDoEspacoView, animated: false)
+        let detalhesAbertoView = DetalhesAbertoView()
+        detalhesAbertoView.modalPresentationStyle = .fullScreen
+        present(detalhesAbertoView, animated: false)
     }
 }
 
