@@ -153,7 +153,7 @@ class NomeViewModel {
         delegate?.setProgressBar(personalDataTitle: "",
                                  personalDataImage: "userGray",
                                  phoneNumberTitle: " Celular",
-                                 phoneNumberImage: "cellBlueSmall",
+                                 phoneNumberImage: "cellBlue",
                                  emailTitle: "",
                                  emailImage: "emailGray")
         
@@ -179,7 +179,7 @@ class NomeViewModel {
                                  phoneNumberTitle: "",
                                  phoneNumberImage: "cellGray",
                                  emailTitle: " Email",
-                                 emailImage: "emailBlueSmall")
+                                 emailImage: "emailBlue")
         
         delegate?.freezeButton()
         
