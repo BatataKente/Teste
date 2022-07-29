@@ -17,7 +17,13 @@ class ConfirmarDadosView: UIViewController {
         return image
     }()
     
-    let backgroundImage2 = UIImageView()
+    let backgroundImage2: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "wayConfirm")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
     
     let buttonBack = UIButton()
     
@@ -190,7 +196,6 @@ class ConfirmarDadosView: UIViewController {
         
         buttonBack.setToBackButtonDefault("backPink")
         imageLogo.setLogoToDefault()
-        backgroundImage2.setWayToDefault("wayConfirm")
         
         NSLayoutConstraint.activate([
         
@@ -230,6 +235,11 @@ class ConfirmarDadosView: UIViewController {
         
         backgroundImage1.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide)
         backgroundImage1.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, -60)
+        
+        backgroundImage2.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        backgroundImage2.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        backgroundImage2.heightAnchorInSuperview(130)
+        backgroundImage2.widthAnchorInSuperview(280)
     }
     
     func addTargets() {
