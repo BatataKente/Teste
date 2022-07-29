@@ -83,7 +83,7 @@ class Recuperar1View: UIViewController {
     let customShaddow: UIView = {
              
              let customShaddow = UIView()
-             customShaddow.backgroundColor = UIColor(red: 0.03, green: 0.01, blue: 0.41, alpha: 1.0)
+             customShaddow.backgroundColor = UIColor(named: "blueNav")
              customShaddow.layer.cornerRadius = 8
              customShaddow.isHidden = true
              
@@ -95,7 +95,7 @@ class Recuperar1View: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "WhiteBrave")
+        view.backgroundColor = UIColor(named: "background")
 
         addSubviews()
         addConstraints()
@@ -121,7 +121,7 @@ class Recuperar1View: UIViewController {
         buttonBack.setToBackButtonDefault("backButtonPink")
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
-        backgroundImage.setWayToDefault("way1")
+        backgroundImage.setWayToDefault("wayCell")
         
         NSLayoutConstraint.activate([
             
@@ -191,7 +191,7 @@ class Recuperar1View: UIViewController {
         
         buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
         
-        buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
+        buttonContinue.backgroundColor = UIColor(named: "buttonGray")
     }
 
 
@@ -200,12 +200,12 @@ class Recuperar1View: UIViewController {
            if sender.text != "" {
 
                buttonContinue.addTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: "PinkBravve")
+               buttonContinue.backgroundColor = UIColor(named: "buttonPink")
            }
            else {
                
                buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
+               buttonContinue.backgroundColor = UIColor(named: "buttonGray")
            }
        }
 
