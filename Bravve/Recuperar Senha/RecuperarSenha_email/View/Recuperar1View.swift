@@ -67,7 +67,7 @@ class Recuperar1View: UIViewController {
         stackView.spacing = 10
         stackView.axis = .vertical
         stackView.backgroundColor = .white
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
