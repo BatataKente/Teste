@@ -31,7 +31,7 @@ extension UIView {
         
         self.addSubviews([backButton, titleLabel])
         
-        titleLabel.constraintInsideTo(.centerY, self, 25)
+        titleLabel.constraintInsideTo(.centerY, self, 15)
         titleLabel.constraintInsideTo(.centerX, self)
         
         backButton.constraintInsideTo(.centerY, titleLabel)
@@ -41,7 +41,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(130)
+        self.heightAnchorInSuperview(120)
     }
     
     open func setToDefaultCustomBarWithFilter() {
@@ -116,7 +116,7 @@ extension UIView {
         
         self.addSubviews([filterButton, stackView])
         
-        stackView.constraintInsideTo(.centerY, self, 25)
+        stackView.constraintInsideTo(.centerY, self, 15)
         stackView.constraintInsideTo(.leading, self, 20)
         stackView.constraintOutsideTo(.trailing, filterButton, 20)
         
@@ -127,7 +127,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(130)
+        self.heightAnchorInSuperview(120)
     }
 }
 
