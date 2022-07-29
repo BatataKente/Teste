@@ -95,9 +95,87 @@ class SenhaView: UIViewController{
         return image
     }()
     
+    let numberCharLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No mínimo 6 caracteres"
+        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let upperCaseEllipse: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(named: "Ellipse gray")
+        return image
+    }()
+    
+    let upperCaseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "1 letra maiúscula"
+        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let lowerCaseEllipse: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(named: "Ellipse gray")
+        return image
+    }()
+    
+    let lowerCaseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "1 letra minúscula"
+        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let numberEllipse: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(named: "Ellipse gray")
+        return image
+    }()
+    
+    let numberLabel: UILabel = {
+        let label = UILabel()
+        label.text = "1 digito numérico"
+        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let specialCharEllipse: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(named: "Ellipse gray")
+        return image
+    }()
+    
+    let specialCharLabel: UILabel = {
+        let label = UILabel()
+        label.text = "1 caractere especial"
+        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let samePasswordEllipse: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(named: "Ellipse gray")
+        return image
+    }()
+    
+    let samePasswordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Senhas coincidem"
+        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel, passwordTextField, hidePasswordButton, confirmPasswordTextField, hideConfirmPasswordButton, numberCharEllipse])
+        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel, passwordTextField, hidePasswordButton, confirmPasswordTextField, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel])
         
     }
     
@@ -143,6 +221,55 @@ class SenhaView: UIViewController{
         numberCharEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
         numberCharEllipse.constraintOutsideTo(.top, confirmPasswordTextField, 15)
         numberCharEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        
+        numberCharLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        numberCharLabel.constraintOutsideTo(.top, confirmPasswordTextField, 10)
+        numberCharLabel.constraintOutsideTo(.left, numberCharEllipse, 10)
+        
+        upperCaseEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        upperCaseEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
+        upperCaseEllipse.constraintOutsideTo(.top, numberCharEllipse, 10)
+        upperCaseEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        
+        upperCaseLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        upperCaseLabel.constraintOutsideTo(.top, numberCharLabel, 5)
+        upperCaseLabel.constraintOutsideTo(.left, upperCaseEllipse, 10)
+        
+        lowerCaseEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        lowerCaseEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
+        lowerCaseEllipse.constraintOutsideTo(.top, upperCaseEllipse, 10)
+        lowerCaseEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        
+        lowerCaseLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        lowerCaseLabel.constraintOutsideTo(.top, upperCaseLabel, 5)
+        lowerCaseLabel.constraintOutsideTo(.left, lowerCaseEllipse, 10)
+        
+        numberEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        numberEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
+        numberEllipse.constraintOutsideTo(.top, confirmPasswordTextField, 15)
+        numberEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
+        
+        numberLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        numberLabel.constraintOutsideTo(.top, confirmPasswordTextField, 10)
+        numberLabel.constraintOutsideTo(.left, numberEllipse, 10)
+        
+        specialCharEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        specialCharEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
+        specialCharEllipse.constraintOutsideTo(.top, numberEllipse, 10)
+        specialCharEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
+        
+        specialCharLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        specialCharLabel.constraintOutsideTo(.top, numberLabel, 5)
+        specialCharLabel.constraintOutsideTo(.left, specialCharEllipse, 10)
+        
+        samePasswordEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        samePasswordEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
+        samePasswordEllipse.constraintOutsideTo(.top, specialCharEllipse, 10)
+        samePasswordEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
+        
+        samePasswordLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        samePasswordLabel.constraintOutsideTo(.top, specialCharLabel, 5)
+        samePasswordLabel.constraintOutsideTo(.left, samePasswordEllipse, 10)
     }
     
 }
