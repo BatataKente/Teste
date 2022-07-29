@@ -17,6 +17,15 @@
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
 		2EAEDF012881DEAB00C88374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF002881DEAB00C88374 /* Assets.xcassets */; };
 		2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */; };
+		2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */; };
+		2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */; };
+		2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */; };
+		2ED5D10928940F48001C11DC /* TermosECondicoesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10828940F48001C11DC /* TermosECondicoesModel.swift */; };
+		2ED5D10B28940F67001C11DC /* TermosECondicoesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10A28940F67001C11DC /* TermosECondicoesViewModel.swift */; };
+		2ED5D10D28940F8B001C11DC /* TermosECodicoesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10C28940F8B001C11DC /* TermosECodicoesView.swift */; };
+		2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10E28940FB6001C11DC /* AjudaModel.swift */; };
+		2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */; };
+		2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11228940FE3001C11DC /* AjudaView.swift */; };
 		2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */; };
 		5F3B69612891851E00E77D2D /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */; };
 		5F3B69622891851E00E77D2D /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */; };
@@ -122,6 +131,15 @@
 		2EAEDF002881DEAB00C88374 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDF032881DEAC00C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAEDF052881DEAC00C88374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPass.swift; sourceTree = "<group>"; };
+		2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPassViewModel.swift; sourceTree = "<group>"; };
+		2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPassView.swift; sourceTree = "<group>"; };
+		2ED5D10828940F48001C11DC /* TermosECondicoesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosECondicoesModel.swift; sourceTree = "<group>"; };
+		2ED5D10A28940F67001C11DC /* TermosECondicoesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosECondicoesViewModel.swift; sourceTree = "<group>"; };
+		2ED5D10C28940F8B001C11DC /* TermosECodicoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosECodicoesView.swift; sourceTree = "<group>"; };
+		2ED5D10E28940FB6001C11DC /* AjudaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaModel.swift; sourceTree = "<group>"; };
+		2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaViewModel.swift; sourceTree = "<group>"; };
+		2ED5D11228940FE3001C11DC /* AjudaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaView.swift; sourceTree = "<group>"; };
 		2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
@@ -284,6 +302,9 @@
 		2EAEDEF32881DEA900C88374 /* Bravve */ = {
 			isa = PBXGroup;
 			children = (
+				2ED5D0F828940E2E001C11DC /* ReservaWorkPass */,
+				2ED5D0F728940E17001C11DC /* TermosECondicoes */,
+				2ED5D0F628940E00001C11DC /* Ajuda */,
 				C69617792881EDEE00281633 /* Editar Perfil */,
 				C69617782881ED7600281633 /* Minhas Reservas */,
 				C696174B2881EBB400281633 /* Reserva Espaco */,
@@ -308,6 +329,108 @@
 				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
 			);
 			path = Delegate;
+			sourceTree = "<group>";
+		};
+		2ED5D0F628940E00001C11DC /* Ajuda */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D0FB28940E4E001C11DC /* Model */,
+				2ED5D0FA28940E47001C11DC /* ViewModel */,
+				2ED5D0F928940E41001C11DC /* View */,
+			);
+			path = Ajuda;
+			sourceTree = "<group>";
+		};
+		2ED5D0F728940E17001C11DC /* TermosECondicoes */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D0FE28940E7B001C11DC /* Model */,
+				2ED5D0FD28940E6B001C11DC /* ViewModel */,
+				2ED5D0FC28940E5B001C11DC /* View */,
+			);
+			path = TermosECondicoes;
+			sourceTree = "<group>";
+		};
+		2ED5D0F828940E2E001C11DC /* ReservaWorkPass */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10128940E94001C11DC /* Model */,
+				2ED5D10028940E8D001C11DC /* ViewModel */,
+				2ED5D0FF28940E86001C11DC /* View */,
+			);
+			path = ReservaWorkPass;
+			sourceTree = "<group>";
+		};
+		2ED5D0F928940E41001C11DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D11228940FE3001C11DC /* AjudaView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2ED5D0FA28940E47001C11DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2ED5D0FB28940E4E001C11DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10E28940FB6001C11DC /* AjudaModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2ED5D0FC28940E5B001C11DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10C28940F8B001C11DC /* TermosECodicoesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2ED5D0FD28940E6B001C11DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10A28940F67001C11DC /* TermosECondicoesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2ED5D0FE28940E7B001C11DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10828940F48001C11DC /* TermosECondicoesModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2ED5D0FF28940E86001C11DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2ED5D10028940E8D001C11DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2ED5D10128940E94001C11DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2EF23F4628931B540078B6B8 /* ExtensionUIView */ = {
@@ -369,10 +492,10 @@
 		C69616922881E65F00281633 /* Recuperar Senha */ = {
 			isa = PBXGroup;
 			children = (
-				C696169C2881E6E100281633 /* Recuperar 4 */,
-				C696169B2881E6D800281633 /* Recuperar 6 */,
-				C696169A2881E6D100281633 /* Recuperar 3 */,
-				C69616992881E6AF00281633 /* Recuperar 1 */,
+				C696169C2881E6E100281633 /* RecuperarSenha_modal */,
+				C696169B2881E6D800281633 /* RecuperarSenha_sms */,
+				C696169A2881E6D100281633 /* RecuperarSenha_senha */,
+				C69616992881E6AF00281633 /* RecuperarSenha_email */,
 			);
 			path = "Recuperar Senha";
 			sourceTree = "<group>";
@@ -425,44 +548,44 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C69616992881E6AF00281633 /* Recuperar 1 */ = {
+		C69616992881E6AF00281633 /* RecuperarSenha_email */ = {
 			isa = PBXGroup;
 			children = (
 				C69616A62881E74700281633 /* ViewModel */,
 				C69616A52881E74200281633 /* Model */,
 				C69616A42881E73C00281633 /* View */,
 			);
-			path = "Recuperar 1";
+			path = RecuperarSenha_email;
 			sourceTree = "<group>";
 		};
-		C696169A2881E6D100281633 /* Recuperar 3 */ = {
+		C696169A2881E6D100281633 /* RecuperarSenha_senha */ = {
 			isa = PBXGroup;
 			children = (
 				C69616AF2881E77D00281633 /* ViewModel */,
 				C69616AE2881E77800281633 /* Model */,
 				C69616AD2881E77300281633 /* View */,
 			);
-			path = "Recuperar 3";
+			path = RecuperarSenha_senha;
 			sourceTree = "<group>";
 		};
-		C696169B2881E6D800281633 /* Recuperar 6 */ = {
+		C696169B2881E6D800281633 /* RecuperarSenha_sms */ = {
 			isa = PBXGroup;
 			children = (
 				C69616B82881E7B000281633 /* ViewModel */,
 				C69616B72881E7AB00281633 /* Model */,
 				C69616B62881E7A500281633 /* View */,
 			);
-			path = "Recuperar 6";
+			path = RecuperarSenha_sms;
 			sourceTree = "<group>";
 		};
-		C696169C2881E6E100281633 /* Recuperar 4 */ = {
+		C696169C2881E6E100281633 /* RecuperarSenha_modal */ = {
 			isa = PBXGroup;
 			children = (
 				C69616C12881E7E100281633 /* ViewModel */,
 				C69616C02881E7DD00281633 /* Model */,
 				C69616BF2881E7D800281633 /* View */,
 			);
-			path = "Recuperar 4";
+			path = RecuperarSenha_modal;
 			sourceTree = "<group>";
 		};
 		C69616A32881E71800281633 /* Login */ = {
@@ -1468,6 +1591,7 @@
 				C69616FF2881E9FC00281633 /* TelefoneViewModel.swift in Sources */,
 				C696176A2881ECBF00281633 /* Reserva3ViewModel.swift in Sources */,
 				C69617082881EA2500281633 /* EmailViewModel.swift in Sources */,
+				2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */,
 				C69616CF2881E89D00281633 /* HomeAbertaViewModel.swift in Sources */,
 				C69617962881EEA300281633 /* CancelarReservaViewModel.swift in Sources */,
 				C69617212881EAB900281633 /* FotoView.swift in Sources */,
@@ -1522,22 +1646,28 @@
 				C69616F42881E9C600281633 /* NomeView.swift in Sources */,
 				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */,
+				2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */,
 				C69616DE2881E90000281633 /* HomeFechadaModel.swift in Sources */,
 				C696171F2881EAB200281633 /* FotoModel.swift in Sources */,
 				C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */,
+				2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */,
 				C69616FB2881E9EC00281633 /* TelefoneModel.swift in Sources */,
 				C69617A62881EF0400281633 /* PerfilPessoalView.swift in Sources */,
 				C69617822881EE2A00281633 /* CheckInView.swift in Sources */,
 				C69617582881EC5C00281633 /* AvulsaViewModel.swift in Sources */,
+				2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */,
 				C69617892881EE5000281633 /* CheckOutModel.swift in Sources */,
 				C69616BC2881E7C700281633 /* Recuperar6Model.swift in Sources */,
 				C69617182881EA8A00281633 /* ConfirmarDadosModel.swift in Sources */,
+				2ED5D10D28940F8B001C11DC /* TermosECodicoesView.swift in Sources */,
 				C69617452881EB7B00281633 /* FinalizarView.swift in Sources */,
+				2ED5D10928940F48001C11DC /* TermosECondicoesModel.swift in Sources */,
 				C69617042881EA1500281633 /* EmailModel.swift in Sources */,
 				C69616A02881E70700281633 /* LoginModel.swift in Sources */,
 				C69616D42881E8C000281633 /* DetalhesAbertoModel.swift in Sources */,
 				C696171A2881EA9500281633 /* ConfirmarDadosViewModel.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
+				2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */,
 				C69616AA2881E76000281633 /* Recuperar1Model.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */,
 				C696173A2881EB4000281633 /* AtividadesModel.swift in Sources */,
@@ -1552,9 +1682,11 @@
 				C69617922881EE8800281633 /* CancelarReservaModel.swift in Sources */,
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
 				C69616E02881E90800281633 /* HomeFechadaView.swift in Sources */,
+				2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservaFinalizadaModel.swift in Sources */,
 				C69617682881ECB600281633 /* Reserva3View.swift in Sources */,
+				2ED5D10B28940F67001C11DC /* TermosECondicoesViewModel.swift in Sources */,
 				2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */,
 				C69616F22881E9C000281633 /* NomeModel.swift in Sources */,
 				C69616A22881E71100281633 /* LoginViewModel.swift in Sources */,
