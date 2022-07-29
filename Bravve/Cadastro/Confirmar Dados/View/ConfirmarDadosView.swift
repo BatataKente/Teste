@@ -114,7 +114,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -129,7 +129,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -144,7 +144,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
