@@ -97,23 +97,10 @@ class Recuperar1View: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
 
-        addSubviews()
+        view.addSubviews([backgroundImage, buttonBack, imageLogo, progressBarStackView.stack, label, customShaddow, stackViewEmail, buttonContinue])
         addConstraints()
         addTargets()
 
-        
-    }
-    
-    func addSubviews() {
-        
-        view.addSubview(backgroundImage)
-        view.addSubview(buttonBack)
-        view.addSubview(imageLogo)
-        view.addSubview(progressBarStackView.stack)
-        view.addSubview(label)
-        view.addSubview(customShaddow)
-        view.addSubview(stackViewEmail)
-        view.addSubview(buttonContinue)
     }
     
     func addConstraints() {
