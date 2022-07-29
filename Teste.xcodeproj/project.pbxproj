@@ -13,6 +13,7 @@
 		134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */; };
 		138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AD2892BE2800997FBC /* MinhasReservas.swift */; };
 		138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AF2892BF4200997FBC /* ReservaCell.swift */; };
+		13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */; };
 		1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeAbertaView.swift */; };
 		14509954288B32AE006AC775 /* ValidateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14509953288B32AE006AC775 /* ValidateUtils.swift */; };
 		145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 		134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3.swift; sourceTree = "<group>"; };
 		138C85AD2892BE2800997FBC /* MinhasReservas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinhasReservas.swift; sourceTree = "<group>"; };
 		138C85AF2892BF4200997FBC /* ReservaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaCell.swift; sourceTree = "<group>"; };
+		13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosView.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeAbertaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaView.swift; sourceTree = "<group>"; };
 		14509953288B32AE006AC775 /* ValidateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateUtils.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* Recuperar1View.swift */,
 				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
+				13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */,
 				138C85AD2892BE2800997FBC /* MinhasReservas.swift */,
 				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
 				14CBDBD92889B7C900EA8EDD /* AppUtils.swift */,
@@ -239,6 +242,7 @@
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* DetalhesDoEspacoView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
+				13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				14F55C342889ECE2003A8A34 /* ConstraintUtils.swift in Sources */,
 				134D680D28900FD200D5572B /* RegExUtils.swift in Sources */,
