@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     func createCapsuleButtons(_ buttonTitles: [String],
-                              _ backgroundColor: UIColor = UIColor(named: "BlueBravve") ?? UIColor()) -> [UIButton] {
+                              _ backgroundColor: UIColor = UIColor(named: "blueNav") ?? UIColor()) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
