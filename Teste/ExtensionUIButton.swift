@@ -159,7 +159,8 @@ extension UIButton {
         self.constraintOutsideTo(.bottom, aboveWhom)
     }
     
-    open func setToBackButtonDefault(_ imageName: String = "backWhite",_ constant: CGFloat = 22) {
+    open func setToBackButtonDefault(_ imageName: String = "backWhite",
+                                     _ constant: CGFloat = 22) {
         
         self.setImage(UIImage(named: imageName), for: .normal)
         

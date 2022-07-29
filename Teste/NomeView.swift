@@ -163,7 +163,7 @@ class NomeView: UIViewController {
         
         registerButton.setToBottomButtonKeyboardDefault()
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault("backButtonPink")
+        backButton.setToBackButtonDefault("backPink")
         ways[0].setWayToDefault("way3")
         ways[1].setWayToDefault("way1")
         ways[2].setWayToDefault("way4")
@@ -258,14 +258,14 @@ class NomeView: UIViewController {
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
-            registerButton.backgroundColor = UIColor(named: "PinkBravve")
+            registerButton.backgroundColor = UIColor(named: "buttonPink")
         }
         else {
 
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
-            registerButton.backgroundColor = UIColor(named: "GrayBravve")
+            registerButton.backgroundColor = UIColor(named: "reservedCancel")
         }
     }
 }
@@ -324,7 +324,7 @@ extension NomeView: NomeViewModelProtocol {
         registerButton.removeTarget(nil,
                                     action: #selector(changeScreen),
                                     for: .touchUpInside)
-        registerButton.backgroundColor = UIColor(named: "GrayBravve")
+        registerButton.backgroundColor = UIColor(named: "reservedCancel")
     }
     
     func setKeyboardType(keyboardType: UIKeyboardType) {
