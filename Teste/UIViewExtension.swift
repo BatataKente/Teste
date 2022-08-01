@@ -20,7 +20,7 @@ extension UIView {
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: ImagesBravve.whiteBack.rawValue), for: .normal)
+        backButton.setImage(UIImage(named: ButtonsBravve.whiteBack.rawValue), for: .normal)
         
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
@@ -54,6 +54,7 @@ extension UIView {
         let rightButton = UIButton()
         let cityLabel = UILabel()
         let cityChosedLabel = UILabel()
+        let margins: CGFloat = 10
         
         let stateHandler = {(action: UIAction) in
 
@@ -106,13 +107,13 @@ extension UIView {
         stackView.layer.cornerRadius = 8
         stackView.setToDefaultBackgroundColor()
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 10,
-                                               left: 10,
-                                               bottom: 10,
-                                               right: 10)
+        stackView.layoutMargins = UIEdgeInsets(top: margins,
+                                               left: margins,
+                                               bottom: margins,
+                                               right: margins)
         
         let filterButton = UIButton()
-        filterButton.setImage(UIImage(named: ImagesBravve.filter.rawValue),
+        filterButton.setImage(UIImage(named: ButtonsBravve.filter.rawValue),
                               for: .normal)
         
         self.addSubviews([filterButton, stackView])
@@ -169,9 +170,9 @@ extension UIView {
         let leadingBorderLine = CALayer()
         leadingBorderLine.backgroundColor = color.cgColor
         leadingBorderLine.frame = CGRect(x: self.frame.size.width - height + x,
-                                        y: 0,
-                                        width: self.frame.size.height,
-                                        height: height)
+                                         y: 0,
+                                         width: self.frame.size.height,
+                                         height: height)
 
         self.layer.addSublayer(leadingBorderLine)
     }

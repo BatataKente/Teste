@@ -14,28 +14,28 @@ extension UIImageView {
         
         switch imageName {
             
-            case "wayCell":
+            case ImagesBravve.cellWay.rawValue:
             
                 self.image = UIImage(named: imageName)
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case "wayConfirm":
+            case ImagesBravve.confirmWay.rawValue:
             
                 self.image = UIImage(named: imageName)
             
             self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         
-            case "wayEmail":
+            case ImagesBravve.emailWay.rawValue:
             
                 self.image = UIImage(named: imageName)
             
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case "wayPassword":
+            case ImagesBravve.passwordWay.rawValue:
             
                 self.image = UIImage(named: imageName)
             
@@ -44,7 +44,7 @@ extension UIImageView {
                 self.heightAnchorInSuperview(110)
                 self.widthAnchorInSuperview(280)
             
-            case "wayReserv2":
+            case ImagesBravve.reservWay_1.rawValue:
             
                 self.image = UIImage(named: imageName)
             
@@ -53,7 +53,7 @@ extension UIImageView {
                 self.heightAnchorInSuperview(140)
                 self.widthAnchorInSuperview(150)
             
-            case "wayReserv":
+            case ImagesBravve.reservWay_2.rawValue:
             
                 self.image = UIImage(named: imageName)
             
@@ -66,9 +66,9 @@ extension UIImageView {
         }
     }
     
-    open func setLogoToDefault(_ ImageName: String = "logoBlue") {
+    open func setLogoToDefault(_ ImageName: ImagesBravve = .blueLogo) {
         
-        self.image = UIImage(named: ImageName)
+        self.image = UIImage(named: ImageName.rawValue)
         
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
