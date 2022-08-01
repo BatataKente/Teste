@@ -783,7 +783,7 @@
 				C69616EB2881E98C00281633 /* Hobbies */,
 				C69616EA2881E98400281633 /* Profissao */,
 				C69616E92881E96600281633 /* Foto */,
-				C69616E82881E95000281633 /* Confirmar Dados */,
+				C69616E82881E95000281633 /* Confirm Data */,
 				C69616E72881E94B00281633 /* Senha */,
 				C69616E62881E93F00281633 /* Email */,
 				C69616E52881E93900281633 /* Telefone */,
@@ -832,14 +832,14 @@
 			path = Senha;
 			sourceTree = "<group>";
 		};
-		C69616E82881E95000281633 /* Confirmar Dados */ = {
+		C69616E82881E95000281633 /* Confirm Data */ = {
 			isa = PBXGroup;
 			children = (
 				C69617142881EA6E00281633 /* ViewModel */,
 				C69617132881EA6A00281633 /* View */,
 				C69617122881EA6500281633 /* Model */,
 			);
-			path = "Confirmar Dados";
+			path = "Confirm Data";
 			sourceTree = "<group>";
 		};
 		C69616E92881E96600281633 /* Foto */ = {
