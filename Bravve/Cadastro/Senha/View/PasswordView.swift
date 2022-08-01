@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SenhaView: UIViewController{
+class PasswordView: UIViewController{
     
     let backWay: UIImageView = {
         let image = UIImageView()
@@ -51,6 +51,17 @@ class SenhaView: UIViewController{
         return label
     }()
     
+    let passwordTFLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Senha"
+        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+        label.minimumScaleFactor = 0.5
+        return label
+    }()
+    
     let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = UITextField.BorderStyle.roundedRect
@@ -63,11 +74,42 @@ class SenhaView: UIViewController{
         return textField
     }()
     
+    let stackMargins: CGFloat = 12
+    
+    lazy var passwordStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [passwordTFLabel, passwordTextField])
+        stackView.spacing = 6
+        stackView.axis = .vertical
+        stackView.backgroundColor = .white
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        stackView.layer.borderWidth = 1
+        stackView.layer.cornerRadius = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
+                                               left: stackMargins,
+                                               bottom: stackMargins,
+                                               right: stackMargins)
+        
+        return stackView
+    }()
+    
     let hidePasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "eyeClose"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let confirmPasswordTFLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Repita a senha"
+        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+        label.minimumScaleFactor = 0.5
+        return label
     }()
     
     let confirmPasswordTextField: UITextField = {
@@ -80,6 +122,24 @@ class SenhaView: UIViewController{
         textField.keyboardType = .namePhonePad
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
+    }()
+    
+    lazy var confirmStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [confirmPasswordTFLabel, confirmPasswordTextField])
+        stackView.spacing = 6
+        stackView.axis = .vertical
+        stackView.backgroundColor = .white
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        stackView.layer.borderWidth = 1
+        stackView.layer.cornerRadius = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
+                                               left: stackMargins,
+                                               bottom: stackMargins,
+                                               right: stackMargins)
+        
+        return stackView
     }()
     
     let hideConfirmPasswordButton: UIButton = {
@@ -173,9 +233,15 @@ class SenhaView: UIViewController{
         return label
     }()
     
+    let continueButton: UIButton = {
+        let button = UIButton()
+        button.setToBottomButtonDefault("Continuar", colorName: "buttonGray", aboveWhom: UIKeyboardLayoutGuide.self)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel, passwordTextField, hidePasswordButton, confirmPasswordTextField, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel])
+        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel,passwordStackView, hidePasswordButton, confirmStackView ,hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton])
         
     }
     
@@ -199,31 +265,31 @@ class SenhaView: UIViewController{
         descriptionLabel.constraintInsideTo(.left, view.safeAreaLayoutGuide)
         descriptionLabel.constraintInsideTo(.right, view.safeAreaLayoutGuide)
         
-        passwordTextField.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        passwordTextField.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
-        passwordTextField.constraintInsideTo(.right, view.safeAreaLayoutGuide, -20)
-        passwordTextField.constraintOutsideTo(.top, descriptionLabel, 30)
+        passwordStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        passwordStackView.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        passwordStackView.constraintInsideTo(.right, view.safeAreaLayoutGuide, -20)
+        passwordStackView.constraintOutsideTo(.top, descriptionLabel, 30)
         
         hidePasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        hidePasswordButton.constraintInsideTo(.top, passwordTextField, 25)
-        hidePasswordButton.constraintInsideTo(.right, passwordTextField, -15)
+        hidePasswordButton.constraintInsideTo(.top, passwordStackView, 25)
+        hidePasswordButton.constraintInsideTo(.right, passwordStackView, -15)
         
-        confirmPasswordTextField.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        confirmPasswordTextField.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
-        confirmPasswordTextField.constraintInsideTo(.right, view.safeAreaLayoutGuide, -20)
-        confirmPasswordTextField.constraintOutsideTo(.top, passwordTextField, 10)
+        confirmStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        confirmStackView.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        confirmStackView.constraintInsideTo(.right, view.safeAreaLayoutGuide, -20)
+        confirmStackView.constraintOutsideTo(.top, passwordStackView, 10)
         
         hideConfirmPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        hideConfirmPasswordButton.constraintInsideTo(.top, confirmPasswordTextField, 25)
-        hideConfirmPasswordButton.constraintInsideTo(.right, confirmPasswordTextField, -15)
+        hideConfirmPasswordButton.constraintInsideTo(.top, confirmStackView, 25)
+        hideConfirmPasswordButton.constraintInsideTo(.right, confirmStackView, -15)
         
         numberCharEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
         numberCharEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        numberCharEllipse.constraintOutsideTo(.top, confirmPasswordTextField, 15)
+        numberCharEllipse.constraintOutsideTo(.top, confirmStackView, 15)
         numberCharEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
         
         numberCharLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        numberCharLabel.constraintOutsideTo(.top, confirmPasswordTextField, 10)
+        numberCharLabel.constraintOutsideTo(.top, confirmStackView, 10)
         numberCharLabel.constraintOutsideTo(.left, numberCharEllipse, 10)
         
         upperCaseEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
@@ -246,11 +312,11 @@ class SenhaView: UIViewController{
         
         numberEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
         numberEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        numberEllipse.constraintOutsideTo(.top, confirmPasswordTextField, 15)
+        numberEllipse.constraintOutsideTo(.top, confirmStackView, 15)
         numberEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
         
         numberLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        numberLabel.constraintOutsideTo(.top, confirmPasswordTextField, 10)
+        numberLabel.constraintOutsideTo(.top, confirmStackView, 10)
         numberLabel.constraintOutsideTo(.left, numberEllipse, 10)
         
         specialCharEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
@@ -270,6 +336,11 @@ class SenhaView: UIViewController{
         samePasswordLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
         samePasswordLabel.constraintOutsideTo(.top, specialCharLabel, 5)
         samePasswordLabel.constraintOutsideTo(.left, samePasswordEllipse, 10)
+        
+        continueButton.heightAnchor.constraint(equalToConstant: 51).isActive = true
+        continueButton.constraintInsideTo(.left, view.safeAreaLayoutGuide)
+        continueButton.constraintInsideTo(.right, view.safeAreaLayoutGuide)
+        continueButton.constraintOutsideTo(.bottom, view.keyboardLayoutGuide)
     }
     
 }

@@ -67,7 +67,7 @@
 		C69617062881EA1C00281633 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617052881EA1C00281633 /* EmailView.swift */; };
 		C69617082881EA2500281633 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617072881EA2500281633 /* EmailViewModel.swift */; };
 		C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170C2881EA4F00281633 /* SenhaModel.swift */; };
-		C696170F2881EA5600281633 /* SenhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170E2881EA5600281633 /* SenhaView.swift */; };
+		C696170F2881EA5600281633 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170E2881EA5600281633 /* PasswordView.swift */; };
 		C69617112881EA5E00281633 /* SenhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617102881EA5E00281633 /* SenhaViewModel.swift */; };
 		C69617162881EA7C00281633 /* ConfirmarDadosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617152881EA7C00281633 /* ConfirmarDadosView.swift */; };
 		C69617182881EA8A00281633 /* ConfirmarDadosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617172881EA8A00281633 /* ConfirmarDadosModel.swift */; };
@@ -182,7 +182,7 @@
 		C69617052881EA1C00281633 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		C69617072881EA2500281633 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		C696170C2881EA4F00281633 /* SenhaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaModel.swift; sourceTree = "<group>"; };
-		C696170E2881EA5600281633 /* SenhaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaView.swift; sourceTree = "<group>"; };
+		C696170E2881EA5600281633 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		C69617102881EA5E00281633 /* SenhaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaViewModel.swift; sourceTree = "<group>"; };
 		C69617152881EA7C00281633 /* ConfirmarDadosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosView.swift; sourceTree = "<group>"; };
 		C69617172881EA8A00281633 /* ConfirmarDadosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosModel.swift; sourceTree = "<group>"; };
@@ -975,7 +975,7 @@
 		C696170A2881EA3300281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C696170E2881EA5600281633 /* SenhaView.swift */,
+				C696170E2881EA5600281633 /* PasswordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1619,7 +1619,7 @@
 				C69616AC2881E76C00281633 /* Recuperar1ViewModel.swift in Sources */,
 				14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */,
 				14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */,
-				C696170F2881EA5600281633 /* SenhaView.swift in Sources */,
+				C696170F2881EA5600281633 /* PasswordView.swift in Sources */,
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
 				2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */,
