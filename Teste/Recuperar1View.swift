@@ -121,7 +121,7 @@ class Recuperar1View: UIViewController {
         buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
-        backgroundImage.setWayToDefault("way1")
+        backgroundImage.setWayToDefault(.wayCell)
         
         NSLayoutConstraint.activate([
             

@@ -177,7 +177,7 @@ extension UIView {
     
     open func setToDefaultBackgroundColor() {
         
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
     
     open func setToDefaultCustomBarWithBackButton(viewTitle: String, _ handler: @escaping UIActionHandler) {
