@@ -781,7 +781,7 @@
 				C69616ED2881E99900281633 /* Finalizar */,
 				C69616EC2881E99200281633 /* Atividades */,
 				C69616EB2881E98C00281633 /* Hobbies */,
-				C69616EA2881E98400281633 /* Profissao */,
+				C69616EA2881E98400281633 /* Profession */,
 				C69616E92881E96600281633 /* Foto */,
 				C69616E82881E95000281633 /* Confirmar Dados */,
 				C69616E72881E94B00281633 /* Senha */,
@@ -852,14 +852,14 @@
 			path = Foto;
 			sourceTree = "<group>";
 		};
-		C69616EA2881E98400281633 /* Profissao */ = {
+		C69616EA2881E98400281633 /* Profession */ = {
 			isa = PBXGroup;
 			children = (
 				C69617262881EAD100281633 /* ViewModel */,
 				C69617252881EACD00281633 /* View */,
 				C69617242881EAC800281633 /* Model */,
 			);
-			path = Profissao;
+			path = Profession;
 			sourceTree = "<group>";
 		};
 		C69616EB2881E98C00281633 /* Hobbies */ = {
