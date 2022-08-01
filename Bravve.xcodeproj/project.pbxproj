@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130544D4289845180026FCE6 /* CancelReservationCell.swift */; };
 		14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */; };
 		14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */; };
 		14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */; };
@@ -105,9 +106,9 @@
 		C69617892881EE5000281633 /* CheckOutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617882881EE5000281633 /* CheckOutModel.swift */; };
 		C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696178A2881EE5B00281633 /* CheckOutView.swift */; };
 		C696178D2881EE6500281633 /* CheckOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696178C2881EE6500281633 /* CheckOutViewModel.swift */; };
-		C69617922881EE8800281633 /* CancelarReservaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617912881EE8800281633 /* CancelarReservaModel.swift */; };
-		C69617942881EE9500281633 /* CancelarReservaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617932881EE9500281633 /* CancelarReservaView.swift */; };
-		C69617962881EEA300281633 /* CancelarReservaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617952881EEA300281633 /* CancelarReservaViewModel.swift */; };
+		C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617912881EE8800281633 /* CancelReservationModel.swift */; };
+		C69617942881EE9500281633 /* CancelReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617932881EE9500281633 /* CancelReservationView.swift */; };
+		C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617952881EEA300281633 /* CancelReservationViewModel.swift */; };
 		C696179B2881EEC100281633 /* DetalhesReservaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179A2881EEC100281633 /* DetalhesReservaModel.swift */; };
 		C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */; };
 		C696179F2881EED900281633 /* DetalhesReservaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179E2881EED900281633 /* DetalhesReservaView.swift */; };
@@ -120,6 +121,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130544D4289845180026FCE6 /* CancelReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationCell.swift; sourceTree = "<group>"; };
 		14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
 		14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
@@ -220,9 +222,9 @@
 		C69617882881EE5000281633 /* CheckOutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutModel.swift; sourceTree = "<group>"; };
 		C696178A2881EE5B00281633 /* CheckOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutView.swift; sourceTree = "<group>"; };
 		C696178C2881EE6500281633 /* CheckOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewModel.swift; sourceTree = "<group>"; };
-		C69617912881EE8800281633 /* CancelarReservaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelarReservaModel.swift; sourceTree = "<group>"; };
-		C69617932881EE9500281633 /* CancelarReservaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelarReservaView.swift; sourceTree = "<group>"; };
-		C69617952881EEA300281633 /* CancelarReservaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelarReservaViewModel.swift; sourceTree = "<group>"; };
+		C69617912881EE8800281633 /* CancelReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationModel.swift; sourceTree = "<group>"; };
+		C69617932881EE9500281633 /* CancelReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationView.swift; sourceTree = "<group>"; };
+		C69617952881EEA300281633 /* CancelReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationViewModel.swift; sourceTree = "<group>"; };
 		C696179A2881EEC100281633 /* DetalhesReservaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaModel.swift; sourceTree = "<group>"; };
 		C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaViewModel.swift; sourceTree = "<group>"; };
 		C696179E2881EED900281633 /* DetalhesReservaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		130544D3289845040026FCE6 /* CancelReservationCell */ = {
+			isa = PBXGroup;
+			children = (
+				130544D4289845180026FCE6 /* CancelReservationCell.swift */,
+			);
+			path = CancelReservationCell;
+			sourceTree = "<group>";
+		};
 		14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1292,14 +1302,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C69617742881ED5100281633 /* Cancelar Reserva */ = {
+		C69617742881ED5100281633 /* CancelReservation */ = {
 			isa = PBXGroup;
 			children = (
 				C69617902881EE7600281633 /* ViewModel */,
 				C696178F2881EE7000281633 /* View */,
 				C696178E2881EE6C00281633 /* Model */,
 			);
-			path = "Cancelar Reserva";
+			path = CancelReservation;
 			sourceTree = "<group>";
 		};
 		C69617752881ED5A00281633 /* Detalhes Reserva */ = {
@@ -1336,7 +1346,7 @@
 			isa = PBXGroup;
 			children = (
 				C69617752881ED5A00281633 /* Detalhes Reserva */,
-				C69617742881ED5100281633 /* Cancelar Reserva */,
+				C69617742881ED5100281633 /* CancelReservation */,
 				C69617772881ED6D00281633 /* Check Out */,
 				C69617762881ED6400281633 /* Check In */,
 			);
@@ -1423,7 +1433,7 @@
 		C696178E2881EE6C00281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69617912881EE8800281633 /* CancelarReservaModel.swift */,
+				C69617912881EE8800281633 /* CancelReservationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1431,7 +1441,8 @@
 		C696178F2881EE7000281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617932881EE9500281633 /* CancelarReservaView.swift */,
+				130544D3289845040026FCE6 /* CancelReservationCell */,
+				C69617932881EE9500281633 /* CancelReservationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1439,7 +1450,7 @@
 		C69617902881EE7600281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617952881EEA300281633 /* CancelarReservaViewModel.swift */,
+				C69617952881EEA300281633 /* CancelReservationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1596,7 +1607,7 @@
 				C69617082881EA2500281633 /* EmailViewModel.swift in Sources */,
 				2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */,
 				C69616CF2881E89D00281633 /* HomeAbertaViewModel.swift in Sources */,
-				C69617962881EEA300281633 /* CancelarReservaViewModel.swift in Sources */,
+				C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */,
 				C69617212881EAB900281633 /* FotoView.swift in Sources */,
 				C69617612881EC9000281633 /* Reserva2ViewModel.swift in Sources */,
 				C69616B32881E79400281633 /* Recuperar3Model.swift in Sources */,
@@ -1611,9 +1622,9 @@
 				C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */,
 				C69617432881EB7300281633 /* FinalizarModel.swift in Sources */,
 				C69617162881EA7C00281633 /* ConfirmarDadosView.swift in Sources */,
-				C69616B12881E78A00281633 /* Recuperar3View.swift in Sources */,
+				C69616B12881E78A00281633 /* PasswordRecoveryPasswordView.swift in Sources */,
 				C696172A2881EAE400281633 /* ProfessionView.swift in Sources */,
-				C69617942881EE9500281633 /* CancelarReservaView.swift in Sources */,
+				C69617942881EE9500281633 /* CancelReservationView.swift in Sources */,
 				C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* Recuperar1ViewModel.swift in Sources */,
@@ -1677,13 +1688,14 @@
 				C696173A2881EB4000281633 /* AtividadesModel.swift in Sources */,
 				C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */,
 				C69616E22881E91200281633 /* HomeFechadaViewModel.swift in Sources */,
+				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
 				C696175D2881EC7700281633 /* Reserva2Model.swift in Sources */,
 				C69616D82881E8D700281633 /* DetalhesAbertoViewModel.swift in Sources */,
 				C69617112881EA5E00281633 /* SenhaViewModel.swift in Sources */,
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
 				C69616F62881E9CD00281633 /* NomeViewModel.swift in Sources */,
-				C69617922881EE8800281633 /* CancelarReservaModel.swift in Sources */,
+				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
 				C69616E02881E90800281633 /* HomeFechadaView.swift in Sources */,
 				2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */,
