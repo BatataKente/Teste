@@ -381,7 +381,7 @@ class PasswordView: UIViewController{
             print("Going On")
         }
     
-    @objc func hidingConfirmPassword(_ sender: UIButton){
+    @objc func hideConfirmPassword(_ sender: UIButton){
         confirmPasswordTextField.isSecureTextEntry.toggle()
         
         if confirmPasswordTextField.isSecureTextEntry {
@@ -391,7 +391,7 @@ class PasswordView: UIViewController{
         }
     }
     
-    @objc func hidingPassword(_ sender: UIButton){
+    @objc func hidePassword(_ sender: UIButton){
         passwordTextField.isSecureTextEntry.toggle()
         
         if passwordTextField.isSecureTextEntry {
