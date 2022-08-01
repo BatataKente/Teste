@@ -7,6 +7,10 @@
 
 import UIKit
 
+//Passar Nomes para ingles
+//Passar Enum em nomes padrao para icons cores etc
+//Ficaria melhor com classe
+
 //Extensions related to simplify creation of menu to buttons
 extension UIButton {
     
