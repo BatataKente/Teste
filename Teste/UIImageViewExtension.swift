@@ -10,52 +10,52 @@ import UIKit
 //Extensions related to set imageViews to Default
 extension UIImageView {
     
-    open func setWayToDefault(_ imageName: String) {
+    open func setWayToDefault(_ imageName: ImagesBravve) {
         
         switch imageName {
             
-            case ImagesBravve.wayCell.rawValue:
+            case ImagesBravve.wayCell:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case ImagesBravve.wayConfirm.rawValue:
+            case ImagesBravve.wayConfirm:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
             self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         
-            case ImagesBravve.wayEmail.rawValue:
+            case ImagesBravve.wayEmail:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case ImagesBravve.wayPassword.rawValue:
+            case ImagesBravve.wayPassword:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(110)
                 self.widthAnchorInSuperview(280)
             
-            case ImagesBravve.wayReserv_1.rawValue:
+            case ImagesBravve.wayReserv_1:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(140)
                 self.widthAnchorInSuperview(150)
             
-            case ImagesBravve.wayReserv_2.rawValue:
+            case ImagesBravve.wayReserv_2:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide)
