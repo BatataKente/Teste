@@ -399,9 +399,160 @@ class PasswordView: UIViewController{
         } else {
             hidePasswordButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
         }
-        
     }
 
+    
+    func addTargets() {
+        let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
+        passwordStackView.addGestureRecognizer(stackViewTap)
+        
+        let stackViewTap_ = UITapGestureRecognizer(target: self, action: #selector(confirmStackViewTapped))
+        confirmStackView.addGestureRecognizer(stackViewTap_)
+    }
+    
+    @objc func confirmStackViewTapped() {
+        confirmPasswordTFLabel.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        confirmPasswordTextField.addTarget(self, action: #selector(confirmChangeText), for: .editingChanged)
+        confirmCustomShadow.isHidden = false
+        confirmPasswordTextField.isHidden = false
+    }
+    
+    @objc func stackViewTapped() {
+        passwordTFLabel.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        passwordTextField.addTarget(self, action: #selector(changeText), for: .editingChanged)
+        passwordCustomShadow.isHidden = false
+        passwordTextField.isHidden = false
+    }
+    
+    @objc func changeText(_ sender: UITextField) {
+        let upperCaseRegEx = ".*[A-Z]+.*"
+        let upperCaseTest = NSPredicate(format: "SELF MATCHES %@", upperCaseRegEx)
+        let numericRegEx = ".*[0-9]+.*"
+        let numericRegExTest = NSPredicate(format: "SELF MATCHES %@", numericRegEx)
+        let specialCharacterRegEx = ".*[!&^%$#@()/.*+]+.*"
+        let specialChracterTest = NSPredicate(format: "SELF MATCHES %@", specialCharacterRegEx)
+        let lowerCaseRegEx = ".*[a-z]+.*"
+        let lowerCaseTest = NSPredicate(format: "SELF MATCHES %@", lowerCaseRegEx)
+        
+        var passwordText: String = ""
+        
+        if let password = passwordTextField.text {
+            passwordText = password
+        }
+        
+        if passwordText.isEmpty {
+            numberCharEllipse.image = UIImage(named: "Ellipse gray")
+            upperCaseEllipse.image = UIImage(named: "Ellipse gray")
+            lowerCaseEllipse.image = UIImage(named: "Ellipse gray")
+            numberEllipse.image = UIImage(named: "Ellipse gray")
+            specialCharEllipse.image = UIImage(named: "Ellipse gray")
+        } else {
+            if upperCaseTest.evaluate(with: passwordTextField.text!){
+                upperCaseEllipse.image = UIImage(named: "Ellipse green")
+                upperCaseLabel.textColor = .label
+            } else {
+                upperCaseEllipse.image = UIImage(named: "Ellipse red")
+                upperCaseLabel.textColor = UIColor(named: "redAlertLabel")
+            }
+            
+            if lowerCaseTest.evaluate(with: passwordTextField.text!){
+                lowerCaseEllipse.image = UIImage(named: "Ellipse green")
+                lowerCaseLabel.textColor = .label
+            } else {
+                lowerCaseEllipse.image = UIImage(named: "Ellipse red")
+                lowerCaseLabel.textColor = UIColor(named: "redAlertLabel")
+            }
+            
+            if numericRegExTest.evaluate(with: passwordTextField.text!){
+                numberEllipse.image = UIImage(named: "Ellipse green")
+                numberLabel.textColor = .label
+            } else {
+                numberEllipse.image = UIImage(named: "Ellipse red")
+                numberLabel.textColor = UIColor(named: "redAlertLabel")
+            }
+            
+            if specialChracterTest.evaluate(with: passwordTextField.text!){
+                specialCharEllipse.image = UIImage(named: "Ellipse green")
+                specialCharLabel.textColor = .label
+            } else {
+                specialCharEllipse.image = UIImage(named: "Ellipse red")
+                specialCharLabel.textColor = UIColor(named: "redAlertLabel")
+            }
+            
+            if (passwordTextField.text?.count ?? 0) < 6 {
+                numberCharEllipse.image = UIImage(named: "Ellipse red")
+                numberCharLabel.textColor = UIColor(named: "redAlertLabel")
+            } else {
+                numberCharEllipse.image = UIImage(named: "Ellipse green")
+                numberCharLabel.textColor = .label
+            }
+            
+        }
+    }
+    
+    @objc func confirmChangeText(_ sender: UITextField) {
+        var passwordText: String = ""
+        
+        if let password = confirmPasswordTextField.text {
+            passwordText = password
+        }
+        
+        if passwordText.isEmpty {
+            samePasswordEllipse.image = UIImage(named: "Ellipse red")
+            samePasswordLabel.textColor = UIColor(named: "redAlertLabel")
+            continueButton.backgroundColor = .gray
+        } else {
+            if confirmPasswordTextField.text == passwordTextField.text {
+                samePasswordEllipse.image = UIImage(named: "Ellipse green")
+                samePasswordLabel.textColor = .label
+                
+            } else {
+                samePasswordEllipse.image = UIImage(named: "Ellipse red")
+                samePasswordLabel.textColor = UIColor(named: "redAlertLabel")
+                continueButton.backgroundColor = .gray
+            }
+        }
+        
+        if samePasswordEllipse.image == UIImage(named: "Ellipse green") {
+            if numberCharEllipse.image == UIImage(named: "Ellipse green"){
+                if upperCaseEllipse.image == UIImage(named: "Ellipse green"){
+                    if lowerCaseEllipse.image == UIImage(named: "Ellipse green"){
+                        if numberEllipse.image == UIImage(named: "Ellipse green"){
+                            if specialCharEllipse.image == UIImage(named: "Ellipse green"){
+                                continueButton.backgroundColor = UIColor(named: "buttonPink")
+                                continueButton.addTarget(nil, action: #selector(continueAction), for: .touchUpInside)
+                            } else {
+                                continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
+                                continueButton.backgroundColor = .gray
+                            }
+                    }
+                }
+            }
+        }
+        
+        if samePasswordEllipse.image == UIImage(named: "Ellipse red") {
+            if numberCharEllipse.image == UIImage(named: "Ellipse red"){
+                if upperCaseEllipse.image == UIImage(named: "Ellipse red"){
+                    if lowerCaseEllipse.image == UIImage(named: "Ellipse red"){
+                        if numberEllipse.image == UIImage(named: "Ellipse red"){
+                            if specialCharEllipse.image == UIImage(named: "Ellipse red"){
+                                passwordTFLabel.textColor = UIColor(named: "AlertRed")
+                                passwordStackView.layer.borderColor = UIColor(named: "AlertRed")?.cgColor
+                                
+                                confirmPasswordTFLabel.textColor = UIColor(named: "AlertRed")
+                                confirmStackView.layer.borderColor = UIColor(named: "AlertRed")?.cgColor
+                                
+                                hidePasswordButton.setImage(UIImage(named: "eyeOpenRed"), for: .normal)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    }
+    
 }
 
 
