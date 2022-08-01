@@ -88,7 +88,7 @@ class FotoView: UIViewController {
         firstWay.setWayToDefault("way4")
         secondWay.setWayToDefault("way1")
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault("backButtonPink")
+        backButton.setToBackButtonDefault(.backPink)
         registerButton.setToButtonDefault(jumpButton, 20)
         jumpButton.setToJumpButtonDefault(50)
     }

@@ -199,7 +199,7 @@ class ConfirmarDadosView: UIViewController {
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault("backButtonPink")
+        buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
         backgroundImage2.setWayToDefault("way4")
         

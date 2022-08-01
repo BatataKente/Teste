@@ -14,28 +14,28 @@ extension UIImageView {
         
         switch imageName {
             
-            case ImagesBravve.cellWay.rawValue:
+            case ImagesBravve.wayCell.rawValue:
             
                 self.image = UIImage(named: imageName)
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case ImagesBravve.confirmWay.rawValue:
+            case ImagesBravve.wayConfirm.rawValue:
             
                 self.image = UIImage(named: imageName)
             
             self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         
-            case ImagesBravve.emailWay.rawValue:
+            case ImagesBravve.wayEmail.rawValue:
             
                 self.image = UIImage(named: imageName)
             
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case ImagesBravve.passwordWay.rawValue:
+            case ImagesBravve.wayPassword.rawValue:
             
                 self.image = UIImage(named: imageName)
             
@@ -44,7 +44,7 @@ extension UIImageView {
                 self.heightAnchorInSuperview(110)
                 self.widthAnchorInSuperview(280)
             
-            case ImagesBravve.reservWay_1.rawValue:
+            case ImagesBravve.wayReserv_1.rawValue:
             
                 self.image = UIImage(named: imageName)
             
@@ -53,7 +53,7 @@ extension UIImageView {
                 self.heightAnchorInSuperview(140)
                 self.widthAnchorInSuperview(150)
             
-            case ImagesBravve.reservWay_2.rawValue:
+            case ImagesBravve.wayReserv_2.rawValue:
             
                 self.image = UIImage(named: imageName)
             
@@ -66,7 +66,7 @@ extension UIImageView {
         }
     }
     
-    open func setLogoToDefault(_ ImageName: ImagesBravve = .blueLogo) {
+    open func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
         
         self.image = UIImage(named: ImageName.rawValue)
         
