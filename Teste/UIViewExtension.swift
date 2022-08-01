@@ -17,16 +17,16 @@ extension UIView {
     
     open func setToDefaultCustomBarWithBackButton(viewTitle: String, _ handler: @escaping UIActionHandler) {
         
-        self.backgroundColor = UIColor(named: "blueNav")
+        self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: "backWhite"), for: .normal)
+        backButton.setImage(UIImage(named: ImagesBravve.whiteBack.rawValue), for: .normal)
         
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         let titleLabel = UILabel()
         titleLabel.text = viewTitle
-        titleLabel.font = UIFont(name: "Ubuntu-Medium", size: 19)
+        titleLabel.font = UIFont(name: FontsBravve.medium.rawValue, size: 19)
         titleLabel.textColor = .white
         
         self.addSubviews([backButton, titleLabel])
@@ -46,7 +46,7 @@ extension UIView {
     
     open func setToDefaultCustomBarWithFilter() {
         
-        self.backgroundColor = UIColor(named: "blueNav")
+        self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let leftButton = UIButton()
         let stateLabel = UILabel()
@@ -58,7 +58,7 @@ extension UIView {
         let stateHandler = {(action: UIAction) in
 
             stateChosedLabel.text = action.title
-            stateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+            stateLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
         }
 
         stateLabel.text = "UF"
@@ -69,12 +69,12 @@ extension UIView {
 
         ])
         leftButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        leftButton.tintColor = UIColor(named: "blueNav")
+        leftButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let cityHandler = {(action: UIAction) in
 
             cityChosedLabel.text = action.title
-            cityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+            cityLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
         }
         
         cityLabel.text = "Cidade"
@@ -85,7 +85,7 @@ extension UIView {
 
         ])
         rightButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        rightButton.tintColor = UIColor(named: "blueNav")
+        rightButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
                                                            stateChosedLabel])
@@ -112,7 +112,8 @@ extension UIView {
                                                right: 10)
         
         let filterButton = UIButton()
-        filterButton.setImage(UIImage(named: "filter"), for: .normal)
+        filterButton.setImage(UIImage(named: ImagesBravve.filter.rawValue),
+                              for: .normal)
         
         self.addSubviews([filterButton, stackView])
         
@@ -145,10 +146,10 @@ extension UIView {
         
         self.addSubview(stackView)
         
-        stackView.constraintInsideTo(.top, self, -1)
+        stackView.constraintInsideTo(.top, self, Ride.down.rawValue)
         stackView.constraintInsideTo(.leading, self)
         stackView.constraintInsideTo(.trailing, self)
-        stackView.constraintInsideTo(.bottom, self, 1)
+        stackView.constraintInsideTo(.bottom, self, Ride.up.rawValue)
     }
 
     func addBottomLineWithColor(color: UIColor = .gray, width: CGFloat = 0.8, y: CGFloat = 0) {

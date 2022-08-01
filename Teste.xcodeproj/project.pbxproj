@@ -18,12 +18,15 @@
 		145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */; };
 		145663C8288D73C500852049 /* HomeAbertaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* HomeAbertaCollectionViewCell.swift */; };
 		147AC2EE2891AB9B00ABE48E /* DetalhesDoEspacoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* DetalhesDoEspacoView.swift */; };
-		14C6954028944A1F00BD3B79 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* ExtensionUIButton.swift */; };
-		14C6954228944A2800BD3B79 /* ExtensionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954128944A2800BD3B79 /* ExtensionUIImageView.swift */; };
-		14C6954428944A2E00BD3B79 /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954328944A2E00BD3B79 /* ExtensionUILabel.swift */; };
-		14C6954628944A3400BD3B79 /* ExtensionUIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954528944A3400BD3B79 /* ExtensionUIStackView.swift */; };
-		14C6954828944A3600BD3B79 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954728944A3600BD3B79 /* ExtensionUIView.swift */; };
-		14C6954A28944A3900BD3B79 /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954928944A3900BD3B79 /* ExtensionUIViewController.swift */; };
+		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
+		14AA1CF32897FCDE008CCC31 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF22897FCDE008CCC31 /* UIFontExtension.swift */; };
+		14AA1CF928980CAB008CCC31 /* EnumAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF828980CAB008CCC31 /* EnumAssets.swift */; };
+		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
+		14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */; };
+		14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954328944A2E00BD3B79 /* UILabelExtension.swift */; };
+		14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */; };
+		14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954728944A3600BD3B79 /* UIViewExtension.swift */; };
+		14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */; };
 		14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBC52889B72300EA8EDD /* AppDelegate.swift */; };
 		14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */; };
 		14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */; };
@@ -53,12 +56,15 @@
 		145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* HomeAbertaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaCollectionViewCell.swift; sourceTree = "<group>"; };
 		147AC2ED2891AB9B00ABE48E /* DetalhesDoEspacoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesDoEspacoView.swift; sourceTree = "<group>"; };
-		14C6953F28944A1F00BD3B79 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
-		14C6954128944A2800BD3B79 /* ExtensionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImageView.swift; sourceTree = "<group>"; };
-		14C6954328944A2E00BD3B79 /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
-		14C6954528944A3400BD3B79 /* ExtensionUIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIStackView.swift; sourceTree = "<group>"; };
-		14C6954728944A3600BD3B79 /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
-		14C6954928944A3900BD3B79 /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
+		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		14AA1CF22897FCDE008CCC31 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
+		14AA1CF828980CAB008CCC31 /* EnumAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumAssets.swift; sourceTree = "<group>"; };
+		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		14C6954328944A2E00BD3B79 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
+		14C6954728944A3600BD3B79 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		14CBDBC22889B72300EA8EDD /* Teste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14CBDBC52889B72300EA8EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,12 +114,15 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
-				14C6954728944A3600BD3B79 /* ExtensionUIView.swift */,
-				14C6954528944A3400BD3B79 /* ExtensionUIStackView.swift */,
-				14C6954128944A2800BD3B79 /* ExtensionUIImageView.swift */,
-				14C6954328944A2E00BD3B79 /* ExtensionUILabel.swift */,
-				14C6953F28944A1F00BD3B79 /* ExtensionUIButton.swift */,
-				14C6954928944A3900BD3B79 /* ExtensionUIViewController.swift */,
+				14AA1CF828980CAB008CCC31 /* EnumAssets.swift */,
+				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
+				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
+				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
+				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
+				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
+				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
+				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
+				14AA1CF22897FCDE008CCC31 /* UIFontExtension.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
@@ -231,26 +240,29 @@
 			files = (
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
-				14C6954828944A3600BD3B79 /* ExtensionUIView.swift in Sources */,
+				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
+				14AA1CF928980CAB008CCC31 /* EnumAssets.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
 				145663C8288D73C500852049 /* HomeAbertaCollectionViewCell.swift in Sources */,
+				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */,
-				14C6954428944A2E00BD3B79 /* ExtensionUILabel.swift in Sources */,
-				14C6954228944A2800BD3B79 /* ExtensionUIImageView.swift in Sources */,
-				14C6954A28944A3900BD3B79 /* ExtensionUIViewController.swift in Sources */,
+				14AA1CF32897FCDE008CCC31 /* UIFontExtension.swift in Sources */,
+				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
+				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
+				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* DetalhesDoEspacoView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */,
-				14C6954028944A1F00BD3B79 /* ExtensionUIButton.swift in Sources */,
+				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
-				14C6954628944A3400BD3B79 /* ExtensionUIStackView.swift in Sources */,
+				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */,
 			);
