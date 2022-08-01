@@ -194,7 +194,7 @@ class ConfirmDataView: UIViewController {
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault("backPink")
+        buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
         
         NSLayoutConstraint.activate([
