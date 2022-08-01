@@ -108,12 +108,12 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
-				14C6954928944A3900BD3B79 /* ExtensionUIViewController.swift */,
 				14C6954728944A3600BD3B79 /* ExtensionUIView.swift */,
 				14C6954528944A3400BD3B79 /* ExtensionUIStackView.swift */,
+				14C6954128944A2800BD3B79 /* ExtensionUIImageView.swift */,
 				14C6954328944A2E00BD3B79 /* ExtensionUILabel.swift */,
 				14C6953F28944A1F00BD3B79 /* ExtensionUIButton.swift */,
-				14C6954128944A2800BD3B79 /* ExtensionUIImageView.swift */,
+				14C6954928944A3900BD3B79 /* ExtensionUIViewController.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,

@@ -19,7 +19,7 @@ class NomeView: UIViewController {
     
     private lazy var progressBarStackView: (stack: UIStackView,
                                             buttons: [UIButton]) = {
-        
+
         let buttons = createProgressBarButtons(["userBlue",
                                                 "cellGray",
                                                 "emailGray",
@@ -27,6 +27,10 @@ class NomeView: UIViewController {
                                                 "hobbiesGray"])
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = 7
+
+        buttons[0].removeTarget(nil, action: nil, for: .allTouchEvents)
+        buttons[1].removeTarget(nil, action: nil, for: .allTouchEvents)
+        buttons[2].removeTarget(nil, action: nil, for: .allTouchEvents)
         
         return (stack: stackView,
                 buttons: buttons)
@@ -138,15 +142,9 @@ class NomeView: UIViewController {
         setupView()
         setupDefaults()
         setupTargets()
-        
-        super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
         setupConstraints()
         
-        super.viewDidAppear(animated)
+        super.viewDidLoad()
     }
     
     private func setupView() {
