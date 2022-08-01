@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Recuperar1View: UIViewController {
+class PasswordRecoveryEmailView: UIViewController {
     
     let backgroundImage = UIImageView()
     
