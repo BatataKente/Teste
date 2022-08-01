@@ -33,6 +33,74 @@ extension UIViewController {
         for name in buttonImageNames {
             
             let button = UIButton()
+            
+            switch name{
+                
+                case "userGray":
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.first)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case "cellGray":
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.second)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case "emailGray":
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.thirdy)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case "padlockGray": break
+
+                case "pencilGray": break
+                
+                case "photoGray":
+            
+                    let handler = {(action: UIAction) in
+                        
+                        let fotoView = FotoView()
+                        fotoView.modalPresentationStyle = .fullScreen
+                        self.present(fotoView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+
+                case "noteGray": break
+
+                case "hobbiesGray": break
+
+                case "activiesGray": break
+                
+                case "calendarGray": break
+                    
+                case "creditGray": break
+                
+                default: break
+            }
+            
             button.setToProgressBarButtonDefault(name)
             
             buttons.append(button)
