@@ -69,9 +69,9 @@
 		C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170C2881EA4F00281633 /* SenhaModel.swift */; };
 		C696170F2881EA5600281633 /* SenhaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170E2881EA5600281633 /* SenhaView.swift */; };
 		C69617112881EA5E00281633 /* SenhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617102881EA5E00281633 /* SenhaViewModel.swift */; };
-		C69617162881EA7C00281633 /* ConfirmarDadosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617152881EA7C00281633 /* ConfirmarDadosView.swift */; };
-		C69617182881EA8A00281633 /* ConfirmarDadosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617172881EA8A00281633 /* ConfirmarDadosModel.swift */; };
-		C696171A2881EA9500281633 /* ConfirmarDadosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617192881EA9500281633 /* ConfirmarDadosViewModel.swift */; };
+		C69617162881EA7C00281633 /* ConfirmDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617152881EA7C00281633 /* ConfirmDataView.swift */; };
+		C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617172881EA8A00281633 /* ConfirmDataModel.swift */; };
+		C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617192881EA9500281633 /* ConfirmDataViewModel.swift */; };
 		C696171F2881EAB200281633 /* FotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696171E2881EAB200281633 /* FotoModel.swift */; };
 		C69617212881EAB900281633 /* FotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617202881EAB900281633 /* FotoView.swift */; };
 		C69617232881EAC200281633 /* FotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617222881EAC200281633 /* FotoViewModel.swift */; };
@@ -184,9 +184,9 @@
 		C696170C2881EA4F00281633 /* SenhaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaModel.swift; sourceTree = "<group>"; };
 		C696170E2881EA5600281633 /* SenhaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaView.swift; sourceTree = "<group>"; };
 		C69617102881EA5E00281633 /* SenhaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaViewModel.swift; sourceTree = "<group>"; };
-		C69617152881EA7C00281633 /* ConfirmarDadosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosView.swift; sourceTree = "<group>"; };
-		C69617172881EA8A00281633 /* ConfirmarDadosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosModel.swift; sourceTree = "<group>"; };
-		C69617192881EA9500281633 /* ConfirmarDadosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosViewModel.swift; sourceTree = "<group>"; };
+		C69617152881EA7C00281633 /* ConfirmDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDataView.swift; sourceTree = "<group>"; };
+		C69617172881EA8A00281633 /* ConfirmDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDataModel.swift; sourceTree = "<group>"; };
+		C69617192881EA9500281633 /* ConfirmDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDataViewModel.swift; sourceTree = "<group>"; };
 		C696171E2881EAB200281633 /* FotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoModel.swift; sourceTree = "<group>"; };
 		C69617202881EAB900281633 /* FotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoView.swift; sourceTree = "<group>"; };
 		C69617222881EAC200281633 /* FotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoViewModel.swift; sourceTree = "<group>"; };
@@ -783,7 +783,7 @@
 				C69616EB2881E98C00281633 /* Hobbies */,
 				C69616EA2881E98400281633 /* Profession */,
 				C69616E92881E96600281633 /* Foto */,
-				C69616E82881E95000281633 /* Confirmar Dados */,
+				C69616E82881E95000281633 /* Confirm Data */,
 				C69616E72881E94B00281633 /* Senha */,
 				C69616E62881E93F00281633 /* Email */,
 				C69616E52881E93900281633 /* Telefone */,
@@ -832,14 +832,14 @@
 			path = Senha;
 			sourceTree = "<group>";
 		};
-		C69616E82881E95000281633 /* Confirmar Dados */ = {
+		C69616E82881E95000281633 /* Confirm Data */ = {
 			isa = PBXGroup;
 			children = (
 				C69617142881EA6E00281633 /* ViewModel */,
 				C69617132881EA6A00281633 /* View */,
 				C69617122881EA6500281633 /* Model */,
 			);
-			path = "Confirmar Dados";
+			path = "Confirm Data";
 			sourceTree = "<group>";
 		};
 		C69616E92881E96600281633 /* Foto */ = {
@@ -991,7 +991,7 @@
 		C69617122881EA6500281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69617172881EA8A00281633 /* ConfirmarDadosModel.swift */,
+				C69617172881EA8A00281633 /* ConfirmDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -999,7 +999,7 @@
 		C69617132881EA6A00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617152881EA7C00281633 /* ConfirmarDadosView.swift */,
+				C69617152881EA7C00281633 /* ConfirmDataView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1007,7 +1007,7 @@
 		C69617142881EA6E00281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617192881EA9500281633 /* ConfirmarDadosViewModel.swift */,
+				C69617192881EA9500281633 /* ConfirmDataViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1610,7 +1610,7 @@
 				14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */,
 				C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */,
 				C69617432881EB7300281633 /* FinalizarModel.swift in Sources */,
-				C69617162881EA7C00281633 /* ConfirmarDadosView.swift in Sources */,
+				C69617162881EA7C00281633 /* ConfirmDataView.swift in Sources */,
 				C69616B12881E78A00281633 /* Recuperar3View.swift in Sources */,
 				C696172A2881EAE400281633 /* ProfessionView.swift in Sources */,
 				C69617942881EE9500281633 /* CancelarReservaView.swift in Sources */,
@@ -1661,7 +1661,7 @@
 				2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */,
 				C69617892881EE5000281633 /* CheckOutModel.swift in Sources */,
 				C69616BC2881E7C700281633 /* Recuperar6Model.swift in Sources */,
-				C69617182881EA8A00281633 /* ConfirmarDadosModel.swift in Sources */,
+				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermosECodicoesView.swift in Sources */,
 				C69617452881EB7B00281633 /* FinalizarView.swift in Sources */,
 				2ED5D10928940F48001C11DC /* TermosECondicoesModel.swift in Sources */,
@@ -1669,7 +1669,7 @@
 				C69616A02881E70700281633 /* LoginModel.swift in Sources */,
 				C69616D42881E8C000281633 /* DetalhesAbertoModel.swift in Sources */,
 				1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */,
-				C696171A2881EA9500281633 /* ConfirmarDadosViewModel.swift in Sources */,
+				C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */,
 				C69616AA2881E76000281633 /* Recuperar1Model.swift in Sources */,
