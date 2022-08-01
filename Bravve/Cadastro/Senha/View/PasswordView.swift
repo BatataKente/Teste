@@ -239,9 +239,29 @@ class PasswordView: UIViewController{
         return button
     }()
     
+    let passwordCustomShadow: UIView = {
+        let customShadow = UIView()
+        customShadow.backgroundColor = UIColor(named: "blueNav")
+        customShadow.layer.cornerRadius = 8
+        customShadow.isHidden = true
+        return customShadow
+    }()
+    
+    let confirmCustomShadow: UIView = {
+        let customShadow = UIView()
+        customShadow.backgroundColor = UIColor(named: "blueNav")
+        customShadow.layer.cornerRadius = 8
+        customShadow.isHidden = true
+        return customShadow
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel,passwordStackView, hidePasswordButton, confirmStackView ,hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton])
+        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel,passwordStackView, hidePasswordButton, confirmStackView ,hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, passwordCustomShadow, confirmCustomShadow])
+        
+        hidePasswordButton.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
+        hideConfirmPasswordButton.addTarget(self, action: #selector(hideConfirmPassword), for: .touchUpInside)
+        goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
     }
     
@@ -341,6 +361,47 @@ class PasswordView: UIViewController{
         continueButton.constraintInsideTo(.left, view.safeAreaLayoutGuide)
         continueButton.constraintInsideTo(.right, view.safeAreaLayoutGuide)
         continueButton.constraintOutsideTo(.bottom, view.keyboardLayoutGuide)
+        
+        passwordCustomShadow.constraintOutsideTo(.top, passwordStackView)
+        passwordCustomShadow.constraintInsideTo(.left, passwordStackView)
+        passwordCustomShadow.constraintInsideTo(.right, passwordStackView)
+        passwordCustomShadow.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
+        confirmCustomShadow.constraintOutsideTo(.top, confirmStackView)
+        confirmCustomShadow.constraintInsideTo(.left, confirmStackView)
+        confirmCustomShadow.constraintInsideTo(.right, confirmStackView)
+        confirmCustomShadow.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
+    @objc func goBack(sender: UIButton){
+            print("Going Back")
+        }
+    
+    @objc func continueAction() {
+            print("Going On")
+        }
+    
+    @objc func hidingConfirmPassword(_ sender: UIButton){
+        confirmPasswordTextField.isSecureTextEntry.toggle()
+        
+        if confirmPasswordTextField.isSecureTextEntry {
+            hideConfirmPasswordButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+        } else {
+            hideConfirmPasswordButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
+        }
+    }
+    
+    @objc func hidingPassword(_ sender: UIButton){
+        passwordTextField.isSecureTextEntry.toggle()
+        
+        if passwordTextField.isSecureTextEntry {
+            hidePasswordButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+        } else {
+            hidePasswordButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
+        }
+        
+    }
+
 }
+
+
