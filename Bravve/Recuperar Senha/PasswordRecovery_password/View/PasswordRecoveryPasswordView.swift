@@ -112,7 +112,7 @@ class PasswordRecoveryPassword: UIViewController {
     
     private func setupDefaults() {
         way.setWayToDefault("wayPassword")
-        backButton.setToBackButtonDefault("backPink")
+        backButton.setToBackButtonDefault(.backPink)
         bravveIcon.setLogoToDefault()
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }
