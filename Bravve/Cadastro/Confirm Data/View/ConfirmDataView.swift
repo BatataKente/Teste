@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ConfirmarDadosView: UIViewController {
+class ConfirmDataView: UIViewController {
     
     let backgroundImage1: UIImageView = {
         let image = UIImageView()
