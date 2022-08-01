@@ -150,7 +150,7 @@ class PasswordView: UIViewController{
     }()
     
     let numberCharEllipse: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "Ellipse gray")
         return image
     }()
@@ -164,7 +164,7 @@ class PasswordView: UIViewController{
     }()
     
     let upperCaseEllipse: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "Ellipse gray")
         return image
     }()
@@ -178,7 +178,7 @@ class PasswordView: UIViewController{
     }()
     
     let lowerCaseEllipse: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "Ellipse gray")
         return image
     }()
@@ -192,7 +192,7 @@ class PasswordView: UIViewController{
     }()
     
     let numberEllipse: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "Ellipse gray")
         return image
     }()
@@ -206,7 +206,7 @@ class PasswordView: UIViewController{
     }()
     
     let specialCharEllipse: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "Ellipse gray")
         return image
     }()
@@ -220,7 +220,7 @@ class PasswordView: UIViewController{
     }()
     
     let samePasswordEllipse: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "Ellipse gray")
         return image
     }()
@@ -374,12 +374,12 @@ class PasswordView: UIViewController{
     }
     
     @objc func goBack(sender: UIButton){
-            print("Going Back")
-        }
+        print("Going Back")
+    }
     
     @objc func continueAction() {
-            print("Going On")
-        }
+        print("Going On")
+    }
     
     @objc func hideConfirmPassword(_ sender: UIButton){
         confirmPasswordTextField.isSecureTextEntry.toggle()
@@ -400,7 +400,7 @@ class PasswordView: UIViewController{
             hidePasswordButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
         }
     }
-
+    
     
     func addTargets() {
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
@@ -525,32 +525,31 @@ class PasswordView: UIViewController{
                                 continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
                                 continueButton.backgroundColor = .gray
                             }
+                        }
                     }
                 }
             }
-        }
-        
-        if samePasswordEllipse.image == UIImage(named: "Ellipse red") {
-            if numberCharEllipse.image == UIImage(named: "Ellipse red"){
-                if upperCaseEllipse.image == UIImage(named: "Ellipse red"){
-                    if lowerCaseEllipse.image == UIImage(named: "Ellipse red"){
-                        if numberEllipse.image == UIImage(named: "Ellipse red"){
-                            if specialCharEllipse.image == UIImage(named: "Ellipse red"){
-                                passwordTFLabel.textColor = UIColor(named: "AlertRed")
-                                passwordStackView.layer.borderColor = UIColor(named: "AlertRed")?.cgColor
-                                
-                                confirmPasswordTFLabel.textColor = UIColor(named: "AlertRed")
-                                confirmStackView.layer.borderColor = UIColor(named: "AlertRed")?.cgColor
-                                
-                                hidePasswordButton.setImage(UIImage(named: "eyeOpenRed"), for: .normal)
+            
+            if samePasswordEllipse.image == UIImage(named: "Ellipse red") {
+                if numberCharEllipse.image == UIImage(named: "Ellipse red"){
+                    if upperCaseEllipse.image == UIImage(named: "Ellipse red"){
+                        if lowerCaseEllipse.image == UIImage(named: "Ellipse red"){
+                            if numberEllipse.image == UIImage(named: "Ellipse red"){
+                                if specialCharEllipse.image == UIImage(named: "Ellipse red"){
+                                    passwordTFLabel.textColor = UIColor(named: "redAlertLabel")
+                                    passwordStackView.layer.borderColor = UIColor(named: "redAlertLabel")?.cgColor
+                                    
+                                    confirmPasswordTFLabel.textColor = UIColor(named: "redAlertLabel")
+                                    confirmStackView.layer.borderColor = UIColor(named: "redAlertLabel")?.cgColor
+                                    
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
-    
+        
     }
     
 }
