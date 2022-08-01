@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     func createCapsuleButtons(_ buttonTitles: [String],
-                              _ backgroundColor: UIColor = UIColor(named: "blueNav") ?? UIColor()) -> [UIButton] {
+                              _ backgroundColor: UIView.ColorsBravve = .blue) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -33,6 +33,74 @@ extension UIViewController {
         for name in buttonImageNames {
             
             let button = UIButton()
+            
+            switch name{
+                
+                case UIView.IconsBravve.userGray.rawValue:
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.first)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case UIView.IconsBravve.cellGray.rawValue:
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.second)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case UIView.IconsBravve.emailGray.rawValue:
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.thirdy)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case UIView.IconsBravve.padlockGray.rawValue: break
+
+                case UIView.IconsBravve.pencilGray.rawValue: break
+                
+                case UIView.IconsBravve.photoGray.rawValue:
+            
+                    let handler = {(action: UIAction) in
+                        
+                        let fotoView = FotoView()
+                        fotoView.modalPresentationStyle = .fullScreen
+                        self.present(fotoView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+
+                case UIView.IconsBravve.noteGray.rawValue: break
+
+                case UIView.IconsBravve.hobbiesGray.rawValue: break
+
+                case UIView.IconsBravve.activiesGray.rawValue: break
+                
+                case UIView.IconsBravve.calendarGray.rawValue: break
+                    
+                case UIView.IconsBravve.creditGray.rawValue: break
+                
+                default: break
+            }
+            
             button.setToProgressBarButtonDefault(name)
             
             buttons.append(button)
