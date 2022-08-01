@@ -76,7 +76,7 @@
 		C69617212881EAB900281633 /* FotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617202881EAB900281633 /* FotoView.swift */; };
 		C69617232881EAC200281633 /* FotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617222881EAC200281633 /* FotoViewModel.swift */; };
 		C69617282881EADC00281633 /* ProfissaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617272881EADC00281633 /* ProfissaoModel.swift */; };
-		C696172A2881EAE400281633 /* ProfissaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617292881EAE400281633 /* ProfissaoView.swift */; };
+		C696172A2881EAE400281633 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617292881EAE400281633 /* ProfessionView.swift */; };
 		C696172C2881EAED00281633 /* ProfissaoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696172B2881EAED00281633 /* ProfissaoViewModel.swift */; };
 		C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617302881EB0A00281633 /* HobbiesModel.swift */; };
 		C69617332881EB1200281633 /* HobbiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617322881EB1200281633 /* HobbiesView.swift */; };
@@ -191,7 +191,7 @@
 		C69617202881EAB900281633 /* FotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoView.swift; sourceTree = "<group>"; };
 		C69617222881EAC200281633 /* FotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoViewModel.swift; sourceTree = "<group>"; };
 		C69617272881EADC00281633 /* ProfissaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfissaoModel.swift; sourceTree = "<group>"; };
-		C69617292881EAE400281633 /* ProfissaoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfissaoView.swift; sourceTree = "<group>"; };
+		C69617292881EAE400281633 /* ProfessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
 		C696172B2881EAED00281633 /* ProfissaoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfissaoViewModel.swift; sourceTree = "<group>"; };
 		C69617302881EB0A00281633 /* HobbiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbiesModel.swift; sourceTree = "<group>"; };
 		C69617322881EB1200281633 /* HobbiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbiesView.swift; sourceTree = "<group>"; };
@@ -1047,7 +1047,7 @@
 		C69617252881EACD00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617292881EAE400281633 /* ProfissaoView.swift */,
+				C69617292881EAE400281633 /* ProfessionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1612,7 +1612,7 @@
 				C69617432881EB7300281633 /* FinalizarModel.swift in Sources */,
 				C69617162881EA7C00281633 /* ConfirmarDadosView.swift in Sources */,
 				C69616B12881E78A00281633 /* Recuperar3View.swift in Sources */,
-				C696172A2881EAE400281633 /* ProfissaoView.swift in Sources */,
+				C696172A2881EAE400281633 /* ProfessionView.swift in Sources */,
 				C69617942881EE9500281633 /* CancelarReservaView.swift in Sources */,
 				C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
