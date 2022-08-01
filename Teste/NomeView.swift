@@ -53,7 +53,7 @@ class NomeView: UIViewController {
         return customShaddow
     }()
     
-    private let viewElements: (rightStackView: UIStackView,
+    private lazy var viewElements: (rightStackView: UIStackView,
                        leftStackView: UIStackView,
                        rightTextField: UITextField,
                        rightLabel: UILabel,
@@ -68,7 +68,9 @@ class NomeView: UIViewController {
         
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
-        ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
+        
+        print(generateFontSizeWithView())
+        ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: generateFontSizeWithView())
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
         stackView.spacing = 10
@@ -88,7 +90,8 @@ class NomeView: UIViewController {
         let rightLabel = UILabel()
         
         let rightTextField = UITextField()
-        rightTextField.font = UIFont(name: "Ubuntu-Medium", size: 16)
+        
+        rightTextField.font = UIFont(name: "Ubuntu-Bold", size: 20)
         
         let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
                                                             rightTextField])
@@ -161,14 +164,14 @@ class NomeView: UIViewController {
         
         registerButton.setToBottomButtonKeyboardDefault()
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault("backPink")
+        backButton.setToBackButtonDefault(.backPink)
         ways[0].setWayToDefault("way3")
         ways[1].setWayToDefault("way1")
         ways[2].setWayToDefault("way4")
     }
     
     private func setupConstraints() {
-        
+            
         progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()

@@ -16,7 +16,7 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(named: "downButtonBlue"), for: .normal)
+        self.setImage(UIImage(systemName: ButtonsBravve.arrowBlue.rawValue), for: .normal)
         self.tintColor = .systemBlue
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
@@ -28,16 +28,16 @@ extension UIButton {
 extension UIButton {
     
     open func setToDefaultCapsuleButton(_ buttonTitle: String,
-                                        _ backgroundColor: UIColor = UIColor(named: "blueNav") ?? UIColor()) {
+                                        _ backgroundColor: ColorsBravve = .blue) {
 
         self.configuration = .filled()
         self.configuration?.title = buttonTitle
-        self.configuration?.background.backgroundColor = backgroundColor
-        if backgroundColor == .white {
+        self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
+        if backgroundColor == .background {
 
-            self.configuration?.baseForegroundColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
+            self.configuration?.baseForegroundColor = .black
             self.configuration?.background.strokeWidth = 0.7
-            self.configuration?.background.strokeColor = UIColor(red: 0.847, green: 0.867, blue: 0.896, alpha: 1)
+            self.configuration?.background.strokeColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
         }
         self.configuration?.cornerStyle = .capsule
     }
@@ -46,11 +46,11 @@ extension UIButton {
                                      _ constant: CGFloat = 70) {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.setTitleColor(UIColor(named: "blueNav"), for: .normal)
-        self.titleLabel?.font = UIFont(name: "Ubuntu-Regular", size: 15)
+        self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        self.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         self.layer.cornerRadius = 8
         
-        self.addBottomLineWithColor(color: UIColor(named: "blueNav") ?? UIColor(), width: 1, y: -7)
+        self.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? UIColor(), width: 1, y: -7)
         
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide, constant)
@@ -67,55 +67,55 @@ extension UIButton {
             
         switch buttonImageName {
 
-            case "userBlue":
+            case IconsBravve.userBlue.rawValue:
 
                 self.configuration?.title = " Dados pessoais"
 
-            case "cellBlue":
+            case IconsBravve.cellBlue.rawValue:
 
                 self.configuration?.title = " Celular"
 
-            case "emailBlue":
+            case IconsBravve.emailBlue.rawValue:
 
                 self.configuration?.title = " Email"
 
-            case "padlockBlue":
+            case IconsBravve.padlockBlue.rawValue:
 
                 self.configuration?.title = " Senha"
 
-            case "pencilBlue":
+            case IconsBravve.pencilBlue.rawValue:
 
                 self.configuration?.title = " Confirmação"
             
-            case "photoBlue":
+            case IconsBravve.photoBlue.rawValue:
 
                 self.configuration?.title = " Foto"
 
-            case "noteBlue":
+            case IconsBravve.noteBlue.rawValue:
 
                 self.configuration?.title = " Profissão"
 
-            case "hobbiesBlue":
+            case IconsBravve.hobbiesBlue.rawValue:
 
                 self.configuration?.title = " Hobbies"
 
-            case "activiesBlue":
+            case IconsBravve.activiesBlue.rawValue:
 
                 self.configuration?.title = " Atividades de interesse"
             
-            case "calendarBlue":
+            case IconsBravve.calendarBlue.rawValue:
 
                 self.configuration?.title = " Agendamento"
                 
-            case "creditBlue":
+            case IconsBravve.creditBlue.rawValue:
 
                 self.configuration?.title = " Carteira"
 
             default: break
         }
         
-        self.configuration?.baseForegroundColor = UIColor(named: "blueNav")
-        self.titleLabel?.font = UIFont(name: "Ubuntu-Medium", size: 14)
+        self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: 14)
     }
     
     open func setToButtonDefault(_ aboveWhom: Any?,
@@ -124,8 +124,8 @@ extension UIButton {
         
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.textColor = .white
-        self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        self.backgroundColor = UIColor(named: "buttonPink")
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        self.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         self.layer.cornerRadius = 8
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
@@ -140,8 +140,8 @@ extension UIButton {
     open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar") {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        self.backgroundColor = UIColor(named: "reservedCancel")
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        self.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
@@ -150,12 +150,12 @@ extension UIButton {
     }
     
     open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
-                                       colorName: String = "buttonPink",
+                                       colorName: ColorsBravve = .buttonPink,
                                        aboveWhom: Any?) {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        self.backgroundColor = UIColor(named: colorName)
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        self.backgroundColor = UIColor(named: colorName.rawValue)
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
@@ -163,10 +163,10 @@ extension UIButton {
         self.constraintOutsideTo(.bottom, aboveWhom)
     }
     
-    open func setToBackButtonDefault(_ imageName: String = "backWhite",
+    open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
                                      _ constant: CGFloat = 22) {
         
-        self.setImage(UIImage(named: imageName), for: .normal)
+        self.setImage(UIImage(named: imageName.rawValue), for: .normal)
         
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
