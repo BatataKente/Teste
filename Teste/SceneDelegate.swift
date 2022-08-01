@@ -19,16 +19,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let vc1 = HomeAbertaView()
         vc1.tabBarItem.image = UIImage(named: "locationGray")
-        
+
         let vc2 = NomeView()
         vc2.tabBarItem.image = UIImage(named: "exiteGray")
-        
+
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [vc1, vc2]
-        
+
         tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
-        
+
         window.rootViewController = tabBarController
+        
+//        window.rootViewController = NomeView()
         window.makeKeyAndVisible()
         
         self.window = window
