@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension RecuperacaoDeSenha3: UITextFieldDelegate {
+extension PasswordRecoveryPassword: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == passwordTextFieldClass.textField {
@@ -30,50 +30,60 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
             }
         
         if passwordText.isEmpty {
-            capitalizedLetterBulletPoint.label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
-            numericCharactersBulletPoint.label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
-            regularCharactersBulletPoint.label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
-            specialCharactersBulletPoint.label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
-            passwordBulletPoint.label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
+            capitalizedLetterBulletPoint.label.textColor = UIColor(named: "label")
+            numericCharactersBulletPoint.label.textColor = UIColor(named: "label")
+            regularCharactersBulletPoint.label.textColor = UIColor(named: "label")
+            specialCharactersBulletPoint.label.textColor = UIColor(named: "label")
+            passwordBulletPoint.label.textColor = UIColor(named: "label")
         } else {
             
             if containsUppercasedLetters(text: passwordText) {
-                capitalizedLetterBulletPoint.label.textColor = UIColor(red: 0, green: 0.697, blue: 0.225, alpha: 1)
+                capitalizedLetterBulletPoint.label.textColor = UIColor(named: "label")
+                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
                 containsUppercased = true
             } else {
-                capitalizedLetterBulletPoint.label.textColor = UIColor(red: 0.837, green: 0, blue: 0, alpha: 1)
+                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
+                capitalizedLetterBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
                 containsUppercased = false
             }
             
             if (6...40).contains(passwordText.count) {
-                passwordBulletPoint.label.textColor = UIColor(red: 0, green: 0.697, blue: 0.225, alpha: 1)
+                passwordBulletPoint.label.textColor = UIColor(named: "label")
+                passwordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
                 textInsideRange = true
             } else {
-                passwordBulletPoint.label.textColor = UIColor(red: 0.837, green: 0, blue: 0, alpha: 1)
+                passwordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
+                passwordBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
                 textInsideRange = false
             }
             
             if containsNumericCharacters(text: passwordText) {
-                numericCharactersBulletPoint.label.textColor = UIColor(red: 0, green: 0.697, blue: 0.225, alpha: 1)
+                numericCharactersBulletPoint.label.textColor = UIColor(named: "label")
+                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
                 containsNumericCharacters = true
             } else {
-                numericCharactersBulletPoint.label.textColor = UIColor(red: 0.837, green: 0, blue: 0, alpha: 1)
+                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
+                numericCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
                 containsNumericCharacters = false
             }
             
             if containsSpecialCharacters(text: passwordText) {
-                specialCharactersBulletPoint.label.textColor = UIColor(red: 0, green: 0.697, blue: 0.225, alpha: 1)
+                specialCharactersBulletPoint.label.textColor = UIColor(named: "label")
+                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
                 containsSpecialCharacters = true
             } else {
-                specialCharactersBulletPoint.label.textColor = UIColor(red: 0.837, green: 0, blue: 0, alpha: 1)
+                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
+                specialCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
                 containsSpecialCharacters = false
             }
             
             if containsLowercasedCharacters(text: passwordText) {
-                regularCharactersBulletPoint.label.textColor = UIColor(red: 0, green: 0.697, blue: 0.225, alpha: 1)
+                regularCharactersBulletPoint.label.textColor = UIColor(named: "label")
+                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
                 containsLowercased = true
             } else {
-                regularCharactersBulletPoint.label.textColor = UIColor(red: 0.837, green: 0, blue: 0, alpha: 1)
+                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
+                regularCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
                 containsLowercased = false
             }
             
@@ -96,22 +106,24 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         }
 
                     if confirmPasswordText == "" {
-                        samePasswordBulletPoint.label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
-                        continueButton.backgroundColor = UIColor(red: 0.435, green: 0.455, blue: 0.475, alpha: 1)
+                        samePasswordBulletPoint.label.textColor = UIColor(named: "label")
+                        registerButton.backgroundColor = UIColor(named: "buttonGray")
                     } else {
                         if confirmPasswordText == passwordTextFieldClass.textField.text {
-                            samePasswordBulletPoint.label.textColor = UIColor(red: 0, green: 0.697, blue: 0.225, alpha: 1)
+                            samePasswordBulletPoint.label.textColor = UIColor(named: "label")
+                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
                             samePassword = true
                         } else {
-                            samePasswordBulletPoint.label.textColor = UIColor(red: 0.837, green: 0, blue: 0, alpha: 1)
+                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
+                            samePasswordBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
                             samePassword = false
                         }
                     }
         
         if passwordOK, samePassword {
-            continueButton.backgroundColor = UIColor(red: 1, green: 0.125, blue: 0.475, alpha: 1)
+            registerButton.backgroundColor = UIColor(named: "buttonPink")
         } else {
-            continueButton.backgroundColor = UIColor(red: 0.435, green: 0.455, blue: 0.475, alpha: 1)
+            registerButton.backgroundColor = UIColor(named: "buttonGray")
         }
     }
 
