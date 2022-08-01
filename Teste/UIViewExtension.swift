@@ -7,29 +7,6 @@
 
 import UIKit
 
-enum FontsBravve: String {
-    
-    case medium = "Ubuntu-Medium"
-    case light = "Ubuntu-light"
-}
-
-enum ImagesBravve: String {
-    
-    case backWhite = "backWhite"
-    case filter = "filter"
-}
-
-enum ColorsBravve: String {
-    
-    case blue = "blueNav"
-}
-
-enum Ride: CGFloat {
-    
-    case up = 1
-    case down = -1
-}
-
 //Extensions related to default elements
 extension UIView {
     
@@ -43,7 +20,7 @@ extension UIView {
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: ImagesBravve.backWhite.rawValue), for: .normal)
+        backButton.setImage(UIImage(named: ImagesBravve.whiteBack.rawValue), for: .normal)
         
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
