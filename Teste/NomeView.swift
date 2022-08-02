@@ -69,8 +69,7 @@ class NomeView: UIViewController {
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
         
-        print(generateFontSizeWithView())
-        ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: generateFontSizeWithView())
+        ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: 20)
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
         stackView.spacing = 10
