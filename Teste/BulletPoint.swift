@@ -24,12 +24,12 @@ class BulletPoint: UIStackView {
     
     func createBulletPointStackView() -> UIStackView {
         
-        ellipseImage.image = UIImage(named: "Ellipse gray")
+        ellipseImage.image = UIImage(named: IconsBravve.emailGray.rawValue)
         ellipseImage.contentMode = .scaleAspectFit
         ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         
         label.text = labelText
-        label.font = UIFont(name: "Ubuntu-Light", size: 10)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 10)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
