@@ -1,8 +1,8 @@
 //
-//  HomeView.swift
-//  Teste
+//  NomeView.swift
+//  Bravve
 //
-//  Created by Josicleison on 22/07/22.
+//  Created by user218260 on 7/15/22.
 //
 
 import UIKit
@@ -56,11 +56,6 @@ class HomeAbertaView: UIViewController {
     
     lazy var tabBar = UITabBarController()
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-    }
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -112,15 +107,17 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
             
             if indexPath.row == 0 {
                 
-                let cell = UITableViewCell()
-                cell.textLabel?.setToDefault(text: "Espaços", .left)
+                let spaceTitleCell = UITableViewCell()
+                spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
                 
-                return cell
+                return spaceTitleCell
             }
             else {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeAbertaTableViewCell
                 cell?.delegate = self
+                
+                cell?.viewElements.photoView.heightAnchorInSuperview(CGFloat(225).generateSizeForScreen)
                 
                 return cell ?? UITableViewCell()
             }
