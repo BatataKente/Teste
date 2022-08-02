@@ -45,7 +45,7 @@ class Recuperar1View: UIViewController {
         let textField = UITextField()
         textField.font = UIFont(name: FontsBravve.medium.rawValue, size: 16)
         textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        textField.backgroundColor = .white
+        textField.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -66,7 +66,7 @@ class Recuperar1View: UIViewController {
     let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
         stackView.spacing = 10
         stackView.axis = .vertical
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
@@ -82,12 +82,12 @@ class Recuperar1View: UIViewController {
     
     let customShaddow: UIView = {
              
-             let customShaddow = UIView()
+        let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-             customShaddow.layer.cornerRadius = 8
-             customShaddow.isHidden = true
-             
-             return customShaddow
+        customShaddow.layer.cornerRadius = 8
+        customShaddow.isHidden = true
+        
+        return customShaddow
          }()
 
     
@@ -98,6 +98,7 @@ class Recuperar1View: UIViewController {
         view.setToDefaultBackgroundColor()
 
         view.addSubviews([backgroundImage, buttonBack, imageLogo, progressBarStackView.stack, label, customShaddow, stackViewEmail, buttonContinue])
+        
         addConstraints()
         addTargets()
 
