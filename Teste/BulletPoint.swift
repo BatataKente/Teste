@@ -24,7 +24,7 @@ class BulletPoint: UIStackView {
     
     func createBulletPointStackView() -> UIStackView {
         
-        ellipseImage.image = UIImage(named: IconsBravve.emailGray.rawValue)
+        ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         ellipseImage.contentMode = .scaleAspectFit
         ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         
