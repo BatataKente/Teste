@@ -13,7 +13,7 @@
 		14076BE528930CC7003EA2F1 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* UILabelExtension.swift */; };
 		14076BE828930CFA003EA2F1 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */; };
 		14076BEB28930DE6003EA2F1 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */; };
-		1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */; };
+		1416C28A28941BFA00FCE10E /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */; };
 		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
 		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
 		1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A231289965DE00B409E5 /* IconsBravveEnum.swift */; };
@@ -56,15 +56,15 @@
 		C69616C32881E7EF00281633 /* Recuperar4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C22881E7EF00281633 /* Recuperar4View.swift */; };
 		C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C42881E7F900281633 /* Recuperar4Model.swift */; };
 		C69616C72881E80600281633 /* Recuperar4ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C62881E80600281633 /* Recuperar4ViewModel.swift */; };
-		C69616CB2881E88600281633 /* HomeAbertaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CA2881E88600281633 /* HomeAbertaModel.swift */; };
-		C69616CD2881E89200281633 /* HomeAbertaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CC2881E89200281633 /* HomeAbertaView.swift */; };
-		C69616CF2881E89D00281633 /* HomeAbertaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CE2881E89D00281633 /* HomeAbertaViewModel.swift */; };
-		C69616D42881E8C000281633 /* DetalhesAbertoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616D32881E8C000281633 /* DetalhesAbertoModel.swift */; };
-		C69616D62881E8CC00281633 /* DetalhesAbertoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616D52881E8CC00281633 /* DetalhesAbertoView.swift */; };
-		C69616D82881E8D700281633 /* DetalhesAbertoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616D72881E8D700281633 /* DetalhesAbertoViewModel.swift */; };
-		C69616DE2881E90000281633 /* HomeFechadaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616DD2881E90000281633 /* HomeFechadaModel.swift */; };
-		C69616E02881E90800281633 /* HomeFechadaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616DF2881E90800281633 /* HomeFechadaView.swift */; };
-		C69616E22881E91200281633 /* HomeFechadaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616E12881E91200281633 /* HomeFechadaViewModel.swift */; };
+		C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CA2881E88600281633 /* HomeOpenModel.swift */; };
+		C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CC2881E89200281633 /* HomeOpenView.swift */; };
+		C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */; };
+		C69616D42881E8C000281633 /* DetailsOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616D32881E8C000281633 /* DetailsOpenModel.swift */; };
+		C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616D52881E8CC00281633 /* DetailsOpenView.swift */; };
+		C69616D82881E8D700281633 /* DetailsOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616D72881E8D700281633 /* DetailsOpenViewModel.swift */; };
+		C69616DE2881E90000281633 /* HomeClosedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616DD2881E90000281633 /* HomeClosedModel.swift */; };
+		C69616E02881E90800281633 /* HomeClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616DF2881E90800281633 /* HomeClosedView.swift */; };
+		C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616E12881E91200281633 /* HomeClosedViewModel.swift */; };
 		C69616F22881E9C000281633 /* NomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616F12881E9C000281633 /* NomeModel.swift */; };
 		C69616F42881E9C600281633 /* NomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616F32881E9C600281633 /* NomeView.swift */; };
 		C69616F62881E9CD00281633 /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616F52881E9CD00281633 /* NomeViewModel.swift */; };
@@ -134,7 +134,7 @@
 		14076BE428930CC7003EA2F1 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
-		1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
+		1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A231289965DE00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
@@ -179,15 +179,15 @@
 		C69616C22881E7EF00281633 /* Recuperar4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recuperar4View.swift; sourceTree = "<group>"; };
 		C69616C42881E7F900281633 /* Recuperar4Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recuperar4Model.swift; sourceTree = "<group>"; };
 		C69616C62881E80600281633 /* Recuperar4ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recuperar4ViewModel.swift; sourceTree = "<group>"; };
-		C69616CA2881E88600281633 /* HomeAbertaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaModel.swift; sourceTree = "<group>"; };
-		C69616CC2881E89200281633 /* HomeAbertaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaView.swift; sourceTree = "<group>"; };
-		C69616CE2881E89D00281633 /* HomeAbertaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaViewModel.swift; sourceTree = "<group>"; };
-		C69616D32881E8C000281633 /* DetalhesAbertoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesAbertoModel.swift; sourceTree = "<group>"; };
-		C69616D52881E8CC00281633 /* DetalhesAbertoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesAbertoView.swift; sourceTree = "<group>"; };
-		C69616D72881E8D700281633 /* DetalhesAbertoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesAbertoViewModel.swift; sourceTree = "<group>"; };
-		C69616DD2881E90000281633 /* HomeFechadaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFechadaModel.swift; sourceTree = "<group>"; };
-		C69616DF2881E90800281633 /* HomeFechadaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFechadaView.swift; sourceTree = "<group>"; };
-		C69616E12881E91200281633 /* HomeFechadaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFechadaViewModel.swift; sourceTree = "<group>"; };
+		C69616CA2881E88600281633 /* HomeOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenModel.swift; sourceTree = "<group>"; };
+		C69616CC2881E89200281633 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenViewModel.swift; sourceTree = "<group>"; };
+		C69616D32881E8C000281633 /* DetailsOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOpenModel.swift; sourceTree = "<group>"; };
+		C69616D52881E8CC00281633 /* DetailsOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOpenView.swift; sourceTree = "<group>"; };
+		C69616D72881E8D700281633 /* DetailsOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOpenViewModel.swift; sourceTree = "<group>"; };
+		C69616DD2881E90000281633 /* HomeClosedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedModel.swift; sourceTree = "<group>"; };
+		C69616DF2881E90800281633 /* HomeClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedView.swift; sourceTree = "<group>"; };
+		C69616E12881E91200281633 /* HomeClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedViewModel.swift; sourceTree = "<group>"; };
 		C69616F12881E9C000281633 /* NomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomeModel.swift; sourceTree = "<group>"; };
 		C69616F32881E9C600281633 /* NomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomeView.swift; sourceTree = "<group>"; };
 		C69616F52881E9CD00281633 /* NomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
@@ -570,9 +570,9 @@
 		C69616902881E64F00281633 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C69616D92881E8E100281633 /* Home Fechada */,
-				C69616C92881E85800281633 /* Detalhes Aberto */,
-				C69616C82881E83A00281633 /* Home Aberta */,
+				C69616D92881E8E100281633 /* Home Closed */,
+				C69616C92881E85800281633 /* Details Open */,
+				C69616C82881E83A00281633 /* Home Open */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -599,7 +599,7 @@
 		C69616932881E68100281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69616CA2881E88600281633 /* HomeAbertaModel.swift */,
+				C69616CA2881E88600281633 /* HomeOpenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -607,8 +607,8 @@
 		C69616942881E68900281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */,
-				C69616CC2881E89200281633 /* HomeAbertaView.swift */,
+				1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */,
+				C69616CC2881E89200281633 /* HomeOpenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -616,7 +616,7 @@
 		C69616952881E68E00281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69616CE2881E89D00281633 /* HomeAbertaViewModel.swift */,
+				C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -791,30 +791,30 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C69616C82881E83A00281633 /* Home Aberta */ = {
+		C69616C82881E83A00281633 /* Home Open */ = {
 			isa = PBXGroup;
 			children = (
 				C69616952881E68E00281633 /* ViewModel */,
 				C69616942881E68900281633 /* View */,
 				C69616932881E68100281633 /* Model */,
 			);
-			path = "Home Aberta";
+			path = "Home Open";
 			sourceTree = "<group>";
 		};
-		C69616C92881E85800281633 /* Detalhes Aberto */ = {
+		C69616C92881E85800281633 /* Details Open */ = {
 			isa = PBXGroup;
 			children = (
 				C69616D22881E8B000281633 /* ViewModel */,
 				C69616D12881E8AA00281633 /* View */,
 				C69616D02881E8A300281633 /* Model */,
 			);
-			path = "Detalhes Aberto";
+			path = "Details Open";
 			sourceTree = "<group>";
 		};
 		C69616D02881E8A300281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69616D32881E8C000281633 /* DetalhesAbertoModel.swift */,
+				C69616D32881E8C000281633 /* DetailsOpenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -822,7 +822,7 @@
 		C69616D12881E8AA00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69616D52881E8CC00281633 /* DetalhesAbertoView.swift */,
+				C69616D52881E8CC00281633 /* DetailsOpenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -830,25 +830,25 @@
 		C69616D22881E8B000281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69616D72881E8D700281633 /* DetalhesAbertoViewModel.swift */,
+				C69616D72881E8D700281633 /* DetailsOpenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C69616D92881E8E100281633 /* Home Fechada */ = {
+		C69616D92881E8E100281633 /* Home Closed */ = {
 			isa = PBXGroup;
 			children = (
 				C69616DC2881E8F300281633 /* ViewModel */,
 				C69616DB2881E8ED00281633 /* View */,
 				C69616DA2881E8E800281633 /* Model */,
 			);
-			path = "Home Fechada";
+			path = "Home Closed";
 			sourceTree = "<group>";
 		};
 		C69616DA2881E8E800281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69616DD2881E90000281633 /* HomeFechadaModel.swift */,
+				C69616DD2881E90000281633 /* HomeClosedModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -856,7 +856,7 @@
 		C69616DB2881E8ED00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69616DF2881E90800281633 /* HomeFechadaView.swift */,
+				C69616DF2881E90800281633 /* HomeClosedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -864,7 +864,7 @@
 		C69616DC2881E8F300281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69616E12881E91200281633 /* HomeFechadaViewModel.swift */,
+				C69616E12881E91200281633 /* HomeClosedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1691,7 +1691,7 @@
 				C696176A2881ECBF00281633 /* Reserva3ViewModel.swift in Sources */,
 				C69617082881EA2500281633 /* EmailViewModel.swift in Sources */,
 				2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */,
-				C69616CF2881E89D00281633 /* HomeAbertaViewModel.swift in Sources */,
+				C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */,
 				C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */,
 				C69617212881EAB900281633 /* FotoView.swift in Sources */,
 				C69617612881EC9000281633 /* Reserva2ViewModel.swift in Sources */,
@@ -1715,13 +1715,13 @@
 				C69616AC2881E76C00281633 /* PasswordRecoveryEmailViewModel.swift in Sources */,
 				14076BE228930BFB003EA2F1 /* UIButtonExtension.swift in Sources */,
 				14076BE528930CC7003EA2F1 /* UILabelExtension.swift in Sources */,
-				C696170F2881EA5600281633 /* SenhaView.swift in Sources */,
+				C696170F2881EA5600281633 /* PasswordView.swift in Sources */,
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
 				2EF23F4828931B760078B6B8 /* UIViewExtension.swift in Sources */,
-				C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */,
-				C69616D62881E8CC00281633 /* DetalhesAbertoView.swift in Sources */,
-				C69616CD2881E89200281633 /* HomeAbertaView.swift in Sources */,
+				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
+				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
+				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelefoneView.swift in Sources */,
 				C696175F2881EC7F00281633 /* Reserva2View.swift in Sources */,
 				C69617232881EAC200281633 /* FotoViewModel.swift in Sources */,
@@ -1731,7 +1731,7 @@
 				C69617562881EC5400281633 /* AvulsaView.swift in Sources */,
 				C69616C32881E7EF00281633 /* Recuperar4View.swift in Sources */,
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
-				C69616CB2881E88600281633 /* HomeAbertaModel.swift in Sources */,
+				C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */,
 				C69617802881EE1E00281633 /* CheckInModel.swift in Sources */,
 				14076BE828930CFA003EA2F1 /* UIImageViewExtension.swift in Sources */,
 				C696178D2881EE6500281633 /* CheckOutViewModel.swift in Sources */,
@@ -1748,7 +1748,7 @@
 				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */,
 				2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */,
-				C69616DE2881E90000281633 /* HomeFechadaModel.swift in Sources */,
+				C69616DE2881E90000281633 /* HomeClosedModel.swift in Sources */,
 				C696171F2881EAB200281633 /* FotoModel.swift in Sources */,
 				C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */,
 				2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */,
@@ -1766,8 +1766,8 @@
 				2ED5D10928940F48001C11DC /* TermosECondicoesModel.swift in Sources */,
 				C69617042881EA1500281633 /* EmailModel.swift in Sources */,
 				C69616A02881E70700281633 /* LoginModel.swift in Sources */,
-				C69616D42881E8C000281633 /* DetalhesAbertoModel.swift in Sources */,
-				1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */,
+				C69616D42881E8C000281633 /* DetailsOpenModel.swift in Sources */,
+				1416C28A28941BFA00FCE10E /* HomeOpenTableViewCell.swift in Sources */,
 				C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */,
 				1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
@@ -1777,18 +1777,18 @@
 				C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */,
 				C696173A2881EB4000281633 /* AtividadesModel.swift in Sources */,
 				C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */,
-				C69616E22881E91200281633 /* HomeFechadaViewModel.swift in Sources */,
+				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
 				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
 				C696175D2881EC7700281633 /* Reserva2Model.swift in Sources */,
-				C69616D82881E8D700281633 /* DetalhesAbertoViewModel.swift in Sources */,
+				C69616D82881E8D700281633 /* DetailsOpenViewModel.swift in Sources */,
 				C69617112881EA5E00281633 /* PasswordViewModel.swift in Sources */,
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
 				C69616F62881E9CD00281633 /* NomeViewModel.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
 				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
-				C69616E02881E90800281633 /* HomeFechadaView.swift in Sources */,
+				C69616E02881E90800281633 /* HomeClosedView.swift in Sources */,
 				2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservaFinalizadaModel.swift in Sources */,

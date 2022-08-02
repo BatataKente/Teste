@@ -1,5 +1,5 @@
 //
-//  HomeAbertaView.swift
+//  NomeView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeAbertaView: UIViewController {
+class HomeOpenView: UIViewController {
     
     private var espacos = 10
     
@@ -33,7 +33,7 @@ class HomeAbertaView: UIViewController {
     let tableView: UITableView = {
         
         let tableView = UITableView()
-        tableView.register(HomeAbertaTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(HomeOpenTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.layoutMargins = UIEdgeInsets(top: 20,
                                                left: 20,
                                                bottom: 20,
@@ -55,11 +55,6 @@ class HomeAbertaView: UIViewController {
     var filterButtons = [UIButton]()
     
     lazy var tabBar = UITabBarController()
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-    }
     
     override func viewDidLoad() {
         
@@ -99,7 +94,7 @@ class HomeAbertaView: UIViewController {
     }
 }
 
-extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
+extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -112,14 +107,16 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
             
             if indexPath.row == 0 {
                 
-                let cell = UITableViewCell()
-                cell.textLabel?.setToDefault(text: "Espaços", .left)
+                let spaceTitleCell = UITableViewCell()
+                spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
+                spaceTitleCell.textLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                                        size: CGFloat(20).generateSizeForScreen)
                 
-                return cell
+                return spaceTitleCell
             }
             else {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeAbertaTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
                 return cell ?? UITableViewCell()
@@ -131,7 +128,7 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
+extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace() {
         
