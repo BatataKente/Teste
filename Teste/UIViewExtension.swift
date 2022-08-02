@@ -172,6 +172,19 @@ extension UIView {
     }
 }
 
+//Extension related to verification of size of screen of a ViewController
+extension UIView {
+    
+    open func isIpad() -> Bool {
+        
+        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+            
+            return true
+        }
+        return false
+    }
+}
+
 //Extensions related to default elements
 extension UIView {
     
@@ -186,12 +199,19 @@ extension UIView {
         
         let backButton = UIButton()
         backButton.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
-        
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         let titleLabel = UILabel()
         titleLabel.text = viewTitle
-        titleLabel.font = UIFont(name: FontsBravve.medium.rawValue, size: 19)
+        
+        if isIpad() {
+            
+            titleLabel.font = UIFont(name: FontsBravve.medium.rawValue, size: 30)
+        }
+        else {
+            
+            titleLabel.font = UIFont(name: FontsBravve.medium.rawValue, size: 19)
+        }
         titleLabel.textColor = .white
         
         self.addSubviews([backButton, titleLabel])
@@ -201,12 +221,13 @@ extension UIView {
         
         backButton.constraintInsideTo(.centerY, titleLabel)
         backButton.constraintInsideTo(.leading, self, 35)
-        backButton.sizeAnchorInSuperview(50)
+        backButton.constraintInsideTo(.height, self, multiplier: 1)
+        backButton.constraintInsideTo(.width, self, multiplier: 0.2)
         
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(120)
+        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.15)
     }
     
     open func setToDefaultCustomBarWithFilter() {
@@ -234,7 +255,7 @@ extension UIView {
             UIAction(title: "action2",handler: stateHandler)
 
         ])
-        leftButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        leftButton.setImage(UIImage(named: ButtonsBravve.arrowWhite.rawValue), for: .normal)
         leftButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let cityHandler = {(action: UIAction) in
@@ -250,7 +271,7 @@ extension UIView {
             UIAction(title: "action2",handler: cityHandler)
 
         ])
-        rightButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        rightButton.setImage(UIImage(named: ButtonsBravve.arrowWhite.rawValue), for: .normal)
         rightButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,

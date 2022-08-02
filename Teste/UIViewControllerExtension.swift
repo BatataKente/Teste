@@ -110,19 +110,6 @@ extension UIViewController {
     }
 }
 
-//Extension related to verification of size of screen on ViewController
-extension UIViewController {
-    
-    open func isIpad() -> Bool {
-        
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
-            return true
-        }
-        return false
-    }
-}
-
 //Extension related to regex
 extension UIViewController {
     
