@@ -255,9 +255,25 @@ class PasswordView: UIViewController{
         return customShadow
     }()
     
+    let hideWrongPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "eyeCloseRed"), for: .normal)
+        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let hideWrongConfirmPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "eyeCloseRed"), for: .normal)
+        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel,passwordStackView, hidePasswordButton, confirmStackView ,hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, passwordCustomShadow, confirmCustomShadow])
+        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel,passwordStackView, hidePasswordButton, confirmStackView ,hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, passwordCustomShadow, confirmCustomShadow, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
         
         hidePasswordButton.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
         hideConfirmPasswordButton.addTarget(self, action: #selector(hideConfirmPassword), for: .touchUpInside)
@@ -371,6 +387,15 @@ class PasswordView: UIViewController{
         confirmCustomShadow.constraintInsideTo(.left, confirmStackView)
         confirmCustomShadow.constraintInsideTo(.right, confirmStackView)
         confirmCustomShadow.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        
+        hideWrongPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        hideWrongPasswordButton.constraintInsideTo(.top, passwordStackView, 25)
+        hideWrongPasswordButton.constraintInsideTo(.right, passwordStackView, -15)
+        
+        hideWrongConfirmPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        hideWrongConfirmPasswordButton.constraintInsideTo(.top, confirmStackView, 25)
+        hideWrongConfirmPasswordButton.constraintInsideTo(.right, confirmStackView, -15)
+        
     }
     
     @objc func goBack(sender: UIButton){
@@ -401,6 +426,27 @@ class PasswordView: UIViewController{
         }
     }
     
+    @objc func hidingWrongPassword(_ sender: UIButton){
+        passwordTextField.isSecureTextEntry.toggle()
+        
+        if passwordTextField.isSecureTextEntry {
+            hideWrongPasswordButton.setImage(UIImage(named: "eyeCloseRed"), for: .normal)
+        } else {
+            hideWrongPasswordButton.setImage(UIImage(named: "eyeOpenRed"), for: .normal)
+        }
+        
+    }
+    
+    @objc func hidingWrongConfirmPassword(_ sender: UIButton){
+        confirmPasswordTextField.isSecureTextEntry.toggle()
+        
+        if confirmPasswordTextField.isSecureTextEntry {
+            hideWrongConfirmPasswordButton.setImage(UIImage(named: "eyeCloseRed"), for: .normal)
+        } else {
+            hideWrongConfirmPasswordButton.setImage(UIImage(named: "eyeOpenRed"), for: .normal)
+        }
+        
+    }
     
     func addTargets() {
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
@@ -529,29 +575,55 @@ class PasswordView: UIViewController{
                     }
                 }
             }
-            
-            if samePasswordEllipse.image == UIImage(named: "Ellipse red") {
-                if numberCharEllipse.image == UIImage(named: "Ellipse red"){
-                    if upperCaseEllipse.image == UIImage(named: "Ellipse red"){
-                        if lowerCaseEllipse.image == UIImage(named: "Ellipse red"){
-                            if numberEllipse.image == UIImage(named: "Ellipse red"){
-                                if specialCharEllipse.image == UIImage(named: "Ellipse red"){
-                                    passwordTFLabel.textColor = UIColor(named: "redAlertLabel")
-                                    passwordStackView.layer.borderColor = UIColor(named: "redAlertLabel")?.cgColor
-                                    
-                                    confirmPasswordTFLabel.textColor = UIColor(named: "redAlertLabel")
-                                    confirmStackView.layer.borderColor = UIColor(named: "redAlertLabel")?.cgColor
-                                    
-                                }
+        } else {
+            continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
+            continueButton.backgroundColor = .gray
+        }
+        if samePasswordEllipse.image == UIImage(named: "Ellipse red") {
+            if numberCharEllipse.image == UIImage(named: "Ellipse red"){
+                if upperCaseEllipse.image == UIImage(named: "Ellipse red"){
+                    if lowerCaseEllipse.image == UIImage(named: "Ellipse red"){
+                        if numberEllipse.image == UIImage(named: "Ellipse red"){
+                            if specialCharEllipse.image == UIImage(named: "Ellipse red"){
+                                
+                                passwordTFLabel.textColor = UIColor(named: "AlertRed")
+                                passwordCustomShadow.backgroundColor = UIColor(named: "AlertRed")
+                                
+                                confirmPasswordTFLabel.textColor = UIColor(named: "AlertRed")
+                                confirmCustomShadow.backgroundColor = UIColor(named: "AlertRed")
+                                
+                                hideWrongPasswordButton.isHidden = false
+                                hidePasswordButton.isHidden = true
+                                hideWrongPasswordButton.addTarget(self, action: #selector(hidingWrongPassword), for: .touchUpInside)
+                                hideWrongConfirmPasswordButton.isHidden = false
+                                hideConfirmPasswordButton.isHidden = true
+                                hideWrongConfirmPasswordButton.addTarget(self, action: #selector(hidingWrongConfirmPassword), for: .touchUpInside)
+                                
                             }
                         }
                     }
                 }
             }
+        } else {
+            passwordTFLabel.textColor = .gray
+            passwordCustomShadow.backgroundColor = UIColor(named: "blueNav")
+            
+            confirmPasswordTFLabel.textColor = .gray
+            confirmCustomShadow.backgroundColor = UIColor(named: "blueNav")
+            
+            hidePasswordButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+            hideConfirmPasswordButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+            
+            hideWrongPasswordButton.isHidden = true
+            hidePasswordButton.isHidden = false
+            
+            hideWrongConfirmPasswordButton.isHidden = true
+            hideConfirmPasswordButton.isHidden = false
         }
-        
-    }
-    
-}
+    }        }
+
+
+
+
 
 
