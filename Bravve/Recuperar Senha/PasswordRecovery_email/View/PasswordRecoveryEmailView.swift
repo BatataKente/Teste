@@ -108,7 +108,7 @@ class PasswordRecoveryEmailView: UIViewController {
         buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
-        backgroundImage.setWayToDefault("wayCell")
+        backgroundImage.setWayToDefault(.wayCell)
         
         NSLayoutConstraint.activate([
             
