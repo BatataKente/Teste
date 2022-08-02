@@ -11,6 +11,7 @@ class BulletPoint: UIStackView {
     
     var labelText: String
     var label = UILabel()
+    var ellipseImage = UIImageView()
     
     init(labelText: String, frame: CGRect = .zero) {
         self.labelText = labelText
@@ -23,17 +24,12 @@ class BulletPoint: UIStackView {
     
     func createBulletPointStackView() -> UIStackView {
         
-        let ellipseImage: UIImageView = {
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: "Elipse")
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
-        
+        ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        ellipseImage.contentMode = .scaleAspectFit
+        ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         
         label.text = labelText
-        label.font = UIFont(name: "Ubuntu-Light", size: 10)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 10)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
