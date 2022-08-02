@@ -137,9 +137,9 @@ class DetalhesAbertoView: UIViewController {
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço") { _ in
             
-            let homeAbertaView = HomeAbertaView()
-            homeAbertaView.modalPresentationStyle = .fullScreen
-            self.present(homeAbertaView, animated: false)
+            let homeOpenView = HomeOpenView()
+            homeOpenView.modalPresentationStyle = .fullScreen
+            self.present(homeOpenView, animated: false)
         }
         
         reserveButton.setToBottomButtonKeyboardDefault("Reservar")

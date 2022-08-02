@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
             guard let windowScene = (scene as? UIWindowScene) else {return}
             let window = UIWindow(windowScene: windowScene)
-            let vc1 = HomeAbertaView()
+            let vc1 = HomeOpenView()
             vc1.tabBarItem.image = UIImage(named: "locationGray")
             let vc2 = LoginView()
             vc2.tabBarItem.image = UIImage(named: "exitGray")

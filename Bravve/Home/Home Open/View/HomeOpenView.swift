@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeAbertaView: UIViewController {
+class HomeOpenView: UIViewController {
     
     private var espacos = 10
     
@@ -33,7 +33,7 @@ class HomeAbertaView: UIViewController {
     let tableView: UITableView = {
         
         let tableView = UITableView()
-        tableView.register(HomeAbertaTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(HomeOpenTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.layoutMargins = UIEdgeInsets(top: 20,
                                                left: 20,
                                                bottom: 20,
@@ -94,7 +94,7 @@ class HomeAbertaView: UIViewController {
     }
 }
 
-extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
+extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -116,7 +116,7 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
             }
             else {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeAbertaTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
                 return cell ?? UITableViewCell()
@@ -128,7 +128,7 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension HomeAbertaView: HomeAbertaTableViewCellProtocol {
+extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace() {
         

@@ -7,9 +7,9 @@
 
 import UIKit
 
-class HomeAbertaTableViewCell: UITableViewCell {
+class HomeOpenTableViewCell: UITableViewCell {
     
-    var delegate: HomeAbertaTableViewCellProtocol?
+    var delegate: HomeOpenTableViewCellProtocol?
     
     let viewElements: (view: UIView,
                        titleLabel: UILabel,
@@ -160,7 +160,7 @@ class HomeAbertaTableViewCell: UITableViewCell {
     }
 }
 
-protocol HomeAbertaTableViewCellProtocol {
+protocol HomeOpenTableViewCellProtocol {
     
     func chosePlace()
 }
