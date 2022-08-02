@@ -174,7 +174,7 @@ class ConfirmarDadosView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "background")
+        view.setToDefaultBackgroundColor()
         
         view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, contentView])
         contentView.addSubviews([backgroundImage1, stackViewLabels, buttonContinue])
