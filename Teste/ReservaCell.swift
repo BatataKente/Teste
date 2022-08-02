@@ -20,18 +20,18 @@ class ReservaCell: UITableViewCell {
     let typeTagLabel: UILabel = {
         let label = UILabel()
         label.text = "BOXOFFICE"
-        label.backgroundColor = UIColor(red: 0.467, green: 0.718, blue: 0.341, alpha: 1)
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.backgroundColor = UIColor(named: "boxOffice")
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Light", size: 13)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-       return label
+        return label
     }()
     
     let topTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Numa esquina"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Regular", size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,7 +40,7 @@ class ReservaCell: UITableViewCell {
     let bottomTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "charmosa, um hotel"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Regular", size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,7 +48,7 @@ class ReservaCell: UITableViewCell {
     
     let spaceImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "Bravve-ReservaImage")
+        imageView.image = UIImage(named: "imageReservs")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -57,7 +57,7 @@ class ReservaCell: UITableViewCell {
     let spaceNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hotel Saint"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Bold", size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -66,18 +66,18 @@ class ReservaCell: UITableViewCell {
     let reservedLabel: UILabel = {
         let label = UILabel()
         label.text = "RESERVADO"
-        label.backgroundColor = UIColor(red: 0.914, green: 0.18, blue: 0.984, alpha: 1)
+        label.backgroundColor = UIColor(named: "reserved")
         label.textColor = .white
         label.font = UIFont(name: "Ubuntu-Light", size: 13)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-       return label
+        return label
     }()
     
     let spaceSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "UM Coffee Co."
-        label.textColor = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1)
+        label.textColor = UIColor(named: "label")
         label.font = UIFont(name: "Ubuntu-Regular", size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -86,7 +86,7 @@ class ReservaCell: UITableViewCell {
     let locationLabel: UILabel = {
         let label = UILabel()
         label.text = "São Paulo / Jardim Paulistano"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Light", size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -95,7 +95,7 @@ class ReservaCell: UITableViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "21/01/2022 - 22/01/2022"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Light", size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -104,7 +104,7 @@ class ReservaCell: UITableViewCell {
     let hourLabel: UILabel = {
         let label = UILabel()
         label.text = "9h às 18h"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Light", size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -113,7 +113,7 @@ class ReservaCell: UITableViewCell {
     let spaceTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "Espaço privativo"
-        label.textColor = UIColor(red: 0.016, green: 0, blue: 0.369, alpha: 1)
+        label.textColor = UIColor(named: "blueNav")
         label.font = UIFont(name: "Ubuntu-Light", size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -137,78 +137,67 @@ class ReservaCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1)
-
+        contentView.backgroundColor = UIColor(named: "background")
         
-        cellView.addSubview(typeTagLabel)
-        cellView.addSubview(topTitleLabel)
-        cellView.addSubview(bottomTitleLabel)
-        cellView.addSubview(spaceImage)
-        cellView.addSubview(spaceNameLabel)
-        cellView.addSubview(reservedLabel)
-        cellView.addSubview(spaceSubtitleLabel)
-        cellView.addSubview(locationInfoStackView)
-        cellView.addSubview(arrowButton)
+        cellView.addSubviews([typeTagLabel, topTitleLabel, bottomTitleLabel, spaceImage, spaceNameLabel, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
+        
         contentView.addSubview(cellView)
         
-        NSLayoutConstraint.activate([
-            
-            cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -26),
-            
-            typeTagLabel.topAnchor.constraint(equalTo: cellView.topAnchor),
-            typeTagLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 17),
-            typeTagLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.2267),
-            typeTagLabel.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.046),
-            
-            topTitleLabel.topAnchor.constraint(equalTo: typeTagLabel.bottomAnchor, constant: 23),
-            topTitleLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 17),
-            topTitleLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.6417),
-            topTitleLabel.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.06),
-            
-            bottomTitleLabel.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor),
-            bottomTitleLabel.leadingAnchor.constraint(equalTo: topTitleLabel.leadingAnchor),
-            bottomTitleLabel.widthAnchor.constraint(equalTo: topTitleLabel.widthAnchor),
-            bottomTitleLabel.heightAnchor.constraint(equalTo: topTitleLabel.heightAnchor),
-            
-            spaceImage.topAnchor.constraint(equalTo: bottomTitleLabel.bottomAnchor, constant: 22),
-            spaceImage.leadingAnchor.constraint(equalTo: bottomTitleLabel.leadingAnchor),
-            spaceImage.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
-            spaceImage.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.39),
-            
-            spaceNameLabel.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: 23),
-            spaceNameLabel.leadingAnchor.constraint(equalTo: spaceImage.leadingAnchor),
-            spaceNameLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.5),
-            spaceNameLabel.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.046),
-            
-            reservedLabel.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: 32),
-            reservedLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -26),
-            reservedLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.241),
-            reservedLabel.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.0462),
-            
-            spaceSubtitleLabel.topAnchor.constraint(equalTo: spaceNameLabel.bottomAnchor, constant: 8),
-            spaceSubtitleLabel.leadingAnchor.constraint(equalTo: spaceNameLabel.leadingAnchor),
-            spaceSubtitleLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.358),
-            spaceSubtitleLabel.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.028),
-            
-            locationInfoStackView.topAnchor.constraint(equalTo: spaceSubtitleLabel.bottomAnchor, constant: 9),
-            locationInfoStackView.leadingAnchor.constraint(equalTo: spaceSubtitleLabel.leadingAnchor),
-            locationInfoStackView.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.507),
-            locationInfoStackView.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.160),
-            
-            arrowButton.topAnchor.constraint(equalTo: reservedLabel.bottomAnchor, constant: 69),
-            arrowButton.trailingAnchor.constraint(equalTo: reservedLabel.trailingAnchor, constant: -10)
-            
-            
-        ])
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-
+    func setupConstraints() {
+        
+        cellView.constraintInsideTo(.top, contentView)
+        cellView.constraintInsideTo(.leading, contentView)
+        cellView.constraintInsideTo(.trailing, contentView)
+        cellView.constraintInsideTo(.bottom, contentView, -26)
+        
+        typeTagLabel.constraintInsideTo(.top, cellView)
+        typeTagLabel.constraintInsideTo(.leading, cellView, 17)
+        typeTagLabel.constraintInsideTo(.width, cellView, multiplier: 0.2267)
+        typeTagLabel.constraintInsideTo(.height, cellView, multiplier: 0.046)
+        
+        topTitleLabel.constraintOutsideTo(.top, typeTagLabel, 23)
+        topTitleLabel.constraintInsideTo(.leading, cellView, 17)
+        topTitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.6417)
+        topTitleLabel.constraintInsideTo(.height, cellView, multiplier: 0.06)
+        
+        bottomTitleLabel.constraintOutsideTo(.top, topTitleLabel)
+        bottomTitleLabel.constraintInsideTo(.leading, topTitleLabel)
+        bottomTitleLabel.constraintInsideTo(.width, topTitleLabel)
+        bottomTitleLabel.constraintInsideTo(.height, topTitleLabel)
+        
+        spaceImage.constraintOutsideTo(.top, bottomTitleLabel, 22)
+        spaceImage.constraintInsideTo(.leading, bottomTitleLabel)
+        spaceImage.constraintInsideTo(.trailing, cellView)
+        spaceImage.constraintInsideTo(.height, cellView, multiplier: 0.39)
+        
+        spaceNameLabel.constraintOutsideTo(.top, spaceImage, 23)
+        spaceNameLabel.constraintInsideTo(.leading, spaceImage)
+        spaceNameLabel.constraintInsideTo(.width, cellView, multiplier: 0.5)
+        spaceNameLabel.constraintInsideTo(.height, cellView, multiplier: 0.046)
+        
+        reservedLabel.constraintOutsideTo(.top, spaceImage, 32)
+        reservedLabel.constraintInsideTo(.trailing, cellView, -26)
+        reservedLabel.constraintInsideTo(.width, cellView, multiplier: 0.241)
+        reservedLabel.constraintInsideTo(.height, cellView, multiplier: 0.0462)
+        
+        spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel, 8)
+        spaceSubtitleLabel.constraintInsideTo(.leading, spaceNameLabel)
+        spaceSubtitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.358)
+        spaceSubtitleLabel.constraintInsideTo(.height, cellView, multiplier: 0.028)
+        
+        locationInfoStackView.constraintOutsideTo(.top, spaceSubtitleLabel, 9)
+        locationInfoStackView.constraintInsideTo(.leading, spaceSubtitleLabel)
+        locationInfoStackView.constraintInsideTo(.width, cellView, multiplier: 0.507)
+        locationInfoStackView.constraintInsideTo(.height, cellView, multiplier: 0.16)
+        
+        arrowButton.constraintOutsideTo(.top, reservedLabel, 69)
+        arrowButton.constraintInsideTo(.trailing, reservedLabel, -10)
+    }
 }
