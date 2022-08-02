@@ -10,8 +10,29 @@ import UIKit
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
     
-    func createCapsuleButtons(_ buttonTitles: [String],
-                              _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
+    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
+                                      _ constant: CGFloat = 22,
+                                      _ handler: @escaping UIActionHandler) {
+        
+        let backButton = UIButton()
+        backButton.configuration = .plain()
+        backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
+        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        let logoImageView = UIImageView()
+        logoImageView.setLogoToDefault()
+        
+        self.view.addSubviews([backButton, logoImageView])
+        
+        backButton.constraintInsideTo(.centerY, logoImageView)
+        backButton.constraintInsideTo(.height, logoImageView)
+        backButton.constraintOutsideTo(.width, backButton)
+        backButton.constraintInsideTo(.leading,
+                                      self, 30)
+    }
+    
+    open func createCapsuleButtons(_ buttonTitles: [String],
+                                   _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -113,7 +134,7 @@ extension UIViewController {
 //Extension related to regex
 extension UIViewController {
     
-    func validateCellPhone(_ phone: String) -> Bool {
+    open func validateCellPhone(_ phone: String) -> Bool {
         
         let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
 
@@ -129,7 +150,7 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func containsUppercasedLetters(text: String) -> Bool {
+    open func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
         let capitalizedTextTest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
@@ -141,7 +162,7 @@ extension UIViewController {
         }
     }
     
-    func containsNumericCharacters(text: String) -> Bool {
+    open func containsNumericCharacters(text: String) -> Bool {
         
         let numericRegEx = ".*[0-9]+.*"
         let numericTextTest = NSPredicate(format:"SELF MATCHES %@", numericRegEx)
@@ -153,7 +174,7 @@ extension UIViewController {
         }
     }
     
-    func containsSpecialCharacters(text: String) -> Bool {
+    open func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
         let specialCharTextTest = NSPredicate(format: "SELF MATCHES %@", specialCharRegEx)
@@ -165,7 +186,7 @@ extension UIViewController {
         }
     }
     
-    func containsLowercasedCharacters(text: String) -> Bool {
+    open func containsLowercasedCharacters(text: String) -> Bool {
         
         let normalLetterRegEx = ".*[a-z]+.*"
         let normalLetterTextTest = NSPredicate(format: "SELF MATCHES %@", normalLetterRegEx)

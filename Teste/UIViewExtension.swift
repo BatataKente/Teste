@@ -28,7 +28,8 @@ extension UIView {
         self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
     
-    open func setToDefaultCustomBarWithBackButton(viewTitle: String, _ handler: @escaping UIActionHandler) {
+    open func setToDefaultCustomBarWithBackButton(viewTitle: String,
+                                                  _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         

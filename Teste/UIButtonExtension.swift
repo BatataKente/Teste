@@ -187,15 +187,9 @@ extension UIButton {
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
-        else {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
+        self.constraintInsideTo(.height,
+                                superview?.safeAreaLayoutGuide,
+                                multiplier: CGFloat(0.04).generateSizeForScreen)
+        self.constraintOutsideTo(.width, self)
     }
 }

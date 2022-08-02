@@ -73,15 +73,11 @@ extension UIImageView {
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.045)
-            self.constraintInsideTo(.width, superview?.safeAreaLayoutGuide, multiplier: 0.20)
-        }
-        else {
-
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.constraintInsideTo(.width, superview?.safeAreaLayoutGuide, multiplier: 0.3)
-        }
+        self.constraintInsideTo(.height,
+                                superview?.safeAreaLayoutGuide,
+                                multiplier: CGFloat(0.045).generateSizeForScreen)
+        self.constraintInsideTo(.width,
+                                superview?.safeAreaLayoutGuide,
+                                multiplier: CGFloat(0.20).generateSizeForScreen)
     }
 }

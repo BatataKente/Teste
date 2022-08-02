@@ -11,10 +11,6 @@ class NomeView: UIViewController {
     
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
-    private let backButton = UIButton()
-    
-    private let bravveIcon = UIImageView()
-    
     private let registerButton = UIButton()
     
     private lazy var progressBarStackView: (stack: UIStackView,
@@ -156,7 +152,9 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
+        view.addSubviews(ways + [progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
+        
+        createRegisterCustomBar()
         
         view.setToDefaultBackgroundColor()
     }
@@ -164,8 +162,6 @@ class NomeView: UIViewController {
     private func setupDefaults() {
         
         registerButton.setToBottomButtonKeyboardDefault()
-        bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink)
         ways[2].setWayToDefault(.wayConfirm)
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
@@ -173,13 +169,13 @@ class NomeView: UIViewController {
     
     private func setupConstraints() {
             
-        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
+        progressBarStackView.stack.constraintOutsideTo(.bottom, infoLabel, 70)
         
-        infoLabel.constraintOutsideTo(.top, progressBarStackView.stack, 50)
         infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
         infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
+        infoLabel.constraintOutsideTo(.bottom, registerStackView, 70)
         
         registerStackView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 50)
         registerStackView.constraintInsideTo(.leading, infoLabel)
@@ -202,9 +198,6 @@ class NomeView: UIViewController {
             self.viewElements.ddiChoseLabel.text = action.title
         }))
         
-        backButton.addTarget(self,
-                             action: #selector(back),
-                             for: .touchUpInside)
         progressBarStackView.buttons[0].addTarget(self,
                                                     action: #selector(progressBarAction),
                                                     for: .touchUpInside)
