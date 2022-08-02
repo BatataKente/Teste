@@ -20,9 +20,9 @@ class ReservaCell: UITableViewCell {
     let typeTagLabel: UILabel = {
         let label = UILabel()
         label.text = "BOXOFFICE"
-        label.backgroundColor = UIColor(named: "boxOffice")
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Light", size: 13)
+        label.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,8 +31,8 @@ class ReservaCell: UITableViewCell {
     let topTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Numa esquina"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 20)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,15 +40,15 @@ class ReservaCell: UITableViewCell {
     let bottomTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "charmosa, um hotel"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 20)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let spaceImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "imageReservs")
+        imageView.image = UIImage(named: ImagesBravve.imageReservs_1.rawValue)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -57,8 +57,8 @@ class ReservaCell: UITableViewCell {
     let spaceNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hotel Saint"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Bold", size: 20)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -66,9 +66,9 @@ class ReservaCell: UITableViewCell {
     let reservedLabel: UILabel = {
         let label = UILabel()
         label.text = "RESERVADO"
-        label.backgroundColor = UIColor(named: "reserved")
+        label.backgroundColor = UIColor(named: ColorsBravve.reserved.rawValue)
         label.textColor = .white
-        label.font = UIFont(name: "Ubuntu-Light", size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -77,8 +77,8 @@ class ReservaCell: UITableViewCell {
     let spaceSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "UM Coffee Co."
-        label.textColor = UIColor(named: "label")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 12)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -86,8 +86,8 @@ class ReservaCell: UITableViewCell {
     let locationLabel: UILabel = {
         let label = UILabel()
         label.text = "São Paulo / Jardim Paulistano"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Light", size: 13)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -95,8 +95,8 @@ class ReservaCell: UITableViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "21/01/2022 - 22/01/2022"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Light", size: 13)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -104,8 +104,8 @@ class ReservaCell: UITableViewCell {
     let hourLabel: UILabel = {
         let label = UILabel()
         label.text = "9h às 18h"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Light", size: 13)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -113,8 +113,8 @@ class ReservaCell: UITableViewCell {
     let spaceTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "Espaço privativo"
-        label.textColor = UIColor(named: "blueNav")
-        label.font = UIFont(name: "Ubuntu-Light", size: 13)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -129,7 +129,7 @@ class ReservaCell: UITableViewCell {
     
     let arrowButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "arrowPink"), for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -137,7 +137,7 @@ class ReservaCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = UIColor(named: "background")
+        contentView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         cellView.addSubviews([typeTagLabel, topTitleLabel, bottomTitleLabel, spaceImage, spaceNameLabel, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
         
