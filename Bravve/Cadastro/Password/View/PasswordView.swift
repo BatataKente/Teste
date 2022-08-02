@@ -11,7 +11,7 @@ class PasswordView: UIViewController{
     
     let backWay: UIImageView = {
         let image = UIImageView()
-        image.setWayToDefault("wayPassword")
+        image.setWayToDefault(.wayPassword)
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
