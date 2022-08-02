@@ -1,8 +1,8 @@
 //
-//  HomeAbertaCollectionViewCell.swift
-//  Teste
+//  NomeView.swift
+//  Bravve
 //
-//  Created by Josicleison on 24/07/22.
+//  Created by user218260 on 7/15/22.
 //
 
 import UIKit

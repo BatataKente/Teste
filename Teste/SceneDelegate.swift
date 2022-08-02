@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let vc1 = ConfirmarDadosView()
+        let vc1 = HomeAbertaView()
         vc1.tabBarItem.image = UIImage(named: "locationGray")
 
         let vc2 = NomeView()
@@ -63,7 +63,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
