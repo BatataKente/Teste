@@ -36,7 +36,6 @@ class DetalhesDoEspacoView: UIViewController {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 8
-//        view.layer.shadowOffset
         
         let photoCollectionView = UICollectionView(frame: self.view.frame,
                                                    collectionViewLayout: collectionViewFlowLayout)
@@ -111,9 +110,7 @@ class DetalhesDoEspacoView: UIViewController {
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço") { _ in
             
-            let homeAbertaView = HomeAbertaView()
-            homeAbertaView.modalPresentationStyle = .fullScreen
-            self.present(homeAbertaView, animated: false)
+            self.dismiss(animated: true)
         }
         
         reserveButton.setToBottomButtonKeyboardDefault("Reservar")

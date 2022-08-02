@@ -168,7 +168,7 @@ class ConfirmarDadosView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "WhiteBrave")
+        view.setToDefaultBackgroundColor()
         
         addSubviews()
         addConstraints()
@@ -199,9 +199,9 @@ class ConfirmarDadosView: UIViewController {
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault("backButtonPink")
+        buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
-        backgroundImage2.setWayToDefault("way4")
+        backgroundImage2.setWayToDefault(.wayEmail)
         
         NSLayoutConstraint.activate([
         

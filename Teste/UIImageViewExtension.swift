@@ -10,52 +10,52 @@ import UIKit
 //Extensions related to set imageViews to Default
 extension UIImageView {
     
-    open func setWayToDefault(_ imageName: String) {
+    open func setWayToDefault(_ imageName: ImagesBravve) {
         
         switch imageName {
             
-            case "wayCell":
+            case ImagesBravve.wayCell:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case "wayConfirm":
+            case ImagesBravve.wayConfirm:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
             self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         
-            case "wayEmail":
+            case ImagesBravve.wayEmail:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case "wayPassword":
+            case ImagesBravve.wayPassword:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(110)
                 self.widthAnchorInSuperview(280)
             
-            case "wayReserv2":
+            case ImagesBravve.wayReserv_1:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(140)
                 self.widthAnchorInSuperview(150)
             
-            case "wayReserv":
+            case ImagesBravve.wayReserv_2:
             
-                self.image = UIImage(named: imageName)
+                self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide)
@@ -66,9 +66,9 @@ extension UIImageView {
         }
     }
     
-    open func setLogoToDefault(_ ImageName: String = "logoBlue") {
+    open func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
         
-        self.image = UIImage(named: ImageName)
+        self.image = UIImage(named: ImageName.rawValue)
         
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
