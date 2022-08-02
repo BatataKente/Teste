@@ -194,7 +194,7 @@ class ConfirmarDadosView: UIViewController {
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault("backPink")
+        buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
         
         NSLayoutConstraint.activate([
