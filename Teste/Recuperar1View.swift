@@ -20,8 +20,8 @@ class Recuperar1View: UIViewController {
                                             buttons: [UIButton]) = {
         
         let buttons = createProgressBarButtons([
-                                                "emailBlue",
-                                                "padlockGray"
+                                                IconsBravve.emailBlue.rawValue,
+                                                IconsBravve.padlockGray.rawValue
                                                 ])
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = 7
@@ -34,8 +34,8 @@ class Recuperar1View: UIViewController {
         let label = UILabel()
         label.text = "Informe seu e-mail para enviarmos um código de confirmação!"
         label.textAlignment = .center
-        label.font = UIFont(name: "Ubuntu-Light", size: 16)
-        label.textColor = UIColor(named: "label")
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,8 +43,8 @@ class Recuperar1View: UIViewController {
     
     let textFieldEmail: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        textField.textColor = UIColor(named: "label")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue, size: 16)
+        textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
         textField.backgroundColor = .white
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -54,8 +54,8 @@ class Recuperar1View: UIViewController {
     let labelEmail_: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.textColor = UIColor(named: "labelTextField")
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +67,7 @@ class Recuperar1View: UIViewController {
         stackView.spacing = 10
         stackView.axis = .vertical
         stackView.backgroundColor = .white
-        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,7 @@ class Recuperar1View: UIViewController {
     let customShaddow: UIView = {
              
              let customShaddow = UIView()
-             customShaddow.backgroundColor = UIColor(named: "blueNav")
+        customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
              customShaddow.layer.cornerRadius = 8
              customShaddow.isHidden = true
              
@@ -111,8 +111,6 @@ class Recuperar1View: UIViewController {
         backgroundImage.setWayToDefault(.wayCell)
         
         NSLayoutConstraint.activate([
-            
-          
             
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
@@ -154,7 +152,7 @@ class Recuperar1View: UIViewController {
     
     @objc func stackViewTapped() {
           
-        labelEmail_.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        labelEmail_.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
                 
         customShaddow.isHidden = false
         
@@ -178,7 +176,7 @@ class Recuperar1View: UIViewController {
         
         buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
         
-        buttonContinue.backgroundColor = UIColor(named: "buttonGray")
+        buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
     }
 
 
@@ -187,12 +185,12 @@ class Recuperar1View: UIViewController {
            if sender.text != "" {
 
                buttonContinue.addTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: "buttonPink")
+               buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
            }
            else {
                
                buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: "buttonGray")
+               buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
            }
        }
 
