@@ -1,8 +1,8 @@
 //
-//  ExtensionUIButton.swift
+//  ExtensionUIView.swift
 //  Bravve
 //
-//  Created by Josicleison on 28/07/22.
+//  Created by Evandro Rodrigo Minamoto on 28/07/22.
 //
 
 import UIKit
@@ -140,13 +140,21 @@ extension UIButton {
     open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar") {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
         self.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
+        
+        if isIpad() {
+            
+            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 25)
+        }
+        else {
+            
+            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        }
     }
     
     open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
@@ -154,13 +162,21 @@ extension UIButton {
                                        aboveWhom: Any?) {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
         self.backgroundColor = UIColor(named: colorName.rawValue)
         
         self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, aboveWhom)
+        
+        if isIpad() {
+            
+            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 25)
+        }
+        else {
+            
+            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        }
     }
     
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,

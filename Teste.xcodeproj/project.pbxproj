@@ -13,13 +13,19 @@
 		138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AD2892BE2800997FBC /* MinhasReservas.swift */; };
 		138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AF2892BF4200997FBC /* ReservaCell.swift */; };
 		13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */; };
+		14054CFA28988506009518D5 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 14054CF928988506009518D5 /* Fonts */; };
 		1415AB76288B07100077CE08 /* HomeAbertaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeAbertaView.swift */; };
 		145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */; };
 		145663C8288D73C500852049 /* HomeAbertaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* HomeAbertaCollectionViewCell.swift */; };
+		1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */; };
+		1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */; };
+		1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */; };
+		1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */; };
+		1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */; };
+		1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22428995EFE00B409E5 /* RideUpEnum.swift */; };
 		147AC2EE2891AB9B00ABE48E /* DetalhesDoEspacoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* DetalhesDoEspacoView.swift */; };
 		147B1C862898482100A5E3EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147B1C852898482100A5E3EE /* Assets.xcassets */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
-		14AA1CF32897FCDE008CCC31 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF22897FCDE008CCC31 /* UIFontExtension.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
 		14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */; };
 		14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954328944A2E00BD3B79 /* UILabelExtension.swift */; };
@@ -35,11 +41,6 @@
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
-		5F116AEB28904D0400685DDC /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F116AE628904D0400685DDC /* Ubuntu-Medium.ttf */; };
-		5F116AEC28904D0400685DDC /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F116AE728904D0400685DDC /* Ubuntu-Regular.ttf */; };
-		5F116AED28904D0400685DDC /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F116AE828904D0400685DDC /* Ubuntu-Bold.ttf */; };
-		5F116AEE28904D0400685DDC /* KoHo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F116AE928904D0400685DDC /* KoHo-Bold.ttf */; };
-		5F116AEF28904D0400685DDC /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F116AEA28904D0400685DDC /* Ubuntu-Light.ttf */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,13 +51,19 @@
 		138C85AD2892BE2800997FBC /* MinhasReservas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinhasReservas.swift; sourceTree = "<group>"; };
 		138C85AF2892BF4200997FBC /* ReservaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaCell.swift; sourceTree = "<group>"; };
 		13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosView.swift; sourceTree = "<group>"; };
+		14054CF928988506009518D5 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeAbertaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* HomeAbertaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaCollectionViewCell.swift; sourceTree = "<group>"; };
+		1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesBravveEnum.swift; sourceTree = "<group>"; };
+		1478A22428995EFE00B409E5 /* RideUpEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUpEnum.swift; sourceTree = "<group>"; };
 		147AC2ED2891AB9B00ABE48E /* DetalhesDoEspacoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesDoEspacoView.swift; sourceTree = "<group>"; };
 		147B1C852898482100A5E3EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
-		14AA1CF22897FCDE008CCC31 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		14C6954328944A2E00BD3B79 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
@@ -74,11 +81,6 @@
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
-		5F116AE628904D0400685DDC /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
-		5F116AE728904D0400685DDC /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
-		5F116AE828904D0400685DDC /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
-		5F116AE928904D0400685DDC /* KoHo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoHo-Bold.ttf"; sourceTree = "<group>"; };
-		5F116AEA28904D0400685DDC /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,14 +114,19 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */,
+				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
+				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
+				1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */,
+				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
+				1478A22428995EFE00B409E5 /* RideUpEnum.swift */,
+				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
 				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
 				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
 				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
 				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
 				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
-				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
 				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
-				14AA1CF22897FCDE008CCC31 /* UIFontExtension.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
@@ -142,21 +149,9 @@
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
 				14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */,
 				14CBDBD32889B72500EA8EDD /* Info.plist */,
-				5F116AE528904D0400685DDC /* Fonts */,
+				14054CF928988506009518D5 /* Fonts */,
 			);
 			path = Teste;
-			sourceTree = "<group>";
-		};
-		5F116AE528904D0400685DDC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				5F116AE628904D0400685DDC /* Ubuntu-Medium.ttf */,
-				5F116AE728904D0400685DDC /* Ubuntu-Regular.ttf */,
-				5F116AE828904D0400685DDC /* Ubuntu-Bold.ttf */,
-				5F116AE928904D0400685DDC /* KoHo-Bold.ttf */,
-				5F116AEA28904D0400685DDC /* Ubuntu-Light.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,14 +212,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F116AEE28904D0400685DDC /* KoHo-Bold.ttf in Resources */,
 				14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */,
-				5F116AED28904D0400685DDC /* Ubuntu-Bold.ttf in Resources */,
-				5F116AEF28904D0400685DDC /* Ubuntu-Light.ttf in Resources */,
-				5F116AEB28904D0400685DDC /* Ubuntu-Medium.ttf in Resources */,
-				5F116AEC28904D0400685DDC /* Ubuntu-Regular.ttf in Resources */,
 				147B1C862898482100A5E3EE /* Assets.xcassets in Resources */,
 				14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */,
+				14054CFA28988506009518D5 /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,17 +228,20 @@
 			files = (
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
+				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
+				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
+				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
 				145663C8288D73C500852049 /* HomeAbertaCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
+				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */,
-				14AA1CF32897FCDE008CCC31 /* UIFontExtension.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
@@ -256,10 +250,12 @@
 				147AC2EE2891AB9B00ABE48E /* DetalhesDoEspacoView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */,
+				1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
+				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

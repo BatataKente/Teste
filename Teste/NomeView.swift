@@ -46,7 +46,7 @@ class NomeView: UIViewController {
     private let customShaddow: UIView = {
         
         let customShaddow = UIView()
-        customShaddow.backgroundColor = .blue
+        customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
         
@@ -69,8 +69,8 @@ class NomeView: UIViewController {
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
         
-        print(generateFontSizeWithView())
-        ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: generateFontSizeWithView())
+        ddiChoseLabel.font = UIFont(name: FontsBravve.medium.rawValue,
+                                    size: CGFloat(15).generateSizeForScreen)
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
         stackView.spacing = 10
@@ -91,7 +91,8 @@ class NomeView: UIViewController {
         
         let rightTextField = UITextField()
         
-        rightTextField.font = UIFont(name: "Ubuntu-Bold", size: 20)
+        rightTextField.font = UIFont(name: FontsBravve.bold.rawValue,
+                                     size: CGFloat(20).generateSizeForScreen)
         
         let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
                                                             rightTextField])
@@ -165,9 +166,9 @@ class NomeView: UIViewController {
         registerButton.setToBottomButtonKeyboardDefault()
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink)
-        ways[0].setWayToDefault("way3")
-        ways[1].setWayToDefault("way1")
-        ways[2].setWayToDefault("way4")
+        ways[2].setWayToDefault(.wayConfirm)
+        ways[0].setWayToDefault(.wayEmail)
+        ways[1].setWayToDefault(.wayCell)
     }
     
     private func setupConstraints() {
