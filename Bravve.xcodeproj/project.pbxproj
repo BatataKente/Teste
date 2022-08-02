@@ -267,44 +267,44 @@
 			path = CancelReservationCell;
 			sourceTree = "<group>";
 		};
-		14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */ = {
+		14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */ = {
 			isa = PBXGroup;
 			children = (
 				14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */,
 			);
-			path = ExtensionUIViewController;
+			path = UIViewControllerExtension;
 			sourceTree = "<group>";
 		};
-		14076BE028930BE2003EA2F1 /* ExtensionUIButton */ = {
+		14076BE028930BE2003EA2F1 /* UIButtonExtension */ = {
 			isa = PBXGroup;
 			children = (
 				14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */,
 			);
-			path = ExtensionUIButton;
+			path = UIButtonExtension;
 			sourceTree = "<group>";
 		};
-		14076BE328930CAD003EA2F1 /* ExtensionUILabel */ = {
+		14076BE328930CAD003EA2F1 /* UILabelExtension */ = {
 			isa = PBXGroup;
 			children = (
 				14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */,
 			);
-			path = ExtensionUILabel;
+			path = UILabelExtension;
 			sourceTree = "<group>";
 		};
-		14076BE628930CDD003EA2F1 /* ExtensionUIImageView */ = {
+		14076BE628930CDD003EA2F1 /* UIImageViewExtension */ = {
 			isa = PBXGroup;
 			children = (
 				14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */,
 			);
-			path = ExtensionUIImageView;
+			path = UIImageViewExtension;
 			sourceTree = "<group>";
 		};
-		14076BE928930DD1003EA2F1 /* ExtensionUIStackView */ = {
+		14076BE928930DD1003EA2F1 /* UIStackViewExtension */ = {
 			isa = PBXGroup;
 			children = (
 				14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */,
 			);
-			path = ExtensionUIStackView;
+			path = UIStackViewExtension;
 			sourceTree = "<group>";
 		};
 		1478A2262899651D00B409E5 /* Enums */ = {
@@ -519,12 +519,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2EF23F4628931B540078B6B8 /* ExtensionUIView */ = {
+		2EF23F4628931B540078B6B8 /* UIViewExtension */ = {
 			isa = PBXGroup;
 			children = (
 				2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */,
 			);
-			path = ExtensionUIView;
+			path = UIViewExtension;
 			sourceTree = "<group>";
 		};
 		5F3B695B2891851E00E77D2D /* Fonts */ = {
@@ -1219,12 +1219,12 @@
 		C69617482881EBA000281633 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2EF23F4628931B540078B6B8 /* ExtensionUIView */,
-				14076BE928930DD1003EA2F1 /* ExtensionUIStackView */,
-				14076BE628930CDD003EA2F1 /* ExtensionUIImageView */,
-				14076BE328930CAD003EA2F1 /* ExtensionUILabel */,
-				14076BE028930BE2003EA2F1 /* ExtensionUIButton */,
-				14076BDD28930B0C003EA2F1 /* ExtensionUIViewController */,
+				2EF23F4628931B540078B6B8 /* UIViewExtension */,
+				14076BE928930DD1003EA2F1 /* UIStackViewExtension */,
+				14076BE628930CDD003EA2F1 /* UIImageViewExtension */,
+				14076BE328930CAD003EA2F1 /* UILabelExtension */,
+				14076BE028930BE2003EA2F1 /* UIButtonExtension */,
+				14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
