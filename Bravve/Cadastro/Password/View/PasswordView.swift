@@ -18,7 +18,7 @@ class PasswordView: UIViewController{
     
     let goBackButton: UIButton = {
         let button = UIButton()
-        button.setToBackButtonDefault(.backPink, 32.76)
+        button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -45,7 +45,7 @@ class PasswordView: UIViewController{
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Agora escolha uma senha de sua preferência."
-        label.font = UIFont(name: "Ubuntu-Regular", size: 16)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -55,7 +55,7 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "Senha"
         label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
-        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
@@ -105,7 +105,7 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "Repita a senha"
         label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
-        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
@@ -158,7 +158,7 @@ class PasswordView: UIViewController{
     let numberCharLabel: UILabel = {
         let label = UILabel()
         label.text = "No mínimo 6 caracteres"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -172,7 +172,7 @@ class PasswordView: UIViewController{
     let upperCaseLabel: UILabel = {
         let label = UILabel()
         label.text = "1 letra maiúscula"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -186,7 +186,7 @@ class PasswordView: UIViewController{
     let lowerCaseLabel: UILabel = {
         let label = UILabel()
         label.text = "1 letra minúscula"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -200,7 +200,7 @@ class PasswordView: UIViewController{
     let numberLabel: UILabel = {
         let label = UILabel()
         label.text = "1 digito numérico"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -214,7 +214,7 @@ class PasswordView: UIViewController{
     let specialCharLabel: UILabel = {
         let label = UILabel()
         label.text = "1 caractere especial"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -228,7 +228,7 @@ class PasswordView: UIViewController{
     let samePasswordLabel: UILabel = {
         let label = UILabel()
         label.text = "Senhas coincidem"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -457,14 +457,14 @@ class PasswordView: UIViewController{
     }
     
     @objc func confirmStackViewTapped() {
-        confirmPasswordTFLabel.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        confirmPasswordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         confirmPasswordTextField.addTarget(self, action: #selector(confirmChangeText), for: .editingChanged)
         confirmCustomShadow.isHidden = false
         confirmPasswordTextField.isHidden = false
     }
     
     @objc func stackViewTapped() {
-        passwordTFLabel.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        passwordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         passwordTextField.addTarget(self, action: #selector(changeText), for: .editingChanged)
         passwordCustomShadow.isHidden = false
         passwordTextField.isHidden = false
