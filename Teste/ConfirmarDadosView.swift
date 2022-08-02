@@ -12,12 +12,18 @@ class ConfirmarDadosView: UIViewController {
     
     let backgroundImage1: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "way1")
+        image.image = UIImage(named: "wayCell")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
-    let backgroundImage2 = UIImageView()
+    let backgroundImage2: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "wayConfirm")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
     
     let buttonBack = UIButton()
     
@@ -45,7 +51,7 @@ class ConfirmarDadosView: UIViewController {
         label.text = "Bravo! Que tal revisar suas informações, aqui você pode alterá-las!"
         label.textAlignment = .center
         label.font = UIFont(name: "Ubuntu-Light", size: 16)
-        label.textColor = UIColor(named: "BlueBravve")
+        label.textColor = UIColor(named: "label")
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -53,7 +59,7 @@ class ConfirmarDadosView: UIViewController {
     
     let contentView: UIView = {
       let view = UIView()
-      view.backgroundColor = UIColor(named: "WhiteBrave")
+      view.backgroundColor = UIColor(named: "background")
       view.translatesAutoresizingMaskIntoConstraints = false
       return view
     }()
@@ -61,7 +67,7 @@ class ConfirmarDadosView: UIViewController {
     let labelName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        label.textColor = UIColor(named: "label")
         //label.text = "Ana Maria Silva"
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +77,7 @@ class ConfirmarDadosView: UIViewController {
     let labelCell: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        label.textColor = UIColor(named: "label")
        // label.text = "11 99686 2647"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,7 +86,7 @@ class ConfirmarDadosView: UIViewController {
     let labelEmail: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        label.textColor = UIColor(named: "label")
        // label.text = "teste@bravve.com.br"
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -108,7 +114,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +129,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +144,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +165,7 @@ class ConfirmarDadosView: UIViewController {
         button.setTitle("Continuar", for: .normal)
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        button.backgroundColor = UIColor(named: "PinkBravve")
+        button.backgroundColor = UIColor(named: "buttonPink")
         button.layer.cornerRadius = 12
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -168,9 +174,11 @@ class ConfirmarDadosView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.setToDefaultBackgroundColor()
+        view.backgroundColor = UIColor(named: "background")
         
-        addSubviews()
+        view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, contentView])
+        contentView.addSubviews([backgroundImage1, stackViewLabels, buttonContinue])
+        
         addConstraints()
         addTargets()
       
@@ -179,29 +187,15 @@ class ConfirmarDadosView: UIViewController {
     
     func myButton() -> UIButton {
         let button = UIButton()
-        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.setImage(UIImage(named: "edit-blue"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
     
-    func addSubviews() {
-        
-        contentView.addSubview(backgroundImage1)
-        view.addSubview(backgroundImage2)
-        view.addSubview(buttonBack)
-        view.addSubview(imageLogo)
-        view.addSubview(progressBarStackView.stack)
-        view.addSubview(label)
-        contentView.addSubview(stackViewLabels)
-        contentView.addSubview(buttonContinue)
-        view.addSubview(contentView)
-    }
-    
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault(.backPink)
+        buttonBack.setToBackButtonDefault("backPink")
         imageLogo.setLogoToDefault()
-        backgroundImage2.setWayToDefault(.wayEmail)
         
         NSLayoutConstraint.activate([
         
@@ -241,6 +235,11 @@ class ConfirmarDadosView: UIViewController {
         
         backgroundImage1.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide)
         backgroundImage1.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, -60)
+        
+        backgroundImage2.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        backgroundImage2.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        backgroundImage2.heightAnchorInSuperview(130)
+        backgroundImage2.widthAnchorInSuperview(280)
     }
     
     func addTargets() {
@@ -300,3 +299,4 @@ class ConfirmarDadosView: UIViewController {
         print("tela email")
     }
 }
+

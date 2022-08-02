@@ -35,7 +35,7 @@ class Recuperar1View: UIViewController {
         label.text = "Informe seu e-mail para enviarmos um código de confirmação!"
         label.textAlignment = .center
         label.font = UIFont(name: "Ubuntu-Light", size: 16)
-        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        label.textColor = UIColor(named: "label")
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -44,7 +44,7 @@ class Recuperar1View: UIViewController {
     let textFieldEmail: UITextField = {
         let textField = UITextField()
         textField.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        textField.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.16, alpha: 1.0)
+        textField.textColor = UIColor(named: "label")
         textField.backgroundColor = .white
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +55,7 @@ class Recuperar1View: UIViewController {
         let label = UILabel()
         label.text = "E-mail"
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
+        label.textColor = UIColor(named: "labelTextField")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +67,7 @@ class Recuperar1View: UIViewController {
         stackView.spacing = 10
         stackView.axis = .vertical
         stackView.backgroundColor = .white
-        stackView.layer.borderColor = CGColor(red: 0.82, green: 0.84, blue: 0.87, alpha: 1.0)
+        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,7 @@ class Recuperar1View: UIViewController {
     let customShaddow: UIView = {
              
              let customShaddow = UIView()
-             customShaddow.backgroundColor = UIColor(red: 0.03, green: 0.01, blue: 0.41, alpha: 1.0)
+             customShaddow.backgroundColor = UIColor(named: "blueNav")
              customShaddow.layer.cornerRadius = 8
              customShaddow.isHidden = true
              
@@ -95,33 +95,20 @@ class Recuperar1View: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "WhiteBrave")
+        view.backgroundColor = UIColor(named: "background")
 
-        addSubviews()
+        view.addSubviews([backgroundImage, buttonBack, imageLogo, progressBarStackView.stack, label, customShaddow, stackViewEmail, buttonContinue])
         addConstraints()
         addTargets()
 
-        
-    }
-    
-    func addSubviews() {
-        
-        view.addSubview(backgroundImage)
-        view.addSubview(buttonBack)
-        view.addSubview(imageLogo)
-        view.addSubview(progressBarStackView.stack)
-        view.addSubview(label)
-        view.addSubview(customShaddow)
-        view.addSubview(stackViewEmail)
-        view.addSubview(buttonContinue)
     }
     
     func addConstraints() {
         
-        buttonBack.setToBackButtonDefault(.backPink)
+        buttonBack.setToBackButtonDefault("backPink")
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
-        backgroundImage.setWayToDefault(.wayCell)
+        backgroundImage.setWayToDefault("wayCell")
         
         NSLayoutConstraint.activate([
             
@@ -191,7 +178,7 @@ class Recuperar1View: UIViewController {
         
         buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
         
-        buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
+        buttonContinue.backgroundColor = UIColor(named: "buttonGray")
     }
 
 
@@ -200,12 +187,12 @@ class Recuperar1View: UIViewController {
            if sender.text != "" {
 
                buttonContinue.addTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: "PinkBravve")
+               buttonContinue.backgroundColor = UIColor(named: "buttonPink")
            }
            else {
                
                buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: "GrayBravve")
+               buttonContinue.backgroundColor = UIColor(named: "buttonGray")
            }
        }
 
