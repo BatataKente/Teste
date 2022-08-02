@@ -1,5 +1,5 @@
 //
-//  HomeAbertaView.swift
+//  NomeView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -56,11 +56,6 @@ class HomeAbertaView: UIViewController {
     
     lazy var tabBar = UITabBarController()
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-    }
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -112,10 +107,12 @@ extension HomeAbertaView: UITableViewDataSource, UITableViewDelegate {
             
             if indexPath.row == 0 {
                 
-                let cell = UITableViewCell()
-                cell.textLabel?.setToDefault(text: "Espaços", .left)
+                let spaceTitleCell = UITableViewCell()
+                spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
+                spaceTitleCell.textLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                                        size: CGFloat(20).generateSizeForScreen)
                 
-                return cell
+                return spaceTitleCell
             }
             else {
                 
