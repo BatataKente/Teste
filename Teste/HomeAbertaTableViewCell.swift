@@ -1,15 +1,13 @@
 //
-//  HomeAbertaTableViewCell.swift
-//  Teste
+//  NomeView.swift
+//  Bravve
 //
-//  Created by Josicleison on 24/07/22.
+//  Created by user218260 on 7/15/22.
 //
 
 import UIKit
 
 class HomeAbertaTableViewCell: UITableViewCell {
-    
-    var delegate: HomeAbertaTableViewCellProtocol?
     
     let viewElements: (view: UIView,
                        titleLabel: UILabel,
@@ -34,14 +32,6 @@ class HomeAbertaTableViewCell: UITableViewCell {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 8
-//        view.layer.shadowOffset
-        
-        let photoView = UIImageView()
-        photoView.backgroundColor = .cyan
-        photoView.clipsToBounds = true
-        photoView.layer.cornerRadius = 12
-        
-        photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         let nameLabel = UILabel()
         nameLabel.text = "Hotel Saint"
@@ -52,6 +42,14 @@ class HomeAbertaTableViewCell: UITableViewCell {
         let detailsLabel = UILabel()
         detailsLabel.text = "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
         detailsLabel.numberOfLines = 0
+        
+        let photoView = UIImageView()
+        photoView.layer.cornerRadius = 12
+        photoView.image = UIImage(named: ImagesBravve.homeOpen.rawValue)
+        photoView.contentMode = .scaleToFill
+        
+        photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        photoView.clipsToBounds = true
         
         let detailsButton = UIButton()
         detailsButton.setImage(UIImage(named: "arrowPink"), for: .normal)
@@ -68,6 +66,8 @@ class HomeAbertaTableViewCell: UITableViewCell {
                 priceLabel: priceLabel,
                 detailsLabel: detailsLabel)
     }()
+    
+    var delegate: HomeAbertaTableViewCellProtocol?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
@@ -105,7 +105,6 @@ class HomeAbertaTableViewCell: UITableViewCell {
         viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, 20)
         viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, 20)
         viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
-//        viewElements.view.heightAnchorInSuperview(100)
         
         viewElements.titleLabel.constraintInsideTo(.top, viewElements.view)
         viewElements.titleLabel.constraintInsideTo(.leading, viewElements.view, 21)
@@ -117,15 +116,14 @@ class HomeAbertaTableViewCell: UITableViewCell {
         viewElements.photoView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
         viewElements.photoView.constraintInsideTo(.leading, viewElements.descriptionLabel)
         viewElements.photoView.constraintInsideTo(.trailing, viewElements.view)
-        viewElements.photoView.heightAnchorInSuperview(100)
         
         viewElements.nameLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
         viewElements.nameLabel.constraintInsideTo(.leading, viewElements.photoView)
         
-        viewElements.priceLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
+        viewElements.priceLabel.constraintOutsideTo(.top, viewElements.nameLabel, 23)
         viewElements.priceLabel.constraintInsideTo(.trailing, viewElements.photoView, 18)
         
-        viewElements.detailsLabel.constraintOutsideTo(.top, viewElements.nameLabel, 23)
+        viewElements.detailsLabel.constraintOutsideTo(.top, viewElements.priceLabel, 23)
         viewElements.detailsLabel.constraintInsideTo(.leading, viewElements.nameLabel, 17)
         viewElements.detailsLabel.constraintInsideTo(.bottom, viewElements.view, 33)
         
