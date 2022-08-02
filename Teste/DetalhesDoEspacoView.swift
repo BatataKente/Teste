@@ -1,8 +1,8 @@
 //
-//  DetalhesDoEspacoView.swift
-//  Teste
+//  NomeView.swift
+//  Bravve
 //
-//  Created by Josicleison on 27/07/22.
+//  Created by user218260 on 7/15/22.
 //
 
 import UIKit
@@ -110,7 +110,7 @@ class DetalhesDoEspacoView: UIViewController {
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço") { _ in
             
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
         
         reserveButton.setToBottomButtonKeyboardDefault("Reservar")
