@@ -13,5 +13,5 @@ enum FontsBravve: String {
     case regular = "Ubuntu-Regular"
     case bold = "Ubuntu-Bold"
     case koho = "KoHo-Bold"
-    case light = "Ubuntu-light"
+    case light = "Ubuntu-Light"
 }

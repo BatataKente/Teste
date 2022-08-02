@@ -57,4 +57,6 @@ enum IconsBravve: String {
     case userGray = "userGray"
     case userPink = "userPink"
     case users = "users"
+    case walletBlue = "walletBlue"
+    case walletGray = "walletGray"
 }

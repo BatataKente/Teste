@@ -114,11 +114,11 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
-				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
 				1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */,
 				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
 				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
 				1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */,
+				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
 				1478A22428995EFE00B409E5 /* RideUpEnum.swift */,
 				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
 				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
