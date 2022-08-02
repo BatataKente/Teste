@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130544D4289845180026FCE6 /* CancelReservationCell.swift */; };
-		14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */; };
-		14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */; };
-		14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */; };
-		14076BE828930CFA003EA2F1 /* ExtensionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */; };
-		14076BEB28930DE6003EA2F1 /* ExtensionUIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */; };
+		14076BDF28930B27003EA2F1 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */; };
+		14076BE228930BFB003EA2F1 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE128930BFB003EA2F1 /* UIButtonExtension.swift */; };
+		14076BE528930CC7003EA2F1 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* UILabelExtension.swift */; };
+		14076BE828930CFA003EA2F1 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */; };
+		14076BEB28930DE6003EA2F1 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */; };
 		1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */; };
 		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
 		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
@@ -34,7 +34,7 @@
 		2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10E28940FB6001C11DC /* AjudaModel.swift */; };
 		2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */; };
 		2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11228940FE3001C11DC /* AjudaView.swift */; };
-		2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */; };
+		2EF23F4828931B760078B6B8 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* UIViewExtension.swift */; };
 		5F3B69612891851E00E77D2D /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */; };
 		5F3B69622891851E00E77D2D /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */; };
 		5F3B69632891851E00E77D2D /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3B695E2891851E00E77D2D /* Ubuntu-Bold.ttf */; };
@@ -128,11 +128,11 @@
 
 /* Begin PBXFileReference section */
 		130544D4289845180026FCE6 /* CancelReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationCell.swift; sourceTree = "<group>"; };
-		14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
-		14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
-		14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUILabel.swift; sourceTree = "<group>"; };
-		14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImageView.swift; sourceTree = "<group>"; };
-		14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIStackView.swift; sourceTree = "<group>"; };
+		14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		14076BE128930BFB003EA2F1 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		14076BE428930CC7003EA2F1 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
 		1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
 		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		2ED5D10E28940FB6001C11DC /* AjudaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaModel.swift; sourceTree = "<group>"; };
 		2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaViewModel.swift; sourceTree = "<group>"; };
 		2ED5D11228940FE3001C11DC /* AjudaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaView.swift; sourceTree = "<group>"; };
-		2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
+		2EF23F4728931B760078B6B8 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		5F3B695C2891851E00E77D2D /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		5F3B695D2891851E00E77D2D /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		5F3B695E2891851E00E77D2D /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 		14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BDE28930B27003EA2F1 /* ExtensionUIViewController.swift */,
+				14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */,
 			);
 			path = UIViewControllerExtension;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 		14076BE028930BE2003EA2F1 /* UIButtonExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BE128930BFB003EA2F1 /* ExtensionUIButton.swift */,
+				14076BE128930BFB003EA2F1 /* UIButtonExtension.swift */,
 			);
 			path = UIButtonExtension;
 			sourceTree = "<group>";
@@ -286,7 +286,7 @@
 		14076BE328930CAD003EA2F1 /* UILabelExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BE428930CC7003EA2F1 /* ExtensionUILabel.swift */,
+				14076BE428930CC7003EA2F1 /* UILabelExtension.swift */,
 			);
 			path = UILabelExtension;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 		14076BE628930CDD003EA2F1 /* UIImageViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */,
+				14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */,
 			);
 			path = UIImageViewExtension;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 		14076BE928930DD1003EA2F1 /* UIStackViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */,
+				14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */,
 			);
 			path = UIStackViewExtension;
 			sourceTree = "<group>";
@@ -522,7 +522,7 @@
 		2EF23F4628931B540078B6B8 /* UIViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				2EF23F4728931B760078B6B8 /* ExtensionUIView.swift */,
+				2EF23F4728931B760078B6B8 /* UIViewExtension.swift */,
 			);
 			path = UIViewExtension;
 			sourceTree = "<group>";
@@ -1688,11 +1688,11 @@
 				C69617282881EADC00281633 /* ProfessionModel.swift in Sources */,
 				C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */,
 				C69616B52881E79E00281633 /* PasswordRecoveryPasswordViewModel.swift in Sources */,
-				14076BEB28930DE6003EA2F1 /* ExtensionUIStackView.swift in Sources */,
+				14076BEB28930DE6003EA2F1 /* UIStackViewExtension.swift in Sources */,
 				C69617A82881EF0F00281633 /* PerfilPessoalViewModel.swift in Sources */,
 				C696176F2881ECDF00281633 /* ReservaFinalizadaView.swift in Sources */,
 				C69617352881EB1F00281633 /* HobbiesViewModel.swift in Sources */,
-				14076BDF28930B27003EA2F1 /* ExtensionUIViewController.swift in Sources */,
+				14076BDF28930B27003EA2F1 /* UIViewControllerExtension.swift in Sources */,
 				C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */,
 				C69617432881EB7300281633 /* FinalizarModel.swift in Sources */,
 				C69617162881EA7C00281633 /* ConfirmDataView.swift in Sources */,
@@ -1702,12 +1702,12 @@
 				C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* PasswordRecoveryEmailViewModel.swift in Sources */,
-				14076BE228930BFB003EA2F1 /* ExtensionUIButton.swift in Sources */,
-				14076BE528930CC7003EA2F1 /* ExtensionUILabel.swift in Sources */,
+				14076BE228930BFB003EA2F1 /* UIButtonExtension.swift in Sources */,
+				14076BE528930CC7003EA2F1 /* UILabelExtension.swift in Sources */,
 				C696170F2881EA5600281633 /* SenhaView.swift in Sources */,
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
-				2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */,
+				2EF23F4828931B760078B6B8 /* UIViewExtension.swift in Sources */,
 				C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetalhesAbertoView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeAbertaView.swift in Sources */,
@@ -1722,7 +1722,7 @@
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
 				C69616CB2881E88600281633 /* HomeAbertaModel.swift in Sources */,
 				C69617802881EE1E00281633 /* CheckInModel.swift in Sources */,
-				14076BE828930CFA003EA2F1 /* ExtensionUIImageView.swift in Sources */,
+				14076BE828930CFA003EA2F1 /* UIImageViewExtension.swift in Sources */,
 				C696178D2881EE6500281633 /* CheckOutViewModel.swift in Sources */,
 				C69616C72881E80600281633 /* Recuperar4ViewModel.swift in Sources */,
 				C696173E2881EB5400281633 /* AtividadesViewModel.swift in Sources */,
