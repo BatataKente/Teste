@@ -16,6 +16,7 @@ class RecuperacaoDeSenha3: UIViewController {
     var textInsideRange = false
     var containsSpecialCharacters = false
     var containsNumericCharacters = false
+    var invalidCharacters = true
     
     let way = UIImageView()
     
@@ -28,8 +29,8 @@ class RecuperacaoDeSenha3: UIViewController {
     private lazy var progressBarStackView: (stack: UIStackView,
                                             buttons: [UIButton]) = {
         
-        let buttons = createProgressBarButtons(["emailGray",
-                                                "padlockBlue"])
+        let buttons = createProgressBarButtons([IconsBravve.emailGray.rawValue,
+                                                IconsBravve.padlockBlue.rawValue])
         buttons[1].configuration?.title = " Recuperar Senha"
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = 7
@@ -41,18 +42,18 @@ class RecuperacaoDeSenha3: UIViewController {
     let sectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Digite e confirme sua nova senha!"
-        label.font = UIFont(name: "Ubuntu-Light", size: 16)
-        label.textColor = UIColor(named: "label")
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     
-    let passwordTextFieldClass = TextField(placeHolderText: "Senha", buttonImageName: "eyeClose")
+    let passwordTextFieldClass = TextField(placeHolderText: "Senha", buttonImageName: ButtonsBravve.eyeClose.rawValue)
     lazy var passwordStackView = passwordTextFieldClass.createStackView()
     
-    let confirmPasswordTextFieldClass = TextField(placeHolderText: "Repita a Senha", buttonImageName: "eyeClose")
+    let confirmPasswordTextFieldClass = TextField(placeHolderText: "Repita a Senha", buttonImageName: ButtonsBravve.eyeClose.rawValue)
     lazy var confirmPasswordStackView = confirmPasswordTextFieldClass.createStackView()
     
     let passwordBulletPoint = BulletPoint(labelText: "No mínimo 6 caracteres")
@@ -111,8 +112,8 @@ class RecuperacaoDeSenha3: UIViewController {
     }
     
     private func setupDefaults() {
-        way.setWayToDefault("wayPassword")
-        backButton.setToBackButtonDefault("backPink")
+        way.setWayToDefault(.wayPassword)
+        backButton.setToBackButtonDefault(.backPink)
         bravveIcon.setLogoToDefault()
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }
@@ -171,7 +172,7 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         if textField == passwordTextFieldClass.textField {
             textField.resignFirstResponder()
             confirmPasswordTextFieldClass.textField.isHidden = false
-            confirmPasswordTextFieldClass.label.font = UIFont(name: "Ubuntu-Light", size: 11)
+            confirmPasswordTextFieldClass.label.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
             confirmPasswordTextFieldClass.textField.becomeFirstResponder()
             return true
         } else {
@@ -188,60 +189,60 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
             }
         
         if passwordText.isEmpty {
-            capitalizedLetterBulletPoint.label.textColor = UIColor(named: "label")
-            numericCharactersBulletPoint.label.textColor = UIColor(named: "label")
-            regularCharactersBulletPoint.label.textColor = UIColor(named: "label")
-            specialCharactersBulletPoint.label.textColor = UIColor(named: "label")
-            passwordBulletPoint.label.textColor = UIColor(named: "label")
+            capitalizedLetterBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            numericCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            regularCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            specialCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            passwordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         } else {
             
             if containsUppercasedLetters(text: passwordText) {
-                capitalizedLetterBulletPoint.label.textColor = UIColor(named: "label")
-                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                capitalizedLetterBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsUppercased = true
             } else {
-                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                capitalizedLetterBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                capitalizedLetterBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsUppercased = false
             }
             
             if (6...40).contains(passwordText.count) {
-                passwordBulletPoint.label.textColor = UIColor(named: "label")
-                passwordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                passwordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                passwordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 textInsideRange = true
             } else {
-                passwordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                passwordBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                passwordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                passwordBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 textInsideRange = false
             }
             
             if containsNumericCharacters(text: passwordText) {
-                numericCharactersBulletPoint.label.textColor = UIColor(named: "label")
-                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                numericCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsNumericCharacters = true
             } else {
-                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                numericCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                numericCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsNumericCharacters = false
             }
             
             if containsSpecialCharacters(text: passwordText) {
-                specialCharactersBulletPoint.label.textColor = UIColor(named: "label")
-                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                specialCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsSpecialCharacters = true
             } else {
-                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                specialCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                specialCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsSpecialCharacters = false
             }
             
             if containsLowercasedCharacters(text: passwordText) {
-                regularCharactersBulletPoint.label.textColor = UIColor(named: "label")
-                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                regularCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsLowercased = true
             } else {
-                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                regularCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                regularCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsLowercased = false
             }
             
@@ -264,24 +265,24 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         }
 
                     if confirmPasswordText == "" {
-                        samePasswordBulletPoint.label.textColor = UIColor(named: "label")
-                        registerButton.backgroundColor = UIColor(named: "buttonGray")
+                        samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                        registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
                     } else {
                         if confirmPasswordText == passwordTextFieldClass.textField.text {
-                            samePasswordBulletPoint.label.textColor = UIColor(named: "label")
-                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                            samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                             samePassword = true
                         } else {
-                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                            samePasswordBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                            samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                             samePassword = false
                         }
                     }
         
         if passwordOK, samePassword {
-            registerButton.backgroundColor = UIColor(named: "buttonPink")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         } else {
-            registerButton.backgroundColor = UIColor(named: "buttonGray")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         }
     }
 
@@ -290,11 +291,11 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         if passwordEyeSlash {
             passwordTextFieldClass.textField.isSecureTextEntry = true
             passwordEyeSlash = !passwordEyeSlash
-            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         } else {
             passwordTextFieldClass.textField.isSecureTextEntry = false
             passwordEyeSlash = !passwordEyeSlash
-            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
+            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
     
@@ -303,11 +304,11 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         if confirmPasswordEyeSlash {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = true
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
-            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         } else {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = false
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
-            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
+            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
 }
