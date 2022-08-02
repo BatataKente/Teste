@@ -20,6 +20,7 @@
 		1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A233289965E900B409E5 /* ImagesBravveEnum.swift */; };
 		1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A235289965F800B409E5 /* FontsBravveEnum.swift */; };
 		1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A2372899660200B409E5 /* RideUpEnum.swift */; };
+		1478A23B28996DC700B409E5 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A23A28996DC700B409E5 /* CGFloatExtension.swift */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
@@ -140,6 +141,7 @@
 		1478A233289965E900B409E5 /* ImagesBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesBravveEnum.swift; sourceTree = "<group>"; };
 		1478A235289965F800B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A2372899660200B409E5 /* RideUpEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUpEnum.swift; sourceTree = "<group>"; };
+		1478A23A28996DC700B409E5 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -366,6 +368,14 @@
 				1478A2372899660200B409E5 /* RideUpEnum.swift */,
 			);
 			path = RideUpEnum;
+			sourceTree = "<group>";
+		};
+		1478A23928996DA900B409E5 /* CGFloatExtension */ = {
+			isa = PBXGroup;
+			children = (
+				1478A23A28996DC700B409E5 /* CGFloatExtension.swift */,
+			);
+			path = CGFloatExtension;
 			sourceTree = "<group>";
 		};
 		2EAEDEE82881DEA900C88374 = {
@@ -1219,6 +1229,7 @@
 		C69617482881EBA000281633 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1478A23928996DA900B409E5 /* CGFloatExtension */,
 				2EF23F4628931B540078B6B8 /* UIViewExtension */,
 				14076BE928930DD1003EA2F1 /* UIStackViewExtension */,
 				14076BE628930CDD003EA2F1 /* UIImageViewExtension */,
@@ -1731,6 +1742,7 @@
 				1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */,
 				2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */,
 				C69616BE2881E7D100281633 /* PasswordRecoverySMSViewModel.swift in Sources */,
+				1478A23B28996DC700B409E5 /* CGFloatExtension.swift in Sources */,
 				C696179B2881EEC100281633 /* DetalhesReservaModel.swift in Sources */,
 				C69616F42881E9C600281633 /* NomeView.swift in Sources */,
 				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
