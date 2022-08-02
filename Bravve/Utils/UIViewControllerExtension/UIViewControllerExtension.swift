@@ -1,17 +1,17 @@
 //
-//  ExtensionUIViewController.swift
+//  ExtensionUIView.swift
 //  Bravve
 //
-//  Created by Josicleison on 28/07/22.
+//  Created by Evandro Rodrigo Minamoto on 28/07/22.
 //
 
 import UIKit
-
+    
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
     
     func createCapsuleButtons(_ buttonTitles: [String],
-                              _ backgroundColor: UIView.ColorsBravve = .blue) -> [UIButton] {
+                              _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -36,7 +36,7 @@ extension UIViewController {
             
             switch name{
                 
-                case UIView.IconsBravve.userGray.rawValue:
+                case IconsBravve.userGray.rawValue:
                     
                     let handler = {(action: UIAction) in
                         
@@ -48,7 +48,7 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case UIView.IconsBravve.cellGray.rawValue:
+                case IconsBravve.cellGray.rawValue:
                     
                     let handler = {(action: UIAction) in
                         
@@ -60,7 +60,7 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case UIView.IconsBravve.emailGray.rawValue:
+                case IconsBravve.emailGray.rawValue:
                     
                     let handler = {(action: UIAction) in
                         
@@ -72,11 +72,11 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case UIView.IconsBravve.padlockGray.rawValue: break
+                case IconsBravve.padlockGray.rawValue: break
 
-                case UIView.IconsBravve.pencilGray.rawValue: break
+                case IconsBravve.pencilGray.rawValue: break
                 
-                case UIView.IconsBravve.photoGray.rawValue:
+                case IconsBravve.photoGray.rawValue:
             
                     let handler = {(action: UIAction) in
                         
@@ -88,15 +88,15 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
 
-                case UIView.IconsBravve.noteGray.rawValue: break
+                case IconsBravve.noteGray.rawValue: break
 
-                case UIView.IconsBravve.hobbiesGray.rawValue: break
+                case IconsBravve.hobbiesGray.rawValue: break
 
-                case UIView.IconsBravve.activiesGray.rawValue: break
+                case IconsBravve.activiesGray.rawValue: break
                 
-                case UIView.IconsBravve.calendarGray.rawValue: break
+                case IconsBravve.calendarGray.rawValue: break
                     
-                case UIView.IconsBravve.creditGray.rawValue: break
+                case IconsBravve.creditGray.rawValue: break
                 
                 default: break
             }
@@ -107,19 +107,6 @@ extension UIViewController {
         }
         
         return buttons
-    }
-}
-
-//Extension related to verification of size of screen on ViewController
-extension UIViewController {
-    
-    open func isIpad() -> Bool {
-        
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
-            return true
-        }
-        return false
     }
 }
 

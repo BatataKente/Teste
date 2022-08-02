@@ -85,8 +85,8 @@ class FotoView: UIViewController {
     
     private func setupDefaults() {
         
-        firstWay.setWayToDefault("way4")
-        secondWay.setWayToDefault("way1")
+        firstWay.setWayToDefault(.wayConfirm)
+        secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink)
         registerButton.setToButtonDefault(jumpButton, 20)

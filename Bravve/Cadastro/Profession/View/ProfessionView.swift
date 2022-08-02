@@ -141,7 +141,7 @@ class ProfessionView: UIViewController {
                                     progressBarStackView,
                                     backgroundImageView])
         
-        backgroundImageView.setWayToDefault("way2")
+        backgroundImageView.setWayToDefault(.wayCell)
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault()
         
