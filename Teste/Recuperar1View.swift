@@ -34,7 +34,7 @@ class Recuperar1View: UIViewController {
         let label = UILabel()
         label.text = "Informe seu e-mail para enviarmos um código de confirmação!"
         label.textAlignment = .center
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class Recuperar1View: UIViewController {
     
     let textFieldEmail: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont(name: FontsBravve.medium.rawValue, size: 16)
+        textField.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
         textField.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         textField.isHidden = true
@@ -54,7 +54,7 @@ class Recuperar1View: UIViewController {
     let labelEmail_: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -68,8 +68,8 @@ class Recuperar1View: UIViewController {
         stackView.axis = .vertical
         stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        stackView.layer.borderWidth = 1
-        stackView.layer.cornerRadius = 8
+        stackView.layer.borderWidth = CGFloat(1).generateSizeForScreen
+        stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
@@ -84,7 +84,7 @@ class Recuperar1View: UIViewController {
              
         let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        customShaddow.layer.cornerRadius = 8
+        customShaddow.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         customShaddow.isHidden = true
         
         return customShaddow
@@ -113,33 +113,28 @@ class Recuperar1View: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            label.topAnchor.constraint(equalTo: progressBarStackView.stack.bottomAnchor, constant: 50),
-                        
-            stackViewEmail.heightAnchor.constraint(equalToConstant: 65),
-            
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
+            label.topAnchor.constraint(equalTo: progressBarStackView.stack.bottomAnchor, constant: CGFloat(50).generateSizeForScreen),
+                                    
         ])
         
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, 50)
+        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
-        stackViewEmail.constraintOutsideTo(.top, label, 70)
+       /* stackViewEmail.constraintOutsideTo(.top, label, CGFloat(65).generateSizeForScreen)
+        stackViewEmail.constraintInsideTo(.leading, label)
+        stackViewEmail.constraintInsideTo(.trailing, label)*/
+        stackViewEmail.constraintOutsideTo(.top, label, 50)
         stackViewEmail.constraintInsideTo(.leading, label)
         stackViewEmail.constraintInsideTo(.trailing, label)
+        stackViewEmail.heightAnchorInSuperview(65)
         
         customShaddow.constraintInsideTo(.top, stackViewEmail)
         customShaddow.constraintInsideTo(.leading, stackViewEmail)
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
-        
-        view.addConstraint(NSLayoutConstraint(item: customShaddow,
-                                              attribute: .bottom,
-                                              relatedBy: .equal,
-                                              toItem: stackViewEmail,
-                                              attribute: .bottom,
-                                              multiplier: 1,
-                                              constant: 1))
+        customShaddow.constraintTo(.bottom, stackViewEmail, 1)
         
     }
     
@@ -153,7 +148,7 @@ class Recuperar1View: UIViewController {
     
     @objc func stackViewTapped() {
           
-        labelEmail_.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        labelEmail_.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
                 
         customShaddow.isHidden = false
         
@@ -198,4 +193,5 @@ class Recuperar1View: UIViewController {
     
     
 }
+
 
