@@ -1,10 +1,3 @@
-//
-//  TextField.swift
-//  Teste
-//
-//  Created by user208023 on 7/26/22.
-//
-
 import UIKit
 
 class TextField: UIStackView {
@@ -14,6 +7,7 @@ class TextField: UIStackView {
     var buttonImageName: String
     var textField = UITextField()
     var textFieldButton = UIButton()
+    var shadow = UIView()
     
     init(placeHolderText labelText: String, buttonImageName: String = "", frame: CGRect = .zero) {
         
@@ -30,7 +24,7 @@ class TextField: UIStackView {
     func createStackView() -> UIStackView {
         
         label.text = self.labelText
-        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        label.textColor = UIColor(named: "labelTextField")
         label.font = UIFont(name: "Ubuntu-Light", size: 15)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
@@ -40,12 +34,16 @@ class TextField: UIStackView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.isSecureTextEntry = true
         
+        shadow.backgroundColor = .blue
+        shadow.layer.cornerRadius = 8
+        shadow.isHidden = true
+        
         
         
         if buttonImageName != "" {
             
             textFieldButton.setImage(UIImage(named: buttonImageName), for: .normal)
-            textFieldButton.tintColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+            textFieldButton.tintColor = UIColor(named: "blueNav")
             
             
             let textFieldStackView: UIStackView = {
@@ -62,7 +60,7 @@ class TextField: UIStackView {
                 stackView.isLayoutMarginsRelativeArrangement = true
                 stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 stackView.layer.borderWidth = 1
-                stackView.layer.borderColor = UIColor(red: 0.816, green: 0.835, blue: 0.867, alpha: 1).cgColor
+                stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
                 stackView.translatesAutoresizingMaskIntoConstraints = false
                 stackView.distribution = .equalCentering
                 return stackView
@@ -81,7 +79,7 @@ class TextField: UIStackView {
                 stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 stackView.axis = .vertical
                 stackView.layer.borderWidth = 1
-                stackView.layer.borderColor = UIColor(red: 0.816, green: 0.835, blue: 0.867, alpha: 1).cgColor
+                stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
                 stackView.translatesAutoresizingMaskIntoConstraints = false
                 stackView.distribution = .equalCentering
                 return stackView
@@ -97,6 +95,7 @@ class TextField: UIStackView {
     
     @objc func textFieldStackViewTapped() {
         textField.isHidden = false
+        shadow.isHidden = false
         label.font = (UIFont(name: "Ubuntu-Light", size: 11))
         textField.becomeFirstResponder()
     }
