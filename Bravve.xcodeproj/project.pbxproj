@@ -14,6 +14,12 @@
 		14076BE828930CFA003EA2F1 /* ExtensionUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */; };
 		14076BEB28930DE6003EA2F1 /* ExtensionUIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */; };
 		1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */; };
+		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
+		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
+		1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A231289965DE00B409E5 /* IconsBravveEnum.swift */; };
+		1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A233289965E900B409E5 /* ImagesBravveEnum.swift */; };
+		1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A235289965F800B409E5 /* FontsBravveEnum.swift */; };
+		1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A2372899660200B409E5 /* RideUpEnum.swift */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
@@ -128,6 +134,12 @@
 		14076BE728930CFA003EA2F1 /* ExtensionUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImageView.swift; sourceTree = "<group>"; };
 		14076BEA28930DE6003EA2F1 /* ExtensionUIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIStackView.swift; sourceTree = "<group>"; };
 		1416C28928941BFA00FCE10E /* HomeAbertaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAbertaTableViewCell.swift; sourceTree = "<group>"; };
+		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A231289965DE00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A233289965E900B409E5 /* ImagesBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesBravveEnum.swift; sourceTree = "<group>"; };
+		1478A235289965F800B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
+		1478A2372899660200B409E5 /* RideUpEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUpEnum.swift; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -295,6 +307,67 @@
 			path = ExtensionUIStackView;
 			sourceTree = "<group>";
 		};
+		1478A2262899651D00B409E5 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1478A2272899654A00B409E5 /* ButtonsBravveEnum */,
+				1478A2282899655300B409E5 /* ColorsBravveEnum */,
+				1478A2292899656100B409E5 /* IconsBravveEnum */,
+				1478A22A2899657600B409E5 /* ImagesBravveEnum */,
+				1478A22B2899658800B409E5 /* FontsBravveEnum */,
+				1478A22C2899659300B409E5 /* RideUpEnum */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		1478A2272899654A00B409E5 /* ButtonsBravveEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */,
+			);
+			path = ButtonsBravveEnum;
+			sourceTree = "<group>";
+		};
+		1478A2282899655300B409E5 /* ColorsBravveEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */,
+			);
+			path = ColorsBravveEnum;
+			sourceTree = "<group>";
+		};
+		1478A2292899656100B409E5 /* IconsBravveEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1478A231289965DE00B409E5 /* IconsBravveEnum.swift */,
+			);
+			path = IconsBravveEnum;
+			sourceTree = "<group>";
+		};
+		1478A22A2899657600B409E5 /* ImagesBravveEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1478A233289965E900B409E5 /* ImagesBravveEnum.swift */,
+			);
+			path = ImagesBravveEnum;
+			sourceTree = "<group>";
+		};
+		1478A22B2899658800B409E5 /* FontsBravveEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1478A235289965F800B409E5 /* FontsBravveEnum.swift */,
+			);
+			path = FontsBravveEnum;
+			sourceTree = "<group>";
+		};
+		1478A22C2899659300B409E5 /* RideUpEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1478A2372899660200B409E5 /* RideUpEnum.swift */,
+			);
+			path = RideUpEnum;
+			sourceTree = "<group>";
+		};
 		2EAEDEE82881DEA900C88374 = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +400,7 @@
 				C69616902881E64F00281633 /* Home */,
 				2EAEDF0B2881DFB300C88374 /* Delegate */,
 				5FC75CDE2892C2EF000CCE71 /* Assets_Fonts */,
+				1478A2262899651D00B409E5 /* Enums */,
 				5FC75CDF2892CB5F000CCE71 /* LaunchScreen */,
 				2EAEDF052881DEAC00C88374 /* Info.plist */,
 				2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */,
@@ -1654,6 +1728,7 @@
 				C696173E2881EB5400281633 /* AtividadesViewModel.swift in Sources */,
 				C69617A42881EEF700281633 /* PerfilPessoalModel.swift in Sources */,
 				C69616BA2881E7BD00281633 /* PasswordRecoverySMSView.swift in Sources */,
+				1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */,
 				2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */,
 				C69616BE2881E7D100281633 /* PasswordRecoverySMSViewModel.swift in Sources */,
 				C696179B2881EEC100281633 /* DetalhesReservaModel.swift in Sources */,
@@ -1671,6 +1746,7 @@
 				C69617582881EC5C00281633 /* AvulsaViewModel.swift in Sources */,
 				2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */,
 				C69617892881EE5000281633 /* CheckOutModel.swift in Sources */,
+				1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */,
 				C69616BC2881E7C700281633 /* PasswordRecoverySMSModel.swift in Sources */,
 				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermosECodicoesView.swift in Sources */,
@@ -1681,7 +1757,9 @@
 				C69616D42881E8C000281633 /* DetalhesAbertoModel.swift in Sources */,
 				1416C28A28941BFA00FCE10E /* HomeAbertaTableViewCell.swift in Sources */,
 				C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */,
+				1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
+				1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */,
@@ -1697,11 +1775,13 @@
 				C69616F62881E9CD00281633 /* NomeViewModel.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
+				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
 				C69616E02881E90800281633 /* HomeFechadaView.swift in Sources */,
 				2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservaFinalizadaModel.swift in Sources */,
 				C69617682881ECB600281633 /* Reserva3View.swift in Sources */,
+				1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */,
 				2ED5D10B28940F67001C11DC /* TermosECondicoesViewModel.swift in Sources */,
 				2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */,
 				C69616F22881E9C000281633 /* NomeModel.swift in Sources */,
