@@ -18,14 +18,14 @@ class PasswordView: UIViewController{
     
     let goBackButton: UIButton = {
         let button = UIButton()
-        button.setToBackButtonDefault("backPink", 32.76)
+        button.setToBackButtonDefault(.backPink, 32.76)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let logoImage: UIImageView = {
         let image = UIImageView()
-        image.setLogoToDefault("logoBlue")
+        image.setLogoToDefault(.logoBlue)
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -235,7 +235,7 @@ class PasswordView: UIViewController{
     
     let continueButton: UIButton = {
         let button = UIButton()
-        button.setToBottomButtonDefault("Continuar", colorName: "buttonGray", aboveWhom: UIKeyboardLayoutGuide.self)
+        button.setToBottomButtonDefault("Continuar", colorName: .buttonGray, aboveWhom: UIKeyboardLayoutGuide.self)
         return button
     }()
     

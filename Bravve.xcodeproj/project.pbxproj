@@ -73,9 +73,9 @@
 		C69617042881EA1500281633 /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617032881EA1500281633 /* EmailModel.swift */; };
 		C69617062881EA1C00281633 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617052881EA1C00281633 /* EmailView.swift */; };
 		C69617082881EA2500281633 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617072881EA2500281633 /* EmailViewModel.swift */; };
-		C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170C2881EA4F00281633 /* SenhaModel.swift */; };
+		C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170C2881EA4F00281633 /* PasswordModel.swift */; };
 		C696170F2881EA5600281633 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696170E2881EA5600281633 /* PasswordView.swift */; };
-		C69617112881EA5E00281633 /* SenhaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617102881EA5E00281633 /* SenhaViewModel.swift */; };
+		C69617112881EA5E00281633 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617102881EA5E00281633 /* PasswordViewModel.swift */; };
 		C69617162881EA7C00281633 /* ConfirmDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617152881EA7C00281633 /* ConfirmDataView.swift */; };
 		C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617172881EA8A00281633 /* ConfirmDataModel.swift */; };
 		C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617192881EA9500281633 /* ConfirmDataViewModel.swift */; };
@@ -195,9 +195,9 @@
 		C69617032881EA1500281633 /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
 		C69617052881EA1C00281633 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		C69617072881EA2500281633 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
-		C696170C2881EA4F00281633 /* SenhaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaModel.swift; sourceTree = "<group>"; };
+		C696170C2881EA4F00281633 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
 		C696170E2881EA5600281633 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
-		C69617102881EA5E00281633 /* SenhaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenhaViewModel.swift; sourceTree = "<group>"; };
+		C69617102881EA5E00281633 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		C69617152881EA7C00281633 /* ConfirmDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDataView.swift; sourceTree = "<group>"; };
 		C69617172881EA8A00281633 /* ConfirmDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDataModel.swift; sourceTree = "<group>"; };
 		C69617192881EA9500281633 /* ConfirmDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDataViewModel.swift; sourceTree = "<group>"; };
@@ -868,7 +868,7 @@
 				C69616EA2881E98400281633 /* Profession */,
 				C69616E92881E96600281633 /* Foto */,
 				C69616E82881E95000281633 /* Confirm Data */,
-				C69616E72881E94B00281633 /* Senha */,
+				C69616E72881E94B00281633 /* Password */,
 				C69616E62881E93F00281633 /* Email */,
 				C69616E52881E93900281633 /* Telefone */,
 				C69616E42881E92700281633 /* Nome */,
@@ -906,14 +906,14 @@
 			path = Email;
 			sourceTree = "<group>";
 		};
-		C69616E72881E94B00281633 /* Senha */ = {
+		C69616E72881E94B00281633 /* Password */ = {
 			isa = PBXGroup;
 			children = (
 				C696170B2881EA3C00281633 /* ViewModel */,
 				C696170A2881EA3300281633 /* View */,
 				C69617092881EA2D00281633 /* Model */,
 			);
-			path = Senha;
+			path = Password;
 			sourceTree = "<group>";
 		};
 		C69616E82881E95000281633 /* Confirm Data */ = {
@@ -1051,7 +1051,7 @@
 		C69617092881EA2D00281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C696170C2881EA4F00281633 /* SenhaModel.swift */,
+				C696170C2881EA4F00281633 /* PasswordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1067,7 +1067,7 @@
 		C696170B2881EA3C00281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617102881EA5E00281633 /* SenhaViewModel.swift */,
+				C69617102881EA5E00281633 /* PasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1708,7 +1708,7 @@
 				C69617732881ECF700281633 /* ReservaFinalizadaViewModel.swift in Sources */,
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
 				2EF23F4828931B760078B6B8 /* ExtensionUIView.swift in Sources */,
-				C696170D2881EA4F00281633 /* SenhaModel.swift in Sources */,
+				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetalhesAbertoView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeAbertaView.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelefoneView.swift in Sources */,
@@ -1770,7 +1770,7 @@
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
 				C696175D2881EC7700281633 /* Reserva2Model.swift in Sources */,
 				C69616D82881E8D700281633 /* DetalhesAbertoViewModel.swift in Sources */,
-				C69617112881EA5E00281633 /* SenhaViewModel.swift in Sources */,
+				C69617112881EA5E00281633 /* PasswordViewModel.swift in Sources */,
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
 				C69616F62881E9CD00281633 /* NomeViewModel.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
