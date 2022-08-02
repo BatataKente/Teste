@@ -51,8 +51,8 @@ class CancelReservationView: UIViewController {
     }
     
     func setDefaults() {
-        topRightWay.setWayToDefault("wayReserv2")
-        bottomLeftWay.setWayToDefault("wayReserv")
+        topRightWay.setWayToDefault(.wayReserv_2)
+        bottomLeftWay.setWayToDefault(.wayReserv_1)
     }
     
     func setConstraints() {
