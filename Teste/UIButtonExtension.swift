@@ -16,11 +16,12 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(systemName: ButtonsBravve.arrowBlue.rawValue), for: .normal)
-        self.tintColor = .systemBlue
+        self.setImage(UIImage(named: ButtonsBravve.arrowBlue.rawValue),
+                      for: .normal)
+        self.imageView?.widthAnchorInSuperview(CGFloat(15).generateSizeForScreen)
+        self.imageView?.heightAnchorInSuperview(CGFloat(10).generateSizeForScreen)
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
-        self.changesSelectionAsPrimaryAction = true
     }
 }
 
@@ -31,7 +32,14 @@ extension UIButton {
                                         _ backgroundColor: ColorsBravve = .blue) {
 
         self.configuration = .filled()
-        self.configuration?.title = buttonTitle
+         
+        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.medium.rawValue,
+                                                             size: CGFloat(13).generateSizeForScreen)]
+        let attributedTitle = NSAttributedString(string: buttonTitle,
+                                                 attributes: attribute as [NSAttributedString.Key : Any])
+        
+        self.configuration?.attributedTitle = AttributedString(attributedTitle)
+        
         self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
         if backgroundColor == .background {
 
@@ -42,102 +50,70 @@ extension UIButton {
         self.configuration?.cornerStyle = .capsule
     }
     
-    open func setToJumpButtonDefault(buttonTitle: String = "Pular",
-                                     _ constant: CGFloat = 70) {
-        
-        self.setTitle(buttonTitle, for: .normal)
-        self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
-        self.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        self.layer.cornerRadius = 8
-        
-        self.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? UIColor(), width: 1, y: -7)
-        
-        self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
-        self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide, constant)
-    }
-    
     open func setToProgressBarButtonDefault(_ buttonImageName: String) {
         
-        self.configuration = .plain()
-        self.configuration?.image = UIImage(named: buttonImageName)
-        self.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                    leading: 0,
-                                                                    bottom: 0,
-                                                                    trailing: 0)
-            
+        var buttonTitle = ""
+        self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        self.setImage(UIImage(named: buttonImageName), for: .normal)
+        
         switch buttonImageName {
 
-            case IconsBravve.userBlue.rawValue:
+        case IconsBravve.userBlue.rawValue:
 
-                self.configuration?.title = " Dados pessoais"
+                buttonTitle = " Dados pessoais"
 
             case IconsBravve.cellBlue.rawValue:
 
-                self.configuration?.title = " Celular"
+                buttonTitle = " Celular"
 
             case IconsBravve.emailBlue.rawValue:
 
-                self.configuration?.title = " Email"
+                buttonTitle = " Email"
 
             case IconsBravve.padlockBlue.rawValue:
 
-                self.configuration?.title = " Senha"
+                buttonTitle = " Senha"
 
             case IconsBravve.pencilBlue.rawValue:
 
-                self.configuration?.title = " Confirmação"
+                buttonTitle = " Confirmação"
             
             case IconsBravve.photoBlue.rawValue:
 
-                self.configuration?.title = " Foto"
+                buttonTitle = " Foto"
 
             case IconsBravve.noteBlue.rawValue:
 
-                self.configuration?.title = " Profissão"
+                buttonTitle = " Profissão"
 
             case IconsBravve.hobbiesBlue.rawValue:
 
-                self.configuration?.title = " Hobbies"
+                buttonTitle = " Hobbies"
 
             case IconsBravve.activiesBlue.rawValue:
 
-                self.configuration?.title = " Atividades de interesse"
+                buttonTitle = " Atividades de interesse"
             
             case IconsBravve.calendarBlue.rawValue:
 
-                self.configuration?.title = " Agendamento"
+                buttonTitle = " Agendamento"
                 
             case IconsBravve.creditBlue.rawValue:
 
-                self.configuration?.title = " Carteira"
+                buttonTitle = " Carteira"
 
             default: break
         }
         
-        self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: 14)
-    }
-    
-    open func setToButtonDefault(_ aboveWhom: Any?,
-                                 buttonTitle: String = "Continuar",
-                                 _ constant: CGFloat = 30) {
-        
         self.setTitle(buttonTitle, for: .normal)
-        self.titleLabel?.textColor = .white
-        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        self.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        self.layer.cornerRadius = 8
-        
-        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
-        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, 22)
-        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide, 22)
-        
-        guard let aboveWhom = aboveWhom else {return}
-        
-        self.constraintOutsideTo(.bottom, aboveWhom, constant)
+        self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                       size: CGFloat(14).generateSizeForScreen)
+        self.imageView?.constraintInsideTo(.height, self)
+        self.imageView?.constraintOutsideTo(.width, self.imageView)
     }
     
-    open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar") {
+    open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
+                                               backgroundColor: ColorsBravve = .buttonGray) {
         
         self.setTitle(buttonTitle, for: .normal)
         self.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
@@ -147,55 +123,23 @@ extension UIButton {
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
         
-        if isIpad() {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 25)
-        }
-        else {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        }
-    }
-    
-    open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
-                                       colorName: ColorsBravve = .buttonPink,
-                                       aboveWhom: Any?) {
-        
-        self.setTitle(buttonTitle, for: .normal)
-        self.backgroundColor = UIColor(named: colorName.rawValue)
-        
-        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
-        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
-        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.constraintOutsideTo(.bottom, aboveWhom)
-        
-        if isIpad() {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 25)
-        }
-        else {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        }
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,
+                                       size: CGFloat(16).generateSizeForScreen)
     }
     
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = 22) {
+                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
+        self.imageView?.heightAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
+        self.imageView?.widthAnchorInSuperview(CGFloat(14).generateSizeForScreen)
         
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
+        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
-        else {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
+        self.constraintInsideTo(.height,
+                                superview?.safeAreaLayoutGuide,
+                                multiplier: CGFloat(0.04).generateSizeForScreen)
+        self.constraintOutsideTo(.width, self)
     }
 }

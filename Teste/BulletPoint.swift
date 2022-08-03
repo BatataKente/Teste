@@ -11,6 +11,7 @@ class BulletPoint: UIStackView {
     
     var labelText: String
     var label = UILabel()
+    var ellipseImage = UIImageView()
     
     init(labelText: String, frame: CGRect = .zero) {
         self.labelText = labelText
@@ -23,17 +24,15 @@ class BulletPoint: UIStackView {
     
     func createBulletPointStackView() -> UIStackView {
         
-        let ellipseImage: UIImageView = {
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: "Elipse")
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
+        ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        ellipseImage.contentMode = .scaleAspectFit
+        ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         
+        ellipseImage.widthAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen).isActive = true
+        ellipseImage.heightAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen).isActive = true
         
         label.text = labelText
-        label.font = UIFont(name: "Ubuntu-Light", size: 10)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -42,7 +41,7 @@ class BulletPoint: UIStackView {
             let stackView = UIStackView(arrangedSubviews: [ellipseImage, label])
             stackView.alignment = .center
             stackView.distribution = .fillProportionally
-            stackView.spacing = 5
+            stackView.spacing = CGFloat(5).generateSizeForScreen
             stackView.translatesAutoresizingMaskIntoConstraints = false
             return stackView
         }()

@@ -10,8 +10,42 @@ import UIKit
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
     
-    func createCapsuleButtons(_ buttonTitles: [String],
-                              _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
+    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
+                                      _ constant: CGFloat = 22,
+                                      _ handler: @escaping UIActionHandler) {
+        
+        let backButton = UIButton()
+        backButton.configuration = .plain()
+        backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
+        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        let logoImageView = UIImageView()
+        logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
+        
+        self.view.addSubviews([backButton, logoImageView])
+        
+        logoImageView.constraintInsideTo(.centerX, self.view.safeAreaLayoutGuide)
+        logoImageView.constraintInsideTo(.top, self.view.safeAreaLayoutGuide, 65)
+        
+        logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+        logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
+        
+        backButton.imageView?.constraintInsideTo(.height,
+                                                 backButton,
+                                                 multiplier: 0.5)
+        backButton.imageView?.constraintInsideTo(.width,
+                                                 backButton,
+                                                 multiplier: 0.5)
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        
+        backButton.constraintInsideTo(.centerY, logoImageView)
+        backButton.constraintInsideTo(.height, logoImageView)
+        backButton.constraintOutsideTo(.width, backButton)
+        backButton.constraintInsideTo(.leading, self.view.safeAreaLayoutGuide, 30)
+    }
+    
+    open func createCapsuleButtons(_ buttonTitles: [String],
+                                   _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -36,7 +70,7 @@ extension UIViewController {
             
             switch name{
                 
-                case IconsBravve.userGray.rawValue:
+            case IconsBravve.userGray.rawValue:
                     
                     let handler = {(action: UIAction) in
                         
@@ -113,7 +147,7 @@ extension UIViewController {
 //Extension related to regex
 extension UIViewController {
     
-    func validateCellPhone(_ phone: String) -> Bool {
+    open func validateCellPhone(_ phone: String) -> Bool {
         
         let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
 
@@ -129,7 +163,7 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func containsUppercasedLetters(text: String) -> Bool {
+    open func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
         let capitalizedTextTest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
@@ -141,7 +175,7 @@ extension UIViewController {
         }
     }
     
-    func containsNumericCharacters(text: String) -> Bool {
+    open func containsNumericCharacters(text: String) -> Bool {
         
         let numericRegEx = ".*[0-9]+.*"
         let numericTextTest = NSPredicate(format:"SELF MATCHES %@", numericRegEx)
@@ -153,7 +187,7 @@ extension UIViewController {
         }
     }
     
-    func containsSpecialCharacters(text: String) -> Bool {
+    open func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
         let specialCharTextTest = NSPredicate(format: "SELF MATCHES %@", specialCharRegEx)
@@ -165,7 +199,7 @@ extension UIViewController {
         }
     }
     
-    func containsLowercasedCharacters(text: String) -> Bool {
+    open func containsLowercasedCharacters(text: String) -> Bool {
         
         let normalLetterRegEx = ".*[a-z]+.*"
         let normalLetterTextTest = NSPredicate(format: "SELF MATCHES %@", normalLetterRegEx)

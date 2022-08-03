@@ -15,17 +15,15 @@ class FotoView: UIViewController {
     
     private let registerButton = UIButton()
     
-    private let jumpButton = UIButton()
-    
     private let firstWay = UIImageView(),
         secondWay = UIImageView()
     
     private lazy var progressBarStackView: UIStackView = {
         
-        let buttons = createProgressBarButtons(["photoBlue",
-                                                "noteGray",
-                                                "hobbiesGray",
-                                                "activiesGray"])
+        let buttons = createProgressBarButtons([IconsBravve.photoBlue.rawValue,
+                                                IconsBravve.noteGray.rawValue,
+                                                IconsBravve.hobbiesGray.rawValue,
+                                                IconsBravve.activiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
         
         stackView.spacing = 7
@@ -78,7 +76,7 @@ class FotoView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, jumpButton, imageView, editButton, tutorialLabel])
+        view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, imageView, editButton, tutorialLabel])
         
         view.setToDefaultBackgroundColor()
     }
@@ -89,8 +87,7 @@ class FotoView: UIViewController {
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink)
-        registerButton.setToButtonDefault(jumpButton, 20)
-        jumpButton.setToJumpButtonDefault(50)
+        registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
     
     private func setupConstraints() {
