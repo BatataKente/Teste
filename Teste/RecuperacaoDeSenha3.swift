@@ -138,14 +138,13 @@ class RecuperacaoDeSenha3: UIViewController {
         passwordTextFieldClass.shadow.constraintInsideTo(.trailing, passwordStackView)
         passwordTextFieldClass.shadow.constraintTo(.bottom, passwordStackView, CGFloat(1).generateSizeForScreen)
         
-        
         passwordTextFieldClass.textField.widthAnchor.constraint(equalTo: passwordStackView.widthAnchor, multiplier: 0.8).isActive = true
 
         confirmPasswordStackView.constraintOutsideTo(.top, passwordStackView, CGFloat(10).generateSizeForScreen)
         confirmPasswordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         confirmPasswordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
         confirmPasswordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-
+        
         confirmPasswordTextFieldClass.shadow.constraintInsideTo(.top, confirmPasswordStackView)
         confirmPasswordTextFieldClass.shadow.constraintInsideTo(.leading, confirmPasswordStackView)
         confirmPasswordTextFieldClass.shadow.constraintInsideTo(.trailing, confirmPasswordStackView)

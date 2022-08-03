@@ -44,6 +44,8 @@ class TextField: UIStackView {
             
             textFieldButton.setImage(UIImage(named: buttonImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
             textFieldButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
+            textFieldButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+            textFieldButton.imageView?.heightAnchorInSuperview(CGFloat(16).generateSizeForScreen)
             
             let textFieldStackView: UIStackView = {
                 let stackView = UIStackView(arrangedSubviews: [label, textField])
