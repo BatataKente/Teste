@@ -22,12 +22,12 @@ class MinhasReservas: UIViewController {
         super.viewDidLoad()
         
         
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.translatesAutoresizingMaskIntoConstraints = false
-        myTableView.backgroundColor = UIColor(named: "background")
+        myTableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         myTableView.register(ReservaCell.self, forCellReuseIdentifier: "Cell")
         
