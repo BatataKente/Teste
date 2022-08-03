@@ -10,11 +10,11 @@ import UIKit
 
 class Recuperar1View: UIViewController {
     
-    let backgroundImage = UIImageView()
+    private let backgroundImage = UIImageView()
     
-    let buttonBack = UIButton()
+    private let buttonBack = UIButton()
     
-    let imageLogo = UIImageView()
+    private let imageLogo = UIImageView()
     
     private lazy var progressBarStackView: (stack: UIStackView,
                                             buttons: [UIButton]) = {
@@ -30,7 +30,7 @@ class Recuperar1View: UIViewController {
                 buttons: buttons)
     }()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.text = "Informe seu e-mail para enviarmos um código de confirmação!"
         label.textAlignment = .center
@@ -41,36 +41,33 @@ class Recuperar1View: UIViewController {
         return label
     }()
     
-    let textFieldEmail: UITextField = {
+    private let textFieldEmail: UITextField = {
         let textField = UITextField()
         textField.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
         textField.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         textField.isHidden = true
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    let labelEmail_: UILabel = {
+    private let labelEmail_: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let stackMargins: CGFloat = 12
+    let stackMargins: CGFloat = 20
         
-    lazy var stackViewEmail: UIStackView = {
+    private lazy var stackViewEmail: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
         stackView.spacing = 10
         stackView.axis = .vertical
         stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
-        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        stackView.layer.borderWidth = CGFloat(1).generateSizeForScreen
-        stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.layer.borderColor =  UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        stackView.layer.borderWidth = 1
+        stackView.layer.cornerRadius = 8
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
                                                                left: stackMargins,
@@ -80,18 +77,18 @@ class Recuperar1View: UIViewController {
         
     }()
     
-    let customShaddow: UIView = {
+    private let customShaddow: UIView = {
              
         let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        customShaddow.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
         
         return customShaddow
          }()
 
     
-    let buttonContinue = UIButton()
+    private let buttonContinue = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,46 +96,47 @@ class Recuperar1View: UIViewController {
 
         view.addSubviews([backgroundImage, buttonBack, imageLogo, progressBarStackView.stack, label, customShaddow, stackViewEmail, buttonContinue])
         
+        defaults()
         addConstraints()
         addTargets()
 
     }
     
-    func addConstraints() {
+    private func defaults() {
         
         buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault(.wayCell)
         
+    }
+    
+    private func addConstraints() {
+        
         NSLayoutConstraint.activate([
             
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             label.topAnchor.constraint(equalTo: progressBarStackView.stack.bottomAnchor, constant: CGFloat(50).generateSizeForScreen),
                                     
         ])
         
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
+        progressBarStackView.stack.constraintInsideTo(.top, imageLogo, CGFloat(65).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
-       /* stackViewEmail.constraintOutsideTo(.top, label, CGFloat(65).generateSizeForScreen)
-        stackViewEmail.constraintInsideTo(.leading, label)
-        stackViewEmail.constraintInsideTo(.trailing, label)*/
-        stackViewEmail.constraintOutsideTo(.top, label, 50)
+        stackViewEmail.constraintOutsideTo(.top, label, CGFloat(50).generateSizeForScreen)
         stackViewEmail.constraintInsideTo(.leading, label)
         stackViewEmail.constraintInsideTo(.trailing, label)
-        stackViewEmail.heightAnchorInSuperview(65)
-        
+    
         customShaddow.constraintInsideTo(.top, stackViewEmail)
         customShaddow.constraintInsideTo(.leading, stackViewEmail)
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
-        customShaddow.constraintTo(.bottom, stackViewEmail, 1)
+        customShaddow.constraintTo(.bottom, stackViewEmail, Ride.up.rawValue)
         
     }
     
-    func addTargets() {
+    private func addTargets() {
         
         buttonBack.addTarget(self, action: #selector(actionButtonBack), for: .touchUpInside)
         
