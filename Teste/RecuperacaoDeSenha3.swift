@@ -31,7 +31,7 @@ class RecuperacaoDeSenha3: UIViewController {
         
         let buttons = createProgressBarButtons([IconsBravve.emailGray.rawValue,
                                                 IconsBravve.padlockBlue.rawValue])
-        buttons[1].configuration?.title = " Recuperar Senha"
+        buttons[1].setTitle("  Recuperação de senha", for: .normal)
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = CGFloat(7).generateSizeForScreen
         
