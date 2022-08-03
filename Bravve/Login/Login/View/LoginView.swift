@@ -171,14 +171,11 @@ class LoginView: UIViewController {
         
         if eyeButton.isSelected {
             passwordTextField.isSecureTextEntry = true
-            
         } else {
-            eyeButton.isSelected == false
             passwordTextField.isSecureTextEntry  = false
         }
     }
 
-    
     private lazy var  passwordStackView: UIStackView = {
         
         let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
@@ -204,8 +201,8 @@ class LoginView: UIViewController {
           
             let attributes: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.underlineStyle: 1,
-            NSAttributedString.Key.font: UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen),
-            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.buttonUnderline.rawValue)]
+            NSAttributedString.Key.font: UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen) as Any,
+            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.buttonUnderline.rawValue) as Any]
 
             let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
@@ -230,8 +227,8 @@ class LoginView: UIViewController {
             
             let attributesFont: [NSAttributedString.Key : Any] = [
             
-                NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen),
-                NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.label.rawValue)]
+                NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
+                NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.label.rawValue) as Any]
 
             let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
@@ -268,8 +265,8 @@ class LoginView: UIViewController {
             
             let attributesFont: [NSAttributedString.Key : Any] = [
                
-                NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen),
-                NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.label.rawValue)]
+                NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
+                NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.label.rawValue) as Any]
             
             let attributedString = NSMutableAttributedString(string: "Cadastre-se", attributes: attributesFont)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
