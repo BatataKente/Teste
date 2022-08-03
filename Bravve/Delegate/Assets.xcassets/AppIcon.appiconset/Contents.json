@@ -107,13 +107,6 @@
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
-    },
-    {
-      "filename" : "29.png",
-      "idiom" : "ipad",
-      "scale" : "1x",
-      "size" : "29x29",
-      "unassigned" : true
     }
   ],
   "info" : {
