@@ -28,6 +28,36 @@ extension UIView {
         self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
     
+    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
+                                      _ constant: CGFloat = 22,
+                                      _ handler: @escaping UIActionHandler) {
+        
+        let backButton = UIButton()
+        backButton.configuration = .plain()
+        backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
+        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        let logoImageView = UIImageView()
+        logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
+        
+        self.addSubviews([backButton, logoImageView])
+        
+        logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
+        logoImageView.constraintInsideTo(.top, self.safeAreaLayoutGuide, 65)
+        
+        logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+        logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
+        
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
+        backButton.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        
+        backButton.constraintInsideTo(.centerY, logoImageView)
+        backButton.constraintInsideTo(.height, logoImageView)
+        backButton.constraintOutsideTo(.width, backButton)
+        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide, 30)
+    }
+    
     open func setToDefaultCustomBarWithBackButton(viewTitle: String,
                                                   _ handler: @escaping UIActionHandler) {
         

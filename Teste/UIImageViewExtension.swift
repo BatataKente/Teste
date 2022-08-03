@@ -26,7 +26,7 @@ extension UIImageView {
                 self.image = UIImage(named: imageName.rawValue)
             
             self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
-                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         
             case ImagesBravve.wayEmail:
             

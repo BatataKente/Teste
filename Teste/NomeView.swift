@@ -160,7 +160,7 @@ class NomeView: UIViewController {
         
         view.addSubviews(ways + [progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
         
-        createRegisterCustomBar {_ in
+        view.createRegisterCustomBar {_ in
 
             self.nomeViewModel.turnBackScreen()
         }
@@ -183,7 +183,6 @@ class NomeView: UIViewController {
                                                       view.frame.size.height*0.2)
         progressBarStackView.stack.constraintInsideTo(.centerX,
                                                       view.safeAreaLayoutGuide)
-        progressBarStackView.stack.heightAnchorInSuperview()
         
         infoLabel.constraintInsideTo(.top,
                                      view.safeAreaLayoutGuide,
@@ -314,14 +313,20 @@ extension NomeView: NomeViewModelProtocol {
                         emailTitle: String,
                         emailImage: String) {
         
-        progressBarStackView.buttons[0].configuration?.title = personalDataTitle
-        progressBarStackView.buttons[0].configuration?.image = UIImage(named: personalDataImage)
+        progressBarStackView.buttons[0].setTitle(personalDataTitle,
+                                                 for: .normal)
+        progressBarStackView.buttons[0].setImage(UIImage(named: personalDataImage),
+                                                 for: .normal)
         
-        progressBarStackView.buttons[1].configuration?.title = phoneNumberTitle
-        progressBarStackView.buttons[1].configuration?.image = UIImage(named: phoneNumberImage)
+        progressBarStackView.buttons[1].setTitle(phoneNumberTitle,
+                                                 for: .normal)
+        progressBarStackView.buttons[1].setImage(UIImage(named: phoneNumberImage),
+                                                 for: .normal)
         
-        progressBarStackView.buttons[2].configuration?.title = emailTitle
-        progressBarStackView.buttons[2].configuration?.image = UIImage(named: emailImage)
+        progressBarStackView.buttons[2].setTitle(emailTitle,
+                                                 for: .normal)
+        progressBarStackView.buttons[2].setImage(UIImage(named: emailImage),
+                                                 for: .normal)
     }
     
     func freezeButton() {
