@@ -113,7 +113,7 @@ class FotoView: UIViewController {
         tutorialLabel.constraintOutsideTo(.top, imageView, 25)
         tutorialLabel.constraintOutsideTo(.centerX, view)
         
-        editButton.sizeAnchorInSuperview()
+        editButton.sizeAnchorInSuperview(CGFloat(32).generateSizeForScreen)
         editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
         editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
     }
