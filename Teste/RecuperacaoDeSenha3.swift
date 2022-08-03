@@ -159,7 +159,7 @@ class RecuperacaoDeSenha3: UIViewController {
 
         rightStackView.constraintOutsideTo(.top, confirmPasswordStackView, CGFloat(10).generateSizeForScreen)
         rightStackView.constraintInsideTo(.trailing, confirmPasswordStackView)
-        rightStackView.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+        rightStackView.widthAnchorInSuperview(CGFloat(100).generateSizeForScreen)
         rightStackView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         
     }
