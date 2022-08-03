@@ -25,7 +25,7 @@ class TextField: UIStackView {
         
         label.text = self.labelText
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 15)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
@@ -96,7 +96,7 @@ class TextField: UIStackView {
     @objc func textFieldStackViewTapped() {
         textField.isHidden = false
         shadow.isHidden = false
-        label.font = (UIFont(name: FontsBravve.light.rawValue, size: 11))
+        label.font = (UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen))
         textField.becomeFirstResponder()
     }
     

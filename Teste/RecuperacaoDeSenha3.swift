@@ -33,7 +33,7 @@ class RecuperacaoDeSenha3: UIViewController {
                                                 IconsBravve.padlockBlue.rawValue])
         buttons[1].configuration?.title = " Recuperar Senha"
         let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 7
+        stackView.spacing = CGFloat(7).generateSizeForScreen
         
         return (stack: stackView,
                 buttons: buttons)
@@ -42,7 +42,7 @@ class RecuperacaoDeSenha3: UIViewController {
     let sectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Digite e confirme sua nova senha!"
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -120,48 +120,48 @@ class RecuperacaoDeSenha3: UIViewController {
     
     private func setupConstraints() {
         
-        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 40)
+        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, CGFloat(40).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
-        sectionLabel.constraintOutsideTo(.top, progressBarStackView.stack, 40)
+        sectionLabel.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(40).generateSizeForScreen)
         sectionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        sectionLabel.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.8)
+        sectionLabel.constraintInsideTo(.width, view.safeAreaLayoutGuide, CGFloat(331).generateSizeForScreen)
         
         passwordStackView.constraintOutsideTo(.top, sectionLabel, 10)
         passwordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        passwordStackView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.88)
-        passwordStackView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.073)
+        passwordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
+        passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
         passwordTextFieldClass.shadow.constraintInsideTo(.top, passwordStackView)
         passwordTextFieldClass.shadow.constraintInsideTo(.leading, passwordStackView)
         passwordTextFieldClass.shadow.constraintInsideTo(.trailing, passwordStackView)
-        passwordTextFieldClass.shadow.constraintTo(.bottom, passwordStackView, 1)
+        passwordTextFieldClass.shadow.constraintTo(.bottom, passwordStackView, CGFloat(1).generateSizeForScreen)
         
         
         passwordTextFieldClass.textField.widthAnchor.constraint(equalTo: passwordStackView.widthAnchor, multiplier: 0.8).isActive = true
-        
-        confirmPasswordStackView.constraintOutsideTo(.top, passwordStackView, 10)
+
+        confirmPasswordStackView.constraintOutsideTo(.top, passwordStackView, CGFloat(10).generateSizeForScreen)
         confirmPasswordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        confirmPasswordStackView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.88)
-        confirmPasswordStackView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.073)
-        
+        confirmPasswordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
+        confirmPasswordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+
         confirmPasswordTextFieldClass.shadow.constraintInsideTo(.top, confirmPasswordStackView)
         confirmPasswordTextFieldClass.shadow.constraintInsideTo(.leading, confirmPasswordStackView)
         confirmPasswordTextFieldClass.shadow.constraintInsideTo(.trailing, confirmPasswordStackView)
-        confirmPasswordTextFieldClass.shadow.constraintTo(.bottom, confirmPasswordStackView, 1)
-        
+        confirmPasswordTextFieldClass.shadow.constraintTo(.bottom, confirmPasswordStackView, CGFloat(1).generateSizeForScreen)
+
         confirmPasswordTextFieldClass.textField.widthAnchor.constraint(equalTo: confirmPasswordStackView.widthAnchor, multiplier: 0.8).isActive = true
-        
-        leftStackView.constraintOutsideTo(.top, confirmPasswordStackView, 10)
+
+        leftStackView.constraintOutsideTo(.top, confirmPasswordStackView, CGFloat(10).generateSizeForScreen)
         leftStackView.constraintInsideTo(.leading, confirmPasswordStackView)
-        leftStackView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.3)
-        leftStackView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.05)
-        
-        rightStackView.constraintOutsideTo(.top, confirmPasswordStackView, 10)
+        leftStackView.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+        leftStackView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+
+        rightStackView.constraintOutsideTo(.top, confirmPasswordStackView, CGFloat(10).generateSizeForScreen)
         rightStackView.constraintInsideTo(.trailing, confirmPasswordStackView)
-        rightStackView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.25)
-        rightStackView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.05)
+        rightStackView.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+        rightStackView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         
     }
 }
@@ -172,7 +172,7 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         if textField == passwordTextFieldClass.textField {
             textField.resignFirstResponder()
             confirmPasswordTextFieldClass.textField.isHidden = false
-            confirmPasswordTextFieldClass.label.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+            confirmPasswordTextFieldClass.label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
             confirmPasswordTextFieldClass.textField.becomeFirstResponder()
             return true
         } else {
