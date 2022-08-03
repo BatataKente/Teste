@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        window.rootViewController = tabBarController
         
-        window.rootViewController = RecuperacaoDeSenha3()
+        window.rootViewController = MinhasReservas()
         window.makeKeyAndVisible()
         
         self.window = window
