@@ -22,10 +22,10 @@ class FotoView: UIViewController {
     
     private lazy var progressBarStackView: UIStackView = {
         
-        let buttons = createProgressBarButtons(["photoBlue",
-                                                "noteGray",
-                                                "hobbiesGray",
-                                                "activiesGray"])
+        let buttons = createProgressBarButtons([IconsBravve.photoBlue.rawValue,
+                                                IconsBravve.noteBlue.rawValue,
+                                                IconsBravve.hobbiesGray.rawValue,
+                                                IconsBravve.activiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
         
         stackView.spacing = 7

@@ -11,20 +11,16 @@ class NomeView: UIViewController {
     
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
-    private let backButton = UIButton()
-    
-    private let bravveIcon = UIImageView()
-    
     private let registerButton = UIButton()
     
     private lazy var progressBarStackView: (stack: UIStackView,
                                             buttons: [UIButton]) = {
 
-        let buttons = createProgressBarButtons(["userBlue",
-                                                "cellGray",
-                                                "emailGray",
-                                                "padlockGray",
-                                                "hobbiesGray"])
+        let buttons = createProgressBarButtons([IconsBravve.userBlue.rawValue,
+                                                IconsBravve.cellGray.rawValue,
+                                                IconsBravve.emailGray.rawValue,
+                                                IconsBravve.padlockGray.rawValue,
+                                                IconsBravve.hobbiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = 7
 
@@ -39,6 +35,10 @@ class NomeView: UIViewController {
     private let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
+        infoLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                size: CGFloat(16).generateSizeForScreen)
+        infoLabel.numberOfLines = 0
+        infoLabel.textAlignment = .center
         
         return infoLabel
     }()
@@ -61,19 +61,21 @@ class NomeView: UIViewController {
                        ddisLabel: UILabel,
                        ddisButton: UIButton) = {
         
-        let stackMargins: CGFloat = 10
+        let stackMargins: CGFloat = 20
+        let smallFont = UIFont(name: FontsBravve.light.rawValue,
+                               size: CGFloat(11).generateSizeForScreen)
+        let font = UIFont(name: FontsBravve.medium.rawValue,
+                          size: CGFloat(15).generateSizeForScreen)
         
         let ddisLabel = UILabel()
         ddisLabel.text = "+55"
+        ddisLabel.font = smallFont
         
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
-        
-        ddiChoseLabel.font = UIFont(name: FontsBravve.medium.rawValue,
-                                    size: CGFloat(15).generateSizeForScreen)
+        ddiChoseLabel.font = font
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
-        stackView.spacing = 10
         stackView.axis = .vertical
         
         let ddisButton = UIButton()
@@ -88,11 +90,10 @@ class NomeView: UIViewController {
                                                    right: 0)
         
         let rightLabel = UILabel()
+        rightLabel.font = smallFont
         
         let rightTextField = UITextField()
-        
-        rightTextField.font = UIFont(name: FontsBravve.bold.rawValue,
-                                     size: CGFloat(20).generateSizeForScreen)
+        rightTextField.font = font
         
         let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
                                                             rightTextField])
@@ -102,9 +103,9 @@ class NomeView: UIViewController {
         rightStackView.layer.cornerRadius = 8
         rightStackView.isLayoutMarginsRelativeArrangement = true
         rightStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                       left: stackMargins,
-                                                       bottom: stackMargins,
-                                                       right: stackMargins)
+                                                    left: stackMargins,
+                                                    bottom: stackMargins,
+                                                    right: stackMargins)
         
         
         return (rightStackView: rightStackView,
@@ -116,9 +117,10 @@ class NomeView: UIViewController {
                 ddisButton: ddisButton)
     }()
     
-    private let registerStackView: UIStackView = {
-
-        let registerStackView = UIStackView()
+    private lazy var registerStackView: UIStackView = {
+        
+        let registerStackView = UIStackView(arrangedSubviews: [viewElements.leftStackView,
+                                                               viewElements.rightStackView])
         registerStackView.backgroundColor = .white
         registerStackView.layer.borderWidth = 1
         registerStackView.spacing = 15
@@ -156,7 +158,12 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
+        view.addSubviews(ways + [progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
+        
+        createRegisterCustomBar {_ in
+
+            self.nomeViewModel.turnBackScreen()
+        }
         
         view.setToDefaultBackgroundColor()
     }
@@ -164,34 +171,40 @@ class NomeView: UIViewController {
     private func setupDefaults() {
         
         registerButton.setToBottomButtonKeyboardDefault()
-        bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink)
         ways[2].setWayToDefault(.wayConfirm)
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
     }
     
     private func setupConstraints() {
-            
-        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        
+        progressBarStackView.stack.constraintInsideTo(.top,
+                                                      view.safeAreaLayoutGuide,
+                                                      view.frame.size.height*0.2)
+        progressBarStackView.stack.constraintInsideTo(.centerX,
+                                                      view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
-        infoLabel.constraintOutsideTo(.top, progressBarStackView.stack, 50)
-        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
-        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
+        infoLabel.constraintInsideTo(.top,
+                                     view.safeAreaLayoutGuide,
+                                     view.frame.size.height*0.3)
+        infoLabel.constraintInsideTo(.leading,
+                                     view.safeAreaLayoutGuide, 40)
+        infoLabel.constraintInsideTo(.trailing,
+                                     view.safeAreaLayoutGuide, 40)
         
-        registerStackView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 50)
+        registerStackView.constraintInsideTo(.centerY,
+                                             view.safeAreaLayoutGuide,
+                                             view.frame.size.height*0.05)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
-        registerStackView.heightAnchorInSuperview(60)
         
         customShaddow.constraintInsideTo(.top, registerStackView)
         customShaddow.constraintInsideTo(.leading, registerStackView)
         customShaddow.constraintInsideTo(.trailing, registerStackView)
-        customShaddow.constraintTo(.bottom, registerStackView, 1)
+        customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
         
-        viewElements.leftStackView.widthAnchorInSuperview(80)
+        viewElements.leftStackView.widthAnchorInSuperview(CGFloat(85).generateSizeForScreen)
         viewElements.ddisButton.widthAnchorInSuperview()
     }
     
@@ -200,26 +213,21 @@ class NomeView: UIViewController {
         viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
 
             self.viewElements.ddiChoseLabel.text = action.title
+            self.viewElements.ddisButton.setTitle(nil, for: .normal)
         }))
         
-        backButton.addTarget(self,
-                             action: #selector(back),
-                             for: .touchUpInside)
         progressBarStackView.buttons[0].addTarget(self,
-                                                    action: #selector(progressBarAction),
-                                                    for: .touchUpInside)
+                                                  action: #selector(progressBarAction),
+                                                  for: .touchUpInside)
         progressBarStackView.buttons[1].addTarget(self,
-                                             action: #selector(progressBarAction),
-                                             for: .touchUpInside)
+                                                  action: #selector(progressBarAction),
+                                                  for: .touchUpInside)
         progressBarStackView.buttons[2].addTarget(self,
-                                             action: #selector(progressBarAction),
-                                             for: .touchUpInside)
+                                                  action: #selector(progressBarAction),
+                                                  for: .touchUpInside)
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
-        
-        registerStackView.addArrangedSubview(viewElements.leftStackView)
-        registerStackView.addArrangedSubview(viewElements.rightStackView)
     }
     
     @objc func stackViewTapped() {
@@ -246,11 +254,6 @@ class NomeView: UIViewController {
     @objc func progressBarAction(_ sender: UIButton) {
         
         nomeViewModel.changeScreenWithProgressBar(sender)
-    }
-    
-    @objc func back() {
-        
-        nomeViewModel.turnBackScreen()
     }
     
     @objc func changeText(_ sender: UITextField) {
@@ -301,7 +304,7 @@ extension NomeView: NomeViewModelProtocol {
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
 
-        self.infoLabel.setToDefault(text: infoLabel)
+        self.infoLabel.text = infoLabel
     }
     
     func setProgressBar(personalDataTitle: String,

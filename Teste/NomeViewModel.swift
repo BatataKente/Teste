@@ -120,7 +120,8 @@ class NomeViewModel {
                               ddiChoseLabel: false,
                               ways: [true, true, false])
         
-        delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
+        delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
+                                       size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
         delegate?.setText(rightLabel: "Nome Completo",
                           rightTextField: "",
@@ -144,7 +145,8 @@ class NomeViewModel {
                               ddiChoseLabel: true,
                               ways: [true, false, true])
         
-        delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
+        delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
+                                       size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
         delegate?.setText(rightLabel: "Telefone",
                           rightTextField: "",
@@ -168,7 +170,8 @@ class NomeViewModel {
                               ddiChoseLabel: false,
                               ways: [false, true, true])
         
-        delegate?.setFont(font: UIFont.systemFont(ofSize: 15))
+        delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
+                                       size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
         delegate?.setText(rightLabel: "E-mail",
                           rightTextField: "",
