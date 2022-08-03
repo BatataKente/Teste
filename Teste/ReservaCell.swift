@@ -11,7 +11,7 @@ class ReservaCell: UITableViewCell {
     
     let cellView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 12
+        view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
@@ -22,7 +22,7 @@ class ReservaCell: UITableViewCell {
         label.text = "BOXOFFICE"
         label.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,7 +32,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "Numa esquina"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -41,7 +41,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "charmosa, um hotel"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -50,7 +50,6 @@ class ReservaCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: ImagesBravve.imageReservs_1.rawValue)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -58,7 +57,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "Hotel Saint"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -68,7 +67,7 @@ class ReservaCell: UITableViewCell {
         label.text = "RESERVADO"
         label.backgroundColor = UIColor(named: ColorsBravve.reserved.rawValue)
         label.textColor = .white
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -78,7 +77,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "UM Coffee Co."
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -87,7 +86,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "São Paulo / Jardim Paulistano"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -96,7 +95,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "21/01/2022 - 22/01/2022"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -105,7 +104,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "9h às 18h"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -114,7 +113,7 @@ class ReservaCell: UITableViewCell {
         let label = UILabel()
         label.text = "Espaço privativo"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -155,49 +154,49 @@ class ReservaCell: UITableViewCell {
         cellView.constraintInsideTo(.top, contentView)
         cellView.constraintInsideTo(.leading, contentView)
         cellView.constraintInsideTo(.trailing, contentView)
-        cellView.constraintInsideTo(.bottom, contentView, -26)
+        cellView.constraintInsideTo(.bottom, contentView, CGFloat(-26).generateSizeForScreen)
         
         typeTagLabel.constraintInsideTo(.top, cellView)
-        typeTagLabel.constraintInsideTo(.leading, cellView, 17)
-        typeTagLabel.constraintInsideTo(.width, cellView, multiplier: 0.2267)
-        typeTagLabel.constraintInsideTo(.height, cellView, multiplier: 0.046)
+        typeTagLabel.constraintInsideTo(.leading, cellView, CGFloat(17).generateSizeForScreen)
+        typeTagLabel.widthAnchorInSuperview(CGFloat(68).generateSizeForScreen)
+        typeTagLabel.heightAnchorInSuperview(CGFloat(15).generateSizeForScreen)
         
-        topTitleLabel.constraintOutsideTo(.top, typeTagLabel, 23)
-        topTitleLabel.constraintInsideTo(.leading, cellView, 17)
-        topTitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.6417)
-        topTitleLabel.constraintInsideTo(.height, cellView, multiplier: 0.06)
+        topTitleLabel.constraintOutsideTo(.top, typeTagLabel, CGFloat(23).generateSizeForScreen)
+        topTitleLabel.constraintInsideTo(.leading, cellView, CGFloat(17).generateSizeForScreen)
+        topTitleLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
+        topTitleLabel.heightAnchorInSuperview(CGFloat(30).generateSizeForScreen)
         
         bottomTitleLabel.constraintOutsideTo(.top, topTitleLabel)
         bottomTitleLabel.constraintInsideTo(.leading, topTitleLabel)
         bottomTitleLabel.constraintInsideTo(.width, topTitleLabel)
         bottomTitleLabel.constraintInsideTo(.height, topTitleLabel)
         
-        spaceImage.constraintOutsideTo(.top, bottomTitleLabel, 22)
+        spaceImage.constraintOutsideTo(.top, bottomTitleLabel, CGFloat(22).generateSizeForScreen)
         spaceImage.constraintInsideTo(.leading, bottomTitleLabel)
         spaceImage.constraintInsideTo(.trailing, cellView)
-        spaceImage.constraintInsideTo(.height, cellView, multiplier: 0.39)
+        spaceImage.heightAnchorInSuperview(CGFloat(194).generateSizeForScreen)
         
-        spaceNameLabel.constraintOutsideTo(.top, spaceImage, 23)
+        spaceNameLabel.constraintOutsideTo(.top, spaceImage, CGFloat(23).generateSizeForScreen)
         spaceNameLabel.constraintInsideTo(.leading, spaceImage)
-        spaceNameLabel.constraintInsideTo(.width, cellView, multiplier: 0.5)
-        spaceNameLabel.constraintInsideTo(.height, cellView, multiplier: 0.046)
+        spaceNameLabel.widthAnchorInSuperview(CGFloat(167.5).generateSizeForScreen)
+        spaceNameLabel.heightAnchorInSuperview(CGFloat(23).generateSizeForScreen)
         
-        reservedLabel.constraintOutsideTo(.top, spaceImage, 32)
-        reservedLabel.constraintInsideTo(.trailing, cellView, -26)
-        reservedLabel.constraintInsideTo(.width, cellView, multiplier: 0.241)
-        reservedLabel.constraintInsideTo(.height, cellView, multiplier: 0.0462)
+        reservedLabel.constraintOutsideTo(.top, spaceImage, CGFloat(32).generateSizeForScreen)
+        reservedLabel.constraintInsideTo(.trailing, cellView, CGFloat(-26).generateSizeForScreen)
+        reservedLabel.widthAnchorInSuperview(CGFloat(73).generateSizeForScreen)
+        reservedLabel.heightAnchorInSuperview(CGFloat(15).generateSizeForScreen)
         
-        spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel, 8)
+        spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel, CGFloat(8).generateSizeForScreen)
         spaceSubtitleLabel.constraintInsideTo(.leading, spaceNameLabel)
-        spaceSubtitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.358)
-        spaceSubtitleLabel.constraintInsideTo(.height, cellView, multiplier: 0.028)
+        spaceSubtitleLabel.widthAnchorInSuperview(CGFloat(79).generateSizeForScreen)
+        spaceSubtitleLabel.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
         
-        locationInfoStackView.constraintOutsideTo(.top, spaceSubtitleLabel, 9)
+        locationInfoStackView.constraintOutsideTo(.top, spaceSubtitleLabel, CGFloat(9).generateSizeForScreen)
         locationInfoStackView.constraintInsideTo(.leading, spaceSubtitleLabel)
-        locationInfoStackView.constraintInsideTo(.width, cellView, multiplier: 0.507)
-        locationInfoStackView.constraintInsideTo(.height, cellView, multiplier: 0.16)
+        locationInfoStackView.widthAnchorInSuperview(CGFloat(170).generateSizeForScreen)
+        locationInfoStackView.heightAnchorInSuperview(CGFloat(80).generateSizeForScreen)
         
-        arrowButton.constraintOutsideTo(.top, reservedLabel, 69)
-        arrowButton.constraintInsideTo(.trailing, reservedLabel, -10)
+        arrowButton.constraintOutsideTo(.top, reservedLabel, CGFloat(69).generateSizeForScreen)
+        arrowButton.constraintInsideTo(.trailing, reservedLabel, CGFloat(-10).generateSizeForScreen)
     }
 }
