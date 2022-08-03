@@ -37,7 +37,6 @@ class Recuperar1View: UIViewController {
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -113,13 +112,9 @@ class Recuperar1View: UIViewController {
     
     private func addConstraints() {
         
-        NSLayoutConstraint.activate([
-            
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            label.topAnchor.constraint(equalTo: progressBarStackView.stack.bottomAnchor, constant: CGFloat(50).generateSizeForScreen),
-                                    
-        ])
+        label.constraintInsideTo(.left, view.safeAreaLayoutGuide, 22)
+        label.constraintInsideTo(.right, view.safeAreaLayoutGuide, -22)
+        label.constraintOutsideTo(.top, progressBarStackView.stack, 50)
         
         progressBarStackView.stack.constraintInsideTo(.top, imageLogo, CGFloat(65).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
