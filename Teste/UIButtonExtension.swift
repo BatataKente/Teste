@@ -104,7 +104,12 @@ extension UIButton {
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                        size: CGFloat(14).generateSizeForScreen)
-        self.imageView?.constraintInsideTo(.height, self, multiplier: 0.8)
+        self.imageView?.constraintInsideTo(.leading,
+                                           self, CGFloat(1).generateSizeForScreen)
+        self.imageView?.constraintInsideTo(.height,
+                                           self.titleLabel,
+                                           multiplier: 1.5)
+        self.imageView?.constraintOutsideTo(.trailing, self.titleLabel)
         self.imageView?.constraintInsideTo(.centerY, self)
         self.imageView?.constraintOutsideTo(.width, self.imageView)
     }
