@@ -49,6 +49,7 @@ extension UIButton {
     open func setToProgressBarButtonDefault(_ buttonImageName: String) {
         
         var buttonTitle = ""
+        let buttonMargins = CGFloat(2.5).generateSizeForScreen
         self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
         self.setImage(UIImage(named: buttonImageName), for: .normal)
         
@@ -56,47 +57,47 @@ extension UIButton {
 
         case IconsBravve.userBlue.rawValue:
 
-                buttonTitle = " Dados pessoais"
+                buttonTitle = "Dados pessoais"
 
             case IconsBravve.cellBlue.rawValue:
 
-                buttonTitle = " Celular"
+                buttonTitle = "Celular"
 
             case IconsBravve.emailBlue.rawValue:
 
-                buttonTitle = " Email"
+                buttonTitle = "Email"
 
             case IconsBravve.padlockBlue.rawValue:
 
-                buttonTitle = " Senha"
+                buttonTitle = "Senha"
 
             case IconsBravve.pencilBlue.rawValue:
 
-                buttonTitle = " Confirmação"
+                buttonTitle = "Confirmação"
             
             case IconsBravve.photoBlue.rawValue:
 
-                buttonTitle = " Foto"
+                buttonTitle = "Foto"
 
             case IconsBravve.noteBlue.rawValue:
 
-                buttonTitle = " Profissão"
+                buttonTitle = "Profissão"
 
             case IconsBravve.hobbiesBlue.rawValue:
 
-                buttonTitle = " Hobbies"
+                buttonTitle = "Hobbies"
 
             case IconsBravve.activiesBlue.rawValue:
 
-                buttonTitle = " Atividades de interesse"
+                buttonTitle = "Atividades de interesse"
             
             case IconsBravve.calendarBlue.rawValue:
 
-                buttonTitle = " Agendamento"
+                buttonTitle = "Agendamento"
                 
             case IconsBravve.creditBlue.rawValue:
 
-                buttonTitle = " Carteira"
+                buttonTitle = "Carteira"
 
             default: break
         }
@@ -104,12 +105,18 @@ extension UIButton {
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                        size: CGFloat(14).generateSizeForScreen)
+        
         self.imageView?.constraintInsideTo(.height,
                                            self.titleLabel,
-                                           multiplier: 1.5)
-        self.imageView?.constraintOutsideTo(.trailing, self.titleLabel)
-        self.imageView?.constraintInsideTo(.centerY, self)
+                                           multiplier: 2)
+        
+        self.imageView?.constraintInsideTo(.top, self, buttonMargins)
+        self.imageView?.constraintInsideTo(.leading, self, buttonMargins)
+        self.imageView?.constraintOutsideTo(.trailing, self.titleLabel, buttonMargins)
+        self.imageView?.constraintInsideTo(.bottom, self, buttonMargins)
         self.imageView?.constraintOutsideTo(.width, self.imageView)
+        
+        self.titleLabel?.constraintInsideTo(.trailing, self, buttonMargins)
     }
     
     open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
