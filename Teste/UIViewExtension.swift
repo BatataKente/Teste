@@ -29,7 +29,7 @@ extension UIView {
     }
     
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
-                                      _ constant: CGFloat = 22,
+                                      _ buttons: [UIButton] = [UIButton](),
                                       _ handler: @escaping UIActionHandler) {
         
         let backButton = UIButton()
@@ -40,7 +40,9 @@ extension UIView {
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        self.addSubviews([backButton, logoImageView])
+        let stackView = UIStackView(arrangedSubviews: buttons)
+        
+        self.addSubviews([backButton, logoImageView, stackView])
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
         logoImageView.constraintInsideTo(.top, self.safeAreaLayoutGuide, 65)

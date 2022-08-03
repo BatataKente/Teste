@@ -61,7 +61,7 @@ class NomeView: UIViewController {
                        ddisLabel: UILabel,
                        ddisButton: UIButton) = {
         
-        let stackMargins: CGFloat = 20
+        let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let smallFont = UIFont(name: FontsBravve.light.rawValue,
                                size: CGFloat(11).generateSizeForScreen)
         let font = UIFont(name: FontsBravve.medium.rawValue,
