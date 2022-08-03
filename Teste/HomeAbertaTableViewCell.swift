@@ -45,7 +45,7 @@ class HomeAbertaTableViewCell: UITableViewCell {
         
         let photoView = UIImageView()
         photoView.layer.cornerRadius = 12
-        photoView.image = UIImage(named: ImagesBravve.homeOpen.rawValue)
+        photoView.image = UIImage(named: ImagesBravve.homeOpen_1.rawValue)
         photoView.contentMode = .scaleToFill
         
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]

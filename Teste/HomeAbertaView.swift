@@ -72,7 +72,7 @@ class HomeAbertaView: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        filterButtons = createCapsuleButtons(["a"])
+        filterButtons = createCapsuleButtons(["asfgdsfgs", "fdsdfgsdf"])
         
         filterStackView.addArrangedSubviews(filterButtons)
     }

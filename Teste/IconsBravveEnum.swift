@@ -7,7 +7,7 @@
 
 //Enum for assets on app
 
-enum IconsBravve: String {
+public enum IconsBravve: String {
 
     case activiesBlue = "activiesBlue"
     case activiesGray = "activiesGray"
@@ -27,9 +27,9 @@ enum IconsBravve: String {
     case creditPink = "creditPink"
     case edit_blue = "edit-blue"
     case edit = "edit"
-    case ellipseGray = "Ellipse gray"
-    case ellipseGreen = "Ellipse green"
-    case ellipseRed = "Ellipse red"
+    case ellipseGray = "ellipseGray"
+    case ellipseGreen = "ellipseGreen"
+    case ellipseRed = "ellipseRed"
     case emailBlue = "emailBlue"
     case emailGray = "emailGray"
     case emailPink = "emailPink"
