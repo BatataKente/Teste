@@ -50,7 +50,6 @@ class FotoView: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = false
         imageView.image = UIImage(named: ImagesBravve.photo.rawValue)
-//        imageView.image = UIImage(named: "MrMadruga")
         imageView.clipsToBounds = true
         
         imageView.backgroundColor = .red
