@@ -26,8 +26,6 @@ class FotoView: UIViewController {
                                                 IconsBravve.activiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
         
-        stackView.spacing = 7
-        
         return stackView
     }()
     
