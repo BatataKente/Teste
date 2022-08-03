@@ -16,8 +16,10 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(systemName: ButtonsBravve.arrowBlue.rawValue), for: .normal)
-        self.tintColor = .systemBlue
+        self.setImage(UIImage(named: ButtonsBravve.arrowBlue.rawValue),
+                      for: .normal)
+        self.imageView?.widthAnchorInSuperview(CGFloat(15).generateSizeForScreen)
+        self.imageView?.heightAnchorInSuperview(CGFloat(10).generateSizeForScreen)
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
         self.changesSelectionAsPrimaryAction = true
@@ -67,7 +69,7 @@ extension UIButton {
             
         switch buttonImageName {
 
-            case IconsBravve.userBlue.rawValue:
+        case IconsBravve.userBlue.rawValue:
 
                 self.configuration?.title = " Dados pessoais"
 
@@ -115,7 +117,8 @@ extension UIButton {
         }
         
         self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: 14)
+        self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                       size: CGFloat(14).generateSizeForScreen)
     }
     
     open func setToButtonDefault(_ aboveWhom: Any?,
@@ -147,14 +150,8 @@ extension UIButton {
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
         
-        if isIpad() {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 25)
-        }
-        else {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        }
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,
+                                       size: CGFloat(16).generateSizeForScreen)
     }
     
     open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
@@ -169,14 +166,8 @@ extension UIButton {
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, aboveWhom)
         
-        if isIpad() {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 25)
-        }
-        else {
-            
-            self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        }
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,
+                                       size: CGFloat(25).generateSizeForScreen)
     }
     
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
@@ -187,15 +178,9 @@ extension UIButton {
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
-        else {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
+        self.constraintInsideTo(.height,
+                                superview?.safeAreaLayoutGuide,
+                                multiplier: CGFloat(0.04).generateSizeForScreen)
+        self.constraintOutsideTo(.width, self)
     }
 }
