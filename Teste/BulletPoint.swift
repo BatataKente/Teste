@@ -28,6 +28,9 @@ class BulletPoint: UIStackView {
         ellipseImage.contentMode = .scaleAspectFit
         ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         
+        ellipseImage.widthAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen).isActive = true
+        ellipseImage.heightAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen).isActive = true
+        
         label.text = labelText
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
