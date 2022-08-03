@@ -35,7 +35,7 @@ class TextField: UIStackView {
         textField.isSecureTextEntry = true
         
         shadow.backgroundColor = .blue
-        shadow.layer.cornerRadius = 8
+        shadow.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         shadow.isHidden = true
         
         
@@ -44,7 +44,6 @@ class TextField: UIStackView {
             
             textFieldButton.setImage(UIImage(named: buttonImageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
             textFieldButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
-            
             
             let textFieldStackView: UIStackView = {
                 let stackView = UIStackView(arrangedSubviews: [label, textField])
@@ -56,10 +55,10 @@ class TextField: UIStackView {
             let stackView: UIStackView = {
                 let stackView = UIStackView(arrangedSubviews: [textFieldStackView, textFieldButton])
                 stackView.backgroundColor = .white
-                stackView.layer.cornerRadius = 8
+                stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
                 stackView.isLayoutMarginsRelativeArrangement = true
-                stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-                stackView.layer.borderWidth = 1
+                stackView.layoutMargins = UIEdgeInsets(top: CGFloat(10).generateSizeForScreen, left: CGFloat(10).generateSizeForScreen, bottom: CGFloat(10).generateSizeForScreen, right: CGFloat(10).generateSizeForScreen)
+                stackView.layer.borderWidth = CGFloat(1).generateSizeForScreen
                 stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
                 stackView.translatesAutoresizingMaskIntoConstraints = false
                 stackView.distribution = .equalCentering
@@ -74,11 +73,11 @@ class TextField: UIStackView {
             let stackView: UIStackView = {
                 let stackView = UIStackView(arrangedSubviews: [label, textField])
                 stackView.backgroundColor = .white
-                stackView.layer.cornerRadius = 8
+                stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
                 stackView.isLayoutMarginsRelativeArrangement = true
-                stackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+                stackView.layoutMargins = UIEdgeInsets(top: CGFloat(10).generateSizeForScreen, left: CGFloat(10).generateSizeForScreen, bottom: CGFloat(10).generateSizeForScreen, right: CGFloat(10).generateSizeForScreen)
                 stackView.axis = .vertical
-                stackView.layer.borderWidth = 1
+                stackView.layer.borderWidth = CGFloat(1).generateSizeForScreen
                 stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
                 stackView.translatesAutoresizingMaskIntoConstraints = false
                 stackView.distribution = .equalCentering

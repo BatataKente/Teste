@@ -38,7 +38,7 @@ class BulletPoint: UIStackView {
             let stackView = UIStackView(arrangedSubviews: [ellipseImage, label])
             stackView.alignment = .center
             stackView.distribution = .fillProportionally
-            stackView.spacing = 5
+            stackView.spacing = CGFloat(5).generateSizeForScreen
             stackView.translatesAutoresizingMaskIntoConstraints = false
             return stackView
         }()

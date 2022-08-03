@@ -128,7 +128,7 @@ class RecuperacaoDeSenha3: UIViewController {
         sectionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         sectionLabel.constraintInsideTo(.width, view.safeAreaLayoutGuide, CGFloat(331).generateSizeForScreen)
         
-        passwordStackView.constraintOutsideTo(.top, sectionLabel, 10)
+        passwordStackView.constraintOutsideTo(.top, sectionLabel, CGFloat(10).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         passwordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
         passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
