@@ -20,15 +20,28 @@ extension UIViewController {
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         let logoImageView = UIImageView()
-        logoImageView.setLogoToDefault()
+        logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
         self.view.addSubviews([backButton, logoImageView])
+        
+        logoImageView.constraintInsideTo(.centerX, self.view.safeAreaLayoutGuide)
+        logoImageView.constraintInsideTo(.top, self.view.safeAreaLayoutGuide, 65)
+        
+        logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+        logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
+        
+        backButton.imageView?.constraintInsideTo(.height,
+                                                 backButton,
+                                                 multiplier: 0.5)
+        backButton.imageView?.constraintInsideTo(.width,
+                                                 backButton,
+                                                 multiplier: 0.5)
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
         
         backButton.constraintInsideTo(.centerY, logoImageView)
         backButton.constraintInsideTo(.height, logoImageView)
         backButton.constraintOutsideTo(.width, backButton)
-        backButton.constraintInsideTo(.leading,
-                                      self, 30)
+        backButton.constraintInsideTo(.leading, self.view.safeAreaLayoutGuide, 30)
     }
     
     open func createCapsuleButtons(_ buttonTitles: [String],
@@ -57,7 +70,7 @@ extension UIViewController {
             
             switch name{
                 
-                case IconsBravve.userGray.rawValue:
+            case IconsBravve.userGray.rawValue:
                     
                     let handler = {(action: UIAction) in
                         

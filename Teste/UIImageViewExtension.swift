@@ -73,11 +73,7 @@ extension UIImageView {
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
         
-        self.constraintInsideTo(.height,
-                                superview?.safeAreaLayoutGuide,
-                                multiplier: CGFloat(0.045).generateSizeForScreen)
-        self.constraintInsideTo(.width,
-                                superview?.safeAreaLayoutGuide,
-                                multiplier: CGFloat(0.20).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+        self.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
     }
 }
