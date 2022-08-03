@@ -14,7 +14,8 @@ extension UILabel {
                            _ textAlignment: NSTextAlignment = .center) {
         
         self.text = text
-        self.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
+        self.font = UIFont(name: FontsBravve.light.rawValue,
+                           size: CGFloat(16).generateSizeForScreen)
         self.numberOfLines = 0
         self.textAlignment = textAlignment
     }

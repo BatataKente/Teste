@@ -31,7 +31,7 @@ class RecuperacaoDeSenha3: UIViewController {
         
         let buttons = createProgressBarButtons([IconsBravve.emailGray.rawValue,
                                                 IconsBravve.padlockBlue.rawValue])
-        buttons[1].configuration?.title = " Recuperar Senha"
+        buttons[1].setTitle("  Recuperação de senha", for: .normal)
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.spacing = CGFloat(7).generateSizeForScreen
         
@@ -159,7 +159,7 @@ class RecuperacaoDeSenha3: UIViewController {
 
         rightStackView.constraintOutsideTo(.top, confirmPasswordStackView, CGFloat(10).generateSizeForScreen)
         rightStackView.constraintInsideTo(.trailing, confirmPasswordStackView)
-        rightStackView.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+        rightStackView.widthAnchorInSuperview(CGFloat(100).generateSizeForScreen)
         rightStackView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         
     }
