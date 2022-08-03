@@ -94,7 +94,7 @@ class HobbiesView: UIViewController {
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(named: "buttonPink")
-        button.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+        button.addTarget(HobbiesView.self, action: #selector(continueButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
     }()
@@ -109,7 +109,7 @@ class HobbiesView: UIViewController {
         borderBottom.backgroundColor = UIColor(named: "blueNav")
         button.addSubview(borderBottom)
         button.setTitleColor(UIColor(named: "blueNav"), for: .normal)
-        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
+        button.addTarget(HobbiesView.self, action: #selector(skipButtonTapped), for: .touchUpInside)
         return button
     }()
     
