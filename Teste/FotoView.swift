@@ -49,8 +49,10 @@ class FotoView: UIViewController {
         
         let imageView = UIImageView()
         imageView.layer.masksToBounds = false
-        imageView.image = UIImage(named: "MrMadruga")
+        imageView.image = UIImage(named: ImagesBravve.photo.rawValue)
         imageView.clipsToBounds = true
+        
+        imageView.backgroundColor = .red
         
         return imageView
     }()
@@ -58,7 +60,8 @@ class FotoView: UIViewController {
     private let editButton: UIButton = {
         
         let editButton = UIButton()
-        editButton.setImage(UIImage(named: "photoPink"), for: .normal)
+        editButton.setImage(UIImage(named: IconsBravve.photoPink.rawValue),
+                            for: .normal)
         
         return editButton
     }()
@@ -90,15 +93,20 @@ class FotoView: UIViewController {
     
     private func setupConstraints() {
         
-        progressBarStackView.constraintOutsideTo(.top, bravveIcon, 50)
+        progressBarStackView.constraintOutsideTo(.top, bravveIcon,
+                                                 CGFloat(50).generateSizeForScreen)
         progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         
-        infoLabel.constraintOutsideTo(.top, progressBarStackView, 50)
-        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
-        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
+        infoLabel.constraintOutsideTo(.top, progressBarStackView,
+                                      CGFloat(50).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         
         imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 30)
+        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide,
+                                     CGFloat(30).generateSizeForScreen)
         imageView.sizeAnchorInSuperview(view.frame.size.height/5)
         imageView.layer.cornerRadius = view.frame.size.height/10
         
