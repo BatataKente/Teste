@@ -114,13 +114,14 @@ class Recuperar1View: UIViewController {
         
         label.constraintInsideTo(.left, view.safeAreaLayoutGuide, 22)
         label.constraintInsideTo(.right, view.safeAreaLayoutGuide, -22)
-        label.constraintOutsideTo(.top, progressBarStackView.stack, 50)
+        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(50).generateSizeForScreen)
+
         
-        progressBarStackView.stack.constraintInsideTo(.top, imageLogo, CGFloat(65).generateSizeForScreen)
+        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
-        stackViewEmail.constraintOutsideTo(.top, label, CGFloat(50).generateSizeForScreen)
+        stackViewEmail.constraintOutsideTo(.top, label, CGFloat(65).generateSizeForScreen)
         stackViewEmail.constraintInsideTo(.leading, label)
         stackViewEmail.constraintInsideTo(.trailing, label)
     
@@ -186,5 +187,3 @@ class Recuperar1View: UIViewController {
     
     
 }
-
-
