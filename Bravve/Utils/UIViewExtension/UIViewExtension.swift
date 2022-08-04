@@ -12,7 +12,7 @@ extension UIView {
     
     open func isIpad() -> Bool {
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+        if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
             
             return true
         }

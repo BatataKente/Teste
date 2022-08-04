@@ -25,8 +25,8 @@ extension UIImageView {
             
                 self.image = UIImage(named: imageName.rawValue)
             
-            self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
-                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         
             case ImagesBravve.wayEmail:
             
@@ -40,9 +40,9 @@ extension UIImageView {
                 self.image = UIImage(named: imageName.rawValue)
             
                 self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
-                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-                self.heightAnchorInSuperview(110)
-                self.widthAnchorInSuperview(280)
+                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(93).generateSizeForScreen)
+                self.widthAnchorInSuperview(CGFloat(230).generateSizeForScreen)
             
             case ImagesBravve.wayReserv_1:
             
@@ -50,8 +50,8 @@ extension UIImageView {
             
                 self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-                self.heightAnchorInSuperview(140)
-                self.widthAnchorInSuperview(150)
+                self.heightAnchorInSuperview(CGFloat(140).generateSizeForScreen)
+                self.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
             
             case ImagesBravve.wayReserv_2:
             
@@ -59,8 +59,17 @@ extension UIImageView {
             
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide)
-                self.heightAnchorInSuperview(200)
-                self.widthAnchorInSuperview(150)
+                self.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
+                self.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+                
+            case ImagesBravve.wayLogin:
+            
+                self.image = UIImage(named: imageName.rawValue)
+            
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(190).generateSizeForScreen)
+                self.widthAnchorInSuperview(CGFloat(200).generateSizeForScreen)
             
             default: return
         }
@@ -71,17 +80,9 @@ extension UIImageView {
         self.image = UIImage(named: ImageName.rawValue)
         
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
+        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.045)
-            self.constraintInsideTo(.width, superview?.safeAreaLayoutGuide, multiplier: 0.20)
-        }
-        else {
-
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.constraintInsideTo(.width, superview?.safeAreaLayoutGuide, multiplier: 0.3)
-        }
+        self.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+        self.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
     }
 }
