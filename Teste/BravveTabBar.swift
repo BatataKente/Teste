@@ -13,13 +13,9 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
         
         switch item.image {
             
-            case UIImage(named: ButtonsBravve.locationPink.rawValue):
+            case UIImage(named: ButtonsBravve.locationGray.rawValue):
             
                 print("Toma!!!")
-            
-            case UIImage(named: ButtonsBravve.calendarGray.rawValue):
-            
-                print("Eu tenho a força!!")
             
             default:
             
@@ -29,19 +25,16 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
     
     override init(frame: CGRect) {
         
-        let firstTabBarItem = UITabBarItem()
-        firstTabBarItem.image = UIImage(named: ButtonsBravve.locationPink.rawValue)
+        let locationTabBarItem = UITabBarItem()
+        locationTabBarItem.image = UIImage(named: ButtonsBravve.locationGray.rawValue)
         
-        let secondTabBarItem = UITabBarItem()
-        secondTabBarItem.image = UIImage(named: ButtonsBravve.calendarGray.rawValue)
-        
-        let thirdyTabBarItem = UITabBarItem()
-        thirdyTabBarItem.image = UIImage(named: ButtonsBravve.alert.rawValue)
+        let signInTabBarItem = UITabBarItem()
+        signInTabBarItem.image = UIImage(named: ButtonsBravve.exitGray.rawValue)
         
         super.init(frame: frame)
         
-        self.items = [firstTabBarItem, secondTabBarItem, thirdyTabBarItem]
-        self.barTintColor = .red
+        self.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        self.items = [locationTabBarItem, signInTabBarItem]
         
         self.delegate = self
     }
