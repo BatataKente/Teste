@@ -9,7 +9,7 @@ import UIKit
 
 class BulletPoint: UIStackView {
     
-    var labelText: String
+    private var labelText: String
     var label = UILabel()
     var ellipseImage = UIImageView()
     
