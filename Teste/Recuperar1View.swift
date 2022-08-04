@@ -24,7 +24,8 @@ class Recuperar1View: UIViewController {
                                                 IconsBravve.padlockGray.rawValue
                                                 ])
         let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 7
+        buttons[0].setTitle(" Email", for: .normal)
+        stackView.spacing = CGFloat(5).generateSizeForScreen
         
         return (stack: stackView,
                 buttons: buttons)
@@ -57,11 +58,12 @@ class Recuperar1View: UIViewController {
         return label
     }()
     
-    let stackMargins: CGFloat = 20
+    let stackMargins: CGFloat =  CGFloat(12).generateSizeForScreen
         
     private lazy var stackViewEmail: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
-        stackView.spacing = 10
+        stackView.spacing =  CGFloat(5).generateSizeForScreen
+        stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         stackView.layer.borderColor =  UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
@@ -112,23 +114,23 @@ class Recuperar1View: UIViewController {
     
     private func addConstraints() {
         
-        label.constraintInsideTo(.left, view.safeAreaLayoutGuide, 22)
-        label.constraintInsideTo(.right, view.safeAreaLayoutGuide, -22)
-        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(50).generateSizeForScreen)
-
-        
         progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
+        label.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(50).generateSizeForScreen)
+        
         stackViewEmail.constraintOutsideTo(.top, label, CGFloat(65).generateSizeForScreen)
         stackViewEmail.constraintInsideTo(.leading, label)
         stackViewEmail.constraintInsideTo(.trailing, label)
+        stackViewEmail.heightAnchorInSuperview( CGFloat(65).generateSizeForScreen)
     
         customShaddow.constraintInsideTo(.top, stackViewEmail)
         customShaddow.constraintInsideTo(.leading, stackViewEmail)
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
-        customShaddow.constraintTo(.bottom, stackViewEmail, Ride.up.rawValue)
+        customShaddow.constraintTo(.bottom, stackViewEmail, CGFloat(1).generateSizeForScreen)
         
     }
     
@@ -187,3 +189,4 @@ class Recuperar1View: UIViewController {
     
     
 }
+
