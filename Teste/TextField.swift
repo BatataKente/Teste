@@ -2,9 +2,9 @@ import UIKit
 
 class TextField: UIStackView {
     
-    var labelText: String
+    private var labelText: String
     var label = UILabel()
-    var buttonImageName: String
+    private var buttonImageName: String
     var textField = UITextField()
     var textFieldButton = UIButton()
     var shadow = UIView()
