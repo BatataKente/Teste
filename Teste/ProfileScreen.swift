@@ -1,0 +1,457 @@
+//
+//  ProfileScreen.swift
+//  Teste
+//
+//  Created by Rayra Jovaneli on 8/4/22.
+//
+
+import UIKit
+
+class EditProfile: UIViewController{
+    let wayImage: UIImageView = {
+        let image = UIImageView()
+        image.setWayToDefault(.wayName)
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    let profilePic: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "ProfilePic")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
+    
+    let helloLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Olá, Ana!"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(30).generateSizeForScreen)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "ana.maria@teste.com.br"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 1, green: 0.125, blue: 0.475, alpha: 0.1).cgColor
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 12
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let infoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Foursys"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let subInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Conta corporativa"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 1, green: 0.125, blue: 0.475, alpha: 0.1).cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let bravveInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Bravve"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let subBravveInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Conta corporativa"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let infoImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "info.circle")
+        image.tintColor = UIColor(named: "NewBlue")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let reservationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Histórico de reservas"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let nextPageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "gofowardbutton"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    var separatorView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let infoImage1: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "info.circle")
+        image.tintColor = UIColor(named: "NewBlue")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let helpLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Ajuda"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let nextPageButton2: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "gofowardbutton"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    var separatorView3: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let infoImage2: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "text.book.closed")
+        image.tintColor = UIColor(named: "NewBlue")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let policyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Política e Termos de uso"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let nextPageButton3: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "gofowardbutton"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    var separatorView4: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let infoImage3: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "logout")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let logoutLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sair"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let nextPageButton4: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "gofowardbutton"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    var separatorView5: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var smallView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1).cgColor
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var numberLabel: UILabel = {
+        let label = UILabel()
+        label.text = "112"
+        label.textColor = UIColor(named: "BravvePink")
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    var creditLabel: UILabel = {
+        let label = UILabel()
+        label.text = "créditos"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    var smallView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1).cgColor
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var numberLabel2: UILabel = {
+        let label = UILabel()
+        label.text = "312"
+        label.textColor = UIColor(named: "BravvePink")
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    var creditLabel2: UILabel = {
+        let label = UILabel()
+        label.text = "créditos"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "Background")
+        view.addSubviews([wayImage,profilePic, helloLabel, subtitleLabel, backView, infoLabel, subInfoLabel, separatorView, bravveInfoLabel, subBravveInfoLabel, infoImage, reservationLabel, nextPageButton, separatorView2, infoImage1, helpLabel, nextPageButton2, separatorView3, infoImage2, policyLabel, nextPageButton3, separatorView4, infoImage3, logoutLabel, nextPageButton4, separatorView5, smallView, numberLabel, creditLabel, smallView2, numberLabel2, creditLabel2])
+        
+        nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
+        nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
+        nextPageButton3.addTarget(self, action: #selector(policyPage), for: .touchUpInside)
+        nextPageButton3.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
+        
+        addConstraints()
+    }
+    
+    @objc func reservationPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    @objc func helpPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    @objc func policyPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    @objc func goOutPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    func addConstraints(){
+        
+        wayImage.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        wayImage.constraintInsideTo(.left, view.safeAreaLayoutGuide)
+        
+        profilePic.widthAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
+        profilePic.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen).isActive = true
+        profilePic.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        profilePic.constraintInsideTo(.top, view.safeAreaLayoutGuide, CGFloat(39).generateSizeForScreen)
+        
+        helloLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        helloLabel.constraintOutsideTo(.top, profilePic, CGFloat(9).generateSizeForScreen)
+        helloLabel.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
+
+        subtitleLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        subtitleLabel.constraintOutsideTo(.top, helloLabel, CGFloat(10).generateSizeForScreen)
+        subtitleLabel.heightAnchor.constraint(equalToConstant: CGFloat(18.13).generateSizeForScreen).isActive = true
+        
+        backView.constraintOutsideTo(.top, subtitleLabel, CGFloat(40).generateSizeForScreen)
+        backView.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        backView.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
+        backView.heightAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
+        
+        infoLabel.constraintInsideTo(.top, backView, CGFloat(20).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        infoLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        subInfoLabel.constraintOutsideTo(.top, infoLabel, CGFloat(10).generateSizeForScreen)
+        subInfoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        subInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(15).generateSizeForScreen).isActive = true
+        
+        separatorView.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView.constraintInsideTo(.right, backView, CGFloat(-20).generateSizeForScreen)
+        separatorView.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        separatorView.constraintInsideTo(.top, backView, CGFloat(75).generateSizeForScreen)
+
+        bravveInfoLabel.constraintOutsideTo(.top, separatorView, CGFloat(15).generateSizeForScreen)
+        bravveInfoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        bravveInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        subBravveInfoLabel.constraintOutsideTo(.top, bravveInfoLabel, CGFloat(10).generateSizeForScreen)
+        subBravveInfoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        subBravveInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(15).generateSizeForScreen).isActive = true
+
+        infoImage.constraintOutsideTo(.top, backView, CGFloat(38).generateSizeForScreen)
+        infoImage.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        infoImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        infoImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        reservationLabel.constraintOutsideTo(.top, backView, CGFloat(38).generateSizeForScreen)
+        reservationLabel.constraintOutsideTo(.left, infoImage, CGFloat(27).generateSizeForScreen)
+        reservationLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
+        nextPageButton.constraintOutsideTo(.top, backView, CGFloat(35).generateSizeForScreen)
+        nextPageButton.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView2.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView2.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
+        separatorView2.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        separatorView2.constraintOutsideTo(.top, reservationLabel, CGFloat(20).generateSizeForScreen)
+        
+        infoImage1.constraintOutsideTo(.top, separatorView2, CGFloat(25).generateSizeForScreen)
+        infoImage1.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        infoImage1.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        infoImage1.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        helpLabel.constraintOutsideTo(.top, separatorView2, CGFloat(25).generateSizeForScreen)
+        helpLabel.constraintOutsideTo(.left, infoImage1, CGFloat(27).generateSizeForScreen)
+        helpLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton2.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
+        nextPageButton2.constraintOutsideTo(.top, separatorView2, CGFloat(22).generateSizeForScreen)
+        nextPageButton2.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton2.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView3.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView3.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
+        separatorView3.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        separatorView3.constraintOutsideTo(.top, helpLabel, CGFloat(20).generateSizeForScreen)
+        
+        infoImage2.constraintOutsideTo(.top, separatorView3, CGFloat(25).generateSizeForScreen)
+        infoImage2.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        infoImage2.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        infoImage2.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        policyLabel.constraintOutsideTo(.top, separatorView3, CGFloat(25).generateSizeForScreen)
+        policyLabel.constraintOutsideTo(.left, infoImage2, CGFloat(27).generateSizeForScreen)
+        policyLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton3.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
+        nextPageButton3.constraintOutsideTo(.top, separatorView3, CGFloat(22).generateSizeForScreen)
+        nextPageButton3.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton3.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView4.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView4.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
+        separatorView4.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        separatorView4.constraintOutsideTo(.top, policyLabel, CGFloat(20).generateSizeForScreen)
+        
+        infoImage3.constraintOutsideTo(.top, separatorView4, CGFloat(25).generateSizeForScreen)
+        infoImage3.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        infoImage3.heightAnchor.constraint(equalToConstant: CGFloat(12).generateSizeForScreen).isActive = true
+        infoImage3.widthAnchor.constraint(equalToConstant: CGFloat(16).generateSizeForScreen).isActive = true
+        
+        logoutLabel.constraintOutsideTo(.top, separatorView4, CGFloat(23).generateSizeForScreen)
+        logoutLabel.constraintOutsideTo(.left, infoImage3, CGFloat(27).generateSizeForScreen)
+        logoutLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton4.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
+        nextPageButton4.constraintOutsideTo(.top, separatorView4, CGFloat(22).generateSizeForScreen)
+        nextPageButton4.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton4.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView5.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView5.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
+        separatorView5.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        separatorView5.constraintOutsideTo(.top, logoutLabel, CGFloat(20).generateSizeForScreen)
+        
+        smallView.constraintInsideTo(.top, backView, CGFloat(29.67).generateSizeForScreen)
+        smallView.constraintInsideTo(.right, backView, CGFloat(-17).generateSizeForScreen)
+        smallView.heightAnchor.constraint(equalToConstant: CGFloat(29).generateSizeForScreen).isActive = true
+        smallView.widthAnchor.constraint(equalToConstant: CGFloat(94).generateSizeForScreen).isActive = true
+        
+        numberLabel.constraintInsideTo(.left, smallView, CGFloat(12).generateSizeForScreen)
+        numberLabel.constraintInsideTo(.top, smallView, CGFloat(6.69).generateSizeForScreen)
+        numberLabel.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+        
+        creditLabel.constraintInsideTo(.right, smallView, CGFloat(-12).generateSizeForScreen)
+        creditLabel.constraintInsideTo(.top, smallView,  CGFloat(6.69).generateSizeForScreen)
+        creditLabel.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+        
+        smallView2.constraintInsideTo(.top, separatorView, CGFloat(18.87).generateSizeForScreen)
+        smallView2.constraintInsideTo(.right, backView, CGFloat(-17).generateSizeForScreen)
+        smallView2.heightAnchor.constraint(equalToConstant: CGFloat(29).generateSizeForScreen).isActive = true
+        smallView2.widthAnchor.constraint(equalToConstant: CGFloat(94).generateSizeForScreen).isActive = true
+        
+        numberLabel2.constraintInsideTo(.left, smallView2, CGFloat(12).generateSizeForScreen)
+        numberLabel2.constraintInsideTo(.top, smallView2, CGFloat(6.69).generateSizeForScreen)
+        numberLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+
+        
+        creditLabel2.constraintInsideTo(.right, smallView2, CGFloat(-12).generateSizeForScreen)
+        creditLabel2.constraintInsideTo(.top, smallView2, CGFloat(6.69).generateSizeForScreen)
+        creditLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+            }
+}
