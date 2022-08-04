@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        window.rootViewController = tabBarController
         
-        window.rootViewController = FotoView()
+        window.rootViewController = NomeView()
         window.makeKeyAndVisible()
         
         self.window = window
