@@ -9,13 +9,13 @@ import UIKit
 
 class MinhasReservas: UIViewController {
     
-    let customBar = UIView()
+    private let customBar = UIView()
     
-    let topRightWay = UIImageView()
+    private let topRightWay = UIImageView()
     
-    let bottomLeftWay = UIImageView()
+    private let bottomLeftWay = UIImageView()
     
-    let myTableView = UITableView()
+    private let myTableView = UITableView()
     
 
     override func viewDidLoad() {
@@ -50,12 +50,12 @@ class MinhasReservas: UIViewController {
         setDefaults()
     }
     
-    func setDefaults() {
+    private func setDefaults() {
         topRightWay.setWayToDefault(.wayReserv_2)
         bottomLeftWay.setWayToDefault(.wayReserv_1)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         myTableView.constraintOutsideTo(.top, customBar, CGFloat(13).generateSizeForScreen)
         myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
