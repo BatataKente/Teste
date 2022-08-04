@@ -10,12 +10,8 @@ import UIKit
 
 class ConfirmarDadosView: UIViewController {
     
-    private let backgroundImage1: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.wayCell.rawValue)
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
+    
+    private let backgroundImage1 = UIImageView()
     
     private let backgroundImage2: UIImageView = {
         let image = UIImageView()
@@ -33,20 +29,18 @@ class ConfirmarDadosView: UIViewController {
                                             buttons: [UIButton]) = {
         
         let buttons = createProgressBarButtons([
-                                                IconsBravve.userGray.rawValue,
-                                                IconsBravve.cellGray.rawValue,
-                                                IconsBravve.emailGray.rawValue,
-                                                IconsBravve.padlockGray.rawValue,
-                                                IconsBravve.pencilBlue.rawValue
-                                               ])
+            IconsBravve.userGray.rawValue,
+            IconsBravve.cellGray.rawValue,
+            IconsBravve.emailGray.rawValue,
+            IconsBravve.padlockGray.rawValue,
+            IconsBravve.pencilBlue.rawValue
+        ])
         let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 7
+        buttons[4].setTitle(" Confirmação", for: .normal)
         
         return (stack: stackView,
                 buttons: buttons)
     }()
-    
-    
     
     private let label: UILabel = {
         let label = UILabel()
@@ -59,18 +53,11 @@ class ConfirmarDadosView: UIViewController {
         return label
     }()
     
-    private let contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let labelName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        //label.text = "Ana Maria Silva"
+        // label.text = "Ana Maria Silva"
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,7 +67,7 @@ class ConfirmarDadosView: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-       // label.text = "11 99686 2647"
+        // label.text = "11 99686 2647"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -89,7 +76,7 @@ class ConfirmarDadosView: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-       // label.text = "teste@bravve.com.br"
+        // label.text = "teste@bravve.com.br"
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -107,7 +94,7 @@ class ConfirmarDadosView: UIViewController {
         let button = myButton()
         return button
     }()
-        
+    
     private lazy var stackViewName: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [labelName, editButton1])
         stackView.alignment = .fill
@@ -121,7 +108,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
-        }()
+    }()
     
     private lazy var stackViewCell: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [labelCell, editButton2])
@@ -136,7 +123,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
-        }()
+    }()
     
     private lazy var stackViewEmail: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [labelEmail, editButton3])
@@ -151,7 +138,7 @@ class ConfirmarDadosView: UIViewController {
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
-        }()
+    }()
     
     private lazy var stackViewLabels: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [stackViewName, stackViewCell, stackViewEmail])
@@ -160,31 +147,20 @@ class ConfirmarDadosView: UIViewController {
         stackView.spacing = 12
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
-        }()
-    
-    private let buttonContinue: UIButton = {
-        let button = UIButton()
-        button.setTitle("Continuar", for: .normal)
-        button.titleLabel?.textColor = UIColor(named: ColorsBravve.cards.rawValue)
-        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
-        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
+    
+    private let buttonContinue = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.setToDefaultBackgroundColor()
         
-        view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, contentView])
-        contentView.addSubviews([backgroundImage1, stackViewLabels, buttonContinue])
+        view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, backgroundImage1, stackViewLabels, buttonContinue])
         
         defaults()
         addConstraints()
         addTargets()
-      
         
     }
     
@@ -199,51 +175,36 @@ class ConfirmarDadosView: UIViewController {
         
         buttonBack.setToBackButtonDefault(.backPink)
         imageLogo.setLogoToDefault()
+        buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
+        backgroundImage1.setWayToDefault(.wayCell)
         
     }
     
     private func addConstraints() {
         
-        NSLayoutConstraint.activate([
+        label.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
+        label.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
+        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(40).generateSizeForScreen)
         
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-            label.topAnchor.constraint(equalTo: progressBarStackView.stack.bottomAnchor, constant: 50),
-            
-            stackViewName.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07),
-            editButton1.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.095),
-            
-            stackViewCell.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07),
-            editButton2.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.095),
-            
-            stackViewEmail.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07),
-            editButton3.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.095),
-            
-            stackViewLabels.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            stackViewLabels.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
-            stackViewLabels.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22),
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50),
-            contentView.heightAnchor.constraint(equalToConstant: view.frame.height/2.7),
-            buttonContinue.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.068),
-            buttonContinue.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22),
-            buttonContinue.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
-            buttonContinue.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-          
-            
-            ])
+        stackViewName.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        stackViewCell.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        stackViewEmail.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, 50)
+        editButton1.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButton2.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButton3.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        stackViewLabels.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        stackViewLabels.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        stackViewLabels.constraintOutsideTo(.top, label, CGFloat(40).generateSizeForScreen)
+        
+        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         progressBarStackView.stack.heightAnchorInSuperview()
         
-        backgroundImage1.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide)
-        backgroundImage1.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, -60)
-        
         backgroundImage2.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         backgroundImage2.constraintInsideTo(.top, view.safeAreaLayoutGuide)
-        backgroundImage2.heightAnchorInSuperview(130)
+        backgroundImage2.heightAnchorInSuperview(120)
         backgroundImage2.widthAnchorInSuperview(280)
     }
     
@@ -275,7 +236,7 @@ class ConfirmarDadosView: UIViewController {
     @objc func actionButtonPersonalData() {
         print("dados pessoais")
     }
-   
+    
     @objc func actionButtonCell() {
         print("celular")
     }
@@ -304,5 +265,6 @@ class ConfirmarDadosView: UIViewController {
         print("tela email")
     }
 }
+
 
 
