@@ -49,6 +49,7 @@
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
 		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
+		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
 		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
+		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +178,7 @@
 				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
+				C616D877289C40C40045AEED /* ProfileScreen.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
@@ -293,6 +296,7 @@
 				1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
+				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
