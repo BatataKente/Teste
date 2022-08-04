@@ -9,7 +9,7 @@ import UIKit
 
 class ReservaCell: UITableViewCell {
     
-    let cellView: UIView = {
+    private let cellView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +17,7 @@ class ReservaCell: UITableViewCell {
         return view
     }()
     
-    let typeTagLabel: UILabel = {
+    private let typeTagLabel: UILabel = {
         let label = UILabel()
         label.text = "BOXOFFICE"
         label.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
@@ -28,7 +28,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let topTitleLabel: UILabel = {
+    private let topTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Numa esquina"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -37,7 +37,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let bottomTitleLabel: UILabel = {
+    private let bottomTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "charmosa, um hotel"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -46,14 +46,14 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let spaceImage: UIImageView = {
+    private let spaceImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: ImagesBravve.imageReservs_1.rawValue)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    let spaceNameLabel: UILabel = {
+    private let spaceNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hotel Saint"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -62,7 +62,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let reservedLabel: UILabel = {
+    private let reservedLabel: UILabel = {
         let label = UILabel()
         label.text = "RESERVADO"
         label.backgroundColor = UIColor(named: ColorsBravve.reserved.rawValue)
@@ -73,7 +73,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let spaceSubtitleLabel: UILabel = {
+    private let spaceSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "UM Coffee Co."
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -82,7 +82,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let locationLabel: UILabel = {
+    private let locationLabel: UILabel = {
         let label = UILabel()
         label.text = "São Paulo / Jardim Paulistano"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -91,7 +91,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "21/01/2022 - 22/01/2022"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -100,7 +100,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let hourLabel: UILabel = {
+    private let hourLabel: UILabel = {
         let label = UILabel()
         label.text = "9h às 18h"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -109,7 +109,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    let spaceTypeLabel: UILabel = {
+    private let spaceTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "Espaço privativo"
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -118,7 +118,7 @@ class ReservaCell: UITableViewCell {
         return label
     }()
     
-    lazy var locationInfoStackView: UIStackView = {
+    private lazy var locationInfoStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [locationLabel, dateLabel, hourLabel, spaceTypeLabel])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -126,7 +126,7 @@ class ReservaCell: UITableViewCell {
         return stackView
     }()
     
-    let arrowButton: UIButton = {
+    private let arrowButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -149,7 +149,7 @@ class ReservaCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         
         cellView.constraintInsideTo(.top, contentView)
         cellView.constraintInsideTo(.leading, contentView)
