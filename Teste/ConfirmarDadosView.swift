@@ -16,7 +16,6 @@ class ConfirmarDadosView: UIViewController {
     private let backgroundImage2: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: ImagesBravve.wayConfirm.rawValue)
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -49,7 +48,6 @@ class ConfirmarDadosView: UIViewController {
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -59,7 +57,6 @@ class ConfirmarDadosView: UIViewController {
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         // label.text = "Ana Maria Silva"
         label.adjustsFontSizeToFitWidth = true
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -68,7 +65,6 @@ class ConfirmarDadosView: UIViewController {
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         // label.text = "11 99686 2647"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -78,7 +74,6 @@ class ConfirmarDadosView: UIViewController {
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         // label.text = "teste@bravve.com.br"
         label.adjustsFontSizeToFitWidth = true
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -106,7 +101,6 @@ class ConfirmarDadosView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -121,7 +115,6 @@ class ConfirmarDadosView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -136,7 +129,6 @@ class ConfirmarDadosView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -145,7 +137,6 @@ class ConfirmarDadosView: UIViewController {
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 12
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -167,7 +158,6 @@ class ConfirmarDadosView: UIViewController {
     func myButton() -> UIButton {
         let button = UIButton()
         button.setImage(UIImage(named: IconsBravve.edit_blue.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
     
@@ -265,6 +255,4 @@ class ConfirmarDadosView: UIViewController {
         print("tela email")
     }
 }
-
-
 
