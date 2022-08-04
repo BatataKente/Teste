@@ -8,32 +8,56 @@
 import UIKit
 
 extension CGFloat {
-    
-    var generateSizeForScreen: CGFloat {
         
+    public var generateSizeForScreen: CGFloat {
+
         let width = UIScreen.main.bounds.width
         let device = UIScreen.main.traitCollection.userInterfaceIdiom
-        
+
         if (device == .phone) {
-            
+
             if (width <= 320) {
                 // iPod(Gen7)
                 // iPhone(5s, SEGen1)
+
+                // SE height: 568
+
                 return self * 0.75
-            } else if (width <= 375) {
+            }
+            else if (width <= 375) {
+
                 // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
+                // 6, 6s, 7 ,8 height: 667
+
                 return self * 0.95
-            } else if (width <= 414) {
+            }
+            else if (width <= 414) {
+
                 // iPhone(6+, 6s+, 7+, 8+, XsMax, XR, 11, 11proMax, 12, 12pro, 13, 13pro)
+
+                // 6+, 6s+, 7+, 8+ height: 736
+//                 X, Xs, 11Pro, 12mini, 13mini height: 812
+//                 12, 12Pro, 13, 13Pro height: 844
+//                 XR, XSmax, 11 height: 896
+
                 return self
-            } else if (width <= 744) {
+            }
+            else if (width <= 744) {
+
                 // iPhone(12proMax, 13proMax)
+//              12ProMax, 13ProMax height: 926
+                // 6+, 6s+, 7+, 8+ height:
+
                 return self * 1.2
             }
-        } else if (device == .pad) {
+        }
+        else if (device == .pad) {
+            
             if (width <= 744) {
+
                 // ipad(miniGen6, )
                 return self * 1.4
+
             } else if (width <= 768) {
                 // ipad(Gen5, Gen6, Air, Air2, Pro9.7)
                 return self * 1.45
@@ -47,6 +71,34 @@ extension CGFloat {
                 // ipad(Pro12.9Gen1, Pro12.9Gen2, Pro12.9Gen3, Pro12.9Gen5)
                 return self * 1.85
             }
+        }
+        return self
+    }
+    
+    public var generateSizeForScreenByHeight: CGFloat {
+
+        let height = UIScreen.main.bounds.height
+
+        if (height <= 568) {
+            // iPod(Gen7)
+            // iPhone(5s, SEGen1)
+
+            // SE height: 568
+
+            return self * 0.5
+        }
+        else if (height <= 667) {
+
+            // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
+            // 6, 6s, 7 ,8 height: 667
+
+            return self * 0.6
+        }
+        else if (height <= 736) {
+
+            // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
+
+            return self
         }
         return self
     }
