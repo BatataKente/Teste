@@ -9,7 +9,18 @@ import UIKit
 
 class DetalhesDoEspacoView: UIViewController {
     
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        setupView()
+        setupDefaults()
+        setupConstraints()
+    }
+    
     let customBar = UIView()
+    
+    lazy var tabBar = BravveTabBar()
     
     lazy var scrollView: UIScrollView = {
         
@@ -91,29 +102,20 @@ class DetalhesDoEspacoView: UIViewController {
     
     let reserveButton = UIButton()
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        setupView()
-        setupDefaults()
-        setupConstraints()
-    }
-    
     private func setupView() {
         
         view.setToDefaultBackgroundColor()
-        view.addSubviews([customBar, scrollView, reserveButton])
+        view.addSubviews([customBar, scrollView, reserveButton, tabBar])
     }
     
     private func setupDefaults() {
         
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço") { _ in
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço") {_ in
             
             self.dismiss(animated: false)
         }
         
-        reserveButton.setToBottomButtonKeyboardDefault("Reservar")
+        reserveButton.setToBottomButtonDefaultAbove("Reservar", above: tabBar)
     }
     
     private func setupConstraints() {
@@ -122,6 +124,10 @@ class DetalhesDoEspacoView: UIViewController {
         scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         scrollView.constraintOutsideTo(.bottom, reserveButton)
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
 
