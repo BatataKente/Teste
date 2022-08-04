@@ -10,40 +10,6 @@ import UIKit
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
     
-    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
-                                      _ constant: CGFloat = 22,
-                                      _ handler: @escaping UIActionHandler) {
-        
-        let backButton = UIButton()
-        backButton.configuration = .plain()
-        backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
-        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
-        
-        let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
-        
-        self.view.addSubviews([backButton, logoImageView])
-        
-        logoImageView.constraintInsideTo(.centerX, self.view.safeAreaLayoutGuide)
-        logoImageView.constraintInsideTo(.top, self.view.safeAreaLayoutGuide, 65)
-        
-        logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
-        logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
-        
-        backButton.imageView?.constraintInsideTo(.height,
-                                                 backButton,
-                                                 multiplier: 0.5)
-        backButton.imageView?.constraintInsideTo(.width,
-                                                 backButton,
-                                                 multiplier: 0.5)
-        backButton.imageView?.constraintInsideTo(.centerY, backButton)
-        
-        backButton.constraintInsideTo(.centerY, logoImageView)
-        backButton.constraintInsideTo(.height, logoImageView)
-        backButton.constraintOutsideTo(.width, backButton)
-        backButton.constraintInsideTo(.leading, self.view.safeAreaLayoutGuide, 30)
-    }
-    
     open func createCapsuleButtons(_ buttonTitles: [String],
                                    _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
         
