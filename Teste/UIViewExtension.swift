@@ -29,7 +29,7 @@ extension UIView {
     }
     
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
-                                      _ buttons: [UIButton] = [UIButton](),
+                                      progressBarButtons: [UIButton],
                                       _ handler: @escaping UIActionHandler) {
         
         let backButton = UIButton()
@@ -37,12 +37,26 @@ extension UIView {
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
         backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
+        let jumpButton = UIButton()
+        jumpButton.configuration = .plain()
+        
+        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
+                                                             size: CGFloat(15).generateSizeForScreen),
+                        NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
+        
+        let attributedTitle = NSAttributedString(string: "Pular",
+                                                 attributes: attribute as [NSAttributedString.Key : Any])
+       
+        jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
+        
+        jumpButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        let stackView = UIStackView(arrangedSubviews: buttons)
+        let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
         
-        self.addSubviews([backButton, logoImageView, stackView])
+        self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
         logoImageView.constraintInsideTo(.top, self.safeAreaLayoutGuide, 65)
@@ -57,7 +71,17 @@ extension UIView {
         backButton.constraintInsideTo(.centerY, logoImageView)
         backButton.constraintInsideTo(.height, logoImageView)
         backButton.constraintOutsideTo(.width, backButton)
-        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide, 30)
+        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide, CGFloat(30).generateSizeForScreen)
+        
+        jumpButton.constraintInsideTo(.centerY, logoImageView)
+        jumpButton.constraintInsideTo(.height, logoImageView)
+        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide, CGFloat(30).generateSizeForScreen)
+            
+        progressBarStackView.constraintInsideTo(.top,
+                                                self.safeAreaLayoutGuide,
+                                                self.frame.size.height*0.2)
+        progressBarStackView.constraintInsideTo(.centerX,
+                                                self.safeAreaLayoutGuide)
     }
     
     open func setToDefaultCustomBarWithBackButton(viewTitle: String,

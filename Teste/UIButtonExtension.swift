@@ -55,7 +55,7 @@ extension UIButton {
         
         switch buttonImageName {
 
-        case IconsBravve.userBlue.rawValue:
+            case IconsBravve.userBlue.rawValue:
 
                 buttonTitle = "Dados pessoais"
 
@@ -110,13 +110,9 @@ extension UIButton {
                                            self.titleLabel,
                                            multiplier: 2)
         
-        self.imageView?.constraintInsideTo(.top, self, buttonMargins)
         self.imageView?.constraintInsideTo(.leading, self, buttonMargins)
         self.imageView?.constraintOutsideTo(.trailing, self.titleLabel, buttonMargins)
-        self.imageView?.constraintInsideTo(.bottom, self, buttonMargins)
         self.imageView?.constraintOutsideTo(.width, self.imageView)
-        
-        self.titleLabel?.constraintInsideTo(.trailing, self, buttonMargins)
     }
     
     open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",

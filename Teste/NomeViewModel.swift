@@ -127,12 +127,7 @@ class NomeViewModel {
                           rightTextField: "",
                           infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!")
         
-        delegate?.setProgressBar(personalDataTitle: " Dados pessoais",
-                                 personalDataImage: IconsBravve.userBlue.rawValue,
-                                 phoneNumberTitle: "",
-                                 phoneNumberImage: IconsBravve.cellGray.rawValue,
-                                 emailTitle: "",
-                                 emailImage: IconsBravve.emailGray.rawValue)
+        delegate?.setProgressBar(buttons: [false, true, true, false, true, false])
         
         delegate?.freezeButton()
         
@@ -152,12 +147,7 @@ class NomeViewModel {
                           rightTextField: "",
                           infoLabel: "Precisamos do seu telefone com DDD!\n Por favor, informe o seu país também.")
         
-        delegate?.setProgressBar(personalDataTitle: "",
-                                 personalDataImage: IconsBravve.userGray.rawValue,
-                                 phoneNumberTitle: " Celular",
-                                 phoneNumberImage: IconsBravve.cellBlue.rawValue,
-                                 emailTitle: "",
-                                 emailImage: IconsBravve.emailGray.rawValue)
+        delegate?.setProgressBar(buttons: [true, false, false, true, true, false])
         
         delegate?.freezeButton()
         
@@ -177,12 +167,7 @@ class NomeViewModel {
                           rightTextField: "",
                           infoLabel: "Qual seu email? Não se preocupe, não vamos encher sua caixa de entrada.")
         
-        delegate?.setProgressBar(personalDataTitle: "",
-                                 personalDataImage: IconsBravve.userGray.rawValue,
-                                 phoneNumberTitle: "",
-                                 phoneNumberImage: IconsBravve.cellGray.rawValue,
-                                 emailTitle: " Email",
-                                 emailImage: IconsBravve.emailBlue.rawValue)
+        delegate?.setProgressBar(buttons: [true, false, true, false, false, true])
         
         delegate?.freezeButton()
         
@@ -202,12 +187,7 @@ protocol NomeViewModelProtocol {
                  rightTextField: String,
                  infoLabel: String)
     
-    func setProgressBar(personalDataTitle: String,
-                        personalDataImage: String,
-                        phoneNumberTitle: String,
-                        phoneNumberImage: String,
-                        emailTitle: String,
-                        emailImage: String)
+    func setProgressBar(buttons: [Bool])
     
     func freezeButton()
     

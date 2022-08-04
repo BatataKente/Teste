@@ -12,24 +12,25 @@ class NomeView: UIViewController {
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
     private let registerButton = UIButton()
+
+    var progressBarStackView = UIStackView()
     
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
+    private lazy var buttons: [UIButton] = {
 
         let buttons = createProgressBarButtons([IconsBravve.userBlue.rawValue,
+                                                IconsBravve.userGray.rawValue,
+                                                IconsBravve.cellBlue.rawValue,
                                                 IconsBravve.cellGray.rawValue,
+                                                IconsBravve.emailBlue.rawValue,
                                                 IconsBravve.emailGray.rawValue,
                                                 IconsBravve.padlockGray.rawValue,
                                                 IconsBravve.hobbiesGray.rawValue])
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 7
 
-        buttons[0].removeTarget(nil, action: nil, for: .allTouchEvents)
         buttons[1].removeTarget(nil, action: nil, for: .allTouchEvents)
-        buttons[2].removeTarget(nil, action: nil, for: .allTouchEvents)
-        
-        return (stack: stackView,
-                buttons: buttons)
+        buttons[3].removeTarget(nil, action: nil, for: .allTouchEvents)
+        buttons[5].removeTarget(nil, action: nil, for: .allTouchEvents)
+
+        return buttons
     }()
     
     private let infoLabel: UILabel = {
@@ -158,9 +159,9 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
         
-        view.createRegisterCustomBar {_ in
+        view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
 
             self.nomeViewModel.turnBackScreen()
         }
@@ -177,12 +178,6 @@ class NomeView: UIViewController {
     }
     
     private func setupConstraints() {
-        
-        progressBarStackView.stack.constraintInsideTo(.top,
-                                                      view.safeAreaLayoutGuide,
-                                                      view.frame.size.height*0.2)
-        progressBarStackView.stack.constraintInsideTo(.centerX,
-                                                      view.safeAreaLayoutGuide)
         
         infoLabel.constraintInsideTo(.top,
                                      view.safeAreaLayoutGuide,
@@ -215,18 +210,18 @@ class NomeView: UIViewController {
             self.viewElements.ddisButton.setTitle(nil, for: .normal)
         }))
         
-        progressBarStackView.buttons[0].addTarget(self,
-                                                  action: #selector(progressBarAction),
-                                                  for: .touchUpInside)
-        progressBarStackView.buttons[1].addTarget(self,
-                                                  action: #selector(progressBarAction),
-                                                  for: .touchUpInside)
-        progressBarStackView.buttons[2].addTarget(self,
-                                                  action: #selector(progressBarAction),
-                                                  for: .touchUpInside)
-        
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
+        
+        buttons[1].addTarget(self,
+                             action: #selector(progressBarAction),
+                             for: .touchUpInside)
+        buttons[3].addTarget(self,
+                             action: #selector(progressBarAction),
+                             for: .touchUpInside)
+        buttons[5].addTarget(self,
+                             action: #selector(progressBarAction),
+                             for: .touchUpInside)
     }
     
     @objc func stackViewTapped() {
@@ -262,14 +257,14 @@ class NomeView: UIViewController {
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
-            registerButton.backgroundColor = UIColor(named: "buttonPink")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
 
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
-            registerButton.backgroundColor = UIColor(named: "reservedCancel")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
         }
     }
 }
@@ -306,27 +301,14 @@ extension NomeView: NomeViewModelProtocol {
         self.infoLabel.text = infoLabel
     }
     
-    func setProgressBar(personalDataTitle: String,
-                        personalDataImage: String,
-                        phoneNumberTitle: String,
-                        phoneNumberImage: String,
-                        emailTitle: String,
-                        emailImage: String) {
+    func setProgressBar(buttons: [Bool]) {
         
-        progressBarStackView.buttons[0].setTitle(personalDataTitle,
-                                                 for: .normal)
-        progressBarStackView.buttons[0].setImage(UIImage(named: personalDataImage),
-                                                 for: .normal)
-        
-        progressBarStackView.buttons[1].setTitle(phoneNumberTitle,
-                                                 for: .normal)
-        progressBarStackView.buttons[1].setImage(UIImage(named: phoneNumberImage),
-                                                 for: .normal)
-        
-        progressBarStackView.buttons[2].setTitle(emailTitle,
-                                                 for: .normal)
-        progressBarStackView.buttons[2].setImage(UIImage(named: emailImage),
-                                                 for: .normal)
+        self.buttons[0].isHidden = buttons[0]
+        self.buttons[1].isHidden = buttons[1]
+        self.buttons[2].isHidden = buttons[2]
+        self.buttons[3].isHidden = buttons[3]
+        self.buttons[4].isHidden = buttons[4]
+        self.buttons[5].isHidden = buttons[5]
     }
     
     func freezeButton() {
