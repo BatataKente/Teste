@@ -120,7 +120,7 @@
 		C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */; };
 		C696179F2881EED900281633 /* DetalhesReservaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179E2881EED900281633 /* DetalhesReservaView.swift */; };
 		C69617A42881EEF700281633 /* PerfilPessoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A32881EEF700281633 /* PerfilPessoalModel.swift */; };
-		C69617A62881EF0400281633 /* PerfilPessoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A52881EF0400281633 /* PerfilPessoalView.swift */; };
+		C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A52881EF0400281633 /* PersonalProfileView.swift */; };
 		C69617A82881EF0F00281633 /* PerfilPessoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A72881EF0F00281633 /* PerfilPessoalViewModel.swift */; };
 		C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617AC2881EF2C00281633 /* PerfilEdicaoModel.swift */; };
 		C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617AE2881EF3700281633 /* PerfilEdicaoView.swift */; };
@@ -243,7 +243,7 @@
 		C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaViewModel.swift; sourceTree = "<group>"; };
 		C696179E2881EED900281633 /* DetalhesReservaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaView.swift; sourceTree = "<group>"; };
 		C69617A32881EEF700281633 /* PerfilPessoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilPessoalModel.swift; sourceTree = "<group>"; };
-		C69617A52881EF0400281633 /* PerfilPessoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilPessoalView.swift; sourceTree = "<group>"; };
+		C69617A52881EF0400281633 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		C69617A72881EF0F00281633 /* PerfilPessoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilPessoalViewModel.swift; sourceTree = "<group>"; };
 		C69617AC2881EF2C00281633 /* PerfilEdicaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilEdicaoModel.swift; sourceTree = "<group>"; };
 		C69617AE2881EF3700281633 /* PerfilEdicaoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilEdicaoView.swift; sourceTree = "<group>"; };
@@ -1575,7 +1575,7 @@
 		C69617A12881EEE600281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617A52881EF0400281633 /* PerfilPessoalView.swift */,
+				C69617A52881EF0400281633 /* PersonalProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1753,7 +1753,7 @@
 				C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */,
 				2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */,
 				C69616FB2881E9EC00281633 /* TelefoneModel.swift in Sources */,
-				C69617A62881EF0400281633 /* PerfilPessoalView.swift in Sources */,
+				C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */,
 				C69617822881EE2A00281633 /* CheckInView.swift in Sources */,
 				C69617582881EC5C00281633 /* AvulsaViewModel.swift in Sources */,
 				2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */,
