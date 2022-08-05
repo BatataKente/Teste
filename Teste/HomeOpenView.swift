@@ -72,7 +72,7 @@ class HomeOpenView: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        filterButtons = createCapsuleButtons(["asfgdsfgs", "fdsdfgsdf"])
+        filterButtons = createCapsuleButtons(["a"])
         
         filterStackView.addArrangedSubviews(filterButtons)
     }
@@ -109,6 +109,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 
                 let spaceTitleCell = UITableViewCell()
                 spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
+                spaceTitleCell.textLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                                        size: CGFloat(20).generateSizeForScreen)
                 
                 return spaceTitleCell
             }
@@ -116,8 +118,6 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
-                
-                cell?.viewElements.photoView.heightAnchorInSuperview(CGFloat(225).generateSizeForScreen)
                 
                 return cell ?? UITableViewCell()
             }
@@ -128,13 +128,13 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension HomeOpenView: HomeAbertaTableViewCellProtocol {
+extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace() {
         
-        let detalhesDoEspacoView = OpenDetailsView()
-        detalhesDoEspacoView.modalPresentationStyle = .fullScreen
-        present(detalhesDoEspacoView, animated: false)
+        let detalhesAbertoView = OpenDetailsView()
+        detalhesAbertoView.modalPresentationStyle = .fullScreen
+        present(detalhesAbertoView, animated: false)
     }
 }
 
