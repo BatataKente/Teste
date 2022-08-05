@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        window.rootViewController = tabBarController
         
-        window.rootViewController = OpenDetailsView()
+        window.rootViewController = CheckInQrCodeViewController()
         window.makeKeyAndVisible()
         
         self.window = window
