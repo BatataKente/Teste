@@ -47,9 +47,9 @@
 		2ED5D10928940F48001C11DC /* TermosECondicoesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10828940F48001C11DC /* TermosECondicoesModel.swift */; };
 		2ED5D10B28940F67001C11DC /* TermosECondicoesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10A28940F67001C11DC /* TermosECondicoesViewModel.swift */; };
 		2ED5D10D28940F8B001C11DC /* TermosECodicoesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10C28940F8B001C11DC /* TermosECodicoesView.swift */; };
-		2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10E28940FB6001C11DC /* AjudaModel.swift */; };
-		2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */; };
-		2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11228940FE3001C11DC /* AjudaView.swift */; };
+		2ED5D10F28940FB6001C11DC /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10E28940FB6001C11DC /* HelpModel.swift */; };
+		2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11028940FCD001C11DC /* HelpViewModel.swift */; };
+		2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11228940FE3001C11DC /* HelpView.swift */; };
 		2EF23F4828931B760078B6B8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* UIView+Extension.swift */; };
 		C696169E2881E70000281633 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696169D2881E70000281633 /* LoginView.swift */; };
 		C69616A02881E70700281633 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696169F2881E70700281633 /* LoginModel.swift */; };
@@ -196,9 +196,9 @@
 		2ED5D10828940F48001C11DC /* TermosECondicoesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosECondicoesModel.swift; sourceTree = "<group>"; };
 		2ED5D10A28940F67001C11DC /* TermosECondicoesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosECondicoesViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10C28940F8B001C11DC /* TermosECodicoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosECodicoesView.swift; sourceTree = "<group>"; };
-		2ED5D10E28940FB6001C11DC /* AjudaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaModel.swift; sourceTree = "<group>"; };
-		2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaViewModel.swift; sourceTree = "<group>"; };
-		2ED5D11228940FE3001C11DC /* AjudaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjudaView.swift; sourceTree = "<group>"; };
+		2ED5D10E28940FB6001C11DC /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
+		2ED5D11028940FCD001C11DC /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
+		2ED5D11228940FE3001C11DC /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		2EF23F4728931B760078B6B8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C696169D2881E70000281633 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C696169F2881E70700281633 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -494,7 +494,7 @@
 		2ED5D0F928940E41001C11DC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2ED5D11228940FE3001C11DC /* AjudaView.swift */,
+				2ED5D11228940FE3001C11DC /* HelpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -502,7 +502,7 @@
 		2ED5D0FA28940E47001C11DC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				2ED5D11028940FCD001C11DC /* AjudaViewModel.swift */,
+				2ED5D11028940FCD001C11DC /* HelpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -510,7 +510,7 @@
 		2ED5D0FB28940E4E001C11DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2ED5D10E28940FB6001C11DC /* AjudaModel.swift */,
+				2ED5D10E28940FB6001C11DC /* HelpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1816,11 +1816,11 @@
 				C69616F42881E9C600281633 /* NomeView.swift in Sources */,
 				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */,
-				2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */,
+				2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */,
 				C69616DE2881E90000281633 /* HomeClosedModel.swift in Sources */,
 				C696171F2881EAB200281633 /* FotoModel.swift in Sources */,
 				C69617AF2881EF3700281633 /* EditProfileView.swift in Sources */,
-				2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */,
+				2ED5D10F28940FB6001C11DC /* HelpModel.swift in Sources */,
 				C69616FB2881E9EC00281633 /* TelefoneModel.swift in Sources */,
 				C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */,
 				C69617822881EE2A00281633 /* CheckInView.swift in Sources */,
@@ -1860,7 +1860,7 @@
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
 				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
 				C69616E02881E90800281633 /* HomeClosedView.swift in Sources */,
-				2ED5D11128940FCD001C11DC /* AjudaViewModel.swift in Sources */,
+				2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservaFinalizadaModel.swift in Sources */,
 				C69617682881ECB600281633 /* Reserva3View.swift in Sources */,
