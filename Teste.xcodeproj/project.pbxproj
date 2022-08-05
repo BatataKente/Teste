@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE0289D4BC200BCC567 /* ProfessionView.swift */; };
-		09619BE3289D50AF00BCC567 /* ProfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */; };
+		0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */; };
 		0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */; };
 		1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */; };
 		1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F096289BFF3F00F9A2A5 /* Reservas2.swift */; };
@@ -59,8 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09619BE0289D4BC200BCC567 /* ProfessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
-		09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionViewModel.swift; sourceTree = "<group>"; };
+		0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndCondition.swift; sourceTree = "<group>"; };
 		0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceCheckoutView.swift; sourceTree = "<group>"; };
 		1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3ViewModel.swift; sourceTree = "<group>"; };
 		1340F096289BFF3F00F9A2A5 /* Reservas2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservas2.swift; sourceTree = "<group>"; };
@@ -156,6 +154,8 @@
 			children = (
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
+				1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */,
+				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
 				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
 				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
 				1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */,
@@ -297,8 +297,8 @@
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
-				140B389A289D3F4D003F596F /* LoginView.swift in Sources */,
-				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
+				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
+				145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
