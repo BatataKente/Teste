@@ -105,15 +105,15 @@
 		C69617432881EB7300281633 /* FinalizeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617422881EB7300281633 /* FinalizeModel.swift */; };
 		C69617452881EB7B00281633 /* FinalizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617442881EB7B00281633 /* FinalizeView.swift */; };
 		C69617472881EB8700281633 /* FinalizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617462881EB8700281633 /* FinalizeViewModel.swift */; };
-		C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617532881EC4C00281633 /* AvulsaModel.swift */; };
-		C69617562881EC5400281633 /* AvulsaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617552881EC5400281633 /* AvulsaView.swift */; };
-		C69617582881EC5C00281633 /* AvulsaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617572881EC5C00281633 /* AvulsaViewModel.swift */; };
-		C696175D2881EC7700281633 /* Reserva2Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696175C2881EC7700281633 /* Reserva2Model.swift */; };
-		C696175F2881EC7F00281633 /* Reserva2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696175E2881EC7F00281633 /* Reserva2View.swift */; };
-		C69617612881EC9000281633 /* Reserva2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617602881EC9000281633 /* Reserva2ViewModel.swift */; };
-		C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617652881ECAD00281633 /* Reserva3Model.swift */; };
-		C69617682881ECB600281633 /* Reserva3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617672881ECB600281633 /* Reserva3View.swift */; };
-		C696176A2881ECBF00281633 /* Reserva3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617692881ECBF00281633 /* Reserva3ViewModel.swift */; };
+		C69617542881EC4C00281633 /* SingleBookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617532881EC4C00281633 /* SingleBookingModel.swift */; };
+		C69617562881EC5400281633 /* SingleBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617552881EC5400281633 /* SingleBookingView.swift */; };
+		C69617582881EC5C00281633 /* SingleBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617572881EC5C00281633 /* SingleBookingViewModel.swift */; };
+		C696175D2881EC7700281633 /* Reservation2Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696175C2881EC7700281633 /* Reservation2Model.swift */; };
+		C696175F2881EC7F00281633 /* Reservation2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696175E2881EC7F00281633 /* Reservation2View.swift */; };
+		C69617612881EC9000281633 /* Reservation2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617602881EC9000281633 /* Reservation2ViewModel.swift */; };
+		C69617662881ECAD00281633 /* Reservation3Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617652881ECAD00281633 /* Reservation3Model.swift */; };
+		C69617682881ECB600281633 /* Reservation3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617672881ECB600281633 /* Reservation3View.swift */; };
+		C696176A2881ECBF00281633 /* Reservation3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617692881ECBF00281633 /* Reservation3ViewModel.swift */; };
 		C696176F2881ECDF00281633 /* ReservationCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696176E2881ECDF00281633 /* ReservationCompletedView.swift */; };
 		C69617712881ECEB00281633 /* ReservationCompletedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617702881ECEB00281633 /* ReservationCompletedModel.swift */; };
 		C69617732881ECF700281633 /* ReservationCompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617722881ECF700281633 /* ReservationCompletedViewModel.swift */; };
@@ -254,15 +254,15 @@
 		C69617422881EB7300281633 /* FinalizeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeModel.swift; sourceTree = "<group>"; };
 		C69617442881EB7B00281633 /* FinalizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeView.swift; sourceTree = "<group>"; };
 		C69617462881EB8700281633 /* FinalizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeViewModel.swift; sourceTree = "<group>"; };
-		C69617532881EC4C00281633 /* AvulsaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvulsaModel.swift; sourceTree = "<group>"; };
-		C69617552881EC5400281633 /* AvulsaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvulsaView.swift; sourceTree = "<group>"; };
-		C69617572881EC5C00281633 /* AvulsaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvulsaViewModel.swift; sourceTree = "<group>"; };
-		C696175C2881EC7700281633 /* Reserva2Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva2Model.swift; sourceTree = "<group>"; };
-		C696175E2881EC7F00281633 /* Reserva2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva2View.swift; sourceTree = "<group>"; };
-		C69617602881EC9000281633 /* Reserva2ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva2ViewModel.swift; sourceTree = "<group>"; };
-		C69617652881ECAD00281633 /* Reserva3Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva3Model.swift; sourceTree = "<group>"; };
-		C69617672881ECB600281633 /* Reserva3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva3View.swift; sourceTree = "<group>"; };
-		C69617692881ECBF00281633 /* Reserva3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva3ViewModel.swift; sourceTree = "<group>"; };
+		C69617532881EC4C00281633 /* SingleBookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBookingModel.swift; sourceTree = "<group>"; };
+		C69617552881EC5400281633 /* SingleBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBookingView.swift; sourceTree = "<group>"; };
+		C69617572881EC5C00281633 /* SingleBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBookingViewModel.swift; sourceTree = "<group>"; };
+		C696175C2881EC7700281633 /* Reservation2Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation2Model.swift; sourceTree = "<group>"; };
+		C696175E2881EC7F00281633 /* Reservation2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation2View.swift; sourceTree = "<group>"; };
+		C69617602881EC9000281633 /* Reservation2ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation2ViewModel.swift; sourceTree = "<group>"; };
+		C69617652881ECAD00281633 /* Reservation3Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation3Model.swift; sourceTree = "<group>"; };
+		C69617672881ECB600281633 /* Reservation3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation3View.swift; sourceTree = "<group>"; };
+		C69617692881ECBF00281633 /* Reservation3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation3ViewModel.swift; sourceTree = "<group>"; };
 		C696176E2881ECDF00281633 /* ReservationCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedView.swift; sourceTree = "<group>"; };
 		C69617702881ECEB00281633 /* ReservationCompletedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedModel.swift; sourceTree = "<group>"; };
 		C69617722881ECF700281633 /* ReservationCompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedViewModel.swift; sourceTree = "<group>"; };
@@ -1241,41 +1241,41 @@
 			isa = PBXGroup;
 			children = (
 				C696174F2881EC1A00281633 /* ReservationCompleted */,
-				C696174E2881EC1200281633 /* Reserva 3 de 3 */,
-				C696174D2881EC0A00281633 /* Reserva 2 de 3 */,
-				C696174C2881EBC000281633 /* Reserva Avulsa */,
+				C696174E2881EC1200281633 /* Reservation 3 de 3 */,
+				C696174D2881EC0A00281633 /* Reservation 2 de 3 */,
+				C696174C2881EBC000281633 /* SingleBooking */,
 			);
 			path = SpaceReservation;
 			sourceTree = "<group>";
 		};
-		C696174C2881EBC000281633 /* Reserva Avulsa */ = {
+		C696174C2881EBC000281633 /* SingleBooking */ = {
 			isa = PBXGroup;
 			children = (
 				C69617522881EC3000281633 /* ViewModel */,
 				C69617512881EC2C00281633 /* View */,
 				C69617502881EC2800281633 /* Model */,
 			);
-			path = "Reserva Avulsa";
+			path = SingleBooking;
 			sourceTree = "<group>";
 		};
-		C696174D2881EC0A00281633 /* Reserva 2 de 3 */ = {
+		C696174D2881EC0A00281633 /* Reservation 2 de 3 */ = {
 			isa = PBXGroup;
 			children = (
 				C696175B2881EC6D00281633 /* ViewModel */,
 				C696175A2881EC6700281633 /* View */,
 				C69617592881EC6300281633 /* Model */,
 			);
-			path = "Reserva 2 de 3";
+			path = "Reservation 2 de 3";
 			sourceTree = "<group>";
 		};
-		C696174E2881EC1200281633 /* Reserva 3 de 3 */ = {
+		C696174E2881EC1200281633 /* Reservation 3 de 3 */ = {
 			isa = PBXGroup;
 			children = (
 				C69617642881ECA100281633 /* ViewModel */,
 				C69617632881EC9D00281633 /* View */,
 				C69617622881EC9900281633 /* Model */,
 			);
-			path = "Reserva 3 de 3";
+			path = "Reservation 3 de 3";
 			sourceTree = "<group>";
 		};
 		C696174F2881EC1A00281633 /* ReservationCompleted */ = {
@@ -1291,7 +1291,7 @@
 		C69617502881EC2800281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69617532881EC4C00281633 /* AvulsaModel.swift */,
+				C69617532881EC4C00281633 /* SingleBookingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1299,7 +1299,7 @@
 		C69617512881EC2C00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617552881EC5400281633 /* AvulsaView.swift */,
+				C69617552881EC5400281633 /* SingleBookingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1307,7 +1307,7 @@
 		C69617522881EC3000281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617572881EC5C00281633 /* AvulsaViewModel.swift */,
+				C69617572881EC5C00281633 /* SingleBookingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1315,7 +1315,7 @@
 		C69617592881EC6300281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C696175C2881EC7700281633 /* Reserva2Model.swift */,
+				C696175C2881EC7700281633 /* Reservation2Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1323,7 +1323,7 @@
 		C696175A2881EC6700281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C696175E2881EC7F00281633 /* Reserva2View.swift */,
+				C696175E2881EC7F00281633 /* Reservation2View.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1331,7 +1331,7 @@
 		C696175B2881EC6D00281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617602881EC9000281633 /* Reserva2ViewModel.swift */,
+				C69617602881EC9000281633 /* Reservation2ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1339,7 +1339,7 @@
 		C69617622881EC9900281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69617652881ECAD00281633 /* Reserva3Model.swift */,
+				C69617652881ECAD00281633 /* Reservation3Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1347,7 +1347,7 @@
 		C69617632881EC9D00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617672881ECB600281633 /* Reserva3View.swift */,
+				C69617672881ECB600281633 /* Reservation3View.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1355,7 +1355,7 @@
 		C69617642881ECA100281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617692881ECBF00281633 /* Reserva3ViewModel.swift */,
+				C69617692881ECBF00281633 /* Reservation3ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1756,13 +1756,13 @@
 			files = (
 				2EB18FA0289D6B05008A80BF /* APILogin.swift in Sources */,
 				C69616FF2881E9FC00281633 /* Telephone ViewModel.swift in Sources */,
-				C696176A2881ECBF00281633 /* Reserva3ViewModel.swift in Sources */,
+				C696176A2881ECBF00281633 /* Reservation3ViewModel.swift in Sources */,
 				C69617082881EA2500281633 /* EmailViewModel.swift in Sources */,
 				2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */,
 				C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */,
 				C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */,
 				C69617212881EAB900281633 /* PhotoView.swift in Sources */,
-				C69617612881EC9000281633 /* Reserva2ViewModel.swift in Sources */,
+				C69617612881EC9000281633 /* Reservation2ViewModel.swift in Sources */,
 				C69616B32881E79400281633 /* Recuperar3Model.swift in Sources */,
 				C69617282881EADC00281633 /* ProfessionModel.swift in Sources */,
 				C69616C52881E7F900281633 /* RecoverPasswordModalModel.swift in Sources */,
@@ -1792,12 +1792,12 @@
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
-				C696175F2881EC7F00281633 /* Reserva2View.swift in Sources */,
+				C696175F2881EC7F00281633 /* Reservation2View.swift in Sources */,
 				C69617232881EAC200281633 /* PhotoViewModel.swift in Sources */,
 				C696172C2881EAED00281633 /* ProfessionViewModel.swift in Sources */,
 				C696173C2881EB4A00281633 /* ActivitiesView.swift in Sources */,
 				C696179F2881EED900281633 /* BookingDetailsView.swift in Sources */,
-				C69617562881EC5400281633 /* AvulsaView.swift in Sources */,
+				C69617562881EC5400281633 /* SingleBookingView.swift in Sources */,
 				C69616C32881E7EF00281633 /* RecoverPasswordModalView.swift in Sources */,
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
 				C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */,
@@ -1814,8 +1814,8 @@
 				1478A23B28996DC700B409E5 /* CGFloat+Extension.swift in Sources */,
 				C696179B2881EEC100281633 /* BookingDetailsModel.swift in Sources */,
 				C69616F42881E9C600281633 /* NameView.swift in Sources */,
-				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
-				C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */,
+				C69617662881ECAD00281633 /* Reservation3Model.swift in Sources */,
+				C69617542881EC4C00281633 /* SingleBookingModel.swift in Sources */,
 				2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */,
 				C69616DE2881E90000281633 /* HomeClosedModel.swift in Sources */,
 				C696171F2881EAB200281633 /* PhotoModel.swift in Sources */,
@@ -1824,7 +1824,7 @@
 				C69616FB2881E9EC00281633 /* TelephoneModel.swift in Sources */,
 				C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */,
 				C69617822881EE2A00281633 /* CheckInView.swift in Sources */,
-				C69617582881EC5C00281633 /* AvulsaViewModel.swift in Sources */,
+				C69617582881EC5C00281633 /* SingleBookingViewModel.swift in Sources */,
 				2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */,
 				C69617892881EE5000281633 /* CheckOutModel.swift in Sources */,
 				1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */,
@@ -1851,7 +1851,7 @@
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
 				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
-				C696175D2881EC7700281633 /* Reserva2Model.swift in Sources */,
+				C696175D2881EC7700281633 /* Reservation2Model.swift in Sources */,
 				C69616D82881E8D700281633 /* DetailsOpenViewModel.swift in Sources */,
 				C69617112881EA5E00281633 /* PasswordViewModel.swift in Sources */,
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
@@ -1863,7 +1863,7 @@
 				2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservationCompletedModel.swift in Sources */,
-				C69617682881ECB600281633 /* Reserva3View.swift in Sources */,
+				C69617682881ECB600281633 /* Reservation3View.swift in Sources */,
 				1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */,
 				2ED5D10B28940F67001C11DC /* TermosECondicoesViewModel.swift in Sources */,
 				2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */,
