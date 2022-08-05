@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE0289D4BC200BCC567 /* ProfessionView.swift */; };
 		0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */; };
 		1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */; };
 		1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F096289BFF3F00F9A2A5 /* Reservas2.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09619BE0289D4BC200BCC567 /* ProfessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
 		0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceCheckoutView.swift; sourceTree = "<group>"; };
 		1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3ViewModel.swift; sourceTree = "<group>"; };
 		1340F096289BFF3F00F9A2A5 /* Reservas2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservas2.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
+				09619BE0289D4BC200BCC567 /* ProfessionView.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
@@ -305,6 +308,7 @@
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
+				09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
