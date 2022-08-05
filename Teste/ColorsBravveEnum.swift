@@ -32,6 +32,7 @@ public enum ColorsBravve: String {
     case labelLogin = "labelLogin"
     case labelSpace = "labelSpace"
     case textFieldLabel = "labelTextField"
+    case progressBarLabel = "progressBarLabel"
     case redAlertLabel = "redAlertLabel"
     case reserved = "reserved"
     case reservedCancel = "reservedCancel"

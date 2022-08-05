@@ -50,7 +50,7 @@ extension UIButton {
         
         var buttonTitle = ""
         let buttonMargins = CGFloat(2.5).generateSizeForScreen
-        self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        self.setTitleColor(UIColor(named: ColorsBravve.progressBarLabel.rawValue), for: .normal)
         self.setImage(UIImage(named: buttonImageName), for: .normal)
         
         switch buttonImageName {
