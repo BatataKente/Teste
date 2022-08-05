@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0945A3A4289D48D0000F00A6 /* FinalizacaoCadastroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0945A3A3289D48D0000F00A6 /* FinalizacaoCadastroView.swift */; };
+		09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE0289D4BC200BCC567 /* ProfessionView.swift */; };
+		09619BE3289D50AF00BCC567 /* ProfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */; };
 		0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */; };
 		1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */; };
 		1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F096289BFF3F00F9A2A5 /* Reservas2.swift */; };
@@ -51,13 +52,15 @@
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
+		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0945A3A3289D48D0000F00A6 /* FinalizacaoCadastroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizacaoCadastroView.swift; sourceTree = "<group>"; };
+		09619BE0289D4BC200BCC567 /* ProfessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
+		09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionViewModel.swift; sourceTree = "<group>"; };
 		0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceCheckoutView.swift; sourceTree = "<group>"; };
 		1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3ViewModel.swift; sourceTree = "<group>"; };
 		1340F096289BFF3F00F9A2A5 /* Reservas2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservas2.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
+		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
 				0945A3A3289D48D0000F00A6 /* FinalizacaoCadastroView.swift */,
 				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
@@ -188,6 +193,8 @@
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
+				09619BE0289D4BC200BCC567 /* ProfessionView.swift */,
+				09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
@@ -276,6 +283,7 @@
 			files = (
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
+				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
 				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				0945A3A4289D48D0000F00A6 /* FinalizacaoCadastroView.swift in Sources */,
@@ -299,6 +307,7 @@
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
+				09619BE3289D50AF00BCC567 /* ProfessionViewModel.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
@@ -309,6 +318,7 @@
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
+				09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,

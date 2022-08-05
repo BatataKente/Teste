@@ -1,18 +1,51 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=color.png",
-      "idiom" : "universal",
+      "filename" : "Logo-Bravve.png",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "filename" : "Property 1=color (1).png",
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "BRAVVE_MARCA_PNG_BRANCO_05102021 1 (2).png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Logo-Bravve (1).png",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "filename" : "Property 1=color (2).png",
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "BRAVVE_MARCA_PNG_BRANCO_05102021 1 (3).png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Logo-Bravve (2).png",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "BRAVVE_MARCA_PNG_BRANCO_05102021 1 (4).png",
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],
