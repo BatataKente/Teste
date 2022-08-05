@@ -56,6 +56,8 @@ class HomeOpenView: UIViewController {
     
     lazy var tabBar = UITabBarController()
     
+    let authManager = AuthManager()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -63,6 +65,9 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
+        authManager.getStates { states in
+            print(states)
+        }
     }
     
     private func setupView() {

@@ -16,13 +16,16 @@
 		134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */; };
 		138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AD2892BE2800997FBC /* MinhasReservas.swift */; };
 		138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AF2892BF4200997FBC /* ReservaCell.swift */; };
+		13AE1FDD289D94A2002FBBC1 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AE1FDC289D94A2002FBBC1 /* Network.swift */; };
+		13AE1FDF289D9525002FBBC1 /* AccessTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AE1FDE289D9525002FBBC1 /* AccessTokenModel.swift */; };
+		13AE1FE1289D9777002FBBC1 /* StatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AE1FE0289D9777002FBBC1 /* StatesModel.swift */; };
+		13AE1FE4289D99A2002FBBC1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 13AE1FE3289D99A2002FBBC1 /* Alamofire */; };
 		13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */; };
 		14054AC42899E79900BB4E3B /* KoHo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC32899E79900BB4E3B /* KoHo-Bold.ttf */; };
 		14054AC62899E7A500BB4E3B /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC52899E7A500BB4E3B /* Ubuntu-Bold.ttf */; };
 		14054AC82899E7AD00BB4E3B /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */; };
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
-		140B389A289D3F4D003F596F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B3899289D3F4D003F596F /* LoginView.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
 		145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */; };
@@ -67,6 +70,9 @@
 		134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3.swift; sourceTree = "<group>"; };
 		138C85AD2892BE2800997FBC /* MinhasReservas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinhasReservas.swift; sourceTree = "<group>"; };
 		138C85AF2892BF4200997FBC /* ReservaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaCell.swift; sourceTree = "<group>"; };
+		13AE1FDC289D94A2002FBBC1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		13AE1FDE289D9525002FBBC1 /* AccessTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenModel.swift; sourceTree = "<group>"; };
+		13AE1FE0289D9777002FBBC1 /* StatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesModel.swift; sourceTree = "<group>"; };
 		13F1768528941C6200C5FD05 /* ConfirmarDadosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosView.swift; sourceTree = "<group>"; };
 		14054AC32899E79900BB4E3B /* KoHo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoHo-Bold.ttf"; sourceTree = "<group>"; };
 		14054AC52899E7A500BB4E3B /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AE1FE4289D99A2002FBBC1 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +161,6 @@
 			children = (
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
-				1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
 				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
 				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
@@ -192,8 +198,9 @@
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
-				09619BE0289D4BC200BCC567 /* ProfessionView.swift */,
-				09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */,
+				13AE1FDC289D94A2002FBBC1 /* Network.swift */,
+				13AE1FDE289D9525002FBBC1 /* AccessTokenModel.swift */,
+				13AE1FE0289D9777002FBBC1 /* StatesModel.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
@@ -220,6 +227,9 @@
 			dependencies = (
 			);
 			name = Teste;
+			packageProductDependencies = (
+				13AE1FE3289D99A2002FBBC1 /* Alamofire */,
+			);
 			productName = Teste;
 			productReference = 14CBDBC22889B72300EA8EDD /* Teste.app */;
 			productType = "com.apple.product-type.application";
@@ -248,6 +258,9 @@
 				Base,
 			);
 			mainGroup = 14CBDBB92889B72300EA8EDD;
+			packageReferences = (
+				13AE1FE2289D99A2002FBBC1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 14CBDBC32889B72300EA8EDD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -287,9 +300,11 @@
 				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,
+				13AE1FDF289D9525002FBBC1 /* AccessTokenModel.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
 				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
+				13AE1FDD289D94A2002FBBC1 /* Network.swift in Sources */,
 				145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
@@ -298,16 +313,16 @@
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
-				145663C6288D73B900852049 /* HomeAbertaTableViewCell.swift in Sources */,
+				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
-				09619BE3289D50AF00BCC567 /* ProfessionViewModel.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
+				13AE1FE1289D9777002FBBC1 /* StatesModel.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
@@ -316,7 +331,6 @@
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
-				09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
@@ -528,6 +542,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		13AE1FE2289D99A2002FBBC1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		13AE1FE3289D99A2002FBBC1 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13AE1FE2289D99A2002FBBC1 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 14CBDBBA2889B72300EA8EDD /* Project object */;
 }

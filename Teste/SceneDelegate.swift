@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
 
-        window.rootViewController = NomeView()
+        window.rootViewController = HomeOpenView()
         
         
         window.makeKeyAndVisible()
