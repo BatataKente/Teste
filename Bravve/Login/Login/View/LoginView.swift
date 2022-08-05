@@ -47,10 +47,21 @@ class LoginView: UIViewController {
         wayImage.setWayToDefault(.wayLogin)
     }
     
+
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        view.translatesAutoresizingMaskIntoConstraints =  false
+      
+        
+        return view
+    }()
+    
     private lazy var logoImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
         view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints =  false
         
         return view
         
@@ -78,9 +89,11 @@ class LoginView: UIViewController {
         view.textColor = .white
         view.text = "O futuro do trabalho é hibrído, remoto,\nconectado e humano!"
         view.numberOfLines = 4
+        view.translatesAutoresizingMaskIntoConstraints =  false
         
         return view
     }()
+    
     
     private lazy var cellLabel: UILabel = {
         let view = UILabel()
@@ -111,6 +124,7 @@ class LoginView: UIViewController {
                                                    left: stackMargins,
                                                    bottom: stackMargins,
                                                    right: stackMargins)
+        cellStackView.translatesAutoresizingMaskIntoConstraints =  false
         return cellStackView
     }()
     
@@ -135,6 +149,7 @@ class LoginView: UIViewController {
         view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints =  false
         return view
     }()
     
@@ -163,6 +178,7 @@ class LoginView: UIViewController {
                                                    left: stackMargins,
                                                    bottom: stackMargins,
                                                    right: stackMargins)
+        passwordStackView.translatesAutoresizingMaskIntoConstraints =  false
         return passwordStackView
     }()
     
@@ -179,6 +195,7 @@ class LoginView: UIViewController {
 
             let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+            view.translatesAutoresizingMaskIntoConstraints =  false
             
             return view
     }()
@@ -205,6 +222,7 @@ class LoginView: UIViewController {
 
             let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+            view.translatesAutoresizingMaskIntoConstraints =  false
             return view
     }()
     
@@ -231,6 +249,7 @@ class LoginView: UIViewController {
                                                        bottom: stackMargins,
                                                        right: stackMargins)
             
+            view.translatesAutoresizingMaskIntoConstraints =  false
             
             let attributesFont: [NSAttributedString.Key : Any] = [
                
@@ -243,6 +262,9 @@ class LoginView: UIViewController {
             
             return view
     }()
+    
+
+
         
     private func setupLayoutConstraints() {
         
