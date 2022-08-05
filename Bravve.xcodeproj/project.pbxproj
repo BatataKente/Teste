@@ -325,62 +325,14 @@
 		1478A2262899651D00B409E5 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				1478A2272899654A00B409E5 /* ButtonsBravveEnum */,
-				1478A2282899655300B409E5 /* ColorsBravveEnum */,
-				1478A2292899656100B409E5 /* IconsBravveEnum */,
-				1478A22A2899657600B409E5 /* ImagesBravveEnum */,
-				1478A22B2899658800B409E5 /* FontsBravveEnum */,
-				1478A22C2899659300B409E5 /* RideUpEnum */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
-		1478A2272899654A00B409E5 /* ButtonsBravveEnum */ = {
-			isa = PBXGroup;
-			children = (
 				1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */,
-			);
-			path = ButtonsBravveEnum;
-			sourceTree = "<group>";
-		};
-		1478A2282899655300B409E5 /* ColorsBravveEnum */ = {
-			isa = PBXGroup;
-			children = (
 				1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */,
-			);
-			path = ColorsBravveEnum;
-			sourceTree = "<group>";
-		};
-		1478A2292899656100B409E5 /* IconsBravveEnum */ = {
-			isa = PBXGroup;
-			children = (
 				1478A231289965DE00B409E5 /* IconsBravveEnum.swift */,
-			);
-			path = IconsBravveEnum;
-			sourceTree = "<group>";
-		};
-		1478A22A2899657600B409E5 /* ImagesBravveEnum */ = {
-			isa = PBXGroup;
-			children = (
 				1478A233289965E900B409E5 /* ImagesBravveEnum.swift */,
-			);
-			path = ImagesBravveEnum;
-			sourceTree = "<group>";
-		};
-		1478A22B2899658800B409E5 /* FontsBravveEnum */ = {
-			isa = PBXGroup;
-			children = (
 				1478A235289965F800B409E5 /* FontsBravveEnum.swift */,
-			);
-			path = FontsBravveEnum;
-			sourceTree = "<group>";
-		};
-		1478A22C2899659300B409E5 /* RideUpEnum */ = {
-			isa = PBXGroup;
-			children = (
 				1478A2372899660200B409E5 /* RideUpEnum.swift */,
 			);
-			path = RideUpEnum;
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		14A81542289D554C004CAEE8 /* Fonts */ = {
