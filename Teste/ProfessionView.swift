@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         return stackView
     } ()
     
-//    let testeViewModel = TesteViewModel()
+    let professionViewModel = ProfessionViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,12 +138,12 @@ class ViewController: UIViewController {
         continueButton.setToBottomButtonKeyboardDefault()
         backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         
-//        selectAreaButton.setMenuForButton(testeViewModel.selectAreaMenu({ (action: UIAction) in
-//            self.selectAreaAPILabel.text = action.title
-//        }))
-//        workRegimeButton.setMenuForButton(testeViewModel.workRegimeMenu({(action: UIAction) in
-//            self.workRegimeAPILabel.text = action.title
-//        }))
+        selectAreaButton.setMenuForButton(professionViewModel.selectAreaMenu({ (action: UIAction) in
+            self.selectAreaAPILabel.text = action.title
+        }))
+        workRegimeButton.setMenuForButton(professionViewModel.workRegimeMenu({(action: UIAction) in
+            self.workRegimeAPILabel.text = action.title
+        }))
         
         NSLayoutConstraint.activate([
             
