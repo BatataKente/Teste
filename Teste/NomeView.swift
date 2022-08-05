@@ -172,7 +172,7 @@ class NomeView: UIViewController {
     private func setupDefaults() {
         
         registerButton.setToBottomButtonKeyboardDefault()
-        ways[2].setWayToDefault(.wayConfirm)
+        ways[2].setWayToDefault(.wayConfirm_1)
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
     }

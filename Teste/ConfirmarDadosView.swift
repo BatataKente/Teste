@@ -15,7 +15,7 @@ class ConfirmarDadosView: UIViewController {
     
     private let backgroundImage2: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.wayConfirm.rawValue)
+        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
         return image
     }()
     

@@ -23,7 +23,7 @@ class FotoView: UIViewController {
         let buttons = createProgressBarButtons([IconsBravve.photoBlue.rawValue,
                                                 IconsBravve.noteGray.rawValue,
                                                 IconsBravve.hobbiesGray.rawValue,
-                                                IconsBravve.activiesGray.rawValue])
+                                                IconsBravve.activitiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
         
         return stackView
@@ -58,7 +58,7 @@ class FotoView: UIViewController {
     private let editButton: UIButton = {
         
         let editButton = UIButton()
-        editButton.setImage(UIImage(named: IconsBravve.photoPink.rawValue),
+        editButton.setImage(UIImage(named: IconsBravve.photoBlue.rawValue),
                             for: .normal)
         
         return editButton
@@ -82,7 +82,7 @@ class FotoView: UIViewController {
     
     private func setupDefaults() {
         
-        firstWay.setWayToDefault(.wayConfirm)
+        firstWay.setWayToDefault(.wayConfirm_1)
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink)
