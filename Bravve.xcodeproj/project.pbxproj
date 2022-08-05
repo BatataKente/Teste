@@ -31,6 +31,9 @@
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
 		2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */; };
+		2EB18F88289D666B008A80BF /* BravveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18F87289D666B008A80BF /* BravveTests.swift */; };
+		2EB18F95289D6675008A80BF /* BravveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18F94289D6675008A80BF /* BravveUITests.swift */; };
+		2EB18F97289D6675008A80BF /* BravveUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18F96289D6675008A80BF /* BravveUITestsLaunchTests.swift */; };
 		2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */; };
 		2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */; };
@@ -127,6 +130,23 @@
 		C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617B02881EF4800281633 /* PerfilEdicaoViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2EB18F89289D666B008A80BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EAEDEE92881DEA900C88374 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EAEDEF02881DEA900C88374;
+			remoteInfo = Bravve;
+		};
+		2EB18F98289D6675008A80BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EAEDEE92881DEA900C88374 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EAEDEF02881DEA900C88374;
+			remoteInfo = Bravve;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		130544D4289845180026FCE6 /* CancelReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationCell.swift; sourceTree = "<group>"; };
 		14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -154,6 +174,11 @@
 		2EAEDEFE2881DEA900C88374 /* Bravve.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bravve.xcdatamodel; sourceTree = "<group>"; };
 		2EAEDF032881DEAC00C88374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EAEDF052881DEAC00C88374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EB18F85289D666B008A80BF /* BravveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BravveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB18F87289D666B008A80BF /* BravveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveTests.swift; sourceTree = "<group>"; };
+		2EB18F92289D6675008A80BF /* BravveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BravveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB18F94289D6675008A80BF /* BravveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveUITests.swift; sourceTree = "<group>"; };
+		2EB18F96289D6675008A80BF /* BravveUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPass.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPassViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPassView.swift; sourceTree = "<group>"; };
@@ -252,6 +277,20 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		2EAEDEEE2881DEA900C88374 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB18F82289D666B008A80BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB18F8F289D6675008A80BF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -370,6 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				2EAEDEF32881DEA900C88374 /* Bravve */,
+				2EB18F86289D666B008A80BF /* BravveTests */,
+				2EB18F93289D6675008A80BF /* BravveUITests */,
 				2EAEDEF22881DEA900C88374 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -378,6 +419,8 @@
 			isa = PBXGroup;
 			children = (
 				2EAEDEF12881DEA900C88374 /* Bravve.app */,
+				2EB18F85289D666B008A80BF /* BravveTests.xctest */,
+				2EB18F92289D6675008A80BF /* BravveUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -404,6 +447,23 @@
 				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		2EB18F86289D666B008A80BF /* BravveTests */ = {
+			isa = PBXGroup;
+			children = (
+				2EB18F87289D666B008A80BF /* BravveTests.swift */,
+			);
+			path = BravveTests;
+			sourceTree = "<group>";
+		};
+		2EB18F93289D6675008A80BF /* BravveUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2EB18F94289D6675008A80BF /* BravveUITests.swift */,
+				2EB18F96289D6675008A80BF /* BravveUITestsLaunchTests.swift */,
+			);
+			path = BravveUITests;
 			sourceTree = "<group>";
 		};
 		2ED5D0F628940E00001C11DC /* Help */ = {
@@ -1583,6 +1643,42 @@
 			productReference = 2EAEDEF12881DEA900C88374 /* Bravve.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2EB18F84289D666B008A80BF /* BravveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EB18F8D289D666B008A80BF /* Build configuration list for PBXNativeTarget "BravveTests" */;
+			buildPhases = (
+				2EB18F81289D666B008A80BF /* Sources */,
+				2EB18F82289D666B008A80BF /* Frameworks */,
+				2EB18F83289D666B008A80BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EB18F8A289D666B008A80BF /* PBXTargetDependency */,
+			);
+			name = BravveTests;
+			productName = BravveTests;
+			productReference = 2EB18F85289D666B008A80BF /* BravveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2EB18F91289D6675008A80BF /* BravveUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EB18F9A289D6675008A80BF /* Build configuration list for PBXNativeTarget "BravveUITests" */;
+			buildPhases = (
+				2EB18F8E289D6675008A80BF /* Sources */,
+				2EB18F8F289D6675008A80BF /* Frameworks */,
+				2EB18F90289D6675008A80BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EB18F99289D6675008A80BF /* PBXTargetDependency */,
+			);
+			name = BravveUITests;
+			productName = BravveUITests;
+			productReference = 2EB18F92289D6675008A80BF /* BravveUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1595,6 +1691,14 @@
 				TargetAttributes = {
 					2EAEDEF02881DEA900C88374 = {
 						CreatedOnToolsVersion = 13.4.1;
+					};
+					2EB18F84289D666B008A80BF = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 2EAEDEF02881DEA900C88374;
+					};
+					2EB18F91289D6675008A80BF = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 2EAEDEF02881DEA900C88374;
 					};
 				};
 			};
@@ -1612,6 +1716,8 @@
 			projectRoot = "";
 			targets = (
 				2EAEDEF02881DEA900C88374 /* Bravve */,
+				2EB18F84289D666B008A80BF /* BravveTests */,
+				2EB18F91289D6675008A80BF /* BravveUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1628,6 +1734,20 @@
 				14A81544289D5580004CAEE8 /* KoHo-Bold.ttf in Resources */,
 				14A8154C289D55A3004CAEE8 /* Ubuntu-Regular.ttf in Resources */,
 				2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB18F83289D666B008A80BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB18F90289D6675008A80BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1752,7 +1872,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2EB18F81289D666B008A80BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EB18F88289D666B008A80BF /* BravveTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EB18F8E289D6675008A80BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EB18F97289D6675008A80BF /* BravveUITestsLaunchTests.swift in Sources */,
+				2EB18F95289D6675008A80BF /* BravveUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EB18F8A289D666B008A80BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EAEDEF02881DEA900C88374 /* Bravve */;
+			targetProxy = 2EB18F89289D666B008A80BF /* PBXContainerItemProxy */;
+		};
+		2EB18F99289D6675008A80BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EAEDEF02881DEA900C88374 /* Bravve */;
+			targetProxy = 2EB18F98289D6675008A80BF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */ = {
@@ -1938,6 +2088,72 @@
 			};
 			name = Release;
 		};
+		2EB18F8B289D666B008A80BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Otomanim-Dev.BravveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bravve.app/Bravve";
+			};
+			name = Debug;
+		};
+		2EB18F8C289D666B008A80BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Otomanim-Dev.BravveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bravve.app/Bravve";
+			};
+			name = Release;
+		};
+		2EB18F9B289D6675008A80BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Otomanim-Dev.BravveUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Bravve;
+			};
+			name = Debug;
+		};
+		2EB18F9C289D6675008A80BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Otomanim-Dev.BravveUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Bravve;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1955,6 +2171,24 @@
 			buildConfigurations = (
 				2EAEDF092881DEAC00C88374 /* Debug */,
 				2EAEDF0A2881DEAC00C88374 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EB18F8D289D666B008A80BF /* Build configuration list for PBXNativeTarget "BravveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EB18F8B289D666B008A80BF /* Debug */,
+				2EB18F8C289D666B008A80BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EB18F9A289D6675008A80BF /* Build configuration list for PBXNativeTarget "BravveUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EB18F9B289D6675008A80BF /* Debug */,
+				2EB18F9C289D6675008A80BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
