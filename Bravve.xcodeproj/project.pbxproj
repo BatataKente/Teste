@@ -21,12 +21,12 @@
 		1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A235289965F800B409E5 /* FontsBravveEnum.swift */; };
 		1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A2372899660200B409E5 /* RideUpEnum.swift */; };
 		1478A23B28996DC700B409E5 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A23A28996DC700B409E5 /* CGFloatExtension.swift */; };
-		2EA90B9B289D0BDB003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90B9A289D0BDB003100FE /* Assets.xcassets */; };
-		2EA90BA2289D0C81003100FE /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90B9D289D0C81003100FE /* Ubuntu-Medium.ttf */; };
-		2EA90BA3289D0C81003100FE /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90B9E289D0C81003100FE /* Ubuntu-Regular.ttf */; };
-		2EA90BA4289D0C81003100FE /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90B9F289D0C81003100FE /* Ubuntu-Bold.ttf */; };
-		2EA90BA5289D0C81003100FE /* KoHo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BA0289D0C81003100FE /* KoHo-Bold.ttf */; };
-		2EA90BA6289D0C81003100FE /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BA1289D0C81003100FE /* Ubuntu-Light.ttf */; };
+		2EA90BB2289D174B003100FE /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BAD289D174B003100FE /* Ubuntu-Medium.ttf */; };
+		2EA90BB3289D174B003100FE /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BAE289D174B003100FE /* Ubuntu-Regular.ttf */; };
+		2EA90BB4289D174B003100FE /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BAF289D174B003100FE /* Ubuntu-Bold.ttf */; };
+		2EA90BB5289D174B003100FE /* KoHo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB0289D174B003100FE /* KoHo-Bold.ttf */; };
+		2EA90BB6289D174B003100FE /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB1289D174B003100FE /* Ubuntu-Light.ttf */; };
+		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
 		2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEFD2881DEA900C88374 /* Bravve.xcdatamodeld */; };
@@ -142,12 +142,12 @@
 		1478A235289965F800B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A2372899660200B409E5 /* RideUpEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUpEnum.swift; sourceTree = "<group>"; };
 		1478A23A28996DC700B409E5 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
-		2EA90B9A289D0BDB003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2EA90B9D289D0C81003100FE /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
-		2EA90B9E289D0C81003100FE /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
-		2EA90B9F289D0C81003100FE /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
-		2EA90BA0289D0C81003100FE /* KoHo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoHo-Bold.ttf"; sourceTree = "<group>"; };
-		2EA90BA1289D0C81003100FE /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
+		2EA90BAD289D174B003100FE /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		2EA90BAE289D174B003100FE /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		2EA90BAF289D174B003100FE /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		2EA90BB0289D174B003100FE /* KoHo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoHo-Bold.ttf"; sourceTree = "<group>"; };
+		2EA90BB1289D174B003100FE /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
+		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -330,18 +330,6 @@
 			path = RideUpEnum;
 			sourceTree = "<group>";
 		};
-		2EA90B9C289D0C81003100FE /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2EA90B9D289D0C81003100FE /* Ubuntu-Medium.ttf */,
-				2EA90B9E289D0C81003100FE /* Ubuntu-Regular.ttf */,
-				2EA90B9F289D0C81003100FE /* Ubuntu-Bold.ttf */,
-				2EA90BA0289D0C81003100FE /* KoHo-Bold.ttf */,
-				2EA90BA1289D0C81003100FE /* Ubuntu-Light.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		2EA90BA7289D0DF0003100FE /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +352,18 @@
 			children = (
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		2EA90BAC289D174B003100FE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2EA90BAD289D174B003100FE /* Ubuntu-Medium.ttf */,
+				2EA90BAE289D174B003100FE /* Ubuntu-Regular.ttf */,
+				2EA90BAF289D174B003100FE /* Ubuntu-Bold.ttf */,
+				2EA90BB0289D174B003100FE /* KoHo-Bold.ttf */,
+				2EA90BB1289D174B003100FE /* Ubuntu-Light.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		2EAEDEE82881DEA900C88374 = {
@@ -508,20 +508,11 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		5FC75CDE2892C2EF000CCE71 /* Assets_Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2EA90B9C289D0C81003100FE /* Fonts */,
-				2EA90B9A289D0BDB003100FE /* Assets.xcassets */,
-			);
-			name = Assets_Fonts;
-			path = Delegate;
-			sourceTree = "<group>";
-		};
 		5FC75CDF2892CB5F000CCE71 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5FC75CDE2892C2EF000CCE71 /* Assets_Fonts */,
+				2EA90BB7289D1785003100FE /* Assets.xcassets */,
+				2EA90BAC289D174B003100FE /* Fonts */,
 				2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -1630,13 +1621,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EA90BA4289D0C81003100FE /* Ubuntu-Bold.ttf in Resources */,
-				2EA90BA5289D0C81003100FE /* KoHo-Bold.ttf in Resources */,
-				2EA90BA6289D0C81003100FE /* Ubuntu-Light.ttf in Resources */,
+				2EA90BB4289D174B003100FE /* Ubuntu-Bold.ttf in Resources */,
+				2EA90BB5289D174B003100FE /* KoHo-Bold.ttf in Resources */,
+				2EA90BB6289D174B003100FE /* Ubuntu-Light.ttf in Resources */,
 				2EAEDF042881DEAC00C88374 /* LaunchScreen.storyboard in Resources */,
-				2EA90B9B289D0BDB003100FE /* Assets.xcassets in Resources */,
-				2EA90BA3289D0C81003100FE /* Ubuntu-Regular.ttf in Resources */,
-				2EA90BA2289D0C81003100FE /* Ubuntu-Medium.ttf in Resources */,
+				2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */,
+				2EA90BB3289D174B003100FE /* Ubuntu-Regular.ttf in Resources */,
+				2EA90BB2289D174B003100FE /* Ubuntu-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
