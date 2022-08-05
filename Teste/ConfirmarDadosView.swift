@@ -10,6 +10,12 @@ import UIKit
 
 class ConfirmarDadosView: UIViewController {
     
+    override var prefersStatusBarHidden: Bool {
+
+            return true
+
+        }
+    
     
     private let backgroundImage1 = UIImageView()
     
