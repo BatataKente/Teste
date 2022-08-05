@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetalhesDoEspacoView: UIViewController {
+class OpenDetailsView: UIViewController {
     
     override func viewDidLoad() {
         
@@ -51,7 +51,7 @@ class DetalhesDoEspacoView: UIViewController {
         let photoCollectionView = UICollectionView(frame: self.view.frame,
                                                    collectionViewLayout: collectionViewFlowLayout)
         
-        photoCollectionView.register(HomeAbertaCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        photoCollectionView.register(OpenDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
@@ -131,7 +131,7 @@ class DetalhesDoEspacoView: UIViewController {
     }
 }
 
-extension DetalhesDoEspacoView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -140,7 +140,7 @@ extension DetalhesDoEspacoView: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HomeAbertaCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? OpenDetailsCollectionViewCell
         
         return cell ?? UICollectionViewCell()
     }

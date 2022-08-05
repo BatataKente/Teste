@@ -59,4 +59,32 @@ extension CGFloat {
         }
         return self
     }
+    
+    public var generateSizeForScreenByHeight: CGFloat {
+
+        let height = UIScreen.main.bounds.height
+
+        if (height <= 568) {
+            // iPod(Gen7)
+            // iPhone(5s, SEGen1)
+
+            // SE height: 568
+
+            return self * 0.5
+        }
+        else if (height <= 667) {
+
+            // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
+            // 6, 6s, 7 ,8 height: 667
+
+            return self * 0.6
+        }
+        else if (height <= 736) {
+
+            // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
+
+            return self
+        }
+        return self
+    }
 }

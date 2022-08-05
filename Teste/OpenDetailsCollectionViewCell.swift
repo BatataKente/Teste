@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeAbertaCollectionViewCell: UICollectionViewCell {
+class OpenDetailsCollectionViewCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         
