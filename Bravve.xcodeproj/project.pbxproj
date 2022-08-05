@@ -126,9 +126,9 @@
 		C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617912881EE8800281633 /* CancelReservationModel.swift */; };
 		C69617942881EE9500281633 /* CancelReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617932881EE9500281633 /* CancelReservationView.swift */; };
 		C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617952881EEA300281633 /* CancelReservationViewModel.swift */; };
-		C696179B2881EEC100281633 /* DetalhesReservaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179A2881EEC100281633 /* DetalhesReservaModel.swift */; };
-		C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */; };
-		C696179F2881EED900281633 /* DetalhesReservaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179E2881EED900281633 /* DetalhesReservaView.swift */; };
+		C696179B2881EEC100281633 /* BookingDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179A2881EEC100281633 /* BookingDetailsModel.swift */; };
+		C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179C2881EECD00281633 /* BookingDetailsViewModel.swift */; };
+		C696179F2881EED900281633 /* BookingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179E2881EED900281633 /* BookingDetailsView.swift */; };
 		C69617A42881EEF700281633 /* PersonalProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A32881EEF700281633 /* PersonalProfileModel.swift */; };
 		C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A52881EF0400281633 /* PersonalProfileView.swift */; };
 		C69617A82881EF0F00281633 /* PersonalProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */; };
@@ -275,9 +275,9 @@
 		C69617912881EE8800281633 /* CancelReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationModel.swift; sourceTree = "<group>"; };
 		C69617932881EE9500281633 /* CancelReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationView.swift; sourceTree = "<group>"; };
 		C69617952881EEA300281633 /* CancelReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationViewModel.swift; sourceTree = "<group>"; };
-		C696179A2881EEC100281633 /* DetalhesReservaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaModel.swift; sourceTree = "<group>"; };
-		C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaViewModel.swift; sourceTree = "<group>"; };
-		C696179E2881EED900281633 /* DetalhesReservaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaView.swift; sourceTree = "<group>"; };
+		C696179A2881EEC100281633 /* BookingDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsModel.swift; sourceTree = "<group>"; };
+		C696179C2881EECD00281633 /* BookingDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsViewModel.swift; sourceTree = "<group>"; };
+		C696179E2881EED900281633 /* BookingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsView.swift; sourceTree = "<group>"; };
 		C69617A32881EEF700281633 /* PersonalProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileModel.swift; sourceTree = "<group>"; };
 		C69617A52881EF0400281633 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
 		C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1394,14 +1394,14 @@
 			path = CancelReservation;
 			sourceTree = "<group>";
 		};
-		C69617752881ED5A00281633 /* Detalhes Reserva */ = {
+		C69617752881ED5A00281633 /* BookingDetails */ = {
 			isa = PBXGroup;
 			children = (
 				C69617992881EEB500281633 /* View */,
 				C69617982881EEAF00281633 /* ViewModel */,
 				C69617972881EEAB00281633 /* Model */,
 			);
-			path = "Detalhes Reserva";
+			path = BookingDetails;
 			sourceTree = "<group>";
 		};
 		C69617762881ED6400281633 /* Check In */ = {
@@ -1427,7 +1427,7 @@
 		C69617782881ED7600281633 /* MyReservations */ = {
 			isa = PBXGroup;
 			children = (
-				C69617752881ED5A00281633 /* Detalhes Reserva */,
+				C69617752881ED5A00281633 /* BookingDetails */,
 				C69617742881ED5100281633 /* CancelReservation */,
 				C69617772881ED6D00281633 /* Check Out */,
 				C69617762881ED6400281633 /* Check In */,
@@ -1540,7 +1540,7 @@
 		C69617972881EEAB00281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C696179A2881EEC100281633 /* DetalhesReservaModel.swift */,
+				C696179A2881EEC100281633 /* BookingDetailsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1548,7 +1548,7 @@
 		C69617982881EEAF00281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */,
+				C696179C2881EECD00281633 /* BookingDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1556,7 +1556,7 @@
 		C69617992881EEB500281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C696179E2881EED900281633 /* DetalhesReservaView.swift */,
+				C696179E2881EED900281633 /* BookingDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1796,7 +1796,7 @@
 				C69617232881EAC200281633 /* FotoViewModel.swift in Sources */,
 				C696172C2881EAED00281633 /* ProfessionViewModel.swift in Sources */,
 				C696173C2881EB4A00281633 /* AtividadesView.swift in Sources */,
-				C696179F2881EED900281633 /* DetalhesReservaView.swift in Sources */,
+				C696179F2881EED900281633 /* BookingDetailsView.swift in Sources */,
 				C69617562881EC5400281633 /* AvulsaView.swift in Sources */,
 				C69616C32881E7EF00281633 /* Recuperar4View.swift in Sources */,
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
@@ -1812,7 +1812,7 @@
 				2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */,
 				C69616BE2881E7D100281633 /* PasswordRecoverySMSViewModel.swift in Sources */,
 				1478A23B28996DC700B409E5 /* CGFloat+Extension.swift in Sources */,
-				C696179B2881EEC100281633 /* DetalhesReservaModel.swift in Sources */,
+				C696179B2881EEC100281633 /* BookingDetailsModel.swift in Sources */,
 				C69616F42881E9C600281633 /* NomeView.swift in Sources */,
 				C69617662881ECAD00281633 /* Reserva3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* AvulsaModel.swift in Sources */,
@@ -1846,7 +1846,7 @@
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */,
 				C696173A2881EB4000281633 /* AtividadesModel.swift in Sources */,
-				C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */,
+				C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */,
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
 				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
