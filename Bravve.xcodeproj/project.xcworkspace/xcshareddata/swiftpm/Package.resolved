@@ -8,6 +8,24 @@
         "branch" : "master",
         "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b"
       }
+    },
+    {
+      "identity" : "iosdropdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jriosdev/iOSDropDown.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "79970152b7873100308aba95ede0f18d313683b9"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7d7debbd262ddac7c75c9d40c78e929839dcbad0"
+      }
     }
   ],
   "version" : 2

@@ -37,6 +37,8 @@
 		2EB18FA0289D6B05008A80BF /* APILogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18F9F289D6B05008A80BF /* APILogin.swift */; };
 		2EB18FA2289D6C2E008A80BF /* APILoginMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FA1289D6C2E008A80BF /* APILoginMock.swift */; };
 		2EB18FA5289D7C65008A80BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FA4289D7C65008A80BF /* Alamofire */; };
+		2EB18FA8289D7EE6008A80BF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FA7289D7EE6008A80BF /* SDWebImage */; };
+		2EB18FAB289D8497008A80BF /* iOSDropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FAA289D8497008A80BF /* iOSDropDown */; };
 		2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */; };
 		2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */; };
@@ -285,6 +287,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB18FAB289D8497008A80BF /* iOSDropDown in Frameworks */,
+				2EB18FA8289D7EE6008A80BF /* SDWebImage in Frameworks */,
 				2EB18FA5289D7C65008A80BF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1657,6 +1661,8 @@
 			name = Bravve;
 			packageProductDependencies = (
 				2EB18FA4289D7C65008A80BF /* Alamofire */,
+				2EB18FA7289D7EE6008A80BF /* SDWebImage */,
+				2EB18FAA289D8497008A80BF /* iOSDropDown */,
 			);
 			productName = Bravve;
 			productReference = 2EAEDEF12881DEA900C88374 /* Bravve.app */;
@@ -1732,6 +1738,8 @@
 			mainGroup = 2EAEDEE82881DEA900C88374;
 			packageReferences = (
 				2EB18FA3289D7C65008A80BF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2EB18FA6289D7EE6008A80BF /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2EB18FA9289D8497008A80BF /* XCRemoteSwiftPackageReference "iOSDropDown" */,
 			);
 			productRefGroup = 2EAEDEF22881DEA900C88374 /* Products */;
 			projectDirPath = "";
@@ -2228,6 +2236,22 @@
 				kind = branch;
 			};
 		};
+		2EB18FA6289D7EE6008A80BF /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		2EB18FA9289D8497008A80BF /* XCRemoteSwiftPackageReference "iOSDropDown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jriosdev/iOSDropDown.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2235,6 +2259,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2EB18FA3289D7C65008A80BF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		2EB18FA7289D7EE6008A80BF /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EB18FA6289D7EE6008A80BF /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		2EB18FAA289D8497008A80BF /* iOSDropDown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EB18FA9289D8497008A80BF /* XCRemoteSwiftPackageReference "iOSDropDown" */;
+			productName = iOSDropDown;
 		};
 /* End XCSwiftPackageProductDependency section */
 
