@@ -169,7 +169,10 @@ class ConfirmarDadosView: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink)
+        buttonBack.setToBackButtonDefault(.backPink) {_ in 
+            
+            self.dismiss(animated: true)
+        }
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
         backgroundImage1.setWayToDefault(.wayCell)

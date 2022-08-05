@@ -148,7 +148,8 @@ extension UIButton {
     }
     
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen) {
+                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
+                                     _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
         self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
@@ -156,6 +157,8 @@ extension UIButton {
         
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
+        
+        self.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         self.constraintInsideTo(.height,
                                 superview?.safeAreaLayoutGuide,

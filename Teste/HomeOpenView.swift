@@ -9,11 +9,9 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
-    private var espacos = 10
-    
     private let titleLabel = UILabel()
     
-    let customBar = UIView()
+    private let customBar = UIView()
     
     private lazy var filterStackView: UIStackView = {
         
@@ -30,14 +28,16 @@ class HomeOpenView: UIViewController {
         return stackView
     }()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
+        
+        let margins = CGFloat(20).generateSizeForScreen
         
         let tableView = UITableView()
         tableView.register(HomeOpenTableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.layoutMargins = UIEdgeInsets(top: 20,
-                                               left: 20,
-                                               bottom: 20,
-                                               right: 20)
+        tableView.layoutMargins = UIEdgeInsets(top: margins,
+                                               left: margins,
+                                               bottom: margins,
+                                               right: margins)
         
         return tableView
     }()
@@ -52,9 +52,10 @@ class HomeOpenView: UIViewController {
         return stackView
     }()
     
-    var filterButtons = [UIButton]()
+    private var filterButtons = [UIButton]()
     
-    lazy var tabBar = UITabBarController()
+    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                              ButtonsBravve.exitGray.rawValue])
     
     override func viewDidLoad() {
         
@@ -67,7 +68,7 @@ class HomeOpenView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar])
+        view.addSubviews([stackView, customBar, tabBar])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -88,9 +89,13 @@ class HomeOpenView: UIViewController {
         stackView.constraintOutsideTo(.top, customBar)
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        stackView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        stackView.constraintOutsideTo(.bottom, tabBar)
         
         tableView.widthAnchorInSuperview(view.frame.size.width)
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
 
@@ -118,6 +123,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
+                cell?.viewElements.photoView.image = UIImage(named: "Example\(Int.random(in: 1...9))")
                 
                 return cell ?? UITableViewCell()
             }
