@@ -33,6 +33,7 @@
       "scale" : "2x"
     },
     {
+      "filename" : "Check (2).png",
       "idiom" : "iphone",
       "scale" : "3x"
     },
@@ -43,36 +44,9 @@
           "value" : "dark"
         }
       ],
+      "filename" : "Check (3).png",
       "idiom" : "iphone",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "ipad",
-      "scale" : "1x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "idiom" : "ipad",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "scale" : "2x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "idiom" : "ipad",
-      "scale" : "2x"
     }
   ],
   "info" : {
