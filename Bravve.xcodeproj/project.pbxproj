@@ -272,7 +272,6 @@
 		14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */,
 			);
 			path = UIViewControllerExtension;
 			sourceTree = "<group>";
@@ -280,7 +279,6 @@
 		14076BE028930BE2003EA2F1 /* UIButtonExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BE128930BFB003EA2F1 /* UIButtonExtension.swift */,
 			);
 			path = UIButtonExtension;
 			sourceTree = "<group>";
@@ -288,7 +286,6 @@
 		14076BE328930CAD003EA2F1 /* UILabelExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BE428930CC7003EA2F1 /* UILabelExtension.swift */,
 			);
 			path = UILabelExtension;
 			sourceTree = "<group>";
@@ -296,7 +293,6 @@
 		14076BE628930CDD003EA2F1 /* UIImageViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */,
 			);
 			path = UIImageViewExtension;
 			sourceTree = "<group>";
@@ -304,7 +300,6 @@
 		14076BE928930DD1003EA2F1 /* UIStackViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */,
 			);
 			path = UIStackViewExtension;
 			sourceTree = "<group>";
@@ -373,7 +368,6 @@
 		1478A23928996DA900B409E5 /* CGFloatExtension */ = {
 			isa = PBXGroup;
 			children = (
-				1478A23A28996DC700B409E5 /* CGFloatExtension.swift */,
 			);
 			path = CGFloatExtension;
 			sourceTree = "<group>";
@@ -552,7 +546,6 @@
 		2EF23F4628931B540078B6B8 /* UIViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				2EF23F4728931B760078B6B8 /* UIViewExtension.swift */,
 			);
 			path = UIViewExtension;
 			sourceTree = "<group>";
@@ -1237,6 +1230,13 @@
 		C69617482881EBA000281633 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1478A23A28996DC700B409E5 /* CGFloatExtension.swift */,
+				14076BE128930BFB003EA2F1 /* UIButtonExtension.swift */,
+				14076BE728930CFA003EA2F1 /* UIImageViewExtension.swift */,
+				14076BE428930CC7003EA2F1 /* UILabelExtension.swift */,
+				14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */,
+				14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */,
+				2EF23F4728931B760078B6B8 /* UIViewExtension.swift */,
 				1478A23928996DA900B409E5 /* CGFloatExtension */,
 				2EF23F4628931B540078B6B8 /* UIViewExtension */,
 				14076BE928930DD1003EA2F1 /* UIStackViewExtension */,
