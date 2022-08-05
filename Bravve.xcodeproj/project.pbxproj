@@ -39,6 +39,8 @@
 		2EB18FA5289D7C65008A80BF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FA4289D7C65008A80BF /* Alamofire */; };
 		2EB18FA8289D7EE6008A80BF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FA7289D7EE6008A80BF /* SDWebImage */; };
 		2EB18FAB289D8497008A80BF /* iOSDropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FAA289D8497008A80BF /* iOSDropDown */; };
+		2EB18FAE289D87DE008A80BF /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FAD289D87DE008A80BF /* MockManager.swift */; };
+		2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FAF289D87F2008A80BF /* SessionManager.swift */; };
 		2ED5D10328940EC4001C11DC /* ReservaWorkPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */; };
 		2ED5D10528940EFA001C11DC /* ReservaWorkPassViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* ReservaWorkPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */; };
@@ -186,6 +188,8 @@
 		2EB18F96289D6675008A80BF /* BravveUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2EB18F9F289D6B05008A80BF /* APILogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILogin.swift; sourceTree = "<group>"; };
 		2EB18FA1289D6C2E008A80BF /* APILoginMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginMock.swift; sourceTree = "<group>"; };
+		2EB18FAD289D87DE008A80BF /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
+		2EB18FAF289D87F2008A80BF /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPass.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* ReservaWorkPassViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPassViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* ReservaWorkPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaWorkPassView.swift; sourceTree = "<group>"; };
@@ -455,6 +459,7 @@
 		2EAEDF0B2881DFB300C88374 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				2EB18FAC289D87BE008A80BF /* Managers */,
 				2EAEDEF42881DEA900C88374 /* AppDelegate.swift */,
 				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
 			);
@@ -493,6 +498,15 @@
 				2EB18FA1289D6C2E008A80BF /* APILoginMock.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		2EB18FAC289D87BE008A80BF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2EB18FAD289D87DE008A80BF /* MockManager.swift */,
+				2EB18FAF289D87F2008A80BF /* SessionManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		2ED5D0F628940E00001C11DC /* Help */ = {
@@ -1863,6 +1877,7 @@
 				C69617892881EE5000281633 /* CheckOutModel.swift in Sources */,
 				1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */,
 				C69616BC2881E7C700281633 /* PasswordRecoverySMSModel.swift in Sources */,
+				2EB18FAE289D87DE008A80BF /* MockManager.swift in Sources */,
 				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermosECodicoesView.swift in Sources */,
 				C69617452881EB7B00281633 /* FinalizarView.swift in Sources */,
@@ -1880,6 +1895,7 @@
 				C69617472881EB8700281633 /* FinalizarViewModel.swift in Sources */,
 				C696173A2881EB4000281633 /* AtividadesModel.swift in Sources */,
 				C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */,
+				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
 				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
