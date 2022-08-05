@@ -65,9 +65,6 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
-        authManager.getStates { states in
-            print(states)
-        }
     }
     
     private func setupView() {
@@ -85,7 +82,15 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        customBar.setToDefaultCustomBarWithFilter()
+        authManager.getStates { states in
+            guard let states = states else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.customBar.setToDefaultCustomBarWithFilter(states: states)
+            }
+        }
+        
     }
     
     private func setupConstraints() {

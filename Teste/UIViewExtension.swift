@@ -116,7 +116,7 @@ extension UIView {
         self.heightAnchorInSuperview(CGFloat(120).generateSizeForScreen)
     }
     
-    open func setToDefaultCustomBarWithFilter() {
+    open func setToDefaultCustomBarWithFilter(states: [States]) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -144,12 +144,11 @@ extension UIView {
         stateLabel.text = "UF"
         stateLabel.font = initialFont
         stateChosedLabel.font = chosedLabelFont
-        leftButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: stateHandler),
-            UIAction(title: "action2",handler: stateHandler)
-
-        ])
+        var actions: [UIAction] = []
+        for state in states {
+            actions.append(UIAction(title: state.code,handler: stateHandler))
+        }
+        leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let cityHandler = {(action: UIAction) in

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct States: Codable {
+public struct States: Codable {
     var id: Int
     var code: String
     var name: String
