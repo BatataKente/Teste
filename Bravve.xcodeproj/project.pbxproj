@@ -269,41 +269,6 @@
 			path = CancelReservationCell;
 			sourceTree = "<group>";
 		};
-		14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIViewControllerExtension;
-			sourceTree = "<group>";
-		};
-		14076BE028930BE2003EA2F1 /* UIButtonExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIButtonExtension;
-			sourceTree = "<group>";
-		};
-		14076BE328930CAD003EA2F1 /* UILabelExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UILabelExtension;
-			sourceTree = "<group>";
-		};
-		14076BE628930CDD003EA2F1 /* UIImageViewExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIImageViewExtension;
-			sourceTree = "<group>";
-		};
-		14076BE928930DD1003EA2F1 /* UIStackViewExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIStackViewExtension;
-			sourceTree = "<group>";
-		};
 		1478A2262899651D00B409E5 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,13 +328,6 @@
 				1478A2372899660200B409E5 /* RideUpEnum.swift */,
 			);
 			path = RideUpEnum;
-			sourceTree = "<group>";
-		};
-		1478A23928996DA900B409E5 /* CGFloatExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CGFloatExtension;
 			sourceTree = "<group>";
 		};
 		2EA90B9C289D0C81003100FE /* Fonts */ = {
@@ -541,13 +499,6 @@
 				2ED5D10228940EC4001C11DC /* ReservaWorkPass.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		2EF23F4628931B540078B6B8 /* UIViewExtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIViewExtension;
 			sourceTree = "<group>";
 		};
 		5FC75CDE2892C2EF000CCE71 /* Assets_Fonts */ = {
@@ -1237,13 +1188,6 @@
 				14076BEA28930DE6003EA2F1 /* UIStackViewExtension.swift */,
 				14076BDE28930B27003EA2F1 /* UIViewControllerExtension.swift */,
 				2EF23F4728931B760078B6B8 /* UIViewExtension.swift */,
-				1478A23928996DA900B409E5 /* CGFloatExtension */,
-				2EF23F4628931B540078B6B8 /* UIViewExtension */,
-				14076BE928930DD1003EA2F1 /* UIStackViewExtension */,
-				14076BE628930CDD003EA2F1 /* UIImageViewExtension */,
-				14076BE328930CAD003EA2F1 /* UILabelExtension */,
-				14076BE028930BE2003EA2F1 /* UIButtonExtension */,
-				14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
