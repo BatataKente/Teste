@@ -12,7 +12,7 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(named: ButtonsBravve.arrowBlue.rawValue),
+        self.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                       for: .normal)
         self.imageView?.widthAnchorInSuperview(CGFloat(15).generateSizeForScreen)
         self.imageView?.heightAnchorInSuperview(CGFloat(10).generateSizeForScreen)
@@ -87,7 +87,7 @@ extension UIButton {
 
                 buttonTitle = "Hobbies"
 
-            case IconsBravve.activiesBlue.rawValue:
+            case IconsBravve.activitiesBlue.rawValue:
 
                 buttonTitle = "Atividades de interesse"
             

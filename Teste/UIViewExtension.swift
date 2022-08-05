@@ -133,7 +133,7 @@ extension UIView {
                                size: CGFloat(11).generateSizeForScreen)
         let chosedLabelFont = UIFont(name: FontsBravve.light.rawValue,
                                      size: CGFloat(16).generateSizeForScreen)
-        let buttonsImage = ButtonsBravve.arrowBlue.rawValue
+        let buttonsImage = ButtonsBravve.arrowDown.rawValue
         
         let stateHandler = {(action: UIAction) in
 
