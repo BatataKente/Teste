@@ -9,6 +9,10 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     private var espacos = 10
     
     private let titleLabel = UILabel()
@@ -59,6 +63,7 @@ class HomeOpenView: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         setupView()
         setupConstraints()
