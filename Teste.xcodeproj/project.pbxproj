@@ -50,6 +50,7 @@
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
+		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
@@ -101,6 +102,7 @@
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
+		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
 				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
 				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
@@ -273,6 +276,7 @@
 			files = (
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
+				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
 				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
