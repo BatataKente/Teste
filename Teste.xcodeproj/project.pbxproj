@@ -21,6 +21,7 @@
 		14054AC82899E7AD00BB4E3B /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */; };
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
+		140B389A289D3F4D003F596F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B3899289D3F4D003F596F /* LoginView.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
 		145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */; };
@@ -69,6 +70,7 @@
 		14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		140B3899289D3F4D003F596F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				148A86EA289C64540019ECFE /* BravveTabBar.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
+				140B3899289D3F4D003F596F /* LoginView.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
@@ -284,6 +287,7 @@
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
+				140B389A289D3F4D003F596F /* LoginView.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
