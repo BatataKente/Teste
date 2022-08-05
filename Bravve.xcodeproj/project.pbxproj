@@ -432,6 +432,7 @@
 				2EA90BA7289D0DF0003100FE /* Features */,
 				C69617482881EBA000281633 /* Extensions */,
 				1478A2262899651D00B409E5 /* Enums */,
+				2EB18F9D289D6A27008A80BF /* Models */,
 				5FC75CDF2892CB5F000CCE71 /* Resources */,
 				2EA90BA8289D13A2003100FE /* Services */,
 				2EAEDF052881DEAC00C88374 /* Info.plist */,
@@ -464,6 +465,14 @@
 				2EB18F96289D6675008A80BF /* BravveUITestsLaunchTests.swift */,
 			);
 			path = BravveUITests;
+			sourceTree = "<group>";
+		};
+		2EB18F9D289D6A27008A80BF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C696169F2881E70700281633 /* LoginModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2ED5D0F628940E00001C11DC /* Help */ = {
@@ -640,14 +649,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		C69616972881E69D00281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C696169F2881E70700281633 /* LoginModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		C69616982881E6A200281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,7 +701,6 @@
 			isa = PBXGroup;
 			children = (
 				C69616982881E6A200281633 /* ViewModel */,
-				C69616972881E69D00281633 /* Model */,
 				C69616962881E69700281633 /* View */,
 			);
 			path = Login;
