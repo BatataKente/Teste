@@ -168,7 +168,7 @@ class NomeView: UIViewController {
         backButton.setToBackButtonDefault(.backPink)
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
-        ways[2].setWayToDefault(.wayConfirm)
+        ways[2].setWayToDefault(.wayConfirm_1)
     }
     
     private func setupConstraints() {

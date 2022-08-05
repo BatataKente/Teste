@@ -12,7 +12,7 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(systemName: ButtonsBravve.arrowBlue.rawValue), for: .normal)
+        self.setImage(UIImage(systemName: ButtonsBravve.arrowDown.rawValue), for: .normal)
         self.tintColor = .systemBlue
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
@@ -94,7 +94,7 @@ extension UIButton {
 
                 self.configuration?.title = " Hobbies"
 
-            case IconsBravve.activiesBlue.rawValue:
+        case IconsBravve.activitiesBlue.rawValue:
 
                 self.configuration?.title = " Atividades de interesse"
             

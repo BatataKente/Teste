@@ -92,7 +92,7 @@ extension UIViewController {
 
                 case IconsBravve.hobbiesGray.rawValue: break
 
-                case IconsBravve.activiesGray.rawValue: break
+                case IconsBravve.activitiesGray.rawValue: break
                 
                 case IconsBravve.calendarGray.rawValue: break
                     

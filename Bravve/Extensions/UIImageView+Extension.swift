@@ -21,7 +21,7 @@ extension UIImageView {
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.constraintInsideTo(.centerY, superview?.safeAreaLayoutGuide)
             
-            case ImagesBravve.wayConfirm:
+        case ImagesBravve.wayConfirm_1:
             
                 self.image = UIImage(named: imageName.rawValue)
             
