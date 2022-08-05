@@ -103,6 +103,7 @@ extension UIButton {
         }
         
         self.setTitle(buttonTitle, for: .normal)
+        
         self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                        size: CGFloat(14).generateSizeForScreen)
         
