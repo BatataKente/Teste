@@ -124,6 +124,8 @@ class ViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
+        view.backgroundColor = .red
+        
         view.addSubviews([backButton,
                                     infoLabel,
                                     selectAreaStackView,
