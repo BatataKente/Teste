@@ -30,7 +30,8 @@ extension UIView {
     
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton],
-                                      _ handler: @escaping UIActionHandler) {
+                                      _ handler: @escaping UIActionHandler,
+                                      hideJumpButton: Bool = true) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
@@ -39,6 +40,7 @@ extension UIView {
         
         let jumpButton = UIButton()
         jumpButton.configuration = .plain()
+        jumpButton.isHidden = hideJumpButton
         
         let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
                                                              size: CGFloat(15).generateSizeForScreen),
@@ -59,7 +61,7 @@ extension UIView {
         self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
-        logoImageView.constraintInsideTo(.top, self.safeAreaLayoutGuide, 65)
+        logoImageView.constraintInsideTo(.top, self, 65)
         
         logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
@@ -77,9 +79,7 @@ extension UIView {
         jumpButton.constraintInsideTo(.height, logoImageView)
         jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide, CGFloat(30).generateSizeForScreen)
             
-        progressBarStackView.constraintInsideTo(.top,
-                                                self.safeAreaLayoutGuide,
-                                                self.frame.size.height*0.2)
+        progressBarStackView.constraintOutsideTo(.top, logoImageView, CGFloat(60).generateSizeForScreen)
         progressBarStackView.constraintInsideTo(.centerX,
                                                 self.safeAreaLayoutGuide)
     }
@@ -113,7 +113,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(120).generateSizeForScreen)
     }
     
     open func setToDefaultCustomBarWithFilter() {
@@ -133,7 +133,7 @@ extension UIView {
                                size: CGFloat(11).generateSizeForScreen)
         let chosedLabelFont = UIFont(name: FontsBravve.light.rawValue,
                                      size: CGFloat(16).generateSizeForScreen)
-        let buttonsImage = ButtonsBravve.arrowBlue.rawValue
+        let buttonsImage = ButtonsBravve.arrowDown.rawValue
         
         let stateHandler = {(action: UIAction) in
 
@@ -211,7 +211,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(120).generateSizeForScreen)
     }
 }
 

@@ -10,6 +10,12 @@ import UIKit
 
 class Recuperar1View: UIViewController {
     
+    override var prefersStatusBarHidden: Bool {
+
+            return true
+
+        }
+    
     private let backgroundImage = UIImageView()
     
     private let buttonBack = UIButton()

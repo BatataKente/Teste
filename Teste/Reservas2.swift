@@ -128,7 +128,7 @@ class Reservas2: UIViewController {
     private let locationIcon: UIImageView = {
         
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ButtonsBravve.locationBlue.rawValue)
+        imageView.image = UIImage(named: ButtonsBravve.locationPink.rawValue)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

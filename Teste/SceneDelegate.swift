@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let vc1 = HomeOpenView()
+        let vc1 = TermsOfPrivacy()
         vc1.tabBarItem.image = UIImage(named: "locationGray")
 
         let vc2 = NomeView()
@@ -28,10 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
 
-        window.rootViewController = tabBarController
-
-       window.rootViewController = HomeOpenView()
-
+        window.rootViewController = NomeView()
+        
+        
         window.makeKeyAndVisible()
         
         self.window = window
