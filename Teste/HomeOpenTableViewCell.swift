@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeAbertaTableViewCell: UITableViewCell {
+class HomeOpenTableViewCell: UITableViewCell {
     
     let viewElements: (view: UIView,
                        titleLabel: UILabel,
