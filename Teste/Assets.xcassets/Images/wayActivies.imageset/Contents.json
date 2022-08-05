@@ -1,16 +1,51 @@
 {
   "images" : [
     {
-      "filename" : "Grupo 91 (6).png",
-      "idiom" : "universal",
+      "filename" : "wayActivities1x.png",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Grupo 635 (1).png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "wayActivities2x.png",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Grupo 635 (2).png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Grupo 635.png",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Grupo 635 (3).png",
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],

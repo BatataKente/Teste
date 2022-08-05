@@ -107,7 +107,7 @@ class progressBar: UIViewController{
         let label = UILabel()
         label.text = "Repita a senha"
         label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
-        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
         label.minimumScaleFactor = 0.5
@@ -161,7 +161,7 @@ class progressBar: UIViewController{
     let numberCharLabel: UILabel = {
         let label = UILabel()
         label.text = "No mínimo 6 caracteres"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -175,7 +175,7 @@ class progressBar: UIViewController{
     let upperCaseLabel: UILabel = {
         let label = UILabel()
         label.text = "1 letra maiúscula"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -189,7 +189,7 @@ class progressBar: UIViewController{
     let lowerCaseLabel: UILabel = {
         let label = UILabel()
         label.text = "1 letra minúscula"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -203,7 +203,7 @@ class progressBar: UIViewController{
     let numberLabel: UILabel = {
         let label = UILabel()
         label.text = "1 digito numérico"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -217,7 +217,7 @@ class progressBar: UIViewController{
     let specialCharLabel: UILabel = {
         let label = UILabel()
         label.text = "1 caractere especial"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -231,7 +231,7 @@ class progressBar: UIViewController{
     let samePasswordLabel: UILabel = {
         let label = UILabel()
         label.text = "Senhas coincidem"
-        label.font = UIFont(name: "Ubuntu-Regular", size: 10)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -475,14 +475,14 @@ class progressBar: UIViewController{
     }
     
     @objc func confirmStackViewTapped() {
-        confirmPasswordTFLabel.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        confirmPasswordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         confirmPasswordTextField.addTarget(self, action: #selector(confirmChangeText), for: .editingChanged)
         customShaddow_.isHidden = false
         confirmPasswordTextField.isHidden = false
     }
     
     @objc func stackViewTapped() {
-        passwordTFLabel.font = UIFont(name: "Ubuntu-Regular", size: 11)
+        passwordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         passwordTextField.addTarget(self, action: #selector(changeText), for: .editingChanged)
         customShaddow.isHidden = false
         passwordTextField.isHidden = false
@@ -516,7 +516,7 @@ class progressBar: UIViewController{
                 upperCaseLabel.textColor = .label
             } else {
                 upperCaseEllipse.image = UIImage(named: "Ellipse red")
-                upperCaseLabel.textColor = UIColor(named: "AlertRed")
+                upperCaseLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if lowerCaseTest.evaluate(with: passwordTextField.text!){
@@ -524,7 +524,7 @@ class progressBar: UIViewController{
                 lowerCaseLabel.textColor = .label
             } else {
                 lowerCaseEllipse.image = UIImage(named: "Ellipse red")
-                lowerCaseLabel.textColor = UIColor(named: "AlertRed")
+                lowerCaseLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if numericRegExTest.evaluate(with: passwordTextField.text!){
@@ -532,7 +532,7 @@ class progressBar: UIViewController{
                 numberLabel.textColor = .label
             } else {
                 numberEllipse.image = UIImage(named: "Ellipse red")
-                numberLabel.textColor = UIColor(named: "AlertRed")
+                numberLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if specialChracterTest.evaluate(with: passwordTextField.text!){
@@ -540,12 +540,12 @@ class progressBar: UIViewController{
                 specialCharLabel.textColor = .label
             } else {
                 specialCharEllipse.image = UIImage(named: "Ellipse red")
-                specialCharLabel.textColor = UIColor(named: "AlertRed")
+                specialCharLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if (passwordTextField.text?.count ?? 0) < 6 {
                 numberCharEllipse.image = UIImage(named: "Ellipse red")
-                numberCharLabel.textColor = UIColor(named: "AlertRed")
+                numberCharLabel.textColor = UIColor(named: "redAlertLabel")
             } else {
                 numberCharEllipse.image = UIImage(named: "Ellipse green")
                 numberCharLabel.textColor = .label
@@ -563,7 +563,7 @@ class progressBar: UIViewController{
         
         if passwordText.isEmpty {
             samePasswordEllipse.image = UIImage(named: "Ellipse red")
-            samePasswordLabel.textColor = UIColor(named: "AlertRed")
+            samePasswordLabel.textColor = UIColor(named: "redAlertLabel")
             continueButton.backgroundColor = .gray
         } else {
             if confirmPasswordTextField.text == passwordTextField.text {
@@ -572,7 +572,7 @@ class progressBar: UIViewController{
                 
             } else {
                 samePasswordEllipse.image = UIImage(named: "Ellipse red")
-                samePasswordLabel.textColor = UIColor(named: "AlertRed")
+                samePasswordLabel.textColor = UIColor(named: "redAlertLabel")
                 continueButton.backgroundColor = .gray
             }
         }
@@ -583,7 +583,7 @@ class progressBar: UIViewController{
                     if lowerCaseEllipse.image == UIImage(named: "Ellipse green"){
                         if numberEllipse.image == UIImage(named: "Ellipse green"){
                             if specialCharEllipse.image == UIImage(named: "Ellipse green"){
-                                continueButton.backgroundColor = UIColor(named: "BravvePink")
+                                continueButton.backgroundColor = UIColor(named: "buttonPink")
                                 continueButton.addTarget(nil, action: #selector(continueAction), for: .touchUpInside)
                             }                         }
                     }
@@ -601,11 +601,11 @@ class progressBar: UIViewController{
                         if numberEllipse.image == UIImage(named: "Ellipse red"){
                             if specialCharEllipse.image == UIImage(named: "Ellipse red"){
                                 
-                                passwordTFLabel.textColor = UIColor(named: "AlertRed")
-                                customShaddow.backgroundColor = UIColor(named: "AlertRed")
+                                passwordTFLabel.textColor = UIColor(named: "redAlertLabel")
+                                customShaddow.backgroundColor = UIColor(named: "redAlertLabel")
                                 
-                                confirmPasswordTFLabel.textColor = UIColor(named: "AlertRed")
-                                customShaddow_.backgroundColor = UIColor(named: "AlertRed")
+                                confirmPasswordTFLabel.textColor = UIColor(named: "redAlertLabel")
+                                customShaddow_.backgroundColor = UIColor(named: "redAlertLabel")
                                 
                                 hideWrongPasswordButton.isHidden = false
                                 hidePasswordButton.isHidden = true

@@ -130,6 +130,22 @@ extension UIButton {
                                        size: CGFloat(16).generateSizeForScreen)
     }
     
+    open func setToBottomButtonDefaultAbove(_ buttonTitle: String = "Continuar",
+                                            backgroundColor: ColorsBravve = .buttonGray,
+                                            above: Any?) {
+        
+        self.setTitle(buttonTitle, for: .normal)
+        self.backgroundColor = UIColor(named: backgroundColor.rawValue)
+        
+        self.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+        self.constraintOutsideTo(.bottom, above)
+        
+        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,
+                                       size: CGFloat(16).generateSizeForScreen)
+    }
+    
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
                                      _ constant: CGFloat = CGFloat(22).generateSizeForScreen) {
         

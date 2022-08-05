@@ -2,15 +2,50 @@
   "images" : [
     {
       "filename" : "Grupo 636.png",
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Grupo 636 (5).png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "wayRecoveryPassword.png",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Grupo 636 (6).png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Grupo 636 (8).png",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Grupo 636 (7).png",
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],
