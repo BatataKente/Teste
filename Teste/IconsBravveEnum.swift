@@ -9,9 +9,9 @@
 
 public enum IconsBravve: String {
 
-    case activiesBlue = "activiesBlue"
-    case activiesGray = "activiesGray"
-    case activiesPink = "activiesPink"
+    case activiesBlue = "activitiesBlue"
+    case activiesGray = "activitiesGray"
+    case activiesPink = "activitiesPink"
     case book = "book"
     case calendarBlue = "calendarBlue"
     case calendarGray = "calendarGray"

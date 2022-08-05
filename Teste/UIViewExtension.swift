@@ -113,7 +113,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(120).generateSizeForScreen)
     }
     
     open func setToDefaultCustomBarWithFilter() {
@@ -211,7 +211,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(120).generateSizeForScreen)
     }
 }
 

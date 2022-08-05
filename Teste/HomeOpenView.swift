@@ -18,7 +18,7 @@ class HomeOpenView: UIViewController {
     private lazy var filterStackView: UIStackView = {
         
         let stackView = UIStackView()
-        stackView.backgroundColor = .white
+        stackView.setToDefaultBackgroundColor()
         stackView.isHidden = false
         stackView.alignment = .leading
         stackView.isLayoutMarginsRelativeArrangement = true
