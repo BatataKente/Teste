@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09619BE1289D4BC200BCC567 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE0289D4BC200BCC567 /* ProfessionView.swift */; };
+		09619BE3289D50AF00BCC567 /* ProfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */; };
 		0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */; };
 		1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */; };
 		1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F096289BFF3F00F9A2A5 /* Reservas2.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		09619BE0289D4BC200BCC567 /* ProfessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
+		09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionViewModel.swift; sourceTree = "<group>"; };
 		0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceCheckoutView.swift; sourceTree = "<group>"; };
 		1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3ViewModel.swift; sourceTree = "<group>"; };
 		1340F096289BFF3F00F9A2A5 /* Reservas2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservas2.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
 				09619BE0289D4BC200BCC567 /* ProfessionView.swift */,
+				09619BE2289D50AF00BCC567 /* ProfessionViewModel.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
@@ -298,6 +301,7 @@
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
+				09619BE3289D50AF00BCC567 /* ProfessionViewModel.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
