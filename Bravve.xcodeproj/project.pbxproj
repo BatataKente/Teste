@@ -393,6 +393,16 @@
 		2EA90BA7289D0DF0003100FE /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C69617792881EDEE00281633 /* EditProfile */,
+				2ED5D0F628940E00001C11DC /* Help */,
+				C69616912881E65900281633 /* Login */,
+				C69616902881E64F00281633 /* Home */,
+				C69617782881ED7600281633 /* MyReservations */,
+				C69616922881E65F00281633 /* RecoverPassword */,
+				C69616E32881E91F00281633 /* Registration */,
+				C696174B2881EBB400281633 /* SpaceReservation */,
+				2ED5D0F728940E17001C11DC /* TermsAndCondition */,
+				2ED5D0F828940E2E001C11DC /* WorkPassBooking */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -417,17 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				2EA90BA7289D0DF0003100FE /* Features */,
-				2ED5D0F828940E2E001C11DC /* WorkPassBooking */,
-				2ED5D0F728940E17001C11DC /* TermsAndCondition */,
-				2ED5D0F628940E00001C11DC /* Help */,
-				C69617792881EDEE00281633 /* EditProfile */,
-				C69617782881ED7600281633 /* MyReservations */,
-				C696174B2881EBB400281633 /* SpaceReservation */,
 				C69617482881EBA000281633 /* Extensions */,
-				C69616E32881E91F00281633 /* Registration */,
-				C69616922881E65F00281633 /* RecoverPassword */,
-				C69616912881E65900281633 /* Login */,
-				C69616902881E64F00281633 /* Home */,
 				2EAEDF0B2881DFB300C88374 /* App */,
 				1478A2262899651D00B409E5 /* Enums */,
 				5FC75CDF2892CB5F000CCE71 /* LaunchScreen */,
