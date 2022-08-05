@@ -17,20 +17,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-//        let vc1 = RecuperacaoDeSenha3()
-//        vc1.tabBarItem.image = UIImage(named: "locationGray")
-//
-//        let vc2 = NomeView()
-//        vc2.tabBarItem.image = UIImage(named: "exiteGray")
-//
-//        let tabBarController = UITabBarController()
-//        tabBarController.viewControllers = [vc1, vc2]
-//
-//        tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
-//
-//        window.rootViewController = tabBarController
-        
-        window.rootViewController = CheckInQrCodeViewController()
+        let vc1 = HomeOpenView()
+        vc1.tabBarItem.image = UIImage(named: "locationGray")
+
+        let vc2 = NomeView()
+        vc2.tabBarItem.image = UIImage(named: "exiteGray")
+
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [vc1, vc2]
+
+        tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
+
+        window.rootViewController = tabBarController
+
+       window.rootViewController = HomeOpenView()
+
         window.makeKeyAndVisible()
         
         self.window = window

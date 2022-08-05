@@ -77,7 +77,7 @@ class LoginView: UIViewController {
         view.textColor = .white
         view.numberOfLines = 0
         
-        view.text = "Bem vindo(a)\n à Bravve "
+        view.text = "Bem vindo(a) à Bravve "
         
         return view
     }()
@@ -216,7 +216,7 @@ class LoginView: UIViewController {
             let attributesFont: [NSAttributedString.Key : Any] = [
             
                 NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
-                NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.label.rawValue) as Any]
+                NSAttributedString.Key.foregroundColor: UIColor.white as Any]
 
             let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
@@ -228,7 +228,7 @@ class LoginView: UIViewController {
         let view = UILabel()
         view.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         view.text = "Novo por aqui?"
-        view.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        view.textColor = UIColor.white
         
         view.translatesAutoresizingMaskIntoConstraints =  false
     
@@ -253,7 +253,7 @@ class LoginView: UIViewController {
             let attributesFont: [NSAttributedString.Key : Any] = [
                
                 NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
-                NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.label.rawValue) as Any]
+                NSAttributedString.Key.foregroundColor: UIColor.white as Any]
             
             let attributedString = NSMutableAttributedString(string: "Cadastre-se", attributes: attributesFont)
             view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
@@ -286,8 +286,8 @@ class LoginView: UIViewController {
         cellStackView.constraintInsideTo(.trailing, passwordStackView)
         
         passwordStackView.constraintOutsideTo(.top, cellStackView, CGFloat(15).generateSizeForScreen)
-        passwordStackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 22)
-        passwordStackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 22)
+        passwordStackView.constraintInsideTo(.leading, subTitleLabel)
+        passwordStackView.constraintInsideTo(.trailing, subTitleLabel)
         
         eyeButton.heightAnchorInSuperview(CGFloat(15).generateSizeForScreen)
         eyeButton.constraintInsideTo(.centerY, passwordStackView)
