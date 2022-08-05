@@ -63,9 +63,9 @@
 		C69616BA2881E7BD00281633 /* PasswordRecoverySMSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616B92881E7BD00281633 /* PasswordRecoverySMSView.swift */; };
 		C69616BC2881E7C700281633 /* PasswordRecoverySMSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616BB2881E7C700281633 /* PasswordRecoverySMSModel.swift */; };
 		C69616BE2881E7D100281633 /* PasswordRecoverySMSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616BD2881E7D100281633 /* PasswordRecoverySMSViewModel.swift */; };
-		C69616C32881E7EF00281633 /* Recuperar4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C22881E7EF00281633 /* Recuperar4View.swift */; };
-		C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C42881E7F900281633 /* Recuperar4Model.swift */; };
-		C69616C72881E80600281633 /* Recuperar4ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C62881E80600281633 /* Recuperar4ViewModel.swift */; };
+		C69616C32881E7EF00281633 /* RecoverPasswordModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C22881E7EF00281633 /* RecoverPasswordModalView.swift */; };
+		C69616C52881E7F900281633 /* RecoverPasswordModalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C42881E7F900281633 /* RecoverPasswordModalModel.swift */; };
+		C69616C72881E80600281633 /* RecoverPasswordModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616C62881E80600281633 /* RecoverPasswordModalViewModel.swift */; };
 		C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CA2881E88600281633 /* HomeOpenModel.swift */; };
 		C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CC2881E89200281633 /* HomeOpenView.swift */; };
 		C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */; };
@@ -212,9 +212,9 @@
 		C69616B92881E7BD00281633 /* PasswordRecoverySMSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverySMSView.swift; sourceTree = "<group>"; };
 		C69616BB2881E7C700281633 /* PasswordRecoverySMSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverySMSModel.swift; sourceTree = "<group>"; };
 		C69616BD2881E7D100281633 /* PasswordRecoverySMSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverySMSViewModel.swift; sourceTree = "<group>"; };
-		C69616C22881E7EF00281633 /* Recuperar4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recuperar4View.swift; sourceTree = "<group>"; };
-		C69616C42881E7F900281633 /* Recuperar4Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recuperar4Model.swift; sourceTree = "<group>"; };
-		C69616C62881E80600281633 /* Recuperar4ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recuperar4ViewModel.swift; sourceTree = "<group>"; };
+		C69616C22881E7EF00281633 /* RecoverPasswordModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordModalView.swift; sourceTree = "<group>"; };
+		C69616C42881E7F900281633 /* RecoverPasswordModalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordModalModel.swift; sourceTree = "<group>"; };
+		C69616C62881E80600281633 /* RecoverPasswordModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordModalViewModel.swift; sourceTree = "<group>"; };
 		C69616CA2881E88600281633 /* HomeOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenModel.swift; sourceTree = "<group>"; };
 		C69616CC2881E89200281633 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenViewModel.swift; sourceTree = "<group>"; };
@@ -594,7 +594,7 @@
 		C69616922881E65F00281633 /* RecoverPassword */ = {
 			isa = PBXGroup;
 			children = (
-				C696169C2881E6E100281633 /* RecuperarSenha_modal */,
+				C696169C2881E6E100281633 /* RecoverPassword_modal */,
 				C696169B2881E6D800281633 /* PasswordRecovery_sms */,
 				C696169A2881E6D100281633 /* PasswordRecovery_password */,
 				C69616992881E6AF00281633 /* PasswordRecovery_email */,
@@ -673,14 +673,14 @@
 			path = PasswordRecovery_sms;
 			sourceTree = "<group>";
 		};
-		C696169C2881E6E100281633 /* RecuperarSenha_modal */ = {
+		C696169C2881E6E100281633 /* RecoverPassword_modal */ = {
 			isa = PBXGroup;
 			children = (
 				C69616C12881E7E100281633 /* ViewModel */,
 				C69616C02881E7DD00281633 /* Model */,
 				C69616BF2881E7D800281633 /* View */,
 			);
-			path = RecuperarSenha_modal;
+			path = RecoverPassword_modal;
 			sourceTree = "<group>";
 		};
 		C69616A32881E71800281633 /* Login */ = {
@@ -767,7 +767,7 @@
 		C69616BF2881E7D800281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69616C22881E7EF00281633 /* Recuperar4View.swift */,
+				C69616C22881E7EF00281633 /* RecoverPasswordModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -775,7 +775,7 @@
 		C69616C02881E7DD00281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69616C42881E7F900281633 /* Recuperar4Model.swift */,
+				C69616C42881E7F900281633 /* RecoverPasswordModalModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -783,7 +783,7 @@
 		C69616C12881E7E100281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69616C62881E80600281633 /* Recuperar4ViewModel.swift */,
+				C69616C62881E80600281633 /* RecoverPasswordModalViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1765,7 +1765,7 @@
 				C69617612881EC9000281633 /* Reserva2ViewModel.swift in Sources */,
 				C69616B32881E79400281633 /* Recuperar3Model.swift in Sources */,
 				C69617282881EADC00281633 /* ProfessionModel.swift in Sources */,
-				C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */,
+				C69616C52881E7F900281633 /* RecoverPasswordModalModel.swift in Sources */,
 				C69616B52881E79E00281633 /* PasswordRecoveryPasswordViewModel.swift in Sources */,
 				14076BEB28930DE6003EA2F1 /* UIStackView+Extension.swift in Sources */,
 				C69617A82881EF0F00281633 /* PersonalProfileViewModel.swift in Sources */,
@@ -1798,13 +1798,13 @@
 				C696173C2881EB4A00281633 /* AtividadesView.swift in Sources */,
 				C696179F2881EED900281633 /* BookingDetailsView.swift in Sources */,
 				C69617562881EC5400281633 /* AvulsaView.swift in Sources */,
-				C69616C32881E7EF00281633 /* Recuperar4View.swift in Sources */,
+				C69616C32881E7EF00281633 /* RecoverPasswordModalView.swift in Sources */,
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
 				C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */,
 				C69617802881EE1E00281633 /* CheckInModel.swift in Sources */,
 				14076BE828930CFA003EA2F1 /* UIImageView+Extension.swift in Sources */,
 				C696178D2881EE6500281633 /* CheckOutViewModel.swift in Sources */,
-				C69616C72881E80600281633 /* Recuperar4ViewModel.swift in Sources */,
+				C69616C72881E80600281633 /* RecoverPasswordModalViewModel.swift in Sources */,
 				C696173E2881EB5400281633 /* AtividadesViewModel.swift in Sources */,
 				C69617A42881EEF700281633 /* PersonalProfileModel.swift in Sources */,
 				C69616BA2881E7BD00281633 /* PasswordRecoverySMSView.swift in Sources */,
