@@ -390,6 +390,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2EA90BA7289D0DF0003100FE /* Features */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		2EAEDEE82881DEA900C88374 = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +416,7 @@
 		2EAEDEF32881DEA900C88374 /* Bravve */ = {
 			isa = PBXGroup;
 			children = (
+				2EA90BA7289D0DF0003100FE /* Features */,
 				2ED5D0F828940E2E001C11DC /* ReservaWorkPass */,
 				2ED5D0F728940E17001C11DC /* TermosECondicoes */,
 				2ED5D0F628940E00001C11DC /* Ajuda */,
