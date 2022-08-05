@@ -417,15 +417,15 @@
 			isa = PBXGroup;
 			children = (
 				2EA90BA7289D0DF0003100FE /* Features */,
-				2ED5D0F828940E2E001C11DC /* ReservaWorkPass */,
-				2ED5D0F728940E17001C11DC /* TermosECondicoes */,
-				2ED5D0F628940E00001C11DC /* Ajuda */,
-				C69617792881EDEE00281633 /* Editar Perfil */,
-				C69617782881ED7600281633 /* Minhas Reservas */,
-				C696174B2881EBB400281633 /* Reserva Espaco */,
-				C69617482881EBA000281633 /* Utils */,
-				C69616E32881E91F00281633 /* Cadastro */,
-				C69616922881E65F00281633 /* Recuperar Senha */,
+				2ED5D0F828940E2E001C11DC /* WorkPassBooking */,
+				2ED5D0F728940E17001C11DC /* TermsAndCondition */,
+				2ED5D0F628940E00001C11DC /* Help */,
+				C69617792881EDEE00281633 /* EditProfile */,
+				C69617782881ED7600281633 /* MyReservations */,
+				C696174B2881EBB400281633 /* SpaceReservation */,
+				C69617482881EBA000281633 /* Extensions */,
+				C69616E32881E91F00281633 /* Registration */,
+				C69616922881E65F00281633 /* RecoverPassword */,
 				C69616912881E65900281633 /* Login */,
 				C69616902881E64F00281633 /* Home */,
 				2EAEDF0B2881DFB300C88374 /* App */,
@@ -447,34 +447,34 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		2ED5D0F628940E00001C11DC /* Ajuda */ = {
+		2ED5D0F628940E00001C11DC /* Help */ = {
 			isa = PBXGroup;
 			children = (
 				2ED5D0FB28940E4E001C11DC /* Model */,
 				2ED5D0FA28940E47001C11DC /* ViewModel */,
 				2ED5D0F928940E41001C11DC /* View */,
 			);
-			path = Ajuda;
+			path = Help;
 			sourceTree = "<group>";
 		};
-		2ED5D0F728940E17001C11DC /* TermosECondicoes */ = {
+		2ED5D0F728940E17001C11DC /* TermsAndCondition */ = {
 			isa = PBXGroup;
 			children = (
 				2ED5D0FE28940E7B001C11DC /* Model */,
 				2ED5D0FD28940E6B001C11DC /* ViewModel */,
 				2ED5D0FC28940E5B001C11DC /* View */,
 			);
-			path = TermosECondicoes;
+			path = TermsAndCondition;
 			sourceTree = "<group>";
 		};
-		2ED5D0F828940E2E001C11DC /* ReservaWorkPass */ = {
+		2ED5D0F828940E2E001C11DC /* WorkPassBooking */ = {
 			isa = PBXGroup;
 			children = (
 				2ED5D10128940E94001C11DC /* Model */,
 				2ED5D10028940E8D001C11DC /* ViewModel */,
 				2ED5D0FF28940E86001C11DC /* View */,
 			);
-			path = ReservaWorkPass;
+			path = WorkPassBooking;
 			sourceTree = "<group>";
 		};
 		2ED5D0F928940E41001C11DC /* View */ = {
@@ -593,7 +593,7 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		C69616922881E65F00281633 /* Recuperar Senha */ = {
+		C69616922881E65F00281633 /* RecoverPassword */ = {
 			isa = PBXGroup;
 			children = (
 				C696169C2881E6E100281633 /* RecuperarSenha_modal */,
@@ -601,7 +601,7 @@
 				C696169A2881E6D100281633 /* PasswordRecovery_password */,
 				C69616992881E6AF00281633 /* PasswordRecovery_email */,
 			);
-			path = "Recuperar Senha";
+			path = RecoverPassword;
 			sourceTree = "<group>";
 		};
 		C69616932881E68100281633 /* Model */ = {
@@ -877,7 +877,7 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C69616E32881E91F00281633 /* Cadastro */ = {
+		C69616E32881E91F00281633 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
 				C69616ED2881E99900281633 /* Finalizar */,
@@ -891,7 +891,7 @@
 				C69616E52881E93900281633 /* Telefone */,
 				C69616E42881E92700281633 /* Nome */,
 			);
-			path = Cadastro;
+			path = Registration;
 			sourceTree = "<group>";
 		};
 		C69616E42881E92700281633 /* Nome */ = {
@@ -1234,7 +1234,7 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C69617482881EBA000281633 /* Utils */ = {
+		C69617482881EBA000281633 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				1478A23928996DA900B409E5 /* CGFloatExtension */,
@@ -1245,10 +1245,10 @@
 				14076BE028930BE2003EA2F1 /* UIButtonExtension */,
 				14076BDD28930B0C003EA2F1 /* UIViewControllerExtension */,
 			);
-			path = Utils;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C696174B2881EBB400281633 /* Reserva Espaco */ = {
+		C696174B2881EBB400281633 /* SpaceReservation */ = {
 			isa = PBXGroup;
 			children = (
 				C696174F2881EC1A00281633 /* Reserva Finalizada */,
@@ -1256,7 +1256,7 @@
 				C696174D2881EC0A00281633 /* Reserva 2 de 3 */,
 				C696174C2881EBC000281633 /* Reserva Avulsa */,
 			);
-			path = "Reserva Espaco";
+			path = SpaceReservation;
 			sourceTree = "<group>";
 		};
 		C696174C2881EBC000281633 /* Reserva Avulsa */ = {
@@ -1435,7 +1435,7 @@
 			path = "Check Out";
 			sourceTree = "<group>";
 		};
-		C69617782881ED7600281633 /* Minhas Reservas */ = {
+		C69617782881ED7600281633 /* MyReservations */ = {
 			isa = PBXGroup;
 			children = (
 				C69617752881ED5A00281633 /* Detalhes Reserva */,
@@ -1443,16 +1443,16 @@
 				C69617772881ED6D00281633 /* Check Out */,
 				C69617762881ED6400281633 /* Check In */,
 			);
-			path = "Minhas Reservas";
+			path = MyReservations;
 			sourceTree = "<group>";
 		};
-		C69617792881EDEE00281633 /* Editar Perfil */ = {
+		C69617792881EDEE00281633 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
 				C696177B2881EDFE00281633 /* Perfil Edicao */,
 				C696177A2881EDF600281633 /* Perfil Pessoal */,
 			);
-			path = "Editar Perfil";
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		C696177A2881EDF600281633 /* Perfil Pessoal */ = {
