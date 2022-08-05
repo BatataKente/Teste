@@ -44,7 +44,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         view.layer.shadowRadius = 8
         
         let photoView = UIImageView()
-        photoView.backgroundColor = .cyan
+        photoView.image = UIImage(named: "Example 1")
         photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 12
         

@@ -5,7 +5,6 @@
 //  Created by user217108 on 8/2/22.
 //
 
-import Foundation
 import UIKit
 
 class LoginView: UIViewController {
@@ -13,8 +12,10 @@ class LoginView: UIViewController {
     let backButton = UIButton()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        
+        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         setupView()
         setupLayoutConstraints()
        
@@ -23,8 +24,11 @@ class LoginView: UIViewController {
         passwordStackView.addGestureRecognizer(stackViewTap)
         
         backButton.setToBackButtonDefault()
-        titleLabel.font = UIFont(name: FontsBravve.koho.rawValue, size: CGFloat(51).generateSizeForScreen)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         
+        return .lightContent
     }
     
     @objc func stackViewTapped() {
@@ -38,7 +42,9 @@ class LoginView: UIViewController {
     }
     
     func setupView() {
-        view.addSubviews([backgroundView,wayImage,backButton,logoImage,titleLabel,subTitleLabel,cellStackView,passwordStackView,eyeButton,passwordRecoveryButton,enterButton,newLabel,registerButton])
+        view.addSubviews([wayImage,titleLabel,subTitleLabel,cellStackView,passwordStackView,eyeButton,passwordRecoveryButton,enterButton,newLabel,registerButton, backButton, logoImage])
+        
+        wayImage.setWayToDefault(.wayLogin)
     }
     
 
@@ -61,44 +67,26 @@ class LoginView: UIViewController {
         
     }()
     
-    private lazy var wayImage: UIImageView = {
-        let view   = UIImageView()
-        view.contentMode = .scaleAspectFit
-        view.image  = UIImage(named: ImagesBravve.wayLogin.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints =  false
-        
-        return view
-        
-    }()
+    private lazy var wayImage = UIImageView()
       
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
-        view.font = UIFont(name: FontsBravve.medium.rawValue,
-                        size: CGFloat(51).generateSizeForScreen)
-        view.backgroundColor = .black
-        view.translatesAutoresizingMaskIntoConstraints =  false
-        view.textColor =  UIColor(named: ColorsBravve.label.rawValue)
+        
+        view.font = UIFont(name: FontsBravve.koho.rawValue,
+                           size: CGFloat(51).generateSizeForScreenByHeight)
+        view.textColor = .white
         view.numberOfLines = 0
-        view.adjustsFontSizeToFitWidth = true
-        view.minimumScaleFactor = 0.2
-//        view.textAlignment = .center
         
-        view.text = "Bem vindo(a) à Bravve "
-        
-//        view.lineBreakMode = .byWordWrapping
-//
-//        var paragraphStyle = NSMutableParagraphStyle()
-//
-//        paragraphStyle.lineHeightMultiple = 0.7
-//        view.attributedText = NSMutableAttributedString(string: "Bem vindo(a) \nà Bravve", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        view.text = "Bem vindo(a)\n à Bravve "
         
         return view
     }()
     
     private lazy var subTitleLabel: UILabel = {
+        
         let view =  UILabel()
         view.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
-        view.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        view.textColor = .white
         view.text = "O futuro do trabalho é hibrído, remoto,\nconectado e humano!"
         view.numberOfLines = 4
         view.translatesAutoresizingMaskIntoConstraints =  false
@@ -214,7 +202,7 @@ class LoginView: UIViewController {
         private lazy var enterButton: UIButton = {
             let view = UIButton()
             view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-            view.layer.cornerRadius = 12
+            view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
 
             
             let stackMargins : CGFloat = CGFloat(20).generateSizeForScreen
@@ -278,73 +266,50 @@ class LoginView: UIViewController {
 
         
     private func setupLayoutConstraints() {
-        NSLayoutConstraint.activate([
-    
-            backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            wayImage.topAnchor.constraint(equalTo: view.topAnchor,constant: -15),
-            wayImage.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant:0),
-
-            wayImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4533),
-            wayImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3078),
-////
-//            logoImage.topAnchor.constraint(equalTo: backButton.bottomAnchor,constant: 10),
-            logoImage.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22.79),
-           
-            
-            logoImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.30),
-            logoImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
-            
-            titleLabel.topAnchor.constraint(equalTo: logoImage.bottomAnchor,constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22),
-
-            
-            titleLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8702),
-//            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2857),
-            
-            
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 5),
-            subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22),
-           
-            
-            subTitleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8826),
-            
-            cellStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor,constant: 20),
-            cellStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22),
-            cellStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -22),
-            
-            cellStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8826),
-
-            
-            passwordStackView.topAnchor.constraint(equalTo: cellStackView.bottomAnchor,constant: 15),
-            passwordStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22),
-            passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: 22),
-            passwordStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8826),
-
-            eyeButton.heightAnchor.constraint(equalToConstant: 15),
-            eyeButton.topAnchor.constraint(equalTo: passwordTextField.topAnchor,constant: -10),
-            eyeButton.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor,constant: -10),
-            
-            passwordRecoveryButton.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor,constant: 19),
-            passwordRecoveryButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 26),
-           
-            enterButton.topAnchor.constraint(equalTo: passwordRecoveryButton.bottomAnchor,constant: 23.5),
-            enterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant:22),
-            enterButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8826),
-            enterButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.0628),
-            
-            newLabel.topAnchor.constraint(equalTo: enterButton.bottomAnchor,constant: 30),
-            newLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22),
-            
-            registerButton.topAnchor.constraint(equalTo: newLabel.bottomAnchor,constant: 10),
-            registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 22),
-            registerButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8826),
-            registerButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.0628)
-            
-    ])
-
+        
+        logoImage.constraintOutsideTo(.top, backButton, 30)
+        logoImage.constraintInsideTo(.leading, view.safeAreaLayoutGuide,
+                                     CGFloat(20).generateSizeForScreen)
+        logoImage.constraintOutsideTo(.width, logoImage, multiplier: 4)
+        logoImage.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+        
+        titleLabel.constraintOutsideTo(.top, logoImage, CGFloat(20).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.leading, logoImage)
+        titleLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide,
+                                      CGFloat(20).generateSizeForScreen)
+        
+        subTitleLabel.constraintOutsideTo(.top, titleLabel, CGFloat(5).generateSizeForScreen)
+        subTitleLabel.constraintInsideTo(.leading, titleLabel)
+        subTitleLabel.constraintInsideTo(.trailing, titleLabel)
+        
+        cellStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
+        cellStackView.constraintInsideTo(.leading, passwordStackView)
+        cellStackView.constraintInsideTo(.trailing, passwordStackView)
+        
+        passwordStackView.constraintOutsideTo(.top, cellStackView, CGFloat(15).generateSizeForScreen)
+        passwordStackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 22)
+        passwordStackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 22)
+        
+        eyeButton.heightAnchorInSuperview(CGFloat(15).generateSizeForScreen)
+        eyeButton.constraintInsideTo(.centerY, passwordStackView)
+        eyeButton.constraintInsideTo(.trailing, passwordStackView,
+                                     CGFloat(15).generateSizeForScreen)
+        
+        enterButton.constraintOutsideTo(.top, passwordRecoveryButton, CGFloat(20).generateSizeForScreen)
+        enterButton.constraintInsideTo(.leading, passwordStackView)
+        enterButton.constraintInsideTo(.trailing, passwordStackView)
+        enterButton.constraintInsideTo(.height, registerButton)
+        
+        passwordRecoveryButton.constraintOutsideTo(.top, passwordStackView, CGFloat(20).generateSizeForScreen)
+        passwordRecoveryButton.constraintInsideTo(.leading, passwordStackView, 6)
+        
+        newLabel.constraintOutsideTo(.top, enterButton,
+                                     CGFloat(50).generateSizeForScreenByHeight)
+        newLabel.constraintInsideTo(.leading, enterButton)
+        
+        registerButton.constraintOutsideTo(.top, newLabel, CGFloat(10).generateSizeForScreen)
+        registerButton.constraintInsideTo(.leading, enterButton)
+        registerButton.constraintInsideTo(.trailing, enterButton)
+        registerButton.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
     }
 }

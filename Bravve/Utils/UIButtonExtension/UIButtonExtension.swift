@@ -16,7 +16,6 @@ extension UIButton {
         self.tintColor = .systemBlue
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
-        self.changesSelectionAsPrimaryAction = true
     }
 }
 
@@ -176,22 +175,18 @@ extension UIButton {
     }
     
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = 22) {
+                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
+        self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
+        self.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
         
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
+        self.constraintInsideTo(.top, superview, CGFloat(50).generateSizeForScreen)
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
-        else {
-            
-            self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.05)
-            self.widthAnchorInSuperview(50)
-        }
+        self.constraintInsideTo(.height,
+                                superview?.safeAreaLayoutGuide,
+                                multiplier: CGFloat(0.04).generateSizeForScreen)
+        self.constraintOutsideTo(.width, self)
     }
 }
