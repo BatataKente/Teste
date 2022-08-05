@@ -12,9 +12,8 @@ class Recuperar1View: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
 
-            return true
-
-        }
+        return true
+    }
     
     private let backgroundImage = UIImageView()
     
@@ -111,7 +110,10 @@ class Recuperar1View: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink)
+        buttonBack.setToBackButtonDefault(.backPink) {_ in
+            
+            self.dismiss(animated: true)
+        }
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault(.wayCell)

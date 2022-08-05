@@ -18,11 +18,12 @@ class OpenDetailsView: UIViewController {
         setupConstraints()
     }
     
-    let customBar = UIView()
+    private let customBar = UIView()
     
-    lazy var tabBar = BravveTabBar()
+    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                                   ButtonsBravve.exitGray.rawValue])
     
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal

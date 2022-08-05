@@ -179,13 +179,18 @@ class NomeView: UIViewController {
     private func setupConstraints() {
         
         infoLabel.constraintInsideTo(.top,
-                                     view, CGFloat(250).generateSizeForScreen)
+                                     view,
+                                     CGFloat(250).generateSizeForScreen)
         infoLabel.constraintInsideTo(.leading,
-                                     view.safeAreaLayoutGuide, CGFloat(40).generateSizeForScreen)
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         infoLabel.constraintInsideTo(.trailing,
-                                     view.safeAreaLayoutGuide, CGFloat(40).generateSizeForScreen)
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         
-        registerStackView.constraintOutsideTo(.top, infoLabel, CGFloat(60).generateSizeForScreen)
+        registerStackView.constraintOutsideTo(.top,
+                                              infoLabel,
+                                              CGFloat(60).generateSizeForScreen)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         
@@ -240,8 +245,8 @@ class NomeView: UIViewController {
     
     @objc func stackViewTapped() {
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: 11)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: 11)
+        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
         
         customShaddow.isHidden = false
         

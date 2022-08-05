@@ -85,7 +85,10 @@ class FotoView: UIViewController {
         firstWay.setWayToDefault(.wayConfirm_1)
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink)
+        backButton.setToBackButtonDefault(.backPink) {_ in
+            
+            self.dismiss(animated: true)
+        }
         registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
     
