@@ -129,12 +129,12 @@
 		C696179B2881EEC100281633 /* DetalhesReservaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179A2881EEC100281633 /* DetalhesReservaModel.swift */; };
 		C696179D2881EECD00281633 /* DetalhesReservaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */; };
 		C696179F2881EED900281633 /* DetalhesReservaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696179E2881EED900281633 /* DetalhesReservaView.swift */; };
-		C69617A42881EEF700281633 /* PerfilPessoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A32881EEF700281633 /* PerfilPessoalModel.swift */; };
+		C69617A42881EEF700281633 /* PersonalProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A32881EEF700281633 /* PersonalProfileModel.swift */; };
 		C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A52881EF0400281633 /* PersonalProfileView.swift */; };
-		C69617A82881EF0F00281633 /* PerfilPessoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A72881EF0F00281633 /* PerfilPessoalViewModel.swift */; };
-		C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617AC2881EF2C00281633 /* PerfilEdicaoModel.swift */; };
-		C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617AE2881EF3700281633 /* PerfilEdicaoView.swift */; };
-		C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617B02881EF4800281633 /* PerfilEdicaoViewModel.swift */; };
+		C69617A82881EF0F00281633 /* PersonalProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */; };
+		C69617AD2881EF2C00281633 /* EditProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617AC2881EF2C00281633 /* EditProfileModel.swift */; };
+		C69617AF2881EF3700281633 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617AE2881EF3700281633 /* EditProfileView.swift */; };
+		C69617B12881EF4800281633 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69617B02881EF4800281633 /* EditProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,12 +278,12 @@
 		C696179A2881EEC100281633 /* DetalhesReservaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaModel.swift; sourceTree = "<group>"; };
 		C696179C2881EECD00281633 /* DetalhesReservaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaViewModel.swift; sourceTree = "<group>"; };
 		C696179E2881EED900281633 /* DetalhesReservaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesReservaView.swift; sourceTree = "<group>"; };
-		C69617A32881EEF700281633 /* PerfilPessoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilPessoalModel.swift; sourceTree = "<group>"; };
+		C69617A32881EEF700281633 /* PersonalProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileModel.swift; sourceTree = "<group>"; };
 		C69617A52881EF0400281633 /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
-		C69617A72881EF0F00281633 /* PerfilPessoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilPessoalViewModel.swift; sourceTree = "<group>"; };
-		C69617AC2881EF2C00281633 /* PerfilEdicaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilEdicaoModel.swift; sourceTree = "<group>"; };
-		C69617AE2881EF3700281633 /* PerfilEdicaoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilEdicaoView.swift; sourceTree = "<group>"; };
-		C69617B02881EF4800281633 /* PerfilEdicaoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilEdicaoViewModel.swift; sourceTree = "<group>"; };
+		C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileViewModel.swift; sourceTree = "<group>"; };
+		C69617AC2881EF2C00281633 /* EditProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModel.swift; sourceTree = "<group>"; };
+		C69617AE2881EF3700281633 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		C69617B02881EF4800281633 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1438,30 +1438,30 @@
 		C69617792881EDEE00281633 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
-				C696177B2881EDFE00281633 /* Perfil Edicao */,
-				C696177A2881EDF600281633 /* Perfil Pessoal */,
+				C696177B2881EDFE00281633 /* EditProfile */,
+				C696177A2881EDF600281633 /* PersonalProfile */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
-		C696177A2881EDF600281633 /* Perfil Pessoal */ = {
+		C696177A2881EDF600281633 /* PersonalProfile */ = {
 			isa = PBXGroup;
 			children = (
 				C69617A22881EEEB00281633 /* ViewModel */,
 				C69617A12881EEE600281633 /* View */,
 				C69617A02881EEE100281633 /* Model */,
 			);
-			path = "Perfil Pessoal";
+			path = PersonalProfile;
 			sourceTree = "<group>";
 		};
-		C696177B2881EDFE00281633 /* Perfil Edicao */ = {
+		C696177B2881EDFE00281633 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
 				C69617AB2881EF2000281633 /* ViewModel */,
 				C69617AA2881EF1C00281633 /* View */,
 				C69617A92881EF1800281633 /* Model */,
 			);
-			path = "Perfil Edicao";
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		C696177C2881EE0900281633 /* Model */ = {
@@ -1564,7 +1564,7 @@
 		C69617A02881EEE100281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69617A32881EEF700281633 /* PerfilPessoalModel.swift */,
+				C69617A32881EEF700281633 /* PersonalProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1580,7 +1580,7 @@
 		C69617A22881EEEB00281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617A72881EF0F00281633 /* PerfilPessoalViewModel.swift */,
+				C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1588,7 +1588,7 @@
 		C69617A92881EF1800281633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C69617AC2881EF2C00281633 /* PerfilEdicaoModel.swift */,
+				C69617AC2881EF2C00281633 /* EditProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1596,7 +1596,7 @@
 		C69617AA2881EF1C00281633 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C69617AE2881EF3700281633 /* PerfilEdicaoView.swift */,
+				C69617AE2881EF3700281633 /* EditProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1604,7 +1604,7 @@
 		C69617AB2881EF2000281633 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C69617B02881EF4800281633 /* PerfilEdicaoViewModel.swift */,
+				C69617B02881EF4800281633 /* EditProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1768,18 +1768,18 @@
 				C69616C52881E7F900281633 /* Recuperar4Model.swift in Sources */,
 				C69616B52881E79E00281633 /* PasswordRecoveryPasswordViewModel.swift in Sources */,
 				14076BEB28930DE6003EA2F1 /* UIStackView+Extension.swift in Sources */,
-				C69617A82881EF0F00281633 /* PerfilPessoalViewModel.swift in Sources */,
+				C69617A82881EF0F00281633 /* PersonalProfileViewModel.swift in Sources */,
 				C696176F2881ECDF00281633 /* ReservaFinalizadaView.swift in Sources */,
 				C69617352881EB1F00281633 /* HobbiesViewModel.swift in Sources */,
 				14076BDF28930B27003EA2F1 /* UIViewController+Extension.swift in Sources */,
 				2EB18FA2289D6C2E008A80BF /* APILoginMock.swift in Sources */,
-				C69617B12881EF4800281633 /* PerfilEdicaoViewModel.swift in Sources */,
+				C69617B12881EF4800281633 /* EditProfileViewModel.swift in Sources */,
 				C69617432881EB7300281633 /* FinalizarModel.swift in Sources */,
 				C69617162881EA7C00281633 /* ConfirmDataView.swift in Sources */,
 				C69616B12881E78A00281633 /* PasswordRecoveryPasswordView.swift in Sources */,
 				C696172A2881EAE400281633 /* ProfessionView.swift in Sources */,
 				C69617942881EE9500281633 /* CancelReservationView.swift in Sources */,
-				C69617AD2881EF2C00281633 /* PerfilEdicaoModel.swift in Sources */,
+				C69617AD2881EF2C00281633 /* EditProfileModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* PasswordRecoveryEmailViewModel.swift in Sources */,
 				14076BE228930BFB003EA2F1 /* UIButton+Extension.swift in Sources */,
@@ -1806,7 +1806,7 @@
 				C696178D2881EE6500281633 /* CheckOutViewModel.swift in Sources */,
 				C69616C72881E80600281633 /* Recuperar4ViewModel.swift in Sources */,
 				C696173E2881EB5400281633 /* AtividadesViewModel.swift in Sources */,
-				C69617A42881EEF700281633 /* PerfilPessoalModel.swift in Sources */,
+				C69617A42881EEF700281633 /* PersonalProfileModel.swift in Sources */,
 				C69616BA2881E7BD00281633 /* PasswordRecoverySMSView.swift in Sources */,
 				1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */,
 				2EAEDEFF2881DEA900C88374 /* Bravve.xcdatamodeld in Sources */,
@@ -1819,7 +1819,7 @@
 				2ED5D11328940FE3001C11DC /* AjudaView.swift in Sources */,
 				C69616DE2881E90000281633 /* HomeClosedModel.swift in Sources */,
 				C696171F2881EAB200281633 /* FotoModel.swift in Sources */,
-				C69617AF2881EF3700281633 /* PerfilEdicaoView.swift in Sources */,
+				C69617AF2881EF3700281633 /* EditProfileView.swift in Sources */,
 				2ED5D10F28940FB6001C11DC /* AjudaModel.swift in Sources */,
 				C69616FB2881E9EC00281633 /* TelefoneModel.swift in Sources */,
 				C69617A62881EF0400281633 /* PersonalProfileView.swift in Sources */,
