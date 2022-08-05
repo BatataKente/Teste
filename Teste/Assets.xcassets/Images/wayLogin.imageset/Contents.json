@@ -1,16 +1,51 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "filename" : "linha com bandeira 2x (1).png",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "linha com bandeira 2x (1)-1.png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "wayLogin.png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "wayLogin-1.png",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
       "filename" : "Group 6611 (1).png",
-      "idiom" : "universal",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Group 6611 (1)-1.png",
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],
