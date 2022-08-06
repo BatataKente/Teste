@@ -11,14 +11,15 @@ import UIKit
 extension UIViewController {
     
     open func createCapsuleButtons(_ buttonTitles: [String],
-                                   _ backgroundColor: ColorsBravve = .capsuleButtonSelected) -> [UIButton] {
+                                   _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
+                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
         for title in buttonTitles {
             
             let button = UIButton()
-            button.setToDefaultCapsuleButton(title, backgroundColor)
+            button.setToDefaultCapsuleButton(title, backgroundColor, strokeColor: strokeColor)
             
             buttons.append(button)
         }

@@ -9,6 +9,12 @@ import UIKit
 
 class OpenDetailsView: UIViewController {
     
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -18,6 +24,11 @@ class OpenDetailsView: UIViewController {
         setupConstraints()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        .lightContent
+    }
+    
     private let customBar = UIView()
     
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
@@ -25,18 +36,41 @@ class OpenDetailsView: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         
+        let itemSize = 256
+        let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
-        collectionViewFlowLayout.itemSize = CGSize(width: 256, height: 256)
+        collectionViewFlowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
         
         let titleLabel = UILabel()
-        titleLabel.backgroundColor = .systemGreen
+        titleLabel.textColor = textColor
+        titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                 size: CGFloat(13).generateSizeForScreen)
         titleLabel.text = "BOXOFFICE"
         
+        let titleLabelView = UIView()
+        titleLabelView.addSubview(titleLabel)
+        titleLabelView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        
+        titleLabel.constraintInsideTo(.top, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.leading, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.trailing, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.bottom, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        
         let descriptionLabel = UILabel()
+        descriptionLabel.text = "Numa esquina charmosa, um hotel"
+        descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                       size: CGFloat(20).generateSizeForScreen)
+        descriptionLabel.textColor = textColor
+        descriptionLabel.numberOfLines = 0
         
         let view = UIView()
         view.backgroundColor = .white
@@ -59,16 +93,42 @@ class OpenDetailsView: UIViewController {
         
         let nameLabel = UILabel()
         nameLabel.text = "Hotel Saint"
+        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                size: CGFloat(20).generateSizeForScreen)
+        nameLabel.textColor = textColor
         
         let hourPriceLabel = UILabel()
-        hourPriceLabel.text = "3,50 crédito/ hora"
+        hourPriceLabel.text = "3,50"
+        hourPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                     size: CGFloat(30).generateSizeForScreen)
+        hourPriceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        
+        let hourPriceDescriptionLabel = UILabel()
+        hourPriceDescriptionLabel.text = "crédito/hora"
+        hourPriceDescriptionLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        hourPriceDescriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                                size: CGFloat(12).generateSizeForScreen)
         
         let dayPriceLabel = UILabel()
-        dayPriceLabel.text = "18,20 crédito/dia"
+        dayPriceLabel.text = "18,20"
+        dayPriceLabel.textColor = textColor
+        dayPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                    size: CGFloat(20).generateSizeForScreen)
         
-        view.addSubviews([titleLabel, descriptionLabel,
-                          photoCollectionView, nameLabel,
-                          hourPriceLabel, dayPriceLabel])
+        let dayPriceDescriptionLabel = UILabel()
+        dayPriceDescriptionLabel.text = "crédito/hora"
+        dayPriceDescriptionLabel.textColor = textColor
+        dayPriceDescriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                               size: CGFloat(12).generateSizeForScreen)
+        
+        let buttons = createCapsuleButtons(["Tecnológico", "Sala de reunião", "Colaborativo"],
+                                            .capsuleButton,
+                                            strokeColor: UIColor(named: ColorsBravve.buttonPink.rawValue) ?? UIColor())
+        
+        let tagsStackView = UIStackView(arrangedSubviews: buttons)
+        tagsStackView.spacing = 5
+        
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, nameLabel, hourPriceLabel, hourPriceDescriptionLabel, dayPriceLabel, dayPriceDescriptionLabel, tagsStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -76,27 +136,37 @@ class OpenDetailsView: UIViewController {
         view.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.width, scrollView.frameLayoutGuide)
         
-        titleLabel.constraintInsideTo(.top, view)
-        titleLabel.constraintInsideTo(.leading, view, 21)
+        titleLabelView.constraintInsideTo(.top, view)
+        titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
         
-        descriptionLabel.constraintOutsideTo(.top, titleLabel, 23)
+        descriptionLabel.constraintOutsideTo(.top, titleLabel, CGFloat(20).generateSizeForScreen)
         descriptionLabel.constraintInsideTo(.leading, titleLabel)
-        descriptionLabel.widthAnchorInSuperview(215)
+        descriptionLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
         
-        photoCollectionView.constraintOutsideTo(.top, descriptionLabel, 22)
+        photoCollectionView.constraintOutsideTo(.top, descriptionLabel, CGFloat(20).generateSizeForScreen)
         photoCollectionView.constraintInsideTo(.leading, descriptionLabel)
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
-        dayPriceLabel.constraintOutsideTo(.top, hourPriceLabel)
-        dayPriceLabel.constraintInsideTo(.leading, hourPriceLabel)
-        dayPriceLabel.constraintInsideTo(.bottom, view, 18)
-        
-        nameLabel.constraintOutsideTo(.top,  photoCollectionView, 23)
+        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
         nameLabel.constraintInsideTo(.leading, photoCollectionView)
         
-        hourPriceLabel.constraintOutsideTo(.top, nameLabel, 23)
-        hourPriceLabel.constraintInsideTo(.leading, nameLabel)
+        hourPriceLabel.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        hourPriceLabel.constraintOutsideTo(.trailing, hourPriceDescriptionLabel, CGFloat(5).generateSizeForScreen)
+        
+        hourPriceDescriptionLabel.constraintInsideTo(.bottom, hourPriceLabel)
+        hourPriceDescriptionLabel.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        
+        dayPriceLabel.constraintOutsideTo(.top, hourPriceLabel, CGFloat(5).generateSizeForScreen)
+        dayPriceLabel.constraintInsideTo(.leading, hourPriceLabel)
+        
+        dayPriceDescriptionLabel.constraintOutsideTo(.leading, dayPriceLabel, CGFloat(5).generateSizeForScreen)
+        dayPriceDescriptionLabel.constraintInsideTo(.bottom, dayPriceLabel)
+        
+        tagsStackView.constraintOutsideTo(.top, dayPriceDescriptionLabel, CGFloat(20).generateSizeForScreen)
+        tagsStackView.constraintInsideTo(.leading, nameLabel)
+        tagsStackView.constraintInsideTo(.trailing, hourPriceDescriptionLabel)
+        tagsStackView.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
         
         return scrollView
     }()
@@ -107,6 +177,7 @@ class OpenDetailsView: UIViewController {
         
         view.setToDefaultBackgroundColor()
         view.addSubviews([customBar, scrollView, reserveButton, tabBar])
+        tabBar.selectedItem = tabBar.items?[0]
     }
     
     private func setupDefaults() {

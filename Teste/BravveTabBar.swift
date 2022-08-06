@@ -50,6 +50,7 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
         }
         
         self.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        self.unselectedItemTintColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
 
         self.delegate = self
     }
