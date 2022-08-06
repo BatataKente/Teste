@@ -12,6 +12,7 @@ struct ReserveData {
     let title: String,
         description: String,
         image: UIImage,
+        photoTitle: String,
         name: String,
         subName: String,
         price: String,
