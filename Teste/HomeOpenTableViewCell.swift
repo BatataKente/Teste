@@ -15,6 +15,7 @@ class HomeOpenTableViewCell: UITableViewCell {
                                     titleLabel: UILabel,
                                     descriptionLabel: UILabel,
                                     photoView: UIImageView,
+                                    photoLabel: UILabel,
                                     nameLabel: UILabel,
                                     subNameLabel: UILabel,
                                     priceLabel: UILabel,
@@ -52,6 +53,15 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
+        let photoLabel = UILabel()
+        photoLabel.textColor = .white
+        photoLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                 size: CGFloat(13).generateSizeForScreen)
+        
+        let photoLabelView = UIView()
+        photoLabelView.addSubview(photoLabel)
+        photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
         let nameLabel = UILabel()
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
@@ -80,10 +90,10 @@ class HomeOpenTableViewCell: UITableViewCell {
                                 action: #selector(showDetails),
                                 for: .touchUpInside)
         
-        view.addSubviews([titleLabelView, descriptionLabel, detailsButton, photoView, nameLabel, subNameLabel, priceLabel, detailsLabel])
+        view.addSubviews([titleLabelView, descriptionLabel, detailsButton, photoView, photoLabelView, nameLabel, subNameLabel, priceLabel, detailsLabel])
         
         titleLabelView.constraintInsideTo(.top, view)
-        titleLabelView.constraintInsideTo(.leading, view, 21)
+        titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
         titleLabel.constraintInsideTo(.top, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
         titleLabel.constraintInsideTo(.leading, titleLabelView,
@@ -93,15 +103,26 @@ class HomeOpenTableViewCell: UITableViewCell {
         titleLabel.constraintInsideTo(.bottom, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
 
-        descriptionLabel.constraintOutsideTo(.top, titleLabelView, 23)
+        descriptionLabel.constraintOutsideTo(.top, titleLabelView, CGFloat(20).generateSizeForScreen)
         descriptionLabel.constraintInsideTo(.leading, titleLabelView)
         descriptionLabel.constraintInsideTo(.width, view, multiplier: 0.6)
-
-        photoView.constraintOutsideTo(.top, descriptionLabel, 22)
+        
+        photoView.constraintOutsideTo(.top, descriptionLabel, CGFloat(20).generateSizeForScreen)
         photoView.constraintInsideTo(.leading, descriptionLabel)
         photoView.constraintInsideTo(.trailing, view)
         photoView.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
-
+        
+        photoLabelView.constraintInsideTo(.top, photoView, CGFloat(25).generateSizeForScreen)
+        photoLabelView.constraintInsideTo(.leading, photoView, CGFloat(25).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.top, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.leading, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.trailing, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.bottom, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        
         nameLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
         nameLabel.constraintInsideTo(.leading, photoView)
 
@@ -122,6 +143,7 @@ class HomeOpenTableViewCell: UITableViewCell {
                 titleLabel: titleLabel,
                 descriptionLabel: descriptionLabel,
                 photoView: photoView,
+                photoLabel: photoLabel,
                 nameLabel: nameLabel,
                 subNameLabel: subNameLabel,
                 priceLabel: priceLabel,
@@ -160,6 +182,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         viewElements.titleLabel.text = cellInfo.title
         viewElements.descriptionLabel.text = cellInfo.description
         viewElements.photoView.image = cellInfo.image
+        viewElements.photoLabel.text = cellInfo.photoTitle
         viewElements.nameLabel.text = cellInfo.name
         viewElements.subNameLabel.text = cellInfo.subName
         viewElements.priceLabel.text = cellInfo.price

@@ -34,6 +34,7 @@ class HomeOpenView: UIViewController {
     private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
                                                     description: "Numa esquina charmosa, um hotel",
                                                     image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
+                                                    photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
                                                     subName: "UM Coffee Co.",
                                                     price: "3,50 crédito/ hora",
@@ -41,6 +42,7 @@ class HomeOpenView: UIViewController {
                                         ReserveData(title: "BOXOFFICE",
                                                     description: "Numa esquina charmosa, um hotel",
                                                     image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
+                                                    photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
                                                     subName: "UM Coffee Co.",
                                                     price: "3,50 crédito/ hora",
@@ -48,6 +50,7 @@ class HomeOpenView: UIViewController {
                                         ReserveData(title: "BOXOFFICE",
                                                     description: "Numa esquina charmosa, um hotel",
                                                     image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
+                                                    photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
                                                     subName: "UM Coffee Co.",
                                                     price: "3,50 crédito/ hora",
@@ -59,15 +62,18 @@ class HomeOpenView: UIViewController {
     
     private lazy var filterStackView: UIStackView = {
         
+        let margins = CGFloat(20).generateSizeForScreen
+        
         let stackView = UIStackView()
         stackView.setToDefaultBackgroundColor()
         stackView.isHidden = false
         stackView.alignment = .leading
+        stackView.spacing = 5
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 10,
-                                               left: 10,
-                                               bottom: 10,
-                                               right: 10)
+        stackView.layoutMargins = UIEdgeInsets(top: margins,
+                                               left: margins,
+                                               bottom: CGFloat(10).generateSizeForScreen,
+                                               right: margins)
         
         return stackView
     }()
@@ -92,6 +98,11 @@ class HomeOpenView: UIViewController {
                                                        tableView])
         stackView.axis = .vertical
         stackView.alignment = .leading
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0,
+                                               left: 0,
+                                               bottom: 0,
+                                               right: 0)
         
         return stackView
     }()
