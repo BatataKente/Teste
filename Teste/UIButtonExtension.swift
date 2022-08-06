@@ -25,7 +25,7 @@ extension UIButton {
 extension UIButton {
     
     open func setToDefaultCapsuleButton(_ buttonTitle: String,
-                                        _ backgroundColor: ColorsBravve = .blue) {
+                                        _ backgroundColor: ColorsBravve = .capsuleButtonSelected) {
 
         self.configuration = .filled()
          
@@ -37,7 +37,7 @@ extension UIButton {
         self.configuration?.attributedTitle = AttributedString(attributedTitle)
         
         self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
-        if backgroundColor == .background {
+        if backgroundColor == .capsuleButton {
 
             self.configuration?.baseForegroundColor = .black
             self.configuration?.background.strokeWidth = 0.7

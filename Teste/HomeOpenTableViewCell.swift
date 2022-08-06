@@ -20,7 +20,10 @@ class HomeOpenTableViewCell: UITableViewCell {
                                     priceLabel: UILabel,
                                     detailsLabel: UILabel) = {
         
+        let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        
         let titleLabel = UILabel()
+        titleLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
         
@@ -29,13 +32,13 @@ class HomeOpenTableViewCell: UITableViewCell {
         titleLabelView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         
         let descriptionLabel = UILabel()
-        descriptionLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        descriptionLabel.textColor = textColor
         descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                        size: CGFloat(20).generateSizeForScreen)
         descriptionLabel.numberOfLines = 0
         
         let view = UIView()
-        view.backgroundColor = .white
+        view.setToDefaultBackgroundColor()
         view.layer.cornerRadius = 12
         
         view.layer.shadowColor = UIColor.black.cgColor
@@ -52,21 +55,22 @@ class HomeOpenTableViewCell: UITableViewCell {
         let nameLabel = UILabel()
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
-        nameLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        nameLabel.textColor = textColor
         
         let subNameLabel = UILabel()
+        subNameLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         subNameLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                 size: CGFloat(12).generateSizeForScreen)
         
         let priceLabel = UILabel()
+        priceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
         priceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                  size: CGFloat(12).generateSizeForScreen)
-        priceLabel.textColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
         let detailsLabel = UILabel()
         detailsLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                    size: CGFloat(13).generateSizeForScreen)
-        detailsLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        detailsLabel.textColor = textColor
         detailsLabel.numberOfLines = 0
         
         let detailsButton = UIButton()
@@ -98,21 +102,21 @@ class HomeOpenTableViewCell: UITableViewCell {
         photoView.constraintInsideTo(.trailing, view)
         photoView.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
 
-        nameLabel.constraintOutsideTo(.top, photoView, 23)
+        nameLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
         nameLabel.constraintInsideTo(.leading, photoView)
 
-        priceLabel.constraintOutsideTo(.top, photoView, 23)
-        priceLabel.constraintInsideTo(.trailing, photoView, 18)
+        priceLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
+        priceLabel.constraintInsideTo(.trailing, photoView, CGFloat(20).generateSizeForScreen)
 
-        subNameLabel.constraintOutsideTo(.top, nameLabel, 8)
+        subNameLabel.constraintOutsideTo(.top, nameLabel, CGFloat(10).generateSizeForScreen)
         subNameLabel.constraintInsideTo(.leading, nameLabel)
 
-        detailsLabel.constraintOutsideTo(.top, subNameLabel, 19)
+        detailsLabel.constraintOutsideTo(.top, subNameLabel, CGFloat(20).generateSizeForScreen)
         detailsLabel.constraintInsideTo(.leading, nameLabel)
-        detailsLabel.constraintInsideTo(.bottom, view, 33)
+        detailsLabel.constraintInsideTo(.bottom, view, CGFloat(30).generateSizeForScreen)
 
-        detailsButton.constraintInsideTo(.trailing, view, 27)
-        detailsButton.constraintInsideTo(.bottom, view, 19)
+        detailsButton.constraintInsideTo(.trailing, view, CGFloat(30).generateSizeForScreen)
+        detailsButton.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
         
         return (view: view,
                 titleLabel: titleLabel,
@@ -145,9 +149,9 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     func setupConstraints() {
         
-        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, 20)
-        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, 20)
-        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
     }
     

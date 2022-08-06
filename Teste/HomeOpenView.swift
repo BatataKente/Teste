@@ -9,6 +9,26 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    override func viewDidLoad() {
+
+        super.viewDidLoad()
+        
+        setupView()
+        setupConstraints()
+        setupDefaults()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+
+        super.viewWillDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        .lightContent
+    }
+    
     private let seletedFilterItems: [String] = ["a", "b", "c"]
     
     private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
@@ -81,21 +101,6 @@ class HomeOpenView: UIViewController {
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                                    ButtonsBravve.exitGray.rawValue])
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        setupView()
-        setupConstraints()
-        setupDefaults()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
-    
     private func setupView() {
         
         view.addSubviews([stackView, customBar, tabBar])
@@ -147,6 +152,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
                 spaceTitleCell.textLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                                         size: CGFloat(20).generateSizeForScreen)
+                spaceTitleCell.setToDefaultBackgroundColor()
                 
                 return spaceTitleCell
             }
