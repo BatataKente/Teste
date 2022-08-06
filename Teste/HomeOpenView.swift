@@ -187,7 +187,7 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace() {
         
-        let detalhesAbertoView = OpenDetailsView()
+        let detalhesAbertoView = OpenDetailsView(cells[0])
         detalhesAbertoView.modalPresentationStyle = .fullScreen
         present(detalhesAbertoView, animated: false)
     }
