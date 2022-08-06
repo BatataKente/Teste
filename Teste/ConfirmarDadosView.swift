@@ -10,12 +10,18 @@ import UIKit
 
 class ConfirmarDadosView: UIViewController {
     
+    override var prefersStatusBarHidden: Bool {
+
+            return true
+
+        }
+    
     
     private let backgroundImage1 = UIImageView()
     
     private let backgroundImage2: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.wayConfirm.rawValue)
+        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
         return image
     }()
     
@@ -163,7 +169,10 @@ class ConfirmarDadosView: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink)
+        buttonBack.setToBackButtonDefault(.backPink) {_ in 
+            
+            self.dismiss(animated: true)
+        }
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
         backgroundImage1.setWayToDefault(.wayCell)

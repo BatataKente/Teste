@@ -12,7 +12,7 @@ extension UIButton {
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(named: ButtonsBravve.arrowBlue.rawValue),
+        self.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                       for: .normal)
         self.imageView?.widthAnchorInSuperview(CGFloat(15).generateSizeForScreen)
         self.imageView?.heightAnchorInSuperview(CGFloat(10).generateSizeForScreen)
@@ -50,7 +50,7 @@ extension UIButton {
         
         var buttonTitle = ""
         let buttonMargins = CGFloat(2.5).generateSizeForScreen
-        self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        self.setTitleColor(UIColor(named: ColorsBravve.progressBarLabel.rawValue), for: .normal)
         self.setImage(UIImage(named: buttonImageName), for: .normal)
         
         switch buttonImageName {
@@ -87,7 +87,7 @@ extension UIButton {
 
                 buttonTitle = "Hobbies"
 
-            case IconsBravve.activiesBlue.rawValue:
+            case IconsBravve.activitiesBlue.rawValue:
 
                 buttonTitle = "Atividades de interesse"
             
@@ -103,6 +103,7 @@ extension UIButton {
         }
         
         self.setTitle(buttonTitle, for: .normal)
+        
         self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                        size: CGFloat(14).generateSizeForScreen)
         
@@ -147,7 +148,8 @@ extension UIButton {
     }
     
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen) {
+                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
+                                     _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
         self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
@@ -155,6 +157,8 @@ extension UIButton {
         
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
+        
+        self.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         self.constraintInsideTo(.height,
                                 superview?.safeAreaLayoutGuide,

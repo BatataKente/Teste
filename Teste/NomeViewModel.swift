@@ -33,20 +33,10 @@ class NomeViewModel {
         
         switch sender.currentImage {
             
-            case UIImage(named: IconsBravve.userBlue.rawValue):
-            
-                makeNameScreen()
-                stage = .first
-            
             case UIImage(named: IconsBravve.userGray.rawValue):
             
                 makeNameScreen()
                 stage = .first
-            
-            case UIImage(named: IconsBravve.cellBlue.rawValue):
-            
-                makePhoneScreen()
-                stage = .second
             
             case UIImage(named: IconsBravve.cellGray.rawValue):
             
@@ -114,7 +104,7 @@ class NomeViewModel {
         }
     }
     
-    private func makeNameScreen() {
+    func makeNameScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
@@ -134,7 +124,7 @@ class NomeViewModel {
         delegate?.setKeyboardType(keyboardType: .namePhonePad)
     }
     
-    private func makePhoneScreen() {
+    func makePhoneScreen() {
         
         delegate?.setIshidden(leftStackView: false,
                               ddiChoseLabel: true,
@@ -154,7 +144,7 @@ class NomeViewModel {
         delegate?.setKeyboardType(keyboardType: .numberPad)
     }
     
-    private func makeEmailScreen() {
+    func makeEmailScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,

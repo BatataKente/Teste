@@ -12,7 +12,7 @@ extension UIView {
     
     open func isIpad() -> Bool {
         
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+        if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
             
             return true
         }
@@ -30,7 +30,8 @@ extension UIView {
     
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton],
-                                      _ handler: @escaping UIActionHandler) {
+                                      _ handler: @escaping UIActionHandler,
+                                      hideJumpButton: Bool = true) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
@@ -39,6 +40,7 @@ extension UIView {
         
         let jumpButton = UIButton()
         jumpButton.configuration = .plain()
+        jumpButton.isHidden = hideJumpButton
         
         let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
                                                              size: CGFloat(15).generateSizeForScreen),
@@ -59,7 +61,7 @@ extension UIView {
         self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
-        logoImageView.constraintInsideTo(.top, self.safeAreaLayoutGuide, 65)
+        logoImageView.constraintInsideTo(.top, self, 65)
         
         logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
@@ -77,9 +79,7 @@ extension UIView {
         jumpButton.constraintInsideTo(.height, logoImageView)
         jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide, CGFloat(30).generateSizeForScreen)
             
-        progressBarStackView.constraintInsideTo(.top,
-                                                self.safeAreaLayoutGuide,
-                                                self.frame.size.height*0.2)
+        progressBarStackView.constraintOutsideTo(.top, logoImageView, CGFloat(60).generateSizeForScreen)
         progressBarStackView.constraintInsideTo(.centerX,
                                                 self.safeAreaLayoutGuide)
     }
@@ -113,7 +113,7 @@ extension UIView {
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
     }
     
     open func setToDefaultCustomBarWithFilter() {
@@ -133,7 +133,7 @@ extension UIView {
                                size: CGFloat(11).generateSizeForScreen)
         let chosedLabelFont = UIFont(name: FontsBravve.light.rawValue,
                                      size: CGFloat(16).generateSizeForScreen)
-        let buttonsImage = ButtonsBravve.arrowBlue.rawValue
+        let buttonsImage = ButtonsBravve.arrowDown.rawValue
         
         let stateHandler = {(action: UIAction) in
 
@@ -174,24 +174,28 @@ extension UIView {
         leftStackView.axis = .vertical
         let rightStackView = UIStackView(arrangedSubviews: [cityLabel,
                                                             cityChosedLabel])
+        rightStackView.isLayoutMarginsRelativeArrangement = true
+        rightStackView.layoutMargins = UIEdgeInsets(top: 0,
+                                                    left: 15,
+                                                    bottom: 0,
+                                                    right: 0)
         rightStackView.axis = .vertical
         
         let stackView = UIStackView()
         
-        stackView.addArrangedSubviews([leftStackView, leftButton, rightStackView, rightButton])
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
-        leftStackView.constraintInsideTo(.width, stackView, multiplier: 0.2)
-        leftButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
-        rightButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
-        
-        stackView.backgroundColor = .white
+        stackView.addArrangedSubviews([leftStackView, leftButton,
+                                       view,
+                                       rightStackView, rightButton])
         stackView.layer.cornerRadius = 8
         stackView.setToDefaultBackgroundColor()
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
                                                bottom: margins,
-                                               right: margins)
+                                               right: 5)
         
         let filterButton = UIButton()
         filterButton.setImage(UIImage(named: ButtonsBravve.filter.rawValue),
@@ -199,19 +203,30 @@ extension UIView {
         
         self.addSubviews([filterButton, stackView])
         
-        stackView.constraintInsideTo(.centerY, self, 15)
-        stackView.constraintInsideTo(.leading, self, 20)
-        stackView.constraintOutsideTo(.trailing, filterButton, 20)
+        leftStackView.constraintInsideTo(.width, stackView, multiplier: 0.15)
+        leftButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
+        leftButton.imageView?.constraintInsideTo(.centerY, leftButton)
+        leftButton.imageView?.widthAnchorInSuperview(CGFloat(10).generateSizeForScreen)
+        leftButton.imageView?.heightAnchorInSuperview(CGFloat(6.2).generateSizeForScreen)
+        rightButton.constraintInsideTo(.width, leftButton)
+        rightButton.imageView?.constraintInsideTo(.centerY, rightButton)
+        rightButton.imageView?.widthAnchorInSuperview(CGFloat(10).generateSizeForScreen)
+        rightButton.imageView?.heightAnchorInSuperview(CGFloat(6.2).generateSizeForScreen)
+        view.widthAnchorInSuperview(0.65)
+        
+        stackView.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
+        stackView.constraintInsideTo(.leading, self, CGFloat(20).generateSizeForScreen)
+        stackView.constraintOutsideTo(.trailing, filterButton, CGFloat(5).generateSizeForScreen)
         
         filterButton.constraintInsideTo(.centerY, stackView)
-        filterButton.constraintInsideTo(.trailing, self, 20)
+        filterButton.constraintInsideTo(.trailing, self, CGFloat(10).generateSizeForScreen)
         filterButton.constraintInsideTo(.height, stackView)
         filterButton.constraintOutsideTo(.width, filterButton)
         
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
     }
 }
 
@@ -245,18 +260,6 @@ extension UIView {
                                         height: width)
 
         self.layer.addSublayer(bottomBorderLine)
-    }
-    
-    func addLeadingLineWithColor(color: UIColor = .gray, height: CGFloat = 0.8, x: CGFloat = 0) {
-
-        let leadingBorderLine = CALayer()
-        leadingBorderLine.backgroundColor = color.cgColor
-        leadingBorderLine.frame = CGRect(x: self.frame.size.width - height + x,
-                                         y: 0,
-                                         width: self.frame.size.height,
-                                         height: height)
-
-        self.layer.addSublayer(leadingBorderLine)
     }
 }
 

@@ -9,16 +9,38 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
-    private var espacos = 10
+    private let seletedFilterItems: [String] = ["a", "b", "c"]
+    
+    private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
+                                                    description: "Numa esquina charmosa, um hotel",
+                                                    image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
+                                                    name: "Hotel Saint",
+                                                    subName: "UM Coffee Co.",
+                                                    price: "3,50 crédito/ hora",
+                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+                                        ReserveData(title: "BOXOFFICE",
+                                                    description: "Numa esquina charmosa, um hotel",
+                                                    image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
+                                                    name: "Hotel Saint",
+                                                    subName: "UM Coffee Co.",
+                                                    price: "3,50 crédito/ hora",
+                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+                                        ReserveData(title: "BOXOFFICE",
+                                                    description: "Numa esquina charmosa, um hotel",
+                                                    image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
+                                                    name: "Hotel Saint",
+                                                    subName: "UM Coffee Co.",
+                                                    price: "3,50 crédito/ hora",
+                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo")]
     
     private let titleLabel = UILabel()
     
-    let customBar = UIView()
+    private let customBar = UIView()
     
     private lazy var filterStackView: UIStackView = {
         
         let stackView = UIStackView()
-        stackView.backgroundColor = .white
+        stackView.setToDefaultBackgroundColor()
         stackView.isHidden = false
         stackView.alignment = .leading
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -30,14 +52,16 @@ class HomeOpenView: UIViewController {
         return stackView
     }()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
+        
+        let margins = CGFloat(20).generateSizeForScreen
         
         let tableView = UITableView()
         tableView.register(HomeOpenTableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.layoutMargins = UIEdgeInsets(top: 20,
-                                               left: 20,
-                                               bottom: 20,
-                                               right: 20)
+        tableView.layoutMargins = UIEdgeInsets(top: margins,
+                                               left: margins,
+                                               bottom: margins,
+                                               right: margins)
         
         return tableView
     }()
@@ -52,9 +76,10 @@ class HomeOpenView: UIViewController {
         return stackView
     }()
     
-    var filterButtons = [UIButton]()
+    private var filterButtons = [UIButton]()
     
-    lazy var tabBar = UITabBarController()
+    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                                   ButtonsBravve.exitGray.rawValue])
     
     override func viewDidLoad() {
         
@@ -65,16 +90,23 @@ class HomeOpenView: UIViewController {
         setupDefaults()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
     private func setupView() {
         
-        view.addSubviews([stackView, customBar])
+        view.addSubviews([stackView, customBar, tabBar])
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        filterButtons = createCapsuleButtons(["a"])
+        filterButtons = createCapsuleButtons(seletedFilterItems)
         
         filterStackView.addArrangedSubviews(filterButtons)
+        tabBar.selectedItem = tabBar.items?[0]
     }
     
     private func setupDefaults() {
@@ -88,9 +120,13 @@ class HomeOpenView: UIViewController {
         stackView.constraintOutsideTo(.top, customBar)
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        stackView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        stackView.constraintOutsideTo(.bottom, tabBar)
         
         tableView.widthAnchorInSuperview(view.frame.size.width)
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
 
@@ -98,7 +134,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return cells.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,6 +154,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
+                
+                cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }

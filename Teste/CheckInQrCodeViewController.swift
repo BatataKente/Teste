@@ -48,7 +48,15 @@ class CheckInQrCodeViewController: UIViewController{
     private lazy var cantScanButton: UIButton = {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setAttributedTitle(NSAttributedString(string: "Não consigo escanear", attributes: [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor : UIColor.link, NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(19).generateSizeForScreen)]), for: .normal)
+        view.setAttributedTitle(NSAttributedString(
+            string: "Não consigo escanear",
+            attributes: [
+                NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
+                NSAttributedString.Key.underlineColor : UIColor.link,
+                NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue,
+                                                     size: CGFloat(19).generateSizeForScreen) as Any
+            ]),
+                                for: .normal)
         view.setTitleColor(.link, for: .normal)
         return view
     }()
