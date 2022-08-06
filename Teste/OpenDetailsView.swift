@@ -9,6 +9,18 @@ import UIKit
 
 class OpenDetailsView: UIViewController {
     
+    init(_ reserveData: ReserveData) {
+        
+        self.reserveData = reserveData
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
@@ -28,6 +40,8 @@ class OpenDetailsView: UIViewController {
         
         .lightContent
     }
+    
+    private var reserveData: ReserveData
     
     private let customBar = UIView()
     
@@ -50,7 +64,7 @@ class OpenDetailsView: UIViewController {
         titleLabel.textColor = textColor
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
-        titleLabel.text = "BOXOFFICE"
+        titleLabel.text = reserveData.title
         
         let titleLabelView = UIView()
         titleLabelView.addSubview(titleLabel)
@@ -66,7 +80,7 @@ class OpenDetailsView: UIViewController {
                                       CGFloat(2.5).generateSizeForScreen)
         
         let descriptionLabel = UILabel()
-        descriptionLabel.text = "Numa esquina charmosa, um hotel"
+        descriptionLabel.text = reserveData.description
         descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                        size: CGFloat(20).generateSizeForScreen)
         descriptionLabel.textColor = textColor
@@ -92,7 +106,7 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.delegate = self
         
         let nameLabel = UILabel()
-        nameLabel.text = "Hotel Saint"
+        nameLabel.text = reserveData.name
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
         nameLabel.textColor = textColor
