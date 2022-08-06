@@ -61,7 +61,7 @@ extension UIView {
         self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
-        logoImageView.constraintInsideTo(.top, self, 65)
+        logoImageView.constraintInsideTo(.top, self, CGFloat(65).generateSizeForScreen)
         
         logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
@@ -73,13 +73,16 @@ extension UIView {
         backButton.constraintInsideTo(.centerY, logoImageView)
         backButton.constraintInsideTo(.height, logoImageView)
         backButton.constraintOutsideTo(.width, backButton)
-        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide, CGFloat(30).generateSizeForScreen)
+        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
+                                      CGFloat(30).generateSizeForScreen)
         
         jumpButton.constraintInsideTo(.centerY, logoImageView)
         jumpButton.constraintInsideTo(.height, logoImageView)
-        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide, CGFloat(30).generateSizeForScreen)
+        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
+                                      CGFloat(30).generateSizeForScreen)
             
-        progressBarStackView.constraintOutsideTo(.top, logoImageView, CGFloat(60).generateSizeForScreen)
+        progressBarStackView.constraintOutsideTo(.top, logoImageView,
+                                                 CGFloat(60).generateSizeForScreen)
         progressBarStackView.constraintInsideTo(.centerX,
                                                 self.safeAreaLayoutGuide)
     }
@@ -102,11 +105,11 @@ extension UIView {
         
         self.addSubviews([backButton, titleLabel])
         
-        titleLabel.constraintInsideTo(.centerY, self, 15)
+        titleLabel.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
         titleLabel.constraintInsideTo(.centerX, self)
         
         backButton.constraintInsideTo(.centerY, titleLabel)
-        backButton.constraintInsideTo(.leading, self, 35)
+        backButton.constraintInsideTo(.leading, self, CGFloat(35).generateSizeForScreen)
         backButton.constraintInsideTo(.height, self, multiplier: 0.5)
         backButton.constraintOutsideTo(.width, backButton)
         
