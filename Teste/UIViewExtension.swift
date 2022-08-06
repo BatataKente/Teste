@@ -187,13 +187,13 @@ extension UIView {
         let stackView = UIStackView()
         
         let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.pink_cyan.rawValue)
         
         stackView.addArrangedSubviews([leftStackView, leftButton,
                                        view,
                                        rightStackView, rightButton])
         stackView.layer.cornerRadius = 8
-        stackView.setToDefaultBackgroundColor()
+        stackView.backgroundColor = UIColor(named: ColorsBravve.searchBar.rawValue)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
