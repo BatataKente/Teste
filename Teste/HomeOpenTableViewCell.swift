@@ -11,6 +11,8 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     var delegate: HomeOpenTableViewCellProtocol?
     
+    var indexPath: IndexPath = IndexPath()
+    
     private lazy var viewElements: (view: UIView,
                                     titleLabel: UILabel,
                                     descriptionLabel: UILabel,
@@ -151,13 +153,13 @@ class HomeOpenTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
         setupConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
@@ -191,11 +193,11 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     @objc func showDetails() {
         
-        delegate?.chosePlace()
+        delegate?.chosePlace(indexPath)
     }
 }
 
 protocol HomeOpenTableViewCellProtocol {
     
-    func chosePlace()
+    func chosePlace(_ indexPath: IndexPath)
 }

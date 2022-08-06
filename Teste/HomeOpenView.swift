@@ -40,7 +40,7 @@ class HomeOpenView: UIViewController {
                                                     price: "3,50 crédito/ hora",
                                                     details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
                                         ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
+                                                    description: "Pelos poderes de greyskull",
                                                     image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
                                                     photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
@@ -172,6 +172,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
+                cell?.indexPath = IndexPath(row: indexPath.row - 1,
+                                            section: indexPath.section - 1)
                 cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
@@ -185,9 +187,9 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
 
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
-    func chosePlace() {
+    func chosePlace(_ indexPath: IndexPath) {
         
-        let detalhesAbertoView = OpenDetailsView(cells[0])
+        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
         detalhesAbertoView.modalPresentationStyle = .fullScreen
         present(detalhesAbertoView, animated: false)
     }
