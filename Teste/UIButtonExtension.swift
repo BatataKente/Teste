@@ -155,8 +155,8 @@ extension UIButton {
         self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
         self.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
         
+        self.constraintInsideTo(.top, superview, CGFloat(65).generateSizeForScreen)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
         
         self.addAction(UIAction(handler: handler), for: .touchUpInside)
         
