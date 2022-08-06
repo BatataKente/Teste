@@ -25,10 +25,8 @@ class HomeOpenTableViewCell: UITableViewCell {
         titleLabel.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
-        titleLabel.text = "BOXOFFICE"
         
         let descriptionLabel = UILabel()
-        descriptionLabel.text = "Numa esquina charmosa, um hotel"
         descriptionLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         descriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                        size: CGFloat(20).generateSizeForScreen)
@@ -53,21 +51,17 @@ class HomeOpenTableViewCell: UITableViewCell {
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
         nameLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        nameLabel.text = "Hotel Saint"
         
         let subNameLabel = UILabel()
         subNameLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                 size: CGFloat(12).generateSizeForScreen)
-        subNameLabel.text = "UM Coffee Co."
         
         let priceLabel = UILabel()
         priceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                  size: CGFloat(12).generateSizeForScreen)
         priceLabel.textColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        priceLabel.text = "3,50 crédito/ hora"
         
         let detailsLabel = UILabel()
-        detailsLabel.text = "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
         detailsLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                    size: CGFloat(13).generateSizeForScreen)
         detailsLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -151,6 +145,17 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         viewElements.detailsButton.constraintInsideTo(.trailing, viewElements.view, 27)
         viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 19)
+    }
+    
+    func setup(_ cellInfo: ReserveData) {
+        
+        viewElements.titleLabel.text = cellInfo.title
+        viewElements.descriptionLabel.text = cellInfo.description
+        viewElements.photoView.image = cellInfo.image
+        viewElements.nameLabel.text = cellInfo.name
+        viewElements.subNameLabel.text = cellInfo.subName
+        viewElements.priceLabel.text = cellInfo.price
+        viewElements.detailsLabel.text = cellInfo.details
     }
     
     @objc func showDetails() {
