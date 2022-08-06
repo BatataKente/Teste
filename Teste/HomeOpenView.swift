@@ -9,6 +9,12 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    override func viewDidDisappear(_ animated: Bool) {
+
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -16,12 +22,6 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-
-        super.viewWillDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
