@@ -9,6 +9,30 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    private let seletedFilterItems: [String] = ["a", "b", "c"]
+    
+    private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
+                                                    description: "Numa esquina charmosa, um hotel",
+                                                    image: UIImage(named: "Example\(Int.random(in: 1...9))") ?? UIImage(),
+                                                    name: "Hotel Saint",
+                                                    subName: "UM Coffee Co.",
+                                                    price: "3,50 crédito/ hora",
+                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+                                        ReserveData(title: "BOXOFFICE",
+                                                    description: "Numa esquina charmosa, um hotel",
+                                                    image: UIImage(named: "Example\(Int.random(in: 1...9))") ?? UIImage(),
+                                                    name: "Hotel Saint",
+                                                    subName: "UM Coffee Co.",
+                                                    price: "3,50 crédito/ hora",
+                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+                                        ReserveData(title: "BOXOFFICE",
+                                                    description: "Numa esquina charmosa, um hotel",
+                                                    image: UIImage(named: "Example\(Int.random(in: 1...9))") ?? UIImage(),
+                                                    name: "Hotel Saint",
+                                                    subName: "UM Coffee Co.",
+                                                    price: "3,50 crédito/ hora",
+                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo")]
+    
     private let titleLabel = UILabel()
     
     private let customBar = UIView()
@@ -55,7 +79,7 @@ class HomeOpenView: UIViewController {
     private var filterButtons = [UIButton]()
     
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                              ButtonsBravve.exitGray.rawValue])
+                                                                   ButtonsBravve.exitGray.rawValue])
     
     override func viewDidLoad() {
         
@@ -66,6 +90,12 @@ class HomeOpenView: UIViewController {
         setupDefaults()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
     private func setupView() {
         
         view.addSubviews([stackView, customBar, tabBar])
@@ -73,9 +103,10 @@ class HomeOpenView: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        filterButtons = createCapsuleButtons(["a"])
+        filterButtons = createCapsuleButtons(seletedFilterItems)
         
         filterStackView.addArrangedSubviews(filterButtons)
+        tabBar.selectedItem = tabBar.items?[0]
     }
     
     private func setupDefaults() {
@@ -103,7 +134,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return cells.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,7 +154,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
-                cell?.viewElements.photoView.image = UIImage(named: "Example\(Int.random(in: 1...9))")
+                
+                cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }

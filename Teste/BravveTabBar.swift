@@ -47,11 +47,6 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
             tabBarItem.image = UIImage(named: itemImageName)
             
             self.items?.append(tabBarItem)
-            
-            if itemImageName == ButtonsBravve.locationPink.rawValue {
-                
-                self.selectedItem = tabBarItem
-            }
         }
         
         self.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)

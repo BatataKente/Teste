@@ -33,6 +33,7 @@
 		1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22428995EFE00B409E5 /* RideUpEnum.swift */; };
 		147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */; };
 		147B1C862898482100A5E3EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147B1C852898482100A5E3EE /* Assets.xcassets */; };
+		1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */; };
 		148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A86EA289C64540019ECFE /* BravveTabBar.swift */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
@@ -84,6 +85,7 @@
 		1478A22428995EFE00B409E5 /* RideUpEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUpEnum.swift; sourceTree = "<group>"; };
 		147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsView.swift; sourceTree = "<group>"; };
 		147B1C852898482100A5E3EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenModel.swift; sourceTree = "<group>"; };
 		148A86EA289C64540019ECFE /* BravveTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveTabBar.swift; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
 				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
+				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
 				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* Recuperar1View.swift */,
@@ -313,6 +316,7 @@
 				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
+				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				14C8B70E289DC2C600ABC321 /* LoginView.swift in Sources */,
