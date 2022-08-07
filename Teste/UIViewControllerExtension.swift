@@ -19,7 +19,24 @@ extension UIViewController {
         for title in buttonTitles {
             
             let button = UIButton()
-            button.setToDefaultCapsuleButton(title, backgroundColor, strokeColor: strokeColor)
+            button.setToDefaultCapsuleButton(title,
+                                             backgroundColor,
+                                             strokeColor: strokeColor)
+            
+            buttons.append(button)
+        }
+        
+        return buttons
+    }
+    
+    open func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
+        
+        var buttons: [UIButton] = []
+        
+        for name in buttonImageNames {
+            
+            let button = UIButton()
+            button.setToProgressBarButtonDefault(name)
             
             buttons.append(button)
         }
