@@ -29,6 +29,8 @@ class HomeOpenView: UIViewController {
         .lightContent
     }
     
+    private let cellIdentifier = "Cell"
+    
     private let seletedFilterItems: [String] = ["a", "b", "c"]
     
     private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
@@ -78,12 +80,14 @@ class HomeOpenView: UIViewController {
         return stackView
     }()
     
-    private let tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         
         let margins = CGFloat(20).generateSizeForScreen
         
         let tableView = UITableView()
-        tableView.register(HomeOpenTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.setToDefaultBackgroundColor()
+        tableView.register(HomeOpenTableViewCell.self,
+                           forCellReuseIdentifier: cellIdentifier)
         tableView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
                                                bottom: margins,
@@ -179,7 +183,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 return cell ?? UITableViewCell()
             }
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                 for: indexPath)
         
         return cell
     }
