@@ -9,6 +9,18 @@ import UIKit
 
 class OpenDetailsView: UIViewController {
     
+    let images = [ImagesBravve.homeOpen_1.rawValue,
+                  ImagesBravve.homeOpen_2.rawValue,
+                  ImagesBravve.homeOpen_3.rawValue,
+                  ImagesBravve.homeOpen_4.rawValue,
+                  ImagesBravve.imageReservs_1.rawValue,
+                  ImagesBravve.imageReservs_2.rawValue,
+                  ImagesBravve.imageReservs_3.rawValue,
+                  ImagesBravve.imageReservs_4.rawValue,
+                  ImagesBravve.example_1.rawValue,
+                  ImagesBravve.example_2.rawValue,
+                  ImagesBravve.example_3.rawValue]
+    
     init(_ reserveData: ReserveData) {
         
         self.reserveData = reserveData
@@ -61,7 +73,7 @@ class OpenDetailsView: UIViewController {
         scrollView.alwaysBounceVertical = false
         
         let titleLabel = UILabel()
-        titleLabel.textColor = textColor
+        titleLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
         titleLabel.text = reserveData.title
@@ -87,7 +99,7 @@ class OpenDetailsView: UIViewController {
         descriptionLabel.numberOfLines = 0
         
         let view = UIView()
-        view.backgroundColor = .white
+        view.setToDefaultBackgroundColor()
         view.layer.cornerRadius = 12
         
         scrollView.addSubview(view)
@@ -101,7 +113,7 @@ class OpenDetailsView: UIViewController {
                                                    collectionViewLayout: collectionViewFlowLayout)
         
         photoCollectionView.register(OpenDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        
+        photoCollectionView.setToDefaultBackgroundColor()
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
@@ -137,7 +149,7 @@ class OpenDetailsView: UIViewController {
         
         let buttons = createCapsuleButtons(["Tecnológico", "Sala de reunião", "Colaborativo"],
                                             .capsuleButton,
-                                            strokeColor: UIColor(named: ColorsBravve.buttonPink.rawValue) ?? UIColor())
+                                            strokeColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) ?? UIColor())
         
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = 5
@@ -200,8 +212,9 @@ class OpenDetailsView: UIViewController {
             
             self.dismiss(animated: false)
         }
-        
-        reserveButton.setToBottomButtonDefaultAbove("Reservar", above: tabBar)
+        reserveButton.setToBottomButtonDefaultAbove("Reservar",
+                                                    backgroundColor: .buttonPink,
+                                                    above: tabBar)
     }
     
     private func setupConstraints() {
@@ -221,12 +234,14 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? OpenDetailsCollectionViewCell
+        
+        cell?.imageView.image = UIImage(named: images[indexPath.row])
         
         return cell ?? UICollectionViewCell()
     }

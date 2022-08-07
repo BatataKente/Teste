@@ -40,7 +40,7 @@ extension UIButton {
         self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
         if backgroundColor == .capsuleButton {
 
-            self.configuration?.baseForegroundColor = .black
+            self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
             self.configuration?.background.strokeWidth = 0.7
             self.configuration?.background.strokeColor = strokeColor
         }
