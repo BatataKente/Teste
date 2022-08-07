@@ -37,17 +37,9 @@ extension UIViewController {
             
             switch name{
                 
-            case IconsBravve.userGray.rawValue:
-                    
-                    let handler = {(action: UIAction) in
-                        
-                        let nomeView = NomeView(.first)
-                        nomeView.modalPresentationStyle = .fullScreen
-                        self.present(nomeView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                case IconsBravve.activitiesGray.rawValue: break
+                
+                case IconsBravve.calendarGray.rawValue: break
                 
                 case IconsBravve.cellGray.rawValue:
                     
@@ -61,6 +53,8 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
+                case IconsBravve.creditGray.rawValue: break
+                
                 case IconsBravve.emailGray.rawValue:
                     
                     let handler = {(action: UIAction) in
@@ -73,8 +67,12 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
+                case IconsBravve.hobbiesGray.rawValue: break
+                
+                case IconsBravve.noteGray.rawValue: break
+                
                 case IconsBravve.padlockGray.rawValue: break
-
+                
                 case IconsBravve.pencilGray.rawValue: break
                 
                 case IconsBravve.photoGray.rawValue:
@@ -88,16 +86,18 @@ extension UIViewController {
                     }
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
-
-                case IconsBravve.noteGray.rawValue: break
-
-                case IconsBravve.hobbiesGray.rawValue: break
-
-                case IconsBravve.activitiesGray.rawValue: break
-                
-                case IconsBravve.calendarGray.rawValue: break
                     
-                case IconsBravve.creditGray.rawValue: break
+                case IconsBravve.userGray.rawValue:
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.first)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 default: break
             }
