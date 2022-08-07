@@ -13,23 +13,21 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 
-        switch item.image {
-
-            case UIImage(named: ButtonsBravve.locationGray.rawValue):
-
+        switch item {
+            
+            case tabBar.items?[0]:
+            
                 let homeOpenView = HomeOpenView()
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)
-
-            case UIImage(named: ButtonsBravve.exitGray.rawValue):
+                
+            default:
 
                 let loginView = LoginView()
 
                 loginView.modalPresentationStyle = .fullScreen
                 actualView.present(loginView, animated: true)
-
-            default: break
         }
     }
 
