@@ -55,7 +55,6 @@ class LoginView: UIViewController {
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         view.translatesAutoresizingMaskIntoConstraints =  false
-      
         
         return view
     }()
