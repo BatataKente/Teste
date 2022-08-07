@@ -15,18 +15,8 @@ class LoginView: UIViewController {
         
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         setupView()
         setupLayoutConstraints()
-       
-        let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
-        cellStackView.addGestureRecognizer(stackViewTap)
-        passwordStackView.addGestureRecognizer(stackViewTap)
-        
-        backButton.setToBackButtonDefault {_ in 
-            
-            self.dismiss(animated: true)
-        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -34,36 +24,73 @@ class LoginView: UIViewController {
         return .lightContent
     }
     
-    @objc func stackViewTapped() {
-        
-        cellLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
-        cellStackView.heightAnchorInSuperview(CGFloat(30).generateSizeForScreen)
-        cellTextField.isHidden = false
-        passwordLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
-        passwordTextField.isHidden = false
-        
-    }
-    
     func setupView() {
-        view.addSubviews([wayImage,titleLabel,subTitleLabel,cellStackView,passwordStackView,eyeButton,passwordRecoveryButton,enterButton,newLabel,registerButton, backButton, logoImage])
+        
+        view.addSubviews([wayImage, titleLabel, subTitleLabel, cellStackView, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
+        
+        view.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
         
         wayImage.setWayToDefault(.wayLogin)
+        
+        let cellStackViewTap = UITapGestureRecognizer(target: self,
+                                                      action: #selector(cellStackViewTapped))
+        cellStackView.addGestureRecognizer(cellStackViewTap)
+        
+        let passwordStackViewTap = UITapGestureRecognizer(target: self,
+                                                          action: #selector(passwordStackViewTapped))
+        passwordStackView.addGestureRecognizer(passwordStackViewTap)
+        
+        backButton.setToBackButtonDefault {_ in
+            
+            self.dismiss(animated: true)
+        }
     }
     
+    func showTextFields() {
+        
+        let layoutVerticalMargins = CGFloat(10).generateSizeForScreen
+        let layoutHorizontalMargins = CGFloat(15).generateSizeForScreen
+        
+        cellLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                size: CGFloat(10).generateSizeForScreen)
+        cellTextField.isHidden = false
+        cellStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
+                                                   left: layoutHorizontalMargins,
+                                                   bottom: layoutVerticalMargins,
+                                                   right: layoutHorizontalMargins)
+        
+        passwordLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                    size: CGFloat(10).generateSizeForScreen)
+        passwordTextField.isHidden = false
+        passwordStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
+                                                       left: layoutHorizontalMargins,
+                                                       bottom: layoutVerticalMargins,
+                                                       right: layoutHorizontalMargins)
+    }
+    
+    @objc func cellStackViewTapped() {
+        
+        showTextFields()
+    }
+    
+    @objc func passwordStackViewTapped() {
+        
+        showTextFields()
+    }
 
     private lazy var backgroundView: UIView = {
+        
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints =  false
         
         return view
     }()
     
     private lazy var logoImage: UIImageView = {
+        
         let view = UIImageView()
         view.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
         view.contentMode = .scaleAspectFill
-        view.translatesAutoresizingMaskIntoConstraints =  false
         
         return view
         
@@ -75,7 +102,7 @@ class LoginView: UIViewController {
         let view = UILabel()
         
         view.font = UIFont(name: FontsBravve.koho.rawValue,
-                           size: CGFloat(51).generateSizeForScreenByHeight)
+                           size: CGFloat(50).generateSizeForScreenByHeight)
         view.textColor = .white
         view.numberOfLines = 0
         
@@ -91,67 +118,79 @@ class LoginView: UIViewController {
         view.textColor = .white
         view.text = "O futuro do trabalho é hibrído, remoto,\nconectado e humano!"
         view.numberOfLines = 4
-        view.translatesAutoresizingMaskIntoConstraints =  false
         
         return view
     }()
-    
     
     private lazy var cellLabel: UILabel = {
+        
         let view = UILabel()
         view.text =  "Número de Celular"
-        view.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
-        view.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        return view
-    }()
-    private lazy var cellTextField: UITextField = {
-        let view = UITextField()
-        view.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
-        view.isHidden = true
-        view.keyboardType = .namePhonePad
+        view.font = UIFont(name: FontsBravve.light.rawValue,
+                           size: CGFloat(15).generateSizeForScreen)
+        view.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
         return view
     }()
     
-    private lazy var  cellStackView: UIStackView = {
+    private lazy var cellTextField: UITextField = {
         
-        let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let view = UITextField()
+        view.font = UIFont(name: FontsBravve.medium.rawValue,
+                           size: CGFloat(16).generateSizeForScreen)
+        view.isHidden = true
+        view.keyboardType = .namePhonePad
         
+        return view
+    }()
+        
+    private lazy var cellStackView: UIStackView = {
+
+        let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let stackHotizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
+
         let cellStackView = UIStackView(arrangedSubviews: [cellLabel,cellTextField])
-        cellStackView.spacing = CGFloat(2).generateSizeForScreen
+        cellStackView.spacing = CGFloat(5).generateSizeForScreen
         cellStackView.axis = .vertical
-        cellStackView.backgroundColor = .white
+        cellStackView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
         cellStackView.layer.cornerRadius = 8
         cellStackView.isLayoutMarginsRelativeArrangement = true
-        cellStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                   left: stackMargins,
-                                                   bottom: stackMargins,
-                                                   right: stackMargins)
-        cellStackView.translatesAutoresizingMaskIntoConstraints =  false
+        cellStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                   left: stackHotizontalMargins,
+                                                   bottom: stackVerticalMargins,
+                                                   right: stackHotizontalMargins)
         return cellStackView
     }()
     
     private lazy var passwordLabel: UILabel = {
+        
         let view = UILabel()
         view.text =  "Senha"
-        view.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
-        view.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        view.font = UIFont(name: FontsBravve.light.rawValue,
+                           size: CGFloat(15).generateSizeForScreen)
+        view.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
         return view
     }()
+    
     private lazy var passwordTextField: UITextField = {
+        
         let view = UITextField()
         view.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
         view.keyboardType = .namePhonePad
+        
         return view
     }()
     
     private lazy var eyeButton: UIButton = {
+        
         let view = UIButton(type: .custom)
         view.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
         view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints =  false
+        
         return view
     }()
     
@@ -166,106 +205,109 @@ class LoginView: UIViewController {
         }
     }
 
-    private lazy var  passwordStackView: UIStackView = {
+    private lazy var passwordStackView: UIStackView = {
         
-        let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let stackHotizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
         
-        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,passwordTextField])
-        passwordStackView.spacing = CGFloat(2).generateSizeForScreen
+        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField])
+        passwordStackView.spacing = CGFloat(5).generateSizeForScreen
         passwordStackView.axis = .vertical
-        passwordStackView.backgroundColor = .white
+        passwordStackView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
         passwordStackView.layer.cornerRadius = 8
         passwordStackView.isLayoutMarginsRelativeArrangement = true
-        passwordStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                   left: stackMargins,
-                                                   bottom: stackMargins,
-                                                   right: stackMargins)
-        passwordStackView.translatesAutoresizingMaskIntoConstraints =  false
+        passwordStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                       left: stackHotizontalMargins,
+                                                       bottom: stackVerticalMargins,
+                                                       right: stackHotizontalMargins)
+        
         return passwordStackView
     }()
     
-    
-    
-        private lazy var passwordRecoveryButton : UIButton = {
-            let view = UIButton()
-          
-            let attributes: [NSAttributedString.Key : Any] = [
-            NSAttributedString.Key.underlineStyle: 1,
-            NSAttributedString.Key.font: UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen) as Any,
-            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.buttonUnderline.rawValue) as Any]
+    private lazy var passwordRecoveryButton : UIButton = {
+        
+        let view = UIButton()
+      
+        let attributes: [NSAttributedString.Key : Any] = [
+        NSAttributedString.Key.underlineStyle: 1,
+        NSAttributedString.Key.font: UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen) as Any,
+        NSAttributedString.Key.foregroundColor: UIColor.cyan as Any]
 
-            let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
-            view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
-            view.translatesAutoresizingMaskIntoConstraints =  false
-            
-            return view
+        let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
+        view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+        
+        return view
     }()
     
-        private lazy var enterButton: UIButton = {
-            let view = UIButton()
-            view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-            view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
+    private lazy var enterButton: UIButton = {
+        
+        let view = UIButton()
+        view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
+        
+        let stackMargins : CGFloat = CGFloat(20).generateSizeForScreen
+        view.layoutMargins = UIEdgeInsets(top: stackMargins,
+                                          left: stackMargins,
+                                          bottom: stackMargins,
+                                          right: stackMargins)
+        
+        let attributesFont: [NSAttributedString.Key : Any] = [
+        
+            NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
+            NSAttributedString.Key.foregroundColor: UIColor.white as Any]
 
-            
-            let stackMargins : CGFloat = CGFloat(20).generateSizeForScreen
-            view.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                       left: stackMargins,
-                                                       bottom: stackMargins,
-                                                       right: stackMargins)
-            
-            
-            
-            let attributesFont: [NSAttributedString.Key : Any] = [
-            
-                NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
-                NSAttributedString.Key.foregroundColor: UIColor.white as Any]
-
-            let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
-            view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
-            return view
+        let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
+        view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+        
+        return view
     }()
     
     
     private lazy var newLabel : UILabel  = {
+        
         let view = UILabel()
         view.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         view.text = "Novo por aqui?"
         view.textColor = UIColor.white
-        
-        view.translatesAutoresizingMaskIntoConstraints =  false
     
-    return view
+        return view
     }()
     
-    
-        private lazy var registerButton: UIButton = {
-            let view = UIButton()
-            view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-            view.layer.cornerRadius = 12
-            view.layer.borderWidth = 1
-            view.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-            let stackMargins : CGFloat = CGFloat(20).generateSizeForScreen
-            view.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                       left: stackMargins,
-                                                       bottom: stackMargins,
-                                                       right: stackMargins)
+    private lazy var registerButton: UIButton = {
+
+        let view = UIButton()
+        view.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
+        view.layer.cornerRadius = 12
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+        let stackMargins : CGFloat = CGFloat(20).generateSizeForScreen
+        view.layoutMargins = UIEdgeInsets(top: stackMargins,
+                                                   left: stackMargins,
+                                                   bottom: stackMargins,
+                                                   right: stackMargins)
+
+        let attributesFont: [NSAttributedString.Key : Any] = [
+
+            NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
+            NSAttributedString.Key.foregroundColor: UIColor.white as Any]
+
+        let attributedString = NSMutableAttributedString(string: "Cadastre-se",
+                                                         attributes: attributesFont)
+        view.setAttributedTitle(NSAttributedString(attributedString: attributedString),
+                                for: .normal)
+        
+        let handler = {(action: UIAction) in
             
-            view.translatesAutoresizingMaskIntoConstraints =  false
-            
-            let attributesFont: [NSAttributedString.Key : Any] = [
-               
-                NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
-                NSAttributedString.Key.foregroundColor: UIColor.white as Any]
-            
-            let attributedString = NSMutableAttributedString(string: "Cadastre-se", attributes: attributesFont)
-            view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
-            
-            return view
+            let nomeView = NomeView()
+            nomeView.modalPresentationStyle = .fullScreen
+            self.present(nomeView, animated: true)
+        }
+        
+        view.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        return view
     }()
     
-
-
-        
     private func setupLayoutConstraints() {
         
         logoImage.constraintOutsideTo(.top, backButton, 30)
