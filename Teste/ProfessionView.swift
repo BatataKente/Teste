@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ProfessionView: UIViewController {
 
     let backButton = UIButton()
     let logoBravve = UIImageView()

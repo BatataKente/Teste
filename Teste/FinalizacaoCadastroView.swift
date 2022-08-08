@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FinalizacaoCadastroView: UIViewController {
 
     let imageLogo: UIImageView = {
         let image = UIImage(named: "logoWhite")
