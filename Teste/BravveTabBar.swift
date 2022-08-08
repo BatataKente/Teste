@@ -5,6 +5,8 @@
 //  Created by Josicleison on 04/08/22.
 //
 
+/* a tab bar in the app pattern with their respective actions*/
+
 import UIKit
 
 class BravveTabBar: UITabBar, UITabBarDelegate {

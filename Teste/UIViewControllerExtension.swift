@@ -10,6 +10,9 @@ import UIKit
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
     
+/* This is a function created with the aim of generating buttons in the capsule configuration
+*/
+    
     open func createCapsuleButtons(_ buttonTitles: [String],
                                    _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
                                    strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
@@ -29,6 +32,8 @@ extension UIViewController {
         return buttons
     }
     
+/* This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons, but without actions */
+    
     open func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
         
         var buttons: [UIButton] = []
@@ -43,6 +48,8 @@ extension UIViewController {
         
         return buttons
     }
+    
+/* This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons */
     
     open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
         
@@ -131,6 +138,8 @@ extension UIViewController {
 //Extension related to regex
 extension UIViewController {
     
+/* This is a regex that checks if it's a valid phone */
+    
     open func validateCellPhone(_ phone: String) -> Bool {
         
         let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
@@ -147,6 +156,8 @@ extension UIViewController {
 
 extension UIViewController {
     
+/* This is a regex that checks if it contains capital letters */
+    
     open func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
@@ -158,6 +169,8 @@ extension UIViewController {
             return false
         }
     }
+    
+/* This is a regex that checks if it contains numbers */
     
     open func containsNumericCharacters(text: String) -> Bool {
         
@@ -171,6 +184,8 @@ extension UIViewController {
         }
     }
     
+/* This is a regex that checks if it contains special characters */
+    
     open func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
@@ -182,6 +197,8 @@ extension UIViewController {
             return false
         }
     }
+    
+/* This is a regex that checks if it contains lowercase letters */
     
     open func containsLowercasedCharacters(text: String) -> Bool {
         

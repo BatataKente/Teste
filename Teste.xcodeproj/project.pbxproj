@@ -50,7 +50,7 @@
 		14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */; };
 		14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */; };
 		14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDD2889B80400EA8EDD /* NomeView.swift */; };
-		14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */; };
+		14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */; };
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
@@ -106,7 +106,7 @@
 		14CBDBD32889B72500EA8EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FotoView.swift; sourceTree = "<group>"; };
 		14CBDBDD2889B80400EA8EDD /* NomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeView.swift; sourceTree = "<group>"; };
-		14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeModel.swift; sourceTree = "<group>"; };
+		14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageEnum.swift; sourceTree = "<group>"; };
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
@@ -169,6 +169,7 @@
 				1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */,
 				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
 				1478A22428995EFE00B409E5 /* RideUpEnum.swift */,
+				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
 				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
 				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
 				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
@@ -183,7 +184,6 @@
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
-				14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
 				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
@@ -319,7 +319,7 @@
 				13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */,
 				1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
-				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
+				14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */,
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
