@@ -102,7 +102,7 @@ class LoginView: UIViewController {
         let view = UILabel()
         
         view.font = UIFont(name: FontsBravve.koho.rawValue,
-                           size: 50 * (self.view.frame.size.height/1000))
+                           size: CGFloat(50).generateSizeForScreenByHeight)
         view.textColor = .white
         view.numberOfLines = 0
         

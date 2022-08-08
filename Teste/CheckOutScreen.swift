@@ -9,7 +9,6 @@ import UIKit
 
 class CheckOutScreen: UIViewController{
  
-    
     //MARK: - Labels
     
     let customBar = UIView()
