@@ -133,7 +133,7 @@ extension UIView {
     }
     
 /// This function transforms a view into a bar with a filter
-    open func setToDefaultCustomBarWithFilter(_ handler: @escaping UIActionHandler) {
+    open func setToDefaultCustomBarWithFilter(states: [States], _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -160,13 +160,13 @@ extension UIView {
 
         stateLabel.text = "UF"
         stateLabel.font = initialFont
+        var actions = [UIAction]()
         stateChosedLabel.font = chosedLabelFont
-        leftButton.setMenuForButton([
-            
-            UIAction(title: "action1",handler: stateHandler),
-            UIAction(title: "action2",handler: stateHandler)
-
-        ])
+        
+        for state in states {
+            actions.append(UIAction(title: state.code,handler: stateHandler))
+        }
+        leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let cityHandler = {(action: UIAction) in
