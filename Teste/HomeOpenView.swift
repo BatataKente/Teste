@@ -116,6 +116,8 @@ class HomeOpenView: UIViewController {
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                                    ButtonsBravve.exitGray.rawValue])
     
+    let states: [States] = []
+    
     private func setupView() {
         
         view.addSubviews([stackView, customBar, tabBar])
@@ -132,14 +134,7 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        authManager.getStates { states in
-            guard let states = states else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.customBar.setToDefaultCustomBarWithFilter(states: states)
-            }
-        }
+        customBar.setToDefaultCustomBarWithFilter(states: states)
         
     }
     
