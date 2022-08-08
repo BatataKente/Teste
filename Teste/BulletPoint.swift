@@ -5,22 +5,21 @@
 //  Created by user208023 on 7/26/22.
 //
 
-/*
- 
- A class that creates a UIElement in the form of bullet point. Developed to the BravveApp
- parameters:
- labelText: String -> The text that will be the label of the bullet point.
- 
- */
-
 import UIKit
 
+
+/// Class that creates a stackview with a bullet point layout
 class BulletPoint: UIStackView {
     
     private var labelText: String
     var label = UILabel()
     var ellipseImage = UIImageView()
     
+    
+    /// Custom initializer of the bullet point stackview
+    /// - Parameters:
+    ///   - labelText: The text of the bullet point
+    ///   - frame: The frame of the bullet point
     init(labelText: String, frame: CGRect = .zero) {
         self.labelText = labelText
         super.init(frame: frame)
@@ -30,6 +29,9 @@ class BulletPoint: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    /// Method to create the stackView containing the bullet point image and the bullet point label
+    /// - Returns: UIStackView contanining an ellipse image and a bullet point label
     func createBulletPointStackView() -> UIStackView {
         
         ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)

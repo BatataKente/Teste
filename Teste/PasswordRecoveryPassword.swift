@@ -111,6 +111,8 @@ class PasswordRecoveryPassword: UIViewController {
         confirmPasswordTextFieldClass.textField.addTarget(self, action: #selector(confirmPasswordTextFieldDidChange(_:)), for: .editingChanged)
     }
     
+    
+    /// Set the default layout of the top elements and the bottom button of the view
     private func setupDefaults() {
         way.setWayToDefault(.wayPassword)
         backButton.setToBackButtonDefault(.backPink) {_ in
@@ -121,6 +123,8 @@ class PasswordRecoveryPassword: UIViewController {
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }
     
+    
+    /// Set the constraints of the view
     private func setupConstraints() {
         
         progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, CGFloat(40).generateSizeForScreen)

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Alamofire
 
+/// Class to manage API Requests
 class AuthManager {
     
     var accessToken: String? {
@@ -18,7 +19,8 @@ class AuthManager {
     private let baseAPIString = "https://api-design.dev.bravve.app/api/v1"
     
     
-    /* Method to get the token to access the app API*/
+    
+    /// Method to get token from the Bravve API
     public func getToken() {
         guard let url = URL(string: "https://api-design.dev.bravve.app/api/auth/token") else { return }
         let parameters = [
@@ -36,30 +38,16 @@ class AuthManager {
     }
     
     
-    /*
-     
-     Method to cache the token in userDefaults
-     parameters:
-     result: AccessToken -> The result of the API call decoded as a AccessTokenModel
-     
-     */
+    
+    /// Method to cache the token got from the Bravve API in the UserDefaults
+    /// - Parameter result: A struct in the format of AccessToken model containing the information on the token
     func cacheToken(result: AccessToken) {
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
     }
     
-    
-    /*
-     
-     Method to get the complete list of states from the BravveAPI
-     parameters:
-     completionHandler: (([States]?) -> Void) -> Closure to manage the result of the API call as an array of the States Model.
-     
-     */
-    
-    
-    /// Method to get the complete list of states from the BravveAPI
-    /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the States Model.
-    func getStates(completionHandler: @escaping ([States]?) -> Void) {
+    /// Method to get data in the format of an array from the API
+    /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the chosen model
+    func getDataArray<T: Codable>(completionHandler: @escaping ([T]?) -> Void) {
         
         guard let url = URL(string: baseAPIString + "/utils/states") else { return }
         
@@ -71,7 +59,7 @@ class AuthManager {
             "Authorization": "Bearer \(accessToken)"
         ]
         
-        AF.request(url, headers: headers).responseDecodable(of: [States].self) { response in
+        AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
             if let data = response.value {
                 completionHandler(data)
             } else {
