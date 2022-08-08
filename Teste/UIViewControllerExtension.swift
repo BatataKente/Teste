@@ -9,16 +9,25 @@ import UIKit
     
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
-    
+
+/// This is a function created with the aim of generating buttons in the capsule configuration
+/// - Parameters:
+///   - buttonTitles: Button titles string array
+///   - backgroundColor: Button background color
+///   - strokeColor: Button stroke color
+/// - Returns: A button for each title
     open func createCapsuleButtons(_ buttonTitles: [String],
-                                   _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
+                                   _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
+                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
         for title in buttonTitles {
             
             let button = UIButton()
-            button.setToDefaultCapsuleButton(title, backgroundColor)
+            button.setToDefaultCapsuleButton(title,
+                                             backgroundColor,
+                                             strokeColor: strokeColor)
             
             buttons.append(button)
         }
@@ -26,6 +35,27 @@ extension UIViewController {
         return buttons
     }
     
+/// This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons
+/// - Parameter buttonImageNames: the button Image Names
+/// - Returns: A progress bar button for each name without actions
+    open func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
+        
+        var buttons: [UIButton] = []
+        
+        for name in buttonImageNames {
+            
+            let button = UIButton()
+            button.setToProgressBarButtonDefault(name)
+            
+            buttons.append(button)
+        }
+        
+        return buttons
+    }
+    
+/// This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons
+/// - Parameter buttonImageNames: the button Image Names
+/// - Returns: A progress bar button for each name with actions
     open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
         
         var buttons: [UIButton] = []
@@ -36,17 +66,9 @@ extension UIViewController {
             
             switch name{
                 
-            case IconsBravve.userGray.rawValue:
-                    
-                    let handler = {(action: UIAction) in
-                        
-                        let nomeView = NomeView(.first)
-                        nomeView.modalPresentationStyle = .fullScreen
-                        self.present(nomeView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                case IconsBravve.activitiesGray.rawValue: break
+                
+                case IconsBravve.calendarGray.rawValue: break
                 
                 case IconsBravve.cellGray.rawValue:
                     
@@ -60,6 +82,8 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
+                case IconsBravve.creditGray.rawValue: break
+                
                 case IconsBravve.emailGray.rawValue:
                     
                     let handler = {(action: UIAction) in
@@ -72,8 +96,12 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
+                case IconsBravve.hobbiesGray.rawValue: break
+                
+                case IconsBravve.noteGray.rawValue: break
+                
                 case IconsBravve.padlockGray.rawValue: break
-
+                
                 case IconsBravve.pencilGray.rawValue: break
                 
                 case IconsBravve.photoGray.rawValue:
@@ -87,16 +115,18 @@ extension UIViewController {
                     }
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
-
-                case IconsBravve.noteGray.rawValue: break
-
-                case IconsBravve.hobbiesGray.rawValue: break
-
-                case IconsBravve.activitiesGray.rawValue: break
-                
-                case IconsBravve.calendarGray.rawValue: break
                     
-                case IconsBravve.creditGray.rawValue: break
+                case IconsBravve.userGray.rawValue:
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.first)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 default: break
             }
@@ -112,7 +142,10 @@ extension UIViewController {
 
 //Extension related to regex
 extension UIViewController {
-    
+
+/// This is a regex that checks if it's a valid phone
+/// - Parameter phone: A string with the phoneNumber
+/// - Returns: True if is a valid number, or false if not
     open func validateCellPhone(_ phone: String) -> Bool {
         
         let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
@@ -129,6 +162,9 @@ extension UIViewController {
 
 extension UIViewController {
     
+/// This is a regex that checks if it contains capital letters
+/// - Parameter text: A string
+/// - Returns: True if is uppercased, or false if not
     open func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
@@ -141,6 +177,9 @@ extension UIViewController {
         }
     }
     
+/// This is a regex that checks if it contains numbers
+/// - Parameter text: A string
+/// - Returns: True if is  contains numeric characters, or false if not
     open func containsNumericCharacters(text: String) -> Bool {
         
         let numericRegEx = ".*[0-9]+.*"
@@ -153,6 +192,9 @@ extension UIViewController {
         }
     }
     
+/// This is a regex that checks if it contains special characters
+/// - Parameter text: A string
+/// - Returns: True if is  contains special characters, or false if not
     open func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
@@ -165,6 +207,9 @@ extension UIViewController {
         }
     }
     
+/// This is a regex that checks if it contains lowercase letters
+/// - Parameter text: A string
+/// - Returns: True if is lowercased, or false if not
     open func containsLowercasedCharacters(text: String) -> Bool {
         
         let normalLetterRegEx = ".*[a-z]+.*"

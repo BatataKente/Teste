@@ -12,24 +12,28 @@ class NomeView: UIViewController {
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
     private let registerButton = UIButton()
-
-    var progressBarStackView = UIStackView()
     
     private lazy var buttons: [UIButton] = {
-
-        let buttons = createProgressBarButtons([IconsBravve.userBlue.rawValue,
-                                                IconsBravve.userGray.rawValue,
-                                                IconsBravve.cellBlue.rawValue,
-                                                IconsBravve.cellGray.rawValue,
-                                                IconsBravve.emailBlue.rawValue,
-                                                IconsBravve.emailGray.rawValue,
-                                                IconsBravve.padlockGray.rawValue,
-                                                IconsBravve.hobbiesGray.rawValue])
-
-        buttons[1].removeTarget(nil, action: nil, for: .allTouchEvents)
-        buttons[3].removeTarget(nil, action: nil, for: .allTouchEvents)
-        buttons[5].removeTarget(nil, action: nil, for: .allTouchEvents)
-
+        
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userBlue.rawValue,
+                                                              IconsBravve.userGray.rawValue,
+                                                              IconsBravve.cellBlue.rawValue,
+                                                              IconsBravve.cellGray.rawValue,
+                                                              IconsBravve.emailBlue.rawValue,
+                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.padlockGray.rawValue,
+                                                              IconsBravve.hobbiesGray.rawValue])
+        
+        buttons[1].addTarget(self,
+                             action: #selector(nameScreenAction),
+                             for: .touchUpInside)
+        buttons[3].addTarget(self,
+                             action: #selector(phoneScreenAction),
+                             for: .touchUpInside)
+        buttons[5].addTarget(self,
+                             action: #selector(emailScreenAction),
+                             for: .touchUpInside)
+        
         return buttons
     }()
     
@@ -82,7 +86,7 @@ class NomeView: UIViewController {
         let ddisButton = UIButton()
         
         let leftStackView = UIStackView(arrangedSubviews: [stackView, ddisButton])
-        leftStackView.backgroundColor = .white
+        leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         leftStackView.layer.cornerRadius = 10
         leftStackView.isLayoutMarginsRelativeArrangement = true
         leftStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
@@ -92,6 +96,7 @@ class NomeView: UIViewController {
         
         let rightLabel = UILabel()
         rightLabel.font = smallFont
+        rightLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         
         let rightTextField = UITextField()
         rightTextField.font = font
@@ -100,7 +105,7 @@ class NomeView: UIViewController {
                                                             rightTextField])
         rightStackView.spacing = 10
         rightStackView.axis = .vertical
-        rightStackView.backgroundColor = .white
+        rightStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         rightStackView.layer.cornerRadius = 8
         rightStackView.isLayoutMarginsRelativeArrangement = true
         rightStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
@@ -122,7 +127,7 @@ class NomeView: UIViewController {
         
         let registerStackView = UIStackView(arrangedSubviews: [viewElements.leftStackView,
                                                                viewElements.rightStackView])
-        registerStackView.backgroundColor = .white
+        registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
         registerStackView.spacing = 15
         registerStackView.layer.cornerRadius = 8
@@ -180,16 +185,18 @@ class NomeView: UIViewController {
     private func setupConstraints() {
         
         infoLabel.constraintInsideTo(.top,
-                                     view.safeAreaLayoutGuide,
-                                     view.frame.size.height*0.3)
+                                     view,
+                                     CGFloat(250).generateSizeForScreen)
         infoLabel.constraintInsideTo(.leading,
-                                     view.safeAreaLayoutGuide, 40)
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         infoLabel.constraintInsideTo(.trailing,
-                                     view.safeAreaLayoutGuide, 40)
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         
-        registerStackView.constraintInsideTo(.centerY,
-                                             view.safeAreaLayoutGuide,
-                                             view.frame.size.height*0.05)
+        registerStackView.constraintOutsideTo(.top,
+                                              infoLabel,
+                                              CGFloat(60).generateSizeForScreen)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         
@@ -212,22 +219,30 @@ class NomeView: UIViewController {
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
-        
-        buttons[1].addTarget(self,
-                             action: #selector(progressBarAction),
-                             for: .touchUpInside)
-        buttons[3].addTarget(self,
-                             action: #selector(progressBarAction),
-                             for: .touchUpInside)
-        buttons[5].addTarget(self,
-                             action: #selector(progressBarAction),
-                             for: .touchUpInside)
+    }
+    
+    @objc func nameScreenAction() {
+
+        nomeViewModel.delegate = self
+        nomeViewModel.makeNameScreen()
+    }
+    
+    @objc func phoneScreenAction() {
+
+        nomeViewModel.delegate = self
+        nomeViewModel.makePhoneScreen()
+    }
+    
+    @objc func emailScreenAction() {
+
+        nomeViewModel.delegate = self
+        nomeViewModel.makeEmailScreen()
     }
     
     @objc func stackViewTapped() {
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: 11)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: 11)
+        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
         
         customShaddow.isHidden = false
         
@@ -243,11 +258,6 @@ class NomeView: UIViewController {
     @objc func changeScreen() {
         
         nomeViewModel.advanceScreen()
-    }
-    
-    @objc func progressBarAction(_ sender: UIButton) {
-        
-        nomeViewModel.changeScreenWithProgressBar(sender)
     }
     
     @objc func changeText(_ sender: UITextField) {
@@ -316,7 +326,7 @@ extension NomeView: NomeViewModelProtocol {
         registerButton.removeTarget(nil,
                                     action: #selector(changeScreen),
                                     for: .touchUpInside)
-        registerButton.backgroundColor = UIColor(named: "reservedCancel")
+        registerButton.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
     }
     
     func setKeyboardType(keyboardType: UIKeyboardType) {

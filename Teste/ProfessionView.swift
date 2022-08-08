@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ProfessionView: UIViewController {
 
     let backButton = UIButton()
     let logoBravve = UIImageView()
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         buttons = createProgressBarButtons([IconsBravve.photoGray.rawValue,
                                                                IconsBravve.noteBlue.rawValue,
                                                                IconsBravve.hobbiesGray.rawValue,
-                                                               IconsBravve.activiesGray.rawValue])
+                                                               IconsBravve.activitiesGray.rawValue])
         return buttons
     } ()
     
@@ -136,7 +136,10 @@ class ViewController: UIViewController {
                                     backgroundImageView])
    
         logoBravve.setLogoToDefault()
-        backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen)
+        backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen) {_ in
+            
+            self.dismiss(animated: true)
+        }
         continueButton.setToBottomButtonKeyboardDefault()
         backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         

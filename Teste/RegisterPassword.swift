@@ -10,9 +10,12 @@ import UIKit
 class progressBar: UIViewController{
     
     
-    let goBackButton: UIButton = {
+    lazy var goBackButton: UIButton = {
         let button = UIButton()
-        button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen)
+        button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen) {_ in
+            
+            self.dismiss(animated: true)
+        }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

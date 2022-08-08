@@ -11,31 +11,37 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     var delegate: HomeOpenTableViewCellProtocol?
     
-    let viewElements: (view: UIView,
-                       titleLabel: UILabel,
-                       descriptionLabel: UILabel,
-                       detailsButton: UIButton,
-                       photoView: UIImageView,
-                       nameLabel: UILabel,
-                       subNameLabel: UILabel,
-                       priceLabel: UILabel,
-                       detailsLabel: UILabel) = {
+    var indexPath: IndexPath = IndexPath()
+    
+    private lazy var viewElements: (view: UIView,
+                                    titleLabel: UILabel,
+                                    descriptionLabel: UILabel,
+                                    photoView: UIImageView,
+                                    photoLabel: UILabel,
+                                    nameLabel: UILabel,
+                                    subNameLabel: UILabel,
+                                    priceLabel: UILabel,
+                                    detailsLabel: UILabel) = {
+        
+        let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         
         let titleLabel = UILabel()
-        titleLabel.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        titleLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
-        titleLabel.text = "BOXOFFICE"
+        
+        let titleLabelView = UIView()
+        titleLabelView.addSubview(titleLabel)
+        titleLabelView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         
         let descriptionLabel = UILabel()
-        descriptionLabel.text = "Numa esquina charmosa, um hotel"
-        descriptionLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        descriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+        descriptionLabel.textColor = textColor
+        descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                        size: CGFloat(20).generateSizeForScreen)
         descriptionLabel.numberOfLines = 0
         
         let view = UIView()
-        view.backgroundColor = .white
+        view.setToDefaultBackgroundColor()
         view.layer.cornerRadius = 12
         
         view.layer.shadowColor = UIColor.black.cgColor
@@ -44,47 +50,102 @@ class HomeOpenTableViewCell: UITableViewCell {
         view.layer.shadowRadius = 8
         
         let photoView = UIImageView()
-        photoView.image = UIImage(named: "Example 1")
         photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 12
         
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
+        let photoLabel = UILabel()
+        photoLabel.textColor = .white
+        photoLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                 size: CGFloat(13).generateSizeForScreen)
+        
+        let photoLabelView = UIView()
+        photoLabelView.addSubview(photoLabel)
+        photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
         let nameLabel = UILabel()
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
-        nameLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        nameLabel.text = "Hotel Saint"
+        nameLabel.textColor = textColor
         
         let subNameLabel = UILabel()
+        subNameLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         subNameLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                 size: CGFloat(12).generateSizeForScreen)
-        subNameLabel.text = "UM Coffee Co."
         
         let priceLabel = UILabel()
+        priceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
         priceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                  size: CGFloat(12).generateSizeForScreen)
-        priceLabel.textColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        priceLabel.text = "3,50 crédito/ hora"
         
         let detailsLabel = UILabel()
-        detailsLabel.text = "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
         detailsLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                    size: CGFloat(13).generateSizeForScreen)
-        detailsLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        detailsLabel.textColor = textColor
         detailsLabel.numberOfLines = 0
         
         let detailsButton = UIButton()
         detailsButton.setImage(UIImage(named: "arrowPink"), for: .normal)
         detailsButton.setTitleColor(.black, for: .normal)
+        detailsButton.addTarget(self,
+                                action: #selector(showDetails),
+                                for: .touchUpInside)
         
-        view.addSubviews([titleLabel, descriptionLabel, detailsButton, photoView, nameLabel, subNameLabel, priceLabel, detailsLabel])
+        view.addSubviews([titleLabelView, descriptionLabel, detailsButton, photoView, photoLabelView, nameLabel, subNameLabel, priceLabel, detailsLabel])
+        
+        titleLabelView.constraintInsideTo(.top, view)
+        titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.top, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.leading, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.trailing, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        titleLabel.constraintInsideTo(.bottom, titleLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+
+        descriptionLabel.constraintOutsideTo(.top, titleLabelView, CGFloat(20).generateSizeForScreen)
+        descriptionLabel.constraintInsideTo(.leading, titleLabelView)
+        descriptionLabel.constraintInsideTo(.width, view, multiplier: 0.6)
+        
+        photoView.constraintOutsideTo(.top, descriptionLabel, CGFloat(20).generateSizeForScreen)
+        photoView.constraintInsideTo(.leading, descriptionLabel)
+        photoView.constraintInsideTo(.trailing, view)
+        photoView.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
+        
+        photoLabelView.constraintInsideTo(.top, photoView, CGFloat(25).generateSizeForScreen)
+        photoLabelView.constraintInsideTo(.leading, photoView, CGFloat(25).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.top, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.leading, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.trailing, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        photoLabel.constraintInsideTo(.bottom, photoLabelView,
+                                      CGFloat(2.5).generateSizeForScreen)
+        
+        nameLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
+        nameLabel.constraintInsideTo(.leading, photoView)
+
+        priceLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
+        priceLabel.constraintInsideTo(.trailing, photoView, CGFloat(20).generateSizeForScreen)
+
+        subNameLabel.constraintOutsideTo(.top, nameLabel, CGFloat(10).generateSizeForScreen)
+        subNameLabel.constraintInsideTo(.leading, nameLabel)
+
+        detailsLabel.constraintOutsideTo(.top, subNameLabel, CGFloat(20).generateSizeForScreen)
+        detailsLabel.constraintInsideTo(.leading, nameLabel)
+        detailsLabel.constraintInsideTo(.bottom, view, CGFloat(30).generateSizeForScreen)
+
+        detailsButton.constraintInsideTo(.trailing, view, CGFloat(30).generateSizeForScreen)
+        detailsButton.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
         
         return (view: view,
                 titleLabel: titleLabel,
                 descriptionLabel: descriptionLabel,
-                detailsButton: detailsButton,
                 photoView: photoView,
+                photoLabel: photoLabel,
                 nameLabel: nameLabel,
                 subNameLabel: subNameLabel,
                 priceLabel: priceLabel,
@@ -92,13 +153,13 @@ class HomeOpenTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
         setupConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
@@ -106,61 +167,37 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     func setupView() {
         
-        contentView.addSubviews([viewElements.view])
+        contentView.addSubview(viewElements.view)
         contentView.setToDefaultBackgroundColor()
-        
-        viewElements.detailsButton.addTarget(self,
-                                             action: #selector(showDetails),
-                                             for: .touchUpInside)
     }
     
     func setupConstraints() {
         
-        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, 20)
-        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, 20)
-        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, 20)
+        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
+    }
+    
+    func setup(_ cellInfo: ReserveData) {
         
-        viewElements.titleLabel.constraintInsideTo(.top, viewElements.view)
-        viewElements.titleLabel.constraintInsideTo(.leading, viewElements.view, 21)
-        
-        viewElements.descriptionLabel.constraintOutsideTo(.top, viewElements.titleLabel, 23)
-        viewElements.descriptionLabel.constraintInsideTo(.leading, viewElements.titleLabel)
-        viewElements.descriptionLabel.constraintInsideTo(.width,
-                                                         viewElements.view,
-                                                         multiplier: 0.6)
-        
-        viewElements.photoView.constraintOutsideTo(.top, viewElements.descriptionLabel, 22)
-        viewElements.photoView.constraintInsideTo(.leading, viewElements.descriptionLabel)
-        viewElements.photoView.constraintInsideTo(.trailing, viewElements.view)
-        viewElements.photoView.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
-        
-        viewElements.nameLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
-        viewElements.nameLabel.constraintInsideTo(.leading, viewElements.photoView)
-        
-        viewElements.priceLabel.constraintOutsideTo(.top, viewElements.photoView, 23)
-        viewElements.priceLabel.constraintInsideTo(.trailing, viewElements.photoView, 18)
-        
-        viewElements.subNameLabel.constraintOutsideTo(.top, viewElements.nameLabel, 8)
-        viewElements.subNameLabel.constraintInsideTo(.leading, viewElements.nameLabel)
-        
-        viewElements.detailsLabel.constraintOutsideTo(.top,
-                                                      viewElements.subNameLabel,
-                                                      19)
-        viewElements.detailsLabel.constraintInsideTo(.leading, viewElements.nameLabel)
-        viewElements.detailsLabel.constraintInsideTo(.bottom, viewElements.view, 33)
-        
-        viewElements.detailsButton.constraintInsideTo(.trailing, viewElements.view, 27)
-        viewElements.detailsButton.constraintInsideTo(.bottom, viewElements.view, 19)
+        viewElements.titleLabel.text = cellInfo.title
+        viewElements.descriptionLabel.text = cellInfo.description
+        viewElements.photoView.image = cellInfo.image
+        viewElements.photoLabel.text = cellInfo.photoTitle
+        viewElements.nameLabel.text = cellInfo.name
+        viewElements.subNameLabel.text = cellInfo.subName
+        viewElements.priceLabel.text = cellInfo.price
+        viewElements.detailsLabel.text = cellInfo.details
     }
     
     @objc func showDetails() {
         
-        delegate?.chosePlace()
+        delegate?.chosePlace(indexPath)
     }
 }
 
 protocol HomeOpenTableViewCellProtocol {
     
-    func chosePlace()
+    func chosePlace(_ indexPath: IndexPath)
 }

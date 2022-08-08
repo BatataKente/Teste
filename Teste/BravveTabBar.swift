@@ -5,42 +5,58 @@
 //  Created by Josicleison on 04/08/22.
 //
 
+/* a tab bar in the app pattern with their respective actions*/
+
 import UIKit
 
 class BravveTabBar: UITabBar, UITabBarDelegate {
-    
+
+    var actualView: UIViewController
+
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-        switch item.image {
+
+        switch item {
             
-            case UIImage(named: ButtonsBravve.locationGray.rawValue):
+            case tabBar.items?[0]:
             
-                print("Toma!!!")
-            
+                let homeOpenView = HomeOpenView()
+
+                homeOpenView.modalPresentationStyle = .fullScreen
+                actualView.present(homeOpenView, animated: true)
+                
             default:
-            
-                print("Kamehameha!")
+
+                let loginView = LoginView()
+
+                loginView.modalPresentationStyle = .fullScreen
+                actualView.present(loginView, animated: true)
         }
     }
-    
-    override init(frame: CGRect) {
+
+    init(_ actualView: UIViewController, itemImagesNames: [String]) {
+
+        self.actualView = actualView
+
+        super.init(frame: .zero)
         
-        let locationTabBarItem = UITabBarItem()
-        locationTabBarItem.image = UIImage(named: ButtonsBravve.locationGray.rawValue)
-        
-        let signInTabBarItem = UITabBarItem()
-        signInTabBarItem.image = UIImage(named: ButtonsBravve.exitGray.rawValue)
-        
-        super.init(frame: frame)
+        self.items = []
+
+        for itemImageName in itemImagesNames {
+
+            let tabBarItem = UITabBarItem()
+            tabBarItem.image = UIImage(named: itemImageName)
+            
+            self.items?.append(tabBarItem)
+        }
         
         self.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        self.items = [locationTabBarItem, signInTabBarItem]
-        
+        self.unselectedItemTintColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
+
         self.delegate = self
     }
-    
+
     required init?(coder: NSCoder) {
-        
+
         fatalError("init(coder:) has not been implemented")
     }
 }

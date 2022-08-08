@@ -6,9 +6,10 @@
 //
 
 import UIKit
-
+    
 extension CGFloat {
     
+/// This function generates a multiplier according to the screen width
     public var generateSizeForScreen: CGFloat {
         
         let width = UIScreen.main.bounds.width
@@ -60,26 +61,20 @@ extension CGFloat {
         return self
     }
     
+/// This function generates a multiplier according to the screen height
     public var generateSizeForScreenByHeight: CGFloat {
 
         let height = UIScreen.main.bounds.height
+        let referenceHeight: CGFloat = 1000
 
-        if (height <= 568) {
-            // iPod(Gen7)
-            // iPhone(5s, SEGen1)
-
-            // SE height: 568
-
-            return self * 0.5
-        }
-        else if (height <= 667) {
+        if (height <= 667) {
 
             // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
             // 6, 6s, 7 ,8 height: 667
 
-            return self * 0.6
+            return self * height/referenceHeight
         }
-        else if (height <= 736) {
+        else if (height <= referenceHeight) {
 
             // iPhone(SEGen2 6, 6s, 7, 8, X, Xs, 11pro, 12mini, 13mini)
 
