@@ -13,6 +13,8 @@
 		13080CB728A17F0000A064B0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 13080CB628A17F0000A064B0 /* Alamofire */; };
 		13080CB928A17F2A00A064B0 /* AccessTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */; };
 		13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13080CBA28A17F6B00A064B0 /* StatesModel.swift */; };
+		13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13080CBD28A1893200A064B0 /* ModelSitesV1.swift */; };
+		13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13080CBF28A18C4700A064B0 /* ModelSpacesV1.swift */; };
 		1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */; };
 		1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F096289BFF3F00F9A2A5 /* Reservas2.swift */; };
 		134D68112890151C00D5572B /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68102890151C00D5572B /* BulletPoint.swift */; };
@@ -73,6 +75,8 @@
 		13080CB328A17EC000A064B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenModel.swift; sourceTree = "<group>"; };
 		13080CBA28A17F6B00A064B0 /* StatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesModel.swift; sourceTree = "<group>"; };
+		13080CBD28A1893200A064B0 /* ModelSitesV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSitesV1.swift; sourceTree = "<group>"; };
+		13080CBF28A18C4700A064B0 /* ModelSpacesV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSpacesV1.swift; sourceTree = "<group>"; };
 		1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3ViewModel.swift; sourceTree = "<group>"; };
 		1340F096289BFF3F00F9A2A5 /* Reservas2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservas2.swift; sourceTree = "<group>"; };
 		134D68102890151C00D5572B /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
@@ -141,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13080CBC28A1890000A064B0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				13080CBD28A1893200A064B0 /* ModelSitesV1.swift */,
+				13080CBF28A18C4700A064B0 /* ModelSpacesV1.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		14054ACD2899E7DE00BB4E3B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +185,7 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				13080CBC28A1890000A064B0 /* Service */,
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
@@ -337,6 +351,7 @@
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
+				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
@@ -358,6 +373,7 @@
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
+				13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */,
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				14C8B70E289DC2C600ABC321 /* LoginView.swift in Sources */,
 				14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */,
