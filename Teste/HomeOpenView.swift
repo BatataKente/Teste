@@ -22,12 +22,15 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         
         .lightContent
     }
+    
+    let authManager = AuthManager()
     
     private let cellIdentifier = "Cell"
     
@@ -132,11 +135,19 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        customBar.setToDefaultCustomBarWithFilter {_ in
+        authManager.getDataArray { (states: [States]?) in
+            guard let states = states else {
+                return
+            }
             
-            let filterView = FilterScreen()
-            filterView.modalPresentationStyle = .fullScreen
-            self.present(filterView, animated: true)
+            DispatchQueue.main.async {
+                self.customBar.setToDefaultCustomBarWithFilter (states: states) {_ in
+                    
+                    let filterView = FilterScreen()
+                    filterView.modalPresentationStyle = .fullScreen
+                    self.present(filterView, animated: true)
+                }
+            }
         }
     }
     

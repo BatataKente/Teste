@@ -1,5 +1,9 @@
+
+
 import UIKit
 
+
+/// A class to set the custom textfield of the BraveApp
 class TextField: UIStackView {
     
     private var labelText: String
@@ -9,6 +13,12 @@ class TextField: UIStackView {
     var textFieldButton = UIButton()
     var shadow = UIView()
     
+    
+    /// Custom initializer for the textfield class
+    /// - Parameters:
+    ///   - labelText: Text for the textfield placeholder
+    ///   - buttonImageName: Image name of the textfieldbutton.
+    ///   - frame: Frame of the textfield
     init(placeHolderText labelText: String, buttonImageName: String = "", frame: CGRect = .zero) {
         
         self.labelText = labelText
@@ -21,6 +31,9 @@ class TextField: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    /// Creates a UIStackView containing the text field, the placeholder label and the textfieldbutton
+    /// - Returns: UIStackView containing textfield, placeholder label and textfieldButton
     func createStackView() -> UIStackView {
         
         label.text = self.labelText
@@ -94,6 +107,8 @@ class TextField: UIStackView {
         
     }
     
+    
+    /// Method to handle the StackView behavior when tapped
     @objc func textFieldStackViewTapped() {
         textField.isHidden = false
         shadow.isHidden = false
