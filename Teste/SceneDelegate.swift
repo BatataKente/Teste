@@ -16,17 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else {return}
         
         let window = UIWindow(windowScene: windowScene)
-//
-//        let vc1 = HomeOpenView()
-//        vc1.tabBarItem.image = UIImage(named: "locationGray")
-//
-//        let vc2 = NomeView()
-//        vc2.tabBarItem.image = UIImage(named: "exiteGray")
-//
-//        let tabBarController = UITabBarController()
-//        tabBarController.viewControllers = [vc1, vc2]
-//
-//        tabBarController.tabBar.tintColor = UIColor(named: "PinkBravve")
 
         window.rootViewController = HomeOpenView()
         
