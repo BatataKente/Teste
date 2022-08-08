@@ -15,20 +15,16 @@ class FotoView: UIViewController {
     
     private let registerButton = UIButton()
     
-    private let jumpButton = UIButton()
-    
     private let firstWay = UIImageView(),
         secondWay = UIImageView()
     
     private lazy var progressBarStackView: UIStackView = {
         
         let buttons = createProgressBarButtons([IconsBravve.photoBlue.rawValue,
-                                                IconsBravve.noteBlue.rawValue,
+                                                IconsBravve.noteGray.rawValue,
                                                 IconsBravve.hobbiesGray.rawValue,
-                                                IconsBravve.activiesGray.rawValue])
+                                                IconsBravve.activitiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
-        
-        stackView.spacing = 7
         
         return stackView
     }()
@@ -53,7 +49,7 @@ class FotoView: UIViewController {
         
         let imageView = UIImageView()
         imageView.layer.masksToBounds = false
-        imageView.image = UIImage(named: "MrMadruga")
+        imageView.image = UIImage(named: ImagesBravve.photo.rawValue)
         imageView.clipsToBounds = true
         
         return imageView
@@ -62,7 +58,8 @@ class FotoView: UIViewController {
     private let editButton: UIButton = {
         
         let editButton = UIButton()
-        editButton.setImage(UIImage(named: "photoPink"), for: .normal)
+        editButton.setImage(UIImage(named: IconsBravve.photoBlue.rawValue),
+                            for: .normal)
         
         return editButton
     }()
@@ -78,39 +75,46 @@ class FotoView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, jumpButton, imageView, editButton, tutorialLabel])
+        view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, imageView, editButton, tutorialLabel])
         
         view.setToDefaultBackgroundColor()
     }
     
     private func setupDefaults() {
         
-        firstWay.setWayToDefault(.wayConfirm)
+        firstWay.setWayToDefault(.wayConfirm_1)
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink)
-        registerButton.setToButtonDefault(jumpButton, 20)
-        jumpButton.setToJumpButtonDefault(50)
+        backButton.setToBackButtonDefault(.backPink) {_ in
+            
+            self.dismiss(animated: true)
+        }
+        registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
     
     private func setupConstraints() {
         
-        progressBarStackView.constraintOutsideTo(.top, bravveIcon, 50)
+        progressBarStackView.constraintOutsideTo(.top, bravveIcon,
+                                                 CGFloat(50).generateSizeForScreen)
         progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         
-        infoLabel.constraintOutsideTo(.top, progressBarStackView, 50)
-        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
-        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
+        infoLabel.constraintOutsideTo(.top, progressBarStackView,
+                                      CGFloat(50).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         
         imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 30)
+        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide,
+                                     CGFloat(30).generateSizeForScreen)
         imageView.sizeAnchorInSuperview(view.frame.size.height/5)
         imageView.layer.cornerRadius = view.frame.size.height/10
         
         tutorialLabel.constraintOutsideTo(.top, imageView, 25)
         tutorialLabel.constraintOutsideTo(.centerX, view)
         
-        editButton.sizeAnchorInSuperview()
+        editButton.sizeAnchorInSuperview(CGFloat(32).generateSizeForScreen)
         editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
         editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
     }

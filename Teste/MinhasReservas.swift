@@ -9,33 +9,33 @@ import UIKit
 
 class MinhasReservas: UIViewController {
     
-    let customBar = UIView()
+    private let customBar = UIView()
     
-    let topRightWay = UIImageView()
+    private let topRightWay = UIImageView()
     
-    let bottomLeftWay = UIImageView()
+    private let bottomLeftWay = UIImageView()
     
-    let myTableView = UITableView()
+    private let myTableView = UITableView()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.translatesAutoresizingMaskIntoConstraints = false
-        myTableView.backgroundColor = UIColor(named: "background")
+        myTableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         myTableView.register(ReservaCell.self, forCellReuseIdentifier: "Cell")
         
-        myTableView.rowHeight = 538
+        myTableView.rowHeight = CGFloat(520).generateSizeForScreen
         
         myTableView.separatorStyle = .none
         
-        myTableView.layer.cornerRadius = 12
+        myTableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         
         view.addSubviews([topRightWay, bottomLeftWay, customBar, myTableView])
         
@@ -50,15 +50,15 @@ class MinhasReservas: UIViewController {
         setDefaults()
     }
     
-    func setDefaults() {
+    private func setDefaults() {
         topRightWay.setWayToDefault(.wayReserv_2)
         bottomLeftWay.setWayToDefault(.wayReserv_1)
     }
     
-    func setConstraints() {
-        myTableView.constraintOutsideTo(.top, customBar, 13)
-        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 20)
-        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, -20)
+    private func setConstraints() {
+        myTableView.constraintOutsideTo(.top, customBar, CGFloat(13).generateSizeForScreen)
+        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
         myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }

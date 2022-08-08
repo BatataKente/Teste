@@ -7,145 +7,132 @@
 
 import UIKit
 
-//Passar Nomes para ingles
-//Passar Enum em nomes padrao para icons cores etc
-//Ficaria melhor com classe
-
 //Extensions related to simplify creation of menu to buttons
+
 extension UIButton {
+    
+/* This function create a menu on the button with list. */
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
-        self.setImage(UIImage(named: ButtonsBravve.arrowBlue.rawValue),
+        self.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                       for: .normal)
         self.imageView?.widthAnchorInSuperview(CGFloat(15).generateSizeForScreen)
         self.imageView?.heightAnchorInSuperview(CGFloat(10).generateSizeForScreen)
         self.menu = UIMenu(children: menuItens)
         self.showsMenuAsPrimaryAction = true
-        self.changesSelectionAsPrimaryAction = true
     }
 }
 
 //Extensions related to set buttons to Default by the app
 extension UIButton {
     
+/* This function turns a button into the default capsule button in the app. */
+    
     open func setToDefaultCapsuleButton(_ buttonTitle: String,
-                                        _ backgroundColor: ColorsBravve = .blue) {
+                                        _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
+                                        strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) {
 
         self.configuration = .filled()
-        self.configuration?.title = buttonTitle
+         
+        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.medium.rawValue,
+                                                             size: CGFloat(13).generateSizeForScreen)]
+        let attributedTitle = NSAttributedString(string: buttonTitle,
+                                                 attributes: attribute as [NSAttributedString.Key : Any])
+        
+        self.configuration?.attributedTitle = AttributedString(attributedTitle)
+        
         self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
-        if backgroundColor == .background {
+        if backgroundColor == .capsuleButton {
 
-            self.configuration?.baseForegroundColor = .black
+            self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
             self.configuration?.background.strokeWidth = 0.7
-            self.configuration?.background.strokeColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
+            self.configuration?.background.strokeColor = strokeColor
         }
         self.configuration?.cornerStyle = .capsule
     }
     
-    open func setToJumpButtonDefault(buttonTitle: String = "Pular",
-                                     _ constant: CGFloat = 70) {
-        
-        self.setTitle(buttonTitle, for: .normal)
-        self.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
-        self.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        self.layer.cornerRadius = 8
-        
-        self.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? UIColor(), width: 1, y: -7)
-        
-        self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
-        self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide, constant)
-    }
+/* This function turns a button into the default progress bar button in the app. Progress bar are a bar that usually occurs in this app*/
     
     open func setToProgressBarButtonDefault(_ buttonImageName: String) {
         
-        self.configuration = .plain()
-        self.configuration?.image = UIImage(named: buttonImageName)
-        self.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                    leading: 0,
-                                                                    bottom: 0,
-                                                                    trailing: 0)
-            
+        var buttonTitle = ""
+        let buttonMargins = CGFloat(2.5).generateSizeForScreen
+        self.setTitleColor(UIColor(named: ColorsBravve.progressBarLabel.rawValue), for: .normal)
+        self.setImage(UIImage(named: buttonImageName), for: .normal)
+        
         switch buttonImageName {
 
-        case IconsBravve.userBlue.rawValue:
+            case IconsBravve.userBlue.rawValue:
 
-                self.configuration?.title = " Dados pessoais"
+                buttonTitle = "Dados pessoais"
 
             case IconsBravve.cellBlue.rawValue:
 
-                self.configuration?.title = " Celular"
+                buttonTitle = "Celular"
 
             case IconsBravve.emailBlue.rawValue:
 
-                self.configuration?.title = " Email"
+                buttonTitle = "Email"
 
             case IconsBravve.padlockBlue.rawValue:
 
-                self.configuration?.title = " Senha"
+                buttonTitle = "Senha"
 
             case IconsBravve.pencilBlue.rawValue:
 
-                self.configuration?.title = " Confirmação"
+                buttonTitle = "Confirmação"
             
             case IconsBravve.photoBlue.rawValue:
 
-                self.configuration?.title = " Foto"
+                buttonTitle = "Foto"
 
             case IconsBravve.noteBlue.rawValue:
 
-                self.configuration?.title = " Profissão"
+                buttonTitle = "Profissão"
 
             case IconsBravve.hobbiesBlue.rawValue:
 
-                self.configuration?.title = " Hobbies"
+                buttonTitle = "Hobbies"
 
-            case IconsBravve.activiesBlue.rawValue:
+            case IconsBravve.activitiesBlue.rawValue:
 
-                self.configuration?.title = " Atividades de interesse"
+                buttonTitle = "Atividades de interesse"
             
             case IconsBravve.calendarBlue.rawValue:
 
-                self.configuration?.title = " Agendamento"
+                buttonTitle = "Agendamento"
                 
             case IconsBravve.creditBlue.rawValue:
 
-                self.configuration?.title = " Carteira"
+                buttonTitle = "Carteira"
 
             default: break
         }
         
-        self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        self.setTitle(buttonTitle, for: .normal)
+        
         self.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                        size: CGFloat(14).generateSizeForScreen)
+        
+        self.imageView?.constraintInsideTo(.height,
+                                           self.titleLabel,
+                                           multiplier: 2)
+        
+        self.imageView?.constraintInsideTo(.leading, self, buttonMargins)
+        self.imageView?.constraintOutsideTo(.trailing, self.titleLabel, buttonMargins)
+        self.imageView?.constraintOutsideTo(.width, self.imageView)
     }
     
-    open func setToButtonDefault(_ aboveWhom: Any?,
-                                 buttonTitle: String = "Continuar",
-                                 _ constant: CGFloat = 30) {
-        
-        self.setTitle(buttonTitle, for: .normal)
-        self.titleLabel?.textColor = .white
-        self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        self.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        self.layer.cornerRadius = 8
-        
-        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
-        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, 22)
-        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide, 22)
-        
-        guard let aboveWhom = aboveWhom else {return}
-        
-        self.constraintOutsideTo(.bottom, aboveWhom, constant)
-    }
+/* This function puts a button in the bottom and customizes it to the app's default */
     
-    open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar") {
+    open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
+                                               backgroundColor: ColorsBravve = .buttonGray) {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
+        self.backgroundColor = UIColor(named: backgroundColor.rawValue)
         
-        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
+        self.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
@@ -154,29 +141,38 @@ extension UIButton {
                                        size: CGFloat(16).generateSizeForScreen)
     }
     
-    open func setToBottomButtonDefault(_ buttonTitle: String = "Continuar",
-                                       colorName: ColorsBravve = .buttonPink,
-                                       aboveWhom: Any?) {
+/* This function puts a button on top of some other view and customizes it to the app's default */
+    
+    open func setToBottomButtonDefaultAbove(_ buttonTitle: String = "Continuar",
+                                            backgroundColor: ColorsBravve = .buttonGray,
+                                            above: Any?) {
         
         self.setTitle(buttonTitle, for: .normal)
-        self.backgroundColor = UIColor(named: colorName.rawValue)
+        self.backgroundColor = UIColor(named: backgroundColor.rawValue)
         
-        self.constraintInsideTo(.height, superview?.safeAreaLayoutGuide, multiplier: 0.07)
+        self.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.constraintOutsideTo(.bottom, aboveWhom)
+        self.constraintOutsideTo(.bottom, above)
         
         self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,
-                                       size: CGFloat(25).generateSizeForScreen)
+                                       size: CGFloat(16).generateSizeForScreen)
     }
     
+/* This function turns the button into the default back */
+    
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = 22) {
+                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
+                                     _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
+        self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
+        self.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
         
+        self.constraintInsideTo(.top, superview, CGFloat(65).generateSizeForScreen)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, 65)
+        
+        self.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         self.constraintInsideTo(.height,
                                 superview?.safeAreaLayoutGuide,

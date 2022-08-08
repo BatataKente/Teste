@@ -9,7 +9,7 @@ import UIKit
 
 class BulletPoint: UIStackView {
     
-    var labelText: String
+    private var labelText: String
     var label = UILabel()
     var ellipseImage = UIImageView()
     
@@ -28,8 +28,11 @@ class BulletPoint: UIStackView {
         ellipseImage.contentMode = .scaleAspectFit
         ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         
+        ellipseImage.widthAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen).isActive = true
+        ellipseImage.heightAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen).isActive = true
+        
         label.text = labelText
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: 10)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(10).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -38,7 +41,7 @@ class BulletPoint: UIStackView {
             let stackView = UIStackView(arrangedSubviews: [ellipseImage, label])
             stackView.alignment = .center
             stackView.distribution = .fillProportionally
-            stackView.spacing = 5
+            stackView.spacing = CGFloat(5).generateSizeForScreen
             stackView.translatesAutoresizingMaskIntoConstraints = false
             return stackView
         }()
