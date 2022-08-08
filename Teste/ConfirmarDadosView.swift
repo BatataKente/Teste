@@ -16,7 +16,6 @@ class ConfirmarDadosView: UIViewController {
 
         }
     
-    
     private let backgroundImage1 = UIImageView()
     
     private let backgroundImage2: UIImageView = {
@@ -152,7 +151,7 @@ class ConfirmarDadosView: UIViewController {
         super.viewDidLoad()
         
         view.setToDefaultBackgroundColor()
-        
+         
         view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, backgroundImage1, stackViewLabels, buttonContinue])
         
         defaults()
@@ -169,20 +168,19 @@ class ConfirmarDadosView: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink) {_ in 
-            
+        buttonBack.setToBackButtonDefault(.backPink) { _ in
             self.dismiss(animated: true)
         }
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
-        backgroundImage1.setWayToDefault(.wayCell)
+        backgroundImage1.setWayToDefault(.wayConfirm_2)
         
     }
     
     private func addConstraints() {
         
-        label.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
-        label.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
+        label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
         label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(40).generateSizeForScreen)
         
         stackViewName.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
@@ -193,13 +191,12 @@ class ConfirmarDadosView: UIViewController {
         editButton2.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         editButton3.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
-        stackViewLabels.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
-        stackViewLabels.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        stackViewLabels.constraintInsideTo(.leading, label)
+        stackViewLabels.constraintInsideTo(.trailing, label)
         stackViewLabels.constraintOutsideTo(.top, label, CGFloat(40).generateSizeForScreen)
         
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
+        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(62).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        progressBarStackView.stack.heightAnchorInSuperview()
         
         backgroundImage2.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         backgroundImage2.constraintInsideTo(.top, view.safeAreaLayoutGuide)
@@ -264,4 +261,3 @@ class ConfirmarDadosView: UIViewController {
         print("tela email")
     }
 }
-
