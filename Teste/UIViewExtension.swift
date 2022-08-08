@@ -133,7 +133,7 @@ extension UIView {
     }
     
 /// This function transforms a view into a bar with a filter
-    open func setToDefaultCustomBarWithFilter() {
+    open func setToDefaultCustomBarWithFilter(_ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -215,6 +215,7 @@ extension UIView {
                                                right: 5)
         
         let filterButton = UIButton()
+        filterButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         filterButton.setImage(UIImage(named: ButtonsBravve.filter.rawValue),
                               for: .normal)
         

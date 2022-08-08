@@ -132,7 +132,12 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        customBar.setToDefaultCustomBarWithFilter()
+        customBar.setToDefaultCustomBarWithFilter {_ in
+            
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
+        }
     }
     
     private func setupConstraints() {
