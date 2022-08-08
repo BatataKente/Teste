@@ -7,6 +7,8 @@
 
 import Foundation
 
-public struct AccessToken: Codable {
-    var access_token: String
+public struct States: Codable {
+    var id: Int
+    var code: String
+    var name: String
 }
