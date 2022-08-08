@@ -1,23 +1,20 @@
 //
 //  ImagesBravveEnum.swift
-//  Bravve
+//  Teste
 //
 //  Created by Josicleison on 02/08/22.
 //
 
 //Enum for assets on app
 
+/* The enums were created with the purpose of organizing the code, so that if there were changes in the names of the assets, the developer could only change the ded enum files, so that it has an impact on all screens of the app
+ */
+
 public enum ImagesBravve: String {
 
-    case Example_1 = "Example1"
-    case Example_2 = "Example2"
-    case Example_3 = "Example3"
-    case Example_4 = "Example4"
-    case Example_5 = "Example5"
-    case Example_6 = "Example6"
-    case Example_7 = "Example7"
-    case Example_8 = "Example8"
-    case Example_9 = "Example9"
+    case example_1 = "Example1"
+    case example_2 = "Example2"
+    case example_3 = "Example3"
     case homeOpen_1 = "homeOpen"
     case homeOpen_2 = "homeOpen2"
     case homeOpen_3 = "homeOpen3"

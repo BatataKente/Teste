@@ -143,7 +143,7 @@ class ProfessionView: UIViewController {
         
         backgroundImageView.setWayToDefault(.wayCell)
         logoBravve.setLogoToDefault()
-        backButton.setToBackButtonDefault()
+        backButton.setToBackButtonDefault{_ in self.dismiss(animated: false)}
         
         selectAreaButton.setMenuForButton(professionViewModel.selectAreaMenu({ (action: UIAction) in
             self.selectAreaAPILabel.text = action.title
