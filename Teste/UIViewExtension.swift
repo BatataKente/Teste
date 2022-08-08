@@ -10,8 +10,8 @@ import UIKit
 //Extension related to verification of size of screen of a ViewController
 extension UIView {
     
-/* This function checks whether the device is an ipad or not */
-    
+/// This function checks whether the device is an ipad or not
+/// - Returns: True if is Ipad of false if not
     open func isIpad() -> Bool {
         
         if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
@@ -25,15 +25,18 @@ extension UIView {
 //Extensions related to default elements
 extension UIView {
     
-/* This function changes the background to the app's default */
-    
+/// This function changes the background to the app's default
     open func setToDefaultBackgroundColor() {
         
         self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
     
-/* This function creates a standard bar that appears in the register part, this bar contains a back button the logo, and it contains a skip button and also comes with a progressbar */
-        
+/// This function creates a standard bar that appears in the register part, this bar contains a back button the logo, and it contains a skip button and also comes with a progressbar
+/// - Parameters:
+///   - imageName: A ButtonsBravve enum referring to the images name of the button name available in assets
+///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
+///   - handler: The action of back button
+///   - hideJumpButton: set false if show a jump button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton],
                                       _ handler: @escaping UIActionHandler,
@@ -93,8 +96,10 @@ extension UIView {
                                                 self.safeAreaLayoutGuide)
     }
     
-/* This function transforms a view into a bar with a back button and title */
-    
+/// This function transforms a view into a bar with a back button and title
+/// - Parameters:
+///   - viewTitle: The title in the center of the custom bar
+///   - handler: The action of back button
     open func setToDefaultCustomBarWithBackButton(viewTitle: String,
                                                   _ handler: @escaping UIActionHandler) {
         
@@ -127,8 +132,7 @@ extension UIView {
         self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
     }
     
-/* This function transforms a view into a bar with a filter */
-    
+/// This function transforms a view into a bar with a filter
     open func setToDefaultCustomBarWithFilter() {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -246,8 +250,11 @@ extension UIView {
 //Extensions related to creation of elements
 extension UIView {
     
-/* This function adds a line below a view */
-
+/// This function adds a line below a view
+/// - Parameters:
+///   - color: The color of line
+///   - width: The width of line
+///   - y: Position y of the line
     func addBottomLineWithColor(color: UIColor = .gray, width: CGFloat = 0.8, y: CGFloat = 0) {
 
         let bottomBorderLine = CALayer()
@@ -264,8 +271,8 @@ extension UIView {
 //Extensions related to constraints
 extension UIView {
     
-/* This function sets the height of a view in a superview */
-    
+/// This function sets the height of a view in a superview
+/// - Parameter constant: The height of view
     open func heightAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -273,8 +280,8 @@ extension UIView {
         superview?.addConstraint(self.heightAnchor.constraint(equalToConstant: constant))
     }
     
-/* This function sets the width of a view in a superview */
-    
+/// This function sets the width of a view in a superview
+/// - Parameter constant: The width of view
     open func widthAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -282,8 +289,8 @@ extension UIView {
         superview?.addConstraint(self.widthAnchor.constraint(equalToConstant: constant))
     }
     
-/* This function sets the width and height of a view in a superview(square) */
-    
+/// This function sets the width and height of a view in a superview(square)
+/// - Parameter constant: The size of view
     open func sizeAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -295,8 +302,8 @@ extension UIView {
         ])
     }
     
-/* This function fills a superview with the view */
-    
+/// This function fills a superview with the view
+/// - Parameter constant: The margins of view to superview
     open func fillSuperview(_ constant: CGFloat = 0) {
         
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, constant)
@@ -305,8 +312,12 @@ extension UIView {
         self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide, constant)
     }
     
-/* This function creates the constraint of a view in a superview directed to some other view */
-    
+/// This function creates the constraint of a view in a superview directed to some other view
+/// - Parameters:
+///   - attribute: The side that will match the side of the item
+///   - toItem: The item at the other point of the constraint
+///   - constant: The distance from attribute
+///   - multiplier: Multiplier for constant
     open func constraintTo(_ attribute: NSLayoutConstraint.Attribute,
                            _ toItem: Any?,
                            _ constant: CGFloat = 0,
@@ -321,9 +332,12 @@ extension UIView {
                                                     constant: constant))
     }
     
-/* This function creates the constraint of a view in a superview directed to some other view with reference to the same part.
-     example bottom to bottom */
-        
+/// This function creates the constraint of a view in a superview directed to some other view with reference to the same part. example bottom to bottom
+/// - Parameters:
+///   - attribute: The side that will match the side of the item(if bottom or trailing it will be the inverse to stay inside)
+///   - toItem: The item at the other point of the constraint
+///   - constant: The distance from attribute
+///   - multiplier: Multiplier for constant
     open func constraintInsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                  _ toItem: Any?,
                                  _ constant: CGFloat = 0,
@@ -351,9 +365,12 @@ extension UIView {
                                                     constant: constant))
     }
     
-/* This function creates the constraint of a view in a superview directed to some other view with reference to the reverse part.
-     example bottom to top */
-    
+/// This function creates the constraint of a view in a superview directed to some other view with reference to the reverse part. example bottom to top
+/// - Parameters:
+///   - attribute: The side that will match the inverse side of the item
+///   - toItem: The item at the other point of the constraint
+///   - constant: The distance from item attribute
+///   - multiplier: Multiplier for constant
     open func constraintOutsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                   _ toItem: Any?,
                                   _ constant: CGFloat = 0,
@@ -398,8 +415,8 @@ extension UIView {
 //Extensions to add multiple Subviews on a view
 extension UIView {
     
-/* This function add an array of views as subviews */
-    
+/// This function add an array of views as subviews
+/// - Parameter views: Views to add
     func addSubviews(_ views: [UIView]) {
         
         for view in views {

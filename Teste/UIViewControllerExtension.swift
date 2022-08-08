@@ -9,10 +9,13 @@ import UIKit
     
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
-    
-/* This is a function created with the aim of generating buttons in the capsule configuration
-*/
-    
+
+/// This is a function created with the aim of generating buttons in the capsule configuration
+/// - Parameters:
+///   - buttonTitles: Button titles string array
+///   - backgroundColor: Button background color
+///   - strokeColor: Button stroke color
+/// - Returns: A button for each title
     open func createCapsuleButtons(_ buttonTitles: [String],
                                    _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
                                    strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
@@ -32,8 +35,9 @@ extension UIViewController {
         return buttons
     }
     
-/* This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons, but without actions */
-    
+/// This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons
+/// - Parameter buttonImageNames: the button Image Names
+/// - Returns: A progress bar button for each name without actions
     open func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
         
         var buttons: [UIButton] = []
@@ -49,8 +53,9 @@ extension UIViewController {
         return buttons
     }
     
-/* This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons */
-    
+/// This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons
+/// - Parameter buttonImageNames: the button Image Names
+/// - Returns: A progress bar button for each name with actions
     open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
         
         var buttons: [UIButton] = []
@@ -137,9 +142,10 @@ extension UIViewController {
 
 //Extension related to regex
 extension UIViewController {
-    
-/* This is a regex that checks if it's a valid phone */
-    
+
+/// This is a regex that checks if it's a valid phone
+/// - Parameter phone: A string with the phoneNumber
+/// - Returns: True if is a valid number, or false if not
     open func validateCellPhone(_ phone: String) -> Bool {
         
         let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
@@ -156,8 +162,9 @@ extension UIViewController {
 
 extension UIViewController {
     
-/* This is a regex that checks if it contains capital letters */
-    
+/// This is a regex that checks if it contains capital letters
+/// - Parameter text: A string
+/// - Returns: True if is uppercased, or false if not
     open func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
@@ -170,8 +177,9 @@ extension UIViewController {
         }
     }
     
-/* This is a regex that checks if it contains numbers */
-    
+/// This is a regex that checks if it contains numbers
+/// - Parameter text: A string
+/// - Returns: True if is  contains numeric characters, or false if not
     open func containsNumericCharacters(text: String) -> Bool {
         
         let numericRegEx = ".*[0-9]+.*"
@@ -184,8 +192,9 @@ extension UIViewController {
         }
     }
     
-/* This is a regex that checks if it contains special characters */
-    
+/// This is a regex that checks if it contains special characters
+/// - Parameter text: A string
+/// - Returns: True if is  contains special characters, or false if not
     open func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
@@ -198,8 +207,9 @@ extension UIViewController {
         }
     }
     
-/* This is a regex that checks if it contains lowercase letters */
-    
+/// This is a regex that checks if it contains lowercase letters
+/// - Parameter text: A string
+/// - Returns: True if is lowercased, or false if not
     open func containsLowercasedCharacters(text: String) -> Bool {
         
         let normalLetterRegEx = ".*[a-z]+.*"
