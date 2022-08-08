@@ -10,6 +10,8 @@ import UIKit
 //Extensions related to set imageViews to Default
 extension UIImageView {
     
+/* This function puts the ways in the default position and size. Ways are background images that are common in this app */
+    
     open func setWayToDefault(_ imageName: ImagesBravve) {
         
         self.image = UIImage(named: imageName.rawValue)
@@ -102,6 +104,8 @@ extension UIImageView {
             default: return
         }
     }
+    
+/* This function puts the BravveLogo in the default position and size. */
     
     open func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
         

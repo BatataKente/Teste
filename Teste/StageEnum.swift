@@ -5,6 +5,9 @@
 //  Created by user218260 on 7/15/22.
 //
 
+/* This enum was developed for the purpose of cataloging stages, for example, on a screen in which there are simple stages in their form to be passed or returned.
+ */
+
 import UIKit
 
 enum Stage: Int8 {
