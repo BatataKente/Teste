@@ -5,38 +5,45 @@
 //  Created by user218260 on 7/15/22.
 //
 
-/* As this screen had the elements being repeated with the TelephoneView and EmailView, I chose to implement it as a function of this same screen, so this screen has the three functions */
-
 import UIKit
 
 class NomeView: UIViewController {
     
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
-    private let backButton = UIButton()
-    
-    private let bravveIcon = UIImageView()
-    
     private let registerButton = UIButton()
     
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
+    private lazy var buttons: [UIButton] = {
         
-        let buttons = createProgressBarButtons(["userBlue",
-                                                "cellGray",
-                                                "emailGray",
-                                                "padlockGray",
-                                                "hobbiesGray"])
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 7
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userBlue.rawValue,
+                                                              IconsBravve.userGray.rawValue,
+                                                              IconsBravve.cellBlue.rawValue,
+                                                              IconsBravve.cellGray.rawValue,
+                                                              IconsBravve.emailBlue.rawValue,
+                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.padlockGray.rawValue,
+                                                              IconsBravve.hobbiesGray.rawValue])
         
-        return (stack: stackView,
-                buttons: buttons)
+        buttons[1].addTarget(self,
+                             action: #selector(nameScreenAction),
+                             for: .touchUpInside)
+        buttons[3].addTarget(self,
+                             action: #selector(phoneScreenAction),
+                             for: .touchUpInside)
+        buttons[5].addTarget(self,
+                             action: #selector(emailScreenAction),
+                             for: .touchUpInside)
+        
+        return buttons
     }()
     
     private let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
+        infoLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                size: CGFloat(16).generateSizeForScreen)
+        infoLabel.numberOfLines = 0
+        infoLabel.textAlignment = .center
         
         return infoLabel
     }()
@@ -44,14 +51,14 @@ class NomeView: UIViewController {
     private let customShaddow: UIView = {
         
         let customShaddow = UIView()
-        customShaddow.backgroundColor = .blue
+        customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
         
         return customShaddow
     }()
     
-    private let viewElements: (rightStackView: UIStackView,
+    private lazy var viewElements: (rightStackView: UIStackView,
                        leftStackView: UIStackView,
                        rightTextField: UITextField,
                        rightLabel: UILabel,
@@ -59,23 +66,27 @@ class NomeView: UIViewController {
                        ddisLabel: UILabel,
                        ddisButton: UIButton) = {
         
-        let stackMargins: CGFloat = 10
+        let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let smallFont = UIFont(name: FontsBravve.light.rawValue,
+                               size: CGFloat(11).generateSizeForScreen)
+        let font = UIFont(name: FontsBravve.medium.rawValue,
+                          size: CGFloat(15).generateSizeForScreen)
         
         let ddisLabel = UILabel()
         ddisLabel.text = "+55"
+        ddisLabel.font = smallFont
         
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
-        ddiChoseLabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
+        ddiChoseLabel.font = font
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
-        stackView.spacing = 10
         stackView.axis = .vertical
         
         let ddisButton = UIButton()
         
         let leftStackView = UIStackView(arrangedSubviews: [stackView, ddisButton])
-        leftStackView.backgroundColor = .white
+        leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         leftStackView.layer.cornerRadius = 10
         leftStackView.isLayoutMarginsRelativeArrangement = true
         leftStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
@@ -84,21 +95,23 @@ class NomeView: UIViewController {
                                                    right: 0)
         
         let rightLabel = UILabel()
+        rightLabel.font = smallFont
+        rightLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         
         let rightTextField = UITextField()
-        rightTextField.font = UIFont(name: "Ubuntu-Medium", size: 16)
+        rightTextField.font = font
         
         let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
                                                             rightTextField])
         rightStackView.spacing = 10
         rightStackView.axis = .vertical
-        rightStackView.backgroundColor = .white
+        rightStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         rightStackView.layer.cornerRadius = 8
         rightStackView.isLayoutMarginsRelativeArrangement = true
         rightStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                       left: stackMargins,
-                                                       bottom: stackMargins,
-                                                       right: stackMargins)
+                                                    left: stackMargins,
+                                                    bottom: stackMargins,
+                                                    right: stackMargins)
         
         
         return (rightStackView: rightStackView,
@@ -110,10 +123,11 @@ class NomeView: UIViewController {
                 ddisButton: ddisButton)
     }()
     
-    private let registerStackView: UIStackView = {
-
-        let registerStackView = UIStackView()
-        registerStackView.backgroundColor = .white
+    private lazy var registerStackView: UIStackView = {
+        
+        let registerStackView = UIStackView(arrangedSubviews: [viewElements.leftStackView,
+                                                               viewElements.rightStackView])
+        registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
         registerStackView.spacing = 15
         registerStackView.layer.cornerRadius = 8
@@ -140,15 +154,9 @@ class NomeView: UIViewController {
         setupView()
         setupDefaults()
         setupTargets()
-        
-        super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
         setupConstraints()
         
-        super.viewDidAppear(animated)
+        super.viewDidLoad()
     }
     
     private func setupView() {
@@ -156,7 +164,12 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [bravveIcon, backButton, progressBarStackView.stack, infoLabel, customShaddow, registerStackView, registerButton])
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
+        
+        view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
+
+            self.nomeViewModel.turnBackScreen()
+        }
         
         view.setToDefaultBackgroundColor()
     }
@@ -164,34 +177,35 @@ class NomeView: UIViewController {
     private func setupDefaults() {
         
         registerButton.setToBottomButtonKeyboardDefault()
-        bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink){_ in self.dismiss(animated: false)}
+        ways[2].setWayToDefault(.wayConfirm_1)
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
-        ways[2].setWayToDefault(.wayConfirm_1)
     }
     
     private func setupConstraints() {
         
-        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, 50)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        progressBarStackView.stack.heightAnchorInSuperview()
+        infoLabel.constraintInsideTo(.top,
+                                     view,
+                                     CGFloat(250).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.leading,
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.trailing,
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         
-        infoLabel.constraintOutsideTo(.top, progressBarStackView.stack, 50)
-        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 40)
-        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, 40)
-        
-        registerStackView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide, 50)
+        registerStackView.constraintOutsideTo(.top,
+                                              infoLabel,
+                                              CGFloat(60).generateSizeForScreen)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
-        registerStackView.heightAnchorInSuperview(60)
         
         customShaddow.constraintInsideTo(.top, registerStackView)
         customShaddow.constraintInsideTo(.leading, registerStackView)
         customShaddow.constraintInsideTo(.trailing, registerStackView)
-        customShaddow.constraintTo(.bottom, registerStackView, 1)
+        customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
         
-        viewElements.leftStackView.widthAnchorInSuperview(80)
+        viewElements.leftStackView.widthAnchorInSuperview(CGFloat(85).generateSizeForScreen)
         viewElements.ddisButton.widthAnchorInSuperview()
     }
     
@@ -200,32 +214,35 @@ class NomeView: UIViewController {
         viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
 
             self.viewElements.ddiChoseLabel.text = action.title
+            self.viewElements.ddisButton.setTitle(nil, for: .normal)
         }))
-        
-        backButton.addTarget(self,
-                             action: #selector(back),
-                             for: .touchUpInside)
-        progressBarStackView.buttons[0].addTarget(self,
-                                                    action: #selector(progressBarAction),
-                                                    for: .touchUpInside)
-        progressBarStackView.buttons[1].addTarget(self,
-                                             action: #selector(progressBarAction),
-                                             for: .touchUpInside)
-        progressBarStackView.buttons[2].addTarget(self,
-                                             action: #selector(progressBarAction),
-                                             for: .touchUpInside)
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
-        
-        registerStackView.addArrangedSubview(viewElements.leftStackView)
-        registerStackView.addArrangedSubview(viewElements.rightStackView)
+    }
+    
+    @objc func nameScreenAction() {
+
+        nomeViewModel.delegate = self
+        nomeViewModel.makeNameScreen()
+    }
+    
+    @objc func phoneScreenAction() {
+
+        nomeViewModel.delegate = self
+        nomeViewModel.makePhoneScreen()
+    }
+    
+    @objc func emailScreenAction() {
+
+        nomeViewModel.delegate = self
+        nomeViewModel.makeEmailScreen()
     }
     
     @objc func stackViewTapped() {
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: 11)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: 11)
+        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
         
         customShaddow.isHidden = false
         
@@ -243,16 +260,6 @@ class NomeView: UIViewController {
         nomeViewModel.advanceScreen()
     }
     
-    @objc func progressBarAction(_ sender: UIButton) {
-        
-        nomeViewModel.changeScreenWithProgressBar(sender)
-    }
-    
-    @objc func back() {
-        
-        nomeViewModel.turnBackScreen()
-    }
-    
     @objc func changeText(_ sender: UITextField) {
         
         if sender.text != "" {
@@ -260,14 +267,14 @@ class NomeView: UIViewController {
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
-            registerButton.backgroundColor = UIColor(named: "buttonPink")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
 
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
-            registerButton.backgroundColor = UIColor(named: "reservedCancel")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
         }
     }
 }
@@ -301,24 +308,17 @@ extension NomeView: NomeViewModelProtocol {
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
 
-        self.infoLabel.setToDefault(text: infoLabel)
+        self.infoLabel.text = infoLabel
     }
     
-    func setProgressBar(personalDataTitle: String,
-                        personalDataImage: String,
-                        phoneNumberTitle: String,
-                        phoneNumberImage: String,
-                        emailTitle: String,
-                        emailImage: String) {
+    func setProgressBar(buttons: [Bool]) {
         
-        progressBarStackView.buttons[0].configuration?.title = personalDataTitle
-        progressBarStackView.buttons[0].configuration?.image = UIImage(named: personalDataImage)
-        
-        progressBarStackView.buttons[1].configuration?.title = phoneNumberTitle
-        progressBarStackView.buttons[1].configuration?.image = UIImage(named: phoneNumberImage)
-        
-        progressBarStackView.buttons[2].configuration?.title = emailTitle
-        progressBarStackView.buttons[2].configuration?.image = UIImage(named: emailImage)
+        self.buttons[0].isHidden = buttons[0]
+        self.buttons[1].isHidden = buttons[1]
+        self.buttons[2].isHidden = buttons[2]
+        self.buttons[3].isHidden = buttons[3]
+        self.buttons[4].isHidden = buttons[4]
+        self.buttons[5].isHidden = buttons[5]
     }
     
     func freezeButton() {
@@ -326,7 +326,7 @@ extension NomeView: NomeViewModelProtocol {
         registerButton.removeTarget(nil,
                                     action: #selector(changeScreen),
                                     for: .touchUpInside)
-        registerButton.backgroundColor = UIColor(named: "reservedCancel")
+        registerButton.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
     }
     
     func setKeyboardType(keyboardType: UIKeyboardType) {
