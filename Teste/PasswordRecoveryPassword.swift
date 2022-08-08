@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecuperacaoDeSenha3: UIViewController {
+class PasswordRecoveryPassword: UIViewController {
     
     var passwordEyeSlash = false
     var confirmPasswordEyeSlash = false

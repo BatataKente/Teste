@@ -15,6 +15,10 @@ class AuthManager {
         return UserDefaults.standard.string(forKey: "access_token")
     }
     
+    private let baseAPIString = "https://api-design.dev.bravve.app/api/v1"
+    
+    
+    /* Method to get the token to access the app API*/
     public func getToken() {
         guard let url = URL(string: "https://api-design.dev.bravve.app/api/auth/token") else { return }
         let parameters = [
@@ -31,13 +35,33 @@ class AuthManager {
         }
     }
     
+    
+    /*
+     
+     Method to cache the token in userDefaults
+     parameters:
+     result: AccessToken -> The result of the API call decoded as a AccessTokenModel
+     
+     */
     func cacheToken(result: AccessToken) {
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
     }
     
+    
+    /*
+     
+     Method to get the complete list of states from the BravveAPI
+     parameters:
+     completionHandler: (([States]?) -> Void) -> Closure to manage the result of the API call as an array of the States Model.
+     
+     */
+    
+    
+    /// Method to get the complete list of states from the BravveAPI
+    /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the States Model.
     func getStates(completionHandler: @escaping ([States]?) -> Void) {
         
-        guard let url = URL(string: "https://api-design.dev.bravve.app/api/v1/utils/states") else { return }
+        guard let url = URL(string: baseAPIString + "/utils/states") else { return }
         
         guard let accessToken = accessToken else {
             return

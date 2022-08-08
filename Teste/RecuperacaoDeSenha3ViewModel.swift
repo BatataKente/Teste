@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension RecuperacaoDeSenha3: UITextFieldDelegate {
+extension PasswordRecoveryPassword: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == passwordTextFieldClass.textField {

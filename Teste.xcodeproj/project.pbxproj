@@ -13,7 +13,7 @@
 		1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340F096289BFF3F00F9A2A5 /* Reservas2.swift */; };
 		134D68112890151C00D5572B /* BulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68102890151C00D5572B /* BulletPoint.swift */; };
 		134D68132890154E00D5572B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68122890154E00D5572B /* TextField.swift */; };
-		134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */; };
+		134D68152890158A00D5572B /* PasswordRecoveryPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D68142890158A00D5572B /* PasswordRecoveryPassword.swift */; };
 		138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AD2892BE2800997FBC /* MinhasReservas.swift */; };
 		138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C85AF2892BF4200997FBC /* ReservaCell.swift */; };
 		13AE1FDD289D94A2002FBBC1 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AE1FDC289D94A2002FBBC1 /* Network.swift */; };
@@ -67,7 +67,7 @@
 		1340F096289BFF3F00F9A2A5 /* Reservas2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservas2.swift; sourceTree = "<group>"; };
 		134D68102890151C00D5572B /* BulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletPoint.swift; sourceTree = "<group>"; };
 		134D68122890154E00D5572B /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperacaoDeSenha3.swift; sourceTree = "<group>"; };
+		134D68142890158A00D5572B /* PasswordRecoveryPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryPassword.swift; sourceTree = "<group>"; };
 		138C85AD2892BE2800997FBC /* MinhasReservas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinhasReservas.swift; sourceTree = "<group>"; };
 		138C85AF2892BF4200997FBC /* ReservaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservaCell.swift; sourceTree = "<group>"; };
 		13AE1FDC289D94A2002FBBC1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				140B3899289D3F4D003F596F /* LoginView.swift */,
-				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
+				134D68142890158A00D5572B /* PasswordRecoveryPassword.swift */,
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
 				14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */,
@@ -296,7 +296,7 @@
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
-				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
+				134D68152890158A00D5572B /* PasswordRecoveryPassword.swift in Sources */,
 				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,

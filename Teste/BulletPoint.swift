@@ -5,6 +5,14 @@
 //  Created by user208023 on 7/26/22.
 //
 
+/*
+ 
+ A class that creates a UIElement in the form of bullet point. Developed to the BravveApp
+ parameters:
+ labelText: String -> The text that will be the label of the bullet point.
+ 
+ */
+
 import UIKit
 
 class BulletPoint: UIStackView {

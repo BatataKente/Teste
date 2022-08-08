@@ -1,3 +1,12 @@
+/*
+ 
+ A class that creates a custom textfield with the characteristics of the BravveApp textfield.
+ 
+ params:
+ placeholderText: String -> The text which will serve as the placeholder inside the textfield.
+ buttonImageName(optional): String -> The name of the asset that will serve as the textfield button. This parameter must only be passed if the textfield has a button inside.
+ */
+
 import UIKit
 
 class TextField: UIStackView {
