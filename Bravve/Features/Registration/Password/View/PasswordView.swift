@@ -16,9 +16,9 @@ class PasswordView: UIViewController{
         return image
     }()
     
-    let goBackButton: UIButton = {
+    lazy var goBackButton: UIButton = {
         let button = UIButton()
-        button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen)
+        button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen){_ in self.dismiss(animated: false)}
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -233,9 +233,9 @@ class PasswordView: UIViewController{
         return label
     }()
     
-    let continueButton: UIButton = {
+    lazy var continueButton: UIButton = {
         let button = UIButton()
-        button.setToBottomButtonDefault("Continuar", colorName: .buttonGray, aboveWhom: UIKeyboardLayoutGuide.self)
+        button.setToBottomButtonKeyboardDefault()
         return button
     }()
     

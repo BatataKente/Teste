@@ -85,7 +85,7 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        customBar.setToDefaultCustomBarWithFilter()
+        customBar.setToDefaultCustomBarWithFilter{_ in self.dismiss(animated: false)}
     }
     
     private func setupConstraints() {
