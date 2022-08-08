@@ -22,6 +22,7 @@
 		14054AC82899E7AD00BB4E3B /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */; };
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
+		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
@@ -55,11 +56,9 @@
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
-
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
-
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +78,7 @@
 		14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalizacaoCadastroView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
@@ -114,11 +114,9 @@
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
-
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
-
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +162,7 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
@@ -189,9 +188,7 @@
 				134D68122890154E00D5572B /* TextField.swift */,
 				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
-
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
-
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
@@ -302,9 +299,9 @@
 				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,
-				B88A8B3B289AB3D30025EE61 /* CheckOutScreen.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
+				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
 				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
 				145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
