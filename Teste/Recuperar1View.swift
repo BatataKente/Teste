@@ -12,8 +12,9 @@ class Recuperar1View: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
 
-        return true
-    }
+            return true
+
+        }
     
     private let backgroundImage = UIImageView()
     
@@ -110,13 +111,12 @@ class Recuperar1View: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink) {_ in
-            
+        buttonBack.setToBackButtonDefault(.backPink) { _ in
             self.dismiss(animated: true)
         }
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
-        backgroundImage.setWayToDefault(.wayCell)
+        backgroundImage.setWayToDefault(.wayConfirm_2)
         
     }
     
@@ -124,17 +124,16 @@ class Recuperar1View: UIViewController {
         
         progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
         progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        progressBarStackView.stack.heightAnchorInSuperview()
         
-        label.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
-        label.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
         label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(50).generateSizeForScreen)
         
         stackViewEmail.constraintOutsideTo(.top, label, CGFloat(65).generateSizeForScreen)
         stackViewEmail.constraintInsideTo(.leading, label)
         stackViewEmail.constraintInsideTo(.trailing, label)
         stackViewEmail.heightAnchorInSuperview( CGFloat(65).generateSizeForScreen)
-    
+        
         customShaddow.constraintInsideTo(.top, stackViewEmail)
         customShaddow.constraintInsideTo(.leading, stackViewEmail)
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
@@ -197,4 +196,3 @@ class Recuperar1View: UIViewController {
     
     
 }
-

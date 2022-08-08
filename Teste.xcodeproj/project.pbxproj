@@ -22,7 +22,10 @@
 		14054AC82899E7AD00BB4E3B /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */; };
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
+		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
+		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
+		14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
 		145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */; };
 		1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */; };
@@ -34,6 +37,8 @@
 		147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */; };
 		147B1C862898482100A5E3EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147B1C852898482100A5E3EE /* Assets.xcassets */; };
 		1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */; };
+		1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986E289EC3D000B1BDE2 /* ProfessionView.swift */; };
+		14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */; };
 		148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A86EA289C64540019ECFE /* BravveTabBar.swift */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
@@ -48,7 +53,7 @@
 		14CBDBD22889B72500EA8EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */; };
 		14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */; };
 		14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDD2889B80400EA8EDD /* NomeView.swift */; };
-		14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */; };
+		14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */; };
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* Recuperar1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* Recuperar1View.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
@@ -74,7 +79,10 @@
 		14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
+		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalizacaoCadastroView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
@@ -86,6 +94,8 @@
 		147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsView.swift; sourceTree = "<group>"; };
 		147B1C852898482100A5E3EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenModel.swift; sourceTree = "<group>"; };
+		1480986E289EC3D000B1BDE2 /* ProfessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
+		14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionViewModel.swift; sourceTree = "<group>"; };
 		148A86EA289C64540019ECFE /* BravveTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveTabBar.swift; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -102,7 +112,7 @@
 		14CBDBD32889B72500EA8EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FotoView.swift; sourceTree = "<group>"; };
 		14CBDBDD2889B80400EA8EDD /* NomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeView.swift; sourceTree = "<group>"; };
-		14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeModel.swift; sourceTree = "<group>"; };
+		14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageEnum.swift; sourceTree = "<group>"; };
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* Recuperar1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recuperar1View.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
@@ -154,6 +164,10 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
+				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
+				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
+				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
@@ -163,6 +177,7 @@
 				1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */,
 				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
 				1478A22428995EFE00B409E5 /* RideUpEnum.swift */,
+				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
 				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
 				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
 				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
@@ -177,13 +192,13 @@
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
-				14CBDBDF2889B81A00EA8EDD /* NomeModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
+				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
 				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
 				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
-				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
+				1410B92428A1740400C36902 /* FilterScreen.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* Recuperar1View.swift */,
 				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
@@ -289,6 +304,7 @@
 				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
+				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
 				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
 				145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
@@ -297,6 +313,7 @@
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
+				14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
@@ -307,14 +324,17 @@
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
+				1410B92528A1740400C36902 /* FilterScreen.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmarDadosView.swift in Sources */,
 				1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
-				14CBDBE02889B81A00EA8EDD /* NomeModel.swift in Sources */,
+				14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */,
+				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
+				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,

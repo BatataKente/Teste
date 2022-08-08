@@ -5,6 +5,8 @@
 //  Created by Josicleison on 04/08/22.
 //
 
+/* a tab bar in the app pattern with their respective actions*/
+
 import UIKit
 
 class BravveTabBar: UITabBar, UITabBarDelegate {
@@ -13,23 +15,21 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 
-        switch item.image {
-
-            case UIImage(named: ButtonsBravve.locationGray.rawValue):
-
+        switch item {
+            
+            case tabBar.items?[0]:
+            
                 let homeOpenView = HomeOpenView()
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)
-
-            case UIImage(named: ButtonsBravve.exitGray.rawValue):
+                
+            default:
 
                 let loginView = LoginView()
 
                 loginView.modalPresentationStyle = .fullScreen
                 actualView.present(loginView, animated: true)
-
-            default: break
         }
     }
 
@@ -50,6 +50,7 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
         }
         
         self.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        self.unselectedItemTintColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
 
         self.delegate = self
     }

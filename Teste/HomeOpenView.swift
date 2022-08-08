@@ -9,18 +9,42 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    override func viewDidDisappear(_ animated: Bool) {
+
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override func viewDidLoad() {
+
+        super.viewDidLoad()
+        
+        setupView()
+        setupConstraints()
+        setupDefaults()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        .lightContent
+    }
+    
+    private let cellIdentifier = "Cell"
+    
     private let seletedFilterItems: [String] = ["a", "b", "c"]
     
     private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
                                                     description: "Numa esquina charmosa, um hotel",
                                                     image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
+                                                    photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
                                                     subName: "UM Coffee Co.",
                                                     price: "3,50 crédito/ hora",
                                                     details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
                                         ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
+                                                    description: "Pelos poderes de greyskull",
                                                     image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
+                                                    photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
                                                     subName: "UM Coffee Co.",
                                                     price: "3,50 crédito/ hora",
@@ -28,6 +52,7 @@ class HomeOpenView: UIViewController {
                                         ReserveData(title: "BOXOFFICE",
                                                     description: "Numa esquina charmosa, um hotel",
                                                     image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
+                                                    photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",
                                                     subName: "UM Coffee Co.",
                                                     price: "3,50 crédito/ hora",
@@ -39,25 +64,30 @@ class HomeOpenView: UIViewController {
     
     private lazy var filterStackView: UIStackView = {
         
+        let margins = CGFloat(20).generateSizeForScreen
+        
         let stackView = UIStackView()
         stackView.setToDefaultBackgroundColor()
         stackView.isHidden = false
         stackView.alignment = .leading
+        stackView.spacing = 5
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 10,
-                                               left: 10,
-                                               bottom: 10,
-                                               right: 10)
+        stackView.layoutMargins = UIEdgeInsets(top: margins,
+                                               left: margins,
+                                               bottom: CGFloat(10).generateSizeForScreen,
+                                               right: margins)
         
         return stackView
     }()
     
-    private let tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         
         let margins = CGFloat(20).generateSizeForScreen
         
         let tableView = UITableView()
-        tableView.register(HomeOpenTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.setToDefaultBackgroundColor()
+        tableView.register(HomeOpenTableViewCell.self,
+                           forCellReuseIdentifier: cellIdentifier)
         tableView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
                                                bottom: margins,
@@ -72,6 +102,11 @@ class HomeOpenView: UIViewController {
                                                        tableView])
         stackView.axis = .vertical
         stackView.alignment = .leading
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0,
+                                               left: 0,
+                                               bottom: 0,
+                                               right: 0)
         
         return stackView
     }()
@@ -80,21 +115,6 @@ class HomeOpenView: UIViewController {
     
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                                    ButtonsBravve.exitGray.rawValue])
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        setupView()
-        setupConstraints()
-        setupDefaults()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
     
     private func setupView() {
         
@@ -112,7 +132,12 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        customBar.setToDefaultCustomBarWithFilter()
+        customBar.setToDefaultCustomBarWithFilter {_ in
+            
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
+        }
     }
     
     private func setupConstraints() {
@@ -147,6 +172,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
                 spaceTitleCell.textLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                                         size: CGFloat(20).generateSizeForScreen)
+                spaceTitleCell.setToDefaultBackgroundColor()
                 
                 return spaceTitleCell
             }
@@ -155,12 +181,15 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
+                cell?.indexPath = IndexPath(row: indexPath.row - 1,
+                                            section: indexPath.section - 1)
                 cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                 for: indexPath)
         
         return cell
     }
@@ -168,9 +197,9 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
 
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
-    func chosePlace() {
+    func chosePlace(_ indexPath: IndexPath) {
         
-        let detalhesAbertoView = OpenDetailsView()
+        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
         detalhesAbertoView.modalPresentationStyle = .fullScreen
         present(detalhesAbertoView, animated: false)
     }
