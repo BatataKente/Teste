@@ -18,11 +18,7 @@ class ConfirmarDadosView: UIViewController {
     
     private let backgroundImage1 = UIImageView()
     
-    private let backgroundImage2: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
-        return image
-    }()
+    private let backgroundImage2 = UIImageView()
     
     
     private let buttonBack = UIButton()
@@ -171,9 +167,11 @@ class ConfirmarDadosView: UIViewController {
         buttonBack.setToBackButtonDefault(.backPink) { _ in
             self.dismiss(animated: true)
         }
+        
         imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
         backgroundImage1.setWayToDefault(.wayConfirm_2)
+        backgroundImage2.setWayToDefault(.wayConfirm_1)
         
     }
     
