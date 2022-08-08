@@ -11,8 +11,8 @@ import UIKit
 
 extension UIButton {
     
-/* This function create a menu on the button with list. */
-    
+/// This function create a menu on the button with list.
+/// - Parameter menuItens: Each item like UIAction, which will be in the list
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
         self.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
@@ -27,8 +27,11 @@ extension UIButton {
 //Extensions related to set buttons to Default by the app
 extension UIButton {
     
-/* This function turns a button into the default capsule button in the app. */
-    
+/// This function turns a button into the default capsule button in the app.
+/// - Parameters:
+///   - buttonTitle: The title of button
+///   - backgroundColor: The background of button
+///   - strokeColor: The stroke of button
     open func setToDefaultCapsuleButton(_ buttonTitle: String,
                                         _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
                                         strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) {
@@ -52,8 +55,8 @@ extension UIButton {
         self.configuration?.cornerStyle = .capsule
     }
     
-/* This function turns a button into the default progress bar button in the app. Progress bar are a bar that usually occurs in this app*/
-    
+/// This function turns a button into the default progress bar button in the app. Progress bar are a bar that usually occurs in this app.
+/// - Parameter buttonImageName: The button image name
     open func setToProgressBarButtonDefault(_ buttonImageName: String) {
         
         var buttonTitle = ""
@@ -124,8 +127,10 @@ extension UIButton {
         self.imageView?.constraintOutsideTo(.width, self.imageView)
     }
     
-/* This function puts a button in the bottom and customizes it to the app's default */
-    
+/// This function puts a button in the bottom and customizes it to the app's default
+/// - Parameters:
+///   - buttonTitle: The button title
+///   - backgroundColor: The background color
     open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
                                                backgroundColor: ColorsBravve = .buttonGray) {
         
@@ -141,8 +146,11 @@ extension UIButton {
                                        size: CGFloat(16).generateSizeForScreen)
     }
     
-/* This function puts a button on top of some other view and customizes it to the app's default */
-    
+/// This function puts a button on top of some other view and customizes it to the app's default
+/// - Parameters:
+///   - buttonTitle: The button title
+///   - backgroundColor: The background color of button as enum of assets
+///   - above: The item immediately below the button
     open func setToBottomButtonDefaultAbove(_ buttonTitle: String = "Continuar",
                                             backgroundColor: ColorsBravve = .buttonGray,
                                             above: Any?) {
@@ -159,8 +167,11 @@ extension UIButton {
                                        size: CGFloat(16).generateSizeForScreen)
     }
     
-/* This function turns the button into the default back */
-    
+/// This function turns the button into the default back
+/// - Parameters:
+///   - imageName: The image name of back button as enum of assets
+///   - constant: Distance of button from left
+///   - handler: Action of button
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
                                      _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
                                      _ handler: @escaping UIActionHandler) {
