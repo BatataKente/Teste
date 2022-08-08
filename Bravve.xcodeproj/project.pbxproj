@@ -42,6 +42,8 @@
 		2EB18FAE289D87DE008A80BF /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FAD289D87DE008A80BF /* MockManager.swift */; };
 		2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FAF289D87F2008A80BF /* SessionManager.swift */; };
 		2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FB628A1810E008A80BF /* StageEnum.swift */; };
+		2EB18FB928A19FB3008A80BF /* TabBarClass+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FB828A19FB3008A80BF /* TabBarClass+Extension.swift */; };
+		2EB18FBB28A1A2E6008A80BF /* StatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FBA28A1A2E6008A80BF /* StatesModel.swift */; };
 		2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */; };
 		2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* WorkPassBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */; };
@@ -192,6 +194,8 @@
 		2EB18FAD289D87DE008A80BF /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		2EB18FAF289D87F2008A80BF /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		2EB18FB628A1810E008A80BF /* StageEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEnum.swift; sourceTree = "<group>"; };
+		2EB18FB828A19FB3008A80BF /* TabBarClass+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarClass+Extension.swift"; sourceTree = "<group>"; };
+		2EB18FBA28A1A2E6008A80BF /* StatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesModel.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBooking.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingView.swift; sourceTree = "<group>"; };
@@ -399,7 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				2EAEDF0B2881DFB300C88374 /* App */,
-				1478A2262899651D00B409E5 /* Enums */,
 				C69617482881EBA000281633 /* Extensions */,
 				2EA90BA7289D0DF0003100FE /* Features */,
 				2EB18F9D289D6A27008A80BF /* Models */,
@@ -414,6 +417,7 @@
 		2EAEDF0B2881DFB300C88374 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				1478A2262899651D00B409E5 /* Enums */,
 				2EB18FAC289D87BE008A80BF /* Managers */,
 				2EAEDEF42881DEA900C88374 /* AppDelegate.swift */,
 				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
@@ -442,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				C696169F2881E70700281633 /* LoginModel.swift */,
+				2EB18FBA28A1A2E6008A80BF /* StatesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1236,6 +1241,7 @@
 				14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */,
 				14076BDE28930B27003EA2F1 /* UIViewController+Extension.swift */,
 				2EF23F4728931B760078B6B8 /* UIView+Extension.swift */,
+				2EB18FB828A19FB3008A80BF /* TabBarClass+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1864,8 +1870,10 @@
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
 				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
 				C69616E02881E90800281633 /* HomeClosedView.swift in Sources */,
+				2EB18FBB28A1A2E6008A80BF /* StatesModel.swift in Sources */,
 				2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
+				2EB18FB928A19FB3008A80BF /* TabBarClass+Extension.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservationCompletedModel.swift in Sources */,
 				C69617682881ECB600281633 /* Reservation3View.swift in Sources */,
 				1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */,
