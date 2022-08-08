@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let vc1 = CheckOutScreen()
+        let vc1 = DetalhesDoEspacoView()
         vc1.tabBarItem.image = UIImage(named: "locationGray")
 
         let vc2 = NomeView()
