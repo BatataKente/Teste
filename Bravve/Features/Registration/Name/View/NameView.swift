@@ -165,7 +165,7 @@ class NomeView: UIViewController {
         
         registerButton.setToBottomButtonKeyboardDefault()
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink)
+        backButton.setToBackButtonDefault(.backPink){_ in self.dismiss(animated: false)}
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
         ways[2].setWayToDefault(.wayConfirm_1)

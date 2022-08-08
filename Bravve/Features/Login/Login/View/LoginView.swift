@@ -23,7 +23,7 @@ class LoginView: UIViewController {
         cellStackView.addGestureRecognizer(stackViewTap)
         passwordStackView.addGestureRecognizer(stackViewTap)
         
-        backButton.setToBackButtonDefault()
+        backButton.setToBackButtonDefault{_ in self.dismiss(animated: false)}
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

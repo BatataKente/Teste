@@ -41,6 +41,7 @@
 		2EB18FAB289D8497008A80BF /* iOSDropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB18FAA289D8497008A80BF /* iOSDropDown */; };
 		2EB18FAE289D87DE008A80BF /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FAD289D87DE008A80BF /* MockManager.swift */; };
 		2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FAF289D87F2008A80BF /* SessionManager.swift */; };
+		2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FB628A1810E008A80BF /* StageEnum.swift */; };
 		2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */; };
 		2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* WorkPassBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */; };
@@ -190,6 +191,7 @@
 		2EB18FA1289D6C2E008A80BF /* APILoginMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginMock.swift; sourceTree = "<group>"; };
 		2EB18FAD289D87DE008A80BF /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		2EB18FAF289D87F2008A80BF /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		2EB18FB628A1810E008A80BF /* StageEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageEnum.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBooking.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingView.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				1478A233289965E900B409E5 /* ImagesBravveEnum.swift */,
 				1478A235289965F800B409E5 /* FontsBravveEnum.swift */,
 				1478A2372899660200B409E5 /* RideUpEnum.swift */,
+				2EB18FB628A1810E008A80BF /* StageEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1845,6 +1848,7 @@
 				2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizeViewModel.swift in Sources */,
+				2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */,
 				C696173A2881EB4000281633 /* ActivitiesModel.swift in Sources */,
 				C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */,
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
