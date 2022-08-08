@@ -112,7 +112,7 @@ extension UIImageView {
         self.image = UIImage(named: ImageName.rawValue)
         
         self.constraintInsideTo(.centerX, superview?.safeAreaLayoutGuide)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
+        self.constraintInsideTo(.top, superview, CGFloat(65).generateSizeForScreen)
         
         self.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         self.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
