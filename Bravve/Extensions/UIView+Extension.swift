@@ -10,6 +10,8 @@ import UIKit
 //Extension related to verification of size of screen of a ViewController
 extension UIView {
     
+/// This function checks whether the device is an ipad or not
+/// - Returns: True if is Ipad of false if not
     open func isIpad() -> Bool {
         
         if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
@@ -23,12 +25,83 @@ extension UIView {
 //Extensions related to default elements
 extension UIView {
     
+/// This function changes the background to the app's default
     open func setToDefaultBackgroundColor() {
         
         self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
     
-    open func setToDefaultCustomBarWithBackButton(viewTitle: String, _ handler: @escaping UIActionHandler) {
+/// This function creates a standard bar that appears in the register part, this bar contains a back button the logo, and it contains a skip button and also comes with a progressbar
+/// - Parameters:
+///   - imageName: A ButtonsBravve enum referring to the images name of the button name available in assets
+///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
+///   - handler: The action of back button
+///   - hideJumpButton: set false if show a jump button
+    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
+                                      progressBarButtons: [UIButton],
+                                      _ handler: @escaping UIActionHandler,
+                                      hideJumpButton: Bool = true) {
+        
+        let backButton = UIButton()
+        backButton.configuration = .plain()
+        backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
+        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        let jumpButton = UIButton()
+        jumpButton.configuration = .plain()
+        jumpButton.isHidden = hideJumpButton
+        
+        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
+                                                             size: CGFloat(15).generateSizeForScreen),
+                        NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
+        
+        let attributedTitle = NSAttributedString(string: "Pular",
+                                                 attributes: attribute as [NSAttributedString.Key : Any])
+       
+        jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
+        
+        jumpButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        let logoImageView = UIImageView()
+        logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
+        
+        let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+        
+        self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
+        
+        logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
+        logoImageView.constraintInsideTo(.top, self, CGFloat(65).generateSizeForScreen)
+        
+        logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
+        logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
+        
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
+        backButton.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        
+        backButton.constraintInsideTo(.centerY, logoImageView)
+        backButton.constraintInsideTo(.height, logoImageView)
+        backButton.constraintOutsideTo(.width, backButton)
+        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
+                                      CGFloat(30).generateSizeForScreen)
+        
+        jumpButton.constraintInsideTo(.centerY, logoImageView)
+        jumpButton.constraintInsideTo(.height, logoImageView)
+        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
+                                      CGFloat(30).generateSizeForScreen)
+            
+        progressBarStackView.constraintOutsideTo(.top, logoImageView,
+                                                 CGFloat(60).generateSizeForScreen)
+        progressBarStackView.constraintInsideTo(.centerX,
+                                                self.safeAreaLayoutGuide)
+    }
+    
+/// This function transforms a view into a bar with a back button and title
+/// - Parameters:
+///   - viewTitle: The title in the center of the custom bar
+///   - handler: The action of back button
+    open func setToDefaultCustomBarWithBackButton(viewTitle: String,
+                                                  _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -45,21 +118,22 @@ extension UIView {
         
         self.addSubviews([backButton, titleLabel])
         
-        titleLabel.constraintInsideTo(.centerY, self, 15)
+        titleLabel.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
         titleLabel.constraintInsideTo(.centerX, self)
         
         backButton.constraintInsideTo(.centerY, titleLabel)
-        backButton.constraintInsideTo(.leading, self, 35)
+        backButton.constraintInsideTo(.leading, self, CGFloat(35).generateSizeForScreen)
         backButton.constraintInsideTo(.height, self, multiplier: 0.5)
         backButton.constraintOutsideTo(.width, backButton)
         
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
     }
     
-    open func setToDefaultCustomBarWithFilter() {
+/// This function transforms a view into a bar with a filter
+    open func setToDefaultCustomBarWithFilter(_ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -117,67 +191,71 @@ extension UIView {
         leftStackView.axis = .vertical
         let rightStackView = UIStackView(arrangedSubviews: [cityLabel,
                                                             cityChosedLabel])
+        rightStackView.isLayoutMarginsRelativeArrangement = true
+        rightStackView.layoutMargins = UIEdgeInsets(top: 0,
+                                                    left: 15,
+                                                    bottom: 0,
+                                                    right: 0)
         rightStackView.axis = .vertical
         
         let stackView = UIStackView()
         
-        stackView.addArrangedSubviews([leftStackView, leftButton, rightStackView, rightButton])
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.pink_cyan.rawValue)
         
-        leftStackView.constraintInsideTo(.width, stackView, multiplier: 0.2)
-        leftButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
-        rightButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
-        
-        stackView.backgroundColor = .white
+        stackView.addArrangedSubviews([leftStackView, leftButton,
+                                       view,
+                                       rightStackView, rightButton])
         stackView.layer.cornerRadius = 8
-        stackView.setToDefaultBackgroundColor()
+        stackView.backgroundColor = UIColor(named: ColorsBravve.searchBar.rawValue)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
                                                bottom: margins,
-                                               right: margins)
+                                               right: 5)
         
         let filterButton = UIButton()
+        filterButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         filterButton.setImage(UIImage(named: ButtonsBravve.filter.rawValue),
                               for: .normal)
         
         self.addSubviews([filterButton, stackView])
         
-        stackView.constraintInsideTo(.centerY, self, 15)
-        stackView.constraintInsideTo(.leading, self, 20)
-        stackView.constraintOutsideTo(.trailing, filterButton, 20)
+        leftStackView.constraintInsideTo(.width, stackView, multiplier: 0.15)
+        leftButton.constraintInsideTo(.width, stackView, multiplier: 0.1)
+        leftButton.imageView?.constraintInsideTo(.centerY, leftButton)
+        leftButton.imageView?.widthAnchorInSuperview(CGFloat(10).generateSizeForScreen)
+        leftButton.imageView?.heightAnchorInSuperview(CGFloat(6.2).generateSizeForScreen)
+        rightButton.constraintInsideTo(.width, leftButton)
+        rightButton.imageView?.constraintInsideTo(.centerY, rightButton)
+        rightButton.imageView?.widthAnchorInSuperview(CGFloat(10).generateSizeForScreen)
+        rightButton.imageView?.heightAnchorInSuperview(CGFloat(6.2).generateSizeForScreen)
+        view.widthAnchorInSuperview(0.65)
+        
+        stackView.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
+        stackView.constraintInsideTo(.leading, self, CGFloat(20).generateSizeForScreen)
+        stackView.constraintOutsideTo(.trailing, filterButton, CGFloat(5).generateSizeForScreen)
         
         filterButton.constraintInsideTo(.centerY, stackView)
-        filterButton.constraintInsideTo(.trailing, self, 20)
+        filterButton.constraintInsideTo(.trailing, self, CGFloat(10).generateSizeForScreen)
         filterButton.constraintInsideTo(.height, stackView)
         filterButton.constraintOutsideTo(.width, filterButton)
         
         self.constraintInsideTo(.top, superview)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
     }
 }
 
 //Extensions related to creation of elements
 extension UIView {
     
-    open func createSuperStackView(_ arrangedSubviews: [UIView]) {
-        
-        self.layer.cornerRadius = 8
-        
-        let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
-        stackView.spacing = 15
-        stackView.layer.cornerRadius = 8
-        stackView.backgroundColor = .yellow
-        
-        self.addSubview(stackView)
-        
-        stackView.constraintInsideTo(.top, self, Ride.down.rawValue)
-        stackView.constraintInsideTo(.leading, self)
-        stackView.constraintInsideTo(.trailing, self)
-        stackView.constraintInsideTo(.bottom, self, Ride.up.rawValue)
-    }
-
+/// This function adds a line below a view
+/// - Parameters:
+///   - color: The color of line
+///   - width: The width of line
+///   - y: Position y of the line
     func addBottomLineWithColor(color: UIColor = .gray, width: CGFloat = 0.8, y: CGFloat = 0) {
 
         let bottomBorderLine = CALayer()
@@ -189,23 +267,13 @@ extension UIView {
 
         self.layer.addSublayer(bottomBorderLine)
     }
-    
-    func addLeadingLineWithColor(color: UIColor = .gray, height: CGFloat = 0.8, x: CGFloat = 0) {
-
-        let leadingBorderLine = CALayer()
-        leadingBorderLine.backgroundColor = color.cgColor
-        leadingBorderLine.frame = CGRect(x: self.frame.size.width - height + x,
-                                         y: 0,
-                                         width: self.frame.size.height,
-                                         height: height)
-
-        self.layer.addSublayer(leadingBorderLine)
-    }
 }
 
 //Extensions related to constraints
 extension UIView {
     
+/// This function sets the height of a view in a superview
+/// - Parameter constant: The height of view
     open func heightAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -213,6 +281,8 @@ extension UIView {
         superview?.addConstraint(self.heightAnchor.constraint(equalToConstant: constant))
     }
     
+/// This function sets the width of a view in a superview
+/// - Parameter constant: The width of view
     open func widthAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -220,6 +290,8 @@ extension UIView {
         superview?.addConstraint(self.widthAnchor.constraint(equalToConstant: constant))
     }
     
+/// This function sets the width and height of a view in a superview(square)
+/// - Parameter constant: The size of view
     open func sizeAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -231,6 +303,8 @@ extension UIView {
         ])
     }
     
+/// This function fills a superview with the view
+/// - Parameter constant: The margins of view to superview
     open func fillSuperview(_ constant: CGFloat = 0) {
         
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, constant)
@@ -239,6 +313,12 @@ extension UIView {
         self.constraintInsideTo(.bottom, superview?.safeAreaLayoutGuide, constant)
     }
     
+/// This function creates the constraint of a view in a superview directed to some other view
+/// - Parameters:
+///   - attribute: The side that will match the side of the item
+///   - toItem: The item at the other point of the constraint
+///   - constant: The distance from attribute
+///   - multiplier: Multiplier for constant
     open func constraintTo(_ attribute: NSLayoutConstraint.Attribute,
                            _ toItem: Any?,
                            _ constant: CGFloat = 0,
@@ -252,7 +332,13 @@ extension UIView {
                                                     multiplier: multiplier,
                                                     constant: constant))
     }
-        
+    
+/// This function creates the constraint of a view in a superview directed to some other view with reference to the same part. example bottom to bottom
+/// - Parameters:
+///   - attribute: The side that will match the side of the item(if bottom or trailing it will be the inverse to stay inside)
+///   - toItem: The item at the other point of the constraint
+///   - constant: The distance from attribute
+///   - multiplier: Multiplier for constant
     open func constraintInsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                  _ toItem: Any?,
                                  _ constant: CGFloat = 0,
@@ -280,6 +366,12 @@ extension UIView {
                                                     constant: constant))
     }
     
+/// This function creates the constraint of a view in a superview directed to some other view with reference to the reverse part. example bottom to top
+/// - Parameters:
+///   - attribute: The side that will match the inverse side of the item
+///   - toItem: The item at the other point of the constraint
+///   - constant: The distance from item attribute
+///   - multiplier: Multiplier for constant
     open func constraintOutsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                   _ toItem: Any?,
                                   _ constant: CGFloat = 0,
@@ -324,6 +416,8 @@ extension UIView {
 //Extensions to add multiple Subviews on a view
 extension UIView {
     
+/// This function add an array of views as subviews
+/// - Parameter views: Views to add
     func addSubviews(_ views: [UIView]) {
         
         for view in views {
