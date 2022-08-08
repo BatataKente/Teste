@@ -8,7 +8,10 @@
 import UIKit
 
 //Extensions related to simplify creation of menu to buttons
+
 extension UIButton {
+    
+/* This function create a menu on the button with list. */
     
     open func setMenuForButton(_ menuItens: [UIAction]) {
         
@@ -24,8 +27,11 @@ extension UIButton {
 //Extensions related to set buttons to Default by the app
 extension UIButton {
     
+/* This function turns a button into the default capsule button in the app. */
+    
     open func setToDefaultCapsuleButton(_ buttonTitle: String,
-                                        _ backgroundColor: ColorsBravve = .blue) {
+                                        _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
+                                        strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) {
 
         self.configuration = .filled()
          
@@ -37,14 +43,16 @@ extension UIButton {
         self.configuration?.attributedTitle = AttributedString(attributedTitle)
         
         self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
-        if backgroundColor == .background {
+        if backgroundColor == .capsuleButton {
 
-            self.configuration?.baseForegroundColor = .black
+            self.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
             self.configuration?.background.strokeWidth = 0.7
-            self.configuration?.background.strokeColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
+            self.configuration?.background.strokeColor = strokeColor
         }
         self.configuration?.cornerStyle = .capsule
     }
+    
+/* This function turns a button into the default progress bar button in the app. Progress bar are a bar that usually occurs in this app*/
     
     open func setToProgressBarButtonDefault(_ buttonImageName: String) {
         
@@ -116,6 +124,8 @@ extension UIButton {
         self.imageView?.constraintOutsideTo(.width, self.imageView)
     }
     
+/* This function puts a button in the bottom and customizes it to the app's default */
+    
     open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
                                                backgroundColor: ColorsBravve = .buttonGray) {
         
@@ -130,6 +140,8 @@ extension UIButton {
         self.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,
                                        size: CGFloat(16).generateSizeForScreen)
     }
+    
+/* This function puts a button on top of some other view and customizes it to the app's default */
     
     open func setToBottomButtonDefaultAbove(_ buttonTitle: String = "Continuar",
                                             backgroundColor: ColorsBravve = .buttonGray,
@@ -147,15 +159,20 @@ extension UIButton {
                                        size: CGFloat(16).generateSizeForScreen)
     }
     
+/* This function turns the button into the default back */
+    
     open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen) {
+                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
+                                     _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
         self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
         self.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
         
+        self.constraintInsideTo(.top, superview, CGFloat(65).generateSizeForScreen)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
-        self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, CGFloat(65).generateSizeForScreen)
+        
+        self.addAction(UIAction(handler: handler), for: .touchUpInside)
         
         self.constraintInsideTo(.height,
                                 superview?.safeAreaLayoutGuide,

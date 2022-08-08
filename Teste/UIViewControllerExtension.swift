@@ -10,21 +10,46 @@ import UIKit
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
     
+/* This is a function created with the aim of generating buttons in the capsule configuration
+*/
+    
     open func createCapsuleButtons(_ buttonTitles: [String],
-                                   _ backgroundColor: ColorsBravve = .blue) -> [UIButton] {
+                                   _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
+                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
         for title in buttonTitles {
             
             let button = UIButton()
-            button.setToDefaultCapsuleButton(title, backgroundColor)
+            button.setToDefaultCapsuleButton(title,
+                                             backgroundColor,
+                                             strokeColor: strokeColor)
             
             buttons.append(button)
         }
         
         return buttons
     }
+    
+/* This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons, but without actions */
+    
+    open func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
+        
+        var buttons: [UIButton] = []
+        
+        for name in buttonImageNames {
+            
+            let button = UIButton()
+            button.setToProgressBarButtonDefault(name)
+            
+            buttons.append(button)
+        }
+        
+        return buttons
+    }
+    
+/* This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons */
     
     open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
         
@@ -36,17 +61,9 @@ extension UIViewController {
             
             switch name{
                 
-            case IconsBravve.userGray.rawValue:
-                    
-                    let handler = {(action: UIAction) in
-                        
-                        let nomeView = NomeView(.first)
-                        nomeView.modalPresentationStyle = .fullScreen
-                        self.present(nomeView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                case IconsBravve.activitiesGray.rawValue: break
+                
+                case IconsBravve.calendarGray.rawValue: break
                 
                 case IconsBravve.cellGray.rawValue:
                     
@@ -60,6 +77,8 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
+                case IconsBravve.creditGray.rawValue: break
+                
                 case IconsBravve.emailGray.rawValue:
                     
                     let handler = {(action: UIAction) in
@@ -72,8 +91,12 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
+                case IconsBravve.hobbiesGray.rawValue: break
+                
+                case IconsBravve.noteGray.rawValue: break
+                
                 case IconsBravve.padlockGray.rawValue: break
-
+                
                 case IconsBravve.pencilGray.rawValue: break
                 
                 case IconsBravve.photoGray.rawValue:
@@ -87,16 +110,18 @@ extension UIViewController {
                     }
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
-
-                case IconsBravve.noteGray.rawValue: break
-
-                case IconsBravve.hobbiesGray.rawValue: break
-
-                case IconsBravve.activitiesGray.rawValue: break
-                
-                case IconsBravve.calendarGray.rawValue: break
                     
-                case IconsBravve.creditGray.rawValue: break
+                case IconsBravve.userGray.rawValue:
+                    
+                    let handler = {(action: UIAction) in
+                        
+                        let nomeView = NomeView(.first)
+                        nomeView.modalPresentationStyle = .fullScreen
+                        self.present(nomeView,
+                                     animated: false)
+                    }
+
+                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 default: break
             }
@@ -112,6 +137,8 @@ extension UIViewController {
 
 //Extension related to regex
 extension UIViewController {
+    
+/* This is a regex that checks if it's a valid phone */
     
     open func validateCellPhone(_ phone: String) -> Bool {
         
@@ -129,6 +156,8 @@ extension UIViewController {
 
 extension UIViewController {
     
+/* This is a regex that checks if it contains capital letters */
+    
     open func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
@@ -140,6 +169,8 @@ extension UIViewController {
             return false
         }
     }
+    
+/* This is a regex that checks if it contains numbers */
     
     open func containsNumericCharacters(text: String) -> Bool {
         
@@ -153,6 +184,8 @@ extension UIViewController {
         }
     }
     
+/* This is a regex that checks if it contains special characters */
+    
     open func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
@@ -164,6 +197,8 @@ extension UIViewController {
             return false
         }
     }
+    
+/* This is a regex that checks if it contains lowercase letters */
     
     open func containsLowercasedCharacters(text: String) -> Bool {
         

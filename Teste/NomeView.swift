@@ -14,20 +14,26 @@ class NomeView: UIViewController {
     private let registerButton = UIButton()
     
     private lazy var buttons: [UIButton] = {
-
-        let buttons = createProgressBarButtons([IconsBravve.userBlue.rawValue,
-                                                IconsBravve.userGray.rawValue,
-                                                IconsBravve.cellBlue.rawValue,
-                                                IconsBravve.cellGray.rawValue,
-                                                IconsBravve.emailBlue.rawValue,
-                                                IconsBravve.emailGray.rawValue,
-                                                IconsBravve.padlockGray.rawValue,
-                                                IconsBravve.hobbiesGray.rawValue])
-
-        buttons[1].removeTarget(nil, action: nil, for: .allTouchEvents)
-        buttons[3].removeTarget(nil, action: nil, for: .allTouchEvents)
-        buttons[5].removeTarget(nil, action: nil, for: .allTouchEvents)
-
+        
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userBlue.rawValue,
+                                                              IconsBravve.userGray.rawValue,
+                                                              IconsBravve.cellBlue.rawValue,
+                                                              IconsBravve.cellGray.rawValue,
+                                                              IconsBravve.emailBlue.rawValue,
+                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.padlockGray.rawValue,
+                                                              IconsBravve.hobbiesGray.rawValue])
+        
+        buttons[1].addTarget(self,
+                             action: #selector(nameScreenAction),
+                             for: .touchUpInside)
+        buttons[3].addTarget(self,
+                             action: #selector(phoneScreenAction),
+                             for: .touchUpInside)
+        buttons[5].addTarget(self,
+                             action: #selector(emailScreenAction),
+                             for: .touchUpInside)
+        
         return buttons
     }()
     
@@ -179,13 +185,18 @@ class NomeView: UIViewController {
     private func setupConstraints() {
         
         infoLabel.constraintInsideTo(.top,
-                                     view, CGFloat(250).generateSizeForScreen)
+                                     view,
+                                     CGFloat(250).generateSizeForScreen)
         infoLabel.constraintInsideTo(.leading,
-                                     view.safeAreaLayoutGuide, CGFloat(40).generateSizeForScreen)
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         infoLabel.constraintInsideTo(.trailing,
-                                     view.safeAreaLayoutGuide, CGFloat(40).generateSizeForScreen)
+                                     view.safeAreaLayoutGuide,
+                                     CGFloat(40).generateSizeForScreen)
         
-        registerStackView.constraintOutsideTo(.top, infoLabel, CGFloat(60).generateSizeForScreen)
+        registerStackView.constraintOutsideTo(.top,
+                                              infoLabel,
+                                              CGFloat(60).generateSizeForScreen)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         
@@ -208,16 +219,6 @@ class NomeView: UIViewController {
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
-        
-        buttons[1].addTarget(self,
-                             action: #selector(nameScreenAction),
-                             for: .touchUpInside)
-        buttons[3].addTarget(self,
-                             action: #selector(phoneScreenAction),
-                             for: .touchUpInside)
-        buttons[5].addTarget(self,
-                             action: #selector(emailScreenAction),
-                             for: .touchUpInside)
     }
     
     @objc func nameScreenAction() {
@@ -240,8 +241,8 @@ class NomeView: UIViewController {
     
     @objc func stackViewTapped() {
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: 11)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: 11)
+        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
         
         customShaddow.isHidden = false
         

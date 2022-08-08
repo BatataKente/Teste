@@ -7,6 +7,9 @@
 
 //Enum for assets on app
 
+/* The enums were created with the purpose of organizing the code, so that if there were changes in the names of the assets, the developer could only change the ded enum files, so that it has an impact on all screens of the app
+ */
+
 public enum ColorsBravve: String {
 
     case background = "background"
@@ -33,6 +36,8 @@ public enum ColorsBravve: String {
     case labelSpace = "labelSpace"
     case textFieldLabel = "labelTextField"
     case progressBarLabel = "progressBarLabel"
+    case pink_cyan = "pink_cyan"
+    case pink_white = "pink_white"
     case redAlertLabel = "redAlertLabel"
     case reserved = "reserved"
     case reservedCancel = "reservedCancel"

@@ -7,6 +7,8 @@
 
 import UIKit
 
+/* This function generates a multiplier according to the screen width */
+    
 extension CGFloat {
     
     public var generateSizeForScreen: CGFloat {
@@ -60,6 +62,8 @@ extension CGFloat {
         return self
     }
     
+/* This function generates a multiplier according to the screen height */
+        
     public var generateSizeForScreenByHeight: CGFloat {
 
         let height = UIScreen.main.bounds.height

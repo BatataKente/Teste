@@ -10,6 +10,8 @@ import UIKit
 //Extensions related to set labels to Default
 extension UILabel {
     
+/* This function puts the label in the default font, size and text. */
+    
     open func setToDefault(text: String = "",
                            _ textAlignment: NSTextAlignment = .center) {
         
