@@ -217,9 +217,9 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-//        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
-//        detalhesAbertoView.modalPresentationStyle = .fullScreen
-//        present(detalhesAbertoView, animated: false)
+        let openDetailsView = OpenDetailsView(cells[indexPath.row])
+        openDetailsView.modalPresentationStyle = .fullScreen
+        present(openDetailsView, animated: false)
     }
 }
 
