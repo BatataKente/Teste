@@ -66,6 +66,7 @@
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
+		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,7 @@
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,6 +225,7 @@
 				1410B92428A1740400C36902 /* FilterScreen.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
+				CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */,
 				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
 				13F1768528941C6200C5FD05 /* ConfirmDataView.swift */,
 				0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */,
@@ -363,6 +366,7 @@
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
+				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
 				1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
