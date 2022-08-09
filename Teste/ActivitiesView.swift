@@ -13,7 +13,6 @@ class ActivitiesView: UIViewController {
     
     let continueButton = UIButton()
     
-
     private let registerButton = UIButton()
     
     private lazy var buttons: [UIButton] = {
@@ -151,10 +150,16 @@ class ActivitiesView: UIViewController {
         view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.createRegisterCustomBar(progressBarButtons: buttons, hideJumpButton: false) {_ in
-            
-            // call screen it should go to
+        let handler = {(action: UIAction) in
+            print("Pulando tela")
         }
+        
+        view.createRegisterCustomBar(progressBarButtons: buttons,
+                                     jumpAction: UIAction(handler: handler)) {_ in
+            
+           return
+        }
+        
     }
     
     func setupDefaults() {
@@ -192,3 +197,4 @@ class ActivitiesView: UIViewController {
     }
 
 }
+
