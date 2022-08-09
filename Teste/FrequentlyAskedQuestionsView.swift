@@ -15,7 +15,7 @@ class FrequentlyAskedQuestionsView: UIViewController {
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
-        table.register(FAQCollectionTableViewCell.self, forCellReuseIdentifier: FAQCollectionTableViewCell.identifier)
+        table.register(FAQViewTableViewCell.self, forCellReuseIdentifier: FAQViewTableViewCell.identifier)
         table.register(FAQTableViewCell.self, forCellReuseIdentifier: FAQTableViewCell.identifier)
         table.showsVerticalScrollIndicator = false
         table.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
@@ -45,7 +45,7 @@ class FrequentlyAskedQuestionsView: UIViewController {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            self.tableView.topAnchor.constraint(equalTo: self.customBar.bottomAnchor, constant: CGFloat(-37).generateSizeForScreen),
+            self.tableView.topAnchor.constraint(equalTo: self.customBar.bottomAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
@@ -62,7 +62,7 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0{
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQCollectionTableViewCell.identifier, for: indexPath) as? FAQCollectionTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQViewTableViewCell.identifier, for: indexPath) as? FAQViewTableViewCell else {
                 fatalError()
             }
             return cell
@@ -70,14 +70,14 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQTableViewCell.identifier, for: indexPath) as? FAQTableViewCell else{
             fatalError()
         }
-        cell.titleButton.setTitle(self.viewModel.getQuestionAnswer(indexPath: indexPath).question, for: .normal)
+        cell.titleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).question
         cell.subTitleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
             return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 378
+            return 222
         }
         return 250
     }

@@ -8,10 +8,8 @@
 import Foundation
 import UIKit
 
-class FAQCollectionTableViewCell: UITableViewCell {
-    static let identifier = "FAQCollectionTableViewCell"
-    
-   
+class FAQViewTableViewCell: UITableViewCell {
+    static let identifier = "FAQViewTableViewCell"
     
     private lazy var backgroundCellView: UIView = {
         let view = UIView()
@@ -51,10 +49,12 @@ class FAQCollectionTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         contentView.addSubview(backgroundCellView)
         contentView.addSubview(vectorHelpImageView)
         contentView.addSubview(wayHelpImageView)
         contentView.addSubview(FAQViewLabel)
+        
         configConstraints()
     }
     
@@ -83,34 +83,8 @@ class FAQCollectionTableViewCell: UITableViewCell {
             self.FAQViewLabel.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: CGFloat(80).generateSizeForScreen),
             self.FAQViewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-140.99).generateSizeForScreen),
             self.FAQViewLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(32.99).generateSizeForScreen),
-            
-//            self.collectionView.topAnchor.constraint(equalTo: self.backgroundCellView.bottomAnchor),
-//            self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-//            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
         
     }
     
 }
-
-//extension FAQCollectionTableViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModels.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FAQCollectionViewCell.identifier, for: indexPath) as? FAQCollectionViewCell else {
-//            fatalError()
-//        }
-//        cell.configure(with: viewModels[indexPath.row])
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if indexPath.row == 0 {
-//            return CGSize(width: CGFloat(296).generateSizeForScreen, height: CGFloat(331).generateSizeForScreen)
-//        }
-//        return CGSize(width: CGFloat(296).generateSizeForScreen, height: CGFloat(72).generateSizeForScreen)
-//    }
-//}
