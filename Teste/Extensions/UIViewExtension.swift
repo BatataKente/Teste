@@ -58,7 +58,6 @@ extension UIView {
             
             let jumpButton = UIButton()
             jumpButton.configuration = .plain()
-            jumpButton.isHidden = hideJumpButton
             
             let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
                                                                  size: CGFloat(15).generateSizeForScreen),

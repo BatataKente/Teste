@@ -167,7 +167,7 @@ class NomeView: UIViewController {
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
-                
+            
             self.nomeViewModel.turnBackScreen()
         }
         
