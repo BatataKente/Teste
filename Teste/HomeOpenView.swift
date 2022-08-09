@@ -22,7 +22,6 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -136,24 +135,20 @@ class HomeOpenView: UIViewController {
         
         view.setToDefaultBackgroundColor()
         
-//        authManager.getDataArray { (states: [States]?) in
-//
-//            guard let states = states else {
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//
-//
-//            }
-//
-//        }
-        
-        self.customBar.setToDefaultCustomBarWithFilter (states: []) {_ in
-            
-            let filterView = FilterScreen()
-            filterView.modalPresentationStyle = .fullScreen
-            self.present(filterView, animated: true)
+        authManager.getDataArray { (states: [States]?) in
+
+            guard let states = states else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.customBar.setToDefaultCustomBarWithFilter (states: states) {_ in
+                    
+                    let filterView = FilterScreen()
+                    filterView.modalPresentationStyle = .fullScreen
+                    self.present(filterView, animated: true)
+                }
+            }
         }
     }
     

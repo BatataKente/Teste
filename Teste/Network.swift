@@ -18,10 +18,9 @@ class AuthManager {
     
     private let baseAPIString = "https://api-design.dev.bravve.app/api/v1"
     
-    
-    
-    /// Method to get token from the Bravve API
-    public func getToken() {
+    /// Method to get the token to access the BravveAPI
+    /// - Parameter completioHandler: Completion handler that holds the API token as parameter to manage the result of the API Call
+    public func getToken(completioHandler: @escaping (String?) -> Void) {
         guard let url = URL(string: "https://api-design.dev.bravve.app/api/auth/token") else { return }
         let parameters = [
             "username": "pedro",
@@ -30,14 +29,12 @@ class AuthManager {
         
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: AccessToken.self) { response in
             if let data = response.value {
-                if self.accessToken ==  nil {
+
                     self.cacheToken(result: data)
-                }
+                    completioHandler(data.access_token)
             }
         }
     }
-    
-    
     
     /// Method to cache the token got from the Bravve API in the UserDefaults
     /// - Parameter result: A struct in the format of AccessToken model containing the information on the token
@@ -47,23 +44,28 @@ class AuthManager {
     
     /// Method to get data in the format of an array from the API
     /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the chosen model
-    func getDataArray<T: Codable>(completionHandler: @escaping ([T]?) -> Void) {
+    func getDataArray<T: Codable>(id: String = "", completionHandler: @escaping ([T]?) -> Void) {
         
-        guard let url = URL(string: baseAPIString + "/utils/states") else { return }
-        
-        guard let accessToken = accessToken else {
-            return
-        }
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)"
-        ]
-        
-        AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
-            if let data = response.value {
-                completionHandler(data)
-            } else {
-                completionHandler(nil)
+        getToken { accessToken in
+            guard let accessToken = accessToken else { return }
+            
+            var urlEndpoint = "/utils/states"
+            
+            if id != "" {
+                urlEndpoint = "/utils/states/\(id)/cities"
+            }
+            
+            guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
             }
         }
     }

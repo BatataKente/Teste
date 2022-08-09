@@ -163,10 +163,36 @@ extension UIView {
                                      size: CGFloat(16).generateSizeForScreen)
         let buttonsImage = ButtonsBravve.arrowDown.rawValue
         
+        let authManager = AuthManager()
+                
         let stateHandler = {(action: UIAction) in
 
             stateChosedLabel.text = action.title
             stateLabel.font = smallFont
+            for state in states {
+                if state.code == action.title {
+                    authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
+                        var actions = [UIAction]()
+                        guard let cities = cities else {
+                            return
+                        }
+                        
+                        let cityHandler = {(action: UIAction) in
+
+                            cityChosedLabel.text = action.title
+                            cityLabel.font = smallFont
+                        }
+                        
+                        for city in cities {
+                            guard let cityName = city.name else { return }
+                            actions.append(UIAction(title: cityName, handler: cityHandler))
+                        }
+                        
+                        rightButton.setMenuForButton(actions)
+                    }
+                }
+            }
+            
         }
 
         stateLabel.text = "UF"
@@ -180,21 +206,36 @@ extension UIView {
         leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
-        let cityHandler = {(action: UIAction) in
-
-            cityChosedLabel.text = action.title
-            cityLabel.font = smallFont
-        }
+//        let cityHandler = {(action: UIAction) in
+//
+//            cityChosedLabel.text = action.title
+//            cityLabel.font = smallFont
+//        }
+        
+//        authManager.getDataArray(id: "1") { (cities: [Cities]?) in
+//            var actions = [UIAction]()
+//            guard let cities = cities else {
+//                return
+//            }
+//
+//            for city in cities {
+//                guard let cityName = city.name else { return }
+//                actions.append(UIAction(title: cityName, handler: cityHandler))
+//            }
+//
+//            rightButton.setMenuForButton(actions)
+//        }
+        
         
         cityLabel.text = "Cidade"
         cityLabel.font = initialFont
         cityChosedLabel.font = chosedLabelFont
-        rightButton.setMenuForButton([
-
-            UIAction(title: "action1",handler: cityHandler),
-            UIAction(title: "action2",handler: cityHandler)
-
-        ])
+//        rightButton.setMenuForButton([
+//
+//            UIAction(title: "action1",handler: cityHandler),
+//            UIAction(title: "action2",handler: cityHandler)
+//
+//        ])
         rightButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
