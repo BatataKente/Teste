@@ -67,6 +67,12 @@
 		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
+		CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */; };
+		CFBF085D28A2810600D39DCF /* ModelSubscriptionsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085728A2810600D39DCF /* ModelSubscriptionsV1.swift */; };
+		CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085828A2810600D39DCF /* ModelUtilsV1.swift */; };
+		CFBF085F28A2810600D39DCF /* ModelPartnersV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085928A2810600D39DCF /* ModelPartnersV1.swift */; };
+		CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */; };
+		CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +138,12 @@
 		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
+		CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCorporatesV1.swift; sourceTree = "<group>"; };
+		CFBF085728A2810600D39DCF /* ModelSubscriptionsV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSubscriptionsV1.swift; sourceTree = "<group>"; };
+		CFBF085828A2810600D39DCF /* ModelUtilsV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelUtilsV1.swift; sourceTree = "<group>"; };
+		CFBF085928A2810600D39DCF /* ModelPartnersV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelPartnersV1.swift; sourceTree = "<group>"; };
+		CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelReservationsV1.swift; sourceTree = "<group>"; };
+		CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelUsersV1.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,8 +162,14 @@
 		13080CBC28A1890000A064B0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				CFBF085828A2810600D39DCF /* ModelUtilsV1.swift */,
+				CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */,
+				CFBF085928A2810600D39DCF /* ModelPartnersV1.swift */,
 				13080CBD28A1893200A064B0 /* ModelSitesV1.swift */,
 				13080CBF28A18C4700A064B0 /* ModelSpacesV1.swift */,
+				CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */,
+				CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */,
+				CFBF085728A2810600D39DCF /* ModelSubscriptionsV1.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -332,6 +350,7 @@
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
+				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
 				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				13080CB928A17F2A00A064B0 /* AccessTokenModel.swift in Sources */,
@@ -340,6 +359,7 @@
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
 				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
+				CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */,
 				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
 				145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
@@ -350,7 +370,9 @@
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */,
+				CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
+				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
@@ -363,6 +385,7 @@
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1410B92528A1740400C36902 /* FilterScreen.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
+				CFBF085D28A2810600D39DCF /* ModelSubscriptionsV1.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
@@ -381,6 +404,7 @@
 				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				14C8B70E289DC2C600ABC321 /* LoginView.swift in Sources */,
 				14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */,
+				CFBF085F28A2810600D39DCF /* ModelPartnersV1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -135,19 +135,25 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-        authManager.getDataArray { (states: [States]?) in
-            guard let states = states else {
-                return
-            }
+        
+//        authManager.getDataArray { (states: [States]?) in
+//
+//            guard let states = states else {
+//                return
+//            }
+//
+//            DispatchQueue.main.async {
+//
+//
+//            }
+//
+//        }
+        
+        self.customBar.setToDefaultCustomBarWithFilter (states: []) {_ in
             
-            DispatchQueue.main.async {
-                self.customBar.setToDefaultCustomBarWithFilter (states: states) {_ in
-                    
-                    let filterView = FilterScreen()
-                    filterView.modalPresentationStyle = .fullScreen
-                    self.present(filterView, animated: true)
-                }
-            }
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
         }
     }
     

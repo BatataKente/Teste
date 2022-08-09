@@ -75,8 +75,9 @@ extension UIView {
         logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
         
-        backButton.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
-        backButton.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
+                                                  multiplier: 0.6)
         backButton.imageView?.constraintInsideTo(.centerY, backButton)
         
         backButton.constraintInsideTo(.centerY, logoImageView)
@@ -117,6 +118,11 @@ extension UIView {
         titleLabel.textColor = .white
         
         self.addSubviews([backButton, titleLabel])
+        
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
+                                                  multiplier: 0.6)
         
         titleLabel.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
         titleLabel.constraintInsideTo(.centerX, self)
