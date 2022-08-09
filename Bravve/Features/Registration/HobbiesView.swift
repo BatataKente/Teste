@@ -5,29 +5,29 @@
 //  Created by user218260 on 7/15/22.
 //
 
-import Foundation
-
 import UIKit
 
 class HobbiesView: UIViewController {
     
     let backgroundImage = UIImageView()
     
-    let bravveIcon = UIImageView()
+    let continueButton = UIButton()
     
-    lazy var progressBarButtons: [UIButton] = {
-       var buttons = [UIButton]()
-       buttons = createProgressBarButtons(["photoGray",
-                                        "noteGray",
-                                        "hobbiesBlue",
-                                        "activitiesGray"])
-       return buttons
+
+    private let registerButton = UIButton()
+    
+    private lazy var buttons: [UIButton] = {
+        
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.photoGray.rawValue,
+                                                      IconsBravve.noteGray.rawValue,
+                                                      IconsBravve.hobbiesBlue.rawValue,
+                                                      IconsBravve.activitiesGray.rawValue])
+        return buttons
     }()
     
     lazy var progressBarStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: progressBarButtons)
-        stackView.spacing = 8
-        
+        let stackView = UIStackView(arrangedSubviews: buttons)
+        stackView.spacing = CGFloat(8).generateSizeForScreen
         return stackView
     }()
     
@@ -45,14 +45,14 @@ class HobbiesView: UIViewController {
         label.attributedText = labelattributedString
         label.numberOfLines = 5
         label.textAlignment = .center
-        label.textColor = UIColor(named: "label")
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         return label
     }()
     
     
     lazy var hobbiesButtons: [UIButton] = {
            var hobbiesButtons = [UIButton]()
-        hobbiesButtons = createCapsuleButtons(["Futebol", "Ciclismo", "Yoga", "Corrida", "Culinária", "Fotografia", "Viagens", "Artes", "Games", "Natação", "Leitura", "Música"], .cards)
+        hobbiesButtons = createCapsuleButtons(["Futebol", "Ciclismo", "Yoga", "Corrida", "Culinária", "Fotografia", "Viagens", "Artes", "Games", "Natação", "Leitura", "Música"], ColorsBravve.capsuleButton)
         
         for hobbiesButton in hobbiesButtons {
             hobbiesButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -65,52 +65,26 @@ class HobbiesView: UIViewController {
     lazy var hobbiesStackView: UIStackView = {
         let line1 = UIStackView(arrangedSubviews: [hobbiesButtons[0], hobbiesButtons[1], hobbiesButtons[2]])
         line1.axis = .horizontal
-        line1.spacing = 4
+        line1.spacing = CGFloat(4).generateSizeForScreen
 
         let line2 = UIStackView(arrangedSubviews: [hobbiesButtons[3], hobbiesButtons[4], hobbiesButtons[5]])
         line2.axis = .horizontal
-        line2.spacing = 4
+        line2.spacing = CGFloat(4).generateSizeForScreen
 
         let line3 = UIStackView(arrangedSubviews: [hobbiesButtons[6], hobbiesButtons[7], hobbiesButtons[8]])
         line3.axis = .horizontal
-        line3.spacing = 4
+        line3.spacing = CGFloat(4).generateSizeForScreen
 
         let line4 = UIStackView(arrangedSubviews: [hobbiesButtons[9], hobbiesButtons[10], hobbiesButtons[11]])
         line4.axis = .horizontal
-        line4.spacing = 4
+        line4.spacing = CGFloat(4).generateSizeForScreen
         
         let stackView = UIStackView(arrangedSubviews: [line1, line2, line3, line4])
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 12
+        stackView.spacing = CGFloat(12).generateSizeForScreen
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
-    }()
-    
-    let continueButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 331, height: 52))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Continuar", for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(named: "buttonPink")
-        button.addTarget(HobbiesView.self, action: #selector(continueButtonTapped), for: .touchUpInside)
-        button.layer.cornerRadius = 12
-        return button
-    }()
-    
-    let skipButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 36, height: 17))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Pular", for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,size: CGFloat(15).generateSizeForScreen)
-        let frame = CGRect(x: 0, y: button.frame.size.height + 6, width: button.frame.size.width, height: 1)
-        let borderBottom = UIView(frame: frame)
-        borderBottom.backgroundColor = UIColor(named: "blueNav")
-        button.addSubview(borderBottom)
-        button.setTitleColor(UIColor(named: "blueNav"), for: .normal)
-        button.addTarget(HobbiesView.self, action: #selector(skipButtonTapped), for: .touchUpInside)
-        return button
     }()
     
     
@@ -120,7 +94,7 @@ class HobbiesView: UIViewController {
         if arrayItems.count >= 3 {
             if button.isSelected == true {
                 button.isSelected.toggle()
-                button.configuration?.background.backgroundColor = .white
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black
                 let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
                 arrayItems = filteredArray
@@ -130,11 +104,11 @@ class HobbiesView: UIViewController {
         } else {
             button.isSelected.toggle()
             if button.isSelected {
-                    button.configuration?.background.backgroundColor = UIColor(named: "blueNav")
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 arrayItems.append(button.titleLabel?.text ?? "")
                 } else {
-                    button.configuration?.background.backgroundColor = .white
+                    button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                     button.configuration?.attributedTitle?.foregroundColor = .black
                     let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
                     arrayItems = filteredArray
@@ -143,13 +117,18 @@ class HobbiesView: UIViewController {
         print(arrayItems)
     }
     
+    func activeButton() {
+
+        continueButton.addTarget(nil, action: #selector(continueButtonTapped), for: .touchUpInside)
+        continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+    }
     
     @objc func continueButtonTapped() {
             
         print("Chamando próxima tela")
     }
     
-    @objc func skipButtonTapped() {
+    @objc func hideJumpButtonTapped() {
             
         print("Pulando tela")
     }
@@ -160,54 +139,39 @@ class HobbiesView: UIViewController {
         setupView()
         setupDefaults()
         setupConstraints()
+        activeButton()
     }
     
     func setupView() {
+            
+        view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.addSubviews([backgroundImage, bravveIcon, progressBarStackView, infoLabel, hobbiesStackView, continueButton, skipButton])
-        
-        view.backgroundColor = UIColor(named: "background")
+        view.createRegisterCustomBar(progressBarButtons: buttons, hideJumpButton: false) {_ in
+            
+            // call screen it should go to
+           
+        }
     }
     
     func setupDefaults() {
         
-        bravveIcon.setLogoToDefault()
-        //backgroundImage.setWayToDefault(.)
+        continueButton.setToBottomButtonKeyboardDefault()
+        backgroundImage.setWayToDefault(.wayName)
     }
     
     func setupConstraints() {
-        setProgressBarStackViewConstraints()
+        
         setInfoLabelConstraints()
         setHobbiesStackConstraints()
-        setSkipButtonConstraints()
-        setContinueButtonConstraints()
     }
     
-    func setBravveImageConstraints() {
-        
-        let constraint = [
-            bravveIcon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 65),
-            bravveIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bravveIcon.widthAnchor.constraint(equalToConstant: CGFloat(123).generateSizeForScreen),
-            bravveIcon.heightAnchor.constraint(equalToConstant: CGFloat(23).generateSizeForScreen)
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
-    }
-    
-    private func setProgressBarStackViewConstraints() {
-        
-        progressBarStackView.constraintOutsideTo(.top, bravveIcon, 50)
-        progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        progressBarStackView.heightAnchorInSuperview()
-    }
     
     private func setInfoLabelConstraints() {
         let constraint = [
-            infoLabel.topAnchor.constraint(equalTo: progressBarStackView.bottomAnchor, constant: 55),
-            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22.5),
-            infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22.5),
+            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(236).generateSizeForScreen),
+            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22.5).generateSizeForScreen),
+            infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22.5).generateSizeForScreen),
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -216,35 +180,12 @@ class HobbiesView: UIViewController {
     
     private func setHobbiesStackConstraints() {
         let constraint = [
-            hobbiesStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 55),
+            hobbiesStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
             hobbiesStackView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
         ]
         constraint.forEach { item in
             item.isActive = true
         }
     }
-    
-    private func setContinueButtonConstraints() {
-        let constraint = [
-            continueButton.topAnchor.constraint(equalTo: hobbiesStackView.bottomAnchor, constant: 108),
-            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            continueButton.widthAnchor.constraint(equalToConstant: CGFloat(331).generateSizeForScreen),
-            continueButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen)
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
-    }
-    
-    private func setSkipButtonConstraints() {
-        let constraint = [
-            skipButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: CGFloat(34).generateSizeForScreen),
-            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
-    }
-  
-   
+
 }
