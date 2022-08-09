@@ -66,7 +66,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var filterStackView: UIStackView = {
         
-        let margins = CGFloat(20).generateSizeForScreen
+        let margins = CGFloat(13).generateSizeForScreen
         
         let stackView = UIStackView()
         stackView.setToDefaultBackgroundColor()
@@ -76,7 +76,7 @@ class HomeOpenView: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
-                                               bottom: CGFloat(10).generateSizeForScreen,
+                                               bottom: CGFloat(13).generateSizeForScreen,
                                                right: margins)
         
         return stackView
@@ -135,20 +135,67 @@ class HomeOpenView: UIViewController {
         
         view.setToDefaultBackgroundColor()
         
+        var customBarWithFilter: CustomBarWithFilter
+        let smallFont = UIFont(name: FontsBravve.light.rawValue,
+                               size: CGFloat(11).generateSizeForScreen)
+        
+        customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
+
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
+        }
+        
         authManager.getDataArray { (states: [States]?) in
 
             guard let states = states else {
                 return
             }
 
-            DispatchQueue.main.async {
-                self.customBar.setToDefaultCustomBarWithFilter (states: states) {_ in
-                    
-                    let filterView = FilterScreen()
-                    filterView.modalPresentationStyle = .fullScreen
-                    self.present(filterView, animated: true)
+            var actions = [UIAction]()
+
+            let stateHandler = {(action: UIAction) in
+
+                for state in states {
+
+                    if state.code == action.title {
+
+                        self.authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
+
+                            guard let cities = cities else {return}
+
+                            var actions = [UIAction]()
+
+                            let cityHandler = {(action: UIAction) in
+                                
+                                customBarWithFilter.cityChosedLabel.text = action.title
+                                customBarWithFilter.cityLabel.font = smallFont
+                            }
+                            
+                            for city in cities {
+
+                                guard let cityname = city.name else {return}
+
+                                actions.append(UIAction(title: cityname,
+                                                        handler: cityHandler))
+                            }
+                            
+                            customBarWithFilter.stateChosedLabel.text = action.title
+                            customBarWithFilter.stateLabel.font = smallFont
+
+                            customBarWithFilter.rightButton.setMenuForButton(actions)
+                        }
+                    }
                 }
             }
+            
+            for state in states {
+
+                actions.append(UIAction(title: state.code,
+                                        handler: stateHandler))
+            }
+
+            customBarWithFilter.leftButton.setMenuForButton(actions)
         }
     }
     

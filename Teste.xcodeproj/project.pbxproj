@@ -32,6 +32,7 @@
 		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
+		143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */; };
 		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
 		1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */; };
 		1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */; };
@@ -104,6 +105,7 @@
 		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
+		143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarWithFilterStruct.swift; sourceTree = "<group>"; };
 		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
 		1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonsBravveEnum.swift; path = Teste/ButtonsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
 		1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsBravveEnum.swift; path = Teste/ColorsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
@@ -243,12 +245,16 @@
 				1440616528A2BCA500F82171 /* Extensions */,
 				13080CBC28A1890000A064B0 /* Service */,
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
+				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
+				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
+				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
+				143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */,
 				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
 				148A86EA289C64540019ECFE /* BravveTabBar.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
@@ -260,9 +266,6 @@
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
 				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
-				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
-				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
-				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
 				1410B92428A1740400C36902 /* FilterScreen.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
@@ -426,6 +429,7 @@
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
+				143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
