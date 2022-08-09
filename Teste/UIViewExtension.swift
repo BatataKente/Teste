@@ -39,33 +39,42 @@ extension UIView {
 ///   - hideJumpButton: set false if show a jump button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
-                                      _ handler: @escaping UIActionHandler,
-                                      hideJumpButton: Bool = true) {
+                                      backAction: UIAction,
+                                      jumpAction: UIAction? = nil) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
-        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
-        
-        let jumpButton = UIButton()
-        jumpButton.configuration = .plain()
-        jumpButton.isHidden = hideJumpButton
-        
-        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
-                                                             size: CGFloat(15).generateSizeForScreen),
-                        NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
-        
-        let attributedTitle = NSAttributedString(string: "Pular",
-                                                 attributes: attribute as [NSAttributedString.Key : Any])
-       
-        jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
-        
-        jumpButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        backButton.addAction(backAction, for: .touchUpInside)
         
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        self.addSubviews([backButton, logoImageView, jumpButton])
+        self.addSubviews([backButton, logoImageView])
+        
+        if let jumpAction = jumpAction {
+            
+            let jumpButton = UIButton()
+            jumpButton.configuration = .plain()
+            
+            let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
+                                                                 size: CGFloat(15).generateSizeForScreen),
+                            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
+            
+            let attributedTitle = NSAttributedString(string: "Pular",
+                                                     attributes: attribute as [NSAttributedString.Key : Any])
+           
+            jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
+            
+            jumpButton.addAction(jumpAction, for: .touchUpInside)
+            
+            self.addSubview(jumpButton)
+            
+            jumpButton.constraintInsideTo(.centerY, logoImageView)
+            jumpButton.constraintInsideTo(.height, logoImageView)
+            jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
+                                          CGFloat(30).generateSizeForScreen)
+        }
         
         if let progressBarButtons = progressBarButtons {
             
@@ -94,11 +103,6 @@ extension UIView {
         backButton.constraintInsideTo(.height, logoImageView)
         backButton.constraintOutsideTo(.width, backButton)
         backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
-                                      CGFloat(30).generateSizeForScreen)
-        
-        jumpButton.constraintInsideTo(.centerY, logoImageView)
-        jumpButton.constraintInsideTo(.height, logoImageView)
-        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
                                       CGFloat(30).generateSizeForScreen)
     }
     
