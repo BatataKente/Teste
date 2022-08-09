@@ -1,5 +1,5 @@
 //
-//  RobbiesView.swift
+//  HobbiesView.swift
 //  TestB
 //
 //  Created by user220237 on 8/9/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RobbiesView: UIViewController {
+class HobbiesView: UIViewController {
     
     let backgroundImage = UIImageView()
     
@@ -147,7 +147,8 @@ class RobbiesView: UIViewController {
         view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.createRegisterCustomBar(progressBarButtons: buttons, hideJumpButton: false) {_ in
+        view.createRegisterCustomBar(progressBarButtons: buttons,
+                                     hideJumpButton: false) {_ in
             
             // call screen it should go to
            

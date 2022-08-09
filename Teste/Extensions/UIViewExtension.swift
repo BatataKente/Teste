@@ -35,17 +35,19 @@ extension UIView {
 /// - Parameters:
 ///   - imageName: A ButtonsBravve enum referring to the images name of the button name available in assets
 ///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
-///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
+///   - jumpAction: The action of jump button
+///   - backHandler: The action of back button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
-                                      backAction: UIAction,
-                                      jumpAction: UIAction? = nil) {
+                                      hideJumpButton: Bool = true,
+                                      jumpAction: UIAction? = nil,
+                                      _ backHandler: @escaping UIActionHandler) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
-        backButton.addAction(backAction, for: .touchUpInside)
+        backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
         
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
@@ -148,6 +150,9 @@ extension UIView {
     }
     
 /// This function transforms a view into a bar with a filter
+/// - Parameters:
+///   - states: The data that will be appear on button drop down menu
+///   - handler: The action of filter Button
     open func setToDefaultCustomBarWithFilter(states: [States], _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)

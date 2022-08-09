@@ -31,15 +31,16 @@
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
 		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
+		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
+		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
+		1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */; };
+		1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */; };
+		1440616E28A2BD7900F82171 /* ImagesBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616D28A2BD7900F82171 /* ImagesBravveEnum.swift */; };
 		14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
 		145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */; };
 		1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */; };
-		1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */; };
-		1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */; };
 		1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */; };
-		1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */; };
-		1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22428995EFE00B409E5 /* RideUpEnum.swift */; };
 		147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */; };
 		147B1C862898482100A5E3EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147B1C852898482100A5E3EE /* Assets.xcassets */; };
 		1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */; };
@@ -74,7 +75,7 @@
 		CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */; };
 		CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */; };
 		CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */; };
-		CFBF087528A2ACFC00D39DCF /* RobbiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF087328A2ACFC00D39DCF /* RobbiesView.swift */; };
+		CFBF087528A2ACFC00D39DCF /* HobbiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF087328A2ACFC00D39DCF /* HobbiesView.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,15 +103,16 @@
 		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
+		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
+		1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonsBravveEnum.swift; path = Teste/ButtonsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
+		1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsBravveEnum.swift; path = Teste/ColorsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
+		1440616D28A2BD7900F82171 /* ImagesBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesBravveEnum.swift; path = Teste/ImagesBravveEnum.swift; sourceTree = SOURCE_ROOT; };
 		14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalizacaoCadastroView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
-		1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
-		1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
-		1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesBravveEnum.swift; sourceTree = "<group>"; };
-		1478A22428995EFE00B409E5 /* RideUpEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUpEnum.swift; sourceTree = "<group>"; };
 		147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsView.swift; sourceTree = "<group>"; };
 		147B1C852898482100A5E3EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenModel.swift; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 		CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelReservationsV1.swift; sourceTree = "<group>"; };
 		CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelUsersV1.swift; sourceTree = "<group>"; };
 		CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
-		CFBF087328A2ACFC00D39DCF /* RobbiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobbiesView.swift; sourceTree = "<group>"; };
+		CFBF087328A2ACFC00D39DCF /* HobbiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HobbiesView.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +192,34 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		1440616528A2BCA500F82171 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
+				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
+				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
+				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
+				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
+				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1440616628A2BCB700F82171 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1440616D28A2BD7900F82171 /* ImagesBravveEnum.swift */,
+				1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */,
+				1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */,
+				1440616728A2BD5F00F82171 /* RideUpEnum.swift */,
+				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
+				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
+				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
+				143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		14CBDBB92889B72300EA8EDD = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +239,8 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				1440616628A2BCB700F82171 /* Enums */,
+				1440616528A2BCA500F82171 /* Extensions */,
 				13080CBC28A1890000A064B0 /* Service */,
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
@@ -217,19 +249,6 @@
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
-				1478A21E28995E9B00B409E5 /* ColorsBravveEnum.swift */,
-				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
-				1478A21C28995E6A00B409E5 /* ButtonsBravveEnum.swift */,
-				1478A22228995EDA00B409E5 /* ImagesBravveEnum.swift */,
-				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
-				1478A22428995EFE00B409E5 /* RideUpEnum.swift */,
-				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
-				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
-				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
-				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
-				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
-				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
-				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
 				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
 				148A86EA289C64540019ECFE /* BravveTabBar.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
@@ -249,7 +268,7 @@
 				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
 				CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */,
 				CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */,
-				CFBF087328A2ACFC00D39DCF /* RobbiesView.swift */,
+				CFBF087328A2ACFC00D39DCF /* HobbiesView.swift */,
 				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
 				13F1768528941C6200C5FD05 /* ConfirmDataView.swift */,
 				0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */,
@@ -354,15 +373,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
-				CFBF087528A2ACFC00D39DCF /* RobbiesView.swift in Sources */,
+				CFBF087528A2ACFC00D39DCF /* HobbiesView.swift in Sources */,
+				1440616E28A2BD7900F82171 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
-				1478A21F28995E9B00B409E5 /* ColorsBravveEnum.swift in Sources */,
 				13080CB928A17F2A00A064B0 /* AccessTokenModel.swift in Sources */,
+				143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
-				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,
+				1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
 				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
@@ -383,10 +403,12 @@
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
+				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
 				CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
+				1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
@@ -399,7 +421,6 @@
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
-				1478A22528995EFE00B409E5 /* RideUpEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */,
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
@@ -409,7 +430,6 @@
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */,
-				1478A21D28995E6A00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				14C8B70E289DC2C600ABC321 /* LoginView.swift in Sources */,
 				14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */,
 				CFBF085F28A2810600D39DCF /* ModelPartnersV1.swift in Sources */,
