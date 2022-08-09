@@ -42,14 +42,14 @@ final class ReservationsThreeViewController: UIViewController {
                              cardCreditLabel,
                              ccValidateExpirationTextfield,
                              sourceSecurityTextfield,
-                             countryButton,
+                             countryField,
                              nameHolderTextfield,
                              cpfTextfield,
                              accessoryButtonCcValidate,
                              accessoryButtonSourceSecurity,
                              countryImageFlag,
                              accessoryButtonCountryArrow,
-                             finishButton,
+                             finishButton,resumeButton
                              
                             ])
        }
@@ -164,6 +164,13 @@ final class ReservationsThreeViewController: UIViewController {
         return label
         
      }()
+    private lazy var resumeButton: UIButton = {
+        let view = UIButton()
+        view.setImage(UIImage(named: "arrowDown"), for: .normal)
+        view.setImage(UIImage(named: "arrowUp"), for: .selected)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     //MARK: lineImage
     private lazy var lineImage: UIButton = {
@@ -258,12 +265,14 @@ final class ReservationsThreeViewController: UIViewController {
         }()
         
     //MARK: countryTextfield
-        private lazy var countryButton: UIButton = {
-            let view = UIButton()
+        private lazy var countryField: UITextField = {
+            let view = UITextField()
             view.layer.cornerRadius = 8
             view.layer.borderWidth = 0.3
             view.backgroundColor = .white
             view.addTarget(self, action: #selector(tapAccessoryCc), for: .touchUpInside)
+            view.isUserInteractionEnabled = false
+            view.attributedPlaceholder = NSAttributedString(string: "    País", attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "labelTextField") as Any])
        //     view.attributedPlaceholder = NSAttributedString(string: "    País", attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "labelTextField") as Any])
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
@@ -282,8 +291,6 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: accessoryButtonCcValidate
         private lazy var accessoryButtonCountryArrow: UIButton = {
         let view = UIButton()
-            view.setTitle("SELECIONAR", for: .normal)
-            view.tintColor = .black
         view.setImage(UIImage(named: "arrowDown"), for: .normal)
         view.setImage(UIImage(named: "arrowUp"), for: .selected)
         view.addTarget(self, action: #selector(tapAccessoryCc), for: .touchUpInside)
@@ -296,30 +303,10 @@ final class ReservationsThreeViewController: UIViewController {
         
         accessoryButtonCountryArrow.isSelected.toggle()
         
-        let optionClosure = {(action : UIAction) in
-            print(action.title)}
-        accessoryButtonCountryArrow.menu = UIMenu(children : [
-            UIAction(title: "SELECIONE", state: .on, handler: optionClosure),
-            UIAction(title: "R$ 12,00", state: .on, handler: optionClosure),
-            UIAction(title: "R$ 15,00", state: .on, handler: optionClosure),
-            UIAction(title: "R$ 20,00", state: .on, handler: optionClosure),
-            UIAction(title: "R$ 25,00", state: .on, handler: optionClosure),
-            UIAction(title: "R$ 35,00",handler: optionClosure)])
-        accessoryButtonCountryArrow.showsMenuAsPrimaryAction = true
-        accessoryButtonCountryArrow.changesSelectionAsPrimaryAction = true
+        
         
     }
     
-    
-//        accessoryButtonCountryArrow.showsMenuAsPrimaryAction = true
-//        accessoryButtonCountryArrow.changesSelectionAsPrimaryAction = true
-//                let optionClosure = {(action : UIAction) in
-//                    print(action.title)}
-//                accessoryButtonCountryArrow.menu = UIMenu(children : [
-//                    UIAction(title: "Brasil", state: .on, handler: optionClosure),
-//                    UIAction(title: "Áustria", state: .on, handler: optionClosure),
-//                    UIAction(title: "México", state: .on, handler: optionClosure),
-//                    ])
                 
 
     
@@ -425,21 +412,23 @@ final class ReservationsThreeViewController: UIViewController {
                 accessoryButtonSourceSecurity.trailingAnchor.constraint(equalTo: sourceSecurityTextfield.trailingAnchor, constant:  -13),
                 accessoryButtonSourceSecurity.centerYAnchor.constraint(equalTo: sourceSecurityTextfield.centerYAnchor),
                 
-                countryButton.topAnchor.constraint(equalTo: ccValidateExpirationTextfield.bottomAnchor, constant: 15),
-                countryButton.centerXAnchor.constraint(equalTo: tableviewCc.centerXAnchor),
-                countryButton.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
-                countryButton.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
-                countryButton.heightAnchor.constraint(equalToConstant: 60),
+                countryField.topAnchor.constraint(equalTo: ccValidateExpirationTextfield.bottomAnchor, constant: 15),
+                countryField.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
+                countryField.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
+                countryField.heightAnchor.constraint(equalToConstant: 60),
                 countryImageFlag.trailingAnchor.constraint(equalTo: accessoryButtonCountryArrow.leadingAnchor, constant:  -16),
-                countryImageFlag.centerYAnchor.constraint(equalTo: countryButton.centerYAnchor),
+                countryImageFlag.centerYAnchor.constraint(equalTo: countryField.centerYAnchor),
+                accessoryButtonCountryArrow.trailingAnchor.constraint(equalTo: countryField.trailingAnchor,constant: -12.36),
+                accessoryButtonCountryArrow.centerYAnchor.constraint(equalTo: countryField.centerYAnchor),
+                accessoryButtonCountryArrow.widthAnchor.constraint(equalToConstant: 13.3),
+                accessoryButtonCountryArrow.heightAnchor.constraint(equalToConstant: 7.66),
+                resumeButton.leadingAnchor.constraint(equalTo: resumeLabel.trailingAnchor,constant: 6),
+                resumeButton.centerYAnchor.constraint(equalTo: resumeLabel.centerYAnchor),
                 
                 
-                
-                accessoryButtonCountryArrow.trailingAnchor.constraint(equalTo: countryButton.trailingAnchor, constant:  -13),
-                accessoryButtonCountryArrow.centerYAnchor.constraint(equalTo: countryButton.centerYAnchor),
             
                 
-                nameHolderTextfield.topAnchor.constraint(equalTo: countryButton.bottomAnchor, constant: 15),
+                nameHolderTextfield.topAnchor.constraint(equalTo: countryField.bottomAnchor, constant: 15),
                 nameHolderTextfield.centerXAnchor.constraint(equalTo: tableviewCc.centerXAnchor),
                 nameHolderTextfield.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
                 nameHolderTextfield.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
