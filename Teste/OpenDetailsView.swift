@@ -179,7 +179,10 @@ class OpenDetailsView: UIViewController {
         label_8.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, tagsStackView])
+        let localDetailsTableView = UITableView()
+        localDetailsTableView.backgroundColor = .green
+        
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsTableView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -235,8 +238,16 @@ class OpenDetailsView: UIViewController {
         label_8.constraintInsideTo(.leading, label_7)
         label_8.constraintInsideTo(.trailing, label_7)
         
-        label_8.constraintInsideTo(.bottom, view,
-                                   CGFloat(20).generateSizeForScreen)
+        localDetailsTableView.constraintOutsideTo(.top, label_8,
+                                                  CGFloat(20).generateSizeForScreen)
+        localDetailsTableView.constraintInsideTo(.leading, label_8,
+                                                 CGFloat(20).generateSizeForScreen)
+        localDetailsTableView.constraintInsideTo(.trailing, label_8,
+                                                 CGFloat(20).generateSizeForScreen)
+        localDetailsTableView.heightAnchorInSuperview(100)
+        
+        localDetailsTableView.constraintInsideTo(.bottom, view,
+                                                 CGFloat(20).generateSizeForScreen)
         
         return scrollView
     }()
