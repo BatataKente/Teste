@@ -38,7 +38,7 @@ extension UIView {
 ///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
-                                      progressBarButtons: [UIButton],
+                                      progressBarButtons: [UIButton]? = nil,
                                       _ handler: @escaping UIActionHandler,
                                       hideJumpButton: Bool = true) {
         
@@ -65,9 +65,19 @@ extension UIView {
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+        self.addSubviews([backButton, logoImageView, jumpButton])
         
-        self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
+        if let progressBarButtons = progressBarButtons {
+            
+            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+            
+            self.addSubview(progressBarStackView)
+            
+            progressBarStackView.constraintOutsideTo(.top, logoImageView,
+                                                     CGFloat(60).generateSizeForScreen)
+            progressBarStackView.constraintInsideTo(.centerX,
+                                                    self.safeAreaLayoutGuide)
+        }
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
         logoImageView.constraintInsideTo(.top, self, CGFloat(65).generateSizeForScreen)
@@ -90,11 +100,6 @@ extension UIView {
         jumpButton.constraintInsideTo(.height, logoImageView)
         jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
                                       CGFloat(30).generateSizeForScreen)
-            
-        progressBarStackView.constraintOutsideTo(.top, logoImageView,
-                                                 CGFloat(60).generateSizeForScreen)
-        progressBarStackView.constraintInsideTo(.centerX,
-                                                self.safeAreaLayoutGuide)
     }
     
 /// This function transforms a view into a bar with a back button and title
@@ -158,10 +163,36 @@ extension UIView {
                                      size: CGFloat(16).generateSizeForScreen)
         let buttonsImage = ButtonsBravve.arrowDown.rawValue
         
+        let authManager = AuthManager()
+                
         let stateHandler = {(action: UIAction) in
 
             stateChosedLabel.text = action.title
             stateLabel.font = smallFont
+            for state in states {
+                if state.code == action.title {
+                    authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
+                        var actions = [UIAction]()
+                        guard let cities = cities else {
+                            return
+                        }
+                        
+                        let cityHandler = {(action: UIAction) in
+
+                            cityChosedLabel.text = action.title
+                            cityLabel.font = smallFont
+                        }
+                        
+                        for city in cities {
+                            guard let cityName = city.name else { return }
+                            actions.append(UIAction(title: cityName, handler: cityHandler))
+                        }
+                        
+                        rightButton.setMenuForButton(actions)
+                    }
+                }
+            }
+            
         }
 
         stateLabel.text = "UF"
@@ -175,21 +206,36 @@ extension UIView {
         leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
-        let cityHandler = {(action: UIAction) in
-
-            cityChosedLabel.text = action.title
-            cityLabel.font = smallFont
-        }
+//        let cityHandler = {(action: UIAction) in
+//
+//            cityChosedLabel.text = action.title
+//            cityLabel.font = smallFont
+//        }
+        
+//        authManager.getDataArray(id: "1") { (cities: [Cities]?) in
+//            var actions = [UIAction]()
+//            guard let cities = cities else {
+//                return
+//            }
+//
+//            for city in cities {
+//                guard let cityName = city.name else { return }
+//                actions.append(UIAction(title: cityName, handler: cityHandler))
+//            }
+//
+//            rightButton.setMenuForButton(actions)
+//        }
+        
         
         cityLabel.text = "Cidade"
         cityLabel.font = initialFont
         cityChosedLabel.font = chosedLabelFont
-        rightButton.setMenuForButton([
-
-            UIAction(title: "action1",handler: cityHandler),
-            UIAction(title: "action2",handler: cityHandler)
-
-        ])
+//        rightButton.setMenuForButton([
+//
+//            UIAction(title: "action1",handler: cityHandler),
+//            UIAction(title: "action2",handler: cityHandler)
+//
+//        ])
         rightButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,

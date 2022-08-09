@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct States: Codable {
+struct UtilsStates: Codable {
      var id: Int?
      var code: String?
      var name: String?
