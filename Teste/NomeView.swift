@@ -166,7 +166,13 @@ class NomeView: UIViewController {
         
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
         
-        view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
+        let handler = {(action: UIAction) in
+            
+            print("coiso")
+        }
+        
+        view.createRegisterCustomBar(progressBarButtons: buttons,
+                                     jumpAction: UIAction(handler: handler)) {_ in
             
             self.nomeViewModel.turnBackScreen()
         }
