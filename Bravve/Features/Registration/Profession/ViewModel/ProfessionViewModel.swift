@@ -8,23 +8,23 @@
 import UIKit
 
 class ProfessionViewModel {
-    
+
     func selectAreaMenu(_ handler: @escaping UIActionHandler) -> [UIAction] {
             
-            var menuSelectArea: [UIAction] = []
+            var selectAreaMenu: [UIAction] = []
             for i in 1...10 {
-                menuSelectArea.append(UIAction(title: "Trabalho \(i)" , handler: handler))
+                selectAreaMenu.append(UIAction(title: "Trabalho \(i)" , handler: handler))
             }
-            return menuSelectArea
+            return selectAreaMenu
         }
     
     func workRegimeMenu(_ handler: @escaping UIActionHandler) -> [UIAction] {
             
-        var menuWorkRegime: [UIAction] = []
+        var workRegimeMenu: [UIAction] = []
         
-        menuWorkRegime.append(UIAction(title: "Home Office", handler: handler))
-        menuWorkRegime.append(UIAction(title: "Híbrido", handler: handler))
-        menuWorkRegime.append(UIAction(title: "Presencial" , handler: handler))
-        return menuWorkRegime
+        workRegimeMenu.append(UIAction(title: "Home Office", handler: handler))
+        workRegimeMenu.append(UIAction(title: "Híbrido", handler: handler))
+        workRegimeMenu.append(UIAction(title: "Presencial" , handler: handler))
+        return workRegimeMenu
     }
 }
