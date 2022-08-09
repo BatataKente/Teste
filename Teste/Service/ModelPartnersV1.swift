@@ -12,7 +12,7 @@ struct PartnersList: Codable {
     var social_name: String?
     var registered_number: String?
     var market_segment: PartnerMarketSegment?
-    var company_size: CompanySize?
+    var company_size: PartnerCompanySize?
     var company_classification: PartnerCompanySize?
     var administrator_partner: AdministratorPartner?
 }
@@ -66,7 +66,7 @@ struct PartnersContacts: Codable {
     var phone_number: String?
 }
 
-struct DoorLockManufacture: Codable {
+struct PartnerDoorLockManufacture: Codable {
     var id: Int?
     var name: Int?
 }
@@ -76,7 +76,7 @@ struct PartnersDoorlocks: Codable {
     var door_lock_serial: Int?
     var door_lock_code: String?
     var door_lock_key: String?
-    var door_lock_manufacture: DoorLockManufacture?
+    var door_lock_manufacture: PartnerDoorLockManufacture?
 }
 
 
