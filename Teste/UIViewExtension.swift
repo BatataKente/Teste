@@ -35,8 +35,9 @@ extension UIView {
 /// - Parameters:
 ///   - imageName: A ButtonsBravve enum referring to the images name of the button name available in assets
 ///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
-///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
+///   - jumpAction: The action of jump button
+///   - backHandler: The action of back button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
                                       hideJumpButton: Bool = true,
