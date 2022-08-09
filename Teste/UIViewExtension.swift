@@ -38,7 +38,7 @@ extension UIView {
 ///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
-                                      progressBarButtons: [UIButton],
+                                      progressBarButtons: [UIButton]? = nil,
                                       _ handler: @escaping UIActionHandler,
                                       hideJumpButton: Bool = true) {
         
@@ -65,21 +65,18 @@ extension UIView {
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
+        self.addSubviews([backButton, logoImageView, jumpButton])
         
-        if progressBarButtons != [] {
+        if let progressBarButtons = progressBarButtons {
             
             let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
             
-            self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
+            self.addSubview(progressBarStackView)
             
             progressBarStackView.constraintOutsideTo(.top, logoImageView,
                                                      CGFloat(60).generateSizeForScreen)
             progressBarStackView.constraintInsideTo(.centerX,
                                                     self.safeAreaLayoutGuide)
-        }
-        else {
-            
-            self.addSubviews([backButton, logoImageView, jumpButton])
         }
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
