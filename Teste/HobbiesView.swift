@@ -1,5 +1,5 @@
 //
-//  RobbiesView.swift
+//  HobbiesView.swift
 //  TestB
 //
 //  Created by user220237 on 8/9/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RobbiesView: UIViewController {
+class HobbiesView: UIViewController {
     
     let backgroundImage = UIImageView()
     
