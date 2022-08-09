@@ -44,7 +44,7 @@ class HomeOpenView: UIViewController {
                                                     price: "3,50 crédito/ hora",
                                                     details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
                                         ReserveData(title: "BOXOFFICE",
-                                                    description: "Pelos poderes de greyskull",
+                                                    description: "Numa esquina charmosa, um hotel",
                                                     image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
                                                     photoTitle: "WORKPASS",
                                                     name: "Hotel Saint",

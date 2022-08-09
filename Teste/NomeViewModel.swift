@@ -59,7 +59,9 @@ class NomeViewModel {
             
                 makeEmailScreen()
             
-            default: break
+            default:
+            
+                delegate?.presentOtherView(PasswordView())
         }
     }
     
@@ -164,4 +166,6 @@ protocol NomeViewModelProtocol {
     func setKeyboardType(keyboardType: UIKeyboardType)
     
     func dismiss()
+    
+    func presentOtherView(_ viewController: UIViewController)
 }

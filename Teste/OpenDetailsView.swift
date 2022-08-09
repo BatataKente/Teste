@@ -179,10 +179,11 @@ class OpenDetailsView: UIViewController {
         label_8.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        let localDetailsTableView = UITableView()
-        localDetailsTableView.backgroundColor = .green
+        let localDetailsView = UITableView()
+        localDetailsView.layer.cornerRadius = 12
+        localDetailsView.backgroundColor = .green
         
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsTableView])
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -238,15 +239,15 @@ class OpenDetailsView: UIViewController {
         label_8.constraintInsideTo(.leading, label_7)
         label_8.constraintInsideTo(.trailing, label_7)
         
-        localDetailsTableView.constraintOutsideTo(.top, label_8,
+        localDetailsView.constraintOutsideTo(.top, label_8,
                                                   CGFloat(20).generateSizeForScreen)
-        localDetailsTableView.constraintInsideTo(.leading, label_8,
+        localDetailsView.constraintInsideTo(.leading, label_8,
                                                  CGFloat(20).generateSizeForScreen)
-        localDetailsTableView.constraintInsideTo(.trailing, label_8,
+        localDetailsView.constraintInsideTo(.trailing, label_8,
                                                  CGFloat(20).generateSizeForScreen)
-        localDetailsTableView.heightAnchorInSuperview(100)
+        localDetailsView.heightAnchorInSuperview(100)
         
-        localDetailsTableView.constraintInsideTo(.bottom, view,
+        localDetailsView.constraintInsideTo(.bottom, view,
                                                  CGFloat(20).generateSizeForScreen)
         
         return scrollView
