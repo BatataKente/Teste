@@ -65,9 +65,22 @@ extension UIView {
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
         
-        self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
+        if progressBarButtons != [] {
+            
+            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+            
+            self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
+            
+            progressBarStackView.constraintOutsideTo(.top, logoImageView,
+                                                     CGFloat(60).generateSizeForScreen)
+            progressBarStackView.constraintInsideTo(.centerX,
+                                                    self.safeAreaLayoutGuide)
+        }
+        else {
+            
+            self.addSubviews([backButton, logoImageView, jumpButton])
+        }
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
         logoImageView.constraintInsideTo(.top, self, CGFloat(65).generateSizeForScreen)
@@ -90,11 +103,6 @@ extension UIView {
         jumpButton.constraintInsideTo(.height, logoImageView)
         jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
                                       CGFloat(30).generateSizeForScreen)
-            
-        progressBarStackView.constraintOutsideTo(.top, logoImageView,
-                                                 CGFloat(60).generateSizeForScreen)
-        progressBarStackView.constraintInsideTo(.centerX,
-                                                self.safeAreaLayoutGuide)
     }
     
 /// This function transforms a view into a bar with a back button and title
