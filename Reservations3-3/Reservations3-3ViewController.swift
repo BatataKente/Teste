@@ -19,6 +19,7 @@ final class ReservationsThreeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupView()
         setupConstrains()
+    
         
     }
     
@@ -49,7 +50,10 @@ final class ReservationsThreeViewController: UIViewController {
                              accessoryButtonSourceSecurity,
                              countryImageFlag,
                              accessoryButtonCountryArrow,
-                             finishButton,resumeButton
+                             resumeButton,
+                             finishButton
+                            
+                             
                              
                             ])
        }
@@ -333,19 +337,9 @@ final class ReservationsThreeViewController: UIViewController {
             return view
         }()
     
-    //MARK: finishButton
-        private lazy var finishButton: UIButton = {
-            let view = UIButton()
-            view.setTitle("Finalizar", for: .normal)
-            view.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-            view.setTitleColor(UIColor.systemBackground, for: .normal)
-            view.titleLabel?.textAlignment = .center
-            view.backgroundColor = UIColor(named: "buttonGray")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        
-       
+    //MARK: FinishButton
+    let finishButton = UIButton()
+    
         //MARK: SetupConstrains
         private func setupConstrains() {
             
@@ -440,14 +434,12 @@ final class ReservationsThreeViewController: UIViewController {
                 cpfTextfield.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
                 cpfTextfield.heightAnchor.constraint(equalToConstant: 60),
                 
-                finishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                finishButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                finishButton.heightAnchor.constraint(equalToConstant: 51),
-                
 
             ])
     
+            
+            finishButton.setToBottomButtonKeyboardDefault()
+          
         }
     
     }
