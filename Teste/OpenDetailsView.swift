@@ -117,35 +117,35 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        let nameLabel = UILabel()
-        nameLabel.text = reserveData.name
-        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                size: CGFloat(20).generateSizeForScreen)
-        nameLabel.textColor = textColor
+        let label_1 = UILabel()
+        label_1.text = reserveData.name
+        label_1.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(20).generateSizeForScreen)
+        label_1.textColor = textColor
         
-        let hourPriceLabel = UILabel()
-        hourPriceLabel.text = "3,50"
-        hourPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                     size: CGFloat(30).generateSizeForScreen)
-        hourPriceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        let label_2 = UILabel()
+        label_2.text = "3,50"
+        label_2.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(30).generateSizeForScreen)
+        label_2.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
         
-        let hourPriceDescriptionLabel = UILabel()
-        hourPriceDescriptionLabel.text = "crédito/hora"
-        hourPriceDescriptionLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-        hourPriceDescriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                                size: CGFloat(12).generateSizeForScreen)
+        let label_3 = UILabel()
+        label_3.text = "crédito/hora"
+        label_3.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        label_3.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
         
-        let dayPriceLabel = UILabel()
-        dayPriceLabel.text = "18,20"
-        dayPriceLabel.textColor = textColor
-        dayPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                    size: CGFloat(20).generateSizeForScreen)
+        let label_4 = UILabel()
+        label_4.text = "18,20"
+        label_4.textColor = textColor
+        label_4.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(20).generateSizeForScreen)
         
-        let dayPriceDescriptionLabel = UILabel()
-        dayPriceDescriptionLabel.text = "crédito/hora"
-        dayPriceDescriptionLabel.textColor = textColor
-        dayPriceDescriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                               size: CGFloat(12).generateSizeForScreen)
+        let label_5 = UILabel()
+        label_5.text = "crédito/hora"
+        label_5.textColor = textColor
+        label_5.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
         
         let buttons = createCapsuleButtons(["Tecnológico", "Sala de reunião", "Colaborativo"],
                                             .capsuleButton,
@@ -154,7 +154,32 @@ class OpenDetailsView: UIViewController {
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = 5
         
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, nameLabel, hourPriceLabel, hourPriceDescriptionLabel, dayPriceLabel, dayPriceDescriptionLabel, tagsStackView])
+        let label_6 = UILabel()
+        label_6.text = """
+        Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
+        
+        Um refúgio paulistano na esquina da Gabriel Monteiro da Silva com a Juquiá,  o paraíso do design. Com uma pegada cultural, o Kamy propicia a seus frequentadores encontrar exposições de diferentes artistas no seu espaço.
+
+        Trabalho + Café + Cultura, precisa de mais? Então reserve =).
+        """
+        label_6.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label_6.numberOfLines = 0
+        label_6.font = UIFont(name: FontsBravve.regular.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+        
+        let label_7 = UILabel()
+        label_7.text = "Giovanna"
+        label_7.textColor = textColor
+        label_7.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+        
+        let label_8 = UILabel()
+        label_8.text = "Community Manager"
+        label_8.textColor = textColor
+        label_8.font = UIFont(name: FontsBravve.regular.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+        
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, tagsStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -174,25 +199,44 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
-        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, photoCollectionView)
+        label_1.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_1.constraintInsideTo(.leading, photoCollectionView)
         
-        hourPriceLabel.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
-        hourPriceLabel.constraintOutsideTo(.trailing, hourPriceDescriptionLabel, CGFloat(5).generateSizeForScreen)
+        label_2.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_2.constraintOutsideTo(.trailing, label_3, CGFloat(5).generateSizeForScreen)
         
-        hourPriceDescriptionLabel.constraintInsideTo(.bottom, hourPriceLabel)
-        hourPriceDescriptionLabel.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_3.constraintInsideTo(.bottom, label_2)
+        label_3.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
         
-        dayPriceLabel.constraintOutsideTo(.top, hourPriceLabel, CGFloat(5).generateSizeForScreen)
-        dayPriceLabel.constraintInsideTo(.leading, hourPriceLabel)
+        label_4.constraintOutsideTo(.top, label_2,
+                                    CGFloat(5).generateSizeForScreen)
+        label_4.constraintInsideTo(.leading, label_2)
         
-        dayPriceDescriptionLabel.constraintOutsideTo(.leading, dayPriceLabel, CGFloat(5).generateSizeForScreen)
-        dayPriceDescriptionLabel.constraintInsideTo(.bottom, dayPriceLabel)
+        label_5.constraintOutsideTo(.leading, label_4,
+                                    CGFloat(5).generateSizeForScreen)
+        label_5.constraintInsideTo(.bottom, label_4)
         
-        tagsStackView.constraintOutsideTo(.top, dayPriceDescriptionLabel, CGFloat(20).generateSizeForScreen)
-        tagsStackView.constraintInsideTo(.leading, nameLabel)
-        tagsStackView.constraintInsideTo(.trailing, hourPriceDescriptionLabel)
-        tagsStackView.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
+        tagsStackView.constraintOutsideTo(.top, label_5,
+                                          CGFloat(20).generateSizeForScreen)
+        tagsStackView.constraintInsideTo(.leading, label_1)
+        tagsStackView.constraintInsideTo(.trailing, label_3)
+        
+        label_6.constraintOutsideTo(.top, tagsStackView,
+                                    CGFloat(20).generateSizeForScreen)
+        label_6.constraintInsideTo(.leading, tagsStackView)
+        label_6.constraintInsideTo(.trailing, tagsStackView)
+        
+        label_7.constraintOutsideTo(.top, label_6,
+                                    CGFloat(20).generateSizeForScreen)
+        label_7.constraintInsideTo(.leading, label_6)
+        label_7.constraintInsideTo(.trailing, label_6)
+        
+        label_8.constraintOutsideTo(.top, label_7)
+        label_8.constraintInsideTo(.leading, label_7)
+        label_8.constraintInsideTo(.trailing, label_7)
+        
+        label_8.constraintInsideTo(.bottom, view,
+                                   CGFloat(20).generateSizeForScreen)
         
         return scrollView
     }()
