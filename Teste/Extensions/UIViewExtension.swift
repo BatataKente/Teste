@@ -150,6 +150,9 @@ extension UIView {
     }
     
 /// This function transforms a view into a bar with a filter
+/// - Parameters:
+///   - states: The data that will be appear on button drop down menu
+///   - handler: The action of filter Button
     open func setToDefaultCustomBarWithFilter(states: [States], _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
