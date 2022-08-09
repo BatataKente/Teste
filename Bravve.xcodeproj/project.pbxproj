@@ -416,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				2EAEDF0B2881DFB300C88374 /* App */,
+				1478A2262899651D00B409E5 /* Enums */,
 				C69617482881EBA000281633 /* Extensions */,
 				2EA90BA7289D0DF0003100FE /* Features */,
 				2EB18F9D289D6A27008A80BF /* Models */,
@@ -430,7 +431,6 @@
 		2EAEDF0B2881DFB300C88374 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				1478A2262899651D00B409E5 /* Enums */,
 				2EB18FAC289D87BE008A80BF /* Managers */,
 				2EAEDEF42881DEA900C88374 /* AppDelegate.swift */,
 				2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */,
