@@ -22,7 +22,6 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -30,36 +29,38 @@ class HomeOpenView: UIViewController {
         .lightContent
     }
     
-//    let authManager = AuthManager()
+    let authManager = AuthManager()
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["a", "b", "c"]
+    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo"]
     
-    private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Pelos poderes de greyskull",
-                                                    image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo")]
+    private let cells: [ReserveData] = [
+        ReserveData(title: "BOXOFFICE",
+        description: "Numa esquina charmosa, um hotel",
+        image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
+        photoTitle: "WORKPASS",
+        name: "Hotel Saint",
+        subName: "UM Coffee Co.",
+        price: "3,50 crédito/ hora",
+        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+        ReserveData(title: "BOXOFFICE",
+        description: "Pelos poderes de greyskull",
+        image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
+        photoTitle: "WORKPASS",
+        name: "Hotel Saint",
+        subName: "UM Coffee Co.",
+        price: "3,50 crédito/ hora",
+        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+        ReserveData(title: "BOXOFFICE",
+        description: "Numa esquina charmosa, um hotel",
+        image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
+        photoTitle: "WORKPASS",
+        name: "Hotel Saint",
+        subName: "UM Coffee Co.",
+        price: "3,50 crédito/ hora",
+        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
+                   )]
     
     private let titleLabel = UILabel()
     
@@ -67,7 +68,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var filterStackView: UIStackView = {
         
-        let margins = CGFloat(20).generateSizeForScreen
+        let margins = CGFloat(10).generateSizeForScreen
         
         let stackView = UIStackView()
         stackView.setToDefaultBackgroundColor()
@@ -77,7 +78,7 @@ class HomeOpenView: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
-                                               bottom: CGFloat(10).generateSizeForScreen,
+                                               bottom: margins,
                                                right: margins)
         
         return stackView
@@ -116,8 +117,10 @@ class HomeOpenView: UIViewController {
     
     private var filterButtons = [UIButton]()
     
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    private lazy var tabBar = BravveTabBar(self,
+                                           itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                            ButtonsBravve.exitGray.rawValue
+                                                            ])
     
     private func setupView() {
         
@@ -135,27 +138,69 @@ class HomeOpenView: UIViewController {
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
-//        authManager.getDataArray { (states: [States]?) in
-//            guard let states = states else {
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                self.customBar.setToDefaultCustomBarWithFilter (states: states) {_ in
-//
-//                    let filterView = FilterScreen()
-//                    filterView.modalPresentationStyle = .fullScreen
-//                    self.present(filterView, animated: true)
-//                }
-//            }
-//        }
-        self.customBar.setToDefaultCustomBarWithFilter (states: []) {_ in
         
-//                            let filterView = FilterScreen()
-//                            filterView.modalPresentationStyle = .fullScreen
-//                            self.present(filterView, animated: true)
+        var customBarWithFilter: CustomBarWithFilter
+        let smallFont = UIFont(name: FontsBravve.light.rawValue,
+                               size: CGFloat(11).generateSizeForScreen)
+        
+        customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
+
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
+        }
+        
+        authManager.getDataArray { (states: [States]?) in
+
+            guard let states = states else {
+                return
+            }
+
+            var actions = [UIAction]()
+
+            let stateHandler = {(action: UIAction) in
+
+                for state in states {
+
+                    if state.code == action.title {
+
+                        self.authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
+
+                            guard let cities = cities else {return}
+
+                            var actions = [UIAction]()
+
+                            let cityHandler = {(action: UIAction) in
+                                
+                                customBarWithFilter.cityChosedLabel.text = action.title
+                                customBarWithFilter.cityLabel.font = smallFont
+                            }
+                            
+                            for city in cities {
+
+                                guard let cityname = city.name else {return}
+
+                                actions.append(UIAction(title: cityname,
+                                                        handler: cityHandler))
+                            }
+                            
+                            customBarWithFilter.stateChosedLabel.text = action.title
+                            customBarWithFilter.stateLabel.font = smallFont
+
+                            customBarWithFilter.rightButton.setMenuForButton(actions)
                         }
-    
+                    }
+                }
+            }
+            
+            for state in states {
+
+                actions.append(UIAction(title: state.code,
+                                        handler: stateHandler))
+            }
+
+            customBarWithFilter.leftButton.setMenuForButton(actions)
+        }
     }
     
     private func setupConstraints() {
@@ -217,10 +262,11 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-        let openDetailsView = OpenDetailsView(cells[indexPath.row])
-        openDetailsView.modalPresentationStyle = .fullScreen
-        present(openDetailsView, animated: false)
+        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
+        detalhesAbertoView.modalPresentationStyle = .fullScreen
+        present(detalhesAbertoView, animated: false)
     }
 }
+
 
 

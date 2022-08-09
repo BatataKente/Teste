@@ -35,8 +35,9 @@ extension UIView {
 /// - Parameters:
 ///   - imageName: A ButtonsBravve enum referring to the images name of the button name available in assets
 ///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
-///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
+///   - jumpAction: The action of jump button
+///   - backHandler: The action of back button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
                                       hideJumpButton: Bool = true,
@@ -46,6 +47,7 @@ extension UIView {
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
+        
         backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
         
         let logoImageView = UIImageView()
@@ -57,7 +59,6 @@ extension UIView {
             
             let jumpButton = UIButton()
             jumpButton.configuration = .plain()
-            jumpButton.isHidden = hideJumpButton
             
             let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
                                                                  size: CGFloat(15).generateSizeForScreen),
@@ -150,7 +151,10 @@ extension UIView {
     }
     
 /// This function transforms a view into a bar with a filter
-    open func setToDefaultCustomBarWithFilter(states: [States], _ handler: @escaping UIActionHandler) {
+/// - Parameters:
+///   - states: The data that will be appear on button drop down menu
+///   - handler: The action of filter Button
+    func setToDefaultCustomBarWithFilter(_ handler: @escaping UIActionHandler) -> CustomBarWithFilter {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -168,80 +172,40 @@ extension UIView {
         let chosedLabelFont = UIFont(name: FontsBravve.light.rawValue,
                                      size: CGFloat(16).generateSizeForScreen)
         let buttonsImage = ButtonsBravve.arrowDown.rawValue
+
+        stateLabel.text = "UF"
+        stateLabel.font = initialFont
+        stateChosedLabel.font = chosedLabelFont
         
-        let authManager = AuthManager()
-                
         let stateHandler = {(action: UIAction) in
 
             stateChosedLabel.text = action.title
             stateLabel.font = smallFont
-            for state in states {
-                if state.code == action.title {
-                    authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
-                        var actions = [UIAction]()
-                        guard let cities = cities else {
-                            return
-                        }
-                        
-                        let cityHandler = {(action: UIAction) in
-
-                            cityChosedLabel.text = action.title
-                            cityLabel.font = smallFont
-                        }
-                        
-                        for city in cities {
-                            guard let cityName = city.name else { return }
-                            actions.append(UIAction(title: cityName, handler: cityHandler))
-                        }
-                        
-                        rightButton.setMenuForButton(actions)
-                    }
-                }
-            }
-            
         }
-
-        stateLabel.text = "UF"
-        stateLabel.font = initialFont
-        var actions = [UIAction]()
-        stateChosedLabel.font = chosedLabelFont
         
-        for state in states {
-            actions.append(UIAction(title: state.code,handler: stateHandler))
-        }
-        leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
+        leftButton.setMenuForButton([
+
+            UIAction(title: "action1",handler: stateHandler),
+            UIAction(title: "action2",handler: stateHandler)
+
+        ])
         
-//        let cityHandler = {(action: UIAction) in
-//
-//            cityChosedLabel.text = action.title
-//            cityLabel.font = smallFont
-//        }
-        
-//        authManager.getDataArray(id: "1") { (cities: [Cities]?) in
-//            var actions = [UIAction]()
-//            guard let cities = cities else {
-//                return
-//            }
-//
-//            for city in cities {
-//                guard let cityName = city.name else { return }
-//                actions.append(UIAction(title: cityName, handler: cityHandler))
-//            }
-//
-//            rightButton.setMenuForButton(actions)
-//        }
-        
+        let cityHandler = {(action: UIAction) in
+
+            cityChosedLabel.text = action.title
+            cityLabel.font = smallFont
+        }
         
         cityLabel.text = "Cidade"
         cityLabel.font = initialFont
         cityChosedLabel.font = chosedLabelFont
-//        rightButton.setMenuForButton([
-//
-//            UIAction(title: "action1",handler: cityHandler),
-//            UIAction(title: "action2",handler: cityHandler)
-//
-//        ])
+        rightButton.setMenuForButton([
+            
+            UIAction(title: "action1", handler: cityHandler),
+            UIAction(title: "action2", handler: cityHandler)
+
+        ])
         rightButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
@@ -303,6 +267,13 @@ extension UIView {
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
+        
+        return CustomBarWithFilter(leftButton: leftButton,
+                                   stateLabel: stateLabel,
+                                   stateChosedLabel: stateChosedLabel,
+                                   rightButton: rightButton,
+                                   cityLabel: cityLabel,
+                                   cityChosedLabel: cityChosedLabel)
     }
 }
 
