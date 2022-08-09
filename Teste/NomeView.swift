@@ -9,6 +9,28 @@ import UIKit
 
 class NomeView: UIViewController {
     
+    init(_ stage: Stage = .first) {
+        
+        nomeViewModel = NomeViewModel(stage)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        
+        setupView()
+        setupDefaults()
+        setupTargets()
+        setupConstraints()
+        
+        super.viewDidLoad()
+    }
+    
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
     private let registerButton = UIButton()
@@ -24,14 +46,36 @@ class NomeView: UIViewController {
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.hobbiesGray.rawValue])
         
-        buttons[1].addTarget(self,
-                             action: #selector(nameScreenAction),
+        let userHandler = {(action: UIAction) in
+
+            self.nomeViewModel.makeNameScreen()
+        }
+        let cellHandler = {(action: UIAction) in
+
+            self.nomeViewModel.makePhoneScreen()
+        }
+        let emailHandler = {(action: UIAction) in
+
+            self.nomeViewModel.makeEmailScreen()
+        }
+        let padlockHandler = {(action: UIAction) in
+            
+            self.presentOtherView(PasswordView())
+        }
+        let confirmHandler = {(action: UIAction) in
+            
+            self.presentOtherView(ConfirmDataView())
+        }
+        
+        buttons[1].addAction(UIAction(handler: userHandler),
                              for: .touchUpInside)
-        buttons[3].addTarget(self,
-                             action: #selector(phoneScreenAction),
+        buttons[3].addAction(UIAction(handler: cellHandler),
                              for: .touchUpInside)
-        buttons[5].addTarget(self,
-                             action: #selector(emailScreenAction),
+        buttons[5].addAction(UIAction(handler: emailHandler),
+                             for: .touchUpInside)
+        buttons[6].addAction(UIAction(handler: padlockHandler),
+                             for: .touchUpInside)
+        buttons[7].addAction(UIAction(handler: confirmHandler),
                              for: .touchUpInside)
         
         return buttons
@@ -66,15 +110,15 @@ class NomeView: UIViewController {
                        ddisLabel: UILabel,
                        ddisButton: UIButton) = {
         
-        let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
-        let smallFont = UIFont(name: FontsBravve.light.rawValue,
-                               size: CGFloat(11).generateSizeForScreen)
+        let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
+        let textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         let font = UIFont(name: FontsBravve.medium.rawValue,
                           size: CGFloat(15).generateSizeForScreen)
         
         let ddisLabel = UILabel()
-        ddisLabel.text = "+55"
-        ddisLabel.font = smallFont
+        ddisLabel.text = "DDI"
+        ddisLabel.textColor = textColor
         
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
@@ -82,6 +126,7 @@ class NomeView: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
         stackView.axis = .vertical
+        stackView.spacing = 10
         
         let ddisButton = UIButton()
         
@@ -89,14 +134,13 @@ class NomeView: UIViewController {
         leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         leftStackView.layer.cornerRadius = 10
         leftStackView.isLayoutMarginsRelativeArrangement = true
-        leftStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                   left: stackMargins,
-                                                   bottom: stackMargins,
+        leftStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                   left: stackHorizontalMargins,
+                                                   bottom: stackVerticalMargins,
                                                    right: 0)
         
         let rightLabel = UILabel()
-        rightLabel.font = smallFont
-        rightLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        rightLabel.textColor = textColor
         
         let rightTextField = UITextField()
         rightTextField.font = font
@@ -108,11 +152,10 @@ class NomeView: UIViewController {
         rightStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         rightStackView.layer.cornerRadius = 8
         rightStackView.isLayoutMarginsRelativeArrangement = true
-        rightStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                    left: stackMargins,
-                                                    bottom: stackMargins,
-                                                    right: stackMargins)
-        
+        rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                    left: stackHorizontalMargins,
+                                                    bottom: stackVerticalMargins,
+                                                    right: stackHorizontalMargins)
         
         return (rightStackView: rightStackView,
                 leftStackView: leftStackView,
@@ -137,28 +180,6 @@ class NomeView: UIViewController {
     
     private let nomeViewModel: NomeViewModel
     
-    init(_ stage: Stage = .first) {
-        
-        nomeViewModel = NomeViewModel(stage)
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        
-        setupView()
-        setupDefaults()
-        setupTargets()
-        setupConstraints()
-        
-        super.viewDidLoad()
-    }
-    
     private func setupView() {
         
         nomeViewModel.delegate = self
@@ -166,13 +187,7 @@ class NomeView: UIViewController {
         
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
         
-        let handler = {(action: UIAction) in
-            
-            print("coiso")
-        }
-        
-        view.createRegisterCustomBar(progressBarButtons: buttons,
-                                     jumpAction: UIAction(handler: handler)) {_ in
+        view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
             self.nomeViewModel.turnBackScreen()
         }
@@ -205,6 +220,7 @@ class NomeView: UIViewController {
                                               CGFloat(60).generateSizeForScreen)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
+        registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
         customShaddow.constraintInsideTo(.top, registerStackView)
         customShaddow.constraintInsideTo(.leading, registerStackView)
@@ -227,25 +243,24 @@ class NomeView: UIViewController {
         registerStackView.addGestureRecognizer(stackViewTap)
     }
     
-    @objc func nameScreenAction() {
-
-        nomeViewModel.makeNameScreen()
-    }
-    
-    @objc func phoneScreenAction() {
-
-        nomeViewModel.makePhoneScreen()
-    }
-    
-    @objc func emailScreenAction() {
-
-        nomeViewModel.makeEmailScreen()
-    }
-    
     @objc func stackViewTapped() {
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
+        let stackVerticalMargins: CGFloat = CGFloat(10).generateSizeForScreen
+        let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
+        
+        viewElements.leftStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                                left: stackHorizontalMargins,
+                                                                bottom: stackVerticalMargins,
+                                                                right: 0)
+        
+        viewElements.rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                                left: stackHorizontalMargins,
+                                                                bottom: stackVerticalMargins,
+                                                                right: stackHorizontalMargins)
+        
+        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(10).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(10).generateSizeForScreen)
+        viewElements.ddisLabel.text = "+55"
         
         customShaddow.isHidden = false
         
@@ -310,6 +325,7 @@ extension NomeView: NomeViewModelProtocol {
         
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
+        viewElements.ddisLabel.text = "DDI"
 
         self.infoLabel.text = infoLabel
     }
@@ -340,5 +356,11 @@ extension NomeView: NomeViewModelProtocol {
     func dismiss() {
         
         self.dismiss(animated: true)
+    }
+    
+    func presentOtherView(_ viewController: UIViewController) {
+        
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: false)
     }
 }
