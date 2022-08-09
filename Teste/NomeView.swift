@@ -166,10 +166,13 @@ class NomeView: UIViewController {
         
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
         
-        view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
-
+        let handler = {(action: UIAction) in
+            
             self.nomeViewModel.turnBackScreen()
         }
+        
+        view.createRegisterCustomBar(progressBarButtons: buttons,
+                                     backAction: UIAction(handler: handler))
         
         view.setToDefaultBackgroundColor()
     }
