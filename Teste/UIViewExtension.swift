@@ -39,13 +39,14 @@ extension UIView {
 ///   - hideJumpButton: set false if show a jump button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
-                                      backAction: UIAction,
-                                      jumpAction: UIAction? = nil) {
+                                      hideJumpButton: Bool = true,
+                                      jumpAction: UIAction? = nil,
+                                      _ backHandler: @escaping UIActionHandler) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
-        backButton.addAction(backAction, for: .touchUpInside)
+        backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
         
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
@@ -56,6 +57,7 @@ extension UIView {
             
             let jumpButton = UIButton()
             jumpButton.configuration = .plain()
+            jumpButton.isHidden = hideJumpButton
             
             let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
                                                                  size: CGFloat(15).generateSizeForScreen),
