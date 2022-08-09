@@ -8,14 +8,20 @@
 import UIKit
 
 class ProfessionView: UIViewController {
-    
+
     let backButton = UIButton()
     let logoBravve = UIImageView()
     let backgroundImageView = UIImageView()
+    let selectAreaButton = UIButton()
+    let workRegimeButton = UIButton()
+    let continueButton = UIButton ()
     
     lazy var progressBarButtons: [UIButton] = {
         var buttons = [UIButton]()
-        buttons = createProgressBarButtons(["photoGray","noteBlue", "hobbiesGray", "activiesGray"])
+        buttons = createProgressBarButtons([IconsBravve.photoGray.rawValue,
+                                                               IconsBravve.noteBlue.rawValue,
+                                                               IconsBravve.hobbiesGray.rawValue,
+                                                               IconsBravve.activitiesGray.rawValue])
         return buttons
     } ()
     
@@ -29,9 +35,9 @@ class ProfessionView: UIViewController {
     let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "Queremos te conhecer um pouco mais pra que possamos te indicar coisas legais! Qual é a sua profissão?"
-        label.font = UIFont(name: "Ubuntu-Light", size: 16)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textAlignment = .center
-        label.textColor = UIColor(named: "labelTextField")
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 3
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,21 +46,19 @@ class ProfessionView: UIViewController {
     let selectAreaLabel: UILabel = {
         let label = UILabel()
         label.text = "Selecionar área"
-        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textAlignment = .left
-        label.textColor = UIColor(named: "labelTextField")
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     } ()
     
     let selectAreaAPILabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(named: "label")
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         label.isHidden = true
         return label
     }()
-    
-    let selectAreaButton = UIButton(type: .custom)
-    
+
     lazy var selectAreaTextStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [selectAreaLabel, selectAreaAPILabel])
         stackView.axis = .vertical
@@ -66,10 +70,10 @@ class ProfessionView: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [selectAreaTextStackView, selectAreaButton])
         stackView.layer.cornerRadius = 8
         stackView.axis = .horizontal
-        stackView.backgroundColor = UIColor(named: "textFieldBackgroud")
         stackView.distribution = .equalCentering
+        stackView.backgroundColor = .white
         stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        stackView.layer.borderColor = CGColor(red: 208.0/255.0, green: 213.0/255.0, blue: 221.0/225.0, alpha: 1.00)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,9 +83,9 @@ class ProfessionView: UIViewController {
     let workRegimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Regime de trabalho"
-        label.font = UIFont(name: "Ubuntu-Light", size: 15)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textAlignment = .left
-        label.textColor = UIColor(named: "labelTextField")
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
@@ -89,11 +93,9 @@ class ProfessionView: UIViewController {
     var workRegimeAPILabel: UILabel = {
         let label = UILabel()
         label.isHidden = true
-        label.textColor = UIColor(named: "label")
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     } ()
-    
-    let workRegimeButton = UIButton()
     
     lazy var workRegimeTextStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [workRegimeLabel, workRegimeAPILabel])
@@ -106,31 +108,23 @@ class ProfessionView: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [workRegimeTextStackView, workRegimeButton])
         stackView.layer.cornerRadius = 8
         stackView.axis = .horizontal
-        stackView.backgroundColor = UIColor(named: "textFieldBackgroud")
+        stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
     
-    let continueButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("Continuar", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16.5)
-        button.titleLabel?.tintColor = .white
-        button.backgroundColor = UIColor(named: "PinkBravve")
-        button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    } ()
-    
     let professionViewModel = ProfessionViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "background")
+        
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        
+        view.backgroundColor = .red
         
         view.addSubviews([backButton,
                                     infoLabel,
@@ -140,10 +134,14 @@ class ProfessionView: UIViewController {
                                     continueButton,
                                     progressBarStackView,
                                     backgroundImageView])
-        
-        backgroundImageView.setWayToDefault(.wayCell)
+   
         logoBravve.setLogoToDefault()
-        backButton.setToBackButtonDefault{_ in self.dismiss(animated: false)}
+        backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen) {_ in
+            
+            self.dismiss(animated: true)
+        }
+        continueButton.setToBottomButtonKeyboardDefault()
+        backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         
         selectAreaButton.setMenuForButton(professionViewModel.selectAreaMenu({ (action: UIAction) in
             self.selectAreaAPILabel.text = action.title
@@ -154,38 +152,27 @@ class ProfessionView: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            progressBarStackView.topAnchor.constraint(equalTo: logoBravve.bottomAnchor, constant: 50),
+            progressBarStackView.topAnchor.constraint(equalTo: logoBravve.bottomAnchor, constant: CGFloat(50).generateSizeForScreen),
             progressBarStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            progressBarStackView.heightAnchor.constraint(equalToConstant: 27),
+            progressBarStackView.heightAnchor.constraint(equalToConstant: CGFloat(27).generateSizeForScreen),
             
-            infoLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 238.5),
-            infoLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 22),
-            infoLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -22),
+            infoLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: CGFloat(238.5).generateSizeForScreen),
+            infoLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
+            infoLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
             
-            selectAreaStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 15),
-            selectAreaStackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 22),
-            selectAreaStackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -22),
-            selectAreaStackView.heightAnchor.constraint(equalToConstant: 60),
+            selectAreaStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(15).generateSizeForScreen),
+            selectAreaStackView.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor),
+            selectAreaStackView.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor),
+            selectAreaStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            selectAreaTextStackView.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.9),
+            selectAreaButton.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.1),
             
-            selectAreaTextStackView.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.8),
-
-            selectAreaButton.bottomAnchor.constraint(equalTo: selectAreaStackView.bottomAnchor, constant: 24.34),
-            selectAreaButton.trailingAnchor.constraint(equalTo: selectAreaStackView.trailingAnchor, constant: -18.36),
-            
-            workRegimeStackView.topAnchor.constraint(equalTo: selectAreaStackView.bottomAnchor, constant: 15),
+            workRegimeStackView.topAnchor.constraint(equalTo: selectAreaStackView.bottomAnchor, constant: CGFloat(15).generateSizeForScreen),
             workRegimeStackView.leadingAnchor.constraint(equalTo: selectAreaStackView.leadingAnchor),
             workRegimeStackView.trailingAnchor.constraint(equalTo: selectAreaStackView.trailingAnchor),
-            workRegimeStackView.heightAnchor.constraint(equalToConstant: 60),
-            
-            workRegimeTextStackView.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.8),
-
-            workRegimeButton.bottomAnchor.constraint(equalTo: workRegimeStackView.bottomAnchor, constant: 24.34),
-            workRegimeButton.trailingAnchor.constraint(equalTo: workRegimeStackView.trailingAnchor, constant: -18.36),
-            
-            continueButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -125),
-            continueButton.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor),
-            continueButton.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor),
-            continueButton.heightAnchor.constraint(equalToConstant: 52),
+            workRegimeStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            workRegimeTextStackView.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.9),
+            workRegimeButton.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.1),
         ])
         
         let selectAreaTap = UITapGestureRecognizer(target: self, action: #selector(selectAreaTapped))
@@ -195,19 +182,28 @@ class ProfessionView: UIViewController {
         let workRegimeTap = UITapGestureRecognizer(target: self, action: #selector(workRegimeTapped))
         workRegimeStackView.addGestureRecognizer(workRegimeTap)
         workRegimeButton.addGestureRecognizer(workRegimeTap)
+        
     }
     
     @objc func selectAreaTapped() {
         
-        selectAreaLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        selectAreaLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
         selectAreaAPILabel.isHidden = false
-        selectAreaAPILabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
+                                      selectAreaAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
     }
     
     @objc func workRegimeTapped() {
         
-        workRegimeLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        workRegimeLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
         workRegimeAPILabel.isHidden = false
-        workRegimeAPILabel.font = UIFont(name: "Ubuntu-Medium", size: 16)
+        workRegimeAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
     }
+    
+//    @objc func continueToHobbies() {
+//        let hobbiesView = HobbiesView ()
+//        hobbiesView.modalPresentationStyle = .fullScreen
+//        present(hobbiesView, animated: true, completion: nil)
+//    }
 }
+
+
