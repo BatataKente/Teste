@@ -31,6 +31,7 @@
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
 		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
+		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
 		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
 		1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */; };
 		1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */; };
@@ -102,6 +103,7 @@
 		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
 		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
 		1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonsBravveEnum.swift; path = Teste/ButtonsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
 		1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsBravveEnum.swift; path = Teste/ColorsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
@@ -213,6 +215,7 @@
 				1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */,
 				1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */,
 				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
+				143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
 				13080CB928A17F2A00A064B0 /* AccessTokenModel.swift in Sources */,
+				143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
