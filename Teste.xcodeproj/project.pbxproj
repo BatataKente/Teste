@@ -73,6 +73,8 @@
 		CFBF085F28A2810600D39DCF /* ModelPartnersV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085928A2810600D39DCF /* ModelPartnersV1.swift */; };
 		CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */; };
 		CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */; };
+		CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */; };
+		CFBF087528A2ACFC00D39DCF /* RobbiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF087328A2ACFC00D39DCF /* RobbiesView.swift */; };
 		CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +146,8 @@
 		CFBF085928A2810600D39DCF /* ModelPartnersV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelPartnersV1.swift; sourceTree = "<group>"; };
 		CFBF085A28A2810600D39DCF /* ModelReservationsV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelReservationsV1.swift; sourceTree = "<group>"; };
 		CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelUsersV1.swift; sourceTree = "<group>"; };
+		CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
+		CFBF087328A2ACFC00D39DCF /* RobbiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobbiesView.swift; sourceTree = "<group>"; };
 		CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,6 +248,8 @@
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
 				CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */,
+				CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */,
+				CFBF087328A2ACFC00D39DCF /* RobbiesView.swift */,
 				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
 				13F1768528941C6200C5FD05 /* ConfirmDataView.swift */,
 				0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */,
@@ -348,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
+				CFBF087528A2ACFC00D39DCF /* RobbiesView.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
@@ -378,6 +385,7 @@
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
+				CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
