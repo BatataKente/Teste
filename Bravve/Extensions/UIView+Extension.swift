@@ -38,36 +38,57 @@ extension UIView {
 ///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
     open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
-                                      progressBarButtons: [UIButton],
-                                      _ handler: @escaping UIActionHandler,
-                                      hideJumpButton: Bool = true) {
+                                      progressBarButtons: [UIButton]? = nil,
+                                      hideJumpButton: Bool = true,
+                                      jumpAction: UIAction? = nil,
+                                      _ backHandler: @escaping UIActionHandler) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
-        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
-        
-        let jumpButton = UIButton()
-        jumpButton.configuration = .plain()
-        jumpButton.isHidden = hideJumpButton
-        
-        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
-                                                             size: CGFloat(15).generateSizeForScreen),
-                        NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
-        
-        let attributedTitle = NSAttributedString(string: "Pular",
-                                                 attributes: attribute as [NSAttributedString.Key : Any])
-       
-        jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
-        
-        jumpButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
         
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+        self.addSubviews([backButton, logoImageView])
         
-        self.addSubviews([backButton, logoImageView, jumpButton, progressBarStackView])
+        if let jumpAction = jumpAction {
+            
+            let jumpButton = UIButton()
+            jumpButton.configuration = .plain()
+            jumpButton.isHidden = hideJumpButton
+            
+            let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
+                                                                 size: CGFloat(15).generateSizeForScreen),
+                            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
+            
+            let attributedTitle = NSAttributedString(string: "Pular",
+                                                     attributes: attribute as [NSAttributedString.Key : Any])
+           
+            jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
+            
+            jumpButton.addAction(jumpAction, for: .touchUpInside)
+            
+            self.addSubview(jumpButton)
+            
+            jumpButton.constraintInsideTo(.centerY, logoImageView)
+            jumpButton.constraintInsideTo(.height, logoImageView)
+            jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
+                                          CGFloat(30).generateSizeForScreen)
+        }
+        
+        if let progressBarButtons = progressBarButtons {
+            
+            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+            
+            self.addSubview(progressBarStackView)
+            
+            progressBarStackView.constraintOutsideTo(.top, logoImageView,
+                                                     CGFloat(60).generateSizeForScreen)
+            progressBarStackView.constraintInsideTo(.centerX,
+                                                    self.safeAreaLayoutGuide)
+        }
         
         logoImageView.constraintInsideTo(.centerX, self.safeAreaLayoutGuide)
         logoImageView.constraintInsideTo(.top, self, CGFloat(65).generateSizeForScreen)
@@ -75,8 +96,9 @@ extension UIView {
         logoImageView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         logoImageView.widthAnchorInSuperview(CGFloat(140).generateSizeForScreen)
         
-        backButton.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
-        backButton.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
+                                                  multiplier: 0.6)
         backButton.imageView?.constraintInsideTo(.centerY, backButton)
         
         backButton.constraintInsideTo(.centerY, logoImageView)
@@ -84,16 +106,6 @@ extension UIView {
         backButton.constraintOutsideTo(.width, backButton)
         backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
                                       CGFloat(30).generateSizeForScreen)
-        
-        jumpButton.constraintInsideTo(.centerY, logoImageView)
-        jumpButton.constraintInsideTo(.height, logoImageView)
-        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
-                                      CGFloat(30).generateSizeForScreen)
-            
-        progressBarStackView.constraintOutsideTo(.top, logoImageView,
-                                                 CGFloat(60).generateSizeForScreen)
-        progressBarStackView.constraintInsideTo(.centerX,
-                                                self.safeAreaLayoutGuide)
     }
     
 /// This function transforms a view into a bar with a back button and title
@@ -117,6 +129,11 @@ extension UIView {
         titleLabel.textColor = .white
         
         self.addSubviews([backButton, titleLabel])
+        
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
+                                                  multiplier: 0.6)
         
         titleLabel.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
         titleLabel.constraintInsideTo(.centerX, self)
@@ -152,10 +169,36 @@ extension UIView {
                                      size: CGFloat(16).generateSizeForScreen)
         let buttonsImage = ButtonsBravve.arrowDown.rawValue
         
+        let authManager = AuthManager()
+                
         let stateHandler = {(action: UIAction) in
 
             stateChosedLabel.text = action.title
             stateLabel.font = smallFont
+            for state in states {
+                if state.code == action.title {
+                    authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
+                        var actions = [UIAction]()
+                        guard let cities = cities else {
+                            return
+                        }
+                        
+                        let cityHandler = {(action: UIAction) in
+
+                            cityChosedLabel.text = action.title
+                            cityLabel.font = smallFont
+                        }
+                        
+                        for city in cities {
+                            guard let cityName = city.name else { return }
+                            actions.append(UIAction(title: cityName, handler: cityHandler))
+                        }
+                        
+                        rightButton.setMenuForButton(actions)
+                    }
+                }
+            }
+            
         }
 
         stateLabel.text = "UF"
@@ -169,21 +212,36 @@ extension UIView {
         leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
-        let cityHandler = {(action: UIAction) in
-
-            cityChosedLabel.text = action.title
-            cityLabel.font = smallFont
-        }
+//        let cityHandler = {(action: UIAction) in
+//
+//            cityChosedLabel.text = action.title
+//            cityLabel.font = smallFont
+//        }
+        
+//        authManager.getDataArray(id: "1") { (cities: [Cities]?) in
+//            var actions = [UIAction]()
+//            guard let cities = cities else {
+//                return
+//            }
+//
+//            for city in cities {
+//                guard let cityName = city.name else { return }
+//                actions.append(UIAction(title: cityName, handler: cityHandler))
+//            }
+//
+//            rightButton.setMenuForButton(actions)
+//        }
+        
         
         cityLabel.text = "Cidade"
         cityLabel.font = initialFont
         cityChosedLabel.font = chosedLabelFont
-        rightButton.setMenuForButton([
-
-            UIAction(title: "action1",handler: cityHandler),
-            UIAction(title: "action2",handler: cityHandler)
-
-        ])
+//        rightButton.setMenuForButton([
+//
+//            UIAction(title: "action1",handler: cityHandler),
+//            UIAction(title: "action2",handler: cityHandler)
+//
+//        ])
         rightButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
