@@ -5,7 +5,6 @@
 //  Created by user218997 on 29/07/22.
 //
 
-import Foundation
 import UIKit
 
 class ConfirmDataView: UIViewController {

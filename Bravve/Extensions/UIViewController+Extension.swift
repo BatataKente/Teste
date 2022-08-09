@@ -66,7 +66,17 @@ extension UIViewController {
             
             switch name{
                 
-                case IconsBravve.activitiesGray.rawValue: break
+                case IconsBravve.activitiesGray.rawValue:
+                
+                let handler = {(action: UIAction) in
+                    
+                    let activitiesView = ActivitiesView()
+                    activitiesView.modalPresentationStyle = .fullScreen
+                    self.present(activitiesView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 case IconsBravve.calendarGray.rawValue: break
                 
@@ -96,13 +106,53 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case IconsBravve.hobbiesGray.rawValue: break
+                case IconsBravve.hobbiesGray.rawValue:
                 
-                case IconsBravve.noteGray.rawValue: break
+                let handler = {(action: UIAction) in
+                    
+                    let hobbiesView = HobbiesView()
+                    hobbiesView.modalPresentationStyle = .fullScreen
+                    self.present(hobbiesView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case IconsBravve.padlockGray.rawValue: break
+                case IconsBravve.noteGray.rawValue:
                 
-                case IconsBravve.pencilGray.rawValue: break
+                let handler = {(action: UIAction) in
+                    
+                    let professionView = ProfessionView()
+                    professionView.modalPresentationStyle = .fullScreen
+                    self.present(professionView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case IconsBravve.padlockGray.rawValue:
+                
+                let handler = {(action: UIAction) in
+                    
+                    let passwordView = PasswordView()
+                    passwordView.modalPresentationStyle = .fullScreen
+                    self.present(passwordView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case IconsBravve.pencilGray.rawValue:
+                
+                let handler = {(action: UIAction) in
+                    
+                    let confirmDataView = ConfirmDataView()
+                    confirmDataView.modalPresentationStyle = .fullScreen
+                    self.present(confirmDataView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 case IconsBravve.photoGray.rawValue:
             
