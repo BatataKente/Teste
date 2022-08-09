@@ -10,33 +10,29 @@ import UIKit
 
 class FrequentlyAskedQuestionsView: UIViewController {
     
-    static let identifier = "FAQHeaderViewController"
-    
+    private var viewModel: FAQViewModel = FAQViewModel()
     let customBar = UIView()
     
     private lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView()
         table.register(FAQCollectionTableViewCell.self, forCellReuseIdentifier: FAQCollectionTableViewCell.identifier)
+        table.register(FAQTableViewCell.self, forCellReuseIdentifier: FAQTableViewCell.identifier)
         table.showsVerticalScrollIndicator = false
         table.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.reloadData()
         return table
     }()
-    
-    private lazy var viewModels: [FAQCollectionTableViewCellViewModel] = [
-        FAQCollectionTableViewCellViewModel(viewModels: [FAQCollectionViewCellViewModel(question: "Como eu faço para abrir o Box?", answer: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu “Minhas reservas”, selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no botão “Destravar porta” e pronto. Você já pode acessar o box."),
-            FAQCollectionViewCellViewModel(question: "Como faço para reportar um problema?", answer: ""),]
-        )]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         view.addSubview(customBar)
+        self.tableView.separatorStyle = .none
         setupDefaults()
         configConstraints()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.reloadData()
     }
     
     private func setupDefaults() {
@@ -60,19 +56,29 @@ class FrequentlyAskedQuestionsView: UIViewController {
 extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        return self.viewModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let viewModel = viewModels[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQCollectionTableViewCell.identifier, for: indexPath) as? FAQCollectionTableViewCell else {
+        
+        if indexPath.row == 0{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQCollectionTableViewCell.identifier, for: indexPath) as? FAQCollectionTableViewCell else {
+                fatalError()
+            }
+            return cell
+        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQTableViewCell.identifier, for: indexPath) as? FAQTableViewCell else{
             fatalError()
         }
-        cell.configure(with: viewModel)
-        return cell
+        cell.titleButton.setTitle(self.viewModel.getQuestionAnswer(indexPath: indexPath).question, for: .normal)
+        cell.subTitleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
+            return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 700
+        if indexPath.row == 0{
+            return 378
+        }
+        return 250
     }
 }

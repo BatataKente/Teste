@@ -1,28 +1,50 @@
 //
-//  FAQCollectionViewCell.swift
-//  Teste
+//  FAQTableViewCell.swift
+//  Files
 //
-//  Created by user217584 on 04/08/22.
+//  Created by user217584 on 09/08/22.
 //
 
 import Foundation
 import UIKit
 
-class FAQCollectionViewCell: UICollectionViewCell {
-    static let identifier = "FAQCollectionViewCell"
+class FAQTableViewCell: UITableViewCell {
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ""
-        label.font = UIFont(name: FontsBravve.koho.rawValue, size: CGFloat(17).generateSizeForScreen)
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.numberOfLines = 0
-        label.textAlignment = .left
-        return label
+    static let identifier = "FAQTableViewCell"
+    var iconClick: Bool = true
+    
+    //MARK: Elements view
+    
+    private lazy var backgroundCellView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
+        view.layer.cornerRadius = 15
+        
+        return view
     }()
     
-    private lazy var subTitleLabel: UILabel = {
+    private lazy var plusAndLessButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "mostButton"), for: .normal)
+        button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        button.addTarget(self, action: #selector(self.showAnswer), for: .touchUpInside)
+        return button
+    }()
+    
+     lazy var titleButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Como eu faço para abrir o Box?", for: .normal)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.font = UIFont(name: FontsBravve.koho.rawValue, size: CGFloat(17).generateSizeForScreen)
+        button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        button.addTarget(self, action: #selector(self.showAnswer), for: .touchUpInside)
+        return button
+    }()
+    
+     lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.39
@@ -33,36 +55,30 @@ class FAQCollectionViewCell: UICollectionViewCell {
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
         label.textAlignment = .left
+         label.isHidden = true
         
         return label
     }()
     
-    private lazy var plusAndLessButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "mostButton"), for: .normal)
-        button.addTarget(self, action: #selector(self.showAnswer), for: .touchUpInside)
-        return button
-    }()
     
-    var iconClick: Bool = true
     
     @objc func showAnswer(sender:UIButton){
         if(iconClick == true){
             plusAndLessButton.setImage(UIImage(named: "lessButton"), for: .normal)
+            self.subTitleLabel.isHidden = false
         } else {
             plusAndLessButton.setImage(UIImage(named: "mostButton"), for: .normal)
+            self.subTitleLabel.isHidden = true
         }
         iconClick = !iconClick
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.layer.cornerRadius = CGFloat(15).generateSizeForScreen
-        contentView.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subTitleLabel)
-        contentView.addSubview(plusAndLessButton)
+        contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+        contentView.addSubviews([backgroundCellView, subTitleLabel, plusAndLessButton, titleButton])
         configConstraints()
     }
     
@@ -70,24 +86,25 @@ class FAQCollectionViewCell: UICollectionViewCell {
         fatalError()
     }
     
-    func configure(with viewModel: FAQCollectionViewCellViewModel){
-        titleLabel.text = viewModel.question
-        subTitleLabel.text = viewModel.answer
-    }
-    
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: CGFloat(14).generateSizeForScreen),
-            self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
-            self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-79).generateSizeForScreen),
+            self.backgroundCellView.topAnchor.constraint(equalTo: self.topAnchor, constant: CGFloat(12).generateSizeForScreen),
+            self.backgroundCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(41).generateSizeForScreen),
+            self.backgroundCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-41).generateSizeForScreen),
+            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: CGFloat(-12).generateSizeForScreen),
             
-            self.subTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: CGFloat(68).generateSizeForScreen),
-            self.subTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
-            self.subTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-29).generateSizeForScreen),
+
+            self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),
+            self.plusAndLessButton.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: 26),
             
-            self.plusAndLessButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
-            self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),
             
+            self.titleButton.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
+            self.titleButton.trailingAnchor.constraint(equalTo: plusAndLessButton.leadingAnchor, constant: CGFloat(-34).generateSizeForScreen),
+            self.titleButton.centerYAnchor.constraint(equalTo: self.plusAndLessButton.centerYAnchor),
+            
+            self.subTitleLabel.topAnchor.constraint(equalTo: self.titleButton.bottomAnchor, constant: CGFloat(10)),
+            self.subTitleLabel.leadingAnchor.constraint(equalTo: self.titleButton.leadingAnchor, constant: 10),
+            self.subTitleLabel.trailingAnchor.constraint(equalTo: self.plusAndLessButton.trailingAnchor),
         ])
     }
 }
