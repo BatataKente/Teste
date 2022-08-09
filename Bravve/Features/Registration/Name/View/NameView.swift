@@ -167,7 +167,7 @@ class NomeView: UIViewController {
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
-
+                
             self.nomeViewModel.turnBackScreen()
         }
         
@@ -223,19 +223,16 @@ class NomeView: UIViewController {
     
     @objc func nameScreenAction() {
 
-        nomeViewModel.delegate = self
         nomeViewModel.makeNameScreen()
     }
     
     @objc func phoneScreenAction() {
 
-        nomeViewModel.delegate = self
         nomeViewModel.makePhoneScreen()
     }
     
     @objc func emailScreenAction() {
 
-        nomeViewModel.delegate = self
         nomeViewModel.makeEmailScreen()
     }
     
@@ -332,5 +329,10 @@ extension NomeView: NomeViewModelProtocol {
     func setKeyboardType(keyboardType: UIKeyboardType) {
         
         viewElements.rightTextField.keyboardType = keyboardType
+    }
+    
+    func dismiss() {
+        
+        self.dismiss(animated: true)
     }
 }

@@ -177,8 +177,9 @@ extension UIButton {
                                      _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
-        self.imageView?.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
-        self.imageView?.widthAnchorInSuperview(CGFloat(8.48).generateSizeForScreen)
+        self.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        self.imageView?.constraintOutsideTo(.width, self.imageView,
+                                            multiplier: 0.6)
         
         self.constraintInsideTo(.top, superview, CGFloat(65).generateSizeForScreen)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
