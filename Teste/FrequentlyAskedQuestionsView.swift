@@ -26,8 +26,7 @@ class FrequentlyAskedQuestionsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(tableView)
-        view.addSubview(customBar)
+        view.addSubviews([tableView, customBar])
         self.tableView.separatorStyle = .none
         setupDefaults()
         configConstraints()
@@ -78,11 +77,4 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0{
-//            return CGFloat(222).generateSizeForScreen
-//        }
-//        return tableView.rowHeight
-//    }
 }

@@ -51,11 +51,7 @@ class FAQViewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        contentView.addSubview(backgroundCellView)
-        contentView.addSubview(vectorHelpImageView)
-        contentView.addSubview(wayHelpImageView)
-        contentView.addSubview(FAQViewLabel)
-        
+        contentView.addSubviews([backgroundCellView, vectorHelpImageView, wayHelpImageView, FAQViewLabel])
         configConstraints()
     }
     

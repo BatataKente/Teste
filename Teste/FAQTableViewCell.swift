@@ -44,7 +44,7 @@ class FAQTableViewCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.39
+        paragraphStyle.lineHeightMultiple = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -77,11 +77,7 @@ class FAQTableViewCell: UITableViewCell {
         if(iconClick == true){
             plusAndLessButton.setImage(UIImage(named: "lessButton"), for: .normal)
             self.subTitleLabel.isHidden = false
-        } else {
-            plusAndLessButton.setImage(UIImage(named: "mostButton"), for: .normal)
-            self.subTitleLabel.isHidden = true
         }
-        iconClick = !iconClick
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
