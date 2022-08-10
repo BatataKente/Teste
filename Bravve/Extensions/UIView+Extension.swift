@@ -12,7 +12,7 @@ extension UIView {
     
 /// This function checks whether the device is an ipad or not
 /// - Returns: True if is Ipad of false if not
-    open func isIpad() -> Bool {
+    func isIpad() -> Bool {
         
         if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
             
@@ -26,7 +26,7 @@ extension UIView {
 extension UIView {
     
 /// This function changes the background to the app's default
-    open func setToDefaultBackgroundColor() {
+    func setToDefaultBackgroundColor() {
         
         self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
@@ -38,7 +38,7 @@ extension UIView {
 ///   - hideJumpButton: set false if show a jump button
 ///   - jumpAction: The action of jump button
 ///   - backHandler: The action of back button
-    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
+    func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
                                       hideJumpButton: Bool = true,
                                       jumpAction: UIAction? = nil,
@@ -113,7 +113,7 @@ extension UIView {
 /// - Parameters:
 ///   - viewTitle: The title in the center of the custom bar
 ///   - handler: The action of back button
-    open func setToDefaultCustomBarWithBackButton(viewTitle: String,
+    func setToDefaultCustomBarWithBackButton(viewTitle: String,
                                                   _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -303,7 +303,7 @@ extension UIView {
     
 /// This function sets the height of a view in a superview
 /// - Parameter constant: The height of view
-    open func heightAnchorInSuperview(_ constant: CGFloat = 32) {
+    func heightAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -312,7 +312,7 @@ extension UIView {
     
 /// This function sets the width of a view in a superview
 /// - Parameter constant: The width of view
-    open func widthAnchorInSuperview(_ constant: CGFloat = 32) {
+    func widthAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -321,7 +321,7 @@ extension UIView {
     
 /// This function sets the width and height of a view in a superview(square)
 /// - Parameter constant: The size of view
-    open func sizeAnchorInSuperview(_ constant: CGFloat = 32) {
+    func sizeAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -334,7 +334,7 @@ extension UIView {
     
 /// This function fills a superview with the view
 /// - Parameter constant: The margins of view to superview
-    open func fillSuperview(_ constant: CGFloat = 0) {
+    func fillSuperview(_ constant: CGFloat = 0) {
         
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
@@ -348,7 +348,7 @@ extension UIView {
 ///   - toItem: The item at the other point of the constraint
 ///   - constant: The distance from attribute
 ///   - multiplier: Multiplier for constant
-    open func constraintTo(_ attribute: NSLayoutConstraint.Attribute,
+    func constraintTo(_ attribute: NSLayoutConstraint.Attribute,
                            _ toItem: Any?,
                            _ constant: CGFloat = 0,
                            multiplier: CGFloat = 1) {
@@ -368,7 +368,7 @@ extension UIView {
 ///   - toItem: The item at the other point of the constraint
 ///   - constant: The distance from attribute
 ///   - multiplier: Multiplier for constant
-    open func constraintInsideTo(_ attribute: NSLayoutConstraint.Attribute,
+    func constraintInsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                  _ toItem: Any?,
                                  _ constant: CGFloat = 0,
                                  multiplier: CGFloat = 1) {
@@ -401,7 +401,7 @@ extension UIView {
 ///   - toItem: The item at the other point of the constraint
 ///   - constant: The distance from item attribute
 ///   - multiplier: Multiplier for constant
-    open func constraintOutsideTo(_ attribute: NSLayoutConstraint.Attribute,
+    func constraintOutsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                   _ toItem: Any?,
                                   _ constant: CGFloat = 0,
                                   multiplier: CGFloat = 1) {
