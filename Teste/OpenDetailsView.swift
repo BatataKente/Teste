@@ -60,10 +60,86 @@ class OpenDetailsView: UIViewController {
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                                    ButtonsBravve.exitGray.rawValue])
     
+    private func createStackView(_ text: String,_ image: UIImage?,_ isHidden: Bool = true) -> UIStackView {
+        
+        let imageView = UIImageView()
+        imageView.contentMode = .center
+        imageView.image = image
+        
+        let label = UILabel()
+        label.text = text
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(20).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        let stackView = UIStackView(arrangedSubviews: [imageView,
+                                                       label])
+        stackView.spacing = CGFloat(10).generateSizeForScreen
+        stackView.isHidden = isHidden
+        
+        imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        return stackView
+    }
+    
+    private lazy var localDetailsStackView: UIStackView = {
+        
+        let textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        let spacing = CGFloat(10).generateSizeForScreen
+        
+        let localDetailsTitleLabel = UILabel()
+        localDetailsTitleLabel.textColor = textColor
+        localDetailsTitleLabel.text = "Detalhes do local"
+        
+        let localDetailsPlusButton = UIButton()
+        localDetailsPlusButton.setTitle("Ver Mais", for: .normal)
+        localDetailsPlusButton.setTitleColor(UIColor(named: ColorsBravve.pink_white.rawValue), for: .normal)
+        localDetailsPlusButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                                         size: CGFloat(20).generateSizeForScreen)
+        localDetailsPlusButton.titleLabel?.constraintInsideTo(.leading, localDetailsPlusButton)
+        
+        let texts:[String] = ["Segunda: 08:00h - 17:00h",
+                              "Terça: 08:00h - 17:00h",
+                              "Quarta: 08:00h - 17:00h",
+                              "Quinta: 08:00h - 17:00h",
+                              "Sexta: 08:00h - 17:00h"]
+        var localDetailItens = [UIStackView]()
+        
+        localDetailItens.append(createStackView("Até 6 pessoas", UIImage(named: IconsBravve.users.rawValue), false))
+        localDetailItens.append(createStackView("R. B, 25 - 24 - barrio loteamento Xurupita, Porto Seguro - BA, 45810-000",
+                                                UIImage(named: IconsBravve.map.rawValue),
+                                                false))
+        
+        for text in texts {
+            
+            localDetailItens.append(createStackView(text, UIImage(named: IconsBravve.clockReserv.rawValue)))
+        }
+        
+        let localDetailsStackView = UIStackView(arrangedSubviews: [localDetailsTitleLabel] +
+                                                                   localDetailItens +
+                                                                  [localDetailsPlusButton])
+        localDetailsStackView.axis = .vertical
+        localDetailsStackView.spacing = spacing
+        
+        let handler = {(action: UIAction) in
+            
+            for i in 2...localDetailItens.count - 1 {
+                
+                localDetailItens[i].isHidden = false
+            }
+        }
+        
+        localDetailsPlusButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        return localDetailsStackView
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         
         let itemSize = 256
         let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        let black_White = UIColor(named: ColorsBravve.textField.rawValue)
         
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
@@ -162,7 +238,7 @@ class OpenDetailsView: UIViewController {
 
         Trabalho + Café + Cultura, precisa de mais? Então reserve =).
         """
-        label_6.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label_6.textColor = black_White
         label_6.numberOfLines = 0
         label_6.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
@@ -179,11 +255,7 @@ class OpenDetailsView: UIViewController {
         label_8.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        let localDetailsView = UITableView()
-        localDetailsView.layer.cornerRadius = 12
-        localDetailsView.backgroundColor = .green
-        
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsView])
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -239,15 +311,12 @@ class OpenDetailsView: UIViewController {
         label_8.constraintInsideTo(.leading, label_7)
         label_8.constraintInsideTo(.trailing, label_7)
         
-        localDetailsView.constraintOutsideTo(.top, label_8,
+        localDetailsStackView.constraintOutsideTo(.top, label_8,
                                                   CGFloat(20).generateSizeForScreen)
-        localDetailsView.constraintInsideTo(.leading, label_8,
-                                                 CGFloat(20).generateSizeForScreen)
-        localDetailsView.constraintInsideTo(.trailing, label_8,
-                                                 CGFloat(20).generateSizeForScreen)
-        localDetailsView.heightAnchorInSuperview(100)
+        localDetailsStackView.constraintInsideTo(.leading, label_8)
+        localDetailsStackView.constraintInsideTo(.trailing, label_8)
         
-        localDetailsView.constraintInsideTo(.bottom, view,
+        localDetailsStackView.constraintInsideTo(.bottom, view,
                                                  CGFloat(20).generateSizeForScreen)
         
         return scrollView
