@@ -180,7 +180,7 @@ class HomeOpenTableViewCell: UITableViewCell {
     }
     
     func setup(_ cellInfo: ReserveData) {
-        
+
         viewElements.titleLabel.text = cellInfo.title
         viewElements.descriptionLabel.text = cellInfo.description
         viewElements.photoView.image = cellInfo.image
