@@ -10,6 +10,7 @@ import UIKit
 class LoginView: UIViewController {
     
     let backButton = UIButton()
+    private let viewModel: LoginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         
@@ -140,6 +141,7 @@ class LoginView: UIViewController {
                            size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
         view.keyboardType = .namePhonePad
+        view.delegate = self
         
         return view
     }()
@@ -179,6 +181,8 @@ class LoginView: UIViewController {
         view.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
         view.keyboardType = .namePhonePad
+        view.delegate = self
+        view.isSecureTextEntry = true
         
         return view
     }()
@@ -186,8 +190,8 @@ class LoginView: UIViewController {
     private lazy var eyeButton: UIButton = {
         
         let view = UIButton(type: .custom)
-        view.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .selected)
+        view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+//        view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
         
@@ -200,8 +204,10 @@ class LoginView: UIViewController {
         
         if eyeButton.isSelected {
             passwordTextField.isSecureTextEntry = true
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
         } else {
             passwordTextField.isSecureTextEntry  = false
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
         }
     }
 
@@ -235,9 +241,16 @@ class LoginView: UIViewController {
 
         let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+        view.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
         
         return view
     }()
+    
+    @objc func forgotPasswordButtonTapped(){
+        let vc = PasswordRecoveryEmailView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
     
     private lazy var enterButton: UIButton = {
         
@@ -258,10 +271,33 @@ class LoginView: UIViewController {
 
         let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+        view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
         return view
     }()
     
+    @objc func loginButtonTapped(){
+//        let vc = ()
+//        vc.modalPresentationStyle = .fullScreen
+        
+        guard let phone = self.cellTextField.text else {return}
+        guard let password = self.passwordTextField.text else {return}
+        
+        if self.viewModel.isValid(phone: phone, password: password) == true{
+//            present(vc, animated: false)
+            print("Login Válido")
+        }
+        else{
+            cellLabel.textColor = .systemRed
+            passwordLabel.textColor = .systemRed
+            if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeOpen.rawValue){
+                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
+            }else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
+                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
+            }
+            print("login Inválido")
+        }
+    }
     
     private lazy var newLabel : UILabel  = {
         
@@ -354,5 +390,19 @@ class LoginView: UIViewController {
         registerButton.constraintInsideTo(.leading, enterButton)
         registerButton.constraintInsideTo(.trailing, enterButton)
         registerButton.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+    }
+}
+
+
+extension LoginView: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        cellLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        passwordLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        cellTextField.text = cellTextField.text?.formatMask(mask: "(##) #####-####")
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        cellTextField.text = cellTextField.text?.formatMask(mask: "(##) #####-####")
     }
 }
