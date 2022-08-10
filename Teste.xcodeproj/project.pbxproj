@@ -69,6 +69,8 @@
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
+		275969A728A2C87D00AAA7CE /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275969A628A2C87D00AAA7CE /* Reservations3-3ViewModel.swift */; };
+		27EA964128A18F070085CD0F /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EA964028A18F070085CD0F /* Reservations3-3ViewController.swift */; };
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		306F6E9A28A29D640057D49C /* FAQTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* FAQTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
@@ -152,6 +154,8 @@
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryEmailView.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
+		275969A628A2C87D00AAA7CE /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
+		27EA964028A18F070085CD0F /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		306F6E9628A29D630057D49C /* FAQTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 		14CBDBB92889B72300EA8EDD = {
 			isa = PBXGroup;
 			children = (
+				27EA963F28A18EBB0085CD0F /* Reservations3-3 */,
 				14CBDBC42889B72300EA8EDD /* Teste */,
 				14CBDBC32889B72300EA8EDD /* Products */,
 			);
@@ -315,6 +320,15 @@
 				306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */,
 			);
 			path = Teste;
+			sourceTree = "<group>";
+		};
+		27EA963F28A18EBB0085CD0F /* Reservations3-3 */ = {
+			isa = PBXGroup;
+			children = (
+				27EA964028A18F070085CD0F /* Reservations3-3ViewController.swift */,
+				275969A628A2C87D00AAA7CE /* Reservations3-3ViewModel.swift */,
+			);
+			path = "Reservations3-3";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
