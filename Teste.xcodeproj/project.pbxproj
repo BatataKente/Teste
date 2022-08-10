@@ -49,6 +49,8 @@
 		1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986E289EC3D000B1BDE2 /* ProfessionView.swift */; };
 		14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */; };
 		148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A86EA289C64540019ECFE /* BravveTabBar.swift */; };
+		14937D6A28A47033004A1E7A /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14937D6928A47033004A1E7A /* HelpView.swift */; };
+		14937D6C28A4703F004A1E7A /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14937D6B28A4703F004A1E7A /* HelpViewModel.swift */; };
 		14A375C528A302A100B48F9D /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A375C428A302A100B48F9D /* PasswordView.swift */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
@@ -128,6 +130,8 @@
 		1480986E289EC3D000B1BDE2 /* ProfessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
 		14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionViewModel.swift; sourceTree = "<group>"; };
 		148A86EA289C64540019ECFE /* BravveTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveTabBar.swift; sourceTree = "<group>"; };
+		14937D6928A47033004A1E7A /* HelpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		14937D6B28A4703F004A1E7A /* HelpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
 		14A375C428A302A100B48F9D /* PasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
+				14937D6B28A4703F004A1E7A /* HelpViewModel.swift */,
+				14937D6928A47033004A1E7A /* HelpView.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
@@ -405,17 +411,18 @@
 				143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */,
-				1478A22328995EDA00B409E5 /* ImagesBravveEnum.swift in Sources */,
 				306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
 				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
 				CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */,
+				14937D6C28A4703F004A1E7A /* HelpViewModel.swift in Sources */,
 				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
 				145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
 				13080CB428A17EC000A064B0 /* Network.swift in Sources */,
+				14937D6A28A47033004A1E7A /* HelpView.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
