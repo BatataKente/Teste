@@ -36,9 +36,11 @@ public enum ImagesBravve: String {
     case wayEmail = "wayEmail"
     case wayFinalCadaster = "wayFinalCadaster"
     case wayHelp = "wayHelp"
+    case wayHobbies = "wayHobbies"
     case wayLogin = "wayLogin"
     case wayName = "wayName"
     case wayPassword = "wayPassword"
+    case wayPhoto = "wayPhoto"
     case wayReserv_1 = "wayReserv"
     case wayReserv_2 = "wayReserv2"
 }
