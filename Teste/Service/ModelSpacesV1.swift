@@ -96,6 +96,7 @@ struct SpacePicture: Codable {
 }
 
 struct Space: Codable {
+    var id: Int?
     var name: String?
     var slogan: String?
     var description: String?
@@ -113,7 +114,7 @@ struct Space: Codable {
     var is_active: Bool?
     var has_qrcode: Bool?
     var partner_site_id: Int?
-    var space_catgegory: SpaceCategory?
+    var space_category: SpaceCategory?
     var space_type: SpaceType?
     var space_classification: SpaceClassification?
     var space_noise_level: SpaceNoise?
@@ -124,4 +125,17 @@ struct Space: Codable {
     var partner_site_address: PartnerSiteAddress?
     var contact: SpaceContact?
     var pictures: [SpacePicture]?
+}
+
+struct SpaceListParameters: Codable {
+    var space_state_id: Int
+    var space_city_id: Int
+    var allow_workpass: Bool
+    var seats_qty: Int
+    var space_type_id: Int
+    var space_classification_id: Int
+    var space_category_id: Int
+    var space_facilities_id: [Int]
+    var space_noise_level_id: Int
+    var space_contract_Type: Int
 }
