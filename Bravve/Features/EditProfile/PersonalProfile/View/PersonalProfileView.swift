@@ -11,7 +11,7 @@ class PersonalProfileView: UIViewController{
     
     let wayImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "wayName")
+        image.setWayToDefault(.wayPassword)
         image.contentMode = .scaleAspectFill
         return image
     }()
@@ -89,7 +89,7 @@ class PersonalProfileView: UIViewController{
     
     let infoImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "info-circle")
+        image.image = UIImage(named: "info-circle")
         return image
     }()
     
@@ -116,7 +116,7 @@ class PersonalProfileView: UIViewController{
     
     let helpImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "info-circle")
+        image.image = UIImage(named: "info-circle")
         return image
     }()
     
@@ -247,23 +247,43 @@ class PersonalProfileView: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(named: "background")
+        
         view.addSubviews([wayImage, profilePic, helloLabel, subtitleLabel, backView, infoLabel, subInfoLabel, separatorView, bravveInfoLabel, subBravveInfoLabel, infoImage, reservationLabel, nextPageButton, separatorView2, helpImage, helpLabel, nextPageButton2, separatorView3, policyImage, policyLabel, nextPageButton3, separatorView4, logoutImage, logoutLabel, nextPageButton4, separatorView5, smallView, numberLabel, creditLabel, smallView2, numberLabel2, creditLabel2])
         
+        nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
+        nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
+        nextPageButton3.addTarget(self, action: #selector(policyPage), for: .touchUpInside)
+        nextPageButton3.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
         addConstraints()
+    }
+    
+    @objc func reservationPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    @objc func helpPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    @objc func policyPage(sender: UIButton){
+        print("Going Next")
+    }
+    
+    @objc func goOutPage(sender: UIButton){
+        print("Going Next")
     }
     
     func addConstraints(){
         
-        wayImage.setWayToDefault(.wayName)
-        
         profilePic.widthAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
         profilePic.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen).isActive = true
         profilePic.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        profilePic.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        profilePic.constraintInsideTo(.top, view.safeAreaLayoutGuide, 39)
         
         helloLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        helloLabel.constraintOutsideTo(.top, profilePic, CGFloat(15).generateSizeForScreen)
-        helloLabel.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
+        helloLabel.constraintOutsideTo(.top, profilePic, CGFloat(60).generateSizeForScreen)
         
         subtitleLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         subtitleLabel.constraintOutsideTo(.top, helloLabel, CGFloat(10).generateSizeForScreen)
