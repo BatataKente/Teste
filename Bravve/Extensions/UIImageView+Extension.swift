@@ -12,7 +12,7 @@ extension UIImageView {
     
 /// This function puts the ways in the default position and size. Ways are background images that are common in this app
 /// - Parameter imageName: The image name which is the enum that has the images identified in the assets
-    open func setWayToDefault(_ imageName: ImagesBravve) {
+    func setWayToDefault(_ imageName: ImagesBravve) {
         
         self.image = UIImage(named: imageName.rawValue)
         
@@ -107,7 +107,7 @@ extension UIImageView {
     
 /// This function puts the BravveLogo in the default position and size.
 /// - Parameter ImageName: The image name which is the enum that has the images identified in the assets(default is logo)
-    open func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
+    func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
         
         self.image = UIImage(named: ImageName.rawValue)
         
