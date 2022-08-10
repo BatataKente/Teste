@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Hobbies: Codable {
     var hobbie: Int?
     var name: String?
@@ -53,5 +52,44 @@ struct Pictures: Codable {
     var is_active: Bool?
 }
 
+struct CreditWallet: Codable {
+    var wp_account_id: Int?
+    var corporate_name: String?
+    var credit_amount: Double?
+}
 
+struct ForgotPasswordParameters: Codable {
+    var phone_number: String
+    var email: String
+}
+
+struct ConfirmForgotPasswordParameters: Codable {
+    var new_password: String
+    var code: String
+}
+
+struct LoginParameters: Codable {
+    var email: String
+    var password: String
+}
+
+struct Token: Codable {
+    var token: String?
+}
+
+struct UserParameters: Codable {
+    var name: String
+    var phone_number: String
+    var email: String
+    var password: String
+}
+
+struct UpdatePasswordParameters: Codable {
+    var previous_password: String
+    var new_password: String
+}
+
+struct ValidateUserParameter: Codable {
+    var code: String
+}
 	
