@@ -81,6 +81,12 @@ class AuthManager {
             case .partnersFinancial: urlEndpoint = EndPoints.partners.rawValue + "/\(id)financial"
             case .partnersContacts: urlEndpoint = EndPoints.partners.rawValue + "/\(id)contacts"
             case .partnersDoorLocks: urlEndpoint = EndPoints.partners.rawValue + "/\(id)doorLocks"
+            
+            case .sitesSiteClassification: urlEndpoint = EndPoints.sitesSiteClassification.rawValue
+            case .sites: urlEndpoint = EndPoints.sites.rawValue
+            case .sitesId: urlEndpoint = EndPoints.sites.rawValue + "/\(id)"
+            case .sitesContacts: urlEndpoint = EndPoints.sites.rawValue + "/\(id)/contacts"
+                
             }
             
             guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
