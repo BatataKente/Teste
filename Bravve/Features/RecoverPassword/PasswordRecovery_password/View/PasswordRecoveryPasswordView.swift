@@ -109,6 +109,9 @@ class PasswordRecoveryPassword: UIViewController {
         
         passwordTextFieldClass.textField.addTarget(self, action: #selector(passwordTextFieldDidChange(_:)), for: .editingChanged)
         confirmPasswordTextFieldClass.textField.addTarget(self, action: #selector(confirmPasswordTextFieldDidChange(_:)), for: .editingChanged)
+        
+        registerButton.addTarget(self, action: #selector(actionRegisterButton), for: .touchUpInside)
+        
     }
     
     

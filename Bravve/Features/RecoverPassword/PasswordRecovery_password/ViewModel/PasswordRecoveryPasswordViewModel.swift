@@ -169,7 +169,6 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         }
     }
-
     
     /// Method to switch between images as the password textfield eyeButton is pressed
     @objc func passwordEyeSlashButtonTapped() {
@@ -185,10 +184,9 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
         }
     }
     
-    
     /// Method to switch images as the confirm password eyeButton is pressed.
     @objc func confirmPasswordEyeSlashButtonTapped() {
-
+        
         if confirmPasswordEyeSlash {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = true
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
@@ -199,4 +197,13 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
             confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
+    
+    @objc func actionRegisterButton() {
+        if registerButton.backgroundColor == UIColor(named: ColorsBravve.buttonPink.rawValue) {
+            let vc = PasswordRecoverySMSView()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        }
+    }
+    
 }
