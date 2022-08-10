@@ -13,7 +13,7 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
         if textField == passwordTextFieldClass.textField {
             textField.resignFirstResponder()
             confirmPasswordTextFieldClass.textField.isHidden = false
-            confirmPasswordTextFieldClass.label.font = UIFont(name: "Ubuntu-Light", size: 11)
+            confirmPasswordTextFieldClass.label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
             confirmPasswordTextFieldClass.textField.becomeFirstResponder()
             return true
         } else {
@@ -21,6 +21,9 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
         }
     }
     
+    
+    /// Method to manage the UI behavior as the passsword textfield changes
+    /// - Parameter textField: The textfield which will be managed
     @objc func passwordTextFieldDidChange(_ textField: UITextField) {
         
         var passwordText: String = ""
@@ -30,66 +33,85 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
             }
         
         if passwordText.isEmpty {
-            capitalizedLetterBulletPoint.label.textColor = UIColor(named: "label")
-            numericCharactersBulletPoint.label.textColor = UIColor(named: "label")
-            regularCharactersBulletPoint.label.textColor = UIColor(named: "label")
-            specialCharactersBulletPoint.label.textColor = UIColor(named: "label")
-            passwordBulletPoint.label.textColor = UIColor(named: "label")
+            capitalizedLetterBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            numericCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            numericCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            regularCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            regularCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            specialCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            specialCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            passwordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            passwordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         } else {
             
             if containsUppercasedLetters(text: passwordText) {
-                capitalizedLetterBulletPoint.label.textColor = UIColor(named: "label")
-                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                capitalizedLetterBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsUppercased = true
+                invalidCharacters = false
             } else {
-                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                capitalizedLetterBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                capitalizedLetterBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                capitalizedLetterBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsUppercased = false
+                invalidCharacters = true
             }
             
             if (6...40).contains(passwordText.count) {
-                passwordBulletPoint.label.textColor = UIColor(named: "label")
-                passwordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                passwordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                passwordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 textInsideRange = true
+                invalidCharacters = false
             } else {
-                passwordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                passwordBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                passwordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                passwordBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 textInsideRange = false
+                invalidCharacters = true
             }
             
             if containsNumericCharacters(text: passwordText) {
-                numericCharactersBulletPoint.label.textColor = UIColor(named: "label")
-                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                numericCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsNumericCharacters = true
+                invalidCharacters = false
             } else {
-                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                numericCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                numericCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                numericCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsNumericCharacters = false
+                invalidCharacters = true
             }
             
             if containsSpecialCharacters(text: passwordText) {
-                specialCharactersBulletPoint.label.textColor = UIColor(named: "label")
-                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                specialCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsSpecialCharacters = true
+                invalidCharacters = false
             } else {
-                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                specialCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                specialCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                specialCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsSpecialCharacters = false
+                invalidCharacters = true
             }
             
             if containsLowercasedCharacters(text: passwordText) {
-                regularCharactersBulletPoint.label.textColor = UIColor(named: "label")
-                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                regularCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                 containsLowercased = true
+                invalidCharacters = false
             } else {
-                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                regularCharactersBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                regularCharactersBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                regularCharactersBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 containsLowercased = false
+                invalidCharacters = true
             }
             
         }
     }
     
+    
+    
+    /// Method to manage the UI behavior as the confirm passsword textfield changes
+    /// - Parameter textField: The textfield which will be managed
     @objc func confirmPasswordTextFieldDidChange(_ textField: UITextField) {
 
         var confirmPasswordText = ""
@@ -106,50 +128,75 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
         }
 
                     if confirmPasswordText == "" {
-                        samePasswordBulletPoint.label.textColor = UIColor(named: "label")
-                        registerButton.backgroundColor = UIColor(named: "buttonGray")
+                        samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                        samePasswordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+                        passwordTextFieldClass.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                        passwordTextFieldClass.textFieldButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
+                        passwordTextFieldClass.shadow.backgroundColor = .blue
+                        confirmPasswordTextFieldClass.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                        confirmPasswordTextFieldClass.textFieldButton.tintColor = UIColor(named: ColorsBravve.blue.rawValue)
+                        confirmPasswordTextFieldClass.shadow.backgroundColor = .blue
+                        registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
                     } else {
                         if confirmPasswordText == passwordTextFieldClass.textField.text {
-                            samePasswordBulletPoint.label.textColor = UIColor(named: "label")
-                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse green")
+                            samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
                             samePassword = true
                         } else {
-                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: "Ellipse red")
-                            samePasswordBulletPoint.label.textColor = UIColor(named: "redAlertLabel")
+                            
+                            if !confirmPasswordText.isEmpty && invalidCharacters {
+                                passwordTextFieldClass.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                passwordTextFieldClass.textFieldButton.tintColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                confirmPasswordTextFieldClass.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                confirmPasswordTextFieldClass.textFieldButton.tintColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                passwordTextFieldClass.shadow.backgroundColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                confirmPasswordTextFieldClass.shadow.backgroundColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                samePasswordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                                samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                samePassword = false
+                                
+                            } else {
+                            samePasswordBulletPoint.ellipseImage.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
+                            samePasswordBulletPoint.label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                             samePassword = false
+                            }
                         }
                     }
         
         if passwordOK, samePassword {
-            registerButton.backgroundColor = UIColor(named: "buttonPink")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         } else {
-            registerButton.backgroundColor = UIColor(named: "buttonGray")
+            registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         }
     }
 
+    
+    /// Method to switch between images as the password textfield eyeButton is pressed
     @objc func passwordEyeSlashButtonTapped() {
 
         if passwordEyeSlash {
             passwordTextFieldClass.textField.isSecureTextEntry = true
             passwordEyeSlash = !passwordEyeSlash
-            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         } else {
             passwordTextFieldClass.textField.isSecureTextEntry = false
             passwordEyeSlash = !passwordEyeSlash
-            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
+            passwordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
     
+    
+    /// Method to switch images as the confirm password eyeButton is pressed.
     @objc func confirmPasswordEyeSlashButtonTapped() {
 
         if confirmPasswordEyeSlash {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = true
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
-            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeClose"), for: .normal)
+            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         } else {
             confirmPasswordTextFieldClass.textField.isSecureTextEntry = false
             confirmPasswordEyeSlash = !confirmPasswordEyeSlash
-            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: "eyeOpen"), for: .normal)
+            confirmPasswordTextFieldClass.textFieldButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue)?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
 }
