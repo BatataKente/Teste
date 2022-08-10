@@ -90,21 +90,55 @@ class AuthManager {
             }
             
             guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
+            
             let headers: HTTPHeaders = [
                 "Authorization": "Bearer \(accessToken)"
             ]
             
             AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
                 if let data = response.value {
+//                    print(response.response?.statusCode)
                     completionHandler(data)
                 } else {
+//                    print(response.response?.statusCode)
                     completionHandler(nil)
                 }
             }
         }
     }
     
-    func postDataWithResponse<T: Codable, P: Codable>(parameters: P? = nil, completionHandler: @escaping ([T]?) -> Void) {
+    func getData<T: Codable>(id: String = "", endpoint: EndPoints? = nil, phoneNumber: String = "", uuid: String = "", completionHandler: @escaping (T?) -> Void) {
+        
+        getToken { accessToken in
+            guard let accessToken = accessToken else { return }
+            
+            var urlEndpoint = ""
+            
+            switch endpoint {
+            case .states: urlEndpoint = EndPoints.states.rawValue
+            case .cities: urlEndpoint = EndPoints.states.rawValue + "/\(id)/cities"
+            case nil: urlEndpoint = "/spaces/\(id)/pictures/"
+            }
+            
+            guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            AF.request(url, headers: headers).responseDecodable(of: T.self) { response in
+                print(response.error)
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    print(response.response?.statusCode)
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
+    func postDataWithArrayResponse<T: Codable, P: Codable>(parameters: P? = nil, completionHandler: @escaping ([T]?) -> Void) {
         
         getToken { accessToken in
             
@@ -130,8 +164,90 @@ class AuthManager {
                 }
             }
         }
+    }
+    
+    func postDataWithResponse<T: Codable, P: Codable>(parameters: P? = nil, completionHandler: @escaping (T?) -> Void) {
         
-       
+        getToken { accessToken in
+            
+            guard let parameters = parameters else {
+                return
+            }
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = URL(string: self.baseAPIString + "/users/") else { return }
+            
+            AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
+    func postDataWithoutResponse<P: Codable>(parameters: P? = nil, uuid: String = "", completionHandler: @escaping (Int?) -> Void) {
         
+        getToken { accessToken in
+            
+            guard let parameters = parameters else {
+                return
+            }
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = URL(string: self.baseAPIString + "/spaces/favorite") else { return }
+            
+            AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { response in
+
+                if let statusCode = response.response?.statusCode {
+                    completionHandler(statusCode)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
+    func putDataWithResponse<T: Codable, P: Codable>(parameters: P? = nil, uuid: String = "", completionHandler: @escaping (T?) -> Void) {
+        
+        getToken { accessToken in
+            
+            guard let parameters = parameters else {
+                return
+            }
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = URL(string: self.baseAPIString + "/users/\(uuid)") else { return }
+            
+            AF.request(url, method: .put, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
     }
 }

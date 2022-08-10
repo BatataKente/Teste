@@ -23,12 +23,11 @@ class HomeOpenView: UIViewController {
         setupConstraints()
         setupDefaults()
         
-        let parameters = SpaceListParameters(space_state_id: 1, space_city_id: 2, allow_workpass: true, seats_qty: 3, space_type_id: 4, space_classification_id: 5, space_category_id: 6, space_facilities_id: [0], space_noise_level_id: 7, space_contract_Type: 8)
+        let parameters = SpaceFavoriteParameters(space_id: 1, uuid: "74d96741-350a-4288-a0f7-7080ac34ede0")
         
-            self.authManager.postDataWithResponse(parameters: parameters) { (spaces: [Space]?) in
-                print(spaces)
-            }
-        
+        self.authManager.postDataWithoutResponse(parameters: parameters) { statusCode in
+            print(statusCode)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
