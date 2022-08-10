@@ -31,6 +31,8 @@
 		140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */; };
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
 		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
+		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
+		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
 		143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */; };
@@ -69,8 +71,6 @@
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
-		275969A728A2C87D00AAA7CE /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275969A628A2C87D00AAA7CE /* Reservations3-3ViewModel.swift */; };
-		27EA964128A18F070085CD0F /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EA964028A18F070085CD0F /* Reservations3-3ViewController.swift */; };
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		306F6E9A28A29D640057D49C /* FAQTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* FAQTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
@@ -114,6 +114,8 @@
 		140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveClosedTabBar.swift; sourceTree = "<group>"; };
 		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
+		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
+		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
 		143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarWithFilterStruct.swift; sourceTree = "<group>"; };
@@ -154,8 +156,6 @@
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryEmailView.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
-		275969A628A2C87D00AAA7CE /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
-		27EA964028A18F070085CD0F /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		306F6E9628A29D630057D49C /* FAQTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
@@ -249,7 +249,6 @@
 		14CBDBB92889B72300EA8EDD = {
 			isa = PBXGroup;
 			children = (
-				27EA963F28A18EBB0085CD0F /* Reservations3-3 */,
 				14CBDBC42889B72300EA8EDD /* Teste */,
 				14CBDBC32889B72300EA8EDD /* Products */,
 			);
@@ -285,6 +284,8 @@
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
+				1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */,
+				1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
@@ -320,15 +321,6 @@
 				306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */,
 			);
 			path = Teste;
-			sourceTree = "<group>";
-		};
-		27EA963F28A18EBB0085CD0F /* Reservations3-3 */ = {
-			isa = PBXGroup;
-			children = (
-				27EA964028A18F070085CD0F /* Reservations3-3ViewController.swift */,
-				275969A628A2C87D00AAA7CE /* Reservations3-3ViewModel.swift */,
-			);
-			path = "Reservations3-3";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,6 +436,7 @@
 				14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */,
 				CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
+				1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */,
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
@@ -481,6 +474,7 @@
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */,
 				14C8B70E289DC2C600ABC321 /* LoginView.swift in Sources */,
+				1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */,
 				14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */,
 				CFBF085F28A2810600D39DCF /* ModelPartnersV1.swift in Sources */,
 			);
