@@ -355,7 +355,7 @@ extension NomeView: NomeViewModelProtocol {
     
     func dismiss() {
         
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
     func presentOtherView(_ viewController: UIViewController) {
