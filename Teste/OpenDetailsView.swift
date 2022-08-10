@@ -95,7 +95,7 @@ class OpenDetailsView: UIViewController {
     
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            itens: [UIStackView],
-                                           titleColor: ColorsBravve = .pink_white) -> UIStackView {
+                                           titleColor: ColorsBravve = .buttonPink) -> UIStackView {
         let moreButton = UIButton()
         moreButton.setTitle("Ver Mais", for: .normal)
         moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
@@ -169,7 +169,7 @@ class OpenDetailsView: UIViewController {
         }
         
         let buttons = createSeeButtonsStackView(2...itens.count-1,
-                                       itens: itens)
+                                                itens: itens)
         
         let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
                                                 itens +
@@ -222,7 +222,7 @@ class OpenDetailsView: UIViewController {
         
         let buttons = createSeeButtonsStackView(6...itens.count-1,
                                                 itens: itens,
-                                                titleColor: .progressBarLabel)
+                                                titleColor: .capsuleButtonSelected)
         
         let structureStackView = UIStackView(arrangedSubviews: [title] +
                                              itens +
@@ -498,7 +498,7 @@ class OpenDetailsView: UIViewController {
     
     private func setupView() {
         
-        view.setToDefaultBackgroundColor()
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.addSubviews([customBar, scrollView, reserveButton, tabBar])
         tabBar.selectedItem = tabBar.items?[0]
     }
