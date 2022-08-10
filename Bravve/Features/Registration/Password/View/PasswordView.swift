@@ -12,21 +12,18 @@ class PasswordView: UIViewController{
     let backWay: UIImageView = {
         let image = UIImageView()
         image.setWayToDefault(.wayPassword)
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     lazy var goBackButton: UIButton = {
         let button = UIButton()
         button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen){_ in self.dismiss(animated: false)}
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let logoImage: UIImageView = {
         let image = UIImageView()
         image.setLogoToDefault(.logoBlue)
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -38,7 +35,6 @@ class PasswordView: UIViewController{
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: progressBarButtons)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -47,14 +43,13 @@ class PasswordView: UIViewController{
         label.text = "Agora escolha uma senha de sua preferência."
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let passwordTFLabel: UILabel = {
         let label = UILabel()
         label.text = "Senha"
-        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        label.textColor = UIColor(named: "labelTextfield")
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
@@ -65,12 +60,10 @@ class PasswordView: UIViewController{
     let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.layer.cornerRadius = 8
-        textField.clipsToBounds = true
         textField.isSecureTextEntry = true
+        textField.isHidden = true
         textField.keyboardAppearance = .light
         textField.keyboardType = .namePhonePad
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -84,7 +77,6 @@ class PasswordView: UIViewController{
         stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
                                                left: stackMargins,
@@ -97,14 +89,13 @@ class PasswordView: UIViewController{
     let hidePasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "eyeClose"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let confirmPasswordTFLabel: UILabel = {
         let label = UILabel()
-        label.text = "Repita a senha"
-        label.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        label.text = "Repetir senha"
+        label.textColor = UIColor(named: "labelTextfield")
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.adjustsFontSizeToFitWidth = true
         label.adjustsFontForContentSizeCategory = true
@@ -115,12 +106,10 @@ class PasswordView: UIViewController{
     let confirmPasswordTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.layer.cornerRadius = 8
-        textField.clipsToBounds = true
+        textField.isHidden = true
         textField.isSecureTextEntry = true
         textField.keyboardAppearance = .light
         textField.keyboardType = .namePhonePad
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -132,7 +121,6 @@ class PasswordView: UIViewController{
         stackView.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
                                                left: stackMargins,
@@ -145,13 +133,12 @@ class PasswordView: UIViewController{
     let hideConfirmPasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "eyeClose"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let numberCharEllipse: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Ellipse gray")
+        image.image = UIImage(named: "ellipseGray")
         return image
     }()
     
@@ -159,13 +146,12 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "No mínimo 6 caracteres"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let upperCaseEllipse: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Ellipse gray")
+        image.image = UIImage(named: "ellipseGray")
         return image
     }()
     
@@ -173,13 +159,12 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "1 letra maiúscula"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let lowerCaseEllipse: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Ellipse gray")
+        image.image = UIImage(named: "ellipseGray")
         return image
     }()
     
@@ -187,13 +172,12 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "1 letra minúscula"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let numberEllipse: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Ellipse gray")
+        image.image = UIImage(named: "ellipseGray")
         return image
     }()
     
@@ -201,13 +185,12 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "1 digito numérico"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let specialCharEllipse: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Ellipse gray")
+        image.image = UIImage(named: "ellipseGray")
         return image
     }()
     
@@ -215,13 +198,12 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "1 caractere especial"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let samePasswordEllipse: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Ellipse gray")
+        image.image = UIImage(named: "ellipseGray")
         return image
     }()
     
@@ -229,7 +211,6 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.text = "Senhas coincidem"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -239,27 +220,10 @@ class PasswordView: UIViewController{
         return button
     }()
     
-    let passwordCustomShadow: UIView = {
-        let customShadow = UIView()
-        customShadow.backgroundColor = UIColor(named: "blueNav")
-        customShadow.layer.cornerRadius = 8
-        customShadow.isHidden = true
-        return customShadow
-    }()
-    
-    let confirmCustomShadow: UIView = {
-        let customShadow = UIView()
-        customShadow.backgroundColor = UIColor(named: "blueNav")
-        customShadow.layer.cornerRadius = 8
-        customShadow.isHidden = true
-        return customShadow
-    }()
-    
     let hideWrongPasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "eyeCloseRed"), for: .normal)
         button.isHidden = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -267,13 +231,17 @@ class PasswordView: UIViewController{
         let button = UIButton()
         button.setImage(UIImage(named: "eyeCloseRed"), for: .normal)
         button.isHidden = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([backWay, goBackButton, logoImage, stackView, descriptionLabel,passwordStackView, hidePasswordButton, confirmStackView ,hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberEllipse, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, passwordCustomShadow, confirmCustomShadow, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
+        view.backgroundColor = UIColor(named: "background")
+        
+        view.addSubviews([backWay,goBackButton, logoImage, logoImage, stackView, descriptionLabel, passwordStackView, hidePasswordButton, confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
+        
+        addConstraints()
+        addTargets()
         
         hidePasswordButton.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
         hideConfirmPasswordButton.addTarget(self, action: #selector(hideConfirmPassword), for: .touchUpInside)
@@ -282,8 +250,9 @@ class PasswordView: UIViewController{
     }
     
     func addConstraints(){
+        
         goBackButton.constraintTo(.left, view.safeAreaLayoutGuide, 32.76)
-        goBackButton.constraintTo(.top, view.safeAreaLayoutGuide, 76)
+        goBackButton.constraintTo(.top, view.safeAreaLayoutGuide, 73)
         goBackButton.widthAnchor.constraint(equalToConstant: 14).isActive = true
         goBackButton.heightAnchor.constraint(equalToConstant: 14).isActive = true
         
@@ -293,7 +262,7 @@ class PasswordView: UIViewController{
         logoImage.widthAnchor.constraint(equalToConstant: 163.22).isActive = true
         
         stackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        stackView.constraintOutsideTo(.top, logoImage, 40)
+        stackView.constraintOutsideTo(.top, logoImage, 62)
         
         descriptionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         descriptionLabel.heightAnchor.constraint(equalToConstant: 43).isActive = true
@@ -378,16 +347,6 @@ class PasswordView: UIViewController{
         continueButton.constraintInsideTo(.right, view.safeAreaLayoutGuide)
         continueButton.constraintOutsideTo(.bottom, view.keyboardLayoutGuide)
         
-        passwordCustomShadow.constraintOutsideTo(.top, passwordStackView)
-        passwordCustomShadow.constraintInsideTo(.left, passwordStackView)
-        passwordCustomShadow.constraintInsideTo(.right, passwordStackView)
-        passwordCustomShadow.heightAnchor.constraint(equalToConstant: 2).isActive = true
-        
-        confirmCustomShadow.constraintOutsideTo(.top, confirmStackView)
-        confirmCustomShadow.constraintInsideTo(.left, confirmStackView)
-        confirmCustomShadow.constraintInsideTo(.right, confirmStackView)
-        confirmCustomShadow.heightAnchor.constraint(equalToConstant: 2).isActive = true
-        
         hideWrongPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
         hideWrongPasswordButton.constraintInsideTo(.top, passwordStackView, 25)
         hideWrongPasswordButton.constraintInsideTo(.right, passwordStackView, -15)
@@ -459,14 +418,14 @@ class PasswordView: UIViewController{
     @objc func confirmStackViewTapped() {
         confirmPasswordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         confirmPasswordTextField.addTarget(self, action: #selector(confirmChangeText), for: .editingChanged)
-        confirmCustomShadow.isHidden = false
+        confirmStackView.addBottomLineWithColor(color: UIColor(named: "blueNav")!, width: 1, y: 1)
         confirmPasswordTextField.isHidden = false
     }
     
     @objc func stackViewTapped() {
         passwordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         passwordTextField.addTarget(self, action: #selector(changeText), for: .editingChanged)
-        passwordCustomShadow.isHidden = false
+        passwordStackView.addBottomLineWithColor(color: UIColor(named: "blueNav")!, width: 1, y: 1)
         passwordTextField.isHidden = false
     }
     
@@ -487,49 +446,49 @@ class PasswordView: UIViewController{
         }
         
         if passwordText.isEmpty {
-            numberCharEllipse.image = UIImage(named: "Ellipse gray")
-            upperCaseEllipse.image = UIImage(named: "Ellipse gray")
-            lowerCaseEllipse.image = UIImage(named: "Ellipse gray")
-            numberEllipse.image = UIImage(named: "Ellipse gray")
-            specialCharEllipse.image = UIImage(named: "Ellipse gray")
+            numberCharEllipse.image = UIImage(named: "ellipseGray")
+            upperCaseEllipse.image = UIImage(named: "ellipseGray")
+            lowerCaseEllipse.image = UIImage(named: "ellipseGray")
+            numberEllipse.image = UIImage(named: "ellipseGray")
+            specialCharEllipse.image = UIImage(named: "ellipseGray")
         } else {
             if upperCaseTest.evaluate(with: passwordTextField.text!){
-                upperCaseEllipse.image = UIImage(named: "Ellipse green")
+                upperCaseEllipse.image = UIImage(named: "ellipseGreen")
                 upperCaseLabel.textColor = .label
             } else {
-                upperCaseEllipse.image = UIImage(named: "Ellipse red")
+                upperCaseEllipse.image = UIImage(named: "ellipseRed")
                 upperCaseLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if lowerCaseTest.evaluate(with: passwordTextField.text!){
-                lowerCaseEllipse.image = UIImage(named: "Ellipse green")
+                lowerCaseEllipse.image = UIImage(named: "ellipseGreen")
                 lowerCaseLabel.textColor = .label
             } else {
-                lowerCaseEllipse.image = UIImage(named: "Ellipse red")
+                lowerCaseEllipse.image = UIImage(named: "ellipseRed")
                 lowerCaseLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if numericRegExTest.evaluate(with: passwordTextField.text!){
-                numberEllipse.image = UIImage(named: "Ellipse green")
+                numberEllipse.image = UIImage(named: "ellipseGreen")
                 numberLabel.textColor = .label
             } else {
-                numberEllipse.image = UIImage(named: "Ellipse red")
+                numberEllipse.image = UIImage(named: "ellipseRed")
                 numberLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if specialChracterTest.evaluate(with: passwordTextField.text!){
-                specialCharEllipse.image = UIImage(named: "Ellipse green")
+                specialCharEllipse.image = UIImage(named: "ellipseGreen")
                 specialCharLabel.textColor = .label
             } else {
-                specialCharEllipse.image = UIImage(named: "Ellipse red")
+                specialCharEllipse.image = UIImage(named: "ellipseRed")
                 specialCharLabel.textColor = UIColor(named: "redAlertLabel")
             }
             
             if (passwordTextField.text?.count ?? 0) < 6 {
-                numberCharEllipse.image = UIImage(named: "Ellipse red")
+                numberCharEllipse.image = UIImage(named: "ellipseRed")
                 numberCharLabel.textColor = UIColor(named: "redAlertLabel")
             } else {
-                numberCharEllipse.image = UIImage(named: "Ellipse green")
+                numberCharEllipse.image = UIImage(named: "ellipseGreen")
                 numberCharLabel.textColor = .label
             }
             
@@ -544,27 +503,27 @@ class PasswordView: UIViewController{
         }
         
         if passwordText.isEmpty {
-            samePasswordEllipse.image = UIImage(named: "Ellipse red")
+            samePasswordEllipse.image = UIImage(named: "ellipseRed")
             samePasswordLabel.textColor = UIColor(named: "redAlertLabel")
             continueButton.backgroundColor = .gray
         } else {
             if confirmPasswordTextField.text == passwordTextField.text {
-                samePasswordEllipse.image = UIImage(named: "Ellipse green")
+                samePasswordEllipse.image = UIImage(named: "ellipseGreen")
                 samePasswordLabel.textColor = .label
                 
             } else {
-                samePasswordEllipse.image = UIImage(named: "Ellipse red")
+                samePasswordEllipse.image = UIImage(named: "ellipseRed")
                 samePasswordLabel.textColor = UIColor(named: "redAlertLabel")
                 continueButton.backgroundColor = .gray
             }
         }
         
-        if samePasswordEllipse.image == UIImage(named: "Ellipse green") {
-            if numberCharEllipse.image == UIImage(named: "Ellipse green"){
-                if upperCaseEllipse.image == UIImage(named: "Ellipse green"){
-                    if lowerCaseEllipse.image == UIImage(named: "Ellipse green"){
-                        if numberEllipse.image == UIImage(named: "Ellipse green"){
-                            if specialCharEllipse.image == UIImage(named: "Ellipse green"){
+        if samePasswordEllipse.image == UIImage(named: "ellipseGreen") {
+            if numberCharEllipse.image == UIImage(named: "ellipseGreen"){
+                if upperCaseEllipse.image == UIImage(named: "ellipseGreen"){
+                    if lowerCaseEllipse.image == UIImage(named: "ellipseGreen"){
+                        if numberEllipse.image == UIImage(named: "ellipseGreen"){
+                            if specialCharEllipse.image == UIImage(named: "ellipseGreen"){
                                 continueButton.backgroundColor = UIColor(named: "buttonPink")
                                 continueButton.addTarget(nil, action: #selector(continueAction), for: .touchUpInside)
                             } else {
@@ -579,18 +538,18 @@ class PasswordView: UIViewController{
             continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
             continueButton.backgroundColor = .gray
         }
-        if samePasswordEllipse.image == UIImage(named: "Ellipse red") {
-            if numberCharEllipse.image == UIImage(named: "Ellipse red"){
-                if upperCaseEllipse.image == UIImage(named: "Ellipse red"){
-                    if lowerCaseEllipse.image == UIImage(named: "Ellipse red"){
-                        if numberEllipse.image == UIImage(named: "Ellipse red"){
-                            if specialCharEllipse.image == UIImage(named: "Ellipse red"){
+        if samePasswordEllipse.image == UIImage(named: "ellipseRed") {
+            if numberCharEllipse.image == UIImage(named: "ellipseRed"){
+                if upperCaseEllipse.image == UIImage(named: "ellipseRed"){
+                    if lowerCaseEllipse.image == UIImage(named: "ellipseRed"){
+                        if numberEllipse.image == UIImage(named: "ellipseRed"){
+                            if specialCharEllipse.image == UIImage(named: "ellipseRed"){
                                 
-                                passwordTFLabel.textColor = UIColor(named: "AlertRed")
-                                passwordCustomShadow.backgroundColor = UIColor(named: "AlertRed")
+                                passwordTFLabel.textColor = UIColor(named: "redAlertLabel")
+                                passwordStackView.addBottomLineWithColor(color: UIColor(named: "redAlertLabel")!, width: 1, y: 1)
                                 
-                                confirmPasswordTFLabel.textColor = UIColor(named: "AlertRed")
-                                confirmCustomShadow.backgroundColor = UIColor(named: "AlertRed")
+                                confirmPasswordTFLabel.textColor = UIColor(named: "redAlertLabel")
+                                confirmStackView.addBottomLineWithColor(color: UIColor(named: "redAlertLabel")!, width: 1, y: 1)
                                 
                                 hideWrongPasswordButton.isHidden = false
                                 hidePasswordButton.isHidden = true
@@ -606,10 +565,10 @@ class PasswordView: UIViewController{
             }
         } else {
             passwordTFLabel.textColor = .gray
-            passwordCustomShadow.backgroundColor = UIColor(named: "blueNav")
+            passwordStackView.addBottomLineWithColor(color: UIColor(named: "blueNav")!, width: 1, y: 1)
             
             confirmPasswordTFLabel.textColor = .gray
-            confirmCustomShadow.backgroundColor = UIColor(named: "blueNav")
+            confirmStackView.addBottomLineWithColor(color: UIColor(named: "blueNav")!, width: 1, y: 1)
             
             hidePasswordButton.setImage(UIImage(named: "eyeClose"), for: .normal)
             hideConfirmPasswordButton.setImage(UIImage(named: "eyeClose"), for: .normal)
