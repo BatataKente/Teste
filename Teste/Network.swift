@@ -44,15 +44,16 @@ class AuthManager {
     
     /// Method to get data in the format of an array from the API
     /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the chosen model
-    func getDataArray<T: Codable>(id: String = "", completionHandler: @escaping ([T]?) -> Void) {
+    func getDataArray<T: Codable>(id: String = "", endpoint: EndPoints = .states, completionHandler: @escaping ([T]?) -> Void) {
         
         getToken { accessToken in
             guard let accessToken = accessToken else { return }
             
-            var urlEndpoint = "/utils/states"
+            var urlEndpoint = ""
             
-            if id != "" {
-                urlEndpoint = "/utils/states/\(id)/cities"
+            switch endpoint {
+            case .states: urlEndpoint = EndPoints.states.rawValue
+            case .cities: urlEndpoint = EndPoints.states.rawValue + "/\(id)/cities"
             }
             
             guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
@@ -68,5 +69,36 @@ class AuthManager {
                 }
             }
         }
+    }
+    
+    func postDataWithResponse<T: Codable, P: Codable>(parameters: P? = nil, completionHandler: @escaping ([T]?) -> Void) {
+        
+        getToken { accessToken in
+            
+            guard let parameters = parameters else {
+                return
+            }
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = URL(string: self.baseAPIString + "/spaces/list?direction=asc&limit=10&offset=0") else { return }
+            
+            AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: [T].self) { response in
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
+        
+       
+        
     }
 }
