@@ -18,6 +18,10 @@ class FAQTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
         view.layer.cornerRadius = 15
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 8
         return view
     }()
     
@@ -83,7 +87,6 @@ class FAQTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        contentView.layer.cornerRadius = CGFloat(15).generateSizeForScreen
         contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
         contentView.addSubviews([backgroundCellView, invisibleButton, titleLabel, plusAndLessButton, subTitleLabel])
         configConstraints()
@@ -95,12 +98,12 @@ class FAQTableViewCell: UITableViewCell {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            self.backgroundCellView.topAnchor.constraint(equalTo: self.topAnchor, constant: CGFloat(12).generateSizeForScreen),
-            self.backgroundCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CGFloat(41).generateSizeForScreen),
-            self.backgroundCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-41).generateSizeForScreen),
-            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: CGFloat(-12).generateSizeForScreen),
+            self.backgroundCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.backgroundCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: CGFloat(41).generateSizeForScreen),
+            self.backgroundCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: CGFloat(-41).generateSizeForScreen),
+            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-12).generateSizeForScreen),
             
-            self.titleLabel.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: CGFloat(14).generateSizeForScreen),
+            self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: CGFloat(14).generateSizeForScreen),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
             self.titleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-79).generateSizeForScreen),
             
@@ -112,6 +115,7 @@ class FAQTableViewCell: UITableViewCell {
             self.subTitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
             self.subTitleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
             self.subTitleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-29).generateSizeForScreen),
+            self.subTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-37).generateSizeForScreen),
             
             self.plusAndLessButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
             self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),

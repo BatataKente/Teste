@@ -19,6 +19,7 @@ class FrequentlyAskedQuestionsView: UIViewController {
         table.register(FAQTableViewCell.self, forCellReuseIdentifier: FAQTableViewCell.identifier)
         table.showsVerticalScrollIndicator = false
         table.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+        table.rowHeight = UITableView.automaticDimension
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -74,11 +75,14 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
         cell.subTitleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
             return cell
     }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
-            return 222
-        }
-        return 250
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 0{
+//            return CGFloat(222).generateSizeForScreen
+//        }
+//        return tableView.rowHeight
+//    }
 }

@@ -50,6 +50,7 @@ class FAQViewTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
+        contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
         contentView.addSubview(backgroundCellView)
         contentView.addSubview(vectorHelpImageView)
         contentView.addSubview(wayHelpImageView)
@@ -65,9 +66,10 @@ class FAQViewTableViewCell: UITableViewCell {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            self.backgroundCellView.topAnchor.constraint(equalTo: self.topAnchor),
-            self.backgroundCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.backgroundCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.backgroundCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.backgroundCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.backgroundCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-20).generateSizeForScreen),
             self.backgroundCellView.heightAnchor.constraint(equalToConstant: CGFloat(222).generateSizeForScreen),
             
             self.vectorHelpImageView.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor),

@@ -21,7 +21,8 @@ struct FAQModel {
 class FAQViewModel{
     
     private let questionAnswer: [FAQModel] = [
-    FAQModel(question: "Como faço para reportar um problema?", answer: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box."),
+        FAQModel(question: "Como eu faço para abrir o Box?", answer: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box."),
+    FAQModel(question: "Como eu faço para abrir o Box?", answer: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box."),
     FAQModel(question: "Como faço para reportar um problema?", answer: "Você pode escrever para suporte@bravve.com.br ou enviar uma mensagem para o número de suporte disponível em nosso app."),
     FAQModel(question: "Como finalizo o uso?", answer: "Basta clicar no botão "+"Sair do Box."+" Certifique-se sempre de que a porta foi fechada corretamente."),
     FAQModel(question: "O que acontece se eu não sair ao final do meu horário?", answer: "Além de prejudicar o próximo cliente, será cobrada de você uma taxa adicional de R$ 500,00 a cada 30 minutos excedentes."),
