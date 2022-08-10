@@ -41,12 +41,15 @@ enum EndPoints: String {
     case partnersExport = "/partners/export"
     case partners = "/partners"
     case partnersAmount = "/partners/amount"
-    case partnersId = "/id"
-    case partnersFinancial = "financial"
-    case partnersContacts = "contacts"
-    case partnersDoorLocks = "doorLocks"
+    case partnersId = "/partnersId"
+    case partnersFinancial = "partners/financial"
+    case partnersContacts = "partners/contacts"
+    case partnersDoorLocks = "partners/doorLocks"
     
     // Sites
-    
+    case sitesSiteClassification = "/sites/siteClassification"
+    case sites = "/sites"
+    case sitesId = "/sites/id"
+    case sitesContacts = "/sites/contacts"
     
 }
