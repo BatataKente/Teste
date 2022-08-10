@@ -23,6 +23,7 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)
+            
                 
             default:
 
