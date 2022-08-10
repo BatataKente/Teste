@@ -92,12 +92,22 @@ class OpenDetailsView: UIViewController {
         localDetailsTitleLabel.textColor = textColor
         localDetailsTitleLabel.text = "Detalhes do local"
         
-        let localDetailsPlusButton = UIButton()
-        localDetailsPlusButton.setTitle("Ver Mais", for: .normal)
-        localDetailsPlusButton.setTitleColor(UIColor(named: ColorsBravve.pink_white.rawValue), for: .normal)
-        localDetailsPlusButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+        let localDetailsMoreButton = UIButton()
+        localDetailsMoreButton.setTitle("Ver Mais", for: .normal)
+        localDetailsMoreButton.setTitleColor(UIColor(named: ColorsBravve.pink_white.rawValue), for: .normal)
+        localDetailsMoreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
                                                          size: CGFloat(20).generateSizeForScreen)
-        localDetailsPlusButton.titleLabel?.constraintInsideTo(.leading, localDetailsPlusButton)
+        localDetailsMoreButton.titleLabel?.constraintInsideTo(.leading, localDetailsMoreButton)
+        
+        let localDetailsLessButton = UIButton()
+        localDetailsLessButton.setTitle("Ver Menos", for: .normal)
+        localDetailsLessButton.isHidden = true
+        localDetailsLessButton.setTitleColor(UIColor(named: ColorsBravve.pink_white.rawValue), for: .normal)
+        localDetailsLessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                                         size: CGFloat(20).generateSizeForScreen)
+        localDetailsLessButton.titleLabel?.constraintInsideTo(.leading, localDetailsLessButton)
+        
+        let localDetailsButtonsStackView = UIStackView(arrangedSubviews: [localDetailsMoreButton, localDetailsLessButton])
         
         let texts:[String] = ["Segunda: 08:00h - 17:00h",
                               "Terça: 08:00h - 17:00h",
@@ -118,23 +128,43 @@ class OpenDetailsView: UIViewController {
         
         let localDetailsStackView = UIStackView(arrangedSubviews: [localDetailsTitleLabel] +
                                                                    localDetailItens +
-                                                                  [localDetailsPlusButton])
+                                                                  [localDetailsButtonsStackView])
         localDetailsStackView.axis = .vertical
         localDetailsStackView.spacing = spacing
         
-        let handler = {(action: UIAction) in
+        let seeMoreHandler = {(action: UIAction) in
             
             for i in 2...localDetailItens.count - 1 {
                 
                 localDetailItens[i].isHidden = false
             }
+            localDetailsMoreButton.isHidden = true
+            localDetailsLessButton.isHidden = false
         }
         
-        localDetailsPlusButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        let seeLessHandler = {(action: UIAction) in
+            
+            for i in 2...localDetailItens.count - 1 {
+                
+                localDetailItens[i].isHidden = true
+            }
+            localDetailsMoreButton.isHidden = false
+            localDetailsLessButton.isHidden = true
+        }
+        
+        localDetailsMoreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
+        localDetailsLessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
         
         return localDetailsStackView
     }()
     
+    private lazy var structureStackView: UIStackView = {
+        
+        let structureStackView = UIStackView()
+        structureStackView.backgroundColor = .brown
+        return structureStackView
+    }()
+        
     private lazy var scrollView: UIScrollView = {
         
         let itemSize = 256
@@ -255,7 +285,7 @@ class OpenDetailsView: UIViewController {
         label_8.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView])
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -316,8 +346,16 @@ class OpenDetailsView: UIViewController {
         localDetailsStackView.constraintInsideTo(.leading, label_8)
         localDetailsStackView.constraintInsideTo(.trailing, label_8)
         
-        localDetailsStackView.constraintInsideTo(.bottom, view,
-                                                 CGFloat(20).generateSizeForScreen)
+        structureStackView.constraintOutsideTo(.top, localDetailsStackView,
+                                               CGFloat(20).generateSizeForScreen)
+        structureStackView.constraintInsideTo(.leading, localDetailsStackView,
+                                              CGFloat(40).generateSizeForScreen)
+        structureStackView.constraintInsideTo(.trailing, localDetailsStackView,
+                                              CGFloat(40).generateSizeForScreen)
+        structureStackView.heightAnchorInSuperview()
+        
+        structureStackView.constraintInsideTo(.bottom, view,
+                                              CGFloat(20).generateSizeForScreen)
         
         return scrollView
     }()
