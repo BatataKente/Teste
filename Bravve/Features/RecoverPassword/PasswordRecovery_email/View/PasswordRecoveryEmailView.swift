@@ -162,13 +162,16 @@ class PasswordRecoveryEmailView: UIViewController {
 
     
     @objc func actionButtonBack(sender: UIButton){
-        print("voltar")
+        let vc = LoginView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
   
     
     @objc func actionButtonContinue() {
-
-        print("ok")
+        let vc = PasswordRecoveryPassword()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     func freezeButton_() {
