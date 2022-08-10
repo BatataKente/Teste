@@ -112,13 +112,9 @@ class AuthManager {
         getToken { accessToken in
             guard let accessToken = accessToken else { return }
             
-            var urlEndpoint = ""
+            var urlEndpoint = "/spaces/\(id)/pictures/"
             
-            switch endpoint {
-            case .states: urlEndpoint = EndPoints.states.rawValue
-            case .cities: urlEndpoint = EndPoints.states.rawValue + "/\(id)/cities"
-            case nil: urlEndpoint = "/spaces/\(id)/pictures/"
-            }
+          
             
             guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
             
