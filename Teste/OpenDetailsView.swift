@@ -63,7 +63,7 @@ class OpenDetailsView: UIViewController {
     private func createStackView(_ text: String,
                                  _ image: UIImage? = nil,
                                  isHidden: Bool = false,
-                                 textColor: ColorsBravve = .textField) -> UIStackView {
+                                 textColor: UIColor? = .white) -> UIStackView {
         
         let stackView = UIStackView()
         
@@ -83,7 +83,7 @@ class OpenDetailsView: UIViewController {
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue,
                             size: CGFloat(12).generateSizeForScreen)
-        label.textColor = UIColor(named: textColor.rawValue)
+        label.textColor = textColor
         
         stackView.spacing = CGFloat(10).generateSizeForScreen
         stackView.isHidden = isHidden
@@ -96,7 +96,6 @@ class OpenDetailsView: UIViewController {
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            itens: [UIStackView],
                                            titleColor: ColorsBravve = .pink_white) -> UIStackView {
-        
         let moreButton = UIButton()
         moreButton.setTitle("Ver Mais", for: .normal)
         moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
@@ -155,13 +154,18 @@ class OpenDetailsView: UIViewController {
                               "Sexta: 08:00h - 17:00h"]
         var itens = [UIStackView]()
         
-        itens.append(createStackView("Até 6 pessoas", UIImage(named: IconsBravve.users.rawValue)))
+        itens.append(createStackView("Até 6 pessoas",
+                                     UIImage(named: IconsBravve.users.rawValue),
+                                     textColor: textColor))
         itens.append(createStackView("Av. São João, Cj. Boulevard, nº900, Sâo Paulo. SP 06020-010, BR",
-                                                UIImage(named: IconsBravve.map.rawValue)))
+                                     UIImage(named: IconsBravve.map.rawValue),
+                                     textColor: textColor))
         
         for text in texts {
             
-            itens.append(createStackView(text, UIImage(named: IconsBravve.clockReserv.rawValue), isHidden: true))
+            itens.append(createStackView(text, UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         isHidden: true,
+                                         textColor: textColor))
         }
         
         let buttons = createSeeButtonsStackView(2...itens.count-1,
@@ -178,11 +182,13 @@ class OpenDetailsView: UIViewController {
     
     private lazy var structureStackView: UIStackView = {
         
+        let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        
         let title = UILabel()
         title.text = "Estrutura"
         title.font = UIFont(name: FontsBravve.medium.rawValue,
                             size: 15)
-        title.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        title.textColor = textColor
         
         let texts:[String] = ["Ar condicionado",
                               "Ás àreas comuns",
@@ -202,13 +208,14 @@ class OpenDetailsView: UIViewController {
         for i in 0...5 {
             
             itens.append(createStackView(texts[i],
-                                         textColor: .blue))
+                                         textColor: textColor))
         }
         
         for i in 6...texts.count - 1 {
             
-            itens.append(createStackView(texts[i], isHidden: true,
-                                         textColor: .blue))
+            itens.append(createStackView(texts[i],
+                                         isHidden: true,
+                                         textColor: textColor))
         }
         
         let buttons = createSeeButtonsStackView(6...itens.count-1,
@@ -232,7 +239,7 @@ class OpenDetailsView: UIViewController {
         title.text = "Facilities do local"
         title.font = UIFont(name: FontsBravve.medium.rawValue,
                             size: 15)
-        title.textColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
+        title.textColor = .white
         
         let texts:[String] = ["Ar condicionado",
                               "Ás àreas comuns",
@@ -251,12 +258,12 @@ class OpenDetailsView: UIViewController {
         
         for i in 0...5 {
             
-            itens.append(createStackView(texts[i], textColor: .backgroundHelp))
+            itens.append(createStackView(texts[i]))
         }
         
         for i in 6...texts.count - 1 {
             
-            itens.append(createStackView(texts[i], isHidden: true, textColor: .backgroundHelp))
+            itens.append(createStackView(texts[i], isHidden: true))
         }
         
         let buttons = createSeeButtonsStackView(6...itens.count-1,
