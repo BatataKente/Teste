@@ -1,15 +1,13 @@
 //
-//  TabBarClass+Extension.swift
+//  TabBarClassClosed+Extension.swift
 //  Bravve
 //
-//  Created by Evandro Rodrigo Minamoto on 08/08/22.
+//  Created by Josicleison on 10/08/22.
 //
-
-/* a tab bar in the app pattern with their respective actions*/
 
 import UIKit
 
-class BravveTabBar: UITabBar, UITabBarDelegate {
+class TabBarClosed: UITabBar, UITabBarDelegate {
 
     private var actualView: UIViewController
     
@@ -18,6 +16,13 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
         switch item {
             
             case tabBar.items?[0]:
+            
+                let homeOpenView = HomeOpenView()
+
+                homeOpenView.modalPresentationStyle = .fullScreen
+                actualView.present(homeOpenView, animated: true)
+            
+            case tabBar.items?[1]:
             
                 let homeOpenView = HomeOpenView()
 
