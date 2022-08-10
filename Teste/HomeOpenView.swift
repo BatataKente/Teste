@@ -91,16 +91,13 @@ class HomeOpenView: UIViewController {
     
     private lazy var tableView: UITableView = {
         
-        let margins = CGFloat(20).generateSizeForScreen
-        
         let tableView = UITableView()
         tableView.setToDefaultBackgroundColor()
         tableView.register(HomeOpenTableViewCell.self,
                            forCellReuseIdentifier: cellIdentifier)
-        tableView.layoutMargins = UIEdgeInsets(top: margins,
-                                               left: margins,
-                                               bottom: margins,
-                                               right: margins)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         
         return tableView
     }()
@@ -122,15 +119,11 @@ class HomeOpenView: UIViewController {
     
     private var filterButtons = [UIButton]()
     
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    private lazy var tabBar: BravveTabBar = BravveTabBar(self)
     
     private func setupView() {
         
         view.addSubviews([stackView, customBar, tabBar])
-        
-        tableView.dataSource = self
-        tableView.delegate = self
         
         filterButtons = createCapsuleButtons(seletedFilterItems)
         

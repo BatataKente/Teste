@@ -160,15 +160,16 @@ class OpenDetailsView: UIViewController {
         itens.append(createStackView("Av. São João, Cj. Boulevard, nº900, Sâo Paulo. SP 06020-010, BR",
                                      UIImage(named: IconsBravve.map.rawValue),
                                      textColor: textColor))
-        
-        for text in texts {
+        itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                     textColor: textColor))
+        for i in 1...texts.count-1 {
             
-            itens.append(createStackView(text, UIImage(named: IconsBravve.clockReserv.rawValue),
+            itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
                                          textColor: textColor))
         }
         
-        let buttons = createSeeButtonsStackView(2...itens.count-1,
+        let buttons = createSeeButtonsStackView(3...itens.count-1,
                                                 itens: itens)
         
         let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
