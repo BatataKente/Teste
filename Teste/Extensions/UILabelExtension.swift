@@ -14,7 +14,7 @@ extension UILabel {
 /// - Parameters:
 ///   - text: The string with the label text
 ///   - textAlignment: The text alignment
-    open func setToDefault(text: String = "",
+    func setToDefault(text: String = "",
                            _ textAlignment: NSTextAlignment = .center) {
         
         self.text = text

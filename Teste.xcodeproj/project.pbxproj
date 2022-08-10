@@ -28,6 +28,7 @@
 		14054AC82899E7AD00BB4E3B /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */; };
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
+		140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */; };
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
 		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
@@ -102,6 +103,7 @@
 		14054AC72899E7AD00BB4E3B /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveClosedTabBar.swift; sourceTree = "<group>"; };
 		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,10 @@
 				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
 				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
 				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
+				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
+				148A86EA289C64540019ECFE /* BravveTabBar.swift */,
+				140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */,
+				143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -257,9 +263,6 @@
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
-				143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */,
-				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
-				148A86EA289C64540019ECFE /* BravveTabBar.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
@@ -409,6 +412,7 @@
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
+				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
