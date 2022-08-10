@@ -13,6 +13,7 @@
 		14076BE528930CC7003EA2F1 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE428930CC7003EA2F1 /* UILabel+Extension.swift */; };
 		14076BE828930CFA003EA2F1 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE728930CFA003EA2F1 /* UIImageView+Extension.swift */; };
 		14076BEB28930DE6003EA2F1 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */; };
+		140DA88928A3F2F900413161 /* TabBarClassClosed+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */; };
 		1416C28A28941BFA00FCE10E /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */; };
 		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
 		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
@@ -178,6 +179,7 @@
 		14076BE428930CC7003EA2F1 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		14076BE728930CFA003EA2F1 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarClassClosed+Extension.swift"; sourceTree = "<group>"; };
 		1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
@@ -1315,6 +1317,7 @@
 				14076BDE28930B27003EA2F1 /* UIViewController+Extension.swift */,
 				2EF23F4728931B760078B6B8 /* UIView+Extension.swift */,
 				2EB18FB828A19FB3008A80BF /* TabBarClass+Extension.swift */,
+				140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */,
 				2EB18FCC28A2E5B2008A80BF /* CustomBarWithFilter.swift */,
 			);
 			path = Extensions;
@@ -1955,6 +1958,7 @@
 				2EB18FD728A2F17A008A80BF /* ReservationsV1Model.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
+				140DA88928A3F2F900413161 /* TabBarClassClosed+Extension.swift in Sources */,
 				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
 				C69616E02881E90800281633 /* HomeClosedView.swift in Sources */,
 				2EB18FBB28A1A2E6008A80BF /* StatesModel.swift in Sources */,
