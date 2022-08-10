@@ -44,15 +44,49 @@ class AuthManager {
     
     /// Method to get data in the format of an array from the API
     /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the chosen model
-    func getDataArray<T: Codable>(id: String = "", completionHandler: @escaping ([T]?) -> Void) {
+    func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", endpoint: EndPoints = .utilsStates, completionHandler: @escaping ([T]?) -> Void) {
         
         getToken { accessToken in
             guard let accessToken = accessToken else { return }
             
-            var urlEndpoint = "/utils/states"
+            var urlEndpoint = ""
             
-            if id != "" {
-                urlEndpoint = "/utils/states/\(id)/cities"
+            switch endpoint {
+            case .utilsStates: urlEndpoint = EndPoints.utilsStates.rawValue
+            case .utilsCities: urlEndpoint = EndPoints.utilsStates.rawValue + "/\(id)/cities"
+            case .utilsMarketSegments: urlEndpoint = EndPoints.utilsMarketSegments.rawValue
+            case .utilsCompanySizes: urlEndpoint = EndPoints.utilsCompanySizes.rawValue
+            case .utilsCompanyClassifications: urlEndpoint = EndPoints.utilsCompanyClassifications.rawValue
+            case .utilsPhoneNumber: urlEndpoint = EndPoints.utilsPhoneNumber.rawValue + "/\(phoneNumber)"
+                
+            case .usersExport: urlEndpoint = EndPoints.usersExport.rawValue
+            case .usersHobbies: urlEndpoint = EndPoints.usersHobbies.rawValue
+            case .usersInterests: urlEndpoint = EndPoints.usersInterests.rawValue
+            case .usersOccupations: urlEndpoint = EndPoints.usersOccupations.rawValue
+            case .usersWorkModels: urlEndpoint = EndPoints.usersWorkModels.rawValue
+            case .users: urlEndpoint = EndPoints.users.rawValue
+            case .usersAmount: urlEndpoint = EndPoints.usersAmount.rawValue
+            case .usersUuid: urlEndpoint = EndPoints.users.rawValue + "/\(uuid)"
+            case .usersPassword: urlEndpoint = EndPoints.users.rawValue + "/\(uuid)/password"
+            case .usersValidate: urlEndpoint = EndPoints.users.rawValue + "/\(uuid)/validate"
+            case .usersCode: urlEndpoint = EndPoints.users.rawValue + "/\(uuid)/code"
+            case .usersPictures: urlEndpoint = EndPoints.users.rawValue + "/\(uuid)/pictures"
+            case .usersPicture: urlEndpoint = EndPoints.users.rawValue + "/\(uuid)/pictures/\(picture)"
+            case .usersCreditWallets: urlEndpoint = EndPoints.usersCreditWallets.rawValue
+                
+            case .partnersExport: urlEndpoint = EndPoints.partnersExport.rawValue
+            case .partnersAmount: urlEndpoint = EndPoints.partners.rawValue
+            case .partners: urlEndpoint = EndPoints.partnersAmount.rawValue
+            case .partnersId: urlEndpoint = EndPoints.partners.rawValue + "/\(id)"
+            case .partnersFinancial: urlEndpoint = EndPoints.partners.rawValue + "/\(id)financial"
+            case .partnersContacts: urlEndpoint = EndPoints.partners.rawValue + "/\(id)contacts"
+            case .partnersDoorLocks: urlEndpoint = EndPoints.partners.rawValue + "/\(id)doorLocks"
+            
+            case .sitesSiteClassification: urlEndpoint = EndPoints.sitesSiteClassification.rawValue
+            case .sites: urlEndpoint = EndPoints.sites.rawValue
+            case .sitesId: urlEndpoint = EndPoints.sites.rawValue + "/\(id)"
+            case .sitesContacts: urlEndpoint = EndPoints.sites.rawValue + "/\(id)/contacts"
+                
             }
             
             guard let url = URL(string: self.baseAPIString + urlEndpoint) else { return }
@@ -68,5 +102,36 @@ class AuthManager {
                 }
             }
         }
+    }
+    
+    func postDataWithResponse<T: Codable, P: Codable>(parameters: P? = nil, completionHandler: @escaping ([T]?) -> Void) {
+        
+        getToken { accessToken in
+            
+            guard let parameters = parameters else {
+                return
+            }
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = URL(string: self.baseAPIString + "/spaces/list?direction=asc&limit=10&offset=0") else { return }
+            
+            AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: [T].self) { response in
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
+        
+       
+        
     }
 }
