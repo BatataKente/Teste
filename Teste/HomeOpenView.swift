@@ -167,7 +167,7 @@ class HomeOpenView: UIViewController {
 
                     if state.code == action.title {
 
-                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .cities) { (cities: [Cities]?) in
+                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
 
                             guard let cities = cities else {return}
 
