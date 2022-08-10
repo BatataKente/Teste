@@ -48,4 +48,5 @@ public enum ColorsBravve: String {
     case textFieldBackground = "textFieldBackground"
     case textFieldBorder = "textFieldBorder"
     case viewHelp = "viewHelp"
+    case white_black = "white_black"
 }
