@@ -43,7 +43,9 @@ class BravveClosedTabBar: UITabBar, UITabBarDelegate {
         ChoseScreen(tabBar, didSelect: item)
     }
 
-    init(_ actualView: UIViewController, itemImagesNames: [String]) {
+    init(_ actualView: UIViewController, itemImagesNames: [String] = [ButtonsBravve.locationPink.rawValue,
+                                                                      ButtonsBravve.calendarButtonGray.rawValue,
+                                                                      ButtonsBravve.userLoginGray.rawValue]) {
 
         self.actualView = actualView
 

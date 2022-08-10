@@ -38,14 +38,15 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
         ChoseScreen(tabBar, didSelect: item)
     }
 
-    init(_ actualView: UIViewController, itemImagesNames: [String]) {
+    init(_ actualView: UIViewController, itemImagesNames: [String] = [ButtonsBravve.locationPink.rawValue,
+                                                                      ButtonsBravve.exitGray.rawValue]) {
 
         self.actualView = actualView
 
         super.init(frame: .zero)
         
         self.items = []
-
+        
         for itemImageName in itemImagesNames {
 
             let tabBarItem = UITabBarItem()
