@@ -182,6 +182,8 @@ class OpenDetailsView: UIViewController {
     
     private lazy var structureStackView: UIStackView = {
         
+        let margins = CGFloat(30).generateSizeForScreen
+        
         let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         
         let title = UILabel()
@@ -227,6 +229,13 @@ class OpenDetailsView: UIViewController {
                                              [buttons])
         structureStackView.axis = .vertical
         structureStackView.spacing = CGFloat(10).generateSizeForScreen
+        structureStackView.backgroundColor = .red
+        structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
+        structureStackView.isLayoutMarginsRelativeArrangement = true
+        structureStackView.layoutMargins = UIEdgeInsets(top: margins,
+                                                        left: margins,
+                                                        bottom: margins,
+                                                        right: margins)
         
         return structureStackView
     }()
@@ -469,10 +478,8 @@ class OpenDetailsView: UIViewController {
         
         structureStackView.constraintOutsideTo(.top, localDetailsStackView,
                                                CGFloat(20).generateSizeForScreen)
-        structureStackView.constraintInsideTo(.leading, localDetailsStackView,
-                                              CGFloat(30).generateSizeForScreen)
-        structureStackView.constraintInsideTo(.trailing, localDetailsStackView,
-                                              CGFloat(30).generateSizeForScreen)
+        structureStackView.constraintInsideTo(.leading, localFacilitiesStackView)
+        structureStackView.constraintInsideTo(.trailing, localFacilitiesStackView)
         
         localFacilitiesStackView.constraintOutsideTo(.top, structureStackView,
                                                      CGFloat(20).generateSizeForScreen)
