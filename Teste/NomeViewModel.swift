@@ -29,27 +29,6 @@ class NomeViewModel {
         return ddis
     }
     
-    func changeScreenWithProgressBar(_ sender: UIButton) {
-        
-        switch sender.currentImage {
-            
-            case UIImage(named: IconsBravve.userGray.rawValue):
-            
-                makeNameScreen()
-                stage = .first
-            
-            case UIImage(named: IconsBravve.cellGray.rawValue):
-            
-                makePhoneScreen()
-                stage = .second
-            
-            default:
-                
-                makeEmailScreen()
-                stage = .thirdy
-        }
-    }
-    
     func makeScreen() {
         
         switch stage {
@@ -75,14 +54,14 @@ class NomeViewModel {
             case .first:
             
                 makePhoneScreen()
-                stage = .second
             
             case .second:
             
                 makeEmailScreen()
-                stage = .thirdy
             
-            default: break
+            default:
+            
+                delegate?.presentOtherView(PasswordView())
         }
     }
     
@@ -93,19 +72,20 @@ class NomeViewModel {
             case .thirdy:
 
                 makePhoneScreen()
-                stage = .second
 
             case .second:
 
                 makeNameScreen()
-                stage = .first
 
-            default: break
+            default:
+            
+                delegate?.dismiss()
         }
     }
     
     func makeNameScreen() {
         
+        stage = .first
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
                               ways: [true, true, false])
@@ -126,6 +106,7 @@ class NomeViewModel {
     
     func makePhoneScreen() {
         
+        stage = .second
         delegate?.setIshidden(leftStackView: false,
                               ddiChoseLabel: true,
                               ways: [true, false, true])
@@ -146,6 +127,7 @@ class NomeViewModel {
     
     func makeEmailScreen() {
         
+        stage = .thirdy
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
                               ways: [false, true, true])
@@ -182,4 +164,8 @@ protocol NomeViewModelProtocol {
     func freezeButton()
     
     func setKeyboardType(keyboardType: UIKeyboardType)
+    
+    func dismiss()
+    
+    func presentOtherView(_ viewController: UIViewController)
 }

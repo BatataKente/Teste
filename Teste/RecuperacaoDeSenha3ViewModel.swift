@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension RecuperacaoDeSenha3: UITextFieldDelegate {
+extension PasswordRecoveryPassword: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == passwordTextFieldClass.textField {
@@ -21,6 +21,9 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         }
     }
     
+    
+    /// Method to manage the UI behavior as the passsword textfield changes
+    /// - Parameter textField: The textfield which will be managed
     @objc func passwordTextFieldDidChange(_ textField: UITextField) {
         
         var passwordText: String = ""
@@ -105,6 +108,10 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         }
     }
     
+    
+    
+    /// Method to manage the UI behavior as the confirm passsword textfield changes
+    /// - Parameter textField: The textfield which will be managed
     @objc func confirmPasswordTextFieldDidChange(_ textField: UITextField) {
 
         var confirmPasswordText = ""
@@ -163,6 +170,8 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         }
     }
 
+    
+    /// Method to switch between images as the password textfield eyeButton is pressed
     @objc func passwordEyeSlashButtonTapped() {
 
         if passwordEyeSlash {
@@ -176,6 +185,8 @@ extension RecuperacaoDeSenha3: UITextFieldDelegate {
         }
     }
     
+    
+    /// Method to switch images as the confirm password eyeButton is pressed.
     @objc func confirmPasswordEyeSlashButtonTapped() {
 
         if confirmPasswordEyeSlash {

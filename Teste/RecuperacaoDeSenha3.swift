@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecuperacaoDeSenha3: UIViewController {
+class PasswordRecoveryPassword: UIViewController {
     
     var passwordEyeSlash = false
     var confirmPasswordEyeSlash = false
@@ -111,6 +111,8 @@ class RecuperacaoDeSenha3: UIViewController {
         confirmPasswordTextFieldClass.textField.addTarget(self, action: #selector(confirmPasswordTextFieldDidChange(_:)), for: .editingChanged)
     }
     
+    
+    /// Set the default layout of the top elements and the bottom button of the view
     private func setupDefaults() {
         way.setWayToDefault(.wayPassword)
         backButton.setToBackButtonDefault(.backPink) {_ in
@@ -121,6 +123,8 @@ class RecuperacaoDeSenha3: UIViewController {
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }
     
+    
+    /// Set the constraints of the view
     private func setupConstraints() {
         
         progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, CGFloat(40).generateSizeForScreen)
