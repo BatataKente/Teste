@@ -222,14 +222,14 @@ class OpenDetailsView: UIViewController {
         
         let buttons = createSeeButtonsStackView(6...itens.count-1,
                                                 itens: itens,
-                                                titleColor: .blue)
+                                                titleColor: .progressBarLabel)
         
         let structureStackView = UIStackView(arrangedSubviews: [title] +
                                              itens +
                                              [buttons])
         structureStackView.axis = .vertical
         structureStackView.spacing = CGFloat(10).generateSizeForScreen
-        structureStackView.backgroundColor = .red
+        structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
         structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         structureStackView.isLayoutMarginsRelativeArrangement = true
         structureStackView.layoutMargins = UIEdgeInsets(top: margins,
@@ -284,7 +284,7 @@ class OpenDetailsView: UIViewController {
                                                    [buttons])
         localFacilitiesStackView.axis = .vertical
         localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
-        localFacilitiesStackView.backgroundColor = .blue
+        localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
         localFacilitiesStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         localFacilitiesStackView.isLayoutMarginsRelativeArrangement = true
         localFacilitiesStackView.layoutMargins = UIEdgeInsets(top: margins,
@@ -309,7 +309,7 @@ class OpenDetailsView: UIViewController {
         scrollView.alwaysBounceVertical = false
         
         let titleLabel = UILabel()
-        titleLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        titleLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
         titleLabel.text = reserveData.title
