@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EB927E428A5420A00D42F04 /* WorkPassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB927E328A5420A00D42F04 /* WorkPassCell.swift */; };
 		130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130544D4289845180026FCE6 /* CancelReservationCell.swift */; };
 		14076BDF28930B27003EA2F1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BDE28930B27003EA2F1 /* UIViewController+Extension.swift */; };
 		14076BE228930BFB003EA2F1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BE128930BFB003EA2F1 /* UIButton+Extension.swift */; };
@@ -178,6 +179,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EB927E328A5420A00D42F04 /* WorkPassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassCell.swift; sourceTree = "<group>"; };
 		130544D4289845180026FCE6 /* CancelReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationCell.swift; sourceTree = "<group>"; };
 		14076BDE28930B27003EA2F1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		14076BE128930BFB003EA2F1 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */,
+				0EB927E328A5420A00D42F04 /* WorkPassCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1985,6 +1988,7 @@
 				2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				2EB18FB928A19FB3008A80BF /* TabBarClass+Extension.swift in Sources */,
+				0EB927E428A5420A00D42F04 /* WorkPassCell.swift in Sources */,
 				C69617712881ECEB00281633 /* ReservationCompletedModel.swift in Sources */,
 				C69617682881ECB600281633 /* Reservation3View.swift in Sources */,
 				1478A2382899660200B409E5 /* RideUpEnum.swift in Sources */,
