@@ -57,8 +57,10 @@ class DetailsClosedView: UIViewController {
     
     private let customBar = UIView()
     
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    private lazy var tabBar = TabBarClosed(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                                   ButtonsBravve.calendarButtonGray.rawValue,
+                                                                   ButtonsBravve.userLoginGray.rawValue
+                                                                  ])
     
     private func createStackView(_ text: String,
                                  _ image: UIImage? = nil,
@@ -229,7 +231,7 @@ class DetailsClosedView: UIViewController {
                                              [buttons])
         structureStackView.axis = .vertical
         structureStackView.spacing = CGFloat(10).generateSizeForScreen
-        structureStackView.backgroundColor = .red
+        structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
         structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         structureStackView.isLayoutMarginsRelativeArrangement = true
         structureStackView.layoutMargins = UIEdgeInsets(top: margins,
@@ -284,7 +286,7 @@ class DetailsClosedView: UIViewController {
                                                    [buttons])
         localFacilitiesStackView.axis = .vertical
         localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
-        localFacilitiesStackView.backgroundColor = .blue
+        localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
         localFacilitiesStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         localFacilitiesStackView.isLayoutMarginsRelativeArrangement = true
         localFacilitiesStackView.layoutMargins = UIEdgeInsets(top: margins,

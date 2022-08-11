@@ -277,14 +277,14 @@ class LoginView: UIViewController {
     }()
     
     @objc func loginButtonTapped(){
-//        let vc = ()
-//        vc.modalPresentationStyle = .fullScreen
+        let vc = HomeClosedView()
+        vc.modalPresentationStyle = .fullScreen
         
         guard let phone = self.loginTextField.text else {return}
         guard let password = self.passwordTextField.text else {return}
         
         if self.viewModel.isValid(phone: phone, password: password) == true{
-//            present(vc, animated: false)
+            present(vc, animated: false)
             print("Login Válido")
         }
         else{
