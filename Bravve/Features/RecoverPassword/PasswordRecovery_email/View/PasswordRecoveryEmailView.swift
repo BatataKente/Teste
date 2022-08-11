@@ -45,7 +45,7 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.isHidden = true
         return textField
     }()
-    
+
     private let labelEmail_: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
@@ -67,14 +67,14 @@ class PasswordRecoveryEmailView: UIViewController {
         stackView.distribution = .equalCentering
         return stackView
     }()
-    
+                                
     private let customShaddow: UIView = {
         let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
         return customShaddow
-         }()
+    }()
 
     
     private let buttonContinue = UIButton()
@@ -121,6 +121,7 @@ class PasswordRecoveryEmailView: UIViewController {
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
         customShaddow.constraintTo(.bottom, stackViewEmail, CGFloat(1).generateSizeForScreen)
         
+        
     }
     
     private func addTargets() {
@@ -130,11 +131,11 @@ class PasswordRecoveryEmailView: UIViewController {
     }
     
     @objc func stackViewTapped() {
-          
+
         labelEmail_.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
-                
+
         customShaddow.isHidden = false
-        
+
         textFieldEmail.isHidden = false
         
         textFieldEmail.becomeFirstResponder()
