@@ -7,38 +7,6 @@
 
 import UIKit
 
-//struct Space: Codable {
-//    var id: Int?
-//    var name: String?
-//    var slogan: String?
-//    var description: String?
-//    var size_mt2: Double?
-//    var seats_qty: Int?
-//    var allow_half_slot: Bool?
-//    var favorite_space: Bool?
-//    var hourly_price: Double?
-//    var daily_price: Double?
-//    var monthly_price: Double?
-//    var allow_workpass: Bool?
-//    var hourly_credits: Int?
-//    var daily_credits: Int?
-//    var monthly_credits: Int?
-//    var is_active: Bool?
-//    var has_qrcode: Bool?
-//    var partner_site_id: Int?
-//    var space_category: SpaceCategory?
-//    var space_type: SpaceType?
-//    var space_classification: SpaceClassification?
-//    var space_noise_level: SpaceNoise?
-//    var space_facilitites: [SpaceFacility]?
-//    var space_bussiness_hours: [SpaceBusinessHours]?
-//    var space_types_contracts: [SpaceContract]?
-//    var doors: [Door]?
-//    var partner_site_address: PartnerSiteAddress?
-//    var contact: SpaceContact?
-//    var pictures: [SpacePicture]?
-//}
-
 class HomeOpenView: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -58,7 +26,7 @@ class HomeOpenView: UIViewController {
         let parameters = SpaceListParameters(space_state_id: 1, space_city_id: 2, allow_workpass: true, seats_qty: 3, space_type_id: 4, space_classification_id: 5, space_category_id: 6, space_facilities_id: [0], space_noise_level_id: 7, space_contract_Type: 8)
         
             self.authManager.postDataWithResponse(parameters: parameters) { (spaces: [Space]?) in
-                print(spaces)
+                print("\(String(describing: spaces))")
             }
         
     }
@@ -291,6 +259,7 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     func chosePlace(_ indexPath: IndexPath) {
         
         let openDetailsView = OpenDetailsView(cells[indexPath.row])
+        
         openDetailsView.modalPresentationStyle = .fullScreen
         present(openDetailsView, animated: false)
     }
