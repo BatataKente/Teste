@@ -43,4 +43,6 @@ public enum ImagesBravve: String {
     case wayPhoto = "wayPhoto"
     case wayReserv_1 = "wayReserv"
     case wayReserv_2 = "wayReserv2"
+    case wayTerms_1 = "wayTerms"
+    case wayTerms_2 = "wayTerms2"
 }

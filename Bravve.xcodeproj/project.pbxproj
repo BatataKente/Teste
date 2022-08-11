@@ -27,6 +27,8 @@
 		14A81548289D5594004CAEE8 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A81547289D5594004CAEE8 /* Ubuntu-Light.ttf */; };
 		14A8154A289D559C004CAEE8 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A81549289D559C004CAEE8 /* Ubuntu-Medium.ttf */; };
 		14A8154C289D55A3004CAEE8 /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A8154B289D55A3004CAEE8 /* Ubuntu-Regular.ttf */; };
+		14CADA0328A52EF6002E9736 /* EndPointMockEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */; };
+		14CADA0528A52F04002E9736 /* EndPointSessionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -195,6 +197,8 @@
 		14A81547289D5594004CAEE8 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		14A81549289D559C004CAEE8 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14A8154B289D55A3004CAEE8 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointMockEnum.swift; sourceTree = "<group>"; };
+		14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointSessionEnum.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 				1478A235289965F800B409E5 /* FontsBravveEnum.swift */,
 				1478A2372899660200B409E5 /* RideUpEnum.swift */,
 				2EB18FB628A1810E008A80BF /* StageEnum.swift */,
+				14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */,
+				14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1955,6 +1961,7 @@
 				C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */,
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
+				14CADA0328A52EF6002E9736 /* EndPointMockEnum.swift in Sources */,
 				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
 				C696175D2881EC7700281633 /* Reservation2Model.swift in Sources */,
@@ -1970,6 +1977,7 @@
 				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
 				C69616E02881E90800281633 /* HomeClosedView.swift in Sources */,
 				2EB18FBB28A1A2E6008A80BF /* StatesModel.swift in Sources */,
+				14CADA0528A52F04002E9736 /* EndPointSessionEnum.swift in Sources */,
 				2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */,
 				2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */,
 				2EB18FB928A19FB3008A80BF /* TabBarClass+Extension.swift in Sources */,
