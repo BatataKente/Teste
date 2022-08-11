@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import UIKit
+
+final class ReservationsViewModel {
+    
+    func verifyHasTextNumberCardTextFiled() {
+        
+        
+    }
+    
+
+}
