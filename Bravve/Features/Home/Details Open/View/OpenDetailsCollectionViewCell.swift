@@ -28,7 +28,7 @@ class OpenDetailsCollectionViewCell: UICollectionViewCell {
         
         let titleView = UIView()
         titleView.addSubview(titleLabel)
-        titleView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        titleView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
         titleLabel.constraintInsideTo(.top, titleView,
                                       CGFloat(2.5).generateSizeForScreen)
