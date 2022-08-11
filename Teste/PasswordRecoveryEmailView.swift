@@ -18,23 +18,13 @@ class PasswordRecoveryEmailView: UIViewController {
     
     private let backgroundImage = UIImageView()
     
-    private let buttonBack = UIButton()
-    
-    private let imageLogo = UIImageView()
-    
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
-        
-        let buttons = createProgressBarButtons([
-                                                IconsBravve.emailBlue.rawValue,
-                                                IconsBravve.padlockGray.rawValue
-                                                ])
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        buttons[0].setTitle(" Email", for: .normal)
-        stackView.spacing = CGFloat(5).generateSizeForScreen
-        
-        return (stack: stackView,
-                buttons: buttons)
+    private lazy var buttons: [UIButton] = {
+        let buttons =  createProgressBarButtonsWithoutActions([
+            IconsBravve.emailBlue.rawValue,
+            IconsBravve.padlockGray.rawValue
+        ])
+        buttons[0].setTitle(" Email ", for: .normal)
+        return buttons
     }()
     
     private let label: UILabel = {
@@ -63,34 +53,26 @@ class PasswordRecoveryEmailView: UIViewController {
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         return label
     }()
-    
-    let stackMargins: CGFloat =  CGFloat(12).generateSizeForScreen
-        
+            
     private lazy var stackViewEmail: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
-        stackView.spacing =  CGFloat(5).generateSizeForScreen
-        stackView.distribution = .fill
-        stackView.axis = .vertical
+        let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
         stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
-        stackView.layer.borderColor =  UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        stackView.layer.borderWidth = 1
-        stackView.layer.cornerRadius = 8
+        stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                               left: stackMargins,
-                                                               bottom: stackMargins,
-                                                               right: stackMargins)
+        stackView.layoutMargins = UIEdgeInsets(top: CGFloat(10).generateSizeForScreen, left: CGFloat(10).generateSizeForScreen, bottom: CGFloat(10).generateSizeForScreen, right: CGFloat(10).generateSizeForScreen)
+        stackView.axis = .vertical
+        stackView.layer.borderWidth = CGFloat(1).generateSizeForScreen
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalCentering
         return stackView
-        
     }()
     
     private let customShaddow: UIView = {
-             
         let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
-        
         return customShaddow
          }()
 
@@ -99,9 +81,16 @@ class PasswordRecoveryEmailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.setToDefaultBackgroundColor()
 
-        view.addSubviews([backgroundImage, buttonBack, imageLogo, progressBarStackView.stack, label, customShaddow, stackViewEmail, buttonContinue])
+        view.addSubviews([backgroundImage, label, customShaddow, stackViewEmail, buttonContinue])
+        
+        view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
+            let vc = LoginView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
         
         defaults()
         addConstraints()
@@ -111,10 +100,6 @@ class PasswordRecoveryEmailView: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink) { _ in
-            self.dismiss(animated: true)
-        }
-        imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault(.wayConfirm_2)
         
@@ -122,14 +107,11 @@ class PasswordRecoveryEmailView: UIViewController {
     
     private func addConstraints() {
         
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(50).generateSizeForScreen)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        label.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        label.constraintInsideTo(.top, view, CGFloat(250).generateSizeForScreen)
         
-        label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
-        label.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
-        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(50).generateSizeForScreen)
-        
-        stackViewEmail.constraintOutsideTo(.top, label, CGFloat(65).generateSizeForScreen)
+        stackViewEmail.constraintOutsideTo(.top, label, CGFloat(69).generateSizeForScreen)
         stackViewEmail.constraintInsideTo(.leading, label)
         stackViewEmail.constraintInsideTo(.trailing, label)
         stackViewEmail.heightAnchorInSuperview( CGFloat(65).generateSizeForScreen)
@@ -142,9 +124,7 @@ class PasswordRecoveryEmailView: UIViewController {
     }
     
     private func addTargets() {
-        
-        buttonBack.addTarget(self, action: #selector(actionButtonBack), for: .touchUpInside)
-        
+                
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         stackViewEmail.addGestureRecognizer(stackViewTap)
     }
@@ -157,18 +137,16 @@ class PasswordRecoveryEmailView: UIViewController {
         
         textFieldEmail.isHidden = false
         
+        textFieldEmail.becomeFirstResponder()
+        
         textFieldEmail.addTarget(self, action: #selector(changeText), for: .editingChanged)
     }
 
     
-    @objc func actionButtonBack(sender: UIButton){
-        print("voltar")
-    }
-  
-    
     @objc func actionButtonContinue() {
-
-        print("ok")
+        let vc = PasswordRecoveryPassword()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     func freezeButton_() {
