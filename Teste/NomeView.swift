@@ -95,7 +95,6 @@ class NomeView: UIViewController {
     private let customShaddow: UIView = {
         
         let customShaddow = UIView()
-        customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
         
@@ -103,34 +102,33 @@ class NomeView: UIViewController {
     }()
     
     private lazy var viewElements: (rightStackView: UIStackView,
-                       leftStackView: UIStackView,
-                       rightTextField: UITextField,
-                       rightLabel: UILabel,
-                       ddiChoseLabel: UILabel,
-                       ddisLabel: UILabel,
-                       ddisButton: UIButton) = {
+                                    leftStackView: UIStackView,
+                                    rightTextField: UITextField,
+                                    rightLabel: UILabel,
+                                    alertButton: UIButton,
+                                    ddiChoseLabel: UILabel,
+                                    ddisLabel: UILabel,
+                                    ddisButton: UIButton) = {
         
         let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
-        let textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         let font = UIFont(name: FontsBravve.medium.rawValue,
                           size: CGFloat(15).generateSizeForScreen)
         
         let ddisLabel = UILabel()
         ddisLabel.text = "DDI"
-        ddisLabel.textColor = textColor
         
         let ddiChoseLabel = UILabel()
         ddiChoseLabel.text = "+55"
         ddiChoseLabel.font = font
         
-        let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 10
+        let ddiStackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
+        ddiStackView.axis = .vertical
+        ddiStackView.spacing = 10
         
         let ddisButton = UIButton()
         
-        let leftStackView = UIStackView(arrangedSubviews: [stackView, ddisButton])
+        let leftStackView = UIStackView(arrangedSubviews: [ddiStackView, ddisButton])
         leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         leftStackView.layer.cornerRadius = 10
         leftStackView.isLayoutMarginsRelativeArrangement = true
@@ -140,16 +138,22 @@ class NomeView: UIViewController {
                                                    right: 0)
         
         let rightLabel = UILabel()
-        rightLabel.textColor = textColor
         
         let rightTextField = UITextField()
         rightTextField.font = font
         
-        let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
-                                                            rightTextField])
-        rightStackView.spacing = 10
-        rightStackView.axis = .vertical
+        let stackView = UIStackView(arrangedSubviews: [rightLabel,
+                                                       rightTextField])
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        
+        let alertButton = UIButton()
+        alertButton.setImage(UIImage(named: ButtonsBravve.alert.rawValue),
+                             for: .normal)
+        
+        let rightStackView = UIStackView(arrangedSubviews: [stackView])
         rightStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
+        rightStackView.distribution = .fillProportionally
         rightStackView.layer.cornerRadius = 8
         rightStackView.isLayoutMarginsRelativeArrangement = true
         rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
@@ -157,10 +161,19 @@ class NomeView: UIViewController {
                                                     bottom: stackVerticalMargins,
                                                     right: stackHorizontalMargins)
         
+        rightStackView.addSubview(alertButton)
+        
+        alertButton.constraintInsideTo(.centerY, rightStackView)
+        alertButton.constraintInsideTo(.trailing, rightStackView,
+                                       stackHorizontalMargins)
+        alertButton.heightAnchorInSuperview(CGFloat(16.5).generateSizeForScreen)
+        alertButton.constraintOutsideTo(.width, alertButton)
+        
         return (rightStackView: rightStackView,
                 leftStackView: leftStackView,
                 rightTextField: rightTextField,
                 rightLabel: rightLabel,
+                alertButton: alertButton,
                 ddiChoseLabel: ddiChoseLabel,
                 ddisLabel: ddisLabel,
                 ddisButton: ddisButton)
@@ -178,6 +191,16 @@ class NomeView: UIViewController {
         return registerStackView
     }()
     
+    private let registerFailLabel: UILabel = {
+        
+        let registerFailLabel = UILabel()
+        registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                        size: CGFloat(11).generateSizeForScreen)
+        registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        
+        return registerFailLabel
+    }()
+    
     private let nomeViewModel: NomeViewModel
     
     private func setupView() {
@@ -185,7 +208,7 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
@@ -221,6 +244,11 @@ class NomeView: UIViewController {
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        
+        registerFailLabel.constraintOutsideTo(.top, registerStackView,
+                                              CGFloat(5).generateSizeForScreen)
+        registerFailLabel.constraintInsideTo(.leading, registerStackView,
+                                             CGFloat(15).generateSizeForScreen)
         
         customShaddow.constraintInsideTo(.top, registerStackView)
         customShaddow.constraintInsideTo(.leading, registerStackView)
@@ -258,8 +286,10 @@ class NomeView: UIViewController {
                                                                 bottom: stackVerticalMargins,
                                                                 right: stackHorizontalMargins)
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(10).generateSizeForScreen)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(10).generateSizeForScreen)
+        viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                              size: CGFloat(10).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                             size: CGFloat(10).generateSizeForScreen)
         viewElements.ddisLabel.text = "+55"
         
         customShaddow.isHidden = false
@@ -305,6 +335,8 @@ extension NomeView: NomeViewModelProtocol {
         
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
+        viewElements.alertButton.isHidden = true
+        registerFailLabel.isHidden = true
         viewElements.ddisButton.isEnabled = false
         viewElements.rightTextField.isHidden = true
         
@@ -319,13 +351,24 @@ extension NomeView: NomeViewModelProtocol {
         viewElements.rightLabel.font = font
     }
     
+    func setColors(textColor: UIColor?,
+                   customShaddowbackgroundColor: UIColor?) {
+        
+        viewElements.rightLabel.textColor = textColor
+        viewElements.ddisLabel.textColor = textColor
+        
+        customShaddow.backgroundColor = customShaddowbackgroundColor
+    }
+    
     func setText(rightLabel: String,
                  rightTextField: String,
-                 infoLabel: String) {
+                 infoLabel: String,
+                 registerFailLabel: String) {
         
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
         viewElements.ddisLabel.text = "DDI"
+        self.registerFailLabel.text = registerFailLabel
 
         self.infoLabel.text = infoLabel
     }

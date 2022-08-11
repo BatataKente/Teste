@@ -62,7 +62,7 @@ extension CGFloat {
     }
     
 /// This function generates a multiplier according to the screen height
-    public var generateSizeForScreenByHeight: CGFloat {
+    var generateSizeForScreenByHeight: CGFloat {
 
         let height = UIScreen.main.bounds.height
         let referenceHeight: CGFloat = 1000
