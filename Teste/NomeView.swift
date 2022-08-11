@@ -45,38 +45,48 @@ class NomeView: UIViewController {
                                                               IconsBravve.emailGray.rawValue,
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.hobbiesGray.rawValue])
-        
-        let userHandler = {(action: UIAction) in
-
-            self.nomeViewModel.makeNameScreen()
-        }
-        let cellHandler = {(action: UIAction) in
-
-            self.nomeViewModel.makePhoneScreen()
-        }
-        let emailHandler = {(action: UIAction) in
-
-            self.nomeViewModel.makeEmailScreen()
-        }
-        let padlockHandler = {(action: UIAction) in
+        switch nomeViewModel.stage {
             
-            self.presentOtherView(PasswordView())
-        }
-        let confirmHandler = {(action: UIAction) in
+            case .first: break
             
-            self.presentOtherView(ConfirmDataView())
+            case .second:
+            
+                let userHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makeNameScreen()
+                }
+                let cellHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makePhoneScreen()
+                }
+                
+                buttons[1].addAction(UIAction(handler: userHandler),
+                                     for: .touchUpInside)
+                buttons[3].addAction(UIAction(handler: cellHandler),
+                                     for: .touchUpInside)
+            
+            default:
+            
+                let userHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makeNameScreen()
+                }
+                let cellHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makePhoneScreen()
+                }
+                let emailHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makeEmailScreen()
+                }
+                
+                buttons[1].addAction(UIAction(handler: userHandler),
+                                     for: .touchUpInside)
+                buttons[3].addAction(UIAction(handler: cellHandler),
+                                     for: .touchUpInside)
+                buttons[5].addAction(UIAction(handler: emailHandler),
+                                     for: .touchUpInside)
         }
-        
-        buttons[1].addAction(UIAction(handler: userHandler),
-                             for: .touchUpInside)
-        buttons[3].addAction(UIAction(handler: cellHandler),
-                             for: .touchUpInside)
-        buttons[5].addAction(UIAction(handler: emailHandler),
-                             for: .touchUpInside)
-        buttons[6].addAction(UIAction(handler: padlockHandler),
-                             for: .touchUpInside)
-        buttons[7].addAction(UIAction(handler: confirmHandler),
-                             for: .touchUpInside)
         
         return buttons
     }()

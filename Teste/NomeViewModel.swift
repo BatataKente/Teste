@@ -9,7 +9,7 @@ import UIKit
 
 class NomeViewModel {
     
-    private var stage: Stage
+    var stage: Stage
     var delegate: NomeViewModelProtocol?
     
     init(_ stage: Stage) {
@@ -53,11 +53,11 @@ class NomeViewModel {
             
             case .first:
             
-                makePhoneScreen()
+                delegate?.presentOtherView(NomeView(.second))
             
             case .second:
             
-                makeEmailScreen()
+                delegate?.presentOtherView(NomeView(.thirdy))
             
             default:
             
