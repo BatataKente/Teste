@@ -11,7 +11,7 @@ import UIKit
 class FrequentlyAskedQuestionsView: UIViewController {
     
     private var viewModel: FAQViewModel = FAQViewModel()
-    let customBar = UIView()
+    private let customBar = UIView()
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -26,8 +26,8 @@ class FrequentlyAskedQuestionsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([tableView, customBar])
         self.tableView.separatorStyle = .none
+        view.addSubviews([tableView, customBar])
         setupDefaults()
         configConstraints()
         tableView.dataSource = self
@@ -60,21 +60,23 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row == 0{
+        switch indexPath.row {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQViewTableViewCell.identifier, for: indexPath) as? FAQViewTableViewCell else {
                 fatalError()
             }
             return cell
+        default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQTableViewCell.identifier, for: indexPath) as? FAQTableViewCell else{
+                fatalError()
+            }
+            cell.titleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).question
+            cell.subTitleLabel.attributedText = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
+                return cell
         }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQTableViewCell.identifier, for: indexPath) as? FAQTableViewCell else{
-            fatalError()
-        }
-        cell.titleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).question
-        cell.subTitleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
-            return cell
     }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }

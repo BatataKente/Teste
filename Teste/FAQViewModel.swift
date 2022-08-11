@@ -15,13 +15,19 @@ import UIKit
 struct FAQModel {
     
     let question: String
-    let answer: String
+    let answer: NSAttributedString
+    
+    init(question: String, answer: String){
+        self.question = question
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        self.answer = NSAttributedString(string: answer, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+    }
 }
 
 class FAQViewModel{
     
     private let questionAnswer: [FAQModel] = [
-        FAQModel(question: "Como eu faço para abrir o Box?", answer: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box."),
         FAQModel(question: "Como eu faço para abrir o Box?", answer: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box."),
         FAQModel(question: "Como faço para reportar um problema?", answer: "Você pode escrever para suporte@bravve.com.br ou enviar uma mensagem para o número de suporte disponível em nosso app."),
         FAQModel(question: "Como finalizo o uso?", answer: "Basta clicar no botão "+"Sair do Box."+" Certifique-se sempre de que a porta foi fechada corretamente."),
@@ -36,11 +42,17 @@ class FAQViewModel{
     ]
     
     var count: Int {
-        return questionAnswer.count
+        return questionAnswer.count+1
     }
     
     func getQuestionAnswer(indexPath: IndexPath) -> FAQModel{
-        return self.questionAnswer[indexPath.row]
+        return self.questionAnswer[indexPath.row-1]
+    }
+    
+    func paragraphStyle(lineHeight: CGFloat) -> NSMutableParagraphStyle {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = lineHeight
+        return paragraphStyle
     }
     
 }

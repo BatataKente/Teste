@@ -20,8 +20,10 @@ class FAQTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 15
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.5
-        view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 8
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.bounds = bounds
+        view.layer.position = center
         return view
     }()
     
@@ -34,7 +36,7 @@ class FAQTableViewCell: UITableViewCell {
         return button
     }()
     
-    lazy var invisibleButton: UIButton = {
+    private lazy var invisibleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(self.showAnswer), for: .touchUpInside)
@@ -57,21 +59,15 @@ class FAQTableViewCell: UITableViewCell {
     
     lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.39
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
-        
         return label
     }()
-    
-    
     
     @objc func showAnswer(sender:UIButton){
         if(iconClick == true){
@@ -79,6 +75,7 @@ class FAQTableViewCell: UITableViewCell {
             self.subTitleLabel.isHidden = false
         }
     }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
