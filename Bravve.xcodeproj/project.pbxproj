@@ -248,6 +248,7 @@
 		2ED5D11028940FCD001C11DC /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
 		2ED5D11228940FE3001C11DC /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		2EF23F4728931B760078B6B8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		B83EC83328A144C300FBEA23 /* CheckOutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		C696169D2881E70000281633 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C696169F2881E70700281633 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		C69616A12881E71100281633 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -401,6 +402,7 @@
 		2EA90BA7289D0DF0003100FE /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				B83EC83228A144A000FBEA23 /* CheckOutScreen */,
 				C69617792881EDEE00281633 /* EditProfile */,
 				2ED5D0F628940E00001C11DC /* Help */,
 				C69616912881E65900281633 /* Login */,
@@ -667,6 +669,14 @@
 				2EAEDF022881DEAC00C88374 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B83EC83228A144A000FBEA23 /* CheckOutScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B83EC83328A144C300FBEA23 /* CheckOutScreen.swift */,
+			);
+			path = CheckOutScreen;
 			sourceTree = "<group>";
 		};
 		C69616902881E64F00281633 /* Home */ = {
@@ -1976,6 +1986,7 @@
 				C69617112881EA5E00281633 /* PasswordViewModel.swift in Sources */,
 				2EB18FD328A2F150008A80BF /* SitesV1Model.swift in Sources */,
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
+				B83EC83428A144C400FBEA23 /* CheckOutScreen.swift in Sources */,
 				C69616F62881E9CD00281633 /* NameViewModel.swift in Sources */,
 				2EB18FD728A2F17A008A80BF /* ReservationsV1Model.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
