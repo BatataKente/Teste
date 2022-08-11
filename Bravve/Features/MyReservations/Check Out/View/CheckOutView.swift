@@ -1,17 +1,21 @@
+
 //
 //  CheckOutScreen.swift
-//  Bravve
+//  Teste
 //
 //  Created by user217685 on 8/3/22.
 //
 
 import UIKit
 
-class CheckOutScreen: UIViewController{
+class CheckOutView: UIViewController{
  
     //MARK: - Labels
     
     let customBar = UIView()
+    private let myTableView = UITableView()
+    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                                   ButtonsBravve.exitGray.rawValue])
     
     lazy var titleLabel: UILabel = {
         let lb = UILabel()
@@ -71,36 +75,29 @@ class CheckOutScreen: UIViewController{
     lazy var detailLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Detalhes do local"
+        lb.text = "Detalhes da sua reserva"
         lb.numberOfLines = 0
         lb.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        lb.textColor = UIColor(named: "label")
+        lb.textColor = UIColor(named: "blueNav")
         lb.textAlignment = .left
         return lb
     }()
-    lazy var iconImagePeople: UIImageView = {
+    lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "users")
+        image.image = UIImage(named: "calendarBlue")
 
         return image
     }()
-    lazy var numberPeopleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Até 6 pessoas"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        lb.textColor = UIColor(named: "label")
-        lb.textAlignment = .left
-        return lb
-    }()
+
     lazy var buttonMainDoor: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Abrir porta principal", for: .normal)
         button.titleLabel?.font = UIFont(name: "Ubuntu-Regular", size: 14)
         button.backgroundColor = UIColor(named: "buttonPink")
+        button.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        button.layer.borderWidth = 1
         button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
         return button
     }()
@@ -114,6 +111,8 @@ class CheckOutScreen: UIViewController{
         button.setTitle("Abrir porta do espaço", for: .normal)
         button.titleLabel?.font = UIFont(name: "Ubuntu-Regular", size: 14)
         button.backgroundColor = UIColor(named: "buttonPink")
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
         button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
         return button
     }()
@@ -122,28 +121,39 @@ class CheckOutScreen: UIViewController{
     @objc func buttonOpenSpaceTap(){
         
     }
+    
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "background")
+        myTableView.delegate = self
+        myTableView.dataSource = self
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        myTableView.separatorStyle = .none
+        myTableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         setupViews()
         setupDefaults()
         setupContraints()
         
        
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
     func setupViews(){
-        view.addSubview(titleLabel)
-        view.addSubview(descriptLabel)
-        view.addSubview(reserveImage)
-        view.addSubview(reserveImage2)
-        view.addSubview(infoLocalLabel)
-        view.addSubview(nameLocalLabel)
-        view.addSubview(detailLocalLabel)
-        view.addSubview(iconImagePeople)
-        view.addSubview(numberPeopleLabel)
         view.addSubview(buttonMainDoor)
         view.addSubview(buttonOpenSpace)
+        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail])
+        view.addSubview(myTableView)
         view.addSubview(customBar)
+        view.addSubview(tabBar)
+        
+    
 
     }
     private func setupDefaults(){
@@ -154,37 +164,45 @@ class CheckOutScreen: UIViewController{
     }
     func setupContraints(){
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: customBar.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            buttonMainDoor.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            buttonMainDoor.leadingAnchor.constraint(equalTo:view.leadingAnchor),
+            buttonMainDoor.widthAnchor.constraint(equalToConstant: 188),
+            buttonMainDoor.heightAnchor.constraint(equalToConstant: 52),
+            buttonOpenSpace.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            buttonOpenSpace.leadingAnchor.constraint(equalTo: buttonMainDoor.trailingAnchor),
+            buttonOpenSpace.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonOpenSpace.widthAnchor.constraint(equalToConstant: 188),
+            buttonOpenSpace.heightAnchor.constraint(equalToConstant: 52),
+            titleLabel.topAnchor.constraint(equalTo: myTableView.bottomAnchor,constant: 4),
+            titleLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 24),
             descriptLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 16),
-            descriptLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             reserveImage.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
-            reserveImage.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            reserveImage.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.80),
-            reserveImage.heightAnchor.constraint(equalTo: view.heightAnchor,multiplier: 0.37),
+            reserveImage.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            reserveImage.widthAnchor.constraint(equalToConstant: 300),
+            reserveImage.heightAnchor.constraint(equalToConstant: 300),
             reserveImage2.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
-            reserveImage2.leadingAnchor.constraint(equalTo: reserveImage.trailingAnchor,constant: 16),
-            reserveImage2.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.80),
-            reserveImage2.heightAnchor.constraint(equalTo: view.heightAnchor,multiplier: 0.37),
-            infoLocalLabel.topAnchor.constraint(equalTo: reserveImage.bottomAnchor,constant: 30),
-            infoLocalLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            nameLocalLabel.topAnchor.constraint(equalTo: infoLocalLabel.bottomAnchor,constant: 16),
-            nameLocalLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            detailLocalLabel.topAnchor.constraint(equalTo: nameLocalLabel.bottomAnchor,constant: 16),
-            detailLocalLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            iconImagePeople.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 16),
-            iconImagePeople.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            numberPeopleLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 16),
-            numberPeopleLabel.leadingAnchor.constraint(equalTo: iconImagePeople.trailingAnchor,constant: 4),
-            numberPeopleLabel.centerYAnchor.constraint(equalTo: iconImagePeople.centerYAnchor),
-            buttonMainDoor.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            buttonMainDoor.topAnchor.constraint(equalTo: numberPeopleLabel.bottomAnchor,constant: 16),
-            buttonMainDoor.heightAnchor.constraint(equalTo: view.heightAnchor,multiplier: 0.063),
-            buttonMainDoor.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.50),
-            buttonOpenSpace.leadingAnchor.constraint(equalTo: buttonMainDoor.trailingAnchor,constant: 3),
-            buttonOpenSpace.topAnchor.constraint(equalTo: numberPeopleLabel.bottomAnchor,constant: 16),
-            buttonOpenSpace.heightAnchor.constraint(equalTo: view.heightAnchor,multiplier: 0.063),
-            buttonOpenSpace.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.50),
+            reserveImage2.leadingAnchor.constraint(equalTo: reserveImage.trailingAnchor,constant: 9),
+            reserveImage.widthAnchor.constraint(equalToConstant: 300),
+            reserveImage.heightAnchor.constraint(equalToConstant: 300),
+            infoLocalLabel.topAnchor.constraint(equalTo: reserveImage.bottomAnchor,constant: 52.5),
+            infoLocalLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            nameLocalLabel.topAnchor.constraint(equalTo: infoLocalLabel.bottomAnchor,constant: 7),
+            nameLocalLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            detailLocalLabel.topAnchor.constraint(equalTo: nameLocalLabel.bottomAnchor,constant: 32),
+            detailLocalLabel.leadingAnchor.constraint(equalTo: imageDetail.trailingAnchor,constant: 9),
+            imageDetail.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 25),
+            imageDetail.centerYAnchor.constraint(equalTo: detailLocalLabel.centerYAnchor),
+         
+            
+            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
+            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            myTableView.bottomAnchor.constraint(equalTo: buttonMainDoor.topAnchor),
+
+            tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
          
             
         ])
@@ -193,5 +211,22 @@ class CheckOutScreen: UIViewController{
 
 
    
+}
+extension CheckOutView: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        1613
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        return cell
+    }
+    
+    
 }
 

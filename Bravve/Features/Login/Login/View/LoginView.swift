@@ -27,7 +27,7 @@ class LoginView: UIViewController {
     
     func setupView() {
         
-        view.addSubviews([wayImage, titleLabel, subTitleLabel, cellStackView, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
+        view.addSubviews([wayImage, titleLabel, subTitleLabel, loginStackView, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
         
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
         
@@ -35,7 +35,7 @@ class LoginView: UIViewController {
         
         let cellStackViewTap = UITapGestureRecognizer(target: self,
                                                       action: #selector(cellStackViewTapped))
-        cellStackView.addGestureRecognizer(cellStackViewTap)
+        loginStackView.addGestureRecognizer(cellStackViewTap)
         
         let passwordStackViewTap = UITapGestureRecognizer(target: self,
                                                           action: #selector(passwordStackViewTapped))
@@ -52,10 +52,10 @@ class LoginView: UIViewController {
         let layoutVerticalMargins = CGFloat(10).generateSizeForScreen
         let layoutHorizontalMargins = CGFloat(15).generateSizeForScreen
         
-        cellLabel.font = UIFont(name: FontsBravve.light.rawValue,
+        loginLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                 size: CGFloat(10).generateSizeForScreen)
-        cellTextField.isHidden = false
-        cellStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
+        loginTextField.isHidden = false
+        loginStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
                                                    left: layoutHorizontalMargins,
                                                    bottom: layoutVerticalMargins,
                                                    right: layoutHorizontalMargins)
@@ -123,10 +123,10 @@ class LoginView: UIViewController {
         return view
     }()
     
-    private lazy var cellLabel: UILabel = {
+    private lazy var loginLabel: UILabel = {
         
         let view = UILabel()
-        view.text =  "Número de Celular"
+        view.text =  "Login"
         view.font = UIFont(name: FontsBravve.light.rawValue,
                            size: CGFloat(15).generateSizeForScreen)
         view.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -134,7 +134,7 @@ class LoginView: UIViewController {
         return view
     }()
     
-    private lazy var cellTextField: UITextField = {
+    private lazy var loginTextField: UITextField = {
         
         let view = UITextField()
         view.font = UIFont(name: FontsBravve.medium.rawValue,
@@ -146,12 +146,12 @@ class LoginView: UIViewController {
         return view
     }()
         
-    private lazy var cellStackView: UIStackView = {
+    private lazy var loginStackView: UIStackView = {
 
         let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let stackHotizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
 
-        let cellStackView = UIStackView(arrangedSubviews: [cellLabel,cellTextField])
+        let cellStackView = UIStackView(arrangedSubviews: [loginLabel,loginTextField])
         cellStackView.spacing = CGFloat(5).generateSizeForScreen
         cellStackView.axis = .vertical
         cellStackView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
@@ -280,7 +280,7 @@ class LoginView: UIViewController {
 //        let vc = ()
 //        vc.modalPresentationStyle = .fullScreen
         
-        guard let phone = self.cellTextField.text else {return}
+        guard let phone = self.loginTextField.text else {return}
         guard let password = self.passwordTextField.text else {return}
         
         if self.viewModel.isValid(phone: phone, password: password) == true{
@@ -288,7 +288,7 @@ class LoginView: UIViewController {
             print("Login Válido")
         }
         else{
-            cellLabel.textColor = .systemRed
+            loginLabel.textColor = .systemRed
             passwordLabel.textColor = .systemRed
             if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeOpen.rawValue){
                 eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
@@ -361,11 +361,11 @@ class LoginView: UIViewController {
         subTitleLabel.constraintInsideTo(.leading, titleLabel)
         subTitleLabel.constraintInsideTo(.trailing, titleLabel)
         
-        cellStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
-        cellStackView.constraintInsideTo(.leading, passwordStackView)
-        cellStackView.constraintInsideTo(.trailing, passwordStackView)
+        loginStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
+        loginStackView.constraintInsideTo(.leading, passwordStackView)
+        loginStackView.constraintInsideTo(.trailing, passwordStackView)
         
-        passwordStackView.constraintOutsideTo(.top, cellStackView, CGFloat(15).generateSizeForScreen)
+        passwordStackView.constraintOutsideTo(.top, loginStackView, CGFloat(15).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.leading, subTitleLabel)
         passwordStackView.constraintInsideTo(.trailing, subTitleLabel)
         
@@ -396,13 +396,13 @@ class LoginView: UIViewController {
 
 extension LoginView: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        cellLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        loginLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         passwordLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         
-        cellTextField.text = cellTextField.text?.formatMask(mask: "(##) #####-####")
+        loginTextField.text = loginTextField.text?.formatMask(mask: "(##) #####-####")
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        cellTextField.text = cellTextField.text?.formatMask(mask: "(##) #####-####")
+        loginTextField.text = loginTextField.text?.formatMask(mask: "(##) #####-####")
     }
 }

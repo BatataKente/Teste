@@ -5,6 +5,8 @@
 //  Created by Josicleison on 10/08/22.
 //
 
+/* a tab bar in the app pattern with their respective actions*/
+
 import UIKit
 
 class TabBarClosed: UITabBar, UITabBarDelegate {
@@ -43,7 +45,9 @@ class TabBarClosed: UITabBar, UITabBarDelegate {
         ChoseScreen(tabBar, didSelect: item)
     }
 
-    init(_ actualView: UIViewController, itemImagesNames: [String]) {
+    init(_ actualView: UIViewController, itemImagesNames: [String] = [ButtonsBravve.locationPink.rawValue,
+                                                                      ButtonsBravve.calendarButtonGray.rawValue,
+                                                                      ButtonsBravve.userLoginGray.rawValue]) {
 
         self.actualView = actualView
 
