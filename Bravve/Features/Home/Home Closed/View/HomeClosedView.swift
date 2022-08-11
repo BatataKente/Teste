@@ -33,7 +33,7 @@ class HomeClosedView: UIViewController {
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["a", "b", "c"]
+    private let seletedFilterItems: [String] = ["Smart Office", "Inspirador"]
     
     private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
                                                     description: "Numa esquina charmosa, um hotel",
@@ -260,8 +260,8 @@ extension HomeClosedView: HomeClosedTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
-        detalhesAbertoView.modalPresentationStyle = .fullScreen
-        present(detalhesAbertoView, animated: false)
+        let detailsClosedView = DetailsClosedView(cells[indexPath.row])
+        detailsClosedView.modalPresentationStyle = .fullScreen
+        present(detailsClosedView, animated: false)
     }
 }
