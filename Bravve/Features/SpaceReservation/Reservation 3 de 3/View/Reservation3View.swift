@@ -11,6 +11,8 @@ import UIKit
 final class ReservationsThreeViewController: UIViewController {
     
 
+    private let viewModel = ReservationsViewModel()
+    
     private let bravveIcon = UIImageView()
     
     //MARK: LoadView
@@ -275,11 +277,13 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: numberCardTextField
         private lazy var numberCardTextfield: UITextField = {
             let view = UITextField()
+            view.becomeFirstResponder()
             view.isHidden = true
             view.tag = 1
             view.layer.cornerRadius = 8
             view.backgroundColor = .white
             view.delegate = self
+            view.addTarget(self, action: #selector(numberTfEmpity), for: .editingChanged)
             view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
@@ -287,13 +291,20 @@ final class ReservationsThreeViewController: UIViewController {
             
         }()
     
-    //MARK: stackViewTapped
+    //MARK: numberTfEmpity
+    @objc private func numberTfEmpity()  {
+        numberCardStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        
+    }
+    
+    //MARK: numberStackViewTapped
     @objc func numberStackViewTapped() {
             numberCardLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
            
 
         numberCardTextfield.isHidden = false
         
+    
     }
     
     //MARK: ccValidateStackView
@@ -337,12 +348,19 @@ final class ReservationsThreeViewController: UIViewController {
             view.isHidden = true
             view.tag = 3
             view.delegate = self
+            view.addTarget(self, action: #selector(ccEmpity), for: .editingChanged)
             view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
             view.translatesAutoresizingMaskIntoConstraints = false
             view.rightViewMode = .always
             return view
             
         }()
+    
+    //MARK: ccEmpity
+    @objc private func ccEmpity()  {
+        ccValidateStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        
+    }
     
     //MARK: accessoryButtonCcValidate
         private lazy var accessoryButtonCcValidate: UIButton = {
@@ -402,9 +420,16 @@ final class ReservationsThreeViewController: UIViewController {
             view.layer.cornerRadius = 8
             view.backgroundColor = .white
             view.isHidden = true
+            view.addTarget(self, action: #selector(sourceEmpity), for: .editingChanged)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
+    
+    //MARK: sourceEmpity
+    @objc private func sourceEmpity()  {
+        sourceSecurityStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        
+    }
     
     //MARK: sourceSecutiryStackViewTapped
     @objc func sourceSecutirytackViewTapped() {
@@ -447,7 +472,7 @@ final class ReservationsThreeViewController: UIViewController {
         return stack
     }()
     
-    //MARK: numberCardLabel
+    //MARK: countryLabel
     private lazy var countryLabel: UILabel = {
        let label = UILabel()
         label.textColor = UIColor(named: "labelTextField")
@@ -464,10 +489,17 @@ final class ReservationsThreeViewController: UIViewController {
             view.layer.cornerRadius = 8
             view.backgroundColor = .white
             view.isHidden = true
+            view.addTarget(self, action: #selector(countryEmpity), for: .editingChanged)
             view.isUserInteractionEnabled = false
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
+    
+    //MARK: countryEmpity
+    @objc private func countryEmpity()  {
+        countryStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        
+    }
     
     //MARK: countryImageFlag
     private lazy var countryImageFlag: UIImageView = {
@@ -545,15 +577,22 @@ final class ReservationsThreeViewController: UIViewController {
             view.backgroundColor = .white
             view.tag = 4
             view.isHidden = true
+            view.addTarget(self, action: #selector(nameHolderEmpity), for: .editingChanged)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
     
+    
+    //MARK: nameHolderEmpity
+    @objc private func nameHolderEmpity()  {
+        nameHolderStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        
+    }
+    
     //MARK: nameHoldertackViewTapped
     @objc func nameHolderStackViewTapped() {
             nameHolderLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
-           
-
+        
         nameHolderTextfield.isHidden = false
         
     }
@@ -600,9 +639,16 @@ final class ReservationsThreeViewController: UIViewController {
             view.layer.cornerRadius = 8
             view.isHidden = true
             view.backgroundColor = .white
+            view.addTarget(self, action: #selector(cpfEmpity), for: .editingChanged)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
+    
+    //MARK: cpfEmpity
+    @objc private func cpfEmpity()  {
+        cpfStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        
+    }
     
     //MARK: cpfStackViewTapped
     @objc func cpfStackViewTapped() {
