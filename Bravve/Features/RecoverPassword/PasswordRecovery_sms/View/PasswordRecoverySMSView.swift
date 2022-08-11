@@ -9,14 +9,10 @@ import UIKit
 
 class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
 
-    let backgroundImage: UIImageView = {
-        let image = UIImage(named: "wayEmail")
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
     
-    let bravveIcon = UIImageView()
+    let backgroundImage = UIImageView()
+        
+    let continueButton = UIButton()
     
     let messageSentLabel: UILabel = {
         let label = UILabel()
@@ -24,8 +20,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         label.text = "Enviamos o código de confirmação por SMS e precisamos dele!"
         label.numberOfLines = 3
         label.textAlignment = .center
-        label.font = UIFont(name: "Ubuntu-Regular", size: 16)
-        label.textColor = UIColor(named: "label")
+        label.font = UIFont(name: FontsBravve.regular.rawValue,size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         return label
     }()
     
@@ -42,8 +38,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Insira o código"
         label.textAlignment = .center
-        label.font = UIFont(name: "Ubuntu-Medium", size: 16)
-        label.textColor = UIColor(named: "label")
+        label.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         return label
     }()
     
@@ -52,8 +48,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 26)
-        textField.textColor = UIColor(named: "labelTextField")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(26).generateSizeForScreen)
+        textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         textField.becomeFirstResponder()
@@ -65,8 +61,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 26)
-        textField.textColor = UIColor(named: "labelTextField")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(26).generateSizeForScreen)
+        textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         return textField
@@ -77,8 +73,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 26)
-        textField.textColor = UIColor(named: "labelTextField")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(26).generateSizeForScreen)
+        textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         return textField
@@ -89,8 +85,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 26)
-        textField.textColor = UIColor(named: "labelTextField")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(26).generateSizeForScreen)
+        textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         return textField
@@ -101,8 +97,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 26)
-        textField.textColor = UIColor(named: "labelTextField")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(26).generateSizeForScreen)
+        textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         return textField
@@ -113,8 +109,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
-        textField.font = UIFont(name: "Ubuntu-Medium", size: 26)
-        textField.textColor = UIColor(named: "labelTextField")
+        textField.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(26).generateSizeForScreen)
+        textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         return textField
@@ -125,7 +121,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.spacing = 7
+        stackView.spacing = CGFloat(7).generateSizeForScreen
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -134,10 +130,10 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         let begginingText = "Não recebeu? Aguarde "
-        let normalAttrs = [NSMutableAttributedString.Key.font: UIFont(name: "Ubuntu-Regular", size: 14)]
+        let normalAttrs = [NSMutableAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,size: CGFloat(14).generateSizeForScreen)]
         let labelattributedString = NSMutableAttributedString(string: begginingText, attributes: normalAttrs as [NSAttributedString.Key : Any])
         let boldString = "30 "
-        let attrs = [NSAttributedString.Key.font: UIFont(name: "Ubuntu-Bold", size: 14)]
+        let attrs = [NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(14).generateSizeForScreen)]
         let boldMutableString = NSMutableAttributedString(string: boldString, attributes: attrs as [NSAttributedString.Key : Any])
         labelattributedString.append(boldMutableString)
         let endingString = "segundos"
@@ -145,33 +141,21 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         labelattributedString.append(endingMutableString)
         label.attributedText = labelattributedString
         label.textAlignment = .center
-        label.textColor = UIColor(named: "label")
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         return label
     }()
     
-    let continueButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 331, height: 52))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Continuar", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(named: "buttonGray")
-        button.layer.cornerRadius = 12
-        return button
-    }()
-    
-   
     let resendCodeButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 109, height: 17))
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Reenviar código", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        let frame = CGRect(x: 0, y: button.frame.size.height + 6, width: button.frame.size.width, height: 1)
+        button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(15).generateSizeForScreen)
+        let frame = CGRect(x: 0, y: button.frame.size.height + CGFloat(6).generateSizeForScreen, width: button.frame.size.width.generateSizeForScreen, height: CGFloat(1).generateSizeForScreen)
         let borderBottom = UIView(frame: frame)
-        borderBottom.backgroundColor = UIColor(named: "blueNav")
+        borderBottom.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         button.addSubview(borderBottom)
-        button.setTitleColor(UIColor(named: "blueNav"), for: .normal)
-        button.addTarget(PasswordRecoverySMSView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -182,7 +166,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
             continueButton.addTarget(nil,
                                      action: #selector(continueButtonTapped),
                                      for: .touchUpInside)
-            continueButton.backgroundColor = UIColor(named: "buttonPink")
+            continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
             resendCodeButton.isHidden = true
         }
         else {
@@ -190,7 +174,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
             continueButton.removeTarget(nil,
                                         action: #selector(continueButtonTapped),
                                         for: .touchUpInside)
-            continueButton.backgroundColor = UIColor(named: "buttonGray")
+            continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
             resendCodeButton.isHidden = false
         }
     }
@@ -207,9 +191,9 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor(named: "buttonPink")?.cgColor
-        textField.layer.cornerRadius = 5
+        textField.layer.borderWidth = CGFloat(1).generateSizeForScreen
+        textField.layer.borderColor = UIColor(named: ColorsBravve.buttonPink.rawValue)?.cgColor
+        textField.layer.cornerRadius = CGFloat(5).generateSizeForScreen
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -234,14 +218,21 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     func setupView() {
         
-        view.addSubviews([backgroundImage, bravveIcon, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
+        view.addSubviews([backgroundImage, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
 
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        
+        view.createRegisterCustomBar(.backPink) { _ in
+            return
+        }
+        
     }
+
     
     func setupDefaults() {
         
-        bravveIcon.setLogoToDefault()
+        backgroundImage.setWayToDefault(ImagesBravve.wayEmail)
+        continueButton.setToBottomButtonKeyboardDefault()
     }
     
     private func setupConstraints() {
@@ -250,10 +241,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         setCodeImageConstraints()
         setInsertCodeLabelConstraints()
         setCodeTextFieldConstraints()
-        setBackgroundImageConstraints()
         setTextFieldStackViewConstraints()
         setMessageNotReceivedLabelConstraints()
-        setContinueButtonConstraints()
         setResendCodeButtonConstraints()
     }
     
@@ -261,9 +250,9 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     private func setMessageSentLabelConstraints() {
         
         let constraint = [
-            messageSentLabel.topAnchor.constraint(equalTo: bravveIcon.bottomAnchor, constant: 55),
-            messageSentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22.5),
-            messageSentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22.5),
+            messageSentLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(152).generateSizeForScreen),
+            messageSentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22.5).generateSizeForScreen),
+            messageSentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22.5).generateSizeForScreen),
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -273,31 +262,21 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     private func setCodeImageConstraints() {
         
         let constraint = [
-            codeImage.topAnchor.constraint(equalTo: messageSentLabel.bottomAnchor, constant: 48.1),
+            codeImage.topAnchor.constraint(equalTo: messageSentLabel.bottomAnchor, constant: CGFloat(48.1).generateSizeForScreen),
             codeImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            codeImage.widthAnchor.constraint(equalToConstant: 58.8),
-            codeImage.heightAnchor.constraint(equalToConstant: 87.8)
+            codeImage.widthAnchor.constraint(equalToConstant: CGFloat(58.8).generateSizeForScreen),
+            codeImage.heightAnchor.constraint(equalToConstant: CGFloat(87.8).generateSizeForScreen)
         ]
         constraint.forEach { item in
             item.isActive = true
         }
     }
     
-    private func setBackgroundImageConstraints() {
-        
-        let constraint = [
-            backgroundImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 250),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
-    }
     
     private func setInsertCodeLabelConstraints() {
         
         let constraint = [
-            insertCodeLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: 48.1),
+            insertCodeLabel.topAnchor.constraint(equalTo: codeImage.bottomAnchor, constant: CGFloat(48.1).generateSizeForScreen),
             insertCodeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ]
         constraint.forEach { item in
@@ -308,18 +287,18 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     private func setCodeTextFieldConstraints() {
         
         let constraint = [
-            code1TextField.widthAnchor.constraint(equalToConstant: 50),
-            code1TextField.heightAnchor.constraint(equalToConstant: 50),
-            code2TextField.widthAnchor.constraint(equalToConstant: 50),
-            code2TextField.heightAnchor.constraint(equalToConstant: 50),
-            code3TextField.widthAnchor.constraint(equalToConstant: 50),
-            code3TextField.heightAnchor.constraint(equalToConstant: 50),
-            code4TextField.widthAnchor.constraint(equalToConstant: 50),
-            code4TextField.heightAnchor.constraint(equalToConstant: 50),
-            code5TextField.widthAnchor.constraint(equalToConstant: 50),
-            code5TextField.heightAnchor.constraint(equalToConstant: 50),
-            code6TextField.widthAnchor.constraint(equalToConstant: 50),
-            code6TextField.heightAnchor.constraint(equalToConstant: 50),
+            code1TextField.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code1TextField.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code2TextField.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code2TextField.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code3TextField.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code3TextField.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code4TextField.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code4TextField.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code5TextField.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code5TextField.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code6TextField.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            code6TextField.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -329,9 +308,9 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     private func setTextFieldStackViewConstraints() {
         
         let constraint = [
-            textFieldStackView.topAnchor.constraint(equalTo: insertCodeLabel.bottomAnchor, constant: 20),
-            textFieldStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            textFieldStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            textFieldStackView.topAnchor.constraint(equalTo: insertCodeLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen),
+            textFieldStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
+            textFieldStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -341,21 +320,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     private func setMessageNotReceivedLabelConstraints() {
         
         let constraint = [
-            messageNotReceivedLabel.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor, constant: 41.33),
+            messageNotReceivedLabel.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor, constant: CGFloat(41.33).generateSizeForScreen),
             messageNotReceivedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
-    }
-    
-    private func setContinueButtonConstraints() {
-        
-        let constraint = [
-            continueButton.topAnchor.constraint(equalTo: messageNotReceivedLabel.bottomAnchor, constant: 41.33),
-            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            continueButton.widthAnchor.constraint(equalToConstant: 331),
-            continueButton.heightAnchor.constraint(equalToConstant: 52)
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -365,7 +331,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     private func setResendCodeButtonConstraints() {
         
         let constraint = [
-            resendCodeButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 26),
+            resendCodeButton.topAnchor.constraint(equalTo: messageNotReceivedLabel.bottomAnchor, constant: CGFloat(23).generateSizeForScreen),
             resendCodeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ]
         constraint.forEach { item in
@@ -374,6 +340,5 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     }
 
 }
-
 
 
