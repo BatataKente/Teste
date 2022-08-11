@@ -22,15 +22,6 @@ final class ReservationsThreeViewController: UIViewController {
         setupView()
         setupConstrains()
         
-        numberCardStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        ccValidateStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        sourceSecurityStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        countryStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        nameHolderStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        cpfStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-
-
-        
         let numberStackViewTap = UITapGestureRecognizer(target: self, action: #selector(numberStackViewTapped))
         numberCardStackView.addGestureRecognizer(numberStackViewTap)
         
@@ -270,7 +261,6 @@ final class ReservationsThreeViewController: UIViewController {
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
         label.text = "Número do cartão"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
         
@@ -288,7 +278,6 @@ final class ReservationsThreeViewController: UIViewController {
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
             
-            
         }()
     
     //MARK: numberTfEmpity
@@ -301,7 +290,6 @@ final class ReservationsThreeViewController: UIViewController {
     @objc func numberStackViewTapped() {
             numberCardLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
            
-
         numberCardTextfield.isHidden = false
         
     
@@ -410,7 +398,6 @@ final class ReservationsThreeViewController: UIViewController {
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
         label.text = "CVV"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -479,7 +466,6 @@ final class ReservationsThreeViewController: UIViewController {
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
         label.text = "País"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
         
@@ -594,7 +580,6 @@ final class ReservationsThreeViewController: UIViewController {
             nameHolderLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
         
         nameHolderTextfield.isHidden = false
-        
     }
     
     
@@ -627,7 +612,6 @@ final class ReservationsThreeViewController: UIViewController {
         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
         label.text = "CPF"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
         
@@ -825,4 +809,5 @@ extension UIStackView {
 
 
     
+
 
