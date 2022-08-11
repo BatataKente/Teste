@@ -1,5 +1,5 @@
 //
-//  NomeView.swift
+//  NomeViewModel.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -59,7 +59,9 @@ class NomeViewModel {
             
                 makeEmailScreen()
             
-            default: break
+            default:
+            
+                delegate?.presentOtherView(PasswordView())
         }
     }
     
@@ -91,9 +93,13 @@ class NomeViewModel {
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
                                        size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
+        
         delegate?.setText(rightLabel: "Nome Completo",
                           rightTextField: "",
-                          infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!")
+                          infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!",
+                          registerFailLabel: "Formato de nome inválido")
         
         delegate?.setProgressBar(buttons: [false, true, true, false, true, false])
         
@@ -112,9 +118,13 @@ class NomeViewModel {
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
                                        size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
+        
         delegate?.setText(rightLabel: "Telefone",
                           rightTextField: "",
-                          infoLabel: "Precisamos do seu telefone com DDD!\n Por favor, informe o seu país também.")
+                          infoLabel: "Precisamos do seu telefone com DDD!\n Por favor, informe o seu país também.",
+                          registerFailLabel: "Número não corresponde ao país")
         
         delegate?.setProgressBar(buttons: [true, false, false, true, true, false])
         
@@ -133,9 +143,13 @@ class NomeViewModel {
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
                                        size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
+        
         delegate?.setText(rightLabel: "E-mail",
                           rightTextField: "",
-                          infoLabel: "Qual seu email? Não se preocupe, não vamos encher sua caixa de entrada.")
+                          infoLabel: "Qual seu email? Não se preocupe, não vamos encher sua caixa de entrada.",
+                          registerFailLabel: "Formato de e-mail inválido")
         
         delegate?.setProgressBar(buttons: [true, false, true, false, false, true])
         
@@ -153,9 +167,13 @@ protocol NomeViewModelProtocol {
     
     func setFont(font: UIFont)
     
+    func setColors(textColor: UIColor?,
+                   customShaddowbackgroundColor: UIColor?)
+    
     func setText(rightLabel: String,
                  rightTextField: String,
-                 infoLabel: String)
+                 infoLabel: String,
+                 registerFailLabel: String)
     
     func setProgressBar(buttons: [Bool])
     
@@ -164,4 +182,6 @@ protocol NomeViewModelProtocol {
     func setKeyboardType(keyboardType: UIKeyboardType)
     
     func dismiss()
+    
+    func presentOtherView(_ viewController: UIViewController)
 }
