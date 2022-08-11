@@ -19,21 +19,21 @@ class TabBarClosed: UITabBar, UITabBarDelegate {
             
             case tabBar.items?[0]:
             
-                let homeOpenView = HomeOpenView()
+                let homeOpenView = HomeClosedView()
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)
             
             case tabBar.items?[1]:
             
-                let homeOpenView = HomeOpenView()
+                let homeOpenView = WorkPassBookingView()
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)
             
             default:
 
-                let loginView = LoginView()
+                let loginView = PersonalProfileView()
 
                 loginView.modalPresentationStyle = .fullScreen
                 actualView.present(loginView, animated: true)

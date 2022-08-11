@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WorkPassViewController: UIViewController{
+class WorkPassBookingView: UIViewController{
     
     
     private let tableView : UITableView = {
@@ -35,8 +35,8 @@ class WorkPassViewController: UIViewController{
         return imageView
     }()
     private lazy var tabBar = TabBarClosed(self, itemImagesNames: [
-                                            ButtonsBravve.locationPink.rawValue,
-                                            ButtonsBravve.calendarButtonGray.rawValue,
+                                            ButtonsBravve.locationGray.rawValue,
+                                            ButtonsBravve.calendarButtonPink.rawValue,
                                             ButtonsBravve.userLoginGray.rawValue
                                            ])
     
@@ -252,7 +252,7 @@ class WorkPassViewController: UIViewController{
     
 }
 
-extension WorkPassViewController: UITableViewDelegate, UITableViewDataSource {
+extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }
