@@ -31,7 +31,7 @@ class PasswordRecoveryEmailView: UIViewController {
                                                 ])
         let stackView = UIStackView(arrangedSubviews: buttons)
         buttons[0].setTitle(" Email", for: .normal)
-        stackView.spacing = CGFloat(5).generateSizeForScreen
+        stackView.spacing = CGFloat(7).generateSizeForScreen
         
         return (stack: stackView,
                 buttons: buttons)
@@ -55,7 +55,7 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.isHidden = true
         return textField
     }()
-    
+
     private let labelEmail_: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
@@ -64,35 +64,27 @@ class PasswordRecoveryEmailView: UIViewController {
         return label
     }()
     
-    let stackMargins: CGFloat =  CGFloat(12).generateSizeForScreen
-        
     private lazy var stackViewEmail: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
-        stackView.spacing =  CGFloat(5).generateSizeForScreen
-        stackView.distribution = .fill
-        stackView.axis = .vertical
+        let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
         stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
-        stackView.layer.borderColor =  UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        stackView.layer.borderWidth = 1
-        stackView.layer.cornerRadius = 8
+        stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                               left: stackMargins,
-                                                               bottom: stackMargins,
-                                                               right: stackMargins)
+        stackView.layoutMargins = UIEdgeInsets(top: CGFloat(10).generateSizeForScreen, left: CGFloat(10).generateSizeForScreen, bottom: CGFloat(10).generateSizeForScreen, right: CGFloat(10).generateSizeForScreen)
+        stackView.axis = .vertical
+        stackView.layer.borderWidth = CGFloat(1).generateSizeForScreen
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalCentering
         return stackView
-        
     }()
-    
+                                
     private let customShaddow: UIView = {
-             
         let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
-        
         return customShaddow
-         }()
+    }()
 
     
     private let buttonContinue = UIButton()
@@ -139,6 +131,7 @@ class PasswordRecoveryEmailView: UIViewController {
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
         customShaddow.constraintTo(.bottom, stackViewEmail, CGFloat(1).generateSizeForScreen)
         
+        
     }
     
     private func addTargets() {
@@ -150,13 +143,15 @@ class PasswordRecoveryEmailView: UIViewController {
     }
     
     @objc func stackViewTapped() {
-          
+
         labelEmail_.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
-                
+
         customShaddow.isHidden = false
-        
+
         textFieldEmail.isHidden = false
         
+        textFieldEmail.becomeFirstResponder()
+
         textFieldEmail.addTarget(self, action: #selector(changeText), for: .editingChanged)
     }
 
