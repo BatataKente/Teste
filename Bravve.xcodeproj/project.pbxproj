@@ -30,8 +30,9 @@
 		14A8154C289D55A3004CAEE8 /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A8154B289D55A3004CAEE8 /* Ubuntu-Regular.ttf */; };
 		14CADA0328A52EF6002E9736 /* EndPointMockEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */; };
 		14CADA0528A52F04002E9736 /* EndPointSessionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */; };
-		2E57CDB428A585EC004214A9 /* DetailsCloseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB328A585EC004214A9 /* DetailsCloseViewModel.swift */; };
-		2E57CDB628A58606004214A9 /* DetailsCloseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB528A58606004214A9 /* DetailsCloseView.swift */; };
+		2E57CDB428A585EC004214A9 /* DetailsClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */; };
+		2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB528A58606004214A9 /* DetailsClosedView.swift */; };
+		2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -204,8 +205,9 @@
 		14A8154B289D55A3004CAEE8 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointMockEnum.swift; sourceTree = "<group>"; };
 		14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointSessionEnum.swift; sourceTree = "<group>"; };
-		2E57CDB328A585EC004214A9 /* DetailsCloseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCloseViewModel.swift; sourceTree = "<group>"; };
-		2E57CDB528A58606004214A9 /* DetailsCloseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCloseView.swift; sourceTree = "<group>"; };
+		2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedViewModel.swift; sourceTree = "<group>"; };
+		2E57CDB528A58606004214A9 /* DetailsClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedView.swift; sourceTree = "<group>"; };
+		2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -402,19 +404,20 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		2E57CDB028A585AD004214A9 /* DetailsClose */ = {
+		2E57CDB028A585AD004214A9 /* DetailsClosed */ = {
 			isa = PBXGroup;
 			children = (
 				2E57CDB228A585C5004214A9 /* ViewModel */,
 				2E57CDB128A585BE004214A9 /* View */,
 			);
-			path = DetailsClose;
+			path = DetailsClosed;
 			sourceTree = "<group>";
 		};
 		2E57CDB128A585BE004214A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2E57CDB528A58606004214A9 /* DetailsCloseView.swift */,
+				2E57CDB528A58606004214A9 /* DetailsClosedView.swift */,
+				2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -422,7 +425,7 @@
 		2E57CDB228A585C5004214A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				2E57CDB328A585EC004214A9 /* DetailsCloseViewModel.swift */,
+				2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -701,7 +704,7 @@
 		C69616902881E64F00281633 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2E57CDB028A585AD004214A9 /* DetailsClose */,
+				2E57CDB028A585AD004214A9 /* DetailsClosed */,
 				2EB18FBE28A1ACCA008A80BF /* Filter */,
 				C69616D92881E8E100281633 /* Home Closed */,
 				C69616C92881E85800281633 /* Details Open */,
@@ -1955,7 +1958,7 @@
 				1478A23B28996DC700B409E5 /* CGFloat+Extension.swift in Sources */,
 				C696179B2881EEC100281633 /* BookingDetailsModel.swift in Sources */,
 				C69616F42881E9C600281633 /* NameView.swift in Sources */,
-				2E57CDB428A585EC004214A9 /* DetailsCloseViewModel.swift in Sources */,
+				2E57CDB428A585EC004214A9 /* DetailsClosedViewModel.swift in Sources */,
 				C69617662881ECAD00281633 /* Reservation3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* SingleBookingModel.swift in Sources */,
 				2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */,
@@ -2009,8 +2012,9 @@
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
 				C69616F62881E9CD00281633 /* NameViewModel.swift in Sources */,
 				2EB18FD728A2F17A008A80BF /* ReservationsV1Model.swift in Sources */,
+				2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
-				2E57CDB628A58606004214A9 /* DetailsCloseView.swift in Sources */,
+				2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */,
 				C69617312881EB0A00281633 /* HobbiesModel.swift in Sources */,
 				140DA88928A3F2F900413161 /* TabBarClassClosed+Extension.swift in Sources */,
 				1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */,
