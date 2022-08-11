@@ -66,6 +66,13 @@ extension UIImageView {
                 self.heightAnchorInSuperview(CGFloat(210).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 0.75)
             
+            case ImagesBravve.wayHobbies:
+            
+            self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(110).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 3)
+            
             case ImagesBravve.wayLogin:
             
                 self.constraintInsideTo(.top, superview)
@@ -87,6 +94,13 @@ extension UIImageView {
                 self.heightAnchorInSuperview(CGFloat(90).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 2.5)
             
+            case ImagesBravve.wayPhoto:
+            
+                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(110).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 3)
+            
             case ImagesBravve.wayReserv_1:
             
                 self.constraintInsideTo(.bottom, superview)
@@ -100,6 +114,20 @@ extension UIImageView {
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 0.95)
+            
+            case ImagesBravve.wayTerms_1:
+            
+                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 0.95)
+            
+            case ImagesBravve.wayTerms_2:
+            
+                self.constraintInsideTo(.bottom, superview)
+                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(190).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 0.7)
             
             default: return
         }
