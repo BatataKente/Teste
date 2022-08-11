@@ -55,6 +55,10 @@ class FrequentlyAskedQuestionsView: UIViewController {
 
 extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.count
     }
@@ -80,3 +84,5 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
         return UITableView.automaticDimension
     }
 }
+
+

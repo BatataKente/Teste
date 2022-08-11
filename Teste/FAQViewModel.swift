@@ -12,6 +12,8 @@ import UIKit
 //    let viewModels: [FAQCollectionViewCellViewModel]
 //}
 
+
+
 struct FAQModel {
     
     let question: String

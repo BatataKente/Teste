@@ -14,9 +14,10 @@ class FAQViewTableViewCell: UITableViewCell {
     private lazy var backgroundCellView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: ColorsBravve.viewHelp.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         return view
     }()
+
     
     private lazy var wayHelpImageView: UIImageView = {
         let view = UIImageView()
