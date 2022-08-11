@@ -6,8 +6,7 @@
 //
 
 //Enum for Endpoints
-
-/* The enum was created to 
+/* The enum was created to
  */
 
 enum EndPoints: String {
@@ -28,13 +27,13 @@ enum EndPoints: String {
     case usersOccupations = "/users/occupations"
     case usersWorkModels = "/users/workModels"
     case users = "/users"
-    case	usersAmount = "/users/amount"
+    case    usersAmount = "/users/amount"
     case usersUuid = "uuid"
     case usersPassword = "/password"
     case usersValidate = "/validate"
-    case usersCode = "/code"
-    case usersPictures = "/pictures"
-    case usersPicture = "/picture"
+    case usersCode = "/user/code"
+    case usersPictures = "/users/pictures"
+    case usersPicture = "/users/picture"
     case usersCreditWallets = "/creditWallets"
     
     // Partners
@@ -51,5 +50,22 @@ enum EndPoints: String {
     case sites = "/sites"
     case sitesId = "/sites/id"
     case sitesContacts = "/sites/contacts"
+    
+    //Spaces
+    case spacesTypes = "/spaces/types"
+    case spacesClassifications = "/spaces/classifications"
+    case spacesCategories = "/spaces/categories"
+    case spacesFacilities = "/spaces/facilities"
+    case spacesNoises = "/spaces/noises"
+    case spacesContracts = "/spaces/contracts"
+    case spaces = "/spaces"
+    case spacesId = "/spacesId"
+    case spacesList = "/spaces/list"
+    case spacesPictures = "/spaces/pictures"
+    case spacesPictureUuid = "/spaces/pictures/uuid"
+    case spacesFavorite = "/spaces/favorite"
+    case spacesQrcode = "/spaces/qrcode"
+    
+    
     
 }
