@@ -26,7 +26,11 @@ class HomeOpenView: UIViewController {
         let parameters = SpaceListParameters(space_state_id: 1, space_city_id: 2, allow_workpass: true, seats_qty: 3, space_type_id: 4, space_classification_id: 5, space_category_id: 6, space_facilities_id: [0], space_noise_level_id: 7, space_contract_Type: 8)
         
             self.authManager.postDataWithResponse(parameters: parameters) { (spaces: [Space]?) in
-                print("\(String(describing: spaces))")
+                
+                if let spaces = spaces {
+                    
+                    self.cells = spaces
+                }
             }
         
     }
@@ -42,30 +46,7 @@ class HomeOpenView: UIViewController {
     
     private let seletedFilterItems: [String] = ["a", "b", "c"]
     
-    private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo")]
+    private var cells: [Space] = []
     
     private let titleLabel = UILabel()
     
@@ -258,10 +239,10 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-        let openDetailsView = OpenDetailsView(cells[indexPath.row])
-        
-        openDetailsView.modalPresentationStyle = .fullScreen
-        present(openDetailsView, animated: false)
+//        let openDetailsView = OpenDetailsView(cells[indexPath.row])
+//        
+//        openDetailsView.modalPresentationStyle = .fullScreen
+//        present(openDetailsView, animated: false)
     }
 }
 
