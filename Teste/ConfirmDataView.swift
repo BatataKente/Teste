@@ -18,32 +18,28 @@ class ConfirmDataView: UIViewController {
     
     private let backgroundImage1 = UIImageView()
     
-    private let backgroundImage2: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
-        return image
-    }()
+    private let backgroundImage2 = UIImageView()
+//    private let backgroundImage2: UIImageView = {
+//        let image = UIImageView()
+//        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
+//        return image
+//    }()
     
     
     private let buttonBack = UIButton()
     
     private let imageLogo = UIImageView()
     
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
-        
-        let buttons = createProgressBarButtons([
+    private lazy var buttons: [UIButton] = {
+        let buttons =  createProgressBarButtons([
             IconsBravve.userGray.rawValue,
             IconsBravve.cellGray.rawValue,
             IconsBravve.emailGray.rawValue,
             IconsBravve.padlockGray.rawValue,
             IconsBravve.pencilBlue.rawValue
         ])
-        let stackView = UIStackView(arrangedSubviews: buttons)
         buttons[4].setTitle(" Confirmação", for: .normal)
-        
-        return (stack: stackView,
-                buttons: buttons)
+        return buttons
     }()
     
     private let label: UILabel = {
@@ -152,7 +148,13 @@ class ConfirmDataView: UIViewController {
         
         view.setToDefaultBackgroundColor()
          
-        view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, backgroundImage1, stackViewLabels, buttonContinue])
+        view.addSubviews([ buttonBack, imageLogo, label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
+        
+        view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
+            let vc = PasswordView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
         
         defaults()
         addConstraints()
@@ -168,12 +170,9 @@ class ConfirmDataView: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink) { _ in
-            self.dismiss(animated: true)
-        }
-        imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
         backgroundImage1.setWayToDefault(.wayConfirm_2)
+        backgroundImage2.setWayToDefault(.wayConfirm_1)
         
     }
     
@@ -181,7 +180,7 @@ class ConfirmDataView: UIViewController {
         
         label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
         label.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
-        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(40).generateSizeForScreen)
+        label.constraintInsideTo(.top, view, CGFloat(240).generateSizeForScreen)
         
         stackViewName.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         stackViewCell.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
@@ -193,28 +192,11 @@ class ConfirmDataView: UIViewController {
         
         stackViewLabels.constraintInsideTo(.leading, label)
         stackViewLabels.constraintInsideTo(.trailing, label)
-        stackViewLabels.constraintOutsideTo(.top, label, CGFloat(40).generateSizeForScreen)
-        
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(62).generateSizeForScreen)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        
-        backgroundImage2.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        backgroundImage2.constraintInsideTo(.top, view.safeAreaLayoutGuide)
-        backgroundImage2.heightAnchorInSuperview(120)
-        backgroundImage2.widthAnchorInSuperview(280)
+        stackViewLabels.constraintOutsideTo(.top, label, CGFloat(60).generateSizeForScreen)
+    
     }
     
     private func addTargets() {
-        
-        buttonBack.addTarget(self, action: #selector(actionButtonBack), for: .touchUpInside)
-        
-        progressBarStackView.buttons[0].addTarget(self, action: #selector(actionButtonPersonalData), for: .touchUpInside)
-        
-        progressBarStackView.buttons[1].addTarget(self, action: #selector(actionButtonCell), for: .touchUpInside)
-        
-        progressBarStackView.buttons[2].addTarget(self, action: #selector(actionButtonEmail), for: .touchUpInside)
-        
-        progressBarStackView.buttons[3].addTarget(self, action: #selector(actionButtonPassword), for: .touchUpInside)
         
         buttonContinue.addTarget(self, action: #selector(actionButtonContinue), for: .touchUpInside)
         
