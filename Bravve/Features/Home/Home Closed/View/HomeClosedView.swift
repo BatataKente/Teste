@@ -10,13 +10,13 @@ import UIKit
 class HomeClosedView: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
-
+        
         super.viewDidDisappear(animated)
         tabBar.selectedItem = tabBar.items?[0]
     }
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         
         setupView()
@@ -88,7 +88,7 @@ class HomeClosedView: UIViewController {
         
         let tableView = UITableView()
         tableView.setToDefaultBackgroundColor()
-        tableView.register(HomeOpenTableViewCell.self,
+        tableView.register(HomeClosedTableViewCell.self,
                            forCellReuseIdentifier: cellIdentifier)
         tableView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
@@ -115,8 +115,10 @@ class HomeClosedView: UIViewController {
     
     private var filterButtons = [UIButton]()
     
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    private lazy var tabBar = TabBarClosed(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                                   ButtonsBravve.calendarButtonGray.rawValue,
+                                                                   ButtonsBravve.userLoginGray.rawValue
+                                                                  ])
     
     private func setupView() {
         
@@ -140,32 +142,32 @@ class HomeClosedView: UIViewController {
                                size: CGFloat(11).generateSizeForScreen)
         
         customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
-
+            
             let filterView = FilterScreen()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
         
         authManager.getDataArray { (states: [States]?) in
-
+            
             guard let states = states else {
                 return
             }
-
+            
             var actions = [UIAction]()
-
+            
             let stateHandler = {(action: UIAction) in
-
+                
                 for state in states {
-
+                    
                     if state.code == action.title {
-
+                        
                         self.authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
-
+                            
                             guard let cities = cities else {return}
-
+                            
                             var actions = [UIAction]()
-
+                            
                             let cityHandler = {(action: UIAction) in
                                 
                                 customBarWithFilter.cityChosedLabel.text = action.title
@@ -173,16 +175,16 @@ class HomeClosedView: UIViewController {
                             }
                             
                             for city in cities {
-
+                                
                                 guard let cityname = city.name else {return}
-
+                                
                                 actions.append(UIAction(title: cityname,
                                                         handler: cityHandler))
                             }
                             
                             customBarWithFilter.stateChosedLabel.text = action.title
                             customBarWithFilter.stateLabel.font = smallFont
-
+                            
                             customBarWithFilter.rightButton.setMenuForButton(actions)
                         }
                     }
@@ -190,11 +192,11 @@ class HomeClosedView: UIViewController {
             }
             
             for state in states {
-
+                
                 actions.append(UIAction(title: state.code,
                                         handler: stateHandler))
             }
-
+            
             customBarWithFilter.leftButton.setMenuForButton(actions)
         }
     }
@@ -237,7 +239,7 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
             }
             else {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeClosedTableViewCell
                 cell?.delegate = self
                 
                 cell?.indexPath = IndexPath(row: indexPath.row - 1,
@@ -254,7 +256,7 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension HomeClosedView: HomeOpenTableViewCellProtocol {
+extension HomeClosedView: HomeClosedTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         

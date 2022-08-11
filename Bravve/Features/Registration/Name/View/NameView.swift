@@ -9,134 +9,6 @@ import UIKit
 
 class NomeView: UIViewController {
     
-    private let ways = [UIImageView(), UIImageView(), UIImageView()]
-    
-    private let registerButton = UIButton()
-    
-    private lazy var buttons: [UIButton] = {
-        
-        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userBlue.rawValue,
-                                                              IconsBravve.userGray.rawValue,
-                                                              IconsBravve.cellBlue.rawValue,
-                                                              IconsBravve.cellGray.rawValue,
-                                                              IconsBravve.emailBlue.rawValue,
-                                                              IconsBravve.emailGray.rawValue,
-                                                              IconsBravve.padlockGray.rawValue,
-                                                              IconsBravve.hobbiesGray.rawValue])
-        
-        buttons[1].addTarget(self,
-                             action: #selector(nameScreenAction),
-                             for: .touchUpInside)
-        buttons[3].addTarget(self,
-                             action: #selector(phoneScreenAction),
-                             for: .touchUpInside)
-        buttons[5].addTarget(self,
-                             action: #selector(emailScreenAction),
-                             for: .touchUpInside)
-        
-        return buttons
-    }()
-    
-    private let infoLabel: UILabel = {
-        
-        let infoLabel = UILabel()
-        infoLabel.font = UIFont(name: FontsBravve.light.rawValue,
-                                size: CGFloat(16).generateSizeForScreen)
-        infoLabel.numberOfLines = 0
-        infoLabel.textAlignment = .center
-        
-        return infoLabel
-    }()
-    
-    private let customShaddow: UIView = {
-        
-        let customShaddow = UIView()
-        customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        customShaddow.layer.cornerRadius = 8
-        customShaddow.isHidden = true
-        
-        return customShaddow
-    }()
-    
-    private lazy var viewElements: (rightStackView: UIStackView,
-                       leftStackView: UIStackView,
-                       rightTextField: UITextField,
-                       rightLabel: UILabel,
-                       ddiChoseLabel: UILabel,
-                       ddisLabel: UILabel,
-                       ddisButton: UIButton) = {
-        
-        let stackMargins: CGFloat = CGFloat(20).generateSizeForScreen
-        let smallFont = UIFont(name: FontsBravve.light.rawValue,
-                               size: CGFloat(11).generateSizeForScreen)
-        let font = UIFont(name: FontsBravve.medium.rawValue,
-                          size: CGFloat(15).generateSizeForScreen)
-        
-        let ddisLabel = UILabel()
-        ddisLabel.text = "+55"
-        ddisLabel.font = smallFont
-        
-        let ddiChoseLabel = UILabel()
-        ddiChoseLabel.text = "+55"
-        ddiChoseLabel.font = font
-        
-        let stackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
-        stackView.axis = .vertical
-        
-        let ddisButton = UIButton()
-        
-        let leftStackView = UIStackView(arrangedSubviews: [stackView, ddisButton])
-        leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
-        leftStackView.layer.cornerRadius = 10
-        leftStackView.isLayoutMarginsRelativeArrangement = true
-        leftStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                   left: stackMargins,
-                                                   bottom: stackMargins,
-                                                   right: 0)
-        
-        let rightLabel = UILabel()
-        rightLabel.font = smallFont
-        rightLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
-        
-        let rightTextField = UITextField()
-        rightTextField.font = font
-        
-        let rightStackView = UIStackView(arrangedSubviews: [rightLabel,
-                                                            rightTextField])
-        rightStackView.spacing = 10
-        rightStackView.axis = .vertical
-        rightStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
-        rightStackView.layer.cornerRadius = 8
-        rightStackView.isLayoutMarginsRelativeArrangement = true
-        rightStackView.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                    left: stackMargins,
-                                                    bottom: stackMargins,
-                                                    right: stackMargins)
-        
-        
-        return (rightStackView: rightStackView,
-                leftStackView: leftStackView,
-                rightTextField: rightTextField,
-                rightLabel: rightLabel,
-                ddiChoseLabel: ddiChoseLabel,
-                ddisLabel: ddisLabel,
-                ddisButton: ddisButton)
-    }()
-    
-    private lazy var registerStackView: UIStackView = {
-        
-        let registerStackView = UIStackView(arrangedSubviews: [viewElements.leftStackView,
-                                                               viewElements.rightStackView])
-        registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
-        registerStackView.layer.borderWidth = 1
-        registerStackView.spacing = 15
-        registerStackView.layer.cornerRadius = 8
-
-        return registerStackView
-    }()
-    
-    private let nomeViewModel: NomeViewModel
-    
     init(_ stage: Stage = .first) {
         
         nomeViewModel = NomeViewModel(stage)
@@ -159,15 +31,197 @@ class NomeView: UIViewController {
         super.viewDidLoad()
     }
     
+    private let ways = [UIImageView(), UIImageView(), UIImageView()]
+    
+    private let registerButton = UIButton()
+    
+    private lazy var buttons: [UIButton] = {
+        
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userBlue.rawValue,
+                                                              IconsBravve.userGray.rawValue,
+                                                              IconsBravve.cellBlue.rawValue,
+                                                              IconsBravve.cellGray.rawValue,
+                                                              IconsBravve.emailBlue.rawValue,
+                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.padlockGray.rawValue,
+                                                              IconsBravve.hobbiesGray.rawValue])
+        switch nomeViewModel.stage {
+            
+            case .first: break
+            
+            case .second:
+            
+                let userHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makeNameScreen()
+                }
+                let cellHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makePhoneScreen()
+                }
+                
+                buttons[1].addAction(UIAction(handler: userHandler),
+                                     for: .touchUpInside)
+                buttons[3].addAction(UIAction(handler: cellHandler),
+                                     for: .touchUpInside)
+            
+            default:
+            
+                let userHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makeNameScreen()
+                }
+                let cellHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makePhoneScreen()
+                }
+                let emailHandler = {(action: UIAction) in
+
+                    self.nomeViewModel.makeEmailScreen()
+                }
+                
+                buttons[1].addAction(UIAction(handler: userHandler),
+                                     for: .touchUpInside)
+                buttons[3].addAction(UIAction(handler: cellHandler),
+                                     for: .touchUpInside)
+                buttons[5].addAction(UIAction(handler: emailHandler),
+                                     for: .touchUpInside)
+        }
+        
+        return buttons
+    }()
+    
+    private let infoLabel: UILabel = {
+        
+        let infoLabel = UILabel()
+        infoLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                size: CGFloat(16).generateSizeForScreen)
+        infoLabel.numberOfLines = 0
+        infoLabel.textAlignment = .center
+        
+        return infoLabel
+    }()
+    
+    private let customShaddow: UIView = {
+        
+        let customShaddow = UIView()
+        customShaddow.layer.cornerRadius = 8
+        customShaddow.isHidden = true
+        
+        return customShaddow
+    }()
+    
+    private lazy var viewElements: (rightStackView: UIStackView,
+                                    leftStackView: UIStackView,
+                                    rightTextField: UITextField,
+                                    rightLabel: UILabel,
+                                    alertButton: UIButton,
+                                    ddiChoseLabel: UILabel,
+                                    ddisLabel: UILabel,
+                                    ddisButton: UIButton) = {
+        
+        let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
+        let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
+        let font = UIFont(name: FontsBravve.medium.rawValue,
+                          size: CGFloat(15).generateSizeForScreen)
+        
+        let ddisLabel = UILabel()
+        ddisLabel.text = "DDI"
+        
+        let ddiChoseLabel = UILabel()
+        ddiChoseLabel.text = "+55"
+        ddiChoseLabel.font = font
+        
+        let ddiStackView = UIStackView(arrangedSubviews: [ddisLabel, ddiChoseLabel])
+        ddiStackView.axis = .vertical
+        ddiStackView.spacing = 10
+        
+        let ddisButton = UIButton()
+        
+        let leftStackView = UIStackView(arrangedSubviews: [ddiStackView, ddisButton])
+        leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
+        leftStackView.layer.cornerRadius = 10
+        leftStackView.isLayoutMarginsRelativeArrangement = true
+        leftStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                   left: stackHorizontalMargins,
+                                                   bottom: stackVerticalMargins,
+                                                   right: 0)
+        
+        let rightLabel = UILabel()
+        
+        let rightTextField = UITextField()
+        rightTextField.font = font
+        
+        let stackView = UIStackView(arrangedSubviews: [rightLabel,
+                                                       rightTextField])
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        
+        let alertButton = UIButton()
+        alertButton.setImage(UIImage(named: ButtonsBravve.alert.rawValue),
+                             for: .normal)
+        
+        let rightStackView = UIStackView(arrangedSubviews: [stackView])
+        rightStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
+        rightStackView.distribution = .fillProportionally
+        rightStackView.layer.cornerRadius = 8
+        rightStackView.isLayoutMarginsRelativeArrangement = true
+        rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                    left: stackHorizontalMargins,
+                                                    bottom: stackVerticalMargins,
+                                                    right: stackHorizontalMargins)
+        
+        rightStackView.addSubview(alertButton)
+        
+        alertButton.constraintInsideTo(.centerY, rightStackView)
+        alertButton.constraintInsideTo(.trailing, rightStackView,
+                                       stackHorizontalMargins)
+        alertButton.heightAnchorInSuperview(CGFloat(16.5).generateSizeForScreen)
+        alertButton.constraintOutsideTo(.width, alertButton)
+        
+        return (rightStackView: rightStackView,
+                leftStackView: leftStackView,
+                rightTextField: rightTextField,
+                rightLabel: rightLabel,
+                alertButton: alertButton,
+                ddiChoseLabel: ddiChoseLabel,
+                ddisLabel: ddisLabel,
+                ddisButton: ddisButton)
+    }()
+    
+    private lazy var registerStackView: UIStackView = {
+        
+        let registerStackView = UIStackView(arrangedSubviews: [viewElements.leftStackView,
+                                                               viewElements.rightStackView])
+        registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
+        registerStackView.layer.borderWidth = 1
+        registerStackView.spacing = 15
+        registerStackView.layer.cornerRadius = 8
+
+        return registerStackView
+    }()
+    
+    private let registerFailLabel: UILabel = {
+        
+        let registerFailLabel = UILabel()
+        registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                        size: CGFloat(11).generateSizeForScreen)
+        registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        
+        return registerFailLabel
+    }()
+    
+    private let nomeViewModel: NomeViewModel
+    
     private func setupView() {
         
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton])
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
-                
+            
             self.nomeViewModel.turnBackScreen()
         }
         
@@ -199,6 +253,12 @@ class NomeView: UIViewController {
                                               CGFloat(60).generateSizeForScreen)
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
+        registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        
+        registerFailLabel.constraintOutsideTo(.top, registerStackView,
+                                              CGFloat(5).generateSizeForScreen)
+        registerFailLabel.constraintInsideTo(.leading, registerStackView,
+                                             CGFloat(15).generateSizeForScreen)
         
         customShaddow.constraintInsideTo(.top, registerStackView)
         customShaddow.constraintInsideTo(.leading, registerStackView)
@@ -221,25 +281,26 @@ class NomeView: UIViewController {
         registerStackView.addGestureRecognizer(stackViewTap)
     }
     
-    @objc func nameScreenAction() {
-
-        nomeViewModel.makeNameScreen()
-    }
-    
-    @objc func phoneScreenAction() {
-
-        nomeViewModel.makePhoneScreen()
-    }
-    
-    @objc func emailScreenAction() {
-
-        nomeViewModel.makeEmailScreen()
-    }
-    
     @objc func stackViewTapped() {
         
-        viewElements.rightLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
-        viewElements.ddisLabel.font = UIFont.systemFont(ofSize: CGFloat(11).generateSizeForScreen)
+        let stackVerticalMargins: CGFloat = CGFloat(10).generateSizeForScreen
+        let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
+        
+        viewElements.leftStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                                left: stackHorizontalMargins,
+                                                                bottom: stackVerticalMargins,
+                                                                right: 0)
+        
+        viewElements.rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
+                                                                left: stackHorizontalMargins,
+                                                                bottom: stackVerticalMargins,
+                                                                right: stackHorizontalMargins)
+        
+        viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                              size: CGFloat(10).generateSizeForScreen)
+        viewElements.ddisLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                             size: CGFloat(10).generateSizeForScreen)
+        viewElements.ddisLabel.text = "+55"
         
         customShaddow.isHidden = false
         
@@ -284,6 +345,8 @@ extension NomeView: NomeViewModelProtocol {
         
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
+        viewElements.alertButton.isHidden = true
+        registerFailLabel.isHidden = true
         viewElements.ddisButton.isEnabled = false
         viewElements.rightTextField.isHidden = true
         
@@ -298,12 +361,24 @@ extension NomeView: NomeViewModelProtocol {
         viewElements.rightLabel.font = font
     }
     
+    func setColors(textColor: UIColor?,
+                   customShaddowbackgroundColor: UIColor?) {
+        
+        viewElements.rightLabel.textColor = textColor
+        viewElements.ddisLabel.textColor = textColor
+        
+        customShaddow.backgroundColor = customShaddowbackgroundColor
+    }
+    
     func setText(rightLabel: String,
                  rightTextField: String,
-                 infoLabel: String) {
+                 infoLabel: String,
+                 registerFailLabel: String) {
         
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
+        viewElements.ddisLabel.text = "DDI"
+        self.registerFailLabel.text = registerFailLabel
 
         self.infoLabel.text = infoLabel
     }
@@ -333,6 +408,12 @@ extension NomeView: NomeViewModelProtocol {
     
     func dismiss() {
         
-        self.dismiss(animated: true)
+        dismiss(animated: true)
+    }
+    
+    func presentOtherView(_ viewController: UIViewController) {
+        
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: false)
     }
 }
