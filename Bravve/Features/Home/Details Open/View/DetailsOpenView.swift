@@ -336,7 +336,7 @@ class OpenDetailsView: UIViewController {
         descriptionLabel.numberOfLines = 0
         
         let view = UIView()
-        view.setToDefaultBackgroundColor()
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.layer.cornerRadius = 12
         
         scrollView.addSubview(view)
