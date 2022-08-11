@@ -25,7 +25,9 @@ public enum ColorsBravve: String {
     case buttonUnderline = "buttonUnderline"
     case capsuleButton = "capsuleButton"
     case capsuleButtonSelected = "capsuleButtonSelected"
+    case cardFacilities = "cardFacilities"
     case cards = "cards"
+    case cardStructure = "cardStructure"
     case coolWorking = "coolWorking"
     case coWorking = "coWorking"
     case grayAlertLabel = "grayAlertLabel"
@@ -46,4 +48,5 @@ public enum ColorsBravve: String {
     case textFieldBackground = "textFieldBackground"
     case textFieldBorder = "textFieldBorder"
     case viewHelp = "viewHelp"
+    case white_black = "white_black"
 }
