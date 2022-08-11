@@ -10,9 +10,7 @@ import UIKit
 class PasswordRecovery_sms: UIViewController, UITextFieldDelegate {
 
     let backgroundImage = UIImageView()
-    
-    let bravveIcon = UIImageView()
-    
+        
     let continueButton = UIButton()
     
     let messageSentLabel: UILabel = {
@@ -219,14 +217,19 @@ class PasswordRecovery_sms: UIViewController, UITextFieldDelegate {
     
     func setupView() {
         
-        view.addSubviews([backgroundImage, bravveIcon, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
+        view.addSubviews([backgroundImage, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
 
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        
+        view.createRegisterCustomBar(.backPink) { _ in
+            return
+        }
+        
     }
+
     
     func setupDefaults() {
         
-        bravveIcon.setLogoToDefault()
         backgroundImage.setWayToDefault(ImagesBravve.wayEmail)
         continueButton.setToBottomButtonKeyboardDefault()
     }
@@ -246,7 +249,7 @@ class PasswordRecovery_sms: UIViewController, UITextFieldDelegate {
     private func setMessageSentLabelConstraints() {
         
         let constraint = [
-            messageSentLabel.topAnchor.constraint(equalTo: bravveIcon.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
+            messageSentLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(152).generateSizeForScreen),
             messageSentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22.5).generateSizeForScreen),
             messageSentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22.5).generateSizeForScreen),
         ]
