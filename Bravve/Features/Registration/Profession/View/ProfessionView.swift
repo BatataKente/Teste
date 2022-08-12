@@ -124,8 +124,6 @@ class ProfessionView: UIViewController {
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.backgroundColor = .red
-        
         view.addSubviews([backButton,
                                     infoLabel,
                                     selectAreaStackView,
@@ -143,12 +141,9 @@ class ProfessionView: UIViewController {
         continueButton.setToBottomButtonKeyboardDefault()
         backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         
-        selectAreaButton.setMenuForButton(professionViewModel.selectAreaMenu({ (action: UIAction) in
-            self.selectAreaAPILabel.text = action.title
-        }))
-        workRegimeButton.setMenuForButton(professionViewModel.workRegimeMenu({(action: UIAction) in
-            self.workRegimeAPILabel.text = action.title
-        }))
+        professionViewModel.selectAreaMenu(label: selectAreaAPILabel, button: selectAreaButton)
+        
+        professionViewModel.workRegimeMenu(label: workRegimeAPILabel, button: workRegimeButton)
         
         NSLayoutConstraint.activate([
             

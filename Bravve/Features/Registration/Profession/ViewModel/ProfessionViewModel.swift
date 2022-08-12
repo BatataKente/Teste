@@ -8,23 +8,54 @@
 import UIKit
 
 class ProfessionViewModel {
-
-    func selectAreaMenu(_ handler: @escaping UIActionHandler) -> [UIAction] {
+    
+    let networkManager =  NetworkManager()
+    
+    func selectAreaMenu(label: UILabel, button: UIButton) {
+        
+        networkManager.getDataArray(endpoint: .usersOccupations) { (occupations: [Occupations]?) in
             
             var selectAreaMenu: [UIAction] = []
-            for i in 1...10 {
-                selectAreaMenu.append(UIAction(title: "Trabalho \(i)" , handler: handler))
-            }
-            return selectAreaMenu
-        }
-    
-    func workRegimeMenu(_ handler: @escaping UIActionHandler) -> [UIAction] {
             
-        var workRegimeMenu: [UIAction] = []
+            guard let occupations = occupations else {
+                return
+            }
+            
+            let handler = { (action: UIAction) in
+                label.text = action.title
+            }
+            
+            for occupation in occupations {
+                guard let occupationName = occupation.name else { return }
+                selectAreaMenu.append(UIAction(title: occupationName , handler: handler))
+                button.setMenuForButton(selectAreaMenu)
+            }
+            
+        }
         
-        workRegimeMenu.append(UIAction(title: "Home Office", handler: handler))
-        workRegimeMenu.append(UIAction(title: "Híbrido", handler: handler))
-        workRegimeMenu.append(UIAction(title: "Presencial" , handler: handler))
-        return workRegimeMenu
+        
+    }
+    
+    func workRegimeMenu(label: UILabel, button: UIButton) {
+        
+        networkManager.getDataArray(endpoint: .usersWorkModels) { (workModels: [WorkModels]?) in
+            
+            var workRegimeMenu: [UIAction] = []
+            
+            guard let workModels = workModels else {
+                return
+            }
+            
+            let handler = { (action: UIAction) in
+                label.text = action.title
+            }
+            
+            for workModel in workModels {
+                guard let workModelName = workModel.name else { return }
+                workRegimeMenu.append(UIAction(title: workModelName , handler: handler))
+                button.setMenuForButton(workRegimeMenu)
+            }
+            
+        }
     }
 }
