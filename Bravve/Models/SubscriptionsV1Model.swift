@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct Subscription: Codable {
+    var id: Int?
+    var name: String?
+    var credit_amount: Int?
+    var price: Int?
+}

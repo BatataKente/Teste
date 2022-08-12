@@ -29,7 +29,7 @@ class HomeClosedView: UIViewController {
         .lightContent
     }
     
-    let authManager = AuthManager()
+    let authManager = NetworkManager()
     
     private let cellIdentifier = "Cell"
     
@@ -148,8 +148,8 @@ class HomeClosedView: UIViewController {
             self.present(filterView, animated: true)
         }
         
-        authManager.getDataArray { (states: [States]?) in
-            
+        authManager.getDataArray (endpoint: .utilsStates){ (states: [States]?) in
+
             guard let states = states else {
                 return
             }
@@ -161,9 +161,9 @@ class HomeClosedView: UIViewController {
                 for state in states {
                     
                     if state.code == action.title {
-                        
-                        self.authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
-                            
+
+                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
+
                             guard let cities = cities else {return}
                             
                             var actions = [UIAction]()
