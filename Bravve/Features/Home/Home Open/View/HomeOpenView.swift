@@ -35,7 +35,7 @@ class HomeOpenView: UIViewController {
     
     private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo"]
     
-    private let cells: [ReserveData] = [
+    private var cells: [ReserveData] = [
         ReserveData(title: "BOXOFFICE",
         description: "Numa esquina charmosa, um hotel",
         image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
@@ -200,6 +200,18 @@ class HomeOpenView: UIViewController {
             }
 
             customBarWithFilter.leftButton.setMenuForButton(actions)
+        }
+        
+        let parameters = SpaceListParameters(space_state_id: 1, space_city_id: 2, allow_workpass: true, seats_qty: 3, space_type_id: 4, space_classification_id: 5, space_category_id: 6, space_facilities_id: [0], space_noise_level_id: 7, space_contract_Type: 8)
+        
+        authManager.postDataWithArrayResponse(endpoint: .spacesList, parameters: parameters) { (spaces: [Space]?) in
+            guard let spaces = spaces else {
+                return
+            }
+            
+            self.cells[0] = ReserveData(title: spaces[0].space_category?.name ?? "", description: spaces[0].slogan ?? "", image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(), photoTitle: "", name: spaces[0].name ?? "", subName: spaces[0].description ?? "", price: "\(spaces[0].hourly_credits ?? 0) crédito/hora", details: "\(spaces[0].partner_site_address?.address?.city_name ?? "") / \(spaces[0].partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(spaces[0].seats_qty ?? 0) pessoas \n\(spaces[0].space_type?.name ?? "")")
+            
+            self.tableView.reloadData()
         }
     }
     
