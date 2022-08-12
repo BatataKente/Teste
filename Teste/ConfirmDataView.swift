@@ -207,36 +207,20 @@ class ConfirmDataView: UIViewController {
     }
     
     
-    @objc func actionButtonBack() {
-        print("voltar")
-    }
-    
-    @objc func actionButtonPersonalData() {
-        print("dados pessoais")
-    }
-    
-    @objc func actionButtonCell() {
-        print("celular")
-    }
-    
-    @objc func actionButtonEmail() {
-        print("email")
-    }
-    
-    @objc func actionButtonPassword() {
-        print("senha")
-    }
-    
     @objc func actionButtonContinue() {
         print("continuar")
     }
     
     @objc func actionEditButton1() {
         print("tela dados pessoais")
+        let vc = NomeView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @objc func actionEditButton2() {
         print("tela celular")
+    
     }
     
     @objc func actionEditButton3() {
