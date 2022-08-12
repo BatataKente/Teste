@@ -1,8 +1,8 @@
 //
-//  ModelSpacesV1.swift
-//  Teste
+//  SpacesV1Model.swift
+//  Bravve
 //
-//  Created by user208023 on 8/8/22.
+//  Created by Evandro Rodrigo Minamoto on 09/08/22.
 //
 
 import Foundation
@@ -51,7 +51,7 @@ struct Door: Codable {
     var door_lock_serial: String?
     var door_lock_code: String?
     var door_lock_key: String?
-    var door_lock_manufacture: [DoorLockManufacture]?
+    var door_lock_manufacture: DoorLockManufacture?
 }
 
 struct DoorLockManufacture: Codable {
@@ -62,7 +62,7 @@ struct DoorLockManufacture: Codable {
 struct PartnerSiteAddress: Codable {
     var address_id: Int?
     var business_name: String?
-    var address: PartnerAddress
+    var address: PartnerAddress?
 }
 
 struct PartnerAddress: Codable {
@@ -95,12 +95,12 @@ struct SpacePicture: Codable {
     var is_cover_photo: Bool?
 }
 
-struct Space: Codable {
+struct SpaceDetail: Codable {
     var id: Int?
     var name: String?
     var slogan: String?
     var description: String?
-    var size_mt2: Double?
+    var size_mt2: Int?
     var seats_qty: Int?
     var allow_half_slot: Bool?
     var favorite_space: Bool?
@@ -108,9 +108,9 @@ struct Space: Codable {
     var daily_price: Double?
     var monthly_price: Double?
     var allow_workpass: Bool?
-    var hourly_credits: Int?
-    var daily_credits: Int?
-    var monthly_credits: Int?
+    var hourly_credits: Double?
+    var daily_credits: Double?
+    var monthly_credits: Double?
     var is_active: Bool?
     var has_qrcode: Bool?
     var partner_site_id: Int?
@@ -127,6 +127,31 @@ struct Space: Codable {
     var pictures: [SpacePicture]?
 }
 
+struct Space: Codable {
+    var id: Int?
+    var seats_qty: Int?
+    var name: String?
+    var slogan: String?
+    var description: String?
+    var hourly_price: Double?
+    var daily_price: Double?
+    var monthly_price: Double?
+    var allow_workpass: Bool?
+    var hourly_credits: Double?
+    var daily_credits: Double?
+    var monthly_credits: Double?
+    var is_active: Bool?
+    var favorite_space: Bool?
+    var partner_site_id: Int?
+    var partner_site_address: PartnerSiteAddress?
+    var space_category: SpaceCategory?
+    var space_type: SpaceType?
+    var space_classification: SpaceClassification?
+    var space_noise_level: SpaceNoise?
+    var space_facilitites: [SpaceFacility]?
+    var space_pictures: [SpacePicture]?
+}
+
 struct SpaceListParameters: Codable {
     var space_state_id: Int
     var space_city_id: Int
@@ -138,4 +163,9 @@ struct SpaceListParameters: Codable {
     var space_facilities_id: [Int]
     var space_noise_level_id: Int
     var space_contract_Type: Int
+}
+
+struct SpaceFavoriteParameters: Codable {
+    var space_id: Int
+    var uuid: String
 }

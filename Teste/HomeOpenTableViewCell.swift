@@ -179,16 +179,16 @@ class HomeOpenTableViewCell: UITableViewCell {
         viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
     }
     
-    func setup(_ cellInfo: Space) {
-
-//        viewElements.titleLabel.text = cellInfo.name
-//        viewElements.descriptionLabel.text = cellInfo.slogan
-//        viewElements.photoView.image = cellInfo.image
-//        viewElements.photoLabel.text = cellInfo.
-//        viewElements.nameLabel.text = cellInfo.name
-//        viewElements.subNameLabel.text = cellInfo.subName
-//        viewElements.priceLabel.text = cellInfo.price
-//        viewElements.detailsLabel.text = cellInfo.details
+    func setup(_ cellInfo: ReserveData) {
+        
+        viewElements.titleLabel.text = cellInfo.title
+        viewElements.descriptionLabel.text = cellInfo.description
+        viewElements.photoView.image = cellInfo.image
+        viewElements.photoLabel.text = cellInfo.photoTitle
+        viewElements.nameLabel.text = cellInfo.name
+        viewElements.subNameLabel.text = cellInfo.subName
+        viewElements.priceLabel.text = cellInfo.price
+        viewElements.detailsLabel.text = cellInfo.details
     }
     
     @objc func showDetails() {
