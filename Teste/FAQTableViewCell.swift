@@ -13,15 +13,49 @@ class FAQTableViewCell: UITableViewCell {
     static let identifier = "FAQTableViewCell"
     var iconClick: Bool = true
     
-    private lazy var backgroundCellView: UIView = {
-        let view = UIView()
+//    private lazy var backgroundCellView: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
+//        view.layer.cornerRadius = 15
+//        view.layer.shadowColor = UIColor.black.cgColor
+//        view.layer.shadowOpacity = 0.5
+//        view.layer.shadowRadius = 8
+//        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+//        view.layer.bounds = bounds
+//        view.layer.position = center
+//        return view
+//    }()
+    
+    
+    
+    private lazy var backgroundCellView: UIStackView = {
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
         view.layer.cornerRadius = 15
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.5
-        view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 8
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.bounds = bounds
+        view.layer.position = center
+        
+        view.addArrangedSubviews([titleLabel, plusAndLessButton])
+        view.axis = .horizontal
+        view.spacing = 25
+        view.distribution = .fillProportionally
+        
+        return view
+    }()
+    
+    private lazy var subtitleStackView: UIStackView = {
+       let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addArrangedSubviews([subTitleLabel])
+        view.axis = .vertical
+        view.distribution = .fillProportionally
+        view.isHidden = true
         return view
     }()
     
@@ -34,7 +68,7 @@ class FAQTableViewCell: UITableViewCell {
         return button
     }()
     
-    lazy var invisibleButton: UIButton = {
+    private lazy var invisibleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(self.showAnswer), for: .touchUpInside)
@@ -44,7 +78,7 @@ class FAQTableViewCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.39
+        paragraphStyle.lineHeightMultiple = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -57,38 +91,29 @@ class FAQTableViewCell: UITableViewCell {
     
     lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.39
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.isHidden = true
-        
+//        label.isHidden = true
         return label
     }()
-    
-    
     
     @objc func showAnswer(sender:UIButton){
         if(iconClick == true){
             plusAndLessButton.setImage(UIImage(named: "lessButton"), for: .normal)
-            self.subTitleLabel.isHidden = false
-        } else {
-            plusAndLessButton.setImage(UIImage(named: "mostButton"), for: .normal)
-            self.subTitleLabel.isHidden = true
+            self.subtitleStackView.isHidden = false
         }
-        iconClick = !iconClick
     }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        contentView.addSubviews([backgroundCellView, invisibleButton, titleLabel, plusAndLessButton, subTitleLabel])
+        contentView.addSubviews([backgroundCellView, invisibleButton, subtitleStackView])
         configConstraints()
     }
     
@@ -112,10 +137,10 @@ class FAQTableViewCell: UITableViewCell {
             self.invisibleButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
             self.invisibleButton.bottomAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
             
-            self.subTitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
-            self.subTitleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
-            self.subTitleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-29).generateSizeForScreen),
-            self.subTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-37).generateSizeForScreen),
+            self.subtitleStackView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+            self.subtitleStackView.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
+            self.subtitleStackView.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-29).generateSizeForScreen),
+            self.subtitleStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-37).generateSizeForScreen),
             
             self.plusAndLessButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
             self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),

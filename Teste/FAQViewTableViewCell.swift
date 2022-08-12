@@ -14,9 +14,10 @@ class FAQViewTableViewCell: UITableViewCell {
     private lazy var backgroundCellView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: ColorsBravve.viewHelp.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         return view
     }()
+
     
     private lazy var wayHelpImageView: UIImageView = {
         let view = UIImageView()
@@ -51,11 +52,7 @@ class FAQViewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        contentView.addSubview(backgroundCellView)
-        contentView.addSubview(vectorHelpImageView)
-        contentView.addSubview(wayHelpImageView)
-        contentView.addSubview(FAQViewLabel)
-        
+        contentView.addSubviews([backgroundCellView, wayHelpImageView, vectorHelpImageView, FAQViewLabel])
         configConstraints()
     }
     
