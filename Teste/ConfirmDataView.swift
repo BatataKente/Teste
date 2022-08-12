@@ -19,16 +19,6 @@ class ConfirmDataView: UIViewController {
     private let backgroundImage1 = UIImageView()
     
     private let backgroundImage2 = UIImageView()
-//    private let backgroundImage2: UIImageView = {
-//        let image = UIImageView()
-//        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
-//        return image
-//    }()
-    
-    
-    private let buttonBack = UIButton()
-    
-    private let imageLogo = UIImageView()
     
     private lazy var buttons: [UIButton] = {
         let buttons =  createProgressBarButtons([
@@ -148,7 +138,7 @@ class ConfirmDataView: UIViewController {
         
         view.setToDefaultBackgroundColor()
          
-        view.addSubviews([ buttonBack, imageLogo, label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
+        view.addSubviews([ label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
             let vc = PasswordView()
