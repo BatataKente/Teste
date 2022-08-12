@@ -25,8 +25,12 @@ class HomeOpenView: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
+
         .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+       true
     }
     
     let authManager = NetworkManager()
@@ -61,7 +65,7 @@ class HomeOpenView: UIViewController {
         price: "3,50 crédito/ hora",
         details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
                    )]
-    
+     
     private let titleLabel = UILabel()
     
     private let customBar = UIView()
@@ -121,10 +125,25 @@ class HomeOpenView: UIViewController {
                                            itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                             ButtonsBravve.exitGray.rawValue
                                                             ])
+    private let coverView: UIView = {
+        let coverView = UIView()
+        coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        coverView.addSubview(imageView)
+        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerY, coverView, 5)
+        imageView.contentMode = .scaleAspectFit
+        imageView.heightAnchorInSuperview(CGFloat(58.5))
+        imageView.widthAnchorInSuperview(CGFloat(263))
+        return coverView
+    }()
+    
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar])
+        view.addSubviews([stackView, customBar, tabBar, coverView])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -212,6 +231,11 @@ class HomeOpenView: UIViewController {
             self.cells[0] = ReserveData(title: spaces[0].space_category?.name ?? "", description: spaces[0].slogan ?? "", image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(), photoTitle: "", name: spaces[0].name ?? "", subName: spaces[0].description ?? "", price: "\(spaces[0].hourly_credits ?? 0) crédito/hora", details: "\(spaces[0].partner_site_address?.address?.city_name ?? "") / \(spaces[0].partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(spaces[0].seats_qty ?? 0) pessoas \n\(spaces[0].space_type?.name ?? "")")
             
             self.tableView.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.coverView.isHidden = true
+            }
+            
         }
     }
     
@@ -227,6 +251,13 @@ class HomeOpenView: UIViewController {
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
+        coverView.constraintInsideTo(.top, view)
+        coverView.constraintInsideTo(.leading, view)
+        coverView.constraintInsideTo(.trailing, view)
+        coverView.constraintInsideTo(.bottom, view)
+        
+        
     }
 }
 
