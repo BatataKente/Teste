@@ -9,6 +9,11 @@ import UIKit
 
 class PersonalProfileView: UIViewController{
     
+    private lazy var tabBar = TabBarClosed(self, itemImagesNames: [ButtonsBravve.locationGray.rawValue,
+                                                                   ButtonsBravve.calendarButtonGray.rawValue,
+                                                                   ButtonsBravve.userLoginPink.rawValue
+                                                                  ])
+    
     let wayImage: UIImageView = {
         let image = UIImageView()
         image.setWayToDefault(.wayPassword)
@@ -245,12 +250,16 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tabBar.selectedItem = tabBar.items?[2]
+
         view.backgroundColor = UIColor(named: "background")
         
-        view.addSubviews([wayImage, profilePic, helloLabel, subtitleLabel, backView, infoLabel, subInfoLabel, separatorView, bravveInfoLabel, subBravveInfoLabel, infoImage, reservationLabel, nextPageButton, separatorView2, helpImage, helpLabel, nextPageButton2, separatorView3, policyImage, policyLabel, nextPageButton3, separatorView4, logoutImage, logoutLabel, nextPageButton4, separatorView5, smallView, numberLabel, creditLabel, smallView2, numberLabel2, creditLabel2])
+        view.addSubviews([tabBar, wayImage, profilePic, helloLabel, subtitleLabel, backView, infoLabel, subInfoLabel, separatorView, bravveInfoLabel, subBravveInfoLabel, infoImage, reservationLabel, nextPageButton, separatorView2, helpImage, helpLabel, nextPageButton2, separatorView3, policyImage, policyLabel, nextPageButton3, separatorView4, logoutImage, logoutLabel, nextPageButton4, separatorView5, smallView, numberLabel, creditLabel, smallView2, numberLabel2, creditLabel2])
         
         nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
         nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
@@ -276,6 +285,10 @@ class PersonalProfileView: UIViewController{
     }
     
     func addConstraints(){
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
         profilePic.widthAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
         profilePic.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen).isActive = true
