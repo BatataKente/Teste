@@ -29,7 +29,7 @@ class HomeOpenView: UIViewController {
         .lightContent
     }
     
-    let authManager = AuthManager()
+    let authManager = NetworkManager()
     
     private let cellIdentifier = "Cell"
     
@@ -150,7 +150,7 @@ class HomeOpenView: UIViewController {
             self.present(filterView, animated: true)
         }
         
-        authManager.getDataArray { (states: [States]?) in
+        authManager.getDataArray (endpoint: .utilsStates) { (states: [States]?) in
 
             guard let states = states else {
                 return
@@ -164,7 +164,7 @@ class HomeOpenView: UIViewController {
 
                     if state.code == action.title {
 
-                        self.authManager.getDataArray(id: "\(state.id)") { (cities: [Cities]?) in
+                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
 
                             guard let cities = cities else {return}
 

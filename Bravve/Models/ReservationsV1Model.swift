@@ -53,6 +53,11 @@ struct HoursParameters: Codable {
     var start_time: String
 }
 
+struct ReservationHours: Codable {
+    var hour: String?
+    var flag: Bool?
+}
+
 struct ReservationParameters: Codable {
     var uuid: String
     var space_id: Int
