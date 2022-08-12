@@ -154,7 +154,7 @@ class PasswordRecovery_sms: UIViewController, UITextFieldDelegate {
         borderBottom.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         button.addSubview(borderBottom)
         button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
-        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(PasswordRecovery_sms.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
 

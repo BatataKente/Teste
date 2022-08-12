@@ -165,7 +165,7 @@ class ConfirmationCodeView: UIViewController, UITextFieldDelegate {
         borderBottom.backgroundColor = UIColor(red: 0.02, green: 0.0, blue: 0.37, alpha: 1.0)
         button.addSubview(borderBottom)
         button.setTitleColor(UIColor(red: 0.02, green: 0.0, blue: 0.37, alpha: 1.0), for: .normal)
-        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(ConfirmationCodeView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
     
