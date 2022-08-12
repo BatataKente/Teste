@@ -60,10 +60,247 @@ class OpenDetailsView: UIViewController {
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                                    ButtonsBravve.exitGray.rawValue])
     
+    private func createStackView(_ text: String,
+                                 _ image: UIImage? = nil,
+                                 isHidden: Bool = false,
+                                 textColor: UIColor? = .white) -> UIStackView {
+        
+        let stackView = UIStackView()
+        
+        if let image = image {
+            
+            let imageView = UIImageView()
+            imageView.contentMode = .center
+            imageView.image = image
+            
+            stackView.addArrangedSubview(imageView)
+            
+            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        }
+        
+        let label = UILabel()
+        label.text = text
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(12).generateSizeForScreen)
+        label.textColor = textColor
+        
+        stackView.spacing = CGFloat(10).generateSizeForScreen
+        stackView.isHidden = isHidden
+        
+        stackView.addArrangedSubview(label)
+        
+        return stackView
+    }
+    
+    private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
+                                           itens: [UIStackView],
+                                           titleColor: ColorsBravve = .buttonPink) -> UIStackView {
+        let moreButton = UIButton()
+        moreButton.setTitle("Ver Mais", for: .normal)
+        moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        moreButton.titleLabel?.constraintInsideTo(.leading, moreButton)
+        
+        let lessButton = UIButton()
+        lessButton.setTitle("Ver Menos", for: .normal)
+        lessButton.isHidden = true
+        lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        lessButton.titleLabel?.constraintInsideTo(.leading, lessButton)
+        
+        let seeMoreHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                itens[i].isHidden = false
+            }
+            moreButton.isHidden = true
+            lessButton.isHidden = false
+        }
+        
+        let seeLessHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                itens[i].isHidden = true
+            }
+            moreButton.isHidden = false
+            lessButton.isHidden = true
+        }
+        
+        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
+        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
+        
+        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
+        
+        return stackView
+    }
+    
+    private lazy var localDetailsStackView: UIStackView = {
+        
+        let textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        let title = UILabel()
+        title.textColor = textColor
+        title.text = "Detalhes do local"
+        
+        let texts:[String] = ["Segunda: 08:00h - 17:00h",
+                              "Terça: 08:00h - 17:00h",
+                              "Quarta: 08:00h - 17:00h",
+                              "Quinta: 08:00h - 17:00h",
+                              "Sexta: 08:00h - 17:00h"]
+        var itens = [UIStackView]()
+        
+        itens.append(createStackView("Até 6 pessoas",
+                                     UIImage(named: IconsBravve.users.rawValue),
+                                     textColor: textColor))
+        itens.append(createStackView("Av. São João, Cj. Boulevard, nº900, Sâo Paulo. SP 06020-010, BR",
+                                     UIImage(named: IconsBravve.map.rawValue),
+                                     textColor: textColor))
+        itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                     textColor: textColor))
+        for i in 1...texts.count-1 {
+            
+            itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         isHidden: true,
+                                         textColor: textColor))
+        }
+        
+        let buttons = createSeeButtonsStackView(3...itens.count-1,
+                                                itens: itens)
+        
+        let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
+                                                itens +
+                                                [buttons])
+        localDetailsStackView.axis = .vertical
+        localDetailsStackView.spacing = CGFloat(10).generateSizeForScreen
+        
+        return localDetailsStackView
+    }()
+    
+    private lazy var structureStackView: UIStackView = {
+        
+        let margins = CGFloat(30).generateSizeForScreen
+        
+        let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        
+        let title = UILabel()
+        title.text = "Estrutura"
+        title.font = UIFont(name: FontsBravve.medium.rawValue,
+                            size: 15)
+        title.textColor = textColor
+        
+        let texts:[String] = ["Ar condicionado",
+                              "Ás àreas comuns",
+                              "Auditório/sala de treinamento",
+                              "Água",
+                              "Café",
+                              "Chá",
+                              "a",
+                              "b",
+                              "c",
+                              "d",
+                              "e",
+                              "f",
+                              "g"]
+        var itens = [UIStackView]()
+        
+        for i in 0...5 {
+            
+            itens.append(createStackView(texts[i],
+                                         textColor: textColor))
+        }
+        
+        for i in 6...texts.count - 1 {
+            
+            itens.append(createStackView(texts[i],
+                                         isHidden: true,
+                                         textColor: textColor))
+        }
+        
+        let buttons = createSeeButtonsStackView(6...itens.count-1,
+                                                itens: itens,
+                                                titleColor: .capsuleButtonSelected)
+        
+        let structureStackView = UIStackView(arrangedSubviews: [title] +
+                                             itens +
+                                             [buttons])
+        structureStackView.axis = .vertical
+        structureStackView.spacing = CGFloat(10).generateSizeForScreen
+        structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
+        structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
+        structureStackView.isLayoutMarginsRelativeArrangement = true
+        structureStackView.layoutMargins = UIEdgeInsets(top: margins,
+                                                        left: margins,
+                                                        bottom: margins,
+                                                        right: margins)
+        
+        return structureStackView
+    }()
+    
+    private lazy var localFacilitiesStackView: UIStackView = {
+        
+        let margins = CGFloat(30).generateSizeForScreen
+        
+        let title = UILabel()
+        title.text = "Facilities do local"
+        title.font = UIFont(name: FontsBravve.medium.rawValue,
+                            size: 15)
+        title.textColor = .white
+        
+        let texts:[String] = ["Ar condicionado",
+                              "Ás àreas comuns",
+                              "Auditório/sala de treinamento",
+                              "Água",
+                              "Café",
+                              "Chá",
+                              "a",
+                              "b",
+                              "c",
+                              "d",
+                              "e",
+                              "f",
+                              "g"]
+        var itens = [UIStackView]()
+        
+        for i in 0...5 {
+            
+            itens.append(createStackView(texts[i]))
+        }
+        
+        for i in 6...texts.count - 1 {
+            
+            itens.append(createStackView(texts[i], isHidden: true))
+        }
+        
+        let buttons = createSeeButtonsStackView(6...itens.count-1,
+                                                itens: itens,
+                                                titleColor: .backgroundHelp)
+        
+        let localFacilitiesStackView = UIStackView(arrangedSubviews: [title] +
+                                                   itens +
+                                                   [buttons])
+        localFacilitiesStackView.axis = .vertical
+        localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
+        localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
+        localFacilitiesStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
+        localFacilitiesStackView.isLayoutMarginsRelativeArrangement = true
+        localFacilitiesStackView.layoutMargins = UIEdgeInsets(top: margins,
+                                                              left: margins,
+                                                              bottom: margins,
+                                                              right: margins)
+        
+        return localFacilitiesStackView
+    }()
+        
     private lazy var scrollView: UIScrollView = {
         
         let itemSize = 256
         let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        let black_White = UIColor(named: ColorsBravve.textField.rawValue)
         
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
@@ -73,7 +310,7 @@ class OpenDetailsView: UIViewController {
         scrollView.alwaysBounceVertical = false
         
         let titleLabel = UILabel()
-        titleLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        titleLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
         titleLabel.text = reserveData.title
@@ -99,7 +336,7 @@ class OpenDetailsView: UIViewController {
         descriptionLabel.numberOfLines = 0
         
         let view = UIView()
-        view.setToDefaultBackgroundColor()
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.layer.cornerRadius = 12
         
         scrollView.addSubview(view)
@@ -117,35 +354,35 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        let nameLabel = UILabel()
-        nameLabel.text = reserveData.name
-        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                size: CGFloat(20).generateSizeForScreen)
-        nameLabel.textColor = textColor
+        let label_1 = UILabel()
+        label_1.text = reserveData.name
+        label_1.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(20).generateSizeForScreen)
+        label_1.textColor = textColor
         
-        let hourPriceLabel = UILabel()
-        hourPriceLabel.text = "3,50"
-        hourPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                     size: CGFloat(30).generateSizeForScreen)
-        hourPriceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        let label_2 = UILabel()
+        label_2.text = "3,50"
+        label_2.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(30).generateSizeForScreen)
+        label_2.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
         
-        let hourPriceDescriptionLabel = UILabel()
-        hourPriceDescriptionLabel.text = "crédito/hora"
-        hourPriceDescriptionLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-        hourPriceDescriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                                size: CGFloat(12).generateSizeForScreen)
+        let label_3 = UILabel()
+        label_3.text = "crédito/hora"
+        label_3.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        label_3.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
         
-        let dayPriceLabel = UILabel()
-        dayPriceLabel.text = "18,20"
-        dayPriceLabel.textColor = textColor
-        dayPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                    size: CGFloat(20).generateSizeForScreen)
+        let label_4 = UILabel()
+        label_4.text = "18,20"
+        label_4.textColor = textColor
+        label_4.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(20).generateSizeForScreen)
         
-        let dayPriceDescriptionLabel = UILabel()
-        dayPriceDescriptionLabel.text = "crédito/hora"
-        dayPriceDescriptionLabel.textColor = textColor
-        dayPriceDescriptionLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                               size: CGFloat(12).generateSizeForScreen)
+        let label_5 = UILabel()
+        label_5.text = "crédito/hora"
+        label_5.textColor = textColor
+        label_5.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
         
         let buttons = createCapsuleButtons(["Tecnológico", "Sala de reunião", "Colaborativo"],
                                             .capsuleButton,
@@ -154,7 +391,32 @@ class OpenDetailsView: UIViewController {
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = 5
         
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, nameLabel, hourPriceLabel, hourPriceDescriptionLabel, dayPriceLabel, dayPriceDescriptionLabel, tagsStackView])
+        let label_6 = UILabel()
+        label_6.text = """
+        Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
+        
+        Um refúgio paulistano na esquina da Gabriel Monteiro da Silva com a Juquiá,  o paraíso do design. Com uma pegada cultural, o Kamy propicia a seus frequentadores encontrar exposições de diferentes artistas no seu espaço.
+
+        Trabalho + Café + Cultura, precisa de mais? Então reserve =).
+        """
+        label_6.textColor = black_White
+        label_6.numberOfLines = 0
+        label_6.font = UIFont(name: FontsBravve.regular.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+        
+        let label_7 = UILabel()
+        label_7.text = "Giovanna"
+        label_7.textColor = textColor
+        label_7.font = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+        
+        let label_8 = UILabel()
+        label_8.text = "Community Manager"
+        label_8.textColor = textColor
+        label_8.font = UIFont(name: FontsBravve.regular.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+        
+        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView, localFacilitiesStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -174,25 +436,61 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
-        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, photoCollectionView)
+        label_1.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_1.constraintInsideTo(.leading, photoCollectionView)
         
-        hourPriceLabel.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
-        hourPriceLabel.constraintOutsideTo(.trailing, hourPriceDescriptionLabel, CGFloat(5).generateSizeForScreen)
+        label_2.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_2.constraintOutsideTo(.trailing, label_3, CGFloat(5).generateSizeForScreen)
         
-        hourPriceDescriptionLabel.constraintInsideTo(.bottom, hourPriceLabel)
-        hourPriceDescriptionLabel.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_3.constraintInsideTo(.bottom, label_2)
+        label_3.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
         
-        dayPriceLabel.constraintOutsideTo(.top, hourPriceLabel, CGFloat(5).generateSizeForScreen)
-        dayPriceLabel.constraintInsideTo(.leading, hourPriceLabel)
+        label_4.constraintOutsideTo(.top, label_2,
+                                    CGFloat(5).generateSizeForScreen)
+        label_4.constraintInsideTo(.leading, label_2)
         
-        dayPriceDescriptionLabel.constraintOutsideTo(.leading, dayPriceLabel, CGFloat(5).generateSizeForScreen)
-        dayPriceDescriptionLabel.constraintInsideTo(.bottom, dayPriceLabel)
+        label_5.constraintOutsideTo(.leading, label_4,
+                                    CGFloat(5).generateSizeForScreen)
+        label_5.constraintInsideTo(.bottom, label_4)
         
-        tagsStackView.constraintOutsideTo(.top, dayPriceDescriptionLabel, CGFloat(20).generateSizeForScreen)
-        tagsStackView.constraintInsideTo(.leading, nameLabel)
-        tagsStackView.constraintInsideTo(.trailing, hourPriceDescriptionLabel)
-        tagsStackView.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
+        tagsStackView.constraintOutsideTo(.top, label_5,
+                                          CGFloat(20).generateSizeForScreen)
+        tagsStackView.constraintInsideTo(.leading, label_1)
+        tagsStackView.constraintInsideTo(.trailing, label_3)
+        
+        label_6.constraintOutsideTo(.top, tagsStackView,
+                                    CGFloat(20).generateSizeForScreen)
+        label_6.constraintInsideTo(.leading, tagsStackView)
+        label_6.constraintInsideTo(.trailing, tagsStackView)
+        
+        label_7.constraintOutsideTo(.top, label_6,
+                                    CGFloat(20).generateSizeForScreen)
+        label_7.constraintInsideTo(.leading, label_6)
+        label_7.constraintInsideTo(.trailing, label_6)
+        
+        label_8.constraintOutsideTo(.top, label_7)
+        label_8.constraintInsideTo(.leading, label_7)
+        label_8.constraintInsideTo(.trailing, label_7)
+        
+        localDetailsStackView.constraintOutsideTo(.top, label_8,
+                                                  CGFloat(20).generateSizeForScreen)
+        localDetailsStackView.constraintInsideTo(.leading, label_8)
+        localDetailsStackView.constraintInsideTo(.trailing, label_8)
+        
+        structureStackView.constraintOutsideTo(.top, localDetailsStackView,
+                                               CGFloat(20).generateSizeForScreen)
+        structureStackView.constraintInsideTo(.leading, localFacilitiesStackView)
+        structureStackView.constraintInsideTo(.trailing, localFacilitiesStackView)
+        
+        localFacilitiesStackView.constraintOutsideTo(.top, structureStackView,
+                                                     CGFloat(20).generateSizeForScreen)
+        localFacilitiesStackView.constraintInsideTo(.leading, view,
+                                                    CGFloat(20).generateSizeForScreen)
+        localFacilitiesStackView.constraintInsideTo(.trailing, view,
+                                                    CGFloat(20).generateSizeForScreen)
+        
+        localFacilitiesStackView.constraintInsideTo(.bottom, view,
+                                                    CGFloat(20).generateSizeForScreen)
         
         return scrollView
     }()
@@ -201,7 +499,7 @@ class OpenDetailsView: UIViewController {
     
     private func setupView() {
         
-        view.setToDefaultBackgroundColor()
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.addSubviews([customBar, scrollView, reserveButton, tabBar])
         tabBar.selectedItem = tabBar.items?[0]
     }

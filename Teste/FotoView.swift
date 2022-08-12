@@ -9,24 +9,18 @@ import UIKit
 
 class FotoView: UIViewController {
     
-    private let bravveIcon = UIImageView()
-    
-    private let backButton = UIButton()
-    
     private let registerButton = UIButton()
     
     private let firstWay = UIImageView(),
         secondWay = UIImageView()
     
-    private lazy var progressBarStackView: UIStackView = {
+    private lazy var progressBarButtons: [UIButton] = {
         
-        let buttons = createProgressBarButtons([IconsBravve.photoBlue.rawValue,
-                                                IconsBravve.noteGray.rawValue,
-                                                IconsBravve.hobbiesGray.rawValue,
-                                                IconsBravve.activitiesGray.rawValue])
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        
-        return stackView
+        let progressBarButtons = createProgressBarButtonsWithoutActions([IconsBravve.photoBlue.rawValue,
+                                                              IconsBravve.noteGray.rawValue,
+                                                              IconsBravve.hobbiesGray.rawValue,
+                                                              IconsBravve.activitiesGray.rawValue])
+        return progressBarButtons
     }()
     
     private let infoLabel: UILabel = {
@@ -75,31 +69,28 @@ class FotoView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, imageView, editButton, tutorialLabel])
+        view.addSubviews([firstWay, secondWay, infoLabel, registerButton, imageView, editButton, tutorialLabel])
+        
+        view.createRegisterCustomBar(progressBarButtons: progressBarButtons) {_ in
+            
+            self.dismiss(animated: true)
+        }
         
         view.setToDefaultBackgroundColor()
     }
     
     private func setupDefaults() {
         
-        firstWay.setWayToDefault(.wayConfirm_1)
-        secondWay.setWayToDefault(.wayCell)
-        bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink) {_ in
-            
-            self.dismiss(animated: true)
-        }
-        registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
+        firstWay.setWayToDefault(.wayPhoto)
+        secondWay.setWayToDefault(.wayConfirm_2 )
+        
+        registerButton.setToBottomButtonKeyboardDefault()
     }
     
     private func setupConstraints() {
         
-        progressBarStackView.constraintOutsideTo(.top, bravveIcon,
-                                                 CGFloat(50).generateSizeForScreen)
-        progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        
-        infoLabel.constraintOutsideTo(.top, progressBarStackView,
-                                      CGFloat(50).generateSizeForScreen)
+        infoLabel.constraintOutsideTo(.top, view,
+                                      CGFloat(250).generateSizeForScreen)
         infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide,
                                      CGFloat(40).generateSizeForScreen)
         infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide,

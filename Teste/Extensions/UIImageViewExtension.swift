@@ -12,7 +12,7 @@ extension UIImageView {
     
 /// This function puts the ways in the default position and size. Ways are background images that are common in this app
 /// - Parameter imageName: The image name which is the enum that has the images identified in the assets
-    open func setWayToDefault(_ imageName: ImagesBravve) {
+    func setWayToDefault(_ imageName: ImagesBravve) {
         
         self.image = UIImage(named: imageName.rawValue)
         
@@ -66,6 +66,13 @@ extension UIImageView {
                 self.heightAnchorInSuperview(CGFloat(210).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 0.75)
             
+            case ImagesBravve.wayHobbies:
+            
+            self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(110).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 3)
+            
             case ImagesBravve.wayLogin:
             
                 self.constraintInsideTo(.top, superview)
@@ -87,6 +94,13 @@ extension UIImageView {
                 self.heightAnchorInSuperview(CGFloat(90).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 2.5)
             
+            case ImagesBravve.wayPhoto:
+            
+                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(110).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 3)
+            
             case ImagesBravve.wayReserv_1:
             
                 self.constraintInsideTo(.bottom, superview)
@@ -101,13 +115,27 @@ extension UIImageView {
                 self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 0.95)
             
+            case ImagesBravve.wayTerms_1:
+            
+                self.constraintInsideTo(.top, superview)
+                self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 0.95)
+            
+            case ImagesBravve.wayTerms_2:
+            
+                self.constraintInsideTo(.bottom, superview)
+                self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+                self.heightAnchorInSuperview(CGFloat(190).generateSizeForScreen)
+                self.constraintOutsideTo(.width, self, multiplier: 0.7)
+            
             default: return
         }
     }
     
 /// This function puts the BravveLogo in the default position and size.
 /// - Parameter ImageName: The image name which is the enum that has the images identified in the assets(default is logo)
-    open func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
+    func setLogoToDefault(_ ImageName: ImagesBravve = .logoBlue) {
         
         self.image = UIImage(named: ImageName.rawValue)
         

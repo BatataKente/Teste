@@ -12,7 +12,7 @@ extension UIView {
     
 /// This function checks whether the device is an ipad or not
 /// - Returns: True if is Ipad of false if not
-    open func isIpad() -> Bool {
+    func isIpad() -> Bool {
         
         if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
             
@@ -26,7 +26,7 @@ extension UIView {
 extension UIView {
     
 /// This function changes the background to the app's default
-    open func setToDefaultBackgroundColor() {
+    func setToDefaultBackgroundColor() {
         
         self.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
     }
@@ -35,37 +35,49 @@ extension UIView {
 /// - Parameters:
 ///   - imageName: A ButtonsBravve enum referring to the images name of the button name available in assets
 ///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
-///   - handler: The action of back button
 ///   - hideJumpButton: set false if show a jump button
-    open func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
+///   - jumpAction: The action of jump button
+///   - backHandler: The action of back button
+    func createRegisterCustomBar(_ imageName: ButtonsBravve = .backWhite,
                                       progressBarButtons: [UIButton]? = nil,
-                                      _ handler: @escaping UIActionHandler,
-                                      hideJumpButton: Bool = true) {
+                                      hideJumpButton: Bool = true,
+                                      jumpAction: UIAction? = nil,
+                                      _ backHandler: @escaping UIActionHandler) {
         
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backPink.rawValue)
-        backButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
-        let jumpButton = UIButton()
-        jumpButton.configuration = .plain()
-        jumpButton.isHidden = hideJumpButton
-        
-        let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
-                                                             size: CGFloat(15).generateSizeForScreen),
-                        NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
-        
-        let attributedTitle = NSAttributedString(string: "Pular",
-                                                 attributes: attribute as [NSAttributedString.Key : Any])
-       
-        jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
-        
-        jumpButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
         
         let logoImageView = UIImageView()
         logoImageView.image = UIImage(named: ImagesBravve.logoBlue.rawValue)
         
-        self.addSubviews([backButton, logoImageView, jumpButton])
+        self.addSubviews([backButton, logoImageView])
+        
+        if let jumpAction = jumpAction {
+            
+            let jumpButton = UIButton()
+            jumpButton.configuration = .plain()
+            
+            let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
+                                                                 size: CGFloat(15).generateSizeForScreen),
+                            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
+            
+            let attributedTitle = NSAttributedString(string: "Pular",
+                                                     attributes: attribute as [NSAttributedString.Key : Any])
+           
+            jumpButton.configuration?.attributedTitle = AttributedString(attributedTitle)
+            
+            jumpButton.addAction(jumpAction, for: .touchUpInside)
+            
+            self.addSubview(jumpButton)
+            
+            jumpButton.constraintInsideTo(.centerY, logoImageView)
+            jumpButton.constraintInsideTo(.height, logoImageView)
+            jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
+                                          CGFloat(30).generateSizeForScreen)
+        }
         
         if let progressBarButtons = progressBarButtons {
             
@@ -95,18 +107,13 @@ extension UIView {
         backButton.constraintOutsideTo(.width, backButton)
         backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
                                       CGFloat(30).generateSizeForScreen)
-        
-        jumpButton.constraintInsideTo(.centerY, logoImageView)
-        jumpButton.constraintInsideTo(.height, logoImageView)
-        jumpButton.constraintInsideTo(.trailing, self.safeAreaLayoutGuide,
-                                      CGFloat(30).generateSizeForScreen)
     }
     
 /// This function transforms a view into a bar with a back button and title
 /// - Parameters:
 ///   - viewTitle: The title in the center of the custom bar
 ///   - handler: The action of back button
-    open func setToDefaultCustomBarWithBackButton(viewTitle: String,
+    func setToDefaultCustomBarWithBackButton(viewTitle: String,
                                                   _ handler: @escaping UIActionHandler) {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -144,7 +151,10 @@ extension UIView {
     }
     
 /// This function transforms a view into a bar with a filter
-    open func setToDefaultCustomBarWithFilter(states: [States], _ handler: @escaping UIActionHandler) {
+/// - Parameters:
+///   - states: The data that will be appear on button drop down menu
+///   - handler: The action of filter Button
+    func setToDefaultCustomBarWithFilter(_ handler: @escaping UIActionHandler) -> CustomBarWithFilter {
         
         self.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         
@@ -162,23 +172,24 @@ extension UIView {
         let chosedLabelFont = UIFont(name: FontsBravve.light.rawValue,
                                      size: CGFloat(16).generateSizeForScreen)
         let buttonsImage = ButtonsBravve.arrowDown.rawValue
+
+        stateLabel.text = "UF"
+        stateLabel.font = initialFont
+        stateChosedLabel.font = chosedLabelFont
         
         let stateHandler = {(action: UIAction) in
 
             stateChosedLabel.text = action.title
             stateLabel.font = smallFont
         }
-
-        stateLabel.text = "UF"
-        stateLabel.font = initialFont
-        var actions = [UIAction]()
-        stateChosedLabel.font = chosedLabelFont
         
-        for state in states {
-            actions.append(UIAction(title: state.code,handler: stateHandler))
-        }
-        leftButton.setMenuForButton(actions)
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
+        leftButton.setMenuForButton([
+
+            UIAction(title: "action1",handler: stateHandler),
+            UIAction(title: "action2",handler: stateHandler)
+
+        ])
         
         let cityHandler = {(action: UIAction) in
 
@@ -190,9 +201,9 @@ extension UIView {
         cityLabel.font = initialFont
         cityChosedLabel.font = chosedLabelFont
         rightButton.setMenuForButton([
-
-            UIAction(title: "action1",handler: cityHandler),
-            UIAction(title: "action2",handler: cityHandler)
+            
+            UIAction(title: "action1", handler: cityHandler),
+            UIAction(title: "action2", handler: cityHandler)
 
         ])
         rightButton.setImage(UIImage(named: buttonsImage), for: .normal)
@@ -256,6 +267,13 @@ extension UIView {
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
+        
+        return CustomBarWithFilter(leftButton: leftButton,
+                                   stateLabel: stateLabel,
+                                   stateChosedLabel: stateChosedLabel,
+                                   rightButton: rightButton,
+                                   cityLabel: cityLabel,
+                                   cityChosedLabel: cityChosedLabel)
     }
 }
 
@@ -285,7 +303,7 @@ extension UIView {
     
 /// This function sets the height of a view in a superview
 /// - Parameter constant: The height of view
-    open func heightAnchorInSuperview(_ constant: CGFloat = 32) {
+    func heightAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -294,7 +312,7 @@ extension UIView {
     
 /// This function sets the width of a view in a superview
 /// - Parameter constant: The width of view
-    open func widthAnchorInSuperview(_ constant: CGFloat = 32) {
+    func widthAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -303,7 +321,7 @@ extension UIView {
     
 /// This function sets the width and height of a view in a superview(square)
 /// - Parameter constant: The size of view
-    open func sizeAnchorInSuperview(_ constant: CGFloat = 32) {
+    func sizeAnchorInSuperview(_ constant: CGFloat = 32) {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -316,7 +334,7 @@ extension UIView {
     
 /// This function fills a superview with the view
 /// - Parameter constant: The margins of view to superview
-    open func fillSuperview(_ constant: CGFloat = 0) {
+    func fillSuperview(_ constant: CGFloat = 0) {
         
         self.constraintInsideTo(.top, superview?.safeAreaLayoutGuide, constant)
         self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide, constant)
@@ -330,7 +348,7 @@ extension UIView {
 ///   - toItem: The item at the other point of the constraint
 ///   - constant: The distance from attribute
 ///   - multiplier: Multiplier for constant
-    open func constraintTo(_ attribute: NSLayoutConstraint.Attribute,
+    func constraintTo(_ attribute: NSLayoutConstraint.Attribute,
                            _ toItem: Any?,
                            _ constant: CGFloat = 0,
                            multiplier: CGFloat = 1) {
@@ -350,7 +368,7 @@ extension UIView {
 ///   - toItem: The item at the other point of the constraint
 ///   - constant: The distance from attribute
 ///   - multiplier: Multiplier for constant
-    open func constraintInsideTo(_ attribute: NSLayoutConstraint.Attribute,
+    func constraintInsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                  _ toItem: Any?,
                                  _ constant: CGFloat = 0,
                                  multiplier: CGFloat = 1) {
@@ -383,7 +401,7 @@ extension UIView {
 ///   - toItem: The item at the other point of the constraint
 ///   - constant: The distance from item attribute
 ///   - multiplier: Multiplier for constant
-    open func constraintOutsideTo(_ attribute: NSLayoutConstraint.Attribute,
+    func constraintOutsideTo(_ attribute: NSLayoutConstraint.Attribute,
                                   _ toItem: Any?,
                                   _ constant: CGFloat = 0,
                                   multiplier: CGFloat = 1) {

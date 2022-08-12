@@ -13,7 +13,7 @@ extension UIButton {
     
 /// This function create a menu on the button with list.
 /// - Parameter menuItens: Each item like UIAction, which will be in the list
-    open func setMenuForButton(_ menuItens: [UIAction]) {
+    func setMenuForButton(_ menuItens: [UIAction]) {
         
         self.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                       for: .normal)
@@ -32,7 +32,7 @@ extension UIButton {
 ///   - buttonTitle: The title of button
 ///   - backgroundColor: The background of button
 ///   - strokeColor: The stroke of button
-    open func setToDefaultCapsuleButton(_ buttonTitle: String,
+    func setToDefaultCapsuleButton(_ buttonTitle: String,
                                         _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
                                         strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) {
 
@@ -57,7 +57,7 @@ extension UIButton {
     
 /// This function turns a button into the default progress bar button in the app. Progress bar are a bar that usually occurs in this app.
 /// - Parameter buttonImageName: The button image name
-    open func setToProgressBarButtonDefault(_ buttonImageName: String) {
+    func setToProgressBarButtonDefault(_ buttonImageName: String) {
         
         var buttonTitle = ""
         let buttonMargins = CGFloat(2.5).generateSizeForScreen
@@ -131,7 +131,7 @@ extension UIButton {
 /// - Parameters:
 ///   - buttonTitle: The button title
 ///   - backgroundColor: The background color
-    open func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
+    func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
                                                backgroundColor: ColorsBravve = .buttonGray) {
         
         self.setTitle(buttonTitle, for: .normal)
@@ -151,7 +151,7 @@ extension UIButton {
 ///   - buttonTitle: The button title
 ///   - backgroundColor: The background color of button as enum of assets
 ///   - above: The item immediately below the button
-    open func setToBottomButtonDefaultAbove(_ buttonTitle: String = "Continuar",
+    func setToBottomButtonDefaultAbove(_ buttonTitle: String = "Continuar",
                                             backgroundColor: ColorsBravve = .buttonGray,
                                             above: Any?) {
         
@@ -172,7 +172,7 @@ extension UIButton {
 ///   - imageName: The image name of back button as enum of assets
 ///   - constant: Distance of button from left
 ///   - handler: Action of button
-    open func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
+    func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
                                      _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
                                      _ handler: @escaping UIActionHandler) {
         

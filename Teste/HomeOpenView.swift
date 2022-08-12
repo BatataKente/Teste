@@ -22,52 +22,57 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        
+
         .lightContent
     }
     
-    let authManager = AuthManager()
+    override var prefersStatusBarHidden: Bool {
+       true
+    }
+    
+    let authManager = NetworkManager()
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["a", "b", "c"]
+    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo"]
     
-    private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Pelos poderes de greyskull",
-                                                    image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo")]
-    
+    private var cells: [ReserveData] = [
+        ReserveData(title: "BOXOFFICE",
+        description: "Numa esquina charmosa, um hotel",
+        image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
+        photoTitle: "WORKPASS",
+        name: "Hotel Saint",
+        subName: "UM Coffee Co.",
+        price: "3,50 crédito/ hora",
+        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+        ReserveData(title: "BOXOFFICE",
+        description: "Pelos poderes de greyskull",
+        image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
+        photoTitle: "WORKPASS",
+        name: "Hotel Saint",
+        subName: "UM Coffee Co.",
+        price: "3,50 crédito/ hora",
+        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
+        ReserveData(title: "BOXOFFICE",
+        description: "Numa esquina charmosa, um hotel",
+        image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
+        photoTitle: "WORKPASS",
+        name: "Hotel Saint",
+        subName: "UM Coffee Co.",
+        price: "3,50 crédito/ hora",
+        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
+                   )]
+     
     private let titleLabel = UILabel()
     
     private let customBar = UIView()
     
     private lazy var filterStackView: UIStackView = {
         
-        let margins = CGFloat(20).generateSizeForScreen
+        let margins = CGFloat(10).generateSizeForScreen
         
         let stackView = UIStackView()
         stackView.setToDefaultBackgroundColor()
@@ -77,7 +82,7 @@ class HomeOpenView: UIViewController {
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
-                                               bottom: CGFloat(10).generateSizeForScreen,
+                                               bottom: margins,
                                                right: margins)
         
         return stackView
@@ -116,12 +121,30 @@ class HomeOpenView: UIViewController {
     
     private var filterButtons = [UIButton]()
     
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    private lazy var tabBar = BravveTabBar(self,
+                                           itemImagesNames: [ButtonsBravve.locationPink.rawValue,
+                                                            ButtonsBravve.exitGray.rawValue
+                                                            ])
+    private let coverView: UIView = {
+        
+        let coverView = UIView()
+        coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        imageView.contentMode = .scaleAspectFit
+        coverView.addSubview(imageView)
+        
+        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerY, coverView)
+        imageView.constraintInsideTo(.height, coverView, multiplier: 0.08)
+        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
+        
+        return coverView
+    }()
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar])
+        view.addSubviews([stackView, customBar, tabBar, coverView])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -136,24 +159,83 @@ class HomeOpenView: UIViewController {
         
         view.setToDefaultBackgroundColor()
         
-//        authManager.getDataArray { (states: [States]?) in
-//
-//            guard let states = states else {
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//
-//
-//            }
-//
-//        }
+        var customBarWithFilter: CustomBarWithFilter
+        let smallFont = UIFont(name: FontsBravve.light.rawValue,
+                               size: CGFloat(11).generateSizeForScreen)
         
-        self.customBar.setToDefaultCustomBarWithFilter (states: []) {_ in
-            
+        customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
+
             let filterView = FilterScreen()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
+        }
+        
+        authManager.getDataArray (endpoint: .utilsStates) { (states: [States]?) in
+
+            guard let states = states else {
+                return
+            }
+
+            var actions = [UIAction]()
+
+            let stateHandler = {(action: UIAction) in
+
+                for state in states {
+
+                    if state.code == action.title {
+
+                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
+
+                            guard let cities = cities else {return}
+
+                            var actions = [UIAction]()
+
+                            let cityHandler = {(action: UIAction) in
+                                
+                                customBarWithFilter.cityChosedLabel.text = action.title
+                                customBarWithFilter.cityLabel.font = smallFont
+                            }
+                            
+                            for city in cities {
+
+                                guard let cityname = city.name else {return}
+
+                                actions.append(UIAction(title: cityname,
+                                                        handler: cityHandler))
+                            }
+                            
+                            customBarWithFilter.stateChosedLabel.text = action.title
+                            customBarWithFilter.stateLabel.font = smallFont
+
+                            customBarWithFilter.rightButton.setMenuForButton(actions)
+                        }
+                    }
+                }
+            }
+            
+            for state in states {
+
+                actions.append(UIAction(title: state.code,
+                                        handler: stateHandler))
+            }
+
+            customBarWithFilter.leftButton.setMenuForButton(actions)
+        }
+        
+        let parameters = SpaceListParameters(space_state_id: 1, space_city_id: 2, allow_workpass: true, seats_qty: 3, space_type_id: 4, space_classification_id: 5, space_category_id: 6, space_facilities_id: [0], space_noise_level_id: 7, space_contract_Type: 8)
+        
+        authManager.postDataWithArrayResponse(endpoint: .spacesList, parameters: parameters) { (spaces: [Space]?) in
+            guard let spaces = spaces else {
+                return
+            }
+            
+            self.cells[0] = ReserveData(title: spaces[0].space_category?.name ?? "", description: spaces[0].slogan ?? "", image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(), photoTitle: "", name: spaces[0].name ?? "", subName: spaces[0].description ?? "", price: "\(spaces[0].hourly_credits ?? 0) crédito/hora", details: "\(spaces[0].partner_site_address?.address?.city_name ?? "") / \(spaces[0].partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(spaces[0].seats_qty ?? 0) pessoas \n\(spaces[0].space_type?.name ?? "")")
+            
+            self.tableView.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.coverView.isHidden = true
+            }
         }
     }
     
@@ -169,6 +251,11 @@ class HomeOpenView: UIViewController {
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
+        coverView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
 
@@ -221,5 +308,6 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
         present(detalhesAbertoView, animated: false)
     }
 }
+
 
 

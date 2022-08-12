@@ -16,7 +16,7 @@ extension UIViewController {
 ///   - backgroundColor: Button background color
 ///   - strokeColor: Button stroke color
 /// - Returns: A button for each title
-    open func createCapsuleButtons(_ buttonTitles: [String],
+    func createCapsuleButtons(_ buttonTitles: [String],
                                    _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
                                    strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
         
@@ -38,7 +38,7 @@ extension UIViewController {
 /// This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons
 /// - Parameter buttonImageNames: the button Image Names
 /// - Returns: A progress bar button for each name without actions
-    open func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
+    func createProgressBarButtonsWithoutActions(_ buttonImageNames: [String]) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -56,7 +56,7 @@ extension UIViewController {
 /// This is a function created with the aim of creating a progress bar buttons, which is a custom bar in the app that has a series of navigable buttons
 /// - Parameter buttonImageNames: the button Image Names
 /// - Returns: A progress bar button for each name with actions
-    open func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
+    func createProgressBarButtons(_ buttonImageNames: [String]) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -66,7 +66,17 @@ extension UIViewController {
             
             switch name{
                 
-                case IconsBravve.activitiesGray.rawValue: break
+                case IconsBravve.activitiesGray.rawValue:
+                
+                let handler = {(action: UIAction) in
+                    
+                    let activitiesView = ActivitiesView()
+                    activitiesView.modalPresentationStyle = .fullScreen
+                    self.present(activitiesView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 case IconsBravve.calendarGray.rawValue: break
                 
@@ -96,13 +106,53 @@ extension UIViewController {
 
                     button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case IconsBravve.hobbiesGray.rawValue: break
+                case IconsBravve.hobbiesGray.rawValue:
                 
-                case IconsBravve.noteGray.rawValue: break
+                let handler = {(action: UIAction) in
+                    
+                    let hobbiesView = HobbiesView()
+                    hobbiesView.modalPresentationStyle = .fullScreen
+                    self.present(hobbiesView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
-                case IconsBravve.padlockGray.rawValue: break
+                case IconsBravve.noteGray.rawValue:
                 
-                case IconsBravve.pencilGray.rawValue: break
+                let handler = {(action: UIAction) in
+                    
+                    let professionView = ProfessionView()
+                    professionView.modalPresentationStyle = .fullScreen
+                    self.present(professionView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case IconsBravve.padlockGray.rawValue:
+                
+                let handler = {(action: UIAction) in
+                    
+                    let passwordView = PasswordView()
+                    passwordView.modalPresentationStyle = .fullScreen
+                    self.present(passwordView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                
+                case IconsBravve.pencilGray.rawValue:
+                
+                let handler = {(action: UIAction) in
+                    
+                    let confirmDataView = ConfirmDataView()
+                    confirmDataView.modalPresentationStyle = .fullScreen
+                    self.present(confirmDataView,
+                                 animated: false)
+                }
+
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
                 
                 case IconsBravve.photoGray.rawValue:
             
@@ -146,7 +196,7 @@ extension UIViewController {
 /// This is a regex that checks if it's a valid phone
 /// - Parameter phone: A string with the phoneNumber
 /// - Returns: True if is a valid number, or false if not
-    open func validateCellPhone(_ phone: String) -> Bool {
+    func validateCellPhone(_ phone: String) -> Bool {
         
         let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
 
@@ -165,7 +215,7 @@ extension UIViewController {
 /// This is a regex that checks if it contains capital letters
 /// - Parameter text: A string
 /// - Returns: True if is uppercased, or false if not
-    open func containsUppercasedLetters(text: String) -> Bool {
+    func containsUppercasedLetters(text: String) -> Bool {
         
         let capitalLetterRegEx = ".*[A-Z]+.*"
         let capitalizedTextTest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
@@ -180,7 +230,7 @@ extension UIViewController {
 /// This is a regex that checks if it contains numbers
 /// - Parameter text: A string
 /// - Returns: True if is  contains numeric characters, or false if not
-    open func containsNumericCharacters(text: String) -> Bool {
+    func containsNumericCharacters(text: String) -> Bool {
         
         let numericRegEx = ".*[0-9]+.*"
         let numericTextTest = NSPredicate(format:"SELF MATCHES %@", numericRegEx)
@@ -195,7 +245,7 @@ extension UIViewController {
 /// This is a regex that checks if it contains special characters
 /// - Parameter text: A string
 /// - Returns: True if is  contains special characters, or false if not
-    open func containsSpecialCharacters(text: String) -> Bool {
+    func containsSpecialCharacters(text: String) -> Bool {
         
         let specialCharRegEx = ".*[\\^$*.\\[\\]\\\\{}()?\\-\"!@#%&/,><':;|_~`+=]+.*"
         let specialCharTextTest = NSPredicate(format: "SELF MATCHES %@", specialCharRegEx)
@@ -210,7 +260,7 @@ extension UIViewController {
 /// This is a regex that checks if it contains lowercase letters
 /// - Parameter text: A string
 /// - Returns: True if is lowercased, or false if not
-    open func containsLowercasedCharacters(text: String) -> Bool {
+    func containsLowercasedCharacters(text: String) -> Bool {
         
         let normalLetterRegEx = ".*[a-z]+.*"
         let normalLetterTextTest = NSPredicate(format: "SELF MATCHES %@", normalLetterRegEx)
