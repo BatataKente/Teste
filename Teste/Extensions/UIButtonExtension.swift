@@ -192,3 +192,113 @@ extension UIButton {
         self.constraintOutsideTo(.width, self)
     }
 }
+
+extension UIButton {
+    
+    func addSubWindow(_ window: UIView,
+                      orientation: Orientation = .downRight) {
+        
+        let size = window.frame.size
+        window.frame.size = .zero
+        
+        let handler = {(action: UIAction) in
+            
+            window.frame.origin = CGPoint(x: self.center.x,
+                                          y: self.center.y)
+            
+            switch orientation {
+                
+                case .downLeft:
+                
+                    if self.isSelected {
+                        
+                        self.isSelected = false
+                        window.frame.size = .zero
+                    }
+                    else {
+                         
+                        self.isSelected = true
+                        
+                        UIView.animate(withDuration: 0.45,
+                                       delay: 0.15) {
+                            
+                            window.frame.size = size
+                            window.frame.origin.x -= size.width
+                        }
+                    }
+                
+                case .downRight:
+                
+                    if self.isSelected {
+                        
+                        self.isSelected = false
+                        window.frame.size = .zero
+                    }
+                    else {
+                         
+                        self.isSelected = true
+                        
+                        UIView.animate(withDuration: 0.45,
+                                       delay: 0.15) {
+                            
+                            window.frame.size = size
+                        }
+                    }
+                
+                case .upLeft:
+                
+                    if self.isSelected {
+                        
+                        self.isSelected = false
+                        window.frame.size = .zero
+                    }
+                    else {
+                         
+                        self.isSelected = true
+                        
+                        UIView.animate(withDuration: 0.45,
+                                       delay: 0.15) {
+                            
+                            window.frame.size = size
+                            window.frame.origin.x -= size.width
+                            window.frame.origin.y -= size.height
+                        }
+                    }
+                
+                case .upRight:
+                
+                    if self.isSelected {
+                        
+                        self.isSelected = false
+                        window.frame.size = .zero
+                    }
+                    else {
+                         
+                        self.isSelected = true
+                        
+                        UIView.animate(withDuration: 0.45,
+                                       delay: 0.15) {
+                            
+                            window.frame.size = size
+                            window.frame.origin.y -= size.height
+                        }
+                    }
+                
+                default:
+                
+                    window.frame.origin = CGPoint(x: self.superview?.center.x ?? self.center.x,
+                                                  y: self.superview?.center.y ?? self.center.x)
+                
+                    UIView.animate(withDuration: 0.45,
+                                   delay: 0.15) {
+                        
+                        window.frame.size = size
+                        window.frame.origin.x -= size.width/2
+                        window.frame.origin.y -= size.width/2
+                    }
+            }
+        }
+        
+        self.addAction(UIAction(handler: handler), for: .touchUpInside)
+    }
+}
