@@ -95,21 +95,43 @@ class OpenDetailsView: UIViewController {
     
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            itens: [UIStackView],
-                                           titleColor: ColorsBravve = .buttonPink) -> UIStackView {
+                                           titleColor: ColorsBravve = .buttonPink,
+                                           downButtonImages: ButtonsBravve,
+                                           upButtonImages: ButtonsBravve) -> UIStackView {
         let moreButton = UIButton()
         moreButton.setTitle("Ver Mais", for: .normal)
+        moreButton.setImage(UIImage(named: downButtonImages.rawValue),
+                            for: .normal)
+        moreButton.imageView?.contentMode = .scaleAspectFit
         moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
         moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
                                              size: CGFloat(12).generateSizeForScreen)
-        moreButton.titleLabel?.constraintInsideTo(.leading, moreButton)
+        
+        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+
+        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
+                                                 multiplier: 0.5)
+        moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
         let lessButton = UIButton()
         lessButton.setTitle("Ver Menos", for: .normal)
+        lessButton.setImage(UIImage(named: upButtonImages.rawValue),
+                            for: .normal)
+        lessButton.imageView?.contentMode = .scaleAspectFit
         lessButton.isHidden = true
         lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
         lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
                                              size: CGFloat(12).generateSizeForScreen)
-        lessButton.titleLabel?.constraintInsideTo(.leading, lessButton)
+        
+        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+
+        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
+                                                 multiplier: 0.5)
+        lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
         let seeMoreHandler = {(action: UIAction) in
             
@@ -170,12 +192,15 @@ class OpenDetailsView: UIViewController {
         }
         
         let buttons = createSeeButtonsStackView(3...itens.count-1,
-                                                itens: itens)
+                                                itens: itens,
+                                                downButtonImages: .arrowDown,
+                                                upButtonImages: .arrowUp)
         
         let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
                                                 itens +
                                                 [buttons])
         localDetailsStackView.axis = .vertical
+        localDetailsStackView.alignment = .leading
         localDetailsStackView.spacing = CGFloat(10).generateSizeForScreen
         
         return localDetailsStackView
@@ -223,7 +248,9 @@ class OpenDetailsView: UIViewController {
         
         let buttons = createSeeButtonsStackView(6...itens.count-1,
                                                 itens: itens,
-                                                titleColor: .capsuleButtonSelected)
+                                                titleColor: .capsuleButtonSelected,
+                                                downButtonImages: .arrowDown,
+                                                upButtonImages: .arrowUp)
         
         let structureStackView = UIStackView(arrangedSubviews: [title] +
                                              itens +
@@ -231,6 +258,7 @@ class OpenDetailsView: UIViewController {
         structureStackView.axis = .vertical
         structureStackView.spacing = CGFloat(10).generateSizeForScreen
         structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
+        structureStackView.alignment = .leading
         structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         structureStackView.isLayoutMarginsRelativeArrangement = true
         structureStackView.layoutMargins = UIEdgeInsets(top: margins,
@@ -273,12 +301,15 @@ class OpenDetailsView: UIViewController {
         
         for i in 6...texts.count - 1 {
             
-            itens.append(createStackView(texts[i], isHidden: true))
+            itens.append(createStackView(texts[i],
+                                         isHidden: true))
         }
         
         let buttons = createSeeButtonsStackView(6...itens.count-1,
                                                 itens: itens,
-                                                titleColor: .backgroundHelp)
+                                                titleColor: .backgroundHelp,
+                                                downButtonImages: .arrowDown,
+                                                upButtonImages: .arrowUp)
         
         let localFacilitiesStackView = UIStackView(arrangedSubviews: [title] +
                                                    itens +
@@ -286,6 +317,7 @@ class OpenDetailsView: UIViewController {
         localFacilitiesStackView.axis = .vertical
         localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
         localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
+        localFacilitiesStackView.alignment = .leading
         localFacilitiesStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         localFacilitiesStackView.isLayoutMarginsRelativeArrangement = true
         localFacilitiesStackView.layoutMargins = UIEdgeInsets(top: margins,

@@ -28,8 +28,9 @@ class HomeOpenView: UIViewController {
 
         .lightContent
     }
-    
+
     override var prefersStatusBarHidden: Bool {
+        
        true
     }
     
@@ -129,6 +130,7 @@ class HomeOpenView: UIViewController {
         
         let coverView = UIView()
         coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
+        
         let imageView = UIImageView()
         imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
         imageView.contentMode = .scaleAspectFit
@@ -233,8 +235,10 @@ class HomeOpenView: UIViewController {
             
             self.tableView.reloadData()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.coverView.isHidden = true
+            UIView.animate(withDuration: 0.45,
+                           delay: 0.15) {
+                    
+                self.coverView.alpha = 0
             }
         }
     }
