@@ -34,6 +34,7 @@
 		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
 		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
+		143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
 		143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */; };
 		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
@@ -118,6 +119,7 @@
 		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
 		143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarWithFilterStruct.swift; sourceTree = "<group>"; };
 		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
+				143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */,
 				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
 				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
 				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
@@ -413,6 +416,7 @@
 				CFBF087528A2ACFC00D39DCF /* HobbiesView.swift in Sources */,
 				1440616E28A2BD7900F82171 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
+				143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,

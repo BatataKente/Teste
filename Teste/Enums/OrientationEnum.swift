@@ -11,5 +11,5 @@ enum Orientation {
     case downRight
     case upLeft
     case upRight
-    case center
+    case alert
 }
