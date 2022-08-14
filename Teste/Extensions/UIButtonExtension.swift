@@ -193,6 +193,26 @@ extension UIButton {
     }
 }
 
+import UIKit
+
+extension UIButton {
+    
+    func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
+                                          backgroundColor: UIColor = .purple) {
+        
+        self.setTitle(buttonTitle, for: .normal)
+        self.backgroundColor = backgroundColor
+        
+        self.heightAnchorInSuperview(50)
+        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
+        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
+        self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
+        
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 25,
+                                                  weight: .bold)
+    }
+}
+
 extension UIButton {
     
     func addSubWindow(_ window: UIView,
@@ -201,9 +221,15 @@ extension UIButton {
         let size = window.frame.size
         window.frame.size = .zero
         
-        let animation: (duration: CGFloat,
-                        delay: CGFloat) = (duration: 0.3,
-                                           delay: 0.1)
+        let animate = {
+            
+            window.frame.size = size
+            window.alpha = 1
+        }
+        
+        let timing: (duration: CGFloat,
+                     delay: CGFloat) = (duration: 0.3,
+                                        delay: 0.1)
         
         let handler = {(action: UIAction) in
             
@@ -217,12 +243,11 @@ extension UIButton {
                     window.frame.origin = CGPoint(x: self.center.x,
                                                   y: self.center.y)
                 
-                    UIView.animate(withDuration: animation.duration,
-                                   delay: animation.delay) {
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
                         
-                        window.frame.size = size
+                        animate()
                         window.frame.origin.x -= size.width
-                        window.alpha = 1
                     }
                 
                 case .downRight:
@@ -230,11 +255,10 @@ extension UIButton {
                     window.frame.origin = CGPoint(x: self.center.x,
                                                   y: self.center.y)
                 
-                    UIView.animate(withDuration: animation.duration,
-                                   delay: animation.delay) {
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
                         
-                        window.frame.size = size
-                        window.alpha = 1
+                        animate()
                     }
                 
                 case .upLeft:
@@ -242,13 +266,12 @@ extension UIButton {
                     window.frame.origin = CGPoint(x: self.center.x,
                                                   y: self.center.y)
                 
-                    UIView.animate(withDuration: animation.duration,
-                                   delay: animation.delay) {
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
                         
-                        window.frame.size = size
+                        animate()
                         window.frame.origin.x -= size.width
                         window.frame.origin.y -= size.height
-                        window.alpha = 1
                     }
                 
                 case .upRight:
@@ -256,12 +279,11 @@ extension UIButton {
                     window.frame.origin = CGPoint(x: self.center.x,
                                                   y: self.center.y)
                 
-                    UIView.animate(withDuration: animation.duration,
-                                   delay: animation.delay) {
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
                         
-                        window.frame.size = size
+                        animate()
                         window.frame.origin.y -= size.height
-                        window.alpha = 1
                     }
                 
                 default:
@@ -269,13 +291,12 @@ extension UIButton {
                     window.frame.origin = CGPoint(x: self.superview?.center.x ?? self.center.x,
                                                   y: self.superview?.center.y ?? self.center.x)
                 
-                    UIView.animate(withDuration: animation.duration,
-                                   delay: animation.delay) {
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
                         
-                        window.frame.size = size
+                        animate()
                         window.frame.origin.x -= size.width/2
                         window.frame.origin.y -= size.width/2
-                        window.alpha = 1
                     }
             }
         }
