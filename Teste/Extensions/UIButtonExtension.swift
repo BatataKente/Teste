@@ -196,92 +196,72 @@ extension UIButton {
 extension UIButton {
     
     func addSubWindow(_ window: UIView,
-                      orientation: Orientation = .downRight) {
+                      _ orientation: Orientation = .downRight) {
         
         let size = window.frame.size
         window.frame.size = .zero
         
+        let animation: (duration: CGFloat,
+                        delay: CGFloat) = (duration: 0.3,
+                                           delay: 0.1)
+        
         let handler = {(action: UIAction) in
             
-            window.frame.origin = CGPoint(x: self.center.x,
-                                          y: self.center.y)
+            window.frame.size = .zero
+            window.alpha = 0
             
             switch orientation {
                 
                 case .downLeft:
                 
-                    if self.isSelected {
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: animation.duration,
+                                   delay: animation.delay) {
                         
-                        self.isSelected = false
-                        window.frame.size = .zero
-                    }
-                    else {
-                         
-                        self.isSelected = true
-                        
-                        UIView.animate(withDuration: 0.45,
-                                       delay: 0.15) {
-                            
-                            window.frame.size = size
-                            window.frame.origin.x -= size.width
-                        }
+                        window.frame.size = size
+                        window.frame.origin.x -= size.width
+                        window.alpha = 1
                     }
                 
                 case .downRight:
                 
-                    if self.isSelected {
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: animation.duration,
+                                   delay: animation.delay) {
                         
-                        self.isSelected = false
-                        window.frame.size = .zero
-                    }
-                    else {
-                         
-                        self.isSelected = true
-                        
-                        UIView.animate(withDuration: 0.45,
-                                       delay: 0.15) {
-                            
-                            window.frame.size = size
-                        }
+                        window.frame.size = size
+                        window.alpha = 1
                     }
                 
                 case .upLeft:
                 
-                    if self.isSelected {
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: animation.duration,
+                                   delay: animation.delay) {
                         
-                        self.isSelected = false
-                        window.frame.size = .zero
-                    }
-                    else {
-                         
-                        self.isSelected = true
-                        
-                        UIView.animate(withDuration: 0.45,
-                                       delay: 0.15) {
-                            
-                            window.frame.size = size
-                            window.frame.origin.x -= size.width
-                            window.frame.origin.y -= size.height
-                        }
+                        window.frame.size = size
+                        window.frame.origin.x -= size.width
+                        window.frame.origin.y -= size.height
+                        window.alpha = 1
                     }
                 
                 case .upRight:
                 
-                    if self.isSelected {
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: animation.duration,
+                                   delay: animation.delay) {
                         
-                        self.isSelected = false
-                        window.frame.size = .zero
-                    }
-                    else {
-                         
-                        self.isSelected = true
-                        
-                        UIView.animate(withDuration: 0.45,
-                                       delay: 0.15) {
-                            
-                            window.frame.size = size
-                            window.frame.origin.y -= size.height
-                        }
+                        window.frame.size = size
+                        window.frame.origin.y -= size.height
+                        window.alpha = 1
                     }
                 
                 default:
@@ -289,12 +269,13 @@ extension UIButton {
                     window.frame.origin = CGPoint(x: self.superview?.center.x ?? self.center.x,
                                                   y: self.superview?.center.y ?? self.center.x)
                 
-                    UIView.animate(withDuration: 0.45,
-                                   delay: 0.15) {
+                    UIView.animate(withDuration: animation.duration,
+                                   delay: animation.delay) {
                         
                         window.frame.size = size
                         window.frame.origin.x -= size.width/2
                         window.frame.origin.y -= size.width/2
+                        window.alpha = 1
                     }
             }
         }
