@@ -44,6 +44,10 @@
 		14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
 		145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */; };
+		145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07DE28AABE6900ABCCF0 /* PhoneView.swift */; };
+		145B07E128AABEAD00ABCCF0 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07E028AABEAD00ABCCF0 /* EmailView.swift */; };
+		145B07E328AABECA00ABCCF0 /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */; };
+		145B07E528AABED600ABCCF0 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07E428AABED600ABCCF0 /* EmailViewModel.swift */; };
 		146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */; };
 		146A8BE628AAAB2F007650A8 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE528AAAB2F007650A8 /* MonthView.swift */; };
 		146A8BE928AAAB55007650A8 /* WeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE828AAAB55007650A8 /* WeekDaysView.swift */; };
@@ -133,6 +137,10 @@
 		14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalizacaoCadastroView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		145B07DE28AABE6900ABCCF0 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
+		145B07E028AABEAD00ABCCF0 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
+		145B07E428AABED600ABCCF0 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCalendar.swift; sourceTree = "<group>"; };
 		146A8BE528AAAB2F007650A8 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		146A8BE828AAAB55007650A8 /* WeekDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysView.swift; sourceTree = "<group>"; };
@@ -308,6 +316,10 @@
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
+				145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */,
+				145B07DE28AABE6900ABCCF0 /* PhoneView.swift */,
+				145B07E428AABED600ABCCF0 /* EmailViewModel.swift */,
+				145B07E028AABEAD00ABCCF0 /* EmailView.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
 				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
 				1410B92428A1740400C36902 /* FilterScreen.swift */,
@@ -452,12 +464,15 @@
 				14937D6A28A47033004A1E7A /* HelpView.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
+				145B07E128AABEAD00ABCCF0 /* EmailView.swift in Sources */,
 				147BA88428A81ECF006924C8 /* OrientationEnum.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */,
 				CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */,
+				145B07E528AABED600ABCCF0 /* EmailViewModel.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
+				145B07E328AABECA00ABCCF0 /* PhoneViewModel.swift in Sources */,
 				1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */,
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
@@ -491,6 +506,7 @@
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
+				145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */,
 				143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				306F6E9D28A29D640057D49C /* FrequentlyAskedQuestionsView.swift in Sources */,

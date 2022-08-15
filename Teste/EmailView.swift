@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NomeView: UIViewController {
+class EmailView: UIViewController {
     
     override func viewDidLoad() {
         
@@ -25,9 +25,9 @@ class NomeView: UIViewController {
     
     private lazy var buttons: [UIButton] = {
         
-        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userBlue.rawValue,
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
                                                               IconsBravve.cellGray.rawValue,
-                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.emailBlue.rawValue,
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
         
@@ -123,12 +123,12 @@ class NomeView: UIViewController {
         return registerFailLabel
     }()
     
-    private let nomeViewModel = NomeViewModel()
+    private let nomeViewModel = EmailViewModel()
     
     private func setupView() {
         
         nomeViewModel.delegate = self
-        nomeViewModel.makeNameScreen()
+        nomeViewModel.makeEmailScreen()
         
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
         
@@ -208,9 +208,9 @@ class NomeView: UIViewController {
         
     @objc func changeScreen() {
         
-        let phoneView = PhoneView()
-        phoneView.modalPresentationStyle = .fullScreen
-        present(phoneView, animated: true)
+        let passwordView = PasswordView()
+        passwordView.modalPresentationStyle = .fullScreen
+        present(passwordView, animated: true)
     }
     
     @objc func changeText(_ sender: UITextField) {
@@ -232,7 +232,7 @@ class NomeView: UIViewController {
     }
 }
 
-extension NomeView: NomeViewModelProtocol {
+extension EmailView: EmailViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
