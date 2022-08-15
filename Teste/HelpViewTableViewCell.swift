@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class FAQViewTableViewCell: UITableViewCell {
-    static let identifier = "FAQViewTableViewCell"
+class HelpViewTableViewCell: UITableViewCell {
+    static let identifier = "HelpViewTableViewCell"
     
     private lazy var backgroundCellView: UIView = {
         let view = UIView()
