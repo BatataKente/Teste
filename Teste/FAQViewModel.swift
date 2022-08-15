@@ -18,6 +18,7 @@ struct FAQModel {
     
     let question: String
     let answer: NSAttributedString
+    var expanded: Bool = false
     
     init(question: String, answer: String){
         self.question = question
@@ -43,12 +44,65 @@ class FAQViewModel{
         FAQModel(question: "Posso cancelar ou desistir da minha reserva?", answer: "Você poderá desistir ou cancelar sua contratação com até 24 horas de antecedência da utilização, enviando um e-mail com sua solicitação para: contato@bravve.com.br. Será devolvido o valor pago, descontadas todas as taxas e encargos financeiros cobrados na transação financeira, ou seja, as taxas da iugu, da administradora do cartão de crédito e quaisquer outros encargos financeiros outros encargos financeiros e/ou impostos atribuidos na transação.\nNão haverá reembolso no caso de cancelamento após o prazo informado acima (dentro de 24 horas de antecedência) uma vez que a agenda do Box ficará reservada, comprometendo quaisquer outros agendamentos e reservas naquele período/local. \nNos casos de não comparecimento no período agendado, não haverá reembolso dos valores contratados uma vez que esse valor será utilizado para compensar a janela de atendimento do BOX que ficará reservada, comprometendo quaisquer outros agendamentos e reservas naquele período/local.")
     ]
     
+    private let question: [String] = [
+        "",
+        "Como eu faço para abrir o Box?",
+        "Como faço para reportar um problema?",
+        "Como finalizo o uso?",
+        "O que acontece se eu não sair ao final do meu horário?",
+        "E se eu encontrar o BOX sujo e desorganizado?",
+        "Sou uma empresa. Posso reservar horários para meus colaboradores?",
+        "Onde eu encontro um BOX Office?",
+        "Como saberei que meu tempo está acabando?",
+        "Como faço para ter um BOX Office numa área do meu estabelecimento comercial?",
+        "Sujei o Box sem querer. O que faço agora?",
+        "Posso cancelar ou desistir da minha reserva?"
+    ]
+    
+    private let answer: [String] = [
+        "",
+         "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box.",
+         "Você pode escrever para suporte@bravve.com.br ou enviar uma mensagem para o número de suporte disponível em nosso app.",
+         "Basta clicar no botão "+"Sair do Box."+" Certifique-se sempre de que a porta foi fechada corretamente.",
+         "Além de prejudicar o próximo cliente, será cobrada de você uma taxa adicional de R$ 500,00 a cada 30 minutos excedentes.",
+         "Contate nosso suporte através do app. Caso não seja possível a manutenção ou limpeza rapidamente, devolveremos seu dinheiro.",
+         "É claro que sim! Pensando nessa situação, nossa equipe de desenvolvimento criou um sistema de vouchers para Pessoas Jurídicas, onde a empresa contrata uma determinada quantia de horas e distribui para uso de seus colaboradores, da forma como quiser. *Clique aqui*",
+         "Neste momento estamos atuando somente na cidade de São Paulo. Em breve expandiremos nossas operações para outras cidades.",
+         "Nosso time desenvolveu um sistema de alerta que vai comunica-lo faltando 05 minutos para o término do seu período e assim que o tempo acabar. Assim terá tempo para se organizar.",
+         "É só *clicar aqui*",
+         "Contate nosso suporte através do app.",
+        "Você poderá desistir ou cancelar sua contratação com até 24 horas de antecedência da utilização, enviando um e-mail com sua solicitação para: contato@bravve.com.br. Será devolvido o valor pago, descontadas todas as taxas e encargos financeiros cobrados na transação financeira, ou seja, as taxas da iugu, da administradora do cartão de crédito e quaisquer outros encargos financeiros outros encargos financeiros e/ou impostos atribuidos na transação.\nNão haverá reembolso no caso de cancelamento após o prazo informado acima (dentro de 24 horas de antecedência) uma vez que a agenda do Box ficará reservada, comprometendo quaisquer outros agendamentos e reservas naquele período/local. \nNos casos de não comparecimento no período agendado, não haverá reembolso dos valores contratados uma vez que esse valor será utilizado para compensar a janela de atendimento do BOX que ficará reservada, comprometendo quaisquer outros agendamentos e reservas naquele período/local."
+    ]
+    
+    private var expandle: [Bool] = [
+        false, false, false, false, false, false, false, false, false, false, false, false
+    ]
+    
+    
+    
     var count: Int {
         return questionAnswer.count+1
     }
     
     func getQuestionAnswer(indexPath: IndexPath) -> FAQModel{
-        return self.questionAnswer[indexPath.row-1]
+        return self.questionAnswer[indexPath.row - 1]
+    }
+    
+    func getQuestion(indexPath: IndexPath) -> String{
+        print(indexPath.row / 2)
+        return self.question[(indexPath.row / 2) + 1]
+    }
+    
+    func getAnswer(indexPath: IndexPath) -> NSAttributedString{
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let string = answer[indexPath.row / 2]
+        return NSAttributedString(string: string, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        
+    }
+    
+    func getExpandle(indexPath: IndexPath) -> Bool{
+        return expandle[indexPath.row]
     }
     
     func paragraphStyle(lineHeight: CGFloat) -> NSMutableParagraphStyle {

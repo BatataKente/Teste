@@ -66,22 +66,22 @@ class FAQViewTableViewCell: UITableViewCell {
             self.backgroundCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             self.backgroundCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.backgroundCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            self.backgroundCellView.heightAnchor.constraint(equalToConstant: CGFloat(222).generateSizeForScreen),
+            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-20)),
+//            self.backgroundCellView.heightAnchor.constraint(equalToConstant: CGFloat(222)),
             
             self.vectorHelpImageView.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor),
             self.vectorHelpImageView.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
             self.vectorHelpImageView.bottomAnchor.constraint(equalTo: self.backgroundCellView.bottomAnchor),
-            self.vectorHelpImageView.heightAnchor.constraint(equalToConstant: CGFloat(38).generateSizeForScreen),
+//            self.vectorHelpImageView.heightAnchor.constraint(equalToConstant: CGFloat(38)),
             
             self.wayHelpImageView.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor),
             self.wayHelpImageView.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
             self.wayHelpImageView.bottomAnchor.constraint(equalTo: self.backgroundCellView.bottomAnchor),
-            self.wayHelpImageView.widthAnchor.constraint(equalToConstant: CGFloat(156.77).generateSizeForScreen),
+//            self.wayHelpImageView.widthAnchor.constraint(equalToConstant: CGFloat(156.77)),
             
-            self.FAQViewLabel.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: CGFloat(80).generateSizeForScreen),
-            self.FAQViewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-140.99).generateSizeForScreen),
-            self.FAQViewLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(32.99).generateSizeForScreen),
+            self.FAQViewLabel.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: CGFloat(80)),
+            self.FAQViewLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: CGFloat(-140.99)),
+            self.FAQViewLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(32.99)),
         ])
         
     }
