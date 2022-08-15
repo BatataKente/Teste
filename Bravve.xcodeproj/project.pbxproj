@@ -35,6 +35,7 @@
 		2E57CDB428A585EC004214A9 /* DetailsClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */; };
 		2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB528A58606004214A9 /* DetailsClosedView.swift */; };
 		2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */; };
+		2E57CDD328A79E38004214A9 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDD228A79E38004214A9 /* CustomAlert.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -214,6 +215,7 @@
 		2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedViewModel.swift; sourceTree = "<group>"; };
 		2E57CDB528A58606004214A9 /* DetailsClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedView.swift; sourceTree = "<group>"; };
 		2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedCollectionViewCell.swift; sourceTree = "<group>"; };
+		2E57CDD228A79E38004214A9 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1382,6 +1384,7 @@
 				2EB18FCC28A2E5B2008A80BF /* CustomBarWithFilter.swift */,
 				2EB18FDC28A41F8B008A80BF /* CustomTextField.swift */,
 				2EB18FDE28A4201E008A80BF /* CustomBulletPoint.swift */,
+				2E57CDD228A79E38004214A9 /* CustomAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1992,6 +1995,7 @@
 				1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */,
 				2EB18FCD28A2E5B2008A80BF /* CustomBarWithFilter.swift in Sources */,
 				C69616BC2881E7C700281633 /* PasswordRecoverySMSModel.swift in Sources */,
+				2E57CDD328A79E38004214A9 /* CustomAlert.swift in Sources */,
 				2EB18FAE289D87DE008A80BF /* MockManager.swift in Sources */,
 				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermsAndConditionView.swift in Sources */,
