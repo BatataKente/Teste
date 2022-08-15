@@ -16,6 +16,8 @@
 		14076BEB28930DE6003EA2F1 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */; };
 		140DA88928A3F2F900413161 /* TabBarClassClosed+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */; };
 		1416C28A28941BFA00FCE10E /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */; };
+		146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */; };
+		146A8BED28AAB2D3007650A8 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */; };
 		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
 		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
 		1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A231289965DE00B409E5 /* IconsBravveEnum.swift */; };
@@ -33,6 +35,7 @@
 		2E57CDB428A585EC004214A9 /* DetailsClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */; };
 		2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB528A58606004214A9 /* DetailsClosedView.swift */; };
 		2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */; };
+		2E57CDD328A79E38004214A9 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDD228A79E38004214A9 /* CustomAlert.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -78,6 +81,8 @@
 		2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11028940FCD001C11DC /* HelpViewModel.swift */; };
 		2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11228940FE3001C11DC /* HelpView.swift */; };
 		2EF23F4828931B760078B6B8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* UIView+Extension.swift */; };
+		30D3120A28AAAE1600BF9311 /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */; };
+		30D3120C28AAAE3B00BF9311 /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */; };
 		C696169E2881E70000281633 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696169D2881E70000281633 /* LoginView.swift */; };
 		C69616A02881E70700281633 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696169F2881E70700281633 /* LoginModel.swift */; };
 		C69616A22881E71100281633 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616A12881E71100281633 /* LoginViewModel.swift */; };
@@ -191,6 +196,8 @@
 		14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarClassClosed+Extension.swift"; sourceTree = "<group>"; };
 		1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
+		146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationEnum.swift; sourceTree = "<group>"; };
+		146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A231289965DE00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
@@ -208,6 +215,7 @@
 		2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedViewModel.swift; sourceTree = "<group>"; };
 		2E57CDB528A58606004214A9 /* DetailsClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedView.swift; sourceTree = "<group>"; };
 		2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedCollectionViewCell.swift; sourceTree = "<group>"; };
+		2E57CDD228A79E38004214A9 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -254,6 +262,8 @@
 		2ED5D11028940FCD001C11DC /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
 		2ED5D11228940FE3001C11DC /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		2EF23F4728931B760078B6B8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
+		30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		C696169D2881E70000281633 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C696169F2881E70700281633 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		C69616A12881E71100281633 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -388,6 +398,7 @@
 				2EB18FB628A1810E008A80BF /* StageEnum.swift */,
 				14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */,
 				14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */,
+				146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -622,6 +633,8 @@
 			isa = PBXGroup;
 			children = (
 				2ED5D11228940FE3001C11DC /* HelpView.swift */,
+				30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */,
+				30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1359,6 +1372,7 @@
 			isa = PBXGroup;
 			children = (
 				1478A23A28996DC700B409E5 /* CGFloat+Extension.swift */,
+				146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */,
 				14076BE128930BFB003EA2F1 /* UIButton+Extension.swift */,
 				14076BE728930CFA003EA2F1 /* UIImageView+Extension.swift */,
 				14076BE428930CC7003EA2F1 /* UILabel+Extension.swift */,
@@ -1370,6 +1384,7 @@
 				2EB18FCC28A2E5B2008A80BF /* CustomBarWithFilter.swift */,
 				2EB18FDC28A41F8B008A80BF /* CustomTextField.swift */,
 				2EB18FDE28A4201E008A80BF /* CustomBulletPoint.swift */,
+				2E57CDD228A79E38004214A9 /* CustomAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1935,6 +1950,7 @@
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
+				146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */,
 				C696175F2881EC7F00281633 /* Reservation2View.swift in Sources */,
 				C69617232881EAC200281633 /* PhotoViewModel.swift in Sources */,
 				C696172C2881EAED00281633 /* ProfessionViewModel.swift in Sources */,
@@ -1979,6 +1995,7 @@
 				1478A234289965E900B409E5 /* ImagesBravveEnum.swift in Sources */,
 				2EB18FCD28A2E5B2008A80BF /* CustomBarWithFilter.swift in Sources */,
 				C69616BC2881E7C700281633 /* PasswordRecoverySMSModel.swift in Sources */,
+				2E57CDD328A79E38004214A9 /* CustomAlert.swift in Sources */,
 				2EB18FAE289D87DE008A80BF /* MockManager.swift in Sources */,
 				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermsAndConditionView.swift in Sources */,
@@ -1993,12 +2010,15 @@
 				C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */,
 				1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
+				146A8BED28AAB2D3007650A8 /* UIScrollView+Extension.swift in Sources */,
 				1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */,
+				30D3120C28AAAE3B00BF9311 /* HelpTableViewCell.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizeViewModel.swift in Sources */,
 				2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */,
 				C696173A2881EB4000281633 /* ActivitiesModel.swift in Sources */,
+				30D3120A28AAAE1600BF9311 /* HelpViewTableViewCell.swift in Sources */,
 				C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */,
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
