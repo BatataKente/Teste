@@ -137,8 +137,10 @@ class NomeView: UIViewController {
         ddiStackView.spacing = 10
         
         let ddisButton = UIButton()
+        ddisButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+                            for: .normal)
         
-        let leftStackView = UIStackView(arrangedSubviews: [ddiStackView, ddisButton])
+        let leftStackView = UIStackView(arrangedSubviews: [ddiStackView])
         leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         leftStackView.layer.cornerRadius = 10
         leftStackView.isLayoutMarginsRelativeArrangement = true
@@ -211,6 +213,34 @@ class NomeView: UIViewController {
         return registerFailLabel
     }()
     
+    private lazy var scrollView: UIScrollView = {
+        
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                    width: 200,
+                                                    height: 100))
+        
+        var ddis = [UIButton]()
+        
+        let handler = {(action: UIAction) in
+            
+            scrollView.frame.size = .zero
+        }
+        
+        for ddi in nomeViewModel.createDDIs() {
+            
+            let button = UIButton()
+            button.setTitle(ddi, for: .normal)
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                     for: .normal)
+            ddis.append(button)
+        }
+        scrollView.turnIntoAList(ddis)
+        scrollView.delegate = self
+        
+        return scrollView
+    }()
+    
     private let nomeViewModel: NomeViewModel
     
     private func setupView() {
@@ -218,7 +248,9 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeScreen()
         
-        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, scrollView])
+        
+        viewElements.ddisButton.addSubWindow(scrollView, .downRight)
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
@@ -255,6 +287,9 @@ class NomeView: UIViewController {
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
+        viewElements.ddisButton.constraintInsideTo(.centerY, registerStackView)
+        viewElements.ddisButton.constraintInsideTo(.leading, registerStackView, CGFloat(40).generateSizeForScreen)
+        
         registerFailLabel.constraintOutsideTo(.top, registerStackView,
                                               CGFloat(5).generateSizeForScreen)
         registerFailLabel.constraintInsideTo(.leading, registerStackView,
@@ -270,12 +305,6 @@ class NomeView: UIViewController {
     }
     
     private func setupTargets() {
-        
-        viewElements.ddisButton.setMenuForButton(nomeViewModel.createDDIs({(action: UIAction) in
-
-            self.viewElements.ddiChoseLabel.text = action.title
-            self.viewElements.ddisButton.setTitle(nil, for: .normal)
-        }))
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
@@ -415,5 +444,15 @@ extension NomeView: NomeViewModelProtocol {
         
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: false)
+    }
+}
+
+extension NomeView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
+        
+        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
 }

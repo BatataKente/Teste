@@ -22,7 +22,7 @@ extension UIScrollView {
         
         let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .vertical
-        stackView.backgroundColor = .cyan
+        stackView.backgroundColor = .white
         
         view.addSubview(stackView)
         
