@@ -16,6 +16,7 @@
 		14076BEB28930DE6003EA2F1 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */; };
 		140DA88928A3F2F900413161 /* TabBarClassClosed+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */; };
 		1416C28A28941BFA00FCE10E /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */; };
+		146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */; };
 		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
 		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
 		1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A231289965DE00B409E5 /* IconsBravveEnum.swift */; };
@@ -191,6 +192,7 @@
 		14076BEA28930DE6003EA2F1 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarClassClosed+Extension.swift"; sourceTree = "<group>"; };
 		1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
+		146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationEnum.swift; sourceTree = "<group>"; };
 		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A231289965DE00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				2EB18FB628A1810E008A80BF /* StageEnum.swift */,
 				14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */,
 				14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */,
+				146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1935,6 +1938,7 @@
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
+				146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */,
 				C696175F2881EC7F00281633 /* Reservation2View.swift in Sources */,
 				C69617232881EAC200281633 /* PhotoViewModel.swift in Sources */,
 				C696172C2881EAED00281633 /* ProfessionViewModel.swift in Sources */,
