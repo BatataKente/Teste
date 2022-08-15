@@ -126,17 +126,20 @@ class HomeOpenView: UIViewController {
                                                             ButtonsBravve.exitGray.rawValue
                                                             ])
     private let coverView: UIView = {
+        
         let coverView = UIView()
         coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
+        
         let imageView = UIImageView()
         imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        coverView.addSubview(imageView)
-        imageView.constraintInsideTo(.centerX, coverView)
-        imageView.constraintInsideTo(.centerY, coverView, 5)
         imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchorInSuperview(CGFloat(58.5))
-        imageView.widthAnchorInSuperview(CGFloat(263))
+        coverView.addSubview(imageView)
+        
+        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerY, coverView)
+        imageView.constraintInsideTo(.height, coverView, multiplier: 0.08)
+        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
+        
         return coverView
     }()
     
@@ -232,10 +235,11 @@ class HomeOpenView: UIViewController {
             
             self.tableView.reloadData()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.coverView.isHidden = true
+            UIView.animate(withDuration: 0.6,
+                           delay: 0.3) {
+                    
+                self.coverView.alpha = 0
             }
-            
         }
     }
     
@@ -252,12 +256,10 @@ class HomeOpenView: UIViewController {
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
-        coverView.constraintInsideTo(.top, view)
-        coverView.constraintInsideTo(.leading, view)
-        coverView.constraintInsideTo(.trailing, view)
-        coverView.constraintInsideTo(.bottom, view)
-        
-        
+        coverView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
 
