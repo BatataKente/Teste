@@ -341,31 +341,31 @@ class OpenDetailsView: UIViewController {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
         
-        let titleLabel = UILabel()
-        titleLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
-        titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
+        let spaceCategoryNameLabel = UILabel()
+        spaceCategoryNameLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        spaceCategoryNameLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
-        titleLabel.text = space.slogan
+        spaceCategoryNameLabel.text = space.space_category?.name
         
         let titleLabelView = UIView()
-        titleLabelView.addSubview(titleLabel)
+        titleLabelView.addSubview(spaceCategoryNameLabel)
         titleLabelView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         
-        titleLabel.constraintInsideTo(.top, titleLabelView,
+        spaceCategoryNameLabel.constraintInsideTo(.top, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.leading, titleLabelView,
+        spaceCategoryNameLabel.constraintInsideTo(.leading, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.trailing, titleLabelView,
+        spaceCategoryNameLabel.constraintInsideTo(.trailing, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.bottom, titleLabelView,
+        spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
         
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = space.description
-        descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+        let sloganLabel = UILabel()
+        sloganLabel.text = space.slogan
+        sloganLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                        size: CGFloat(20).generateSizeForScreen)
-        descriptionLabel.textColor = textColor
-        descriptionLabel.numberOfLines = 0
+        sloganLabel.textColor = textColor
+        sloganLabel.numberOfLines = 0
         
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
@@ -386,11 +386,17 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        let label_1 = UILabel()
-        label_1.text = space.name
-        label_1.font = UIFont(name: FontsBravve.bold.rawValue,
+        let nameLabel = UILabel()
+        nameLabel.text = space.name
+        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(20).generateSizeForScreen)
-        label_1.textColor = textColor
+        nameLabel.textColor = textColor
+        
+        let label_1 = UILabel()
+        label_1.text = "UM Coffee Co."
+        label_1.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label_1.font = UIFont(name: FontsBravve.regular.rawValue,
+                              size: 12)
         
         let label_2 = UILabel()
         label_2.text = "3,50"
@@ -448,7 +454,7 @@ class OpenDetailsView: UIViewController {
         label_8.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        view.addSubviews([titleLabelView, descriptionLabel, photoCollectionView, tagsStackView, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView, localFacilitiesStackView])
+        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, tagsStackView, nameLabel, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView, localFacilitiesStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -459,17 +465,20 @@ class OpenDetailsView: UIViewController {
         titleLabelView.constraintInsideTo(.top, view)
         titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
         
-        descriptionLabel.constraintOutsideTo(.top, titleLabel, CGFloat(20).generateSizeForScreen)
-        descriptionLabel.constraintInsideTo(.leading, titleLabel)
-        descriptionLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
+        sloganLabel.constraintOutsideTo(.top, spaceCategoryNameLabel, CGFloat(20).generateSizeForScreen)
+        sloganLabel.constraintInsideTo(.leading, spaceCategoryNameLabel)
+        sloganLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
         
-        photoCollectionView.constraintOutsideTo(.top, descriptionLabel, CGFloat(20).generateSizeForScreen)
-        photoCollectionView.constraintInsideTo(.leading, descriptionLabel)
+        photoCollectionView.constraintOutsideTo(.top, sloganLabel, CGFloat(20).generateSizeForScreen)
+        photoCollectionView.constraintInsideTo(.leading, sloganLabel)
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
-        label_1.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
-        label_1.constraintInsideTo(.leading, photoCollectionView)
+        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
+        nameLabel.constraintInsideTo(.leading, photoCollectionView)
+        
+        label_1.constraintOutsideTo(.top, nameLabel, CGFloat(7.5).generateSizeForScreen)
+        label_1.constraintInsideTo(.leading, nameLabel)
         
         label_2.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
         label_2.constraintOutsideTo(.trailing, label_3, CGFloat(5).generateSizeForScreen)
@@ -487,7 +496,7 @@ class OpenDetailsView: UIViewController {
         
         tagsStackView.constraintOutsideTo(.top, label_5,
                                           CGFloat(20).generateSizeForScreen)
-        tagsStackView.constraintInsideTo(.leading, label_1)
+        tagsStackView.constraintInsideTo(.leading, nameLabel)
         tagsStackView.constraintInsideTo(.trailing, label_3)
         
         label_6.constraintOutsideTo(.top, tagsStackView,
