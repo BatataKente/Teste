@@ -9,6 +9,8 @@ import UIKit
 
 extension UIScrollView {
     
+/// This function turns the scrollView into a list with stackViews
+/// - Parameter views: Views to set in the list
     func turnIntoAList(_ views: [UIView]) {
         
         let view = UIView()
