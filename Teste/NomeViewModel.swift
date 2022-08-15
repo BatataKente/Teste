@@ -16,14 +16,26 @@ class NomeViewModel {
         
         self.stage = stage
     }
+//
+//    func createDDIs(_ handler: @escaping UIActionHandler) -> [UIAction] {
+//
+//        var ddis: [UIAction] = []
+//
+//        for i in 1...235 {
+//
+//            ddis.append(UIAction(title: "+\(i)" , handler: handler))
+//        }
+//
+//        return ddis
+//    }
     
-    func createDDIs(_ handler: @escaping UIActionHandler) -> [UIAction] {
+    func createDDIs() -> [String] {
         
-        var ddis: [UIAction] = []
+        var ddis: [String] = []
         
         for i in 1...235 {
             
-            ddis.append(UIAction(title: "+\(i)" , handler: handler))
+            ddis.append("+\(i)")
         }
         
         return ddis

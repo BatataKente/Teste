@@ -193,26 +193,6 @@ extension UIButton {
     }
 }
 
-import UIKit
-
-extension UIButton {
-    
-    func setToBottomButtonKeyboardDefault(_ buttonTitle: String = "Continuar",
-                                          backgroundColor: UIColor = .purple) {
-        
-        self.setTitle(buttonTitle, for: .normal)
-        self.backgroundColor = backgroundColor
-        
-        self.heightAnchorInSuperview(50)
-        self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
-        self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
-        self.constraintOutsideTo(.bottom, superview?.keyboardLayoutGuide)
-        
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 25,
-                                                  weight: .bold)
-    }
-}
-
 extension UIButton {
     
     func addSubWindow(_ window: UIView,
