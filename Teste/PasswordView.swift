@@ -10,6 +10,7 @@ import UIKit
 class PasswordView: UIViewController{
     
     let backWay: UIImageView = {
+        
         let image = UIImageView()
         image.setWayToDefault(.wayPassword)
         return image
