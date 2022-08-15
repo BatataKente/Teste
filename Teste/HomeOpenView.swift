@@ -24,17 +24,12 @@ class HomeOpenView: UIViewController {
         setupDefaults()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-
-        .lightContent
-    }
-
     override var prefersStatusBarHidden: Bool {
         
        true
     }
     
-    let authManager = NetworkManager()
+    private let authManager = NetworkManager()
     
     private let cellIdentifier = "Cell"
     
@@ -143,6 +138,7 @@ class HomeOpenView: UIViewController {
         
         return coverView
     }()
+    
     
     private func setupView() {
         
