@@ -130,9 +130,7 @@ class NomeView: UIViewController {
         nomeViewModel.delegate = self
         nomeViewModel.makeNameScreen()
         
-        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, scrollView])
-        
-        viewElements.ddisButton.addSubWindow(scrollView, .downRight)
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
@@ -168,9 +166,6 @@ class NomeView: UIViewController {
         registerStackView.constraintInsideTo(.leading, infoLabel)
         registerStackView.constraintInsideTo(.trailing, infoLabel)
         registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-        
-        viewElements.ddisButton.constraintInsideTo(.centerY, registerStackView)
-        viewElements.ddisButton.constraintInsideTo(.leading, registerStackView, CGFloat(50).generateSizeForScreen)
         
         registerFailLabel.constraintOutsideTo(.top, registerStackView,
                                               CGFloat(5).generateSizeForScreen)
@@ -288,15 +283,5 @@ extension NomeView: NomeViewModelProtocol {
     func setKeyboardType(keyboardType: UIKeyboardType) {
         
         viewElements.rightTextField.keyboardType = keyboardType
-    }
-}
-
-extension NomeView: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
-        
-        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
 }
