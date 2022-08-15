@@ -17,32 +17,18 @@ class ConfirmDataView: UIViewController {
     
     private let backgroundImage1 = UIImageView()
     
-    private let backgroundImage2: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.wayConfirm_1.rawValue)
-        return image
-    }()
+    private let backgroundImage2 = UIImageView()
     
-    
-    private let buttonBack = UIButton()
-    
-    private let imageLogo = UIImageView()
-    
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
-        
-        let buttons = createProgressBarButtons([
+    private lazy var buttons: [UIButton] = {
+        let buttons =  createProgressBarButtons([
             IconsBravve.userGray.rawValue,
             IconsBravve.cellGray.rawValue,
             IconsBravve.emailGray.rawValue,
             IconsBravve.padlockGray.rawValue,
             IconsBravve.pencilBlue.rawValue
         ])
-        let stackView = UIStackView(arrangedSubviews: buttons)
         buttons[4].setTitle(" Confirmação", for: .normal)
-        
-        return (stack: stackView,
-                buttons: buttons)
+        return buttons
     }()
     
     private let label: UILabel = {
@@ -81,21 +67,21 @@ class ConfirmDataView: UIViewController {
         return label
     }()
     
-    private lazy var editButton1: UIButton = {
+    private lazy var editButtonName: UIButton = {
         let button = myButton()
         return button
     }()
-    private lazy var editButton2: UIButton = {
+    private lazy var editButtonCell: UIButton = {
         let button = myButton()
         return button
     }()
-    private lazy var editButton3: UIButton = {
+    private lazy var editButtonEmail: UIButton = {
         let button = myButton()
         return button
     }()
     
     private lazy var stackViewName: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelName, editButton1])
+        let stackView = UIStackView(arrangedSubviews: [labelName, editButtonName])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -109,7 +95,7 @@ class ConfirmDataView: UIViewController {
     }()
     
     private lazy var stackViewCell: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelCell, editButton2])
+        let stackView = UIStackView(arrangedSubviews: [labelCell, editButtonCell])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -123,7 +109,7 @@ class ConfirmDataView: UIViewController {
     }()
     
     private lazy var stackViewEmail: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelEmail, editButton3])
+        let stackView = UIStackView(arrangedSubviews: [labelEmail, editButtonEmail])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -151,7 +137,13 @@ class ConfirmDataView: UIViewController {
         
         view.setToDefaultBackgroundColor()
          
-        view.addSubviews([backgroundImage2, buttonBack, imageLogo, progressBarStackView.stack, label, backgroundImage1, stackViewLabels, buttonContinue])
+        view.addSubviews([ label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
+        
+        view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
+            let vc = PasswordView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
         
         defaults()
         addConstraints()
@@ -167,12 +159,9 @@ class ConfirmDataView: UIViewController {
     
     private func defaults() {
         
-        buttonBack.setToBackButtonDefault(.backPink) { _ in
-            self.dismiss(animated: true)
-        }
-        imageLogo.setLogoToDefault()
         buttonContinue.setToBottomButtonKeyboardDefault("Continuar", backgroundColor: .buttonPink)
         backgroundImage1.setWayToDefault(.wayConfirm_2)
+        backgroundImage2.setWayToDefault(.wayConfirm_1)
         
     }
     
@@ -180,83 +169,54 @@ class ConfirmDataView: UIViewController {
         
         label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
         label.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
-        label.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(40).generateSizeForScreen)
+        label.constraintInsideTo(.top, view, CGFloat(240).generateSizeForScreen)
         
         stackViewName.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         stackViewCell.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         stackViewEmail.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
-        editButton1.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        editButton2.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        editButton3.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButtonName.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButtonCell.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButtonEmail.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
         stackViewLabels.constraintInsideTo(.leading, label)
         stackViewLabels.constraintInsideTo(.trailing, label)
-        stackViewLabels.constraintOutsideTo(.top, label, CGFloat(40).generateSizeForScreen)
-        
-        progressBarStackView.stack.constraintOutsideTo(.top, imageLogo, CGFloat(62).generateSizeForScreen)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        
-        backgroundImage2.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        backgroundImage2.constraintInsideTo(.top, view.safeAreaLayoutGuide)
-        backgroundImage2.heightAnchorInSuperview(120)
-        backgroundImage2.widthAnchorInSuperview(280)
+        stackViewLabels.constraintOutsideTo(.top, label, CGFloat(60).generateSizeForScreen)
+    
     }
     
     private func addTargets() {
         
-        buttonBack.addTarget(self, action: #selector(actionButtonBack), for: .touchUpInside)
-        
-        progressBarStackView.buttons[0].addTarget(self, action: #selector(actionButtonPersonalData), for: .touchUpInside)
-        
-        progressBarStackView.buttons[1].addTarget(self, action: #selector(actionButtonCell), for: .touchUpInside)
-        
-        progressBarStackView.buttons[2].addTarget(self, action: #selector(actionButtonEmail), for: .touchUpInside)
-        
-        progressBarStackView.buttons[3].addTarget(self, action: #selector(actionButtonPassword), for: .touchUpInside)
-        
         buttonContinue.addTarget(self, action: #selector(actionButtonContinue), for: .touchUpInside)
         
-        editButton1.addTarget(self, action: #selector(actionEditButton1), for: .touchUpInside)
-        editButton2.addTarget(self, action: #selector(actionEditButton2), for: .touchUpInside)
-        editButton3.addTarget(self, action: #selector(actionEditButton3), for: .touchUpInside)
+        editButtonName.addTarget(self, action: #selector(actionEditButtonName), for: .touchUpInside)
+        editButtonCell.addTarget(self, action: #selector(actionEditButtonCell), for: .touchUpInside)
+        editButtonEmail.addTarget(self, action: #selector(actionEditButtonEmail), for: .touchUpInside)
         
     }
     
     
-    @objc func actionButtonBack() {
-        print("voltar")
-    }
-    
-    @objc func actionButtonPersonalData() {
-        print("dados pessoais")
-    }
-    
-    @objc func actionButtonCell() {
-        print("celular")
-    }
-    
-    @objc func actionButtonEmail() {
-        print("email")
-    }
-    
-    @objc func actionButtonPassword() {
-        print("senha")
-    }
-    
     @objc func actionButtonContinue() {
-        print("continuar")
+        let vc = FotoView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
-    @objc func actionEditButton1() {
-        print("tela dados pessoais")
+    @objc func actionEditButtonName() {
+        let vc = NomeView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
-    @objc func actionEditButton2() {
-        print("tela celular")
+    @objc func actionEditButtonCell() {
+        let vc = PhoneView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
-    @objc func actionEditButton3() {
-        print("tela email")
+    @objc func actionEditButtonEmail() {
+        let vc = EmailView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }

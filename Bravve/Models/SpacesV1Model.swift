@@ -95,7 +95,7 @@ struct SpacePicture: Codable {
     var is_cover_photo: Bool?
 }
 
-struct Space: Codable {
+struct SpaceDetail: Codable {
     var id: Int?
     var name: String?
     var slogan: String?
@@ -125,6 +125,31 @@ struct Space: Codable {
     var partner_site_address: PartnerSiteAddress?
     var contact: SpaceContact?
     var pictures: [SpacePicture]?
+}
+
+struct Space: Codable {
+    var id: Int?
+    var seats_qty: Int?
+    var name: String?
+    var slogan: String?
+    var description: String?
+    var hourly_price: Double?
+    var daily_price: Double?
+    var monthly_price: Double?
+    var allow_workpass: Bool?
+    var hourly_credits: Double?
+    var daily_credits: Double?
+    var monthly_credits: Double?
+    var is_active: Bool?
+    var favorite_space: Bool?
+    var partner_site_id: Int?
+    var partner_site_address: PartnerSiteAddress?
+    var space_category: SpaceCategory?
+    var space_type: SpaceType?
+    var space_classification: SpaceClassification?
+    var space_noise_level: SpaceNoise?
+    var space_facilitites: [SpaceFacility]?
+    var space_pictures: [SpacePicture]?
 }
 
 struct SpaceListParameters: Codable {
