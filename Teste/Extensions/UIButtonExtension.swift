@@ -173,8 +173,8 @@ extension UIButton {
 ///   - constant: Distance of button from left
 ///   - handler: Action of button
     func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
-                                     _ handler: @escaping UIActionHandler) {
+                                _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
+                                _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
         self.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
@@ -195,6 +195,10 @@ extension UIButton {
 
 extension UIButton {
     
+/// This function adds a view as a subview
+/// - Parameters:
+///   - window: The view that will be the subWindow
+///   - orientation: The position that window will move
     func addSubWindow(_ window: UIView,
                       _ orientation: Orientation = .downRight) {
         

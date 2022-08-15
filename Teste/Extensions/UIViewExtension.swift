@@ -109,6 +109,68 @@ extension UIView {
                                       CGFloat(30).generateSizeForScreen)
     }
     
+    func createReservationCustomBar(progressBarButtons: [UIButton]? = nil,
+                                    _ backHandler: @escaping UIActionHandler) {
+        
+        let backButton = UIButton()
+        backButton.configuration = .plain()
+        backButton.configuration?.image = UIImage(named: ButtonsBravve.backWhite.rawValue)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Nome do espaço"
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                 size: CGFloat(16).generateSizeForScreen)
+        
+        let subTitleLabel = UILabel()
+        subTitleLabel.text = "Nome do local parceiro"
+        subTitleLabel.textColor = .white
+        subTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                    size: CGFloat(16).generateSizeForScreen)
+        
+        backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
+        
+        self.addSubviews([imageView, backButton, titleLabel, subTitleLabel])
+        
+        if let progressBarButtons = progressBarButtons {
+            
+            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+            
+            self.addSubview(progressBarStackView)
+            
+            progressBarStackView.constraintOutsideTo(.top, imageView,
+                                                     CGFloat(20).generateSizeForScreen)
+            progressBarStackView.constraintInsideTo(.centerX,
+                                                    self.safeAreaLayoutGuide)
+        }
+        
+        imageView.constraintInsideTo(.top, self)
+        imageView.constraintInsideTo(.leading, self)
+        imageView.constraintInsideTo(.trailing, self)
+        
+        imageView.heightAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+        
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
+                                                  multiplier: 0.6)
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        
+        titleLabel.constraintInsideTo(.centerX, imageView)
+        titleLabel.constraintOutsideTo(.bottom, subTitleLabel, CGFloat(5).generateSizeForScreen)
+        
+        subTitleLabel.constraintInsideTo(.centerX, imageView)
+        subTitleLabel.constraintInsideTo(.bottom, imageView, CGFloat(20).generateSizeForScreen)
+        
+        backButton.constraintInsideTo(.centerY, imageView)
+        backButton.constraintInsideTo(.height, imageView)
+        backButton.constraintOutsideTo(.width, backButton)
+        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
+                                      CGFloat(30).generateSizeForScreen)
+    }
+    
 /// This function transforms a view into a bar with a back button and title
 /// - Parameters:
 ///   - viewTitle: The title in the center of the custom bar

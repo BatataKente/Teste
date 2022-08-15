@@ -41,7 +41,7 @@ class LoginView: UIViewController {
         passwordStackView.addGestureRecognizer(passwordStackViewTap)
         
         backButton.setToBackButtonDefault {_ in
-            
+
             self.dismiss(animated: true)
         }
     }
