@@ -235,8 +235,8 @@ class HomeOpenView: UIViewController {
             
             self.tableView.reloadData()
             
-            UIView.animate(withDuration: 0.45,
-                           delay: 0.15) {
+            UIView.animate(withDuration: 0.6,
+                           delay: 0.3) {
                     
                 self.coverView.alpha = 0
             }
