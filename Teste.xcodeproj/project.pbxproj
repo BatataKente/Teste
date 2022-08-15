@@ -86,7 +86,6 @@
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
 		306F6E9C28A29D640057D49C /* FAQViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */; };
 		306F6E9D28A29D640057D49C /* FrequentlyAskedQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */; };
-		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
 		CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */; };
@@ -181,7 +180,6 @@
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
 		306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequentlyAskedQuestionsView.swift; sourceTree = "<group>"; };
-		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
 		CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCorporatesV1.swift; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 				138C85AD2892BE2800997FBC /* MinhasReservas.swift */,
 				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
-				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
 				13080CB328A17EC000A064B0 /* Network.swift */,
 				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
@@ -483,7 +480,6 @@
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */,
-				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
 				CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */,
