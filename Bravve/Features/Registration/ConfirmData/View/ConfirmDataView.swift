@@ -209,13 +209,13 @@ class ConfirmDataView: UIViewController {
     }
     
     @objc func actionEditButtonCell() {
-        let vc = NomeView(.second)
+        let vc = PhoneView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     
     @objc func actionEditButtonEmail() {
-        let vc = NomeView(.thirdy)
+        let vc = EmailView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
