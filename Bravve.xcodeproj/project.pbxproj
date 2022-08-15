@@ -17,6 +17,7 @@
 		140DA88928A3F2F900413161 /* TabBarClassClosed+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */; };
 		1416C28A28941BFA00FCE10E /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */; };
 		146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */; };
+		146A8BED28AAB2D3007650A8 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */; };
 		1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */; };
 		1478A230289965D000B409E5 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */; };
 		1478A232289965DE00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A231289965DE00B409E5 /* IconsBravveEnum.swift */; };
@@ -193,6 +194,7 @@
 		140DA88828A3F2F900413161 /* TabBarClassClosed+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarClassClosed+Extension.swift"; sourceTree = "<group>"; };
 		1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		146A8BE128AA7E7B007650A8 /* OrientationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationEnum.swift; sourceTree = "<group>"; };
+		146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		1478A22D289965BF00B409E5 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22F289965D000B409E5 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A231289965DE00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
@@ -1362,6 +1364,7 @@
 			isa = PBXGroup;
 			children = (
 				1478A23A28996DC700B409E5 /* CGFloat+Extension.swift */,
+				146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */,
 				14076BE128930BFB003EA2F1 /* UIButton+Extension.swift */,
 				14076BE728930CFA003EA2F1 /* UIImageView+Extension.swift */,
 				14076BE428930CC7003EA2F1 /* UILabel+Extension.swift */,
@@ -1997,6 +2000,7 @@
 				C696171A2881EA9500281633 /* ConfirmDataViewModel.swift in Sources */,
 				1478A22E289965BF00B409E5 /* ButtonsBravveEnum.swift in Sources */,
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
+				146A8BED28AAB2D3007650A8 /* UIScrollView+Extension.swift in Sources */,
 				1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
