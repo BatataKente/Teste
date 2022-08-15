@@ -42,8 +42,17 @@ class NetworkManager {
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
     }
     
-    /// Method to get data in the format of an array from the API
-    /// - Parameter completionHandler: Closure to manage the result of the API call as an array of the chosen model
+    
+    /// Method to get data from the API with a response decoded as an array
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id to the API endpoint
+    ///   - phoneNumber: Optional argument to pass the phoneNumber to the API endpoint
+    ///   - uuid: Optional argument to pass the uuid to the API endpoint
+    ///   - picture: Optional argument to pass the picture path to the API endpoint
+    ///   - picture_uuid: Optional argument to pass the picture_uuid to the  API endpoint
+    ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
+    ///   - endpoint: The API endpoint as a member of the Endpoint Enum
+    ///   - completionHandler: Completion handler to use the result of the API call
     func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping ([T]?) -> Void) {
         
         getToken { accessToken in
@@ -70,6 +79,16 @@ class NetworkManager {
     }
     
     
+    /// Method to get data from the API with a response decoded as a customModel
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id to the API endpoint
+    ///   - phoneNumber: Optional argument to pass the phoneNumber to the API endpoint
+    ///   - uuid: Optional argument to pass the uuid to the API endpoint
+    ///   - picture: Optional argument to pass the picture path to the API endpoint
+    ///   - picture_uuid: Optional argument to pass the picture_uuid to the  API endpoint
+    ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
+    ///   - endpoint: The API endpoint as a member of the Endpoint Enum
+    ///   - completionHandler: Completion handler to use the result of the API call
     func getData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
@@ -94,6 +113,18 @@ class NetworkManager {
         }
     }
     
+    
+    /// Method to post data to the API with a response decoded as an array
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id to the API endpoint
+    ///   - phoneNumber: Optional argument to pass the phoneNumber to the API endpoint
+    ///   - uuid: Optional argument to pass the uuid to the API endpoint
+    ///   - picture: Optional argument to pass the picture path to the API endpoint
+    ///   - picture_uuid: Optional argument to pass the picture_uuid to the  API endpoint
+    ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
+    ///   - endpoint: The API endpoint as a member of the Endpoint Enum
+    ///   - parameters: The parameter to be passed in the post call with a customModel type
+    ///   - completionHandler: Completion handler to use the result of the API call
     func postDataWithArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping ([T]?) -> Void) {
         
         getToken { accessToken in
@@ -122,6 +153,18 @@ class NetworkManager {
         }
     }
     
+    
+    /// Method to post data to the API with a response decoded as a customModel
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id to the API endpoint
+    ///   - phoneNumber: Optional argument to pass the phoneNumber to the API endpoint
+    ///   - uuid: Optional argument to pass the uuid to the API endpoint
+    ///   - picture: Optional argument to pass the picture path to the API endpoint
+    ///   - picture_uuid: Optional argument to pass the picture_uuid to the  API endpoint
+    ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
+    ///   - endpoint: The API endpoint as a member of the Endpoint Enum
+    ///   - parameters: The parameter to be passed in the post call with a customModel type
+    ///   - completionHandler: Completion handler to use the result of the API call
     func postDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
@@ -151,6 +194,18 @@ class NetworkManager {
         }
     }
     
+    
+    /// Method to post data to the API without receiving a response
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id to the API endpoint
+    ///   - phoneNumber: Optional argument to pass the phoneNumber to the API endpoint
+    ///   - uuid: Optional argument to pass the uuid to the API endpoint
+    ///   - picture: Optional argument to pass the picture path to the API endpoint
+    ///   - picture_uuid: Optional argument to pass the picture_uuid to the  API endpoint
+    ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
+    ///   - endpoint: The API endpoint as a member of the Endpoint Enum
+    ///   - parameters: The parameter to be passed in the post call with a customModel type
+    ///   - completionHandler: Completion handler to use the result of the API call
     func postDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping (Int?) -> Void) {
         
         getToken { accessToken in
@@ -180,6 +235,18 @@ class NetworkManager {
         }
     }
     
+    
+    /// Method to put data to the API with a response as a customModel
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id to the API endpoint
+    ///   - phoneNumber: Optional argument to pass the phoneNumber to the API endpoint
+    ///   - uuid: Optional argument to pass the uuid to the API endpoint
+    ///   - picture: Optional argument to pass the picture path to the API endpoint
+    ///   - picture_uuid: Optional argument to pass the picture_uuid to the  API endpoint
+    ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
+    ///   - endpoint: The API endpoint as a member of the Endpoint Enum
+    ///   - parameters: The parameter to be passed in the post call with a customModel type
+    ///   - completionHandler: Completion handler to use the result of the API call
     func putDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
@@ -208,6 +275,17 @@ class NetworkManager {
         }
     }
     
+    
+    /// Method to construct the url to be called in the network functions
+    /// - Parameters:
+    ///   - endpoint: The endpoint as a Endpoint Enum
+    ///   - id: The id to be passed to the endpoint url
+    ///   - phoneNumber: The phoneNumber to be passed to the endpoint url
+    ///   - uuid: The uuid to be passed to the endpoint url
+    ///   - picture: The picture path to be passed to the endpoint url
+    ///   - picture_uuid: The picture uuid to be passed to the endpoint url
+    ///   - payment_type_id: The payment_type_id to be passed to the endpoint url
+    /// - Returns: Optional URL object to be called in the network functions' requests
     func getURL(endpoint: EndPoints, id: String, phoneNumber: String, uuid: String, picture: String, picture_uuid: String, payment_type_id: String) -> URL? {
         
         var urlEndpoint = ""
