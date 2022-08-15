@@ -179,16 +179,18 @@ class HomeOpenTableViewCell: UITableViewCell {
         viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
     }
     
-    func setup(_ cellInfo: ReserveData) {
+    func setup(_ space: Space,_ indexPath: IndexPath) {
         
-        viewElements.titleLabel.text = cellInfo.title
-        viewElements.descriptionLabel.text = cellInfo.description
-        viewElements.photoView.image = cellInfo.image
-        viewElements.photoLabel.text = cellInfo.photoTitle
-        viewElements.nameLabel.text = cellInfo.name
-        viewElements.subNameLabel.text = cellInfo.subName
-        viewElements.priceLabel.text = cellInfo.price
-        viewElements.detailsLabel.text = cellInfo.details
+        viewElements.titleLabel.text = space.space_category?.name
+        viewElements.descriptionLabel.text = space.slogan
+        viewElements.photoView.image = UIImage(named: ImagesBravve.example_1.rawValue)
+        viewElements.photoLabel.text = ""
+        viewElements.nameLabel.text = space.name
+        viewElements.subNameLabel.text = space.description
+        viewElements.priceLabel.text = String(space.hourly_credits ?? 0) 
+        viewElements.detailsLabel.text = space.partner_site_address?.address?.city_name
+        
+        self.indexPath = indexPath
     }
     
     @objc func showDetails() {

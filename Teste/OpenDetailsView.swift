@@ -21,9 +21,9 @@ class OpenDetailsView: UIViewController {
                   ImagesBravve.example_2.rawValue,
                   ImagesBravve.example_3.rawValue]
     
-    init(_ reserveData: ReserveData) {
+    init(_ space: Space) {
         
-        self.reserveData = reserveData
+        self.space = space
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,7 +53,7 @@ class OpenDetailsView: UIViewController {
         .lightContent
     }
     
-    private var reserveData: ReserveData
+    private var space: Space
     
     private let customBar = UIView()
     
@@ -345,7 +345,7 @@ class OpenDetailsView: UIViewController {
         titleLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
-        titleLabel.text = reserveData.title
+        titleLabel.text = space.slogan
         
         let titleLabelView = UIView()
         titleLabelView.addSubview(titleLabel)
@@ -361,7 +361,7 @@ class OpenDetailsView: UIViewController {
                                       CGFloat(2.5).generateSizeForScreen)
         
         let descriptionLabel = UILabel()
-        descriptionLabel.text = reserveData.description
+        descriptionLabel.text = space.description
         descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                        size: CGFloat(20).generateSizeForScreen)
         descriptionLabel.textColor = textColor
@@ -387,7 +387,7 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.delegate = self
         
         let label_1 = UILabel()
-        label_1.text = reserveData.name
+        label_1.text = space.name
         label_1.font = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(20).generateSizeForScreen)
         label_1.textColor = textColor
