@@ -197,8 +197,8 @@ class NomeView: UIViewController {
                                                                viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
-        registerStackView.spacing = 15
         registerStackView.layer.cornerRadius = 8
+        registerStackView.spacing = CGFloat(30).generateSizeForScreen
 
         return registerStackView
     }()
@@ -293,7 +293,7 @@ class NomeView: UIViewController {
         registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
         viewElements.ddisButton.constraintInsideTo(.centerY, registerStackView)
-        viewElements.ddisButton.constraintInsideTo(.leading, registerStackView, CGFloat(40).generateSizeForScreen)
+        viewElements.ddisButton.constraintInsideTo(.leading, registerStackView, CGFloat(50).generateSizeForScreen)
         
         registerFailLabel.constraintOutsideTo(.top, registerStackView,
                                               CGFloat(5).generateSizeForScreen)
@@ -305,8 +305,8 @@ class NomeView: UIViewController {
         customShaddow.constraintInsideTo(.trailing, registerStackView)
         customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
         
-        viewElements.leftStackView.widthAnchorInSuperview(CGFloat(85).generateSizeForScreen)
-        viewElements.ddisButton.widthAnchorInSuperview()
+        viewElements.leftStackView.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+        viewElements.ddisButton.widthAnchorInSuperview(30)
     }
     
     private func setupTargets() {
