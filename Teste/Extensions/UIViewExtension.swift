@@ -109,6 +109,10 @@ extension UIView {
                                       CGFloat(30).generateSizeForScreen)
     }
     
+/// This function creates a standard bar that appears in the Reservation part, this bar contains a back button the logo, and also comes with a progressbar
+/// - Parameters:
+///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
+///   - backHandler: The action of back button
     func createReservationCustomBar(progressBarButtons: [UIButton]? = nil,
                                     _ backHandler: @escaping UIActionHandler) {
         
