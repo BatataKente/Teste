@@ -216,8 +216,8 @@ class NomeView: UIViewController {
     private lazy var scrollView: UIScrollView = {
         
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: 200,
-                                                    height: 100))
+                                                    width: view.frame.size.width/3,
+                                                    height: view.frame.size.height/5))
         
         var ddis = [UIButton]()
         
@@ -240,6 +240,11 @@ class NomeView: UIViewController {
         
         return scrollView
     }()
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        scrollView.frame.size = .zero
+    }
     
     private let nomeViewModel: NomeViewModel
     
