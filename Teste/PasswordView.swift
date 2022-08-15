@@ -268,7 +268,7 @@ class PasswordView: UIViewController{
         upperCaseEllipse.constraintOutsideTo(.top, numberCharEllipse, CGFloat(10).generateSizeForScreen)
         upperCaseEllipse.constraintInsideTo(.leading, numberCharEllipse)
         
-        upperCaseLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
+        upperCaseLabel.constraintInsideTo(.height, numberCharLabel)
         upperCaseLabel.constraintInsideTo(.centerY, upperCaseEllipse)
         upperCaseLabel.constraintInsideTo(.leading, numberCharLabel)
         
@@ -277,7 +277,7 @@ class PasswordView: UIViewController{
         lowerCaseEllipse.constraintOutsideTo(.top, upperCaseEllipse, CGFloat(10).generateSizeForScreen)
         lowerCaseEllipse.constraintInsideTo(.leading, upperCaseEllipse)
         
-        lowerCaseLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
+        lowerCaseLabel.constraintInsideTo(.height, numberCharLabel)
         lowerCaseLabel.constraintInsideTo(.centerY, lowerCaseEllipse)
         lowerCaseLabel.constraintInsideTo(.leading, numberCharLabel)
         
@@ -286,7 +286,7 @@ class PasswordView: UIViewController{
         numberEllipse.constraintInsideTo(.top, numberCharEllipse)
         numberEllipse.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(120).generateSizeForScreen)
         
-        numberLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
+        numberLabel.constraintInsideTo(.height, numberCharLabel)
         numberLabel.constraintInsideTo(.centerY, numberEllipse)
         numberLabel.constraintOutsideTo(.leading, numberEllipse, CGFloat(5).generateSizeForScreen)
         
@@ -295,7 +295,7 @@ class PasswordView: UIViewController{
         specialCharEllipse.constraintOutsideTo(.top, numberEllipse, CGFloat(10).generateSizeForScreen)
         specialCharEllipse.constraintInsideTo(.leading, numberEllipse)
         
-        specialCharLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
+        specialCharLabel.constraintInsideTo(.height, numberCharLabel)
         specialCharLabel.constraintInsideTo(.centerY, specialCharEllipse)
         specialCharLabel.constraintInsideTo(.leading, numberLabel)
         
@@ -304,7 +304,7 @@ class PasswordView: UIViewController{
         samePasswordEllipse.constraintOutsideTo(.top, specialCharEllipse, CGFloat(10).generateSizeForScreen)
         samePasswordEllipse.constraintInsideTo(.leading, specialCharEllipse)
         
-        samePasswordLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
+        samePasswordLabel.constraintInsideTo(.height, numberCharLabel)
         samePasswordLabel.constraintInsideTo(.centerY, samePasswordEllipse)
         samePasswordLabel.constraintInsideTo(.leading, numberLabel)
     }
