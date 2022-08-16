@@ -249,7 +249,7 @@ class PasswordView: UIViewController{
         
         hidePasswordButton.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
         hideConfirmPasswordButton.addTarget(self, action: #selector(hideConfirmPassword), for: .touchUpInside)
-        goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+//        goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
     }
     
@@ -361,12 +361,17 @@ class PasswordView: UIViewController{
         
     }
     
-    @objc func goBack(sender: UIButton){
-        print("Going Back")
-    }
+//    @objc func goBack(sender: UIButton){
+////        let vc = NomeView(.thirdy)
+////        vc.modalPresentationStyle = .fullScreen
+////        present(vc, animated: true)
+//    }
     
     @objc func continueAction() {
-        print("Going On")
+        let vc = ConfirmDataView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+        
     }
     
     @objc func hideConfirmPassword(_ sender: UIButton){

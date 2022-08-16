@@ -70,6 +70,8 @@ class FotoView: UIViewController {
         setupDefaults()
         setupConstraints()
         
+        registerButton.addTarget(self, action: #selector(actionRegisterButton), for: .touchUpInside)
+        
         super.viewDidLoad()
     }
     
@@ -86,8 +88,9 @@ class FotoView: UIViewController {
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink) {_ in
-            
-            self.dismiss(animated: true)
+            let vc = ConfirmDataView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
         registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
@@ -117,5 +120,11 @@ class FotoView: UIViewController {
         editButton.sizeAnchorInSuperview(CGFloat(32).generateSizeForScreen)
         editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
         editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
+    }
+    
+    @objc func actionRegisterButton() {
+        let vc = ProfessionView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
