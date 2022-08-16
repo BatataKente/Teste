@@ -140,12 +140,12 @@ class EmailView: UIViewController {
         return registerFailLabel
     }()
     
-    private let nomeViewModel = EmailViewModel()
+    private let emailViewModel = EmailViewModel()
     
     private func setupView() {
         
-        nomeViewModel.delegate = self
-        nomeViewModel.makeEmailScreen()
+        emailViewModel.delegate = self
+        emailViewModel.makeEmailScreen()
         
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
         
@@ -229,9 +229,13 @@ class EmailView: UIViewController {
             
             userToRegister.email = viewElements.rightTextField.text ?? ""
             
-            let passwordView = PasswordView()
+            let passwordView = PasswordView(userToRegister)
             passwordView.modalPresentationStyle = .fullScreen
             present(passwordView, animated: false)
+        }
+        else {
+            
+            emailViewModel.makeFailScreen()
         }
     }
     

@@ -50,7 +50,7 @@ class PhoneViewModel {
     
     func makeFailScreen() {
         
-        delegate?.setIshidden(leftStackView: true,
+        delegate?.setIshidden(leftStackView: false,
                               ddiChoseLabel: false,
                               alertButton: false,
                               registerFailLabel: false,
