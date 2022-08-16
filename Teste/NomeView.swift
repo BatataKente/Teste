@@ -228,31 +228,28 @@ class NomeView: UIViewController {
         
     @objc func changeScreen() {
         
-        if validateName(viewElements.rightTextField.text ?? "") {
-            
-            userToRegister.name = viewElements.rightTextField.text ?? ""
-            
-            let phoneView = PhoneView(userToRegister)
-            phoneView.modalPresentationStyle = .fullScreen
-            present(phoneView, animated: false)
-        }
-        else {
-            
-            nomeViewModel.makeFailScreen()
-        }
+        userToRegister.name = viewElements.rightTextField.text ?? ""
+        
+        let phoneView = PhoneView(userToRegister)
+        phoneView.modalPresentationStyle = .fullScreen
+        present(phoneView, animated: false)
     }
     
     @objc func changeText(_ sender: UITextField) {
         
-        if sender.text != "" {
-
+        if validateName(sender.text ?? "") {
+            
+            nomeViewModel.refreshScreen()
+            
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
-
+            
+            nomeViewModel.makeFailScreen()
+            
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
@@ -263,9 +260,7 @@ class NomeView: UIViewController {
 
 extension NomeView: NomeViewModelProtocol {
     
-    func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool,
-                     alertButton: Bool,
+    func setIshidden(alertButton: Bool,
                      registerFailLabel: Bool,
                      rightTextField: Bool,
                      ways: [Bool])  {

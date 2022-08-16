@@ -319,23 +319,18 @@ class PhoneView: UIViewController {
 
     @objc func changeScreen() {
         
-        if validateCellPhone(viewElements.rightTextField.text ?? "") {
-            
-            userToRegister.phone_number = viewElements.rightTextField.text ?? ""
-            
-            let emailView = EmailView(userToRegister)
-            emailView.modalPresentationStyle = .fullScreen
-            present(emailView, animated: false)
-        }
-        else {
-            
-            phoneViewModel.makeFailScreen()
-        }
+        userToRegister.phone_number = viewElements.rightTextField.text ?? ""
+        
+        let emailView = EmailView(userToRegister)
+        emailView.modalPresentationStyle = .fullScreen
+        present(emailView, animated: false)
     }
 
     @objc func changeText(_ sender: UITextField) {
 
-        if sender.text != "" {
+        if validateCellPhone(sender.text ?? "") {
+            
+            phoneViewModel.refreshScreen()
 
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
@@ -343,6 +338,8 @@ class PhoneView: UIViewController {
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
+            
+            phoneViewModel.makeFailScreen()
 
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),

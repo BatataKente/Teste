@@ -13,9 +13,7 @@ class NomeViewModel {
     
     func makeNameScreen() {
         
-        delegate?.setIshidden(leftStackView: true,
-                              ddiChoseLabel: false,
-                              alertButton: true,
+        delegate?.setIshidden(alertButton: true,
                               registerFailLabel: true,
                               rightTextField: true,
                               ways: [true, true, false])
@@ -38,9 +36,7 @@ class NomeViewModel {
     
     func makeFailScreen() {
         
-        delegate?.setIshidden(leftStackView: true,
-                              ddiChoseLabel: false,
-                              alertButton: false,
+        delegate?.setIshidden(alertButton: false,
                               registerFailLabel: false,
                               rightTextField: false,
                               ways: [true, true, false])
@@ -48,13 +44,22 @@ class NomeViewModel {
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue),
                             customShaddowbackgroundColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue))
     }
+    
+    func refreshScreen() {
+        
+        delegate?.setIshidden(alertButton: true,
+                              registerFailLabel: true,
+                              rightTextField: false,
+                              ways: [true, true, false])
+        
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
+    }
 }
 
 protocol NomeViewModelProtocol {
     
-    func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool,
-                     alertButton: Bool,
+    func setIshidden(alertButton: Bool,
                      registerFailLabel: Bool,
                      rightTextField: Bool,
                      ways: [Bool])
