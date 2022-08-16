@@ -37,6 +37,8 @@
 		2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB528A58606004214A9 /* DetailsClosedView.swift */; };
 		2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */; };
 		2E57CDD328A79E38004214A9 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDD228A79E38004214A9 /* CustomAlert.swift */; };
+		2E57CDDC28AC05EC004214A9 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDDB28AC05EC004214A9 /* TokenView.swift */; };
+		2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -218,6 +220,8 @@
 		2E57CDB528A58606004214A9 /* DetailsClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedView.swift; sourceTree = "<group>"; };
 		2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedCollectionViewCell.swift; sourceTree = "<group>"; };
 		2E57CDD228A79E38004214A9 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		2E57CDDB28AC05EC004214A9 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -439,6 +443,31 @@
 			isa = PBXGroup;
 			children = (
 				2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2E57CDD828AC059C004214A9 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDDA28AC05C9004214A9 /* ViewModel */,
+				2E57CDD928AC05C2004214A9 /* View */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
+		2E57CDD928AC05C2004214A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDDB28AC05EC004214A9 /* TokenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E57CDDA28AC05C9004214A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1025,6 +1054,7 @@
 				C69616E72881E94B00281633 /* Password */,
 				C69616E62881E93F00281633 /* Email */,
 				C69616E52881E93900281633 /* Telephone */,
+				2E57CDD828AC059C004214A9 /* Token */,
 				C69616E42881E92700281633 /* Name */,
 			);
 			path = Registration;
@@ -1916,6 +1946,7 @@
 				2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */,
 				C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */,
 				C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */,
+				2E57CDDC28AC05EC004214A9 /* TokenView.swift in Sources */,
 				C69617212881EAB900281633 /* PhotoView.swift in Sources */,
 				C69617612881EC9000281633 /* Reservation2ViewModel.swift in Sources */,
 				C69616B32881E79400281633 /* PasswordRecoveryPasswordModel.swift in Sources */,
@@ -1952,6 +1983,7 @@
 				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
+				2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
 				146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */,
 				C696175F2881EC7F00281633 /* Reservation2View.swift in Sources */,
