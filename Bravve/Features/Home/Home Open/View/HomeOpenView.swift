@@ -9,6 +9,19 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    init(_ willLoad: Bool = false) {
+        
+        imageView.isHidden = willLoad
+        coverView.isHidden = willLoad
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
 
         super.viewDidDisappear(animated)
@@ -233,10 +246,10 @@ class HomeOpenView: UIViewController {
         coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         coverView.constraintInsideTo(.bottom, view)
         
-        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.height, coverView, multiplier: 0.0725446428571429)
-        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
+        imageView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.08)
+        imageView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.6634)
     }
 }
 
