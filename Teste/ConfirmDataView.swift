@@ -1,14 +1,30 @@
 //
 //  ConfirmarDadosView.swift
-//  Teste
+//  Bravve
 //
 //  Created by user218997 on 29/07/22.
 //
 
-import Foundation
 import UIKit
 
 class ConfirmDataView: UIViewController {
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override var prefersStatusBarHidden: Bool {
 
@@ -68,21 +84,21 @@ class ConfirmDataView: UIViewController {
         return label
     }()
     
-    private lazy var editButton1: UIButton = {
+    private lazy var editButtonName: UIButton = {
         let button = myButton()
         return button
     }()
-    private lazy var editButton2: UIButton = {
+    private lazy var editButtonCell: UIButton = {
         let button = myButton()
         return button
     }()
-    private lazy var editButton3: UIButton = {
+    private lazy var editButtonEmail: UIButton = {
         let button = myButton()
         return button
     }()
     
     private lazy var stackViewName: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelName, editButton1])
+        let stackView = UIStackView(arrangedSubviews: [labelName, editButtonName])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -96,7 +112,7 @@ class ConfirmDataView: UIViewController {
     }()
     
     private lazy var stackViewCell: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelCell, editButton2])
+        let stackView = UIStackView(arrangedSubviews: [labelCell, editButtonCell])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -110,7 +126,7 @@ class ConfirmDataView: UIViewController {
     }()
     
     private lazy var stackViewEmail: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelEmail, editButton3])
+        let stackView = UIStackView(arrangedSubviews: [labelEmail, editButtonEmail])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -176,9 +192,9 @@ class ConfirmDataView: UIViewController {
         stackViewCell.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         stackViewEmail.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
-        editButton1.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        editButton2.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        editButton3.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButtonName.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButtonCell.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        editButtonEmail.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
         stackViewLabels.constraintInsideTo(.leading, label)
         stackViewLabels.constraintInsideTo(.trailing, label)
@@ -190,30 +206,34 @@ class ConfirmDataView: UIViewController {
         
         buttonContinue.addTarget(self, action: #selector(actionButtonContinue), for: .touchUpInside)
         
-        editButton1.addTarget(self, action: #selector(actionEditButton1), for: .touchUpInside)
-        editButton2.addTarget(self, action: #selector(actionEditButton2), for: .touchUpInside)
-        editButton3.addTarget(self, action: #selector(actionEditButton3), for: .touchUpInside)
+        editButtonName.addTarget(self, action: #selector(actionEditButtonName), for: .touchUpInside)
+        editButtonCell.addTarget(self, action: #selector(actionEditButtonCell), for: .touchUpInside)
+        editButtonEmail.addTarget(self, action: #selector(actionEditButtonEmail), for: .touchUpInside)
         
     }
     
     
     @objc func actionButtonContinue() {
-        print("continuar")
+        let vc = FotoView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
-    @objc func actionEditButton1() {
-        print("tela dados pessoais")
+    @objc func actionEditButtonName() {
         let vc = NomeView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     
-    @objc func actionEditButton2() {
-        print("tela celular")
-    
+    @objc func actionEditButtonCell() {
+        let vc = PhoneView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
-    @objc func actionEditButton3() {
-        print("tela email")
+    @objc func actionEditButtonEmail() {
+        let vc = EmailView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
