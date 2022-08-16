@@ -82,7 +82,7 @@
 		14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
-		306F6E9A28A29D640057D49C /* FAQTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* FAQTableViewCell.swift */; };
+		306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* HelpTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
 		306F6E9C28A29D640057D49C /* FAQViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */; };
 		306F6E9D28A29D640057D49C /* FrequentlyAskedQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */; };
@@ -176,7 +176,7 @@
 		14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryEmailView.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
-		306F6E9628A29D630057D49C /* FAQTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQTableViewCell.swift; sourceTree = "<group>"; };
+		306F6E9628A29D630057D49C /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
 		306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequentlyAskedQuestionsView.swift; sourceTree = "<group>"; };
@@ -342,10 +342,11 @@
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
 				14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */,
 				14CBDBD32889B72500EA8EDD /* Info.plist */,
-				306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */,
-				306F6E9628A29D630057D49C /* FAQTableViewCell.swift */,
+				306F6E9828A29D640057D49C /* HelpViewTableViewCell.swift */,
+				30D3120D28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift */,
+				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
-				306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */,
+				306F6E9928A29D640057D49C /* HelpViewController.swift */,
 			);
 			path = Teste;
 			sourceTree = "<group>";
@@ -458,6 +459,7 @@
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
 				13080CB428A17EC000A064B0 /* Network.swift in Sources */,
+				30D3120E28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift in Sources */,
 				14937D6A28A47033004A1E7A /* HelpView.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
@@ -475,7 +477,7 @@
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
-				306F6E9A28A29D640057D49C /* FAQTableViewCell.swift in Sources */,
+				306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
@@ -494,7 +496,7 @@
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
-				306F6E9C28A29D640057D49C /* FAQViewTableViewCell.swift in Sources */,
+				306F6E9C28A29D640057D49C /* HelpViewTableViewCell.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
 				146A8BEB28AAAB86007650A8 /* ThemeEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
@@ -505,7 +507,7 @@
 				145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */,
 				143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
-				306F6E9D28A29D640057D49C /* FrequentlyAskedQuestionsView.swift in Sources */,
+				306F6E9D28A29D640057D49C /* HelpViewController.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */,

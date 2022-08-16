@@ -8,28 +8,27 @@
 import Foundation
 import UIKit
 
-class FAQTableViewCell: UITableViewCell {
+class HelpTableViewCell: UITableViewCell {
     
-    static let identifier = "FAQTableViewCell"
+    static let identifier = "HelpTableViewCell"
     var iconClick: Bool = true
     
-//    private lazy var backgroundCellView: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var backgroundCellView: UIImageView = {
+        let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 296, height: 331))
+        view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
-//        view.layer.cornerRadius = 15
-//        view.layer.shadowColor = UIColor.black.cgColor
-//        view.layer.shadowOpacity = 0.5
-//        view.layer.shadowRadius = 8
-//        view.layer.shadowOffset = CGSize(width: 0, height: 4)
-//        view.layer.bounds = bounds
-//        view.layer.position = center
-//        return view
-//    }()
+        view.layer.cornerRadius = 15
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowRadius = 8
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.bounds = bounds
+        view.layer.position = center
+        view.backgroundColor = .systemBlue
+        return view
+    }()
     
-    
-    
-    private lazy var backgroundCellView: UIStackView = {
+    private lazy var subtitleStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
@@ -41,21 +40,10 @@ class FAQTableViewCell: UITableViewCell {
         view.layer.bounds = bounds
         view.layer.position = center
         
-        view.addArrangedSubviews([titleLabel, plusAndLessButton])
-        view.axis = .horizontal
-        view.spacing = 25
-        view.distribution = .fillProportionally
-        
-        return view
-    }()
-    
-    private lazy var subtitleStackView: UIStackView = {
-       let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addArrangedSubviews([subTitleLabel])
-        view.axis = .vertical
-        view.distribution = .fillProportionally
-        view.isHidden = true
+//        view.axis = .horizontal
+//        view.spacing = 25
+//        view.distribution = .fillProportionally
         return view
     }()
     
@@ -81,8 +69,9 @@ class FAQTableViewCell: UITableViewCell {
         paragraphStyle.lineHeightMultiple = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
+        label.backgroundColor = .red
         label.numberOfLines = 0
-        label.attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.attributedText = NSMutableAttributedString(string: "Como eu faço para abrir o Box?", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.font = UIFont(name: FontsBravve.koho.rawValue, size: CGFloat(17).generateSizeForScreen)
         label.textAlignment = .left
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -90,22 +79,30 @@ class FAQTableViewCell: UITableViewCell {
     }()
     
     lazy var subTitleLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 242, height: 240))
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
+        label.attributedText = NSMutableAttributedString(string: "Após confirmar o pagamento ou inserir seu voucher, o app exibe as informações da sua contratação. No horário estabelecido, basta ir no menu "+"Minhas reservas"+", selecionar sua reserva e o app abrirá um card com o resumo da sua contratação. Clique na reserva e depois no. botão "+"Destravar porta"+" e pronto. Você já pode acessar o box.", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
         label.textAlignment = .left
-//        label.isHidden = true
+        label.isHidden = true
+        
         return label
     }()
     
     @objc func showAnswer(sender:UIButton){
         if(iconClick == true){
             plusAndLessButton.setImage(UIImage(named: "lessButton"), for: .normal)
-            self.subtitleStackView.isHidden = false
+            self.subTitleLabel.isHidden = false
+        } else {
+        plusAndLessButton.setImage(UIImage(named: "mostButton"), for: .normal)
+        self.subTitleLabel.isHidden = true
         }
+        iconClick = !iconClick
     }
     
     
@@ -113,7 +110,7 @@ class FAQTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        contentView.addSubviews([backgroundCellView, invisibleButton, subtitleStackView])
+        contentView.addSubviews([backgroundCellView, titleLabel, invisibleButton, subTitleLabel, plusAndLessButton])
         configConstraints()
     }
     
@@ -123,24 +120,30 @@ class FAQTableViewCell: UITableViewCell {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            self.backgroundCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.backgroundCellView.topAnchor.constraint(equalTo: self.subTitleLabel.topAnchor),
             self.backgroundCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: CGFloat(41).generateSizeForScreen),
             self.backgroundCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: CGFloat(-41).generateSizeForScreen),
-            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-12).generateSizeForScreen),
+            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.subTitleLabel.bottomAnchor, constant: CGFloat(-12).generateSizeForScreen),
+//            
+            self.titleLabel.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: CGFloat(50)),
+            self.titleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25)),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-79)),
+            self.titleLabel.bottomAnchor.constraint(equalTo: self.backgroundCellView.topAnchor),
             
-            self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: CGFloat(14).generateSizeForScreen),
-            self.titleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
-            self.titleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-79).generateSizeForScreen),
+            self.subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            self.subTitleLabel.leadingAnchor.constraint(equalTo: backgroundCellView.leadingAnchor, constant: 25),
+            self.subTitleLabel.trailingAnchor.constraint(equalTo: backgroundCellView.trailingAnchor, constant: -29),
+            self.subTitleLabel.bottomAnchor.constraint(equalTo: self.backgroundCellView.bottomAnchor, constant: -23),
             
             self.invisibleButton.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor),
             self.invisibleButton.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor),
             self.invisibleButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
             self.invisibleButton.bottomAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
             
-            self.subtitleStackView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
-            self.subtitleStackView.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
-            self.subtitleStackView.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-29).generateSizeForScreen),
-            self.subtitleStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-37).generateSizeForScreen),
+//            self.subTitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+//            self.subTitleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
+//            self.subTitleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: CGFloat(-29).generateSizeForScreen),
+//            self.subTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: CGFloat(-37).generateSizeForScreen),
             
             self.plusAndLessButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
             self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),

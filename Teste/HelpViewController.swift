@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-class FrequentlyAskedQuestionsView: UIViewController {
+class HelpViewController: UIViewController {
     
-    private var viewModel: FAQViewModel = FAQViewModel()
+    private var viewModel: HelpViewModel = HelpViewModel()
     private let customBar = UIView()
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
-        table.register(FAQViewTableViewCell.self, forCellReuseIdentifier: FAQViewTableViewCell.identifier)
-        table.register(FAQTableViewCell.self, forCellReuseIdentifier: FAQTableViewCell.identifier)
+        table.register(HelpViewTableViewCell.self, forCellReuseIdentifier: HelpViewTableViewCell.identifier)
+        table.register(HelpTableViewCell.self, forCellReuseIdentifier: HelpTableViewCell.identifier)
         table.showsVerticalScrollIndicator = false
         table.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
         table.rowHeight = UITableView.automaticDimension
@@ -37,7 +37,7 @@ class FrequentlyAskedQuestionsView: UIViewController {
     
     private func setupDefaults() {
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes") {_ in
-            let navBar = FrequentlyAskedQuestionsView()
+            let navBar = HelpViewController()
             navBar.modalPresentationStyle = .fullScreen
             self.present(navBar, animated: false)
         }
@@ -53,7 +53,7 @@ class FrequentlyAskedQuestionsView: UIViewController {
     }
 }
 
-extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelegate {
+extension HelpViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -66,22 +66,23 @@ extension FrequentlyAskedQuestionsView: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQViewTableViewCell.identifier, for: indexPath) as? FAQViewTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: HelpViewTableViewCell.identifier, for: indexPath) as? HelpViewTableViewCell else {
                 fatalError()
             }
             return cell
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: FAQTableViewCell.identifier, for: indexPath) as? FAQTableViewCell else{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: HelpTableViewCell.identifier, for: indexPath) as? HelpTableViewCell else{
                 fatalError()
             }
-            cell.titleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).question
-            cell.subTitleLabel.attributedText = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
                 return cell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
         return UITableView.automaticDimension
+        }
+        return 500
     }
 }
 
