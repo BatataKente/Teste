@@ -246,31 +246,28 @@ class EmailView: UIViewController {
         
     @objc func changeScreen() {
         
-        if validateEmail(viewElements.rightTextField.text ?? "") {
-            
-            userToRegister.email = viewElements.rightTextField.text ?? ""
-            
-            let passwordView = PasswordView(userToRegister)
-            passwordView.modalPresentationStyle = .fullScreen
-            present(passwordView, animated: false)
-        }
-        else {
-            
-            emailViewModel.makeFailScreen()
-        }
+        userToRegister.email = viewElements.rightTextField.text ?? ""
+        
+        let passwordView = PasswordView(userToRegister)
+        passwordView.modalPresentationStyle = .fullScreen
+        present(passwordView, animated: false)
     }
     
     @objc func changeText(_ sender: UITextField) {
         
-        if sender.text != "" {
-
+        if validateEmail(sender.text ?? "") {
+            
+            emailViewModel.refreshScreen()
+            
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
-
+            
+            emailViewModel.makeFailScreen()
+            
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
@@ -281,9 +278,7 @@ class EmailView: UIViewController {
 
 extension EmailView: EmailViewModelProtocol {
     
-    func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool,
-                     alertButton: Bool,
+    func setIshidden(alertButton: Bool,
                      registerFailLabel: Bool,
                      rightTextField: Bool,
                      ways: [Bool]) {
