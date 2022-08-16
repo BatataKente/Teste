@@ -1,5 +1,5 @@
 //
-//  NomeView.swift
+//  EmailView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -258,11 +258,14 @@ extension EmailView: EmailViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool]) {
         
-        viewElements.alertButton.isHidden = true
-        registerFailLabel.isHidden = true
-        viewElements.rightTextField.isHidden = true
+        viewElements.alertButton.isHidden = alertButton
+        self.registerFailLabel.isHidden = registerFailLabel
+        viewElements.rightTextField.isHidden = rightTextField
         
         self.ways[0].isHidden = ways[0]
         self.ways[1].isHidden = ways[1]
