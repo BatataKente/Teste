@@ -84,7 +84,7 @@ extension UIViewController {
                     
                     let handler = {(action: UIAction) in
                         
-                        let nomeView = NomeView(.second)
+                        let nomeView = NomeView()
                         nomeView.modalPresentationStyle = .fullScreen
                         self.present(nomeView,
                                      animated: false)
@@ -98,7 +98,7 @@ extension UIViewController {
                     
                     let handler = {(action: UIAction) in
                         
-                        let nomeView = NomeView(.thirdy)
+                        let nomeView = NomeView()
                         nomeView.modalPresentationStyle = .fullScreen
                         self.present(nomeView,
                                      animated: false)
@@ -170,7 +170,7 @@ extension UIViewController {
                     
                     let handler = {(action: UIAction) in
                         
-                        let nomeView = NomeView(.first)
+                        let nomeView = NomeView()
                         nomeView.modalPresentationStyle = .fullScreen
                         self.present(nomeView,
                                      animated: false)

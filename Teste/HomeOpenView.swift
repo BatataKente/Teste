@@ -24,47 +24,18 @@ class HomeOpenView: UIViewController {
         setupDefaults()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-
-        .lightContent
-    }
-    
     override var prefersStatusBarHidden: Bool {
+        
        true
     }
     
-    let authManager = NetworkManager()
+    private let authManager = NetworkManager()
     
     private let cellIdentifier = "Cell"
     
     private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo"]
     
-    private var cells: [ReserveData] = [
-        ReserveData(title: "BOXOFFICE",
-        description: "Numa esquina charmosa, um hotel",
-        image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
-        photoTitle: "WORKPASS",
-        name: "Hotel Saint",
-        subName: "UM Coffee Co.",
-        price: "3,50 crédito/ hora",
-        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-        ReserveData(title: "BOXOFFICE",
-        description: "Pelos poderes de greyskull",
-        image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
-        photoTitle: "WORKPASS",
-        name: "Hotel Saint",
-        subName: "UM Coffee Co.",
-        price: "3,50 crédito/ hora",
-        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-        ReserveData(title: "BOXOFFICE",
-        description: "Numa esquina charmosa, um hotel",
-        image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
-        photoTitle: "WORKPASS",
-        name: "Hotel Saint",
-        subName: "UM Coffee Co.",
-        price: "3,50 crédito/ hora",
-        details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"
-                   )]
+    private var cells: [Space] = []
      
     private let titleLabel = UILabel()
     
@@ -125,26 +96,28 @@ class HomeOpenView: UIViewController {
                                            itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                             ButtonsBravve.exitGray.rawValue
                                                             ])
+    private let imageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
     private let coverView: UIView = {
         
         let coverView = UIView()
         coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
-        imageView.contentMode = .scaleAspectFit
-        coverView.addSubview(imageView)
-        
-        imageView.constraintInsideTo(.centerX, coverView)
-        imageView.constraintInsideTo(.centerY, coverView)
-        imageView.constraintInsideTo(.height, coverView, multiplier: 0.08)
-        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
         
         return coverView
     }()
     
+    
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar, coverView])
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -229,12 +202,15 @@ class HomeOpenView: UIViewController {
                 return
             }
             
-            self.cells[0] = ReserveData(title: spaces[0].space_category?.name ?? "", description: spaces[0].slogan ?? "", image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(), photoTitle: "", name: spaces[0].name ?? "", subName: spaces[0].description ?? "", price: "\(spaces[0].hourly_credits ?? 0) crédito/hora", details: "\(spaces[0].partner_site_address?.address?.city_name ?? "") / \(spaces[0].partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(spaces[0].seats_qty ?? 0) pessoas \n\(spaces[0].space_type?.name ?? "")")
+            self.cells = spaces
             
             self.tableView.reloadData()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.coverView.isHidden = true
+            UIView.animate(withDuration: 0.6,
+                           delay: 0.3) {
+                    
+                self.coverView.alpha = 0
+                self.imageView.alpha = 0
             }
         }
     }
@@ -252,10 +228,15 @@ class HomeOpenView: UIViewController {
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
-        coverView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.top, view)
         coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        coverView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.bottom, view)
+        
+        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
+        imageView.constraintInsideTo(.height, coverView, multiplier: 0.0725446428571429)
+        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
     }
 }
 
@@ -285,9 +266,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
-                cell?.indexPath = IndexPath(row: indexPath.row - 1,
-                                            section: indexPath.section - 1)
-                cell?.setup(cells[indexPath.row - 1])
+                cell?.setup(cells[indexPath.row - 1], IndexPath(row: indexPath.row - 1,
+                                                                section: indexPath.section - 1))
                 
                 return cell ?? UITableViewCell()
             }

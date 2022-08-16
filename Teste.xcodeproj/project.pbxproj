@@ -34,6 +34,7 @@
 		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
 		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
+		143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
 		143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */; };
 		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
@@ -43,10 +44,19 @@
 		14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */; };
 		145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */; };
 		145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */; };
+		145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07DE28AABE6900ABCCF0 /* PhoneView.swift */; };
+		145B07E128AABEAD00ABCCF0 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07E028AABEAD00ABCCF0 /* EmailView.swift */; };
+		145B07E328AABECA00ABCCF0 /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */; };
+		145B07E528AABED600ABCCF0 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B07E428AABED600ABCCF0 /* EmailViewModel.swift */; };
+		146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */; };
+		146A8BE628AAAB2F007650A8 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE528AAAB2F007650A8 /* MonthView.swift */; };
+		146A8BE928AAAB55007650A8 /* WeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE828AAAB55007650A8 /* WeekDaysView.swift */; };
+		146A8BEB28AAAB86007650A8 /* ThemeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BEA28AAAB86007650A8 /* ThemeEnum.swift */; };
 		1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */; };
 		1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */; };
 		147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */; };
 		147B1C862898482100A5E3EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 147B1C852898482100A5E3EE /* Assets.xcassets */; };
+		147BA88428A81ECF006924C8 /* OrientationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA88328A81ECF006924C8 /* OrientationEnum.swift */; };
 		1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */; };
 		1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480986E289EC3D000B1BDE2 /* ProfessionView.swift */; };
 		14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */; };
@@ -55,6 +65,9 @@
 		14937D6C28A4703F004A1E7A /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14937D6B28A4703F004A1E7A /* HelpViewModel.swift */; };
 		14A375C528A302A100B48F9D /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A375C428A302A100B48F9D /* PasswordView.swift */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
+		14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */; };
+		14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE328ABB626004C32BF /* HelpViewController.swift */; };
+		14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
 		14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */; };
 		14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954328944A2E00BD3B79 /* UILabelExtension.swift */; };
@@ -74,10 +87,6 @@
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* HelpTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
-		306F6E9C28A29D640057D49C /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9828A29D640057D49C /* HelpViewTableViewCell.swift */; };
-		306F6E9D28A29D640057D49C /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9928A29D640057D49C /* HelpViewController.swift */; };
-		30D3120E28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3120D28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift */; };
-		C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D873289C3DFB0045AEED /* RegisterPassword.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
 		CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */; };
@@ -118,6 +127,7 @@
 		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
 		143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarWithFilterStruct.swift; sourceTree = "<group>"; };
 		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
@@ -127,10 +137,19 @@
 		14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalizacaoCadastroView.swift; sourceTree = "<group>"; };
 		145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenTableViewCell.swift; sourceTree = "<group>"; };
 		145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		145B07DE28AABE6900ABCCF0 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
+		145B07E028AABEAD00ABCCF0 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
+		145B07E428AABED600ABCCF0 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
+		146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCalendar.swift; sourceTree = "<group>"; };
+		146A8BE528AAAB2F007650A8 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		146A8BE828AAAB55007650A8 /* WeekDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysView.swift; sourceTree = "<group>"; };
+		146A8BEA28AAAB86007650A8 /* ThemeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnum.swift; sourceTree = "<group>"; };
 		1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
 		147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsView.swift; sourceTree = "<group>"; };
 		147B1C852898482100A5E3EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		147BA88328A81ECF006924C8 /* OrientationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationEnum.swift; sourceTree = "<group>"; };
 		1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenModel.swift; sourceTree = "<group>"; };
 		1480986E289EC3D000B1BDE2 /* ProfessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionView.swift; sourceTree = "<group>"; };
 		14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionViewModel.swift; sourceTree = "<group>"; };
@@ -139,6 +158,9 @@
 		14937D6B28A4703F004A1E7A /* HelpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
 		14A375C428A302A100B48F9D /* PasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQScrollViewTesteViewController.swift; sourceTree = "<group>"; };
+		14BDBBE328ABB626004C32BF /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		14C6954328944A2E00BD3B79 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
@@ -160,10 +182,6 @@
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		306F6E9628A29D630057D49C /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
-		306F6E9828A29D640057D49C /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
-		306F6E9928A29D640057D49C /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		30D3120D28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQScrollViewTesteViewController.swift; sourceTree = "<group>"; };
-		C616D873289C3DFB0045AEED /* RegisterPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPassword.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
 		CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCorporatesV1.swift; sourceTree = "<group>"; };
@@ -220,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
+				143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */,
 				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
 				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
 				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
@@ -229,6 +248,9 @@
 				148A86EA289C64540019ECFE /* BravveTabBar.swift */,
 				140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */,
 				143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */,
+				146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */,
+				146A8BE528AAAB2F007650A8 /* MonthView.swift */,
+				146A8BE828AAAB55007650A8 /* WeekDaysView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -244,6 +266,8 @@
 				1440616728A2BD5F00F82171 /* RideUpEnum.swift */,
 				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
 				143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */,
+				147BA88328A81ECF006924C8 /* OrientationEnum.swift */,
+				146A8BEA28AAAB86007650A8 /* ThemeEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -275,8 +299,11 @@
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				14A375C428A302A100B48F9D /* PasswordView.swift */,
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
+				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
+				14BDBBE328ABB626004C32BF /* HelpViewController.swift */,
 				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
 				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
+				14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
@@ -292,6 +319,10 @@
 				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
 				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
 				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
+				145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */,
+				145B07DE28AABE6900ABCCF0 /* PhoneView.swift */,
+				145B07E428AABED600ABCCF0 /* EmailViewModel.swift */,
+				145B07E028AABEAD00ABCCF0 /* EmailView.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
 				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
 				1410B92428A1740400C36902 /* FilterScreen.swift */,
@@ -306,22 +337,18 @@
 				138C85AD2892BE2800997FBC /* MinhasReservas.swift */,
 				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
-				C616D873289C3DFB0045AEED /* RegisterPassword.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
 				13080CB328A17EC000A064B0 /* Network.swift */,
 				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
 				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
+				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
+				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
 				14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */,
 				14CBDBD32889B72500EA8EDD /* Info.plist */,
-				306F6E9828A29D640057D49C /* HelpViewTableViewCell.swift */,
-				30D3120D28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift */,
-				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
-				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
-				306F6E9928A29D640057D49C /* HelpViewController.swift */,
 			);
 			path = Teste;
 			sourceTree = "<group>";
@@ -413,14 +440,17 @@
 				CFBF087528A2ACFC00D39DCF /* HobbiesView.swift in Sources */,
 				1440616E28A2BD7900F82171 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
+				143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
 				13080CB928A17F2A00A064B0 /* AccessTokenModel.swift in Sources */,
 				143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */,
+				146A8BE628AAAB2F007650A8 /* MonthView.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */,
 				306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */,
+				146A8BE928AAAB55007650A8 /* WeekDaysView.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
 				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
@@ -431,30 +461,36 @@
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
 				13080CB428A17EC000A064B0 /* Network.swift in Sources */,
-				30D3120E28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift in Sources */,
 				14937D6A28A47033004A1E7A /* HelpView.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
+				145B07E128AABEAD00ABCCF0 /* EmailView.swift in Sources */,
+				147BA88428A81ECF006924C8 /* OrientationEnum.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */,
 				CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */,
+				145B07E528AABED600ABCCF0 /* EmailViewModel.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
+				145B07E328AABECA00ABCCF0 /* PhoneViewModel.swift in Sources */,
 				1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */,
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
+				14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
 				306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
-				C616D874289C3DFB0045AEED /* RegisterPassword.swift in Sources */,
+				146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */,
+				14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */,
 				CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
+				14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1410B92528A1740400C36902 /* FilterScreen.swift in Sources */,
@@ -464,16 +500,16 @@
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
-				306F6E9C28A29D640057D49C /* HelpViewTableViewCell.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
+				146A8BEB28AAAB86007650A8 /* ThemeEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */,
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
+				145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */,
 				143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
-				306F6E9D28A29D640057D49C /* HelpViewController.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */,

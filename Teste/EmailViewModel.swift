@@ -7,15 +7,15 @@
 
 import UIKit
 
-class NomeViewModel {
+class EmailViewModel {
     
-    var delegate: NomeViewModelProtocol?
+    var delegate: EmailViewModelProtocol?
     
-    func makeNameScreen() {
+    func makeEmailScreen() {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
-                              ways: [true, true, false])
+                              ways: [false, true, true])
         
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
                                        size: CGFloat(15).generateSizeForScreen) ?? UIFont())
@@ -23,18 +23,18 @@ class NomeViewModel {
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
                             customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
         
-        delegate?.setText(rightLabel: "Nome Completo",
+        delegate?.setText(rightLabel: "E-mail",
                           rightTextField: "",
-                          infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!",
-                          registerFailLabel: "Formato de nome inválido")
+                          infoLabel: "Qual seu email? Não se preocupe, não vamos encher sua caixa de entrada.",
+                          registerFailLabel: "Formato de e-mail inválido")
         
         delegate?.freezeButton()
         
-        delegate?.setKeyboardType(keyboardType: .namePhonePad)
+        delegate?.setKeyboardType(keyboardType: .emailAddress)
     }
 }
 
-protocol NomeViewModelProtocol {
+protocol EmailViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,

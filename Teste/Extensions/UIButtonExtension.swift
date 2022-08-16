@@ -173,8 +173,8 @@ extension UIButton {
 ///   - constant: Distance of button from left
 ///   - handler: Action of button
     func setToBackButtonDefault(_ imageName: ButtonsBravve = .backWhite,
-                                     _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
-                                     _ handler: @escaping UIActionHandler) {
+                                _ constant: CGFloat = CGFloat(22).generateSizeForScreen,
+                                _ handler: @escaping UIActionHandler) {
         
         self.setImage(UIImage(named: imageName.rawValue), for: .normal)
         self.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
@@ -190,5 +190,101 @@ extension UIButton {
                                 superview?.safeAreaLayoutGuide,
                                 multiplier: CGFloat(0.04).generateSizeForScreen)
         self.constraintOutsideTo(.width, self)
+    }
+}
+
+extension UIButton {
+    
+/// This function adds a view as a subview
+/// - Parameters:
+///   - window: The view that will be the subWindow
+///   - orientation: The position that window will move
+    func addSubWindow(_ window: UIView,
+                      _ orientation: Orientation = .downRight) {
+        
+        let size = window.frame.size
+        window.frame.size = .zero
+        
+        let animate = {
+            
+            window.frame.size = size
+            window.alpha = 1
+        }
+        
+        let timing: (duration: CGFloat,
+                     delay: CGFloat) = (duration: 0.3,
+                                        delay: 0.1)
+        
+        let handler = {(action: UIAction) in
+            
+            window.frame.size = .zero
+            window.alpha = 0
+            
+            switch orientation {
+                
+                case .downLeft:
+                
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+                        
+                        animate()
+                        window.frame.origin.x -= size.width
+                    }
+                
+                case .downRight:
+                
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+                        
+                        animate()
+                    }
+                
+                case .upLeft:
+                
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+                        
+                        animate()
+                        window.frame.origin.x -= size.width
+                        window.frame.origin.y -= size.height
+                    }
+                
+                case .upRight:
+                
+                    window.frame.origin = CGPoint(x: self.center.x,
+                                                  y: self.center.y)
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+                        
+                        animate()
+                        window.frame.origin.y -= size.height
+                    }
+                
+                default:
+                
+                    window.frame.origin = CGPoint(x: self.superview?.center.x ?? self.center.x,
+                                                  y: self.superview?.center.y ?? self.center.x)
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+                        
+                        animate()
+                        window.frame.origin.x -= size.width/2
+                        window.frame.origin.y -= size.width/2
+                    }
+            }
+        }
+        
+        self.addAction(UIAction(handler: handler), for: .touchUpInside)
     }
 }
