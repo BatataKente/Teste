@@ -50,21 +50,21 @@ class EmailView: UIViewController {
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            if let before = self.presentingViewController,
-               let beforeBefore = before.presentingViewController {
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
                 
-                before.view.isHidden = true
-                beforeBefore.dismiss(animated: false)
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
             }
         }
         
-        let handler = {(action: UIAction) in
+        let dismissHandler = {(action: UIAction) in
             
             self.dismiss(animated: false)
         }
         
         buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
-        buttons[1].addAction(UIAction(handler: handler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
         
         return buttons
     }()
