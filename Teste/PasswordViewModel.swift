@@ -199,6 +199,9 @@ extension PasswordView: UITextFieldDelegate {
         
         if samePasswordEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue) {
             
+            continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            continueButton.addTarget(nil, action: #selector(continueAction), for: .touchUpInside)
+            
             if numberCharEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
                 
                 if upperCaseEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
@@ -209,13 +212,6 @@ extension PasswordView: UITextFieldDelegate {
                             
                             if specialCharEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
                                 
-                                continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-                                continueButton.addTarget(nil, action: #selector(continueAction), for: .touchUpInside)
-                            }
-                            else {
-                                
-                                continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
-                                continueButton.backgroundColor = .gray
                             }
                         }
                     }
@@ -269,7 +265,7 @@ extension PasswordView: UITextFieldDelegate {
             confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
             hideWrongConfirmPasswordButton.isHidden = true
             hideConfirmPasswordButton.isHidden = false
-           
+            
         }
     }
 }
