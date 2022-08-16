@@ -68,6 +68,7 @@
 		14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */; };
 		14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE328ABB626004C32BF /* HelpViewController.swift */; };
 		14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */; };
+		14BDBC1828ABDF12004C32BF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBC1728ABDF12004C32BF /* String+Extension.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
 		14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */; };
 		14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954328944A2E00BD3B79 /* UILabelExtension.swift */; };
@@ -161,6 +162,7 @@
 		14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQScrollViewTesteViewController.swift; sourceTree = "<group>"; };
 		14BDBBE328ABB626004C32BF /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
+		14BDBC1728ABDF12004C32BF /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		14C6954328944A2E00BD3B79 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */,
+				14BDBC1728ABDF12004C32BF /* String+Extension.swift */,
 				143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */,
 				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
 				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
@@ -492,6 +495,7 @@
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
 				14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
+				14BDBC1828ABDF12004C32BF /* String+Extension.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1410B92528A1740400C36902 /* FilterScreen.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,

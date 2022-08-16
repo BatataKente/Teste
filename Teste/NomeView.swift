@@ -208,9 +208,12 @@ class NomeView: UIViewController {
         
     @objc func changeScreen() {
         
-        let phoneView = PhoneView()
-        phoneView.modalPresentationStyle = .fullScreen
-        present(phoneView, animated: true)
+        if validateName(viewElements.rightTextField.text ?? "") {
+            
+            let phoneView = PhoneView()
+            phoneView.modalPresentationStyle = .fullScreen
+            present(phoneView, animated: false)
+        }
     }
     
     @objc func changeText(_ sender: UITextField) {
