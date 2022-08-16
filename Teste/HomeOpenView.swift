@@ -96,20 +96,20 @@ class HomeOpenView: UIViewController {
                                            itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                             ButtonsBravve.exitGray.rawValue
                                                             ])
+    private let imageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
     private let coverView: UIView = {
         
         let coverView = UIView()
         coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
-        imageView.contentMode = .scaleAspectFit
-        coverView.addSubview(imageView)
-        
-        imageView.constraintInsideTo(.centerX, coverView)
-        imageView.constraintInsideTo(.centerY, coverView)
-        imageView.constraintInsideTo(.height, coverView, multiplier: 0.08)
-        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
         
         return coverView
     }()
@@ -117,7 +117,7 @@ class HomeOpenView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar, coverView])
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -210,6 +210,7 @@ class HomeOpenView: UIViewController {
                            delay: 0.3) {
                     
                 self.coverView.alpha = 0
+                self.imageView.alpha = 0
             }
         }
     }
@@ -227,10 +228,15 @@ class HomeOpenView: UIViewController {
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
-        coverView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.top, view)
         coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        coverView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.bottom, view)
+        
+        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
+        imageView.constraintInsideTo(.height, coverView, multiplier: 0.0725446428571429)
+        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
     }
 }
 
