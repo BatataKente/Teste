@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0953C3C028AC15BC00C78D93 /* MinhasReservasVazioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953C3BF28AC15BC00C78D93 /* MinhasReservasVazioView.swift */; };
 		0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */; };
 		0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */; };
 		13080CB428A17EC000A064B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13080CB328A17EC000A064B0 /* Network.swift */; };
@@ -104,6 +105,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0953C3BF28AC15BC00C78D93 /* MinhasReservasVazioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinhasReservasVazioView.swift; sourceTree = "<group>"; };
 		0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndCondition.swift; sourceTree = "<group>"; };
 		0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceCheckoutView.swift; sourceTree = "<group>"; };
 		13080CB328A17EC000A064B0 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				13F1768528941C6200C5FD05 /* ConfirmDataView.swift */,
 				0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */,
 				138C85AD2892BE2800997FBC /* MinhasReservas.swift */,
+				0953C3BF28AC15BC00C78D93 /* MinhasReservasVazioView.swift */,
 				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
@@ -457,6 +460,7 @@
 				CFBF087528A2ACFC00D39DCF /* HobbiesView.swift in Sources */,
 				1440616E28A2BD7900F82171 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
+				0953C3C028AC15BC00C78D93 /* MinhasReservasVazioView.swift in Sources */,
 				143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
