@@ -55,7 +55,7 @@ class PhoneViewModel {
                               alertButton: false,
                               registerFailLabel: false,
                               rightTextField: false,
-                              ways: [true, true, false])
+                              ways: [true, false, true])
         
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue),
                             customShaddowbackgroundColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue))

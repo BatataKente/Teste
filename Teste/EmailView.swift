@@ -48,6 +48,24 @@ class EmailView: UIViewController {
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
         
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let before = self.presentingViewController,
+               let beforeBefore = before.presentingViewController {
+                
+                before.view.isHidden = true
+                beforeBefore.dismiss(animated: false)
+            }
+        }
+        
+        let handler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return buttons
     }()
     
