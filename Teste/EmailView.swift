@@ -134,7 +134,7 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
         
         view.setToDefaultBackgroundColor()
@@ -208,9 +208,12 @@ class EmailView: UIViewController {
         
     @objc func changeScreen() {
         
-        let passwordView = PasswordView()
-        passwordView.modalPresentationStyle = .fullScreen
-        present(passwordView, animated: true)
+        if validateEmail(viewElements.rightTextField.text ?? "") {
+            
+            let passwordView = PasswordView()
+            passwordView.modalPresentationStyle = .fullScreen
+            present(passwordView, animated: false)
+        }
     }
     
     @objc func changeText(_ sender: UITextField) {

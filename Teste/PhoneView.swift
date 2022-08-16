@@ -202,7 +202,7 @@ class PhoneView: UIViewController {
 
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
 
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
 
         view.setToDefaultBackgroundColor()
@@ -291,10 +291,13 @@ class PhoneView: UIViewController {
     }
 
     @objc func changeScreen() {
-
-        let emailView = EmailView()
-        emailView.modalPresentationStyle = .fullScreen
-        present(emailView, animated: true)
+        
+        if validateCellPhone(viewElements.rightTextField.text ?? "") {
+            
+            let emailView = EmailView()
+            emailView.modalPresentationStyle = .fullScreen
+            present(emailView, animated: false)
+        }
     }
 
     @objc func changeText(_ sender: UITextField) {
