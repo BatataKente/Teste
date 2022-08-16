@@ -7,15 +7,27 @@
 
 import UIKit
 
-class NomeViewModel {
+class PhoneViewModel {
     
-    var delegate: NomeViewModelProtocol?
+    var delegate: PhoneViewModelProtocol?
     
-    func makeNameScreen() {
+    func createDDIs() -> [String] {
         
-        delegate?.setIshidden(leftStackView: true,
-                              ddiChoseLabel: false,
-                              ways: [true, true, false])
+        var ddis: [String] = []
+        
+        for i in 1...235 {
+            
+            ddis.append("+\(i)")
+        }
+        
+        return ddis
+    }
+    
+    func makePhoneScreen() {
+        
+        delegate?.setIshidden(leftStackView: false,
+                              ddiChoseLabel: true,
+                              ways: [true, false, true])
         
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
                                        size: CGFloat(15).generateSizeForScreen) ?? UIFont())
@@ -23,18 +35,18 @@ class NomeViewModel {
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
                             customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
         
-        delegate?.setText(rightLabel: "Nome Completo",
+        delegate?.setText(rightLabel: "Telefone",
                           rightTextField: "",
-                          infoLabel: "Para começarmos a conversar, pode nos contar seu nome e sobrenome!",
-                          registerFailLabel: "Formato de nome inválido")
+                          infoLabel: "Precisamos do seu telefone com DDD!\n Por favor, informe o seu país também.",
+                          registerFailLabel: "Número não corresponde ao país")
         
         delegate?.freezeButton()
         
-        delegate?.setKeyboardType(keyboardType: .namePhonePad)
+        delegate?.setKeyboardType(keyboardType: .numberPad)
     }
 }
 
-protocol NomeViewModelProtocol {
+protocol PhoneViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
