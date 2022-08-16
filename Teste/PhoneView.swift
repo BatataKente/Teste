@@ -313,9 +313,13 @@ class PhoneView: UIViewController {
             
             userToRegister.phone_number = viewElements.rightTextField.text ?? ""
             
-            let emailView = EmailView()
+            let emailView = EmailView(userToRegister)
             emailView.modalPresentationStyle = .fullScreen
             present(emailView, animated: false)
+        }
+        else {
+            
+            phoneViewModel.makeFailScreen()
         }
     }
 
