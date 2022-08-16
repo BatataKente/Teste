@@ -1,5 +1,5 @@
 //
-//  NomeView.swift
+//  EmailView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -8,6 +8,23 @@
 import UIKit
 
 class EmailView: UIViewController {
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         
@@ -134,7 +151,7 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
         
         view.setToDefaultBackgroundColor()
@@ -208,9 +225,14 @@ class EmailView: UIViewController {
         
     @objc func changeScreen() {
         
-        let passwordView = PasswordView()
-        passwordView.modalPresentationStyle = .fullScreen
-        present(passwordView, animated: true)
+        if validateEmail(viewElements.rightTextField.text ?? "") {
+            
+            userToRegister.email = viewElements.rightTextField.text ?? ""
+            
+            let passwordView = PasswordView()
+            passwordView.modalPresentationStyle = .fullScreen
+            present(passwordView, animated: false)
+        }
     }
     
     @objc func changeText(_ sender: UITextField) {
@@ -236,11 +258,14 @@ extension EmailView: EmailViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool]) {
         
-        viewElements.alertButton.isHidden = true
-        registerFailLabel.isHidden = true
-        viewElements.rightTextField.isHidden = true
+        viewElements.alertButton.isHidden = alertButton
+        self.registerFailLabel.isHidden = registerFailLabel
+        viewElements.rightTextField.isHidden = rightTextField
         
         self.ways[0].isHidden = ways[0]
         self.ways[1].isHidden = ways[1]
