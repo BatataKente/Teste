@@ -65,6 +65,9 @@
 		14937D6C28A4703F004A1E7A /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14937D6B28A4703F004A1E7A /* HelpViewModel.swift */; };
 		14A375C528A302A100B48F9D /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A375C428A302A100B48F9D /* PasswordView.swift */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
+		14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */; };
+		14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE328ABB626004C32BF /* HelpViewController.swift */; };
+		14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
 		14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */; };
 		14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6954328944A2E00BD3B79 /* UILabelExtension.swift */; };
@@ -84,8 +87,6 @@
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* HelpTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
-		306F6E9C28A29D640057D49C /* FAQViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */; };
-		306F6E9D28A29D640057D49C /* FrequentlyAskedQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
 		CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */; };
@@ -157,6 +158,9 @@
 		14937D6B28A4703F004A1E7A /* HelpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
 		14A375C428A302A100B48F9D /* PasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQScrollViewTesteViewController.swift; sourceTree = "<group>"; };
+		14BDBBE328ABB626004C32BF /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		14C6954328944A2E00BD3B79 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
@@ -178,8 +182,6 @@
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		306F6E9628A29D630057D49C /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
-		306F6E9828A29D640057D49C /* FAQViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewTableViewCell.swift; sourceTree = "<group>"; };
-		306F6E9928A29D640057D49C /* FrequentlyAskedQuestionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequentlyAskedQuestionsView.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
 		CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCorporatesV1.swift; sourceTree = "<group>"; };
@@ -297,8 +299,11 @@
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				14A375C428A302A100B48F9D /* PasswordView.swift */,
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
+				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
+				14BDBBE328ABB626004C32BF /* HelpViewController.swift */,
 				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
 				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
+				14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
@@ -338,15 +343,12 @@
 				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
+				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
+				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
 				14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */,
 				14CBDBD32889B72500EA8EDD /* Info.plist */,
-				306F6E9828A29D640057D49C /* HelpViewTableViewCell.swift */,
-				30D3120D28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift */,
-				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
-				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
-				306F6E9928A29D640057D49C /* HelpViewController.swift */,
 			);
 			path = Teste;
 			sourceTree = "<group>";
@@ -459,7 +461,6 @@
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
 				13080CB428A17EC000A064B0 /* Network.swift in Sources */,
-				30D3120E28AAC51000BF9311 /* FAQScrollViewTesteViewController.swift in Sources */,
 				14937D6A28A47033004A1E7A /* HelpView.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
@@ -475,6 +476,7 @@
 				1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */,
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
+				14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
 				306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */,
@@ -482,11 +484,13 @@
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */,
+				14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */,
 				CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
+				14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1410B92528A1740400C36902 /* FilterScreen.swift in Sources */,
@@ -496,7 +500,6 @@
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
-				306F6E9C28A29D640057D49C /* HelpViewTableViewCell.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
 				146A8BEB28AAAB86007650A8 /* ThemeEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
@@ -507,7 +510,6 @@
 				145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */,
 				143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
-				306F6E9D28A29D640057D49C /* HelpViewController.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,
 				134D68112890151C00D5572B /* BulletPoint.swift in Sources */,
 				13080CC028A18C4700A064B0 /* ModelSpacesV1.swift in Sources */,
