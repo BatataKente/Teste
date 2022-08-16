@@ -48,6 +48,13 @@ class PhoneView: UIViewController {
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
 
+        let handler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return buttons
     }()
 
