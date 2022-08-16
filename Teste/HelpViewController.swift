@@ -12,6 +12,7 @@ class HelpViewController: UIViewController {
     
     private var viewModel: HelpViewModel = HelpViewModel()
     private let customBar = UIView()
+    private var flag: Int = 0
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -74,6 +75,9 @@ extension HelpViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HelpTableViewCell.identifier, for: indexPath) as? HelpTableViewCell else{
                 fatalError()
             }
+            cell.titleLabel.text = self.viewModel.getQuestionAnswer(indexPath: indexPath).question
+            cell.subTitleLabel.attributedText = self.viewModel.getQuestionAnswer(indexPath: indexPath).answer
+            cell.delegate = self
                 return cell
         }
     }
@@ -82,8 +86,22 @@ extension HelpViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
         return UITableView.automaticDimension
         }
-        return 500
+        if self.flag == 0 {
+        return 135
+        }
+        else {
+            return UITableView.automaticDimension
+
+        }
     }
 }
 
-
+extension HelpViewController: HelpTableViewCellDelegate {
+    func expandedFlag(flag: Int) {
+        self.flag = flag
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.reloadData()
+    }
+    
+    
+}
