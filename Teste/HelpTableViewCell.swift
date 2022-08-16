@@ -16,7 +16,8 @@ class HelpTableViewCell: UITableViewCell {
     private lazy var backgroundCellView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
+//        view.backgroundColor = UIColor(named: ColorsBravve.backgroundHelp.rawValue)
+        view.backgroundColor = .red
         view.frame = view.bounds
         view.layer.cornerRadius = 15
         view.layer.shadowColor = UIColor.black.cgColor
@@ -25,14 +26,20 @@ class HelpTableViewCell: UITableViewCell {
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
         view.layer.bounds = bounds
         view.layer.position = center
-        view.addArrangedSubviews([titleLabel, plusAndLessButton, subtitleStackView])
+        view.axis = .horizontal
+        view.addArrangedSubviews([titleLabel, plusAndLessButton])
+        
+//        NSLayoutConstraint.activate([
+//            view.
+//        ])
         return view
     }()
     
-    private lazy var subtitleStackView: UIStackView = {
-        let view = UIStackView()
+    lazy var subtitleStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [backgroundCellView, subTitleLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.frame = view.bounds
+        view.axis = .vertical
         view.addArrangedSubviews([subTitleLabel])
         view.isHidden = true
         return view
@@ -87,10 +94,10 @@ class HelpTableViewCell: UITableViewCell {
     @objc func showAnswer(sender:UIButton){
         if(iconClick == true){
             plusAndLessButton.setImage(UIImage(named: "lessButton"), for: .normal)
-            self.subtitleStackView.isHidden = false
+            self.subTitleLabel.isHidden = false
         } else {
         plusAndLessButton.setImage(UIImage(named: "mostButton"), for: .normal)
-        self.subtitleStackView.isHidden = true
+        self.subTitleLabel.isHidden = true
         }
         iconClick = !iconClick
     }
@@ -100,7 +107,7 @@ class HelpTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         contentView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        contentView.addSubviews([backgroundCellView, invisibleButton])
+        contentView.addSubviews([subtitleStackView])
         configConstraints()
     }
     
@@ -113,30 +120,72 @@ class HelpTableViewCell: UITableViewCell {
             self.backgroundCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             self.backgroundCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 40),
             self.backgroundCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -40),
-            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.subtitleStackView.bottomAnchor),
+//            self.backgroundCellView.bottomAnchor.constraint(equalTo: self.subtitleStackView.bottomAnchor),
             
             self.titleLabel.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor, constant: 14),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: 25),
-            self.titleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: -79),
-
-            self.subTitleLabel.topAnchor.constraint(equalTo: self.subtitleStackView.bottomAnchor),
-            self.subTitleLabel.leadingAnchor.constraint(equalTo: self.subtitleStackView.leadingAnchor),
-            self.subTitleLabel.trailingAnchor.constraint(equalTo: self.subtitleStackView.trailingAnchor),
-            self.subTitleLabel.bottomAnchor.constraint(equalTo: self.subtitleStackView.bottomAnchor),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.plusAndLessButton.leadingAnchor),
+            self.titleLabel.heightAnchor.constraint(equalToConstant: 45),
             
-            self.invisibleButton.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor),
-            self.invisibleButton.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor),
-            self.invisibleButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
-            self.invisibleButton.bottomAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
+            self.plusAndLessButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
+            self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: 25),
+            
+            self.subTitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
+            self.subTitleLabel.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor),
+            self.subTitleLabel.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
+            self.subTitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            
+//            self.invisibleButton.topAnchor.constraint(equalTo: self.backgroundCellView.topAnchor),
+//            self.invisibleButton.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor),
+//            self.invisibleButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
+//            self.invisibleButton.bottomAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
             
             self.subtitleStackView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 50),
             self.subtitleStackView.leadingAnchor.constraint(equalTo: self.backgroundCellView.leadingAnchor, constant: 25),
             self.subtitleStackView.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor, constant: -79),
             self.subtitleStackView.bottomAnchor.constraint(equalTo: self.backgroundCellView.bottomAnchor, constant: -37),
             
-            self.plusAndLessButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
-            self.plusAndLessButton.trailingAnchor.constraint(equalTo: self.backgroundCellView.trailingAnchor),
         ])
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+
+import SwiftUI
+
+
+
+struct FeaturePreviews: PreviewProvider {
+
+    static var previews: some View {
+
+        UIViewPreview {
+
+            let cell = HelpTableViewCell()
+            cell.backgroundColor = .red
+//            let app = App(tagline: "Lorem ipsum",
+//
+//                          name: "Lorem ipsum",
+//
+//                          subheading: "Lorem ipsum")
+//
+//            cell.configure(with: app)
+
+            return cell
+
+        }
+
+        .previewLayout(.fixed(width: UIScreen.main.bounds.width,
+
+                              height: 300))
+
+    }
+
+}
+
+
+
+
+
+#endif
 

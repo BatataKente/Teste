@@ -85,6 +85,7 @@
 		14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
+		3029F16728ABDD9E006E1229 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029F16628ABDD9E006E1229 /* UIViewPreview.swift */; };
 		306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* HelpTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
@@ -180,6 +181,7 @@
 		14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryEmailView.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
+		3029F16628ABDD9E006E1229 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		306F6E9628A29D630057D49C /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
@@ -346,11 +348,20 @@
 				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
 				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
+				3029F16528ABDCE4006E1229 /* Utils */,
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
 				14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */,
 				14CBDBD32889B72500EA8EDD /* Info.plist */,
 			);
 			path = Teste;
+			sourceTree = "<group>";
+		};
+		3029F16528ABDCE4006E1229 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3029F16628ABDD9E006E1229 /* UIViewPreview.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,6 +492,7 @@
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
 				306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
+				3029F16728ABDD9E006E1229 /* UIViewPreview.swift in Sources */,
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */,
