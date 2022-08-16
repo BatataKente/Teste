@@ -88,6 +88,7 @@
 		306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* HelpTableViewCell.swift */; };
 		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
+		C636F6E828ABC76D000804D2 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */; };
 		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
 		CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */; };
 		CFBF085D28A2810600D39DCF /* ModelSubscriptionsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBF085728A2810600D39DCF /* ModelSubscriptionsV1.swift */; };
@@ -183,6 +184,7 @@
 		306F6E9628A29D630057D49C /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
 		CFBF085628A2810600D39DCF /* ModelCorporatesV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCorporatesV1.swift; sourceTree = "<group>"; };
 		CFBF085728A2810600D39DCF /* ModelSubscriptionsV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSubscriptionsV1.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
+				C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */,
 				14A375C428A302A100B48F9D /* PasswordView.swift */,
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
 				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
@@ -484,6 +487,7 @@
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
 				146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */,
+				C636F6E828ABC76D000804D2 /* PasswordViewModel.swift in Sources */,
 				14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */,
 				CFBF087428A2ACFC00D39DCF /* ActivitiesView.swift in Sources */,
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
