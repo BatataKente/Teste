@@ -113,7 +113,6 @@ class NetworkManager {
         }
     }
     
-    
     /// Method to post data to the API with a response decoded as an array
     /// - Parameters:
     ///   - id: Optional argument to pass the id to the API endpoint
@@ -125,14 +124,10 @@ class NetworkManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func postDataWithArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping ([T]?) -> Void) {
+    func postDataWithArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping ([T]?) -> Void) {
         
         getToken { accessToken in
             
-            guard let parameters = parameters else {
-                return
-            }
-
             guard let accessToken = accessToken else {
                 return
             }
@@ -165,13 +160,9 @@ class NetworkManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func postDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping (T?) -> Void) {
+    func postDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
-            
-            guard let parameters = parameters else {
-                return
-            }
 
             guard let accessToken = accessToken else {
                 return
@@ -195,6 +186,45 @@ class NetworkManager {
     }
     
     
+    /// Method to upload photos to the API
+    /// - Parameters:
+    ///   - id: Optional id to be passed as a url string parameter
+    ///   - phoneNumber: Optional phone_number to be passed as a url string parameter
+    ///   - uuid: Optional uuid to be passed as a url string parameter
+    ///   - picture: Optional picture to be passed as a url string parameter
+    ///   - picture_uuid: Optional picture_uuid to be passed as a url string parameter
+    ///   - payment_type_id: Optional payment_type_id to be passed as a url string parameter
+    ///   - endpoint: API endpoint passed as a endpoint enum
+    ///   - picture_url: Local URL of the picture to be send to the API
+    ///   - completionHandler: Completio handler to manage the API response
+    func uploadPictureWithResponse<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, picture_url: URL, completionHandler: @escaping (T?) -> Void) {
+        
+        getToken { accessToken in
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+            print(url)
+            
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(picture_url, withName: "picture")
+            }, to: url, headers: headers).responseDecodable(of: T.self) { response in
+                print(response.response?.statusCode)
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
     /// Method to post data to the API without receiving a response
     /// - Parameters:
     ///   - id: Optional argument to pass the id to the API endpoint
@@ -206,13 +236,9 @@ class NetworkManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func postDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping (Int?) -> Void) {
+    func postDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?) -> Void) {
         
         getToken { accessToken in
-            
-            guard let parameters = parameters else {
-                return
-            }
 
             guard let accessToken = accessToken else {
                 return
@@ -247,13 +273,9 @@ class NetworkManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func putDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P? = nil, completionHandler: @escaping (T?) -> Void) {
+    func putDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
-            
-            guard let parameters = parameters else {
-                return
-            }
 
             guard let accessToken = accessToken else {
                 return
@@ -274,6 +296,43 @@ class NetworkManager {
             }
         }
     }
+    
+    
+    /// Method to delete data from the API
+    /// - Parameters:
+    ///   - id: Optional argument to pass the id as a url string parameter
+    ///   - phoneNumber: Optional argument to pass a phone number as a url string parameter
+    ///   - uuid: Optional argument to pass a uuid as a url string parameter
+    ///   - picture: Optional argument to pass a picture path as a url string parameter
+    ///   - picture_uuid: Optional argument to pass a picture_uuid as a url string parameter
+    ///   - payment_type_id: Optional argument to pass a payment_type_id as  a url string parameter
+    ///   - endpoint: The API endpoint as a Endpoint Enum
+    ///   - completionHandler: Completion Handler to manage the status code returned from the API Call.
+    func deleteData(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?) -> Void) {
+        
+        getToken { accessToken in
+
+            guard let accessToken = accessToken else {
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)"
+            ]
+            
+            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+            
+            AF.request(url, method: .delete, headers: headers).response { response in
+
+                if let statusCode = response.response?.statusCode {
+                    completionHandler(statusCode)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
     
     
     /// Method to construct the url to be called in the network functions
