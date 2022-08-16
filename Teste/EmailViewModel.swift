@@ -1,5 +1,5 @@
 //
-//  NomeViewModel.swift
+//  EmailViewModel.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -15,6 +15,9 @@ class EmailViewModel {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
+                              alertButton: true,
+                              registerFailLabel: true,
+                              rightTextField: true,
                               ways: [false, true, true])
         
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
@@ -32,12 +35,28 @@ class EmailViewModel {
         
         delegate?.setKeyboardType(keyboardType: .emailAddress)
     }
+    
+    func makeFailScreen() {
+        
+        delegate?.setIshidden(leftStackView: true,
+                              ddiChoseLabel: false,
+                              alertButton: false,
+                              registerFailLabel: false,
+                              rightTextField: false,
+                              ways: [true, true, false])
+        
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue))
+    }
 }
 
 protocol EmailViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool])
     
     func setFont(font: UIFont)

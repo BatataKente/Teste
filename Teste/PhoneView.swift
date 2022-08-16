@@ -1,5 +1,5 @@
 //
-//  NomeView.swift
+//  PhoneView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -339,17 +339,20 @@ class PhoneView: UIViewController {
 }
 
 extension PhoneView: PhoneViewModelProtocol {
-
+    
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool]) {
 
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
-        viewElements.alertButton.isHidden = true
-        registerFailLabel.isHidden = true
+        viewElements.alertButton.isHidden = alertButton
+        self.registerFailLabel.isHidden = registerFailLabel
         viewElements.ddisButton.isEnabled = false
-        viewElements.rightTextField.isHidden = true
+        viewElements.rightTextField.isHidden = rightTextField
 
         self.ways[0].isHidden = ways[0]
         self.ways[1].isHidden = ways[1]
