@@ -9,6 +9,23 @@ import UIKit
 
 class EmailView: UIViewController {
     
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         
         setupView()
@@ -209,6 +226,8 @@ class EmailView: UIViewController {
     @objc func changeScreen() {
         
         if validateEmail(viewElements.rightTextField.text ?? "") {
+            
+            userToRegister.email = viewElements.rightTextField.text ?? ""
             
             let passwordView = PasswordView()
             passwordView.modalPresentationStyle = .fullScreen

@@ -9,6 +9,23 @@ import UIKit
 
 class NomeView: UIViewController {
     
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         
         setupView()
@@ -210,7 +227,9 @@ class NomeView: UIViewController {
         
         if validateName(viewElements.rightTextField.text ?? "") {
             
-            let phoneView = PhoneView()
+            userToRegister.name = viewElements.rightTextField.text ?? ""
+            
+            let phoneView = PhoneView(userToRegister)
             phoneView.modalPresentationStyle = .fullScreen
             present(phoneView, animated: false)
         }
