@@ -57,9 +57,9 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 1
         lb.text = "BOXOFFICE"
-        lb.font = UIFont(name: "Ubuntu-Light", size: 13)
-        lb.backgroundColor = UIColor(named: "boxOffice")
-        lb.textColor = UIColor(named: "blueBravve")
+        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
+        lb.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -68,22 +68,22 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Numa esquina\ncharmosa, um hotel"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 20)
-        lb.textColor = UIColor(named: "blueBravve")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
+        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lb.textAlignment = .left
         return lb
     }()
     lazy var reserveImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "imageReservs3")
+        image.image = UIImage(named: ImagesBravve.imageReservs_3.rawValue)
 
         return image
     }()
     lazy var reserveImage2: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "imageReservs4")
+        image.image = UIImage(named: ImagesBravve.imageReservs_4.rawValue)
 
         return image
     }()
@@ -92,8 +92,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Home by Kamy"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Bold", size: 20)
-        lb.textColor = UIColor(named: "blueBravve")
+        lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
+        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -102,8 +102,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "UM Coffe Co."
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 12)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -112,15 +112,15 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Detalhes da sua reserva"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "blueBravve")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lb.textAlignment = .left
         return lb
     }()
     lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "calendarButtonGray")
+        image.image = UIImage(named: IconsBravve.calendarGray.rawValue)
 
         return image
     }()
@@ -129,8 +129,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "09/04/22"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -139,8 +139,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Check-in"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -149,8 +149,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Check-Out"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -159,8 +159,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Diária"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -169,8 +169,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "09:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -179,8 +179,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "20:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -189,8 +189,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "10/04/22"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -199,8 +199,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Check-in"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -209,8 +209,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Check-Out"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -219,8 +219,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Hora(3)"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -229,8 +229,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "09:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -239,8 +239,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "12:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -249,8 +249,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Hora"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -259,8 +259,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "18:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -269,8 +269,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "19:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -280,8 +280,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Forma de pagamento"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "blueBravve")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -289,7 +289,7 @@ class CheckOutScreen: UIViewController{
     lazy var imagePay: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "walletBlue")
+        image.image = UIImage(named: IconsBravve.walletBlue.rawValue)
 
         return image
     }()
@@ -297,7 +297,7 @@ class CheckOutScreen: UIViewController{
     lazy var numberPeopleImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "users")
+        image.image = UIImage(named: IconsBravve.users.rawValue)
 
         return image
     }()
@@ -305,7 +305,7 @@ class CheckOutScreen: UIViewController{
     lazy var localizationIconImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "map")
+        image.image = UIImage(named: IconsBravve.map.rawValue)
 
         return image
     }()
@@ -313,7 +313,7 @@ class CheckOutScreen: UIViewController{
     lazy var clockIconImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "clockReserv")
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
 
         return image
     }()
@@ -321,7 +321,7 @@ class CheckOutScreen: UIViewController{
     lazy var arrowIconImage1: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "arrowDown")
+        image.image = UIImage(named: ButtonsBravve.arrowDown.rawValue)
 
         return image
     }()
@@ -329,7 +329,7 @@ class CheckOutScreen: UIViewController{
     lazy var arrowIconImage2: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "arrowDown")
+        image.image = UIImage(named: ButtonsBravve.arrowDown.rawValue)
 
         return image
     }()
@@ -345,7 +345,7 @@ class CheckOutScreen: UIViewController{
     lazy var emailIconImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "email")
+        image.image = UIImage(named: IconsBravve.email.rawValue)
 
         return image
     }()
@@ -355,8 +355,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Cartão de crédito"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 13)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -365,8 +365,8 @@ class CheckOutScreen: UIViewController{
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Ubuntu-Medium", size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: "label")]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Ubuntu-Regular", size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: "label")]
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Total:", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: " R$ 560,87", attributes: attrs2 as [NSAttributedString.Key : Any])
@@ -383,8 +383,8 @@ class CheckOutScreen: UIViewController{
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.text = "    **** **** **** 4679"
-        tf.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        tf.backgroundColor = UIColor(named: "textFieldBorder")
+        tf.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        tf.backgroundColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
         tf.isUserInteractionEnabled = false
         return tf
     }()
@@ -394,8 +394,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Detalhes do local"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -405,8 +405,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Até 6 pessoas"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 12)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -417,8 +417,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Av. São Joâo, Cj. Boulevard, n°900, São Paulo. SP 06020-010, BR"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 12)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -427,8 +427,8 @@ class CheckOutScreen: UIViewController{
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Ubuntu-Regular", size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: "label")]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Ubuntu-Medium", size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: "label")]
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Segunda:", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
@@ -446,8 +446,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Responsavél"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -456,8 +456,8 @@ class CheckOutScreen: UIViewController{
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: "Ubuntu-Medium", size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: "label")]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: "Ubuntu-Regular", size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: "label")]
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
@@ -475,8 +475,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via whatsapp"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Light", size: 12)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -486,8 +486,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Contatos"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Medium", size: 15)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -497,8 +497,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "(11) 99999-9999"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 12)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -508,8 +508,8 @@ class CheckOutScreen: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "giovanna@empresaexe.com.br"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: "Ubuntu-Regular", size: 12)
-        lb.textColor = UIColor(named: "label")
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -519,7 +519,7 @@ class CheckOutScreen: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         let yourAttributes: [NSAttributedString.Key: Any] = [
                       .font: UIFont.systemFont(ofSize: 12),
-                      .foregroundColor: UIColor(named: "pink_cyan") as Any,
+                      .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
                       .underlineStyle: NSUnderlineStyle.single.rawValue
                   ]
                      let attributeString = NSMutableAttributedString(
@@ -538,7 +538,7 @@ class CheckOutScreen: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         let yourAttributes: [NSAttributedString.Key: Any] = [
                       .font: UIFont.systemFont(ofSize: 12),
-                      .foregroundColor: UIColor(named: "pink_cyan") as Any,
+                      .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
                       .underlineStyle: NSUnderlineStyle.single.rawValue
                   ]
                      let attributeString = NSMutableAttributedString(
@@ -556,9 +556,9 @@ class CheckOutScreen: UIViewController{
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Abrir porta principal", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 14)
-        button.backgroundColor = UIColor(named: "buttonPink")
-        button.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         button.layer.borderWidth = 1
         button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
         return button
@@ -571,10 +571,10 @@ class CheckOutScreen: UIViewController{
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Abrir porta do espaço", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 14)
-        button.backgroundColor = UIColor(named: "buttonPink")
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(named: "textFieldBorder")?.cgColor
+        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
         return button
     }()
@@ -587,12 +587,12 @@ class CheckOutScreen: UIViewController{
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Check-out", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
-        button.backgroundColor = UIColor.systemBackground
-        button.layer.borderColor = UIColor(named: "label")?.cgColor
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        button.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        button.layer.borderColor = UIColor(named: ColorsBravve.label.rawValue)?.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 12
-        button.setTitleColor(UIColor(named: "label"), for: .normal)
+        button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
        
         button.addTarget(self, action: #selector(buttonCheckOut), for: .touchUpInside)
         
@@ -607,7 +607,7 @@ class CheckOutScreen: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "background")
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -866,10 +866,10 @@ extension CheckOutScreen: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        cell.selectionStyle = .none
         return cell
     }
     
-    
 }
+
 
