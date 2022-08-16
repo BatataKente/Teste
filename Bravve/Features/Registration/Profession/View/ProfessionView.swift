@@ -135,10 +135,13 @@ class ProfessionView: UIViewController {
    
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen) {_ in
-            
-            self.dismiss(animated: true)
+            let vc = FotoView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
         continueButton.setToBottomButtonKeyboardDefault()
+        continueButton.addTarget(self, action: #selector(continueToHobbies), for: .touchUpInside)
+        
         backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         
         professionViewModel.selectAreaMenu(label: selectAreaAPILabel, button: selectAreaButton)
@@ -194,11 +197,11 @@ class ProfessionView: UIViewController {
         workRegimeAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
     }
     
-//    @objc func continueToHobbies() {
-//        let hobbiesView = HobbiesView ()
-//        hobbiesView.modalPresentationStyle = .fullScreen
-//        present(hobbiesView, animated: true, completion: nil)
-//    }
+    @objc func continueToHobbies() {
+        let hobbiesView = HobbiesView ()
+        hobbiesView.modalPresentationStyle = .fullScreen
+        present(hobbiesView, animated: true, completion: nil)
+    }
 }
 
 

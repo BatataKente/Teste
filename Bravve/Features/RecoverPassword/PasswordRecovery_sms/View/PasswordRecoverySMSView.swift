@@ -155,7 +155,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         borderBottom.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         button.addSubview(borderBottom)
         button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
-        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(PasswordRecoverySMSView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -180,8 +180,9 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     }
     
     @objc func continueButtonTapped() {
-            
-        print("Chamando próxima tela")
+        let vc = LoginView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @objc func resendCodeButtonTapped() {
