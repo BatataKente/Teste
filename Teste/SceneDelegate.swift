@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
 
-        window.rootViewController = HomeOpenView()
+        window.rootViewController = HelpViewController()
         
         window.makeKeyAndVisible()
         
