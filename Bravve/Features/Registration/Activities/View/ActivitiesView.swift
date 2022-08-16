@@ -127,8 +127,9 @@ class ActivitiesView: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-            
-        print("Chamando próxima tela")
+        let vc = FinalizeView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @objc func hideJumpButtonTapped() {
@@ -151,13 +152,16 @@ class ActivitiesView: UIViewController {
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         let handler = {(action: UIAction) in
-            print("Pulando tela")
+            let vc = FinalizeView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
         
         view.createRegisterCustomBar(progressBarButtons: buttons,
                                      jumpAction: UIAction(handler: handler)) {_ in
-            
-           return
+            let vc = HobbiesView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
         
     }

@@ -60,6 +60,8 @@ class FinalizeView: UIViewController {
         addSubViews()
         setConstraints()
         view.backgroundColor = UIColor(red: 0.02, green: 0, blue: 0.37, alpha: 1)
+        
+        homeButton.addTarget(self, action: #selector(actionHomeButton), for: .touchUpInside)
     }
     
     
@@ -138,6 +140,12 @@ class FinalizeView: UIViewController {
         constraint.forEach { item in
             item.isActive = true
         }
+    }
+    
+    @objc func actionHomeButton() {
+        let vc = HomeClosedView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
 }

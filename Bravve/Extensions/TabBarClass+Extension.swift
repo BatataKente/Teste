@@ -19,7 +19,7 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
             
             case tabBar.items?[0]:
             
-                let homeOpenView = HomeOpenView()
+                let homeOpenView = HomeOpenView(true)
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)

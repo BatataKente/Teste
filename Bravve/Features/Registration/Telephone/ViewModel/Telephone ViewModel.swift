@@ -1,5 +1,5 @@
 //
-//  TelefoneViewModel.swift
+//  PhoneViewModel.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -27,6 +27,9 @@ class PhoneViewModel {
         
         delegate?.setIshidden(leftStackView: false,
                               ddiChoseLabel: true,
+                              alertButton: true,
+                              registerFailLabel: true,
+                              rightTextField: true,
                               ways: [true, false, true])
         
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
@@ -44,12 +47,28 @@ class PhoneViewModel {
         
         delegate?.setKeyboardType(keyboardType: .numberPad)
     }
+    
+    func makeFailScreen() {
+        
+        delegate?.setIshidden(leftStackView: false,
+                              ddiChoseLabel: false,
+                              alertButton: false,
+                              registerFailLabel: false,
+                              rightTextField: false,
+                              ways: [true, false, true])
+        
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue))
+    }
 }
 
 protocol PhoneViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool])
     
     func setFont(font: UIFont)

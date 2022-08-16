@@ -30,12 +30,17 @@
 		14A81548289D5594004CAEE8 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A81547289D5594004CAEE8 /* Ubuntu-Light.ttf */; };
 		14A8154A289D559C004CAEE8 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A81549289D559C004CAEE8 /* Ubuntu-Medium.ttf */; };
 		14A8154C289D55A3004CAEE8 /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14A8154B289D55A3004CAEE8 /* Ubuntu-Regular.ttf */; };
+		14BDBBEA28ABD71F004C32BF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE928ABD71F004C32BF /* String+Extension.swift */; };
 		14CADA0328A52EF6002E9736 /* EndPointMockEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */; };
 		14CADA0528A52F04002E9736 /* EndPointSessionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */; };
 		2E57CDB428A585EC004214A9 /* DetailsClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */; };
 		2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB528A58606004214A9 /* DetailsClosedView.swift */; };
 		2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */; };
 		2E57CDD328A79E38004214A9 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDD228A79E38004214A9 /* CustomAlert.swift */; };
+		2E57CDDC28AC05EC004214A9 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDDB28AC05EC004214A9 /* TokenView.swift */; };
+		2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */; };
+		2E57CDE328AC1DA9004214A9 /* EmptyReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */; };
+		2E57CDE528AC1DB7004214A9 /* EmptyReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -210,12 +215,17 @@
 		14A81547289D5594004CAEE8 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		14A81549289D559C004CAEE8 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14A8154B289D55A3004CAEE8 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		14BDBBE928ABD71F004C32BF /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		14CADA0228A52EF6002E9736 /* EndPointMockEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointMockEnum.swift; sourceTree = "<group>"; };
 		14CADA0428A52F04002E9736 /* EndPointSessionEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointSessionEnum.swift; sourceTree = "<group>"; };
 		2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedViewModel.swift; sourceTree = "<group>"; };
 		2E57CDB528A58606004214A9 /* DetailsClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedView.swift; sourceTree = "<group>"; };
 		2E57CDB728A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedCollectionViewCell.swift; sourceTree = "<group>"; };
 		2E57CDD228A79E38004214A9 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		2E57CDDB28AC05EC004214A9 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
+		2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReservationViewModel.swift; sourceTree = "<group>"; };
+		2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReservationView.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -437,6 +447,56 @@
 			isa = PBXGroup;
 			children = (
 				2E57CDB328A585EC004214A9 /* DetailsClosedViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2E57CDD828AC059C004214A9 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDDA28AC05C9004214A9 /* ViewModel */,
+				2E57CDD928AC05C2004214A9 /* View */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
+		2E57CDD928AC05C2004214A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDDB28AC05EC004214A9 /* TokenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E57CDDA28AC05C9004214A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2E57CDDF28AC1D23004214A9 /* EmptyReservation */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDE128AC1D55004214A9 /* ViewModel */,
+				2E57CDE028AC1D4D004214A9 /* View */,
+			);
+			path = EmptyReservation;
+			sourceTree = "<group>";
+		};
+		2E57CDE028AC1D4D004214A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E57CDE128AC1D55004214A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1023,6 +1083,7 @@
 				C69616E72881E94B00281633 /* Password */,
 				C69616E62881E93F00281633 /* Email */,
 				C69616E52881E93900281633 /* Telephone */,
+				2E57CDD828AC059C004214A9 /* Token */,
 				C69616E42881E92700281633 /* Name */,
 			);
 			path = Registration;
@@ -1372,6 +1433,7 @@
 			isa = PBXGroup;
 			children = (
 				1478A23A28996DC700B409E5 /* CGFloat+Extension.swift */,
+				14BDBBE928ABD71F004C32BF /* String+Extension.swift */,
 				146A8BEC28AAB2D3007650A8 /* UIScrollView+Extension.swift */,
 				14076BE128930BFB003EA2F1 /* UIButton+Extension.swift */,
 				14076BE728930CFA003EA2F1 /* UIImageView+Extension.swift */,
@@ -1583,6 +1645,7 @@
 				C69617742881ED5100281633 /* CancelReservation */,
 				C69617772881ED6D00281633 /* Check Out */,
 				C69617762881ED6400281633 /* Check In */,
+				2E57CDDF28AC1D23004214A9 /* EmptyReservation */,
 			);
 			path = MyReservations;
 			sourceTree = "<group>";
@@ -1913,6 +1976,7 @@
 				2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */,
 				C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */,
 				C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */,
+				2E57CDDC28AC05EC004214A9 /* TokenView.swift in Sources */,
 				C69617212881EAB900281633 /* PhotoView.swift in Sources */,
 				C69617612881EC9000281633 /* Reservation2ViewModel.swift in Sources */,
 				C69616B32881E79400281633 /* PasswordRecoveryPasswordModel.swift in Sources */,
@@ -1949,6 +2013,7 @@
 				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
+				2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
 				146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */,
 				C696175F2881EC7F00281633 /* Reservation2View.swift in Sources */,
@@ -1958,6 +2023,7 @@
 				C696179F2881EED900281633 /* BookingDetailsView.swift in Sources */,
 				C69617562881EC5400281633 /* SingleBookingView.swift in Sources */,
 				C69616C32881E7EF00281633 /* RecoverPasswordModalView.swift in Sources */,
+				2E57CDE328AC1DA9004214A9 /* EmptyReservationViewModel.swift in Sources */,
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
 				C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */,
 				C69617802881EE1E00281633 /* CheckInModel.swift in Sources */,
@@ -2000,6 +2066,7 @@
 				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermsAndConditionView.swift in Sources */,
 				C69617452881EB7B00281633 /* FinalizeView.swift in Sources */,
+				2E57CDE528AC1DB7004214A9 /* EmptyReservationView.swift in Sources */,
 				2ED5D10928940F48001C11DC /* TermsAndConditionModel.swift in Sources */,
 				C69617042881EA1500281633 /* EmailModel.swift in Sources */,
 				C69616A02881E70700281633 /* LoginModel.swift in Sources */,
@@ -2014,6 +2081,7 @@
 				1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */,
 				30D3120C28AAAE3B00BF9311 /* HelpTableViewCell.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */,
+				14BDBBEA28ABD71F004C32BF /* String+Extension.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizeViewModel.swift in Sources */,
 				2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */,
