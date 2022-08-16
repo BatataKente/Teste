@@ -64,11 +64,24 @@ class FotoView: UIViewController {
         return editButton
     }()
     
+    let imagePicker = UIImagePickerController()
+    
+    let networkManager = NetworkManager()
+    
+    
     override func viewDidLoad() {
         
         setupView()
         setupDefaults()
         setupConstraints()
+        
+        registerButton.addTarget(self, action: #selector(actionRegisterButton), for: .touchUpInside)
+        
+        editButton.addTarget(self, action: #selector(showGallery), for: .touchUpInside)
+        
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary;
+        imagePicker.allowsEditing = true
         
         super.viewDidLoad()
     }
@@ -86,8 +99,9 @@ class FotoView: UIViewController {
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink) {_ in
-            
-            self.dismiss(animated: true)
+            let vc = ConfirmDataView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
         registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
@@ -117,5 +131,40 @@ class FotoView: UIViewController {
         editButton.sizeAnchorInSuperview(CGFloat(32).generateSizeForScreen)
         editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
         editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
+    }
+    
+    @objc func actionRegisterButton() {
+        let vc = ProfessionView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+   
+}
+
+extension FotoView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @objc func showGallery() {
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            DispatchQueue.main.async {
+                self.imageView.image = pickedImage
+            }
+            
+            guard let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
+            
+            networkManager.uploadPictureWithResponse(uuid: "466c669a-a1d4-4bcd-9808-1e49afb1b806",endpoint: .usersPictures, picture_url: imageURL) { (updatedPicture: UploadPicture?) in
+                print(updatedPicture)
+            }
+            
+            dismiss(animated: true)
+            
+        }
     }
 }

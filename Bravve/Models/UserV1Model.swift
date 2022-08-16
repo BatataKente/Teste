@@ -52,6 +52,12 @@ struct Pictures: Codable {
     var is_active: Bool?
 }
 
+struct UploadPicture: Codable {
+    var uuid: String?
+    var filename: String?
+    var content_type: String?
+}
+
 struct CreditWallet: Codable {
     var wp_account_id: Int?
     var corporate_name: String?

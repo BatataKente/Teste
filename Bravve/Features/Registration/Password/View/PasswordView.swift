@@ -10,41 +10,26 @@ import UIKit
 class PasswordView: UIViewController{
     
     let backWay: UIImageView = {
+        
         let image = UIImageView()
         image.setWayToDefault(.wayPassword)
         return image
     }()
     
-    lazy var goBackButton: UIButton = {
-        let button = UIButton()
-        button.setToBackButtonDefault(.backPink, CGFloat(32.76).generateSizeForScreen){_ in self.dismiss(animated: false)}
-        return button
-    }()
-    
-    let logoImage: UIImageView = {
-        let image = UIImageView()
-        image.setLogoToDefault(.logoBlue)
-        return image
-    }()
-    
     lazy var progressBarButtons: [UIButton] = {
-        var buttons = [UIButton()]
-        buttons = createProgressBarButtons([IconsBravve.userGray.rawValue,
-                                            IconsBravve.cellGray.rawValue,
-                                            IconsBravve.emailGray.rawValue,
-                                            IconsBravve.padlockBlue.rawValue,
-                                            IconsBravve.pencilGray.rawValue])
+        
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
+                                                              IconsBravve.cellGray.rawValue,
+                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.padlockBlue.rawValue,
+                                                              IconsBravve.pencilGray.rawValue])
         return buttons
-    }()
-    
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: progressBarButtons)
-        return stackView
     }()
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Agora escolha uma senha de sua preferência."
+        label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textAlignment = .center
         return label
@@ -63,11 +48,8 @@ class PasswordView: UIViewController{
     
     let passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.isSecureTextEntry = true
         textField.isHidden = true
-        textField.keyboardAppearance = .light
-        textField.keyboardType = .namePhonePad
         return textField
     }()
     
@@ -78,7 +60,7 @@ class PasswordView: UIViewController{
         stackView.spacing = 6
         stackView.axis = .vertical
         stackView.backgroundColor = .white
-        stackView.layer.borderColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)?.cgColor
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -96,6 +78,13 @@ class PasswordView: UIViewController{
         return button
     }()
     
+    let hideWrongPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
+        button.isHidden = true
+        return button
+    }()
+    
     let confirmPasswordTFLabel: UILabel = {
         let label = UILabel()
         label.text = "Repetir senha"
@@ -109,11 +98,8 @@ class PasswordView: UIViewController{
     
     let confirmPasswordTextField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.isHidden = true
         textField.isSecureTextEntry = true
-        textField.keyboardAppearance = .light
-        textField.keyboardType = .namePhonePad
         return textField
     }()
     
@@ -137,6 +123,13 @@ class PasswordView: UIViewController{
     let hideConfirmPasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        return button
+    }()
+    
+    let hideWrongConfirmPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
+        button.isHidden = true
         return button
     }()
     
@@ -218,373 +211,128 @@ class PasswordView: UIViewController{
         return label
     }()
     
-    lazy var continueButton: UIButton = {
-        let button = UIButton()
-        button.setToBottomButtonKeyboardDefault()
-        return button
-    }()
-    
-    let hideWrongPasswordButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-        button.isHidden = true
-        return button
-    }()
-    
-    let hideWrongConfirmPasswordButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-        button.isHidden = true
-        return button
-    }()
+    let continueButton = UIButton()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.addSubviews([backWay,goBackButton, logoImage, logoImage, stackView, descriptionLabel, passwordStackView, hidePasswordButton, confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
+        view.addSubviews([backWay, descriptionLabel, passwordStackView, hidePasswordButton, confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
+        
+        view.createRegisterCustomBar(progressBarButtons: progressBarButtons) {_ in
+            
+            print("Going Back")
+        }
+        
+        continueButton.setToBottomButtonKeyboardDefault()
         
         addConstraints()
         addTargets()
         
         hidePasswordButton.addTarget(self, action: #selector(hidePassword), for: .touchUpInside)
         hideConfirmPasswordButton.addTarget(self, action: #selector(hideConfirmPassword), for: .touchUpInside)
-        goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
+        hideWrongPasswordButton.addTarget(self, action: #selector(hideWrongPassword), for: .touchUpInside)
+        hideWrongConfirmPasswordButton.addTarget(self, action: #selector(hideWrongConfirmPassword), for: .touchUpInside)
     }
     
     func addConstraints(){
         
-        goBackButton.constraintTo(.left, view.safeAreaLayoutGuide, 32.76)
-        goBackButton.constraintTo(.top, view.safeAreaLayoutGuide, 73)
-        goBackButton.widthAnchor.constraint(equalToConstant: 14).isActive = true
-        goBackButton.heightAnchor.constraint(equalToConstant: 14).isActive = true
-        
-        logoImage.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        logoImage.constraintInsideTo(.top, view.safeAreaLayoutGuide, 65)
-        logoImage.heightAnchor.constraint(equalToConstant: 43).isActive = true
-        logoImage.widthAnchor.constraint(equalToConstant: 163.22).isActive = true
-        
-        stackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        stackView.constraintOutsideTo(.top, logoImage, 62)
-        
         descriptionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        descriptionLabel.heightAnchor.constraint(equalToConstant: 43).isActive = true
-        descriptionLabel.constraintOutsideTo(.top, logoImage, 124.5)
+        descriptionLabel.constraintInsideTo(.top, view, CGFloat(250).generateSizeForScreen)
         descriptionLabel.constraintInsideTo(.left, view.safeAreaLayoutGuide)
         descriptionLabel.constraintInsideTo(.right, view.safeAreaLayoutGuide)
         
-        passwordStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        passwordStackView.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
-        passwordStackView.constraintInsideTo(.right, view.safeAreaLayoutGuide, -20)
-        passwordStackView.constraintOutsideTo(.top, descriptionLabel, 30)
+        passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        passwordStackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        passwordStackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        passwordStackView.constraintOutsideTo(.top, descriptionLabel, CGFloat(30).generateSizeForScreen)
         
-        hidePasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        hidePasswordButton.constraintInsideTo(.top, passwordStackView, 25)
-        hidePasswordButton.constraintInsideTo(.right, passwordStackView, -15)
+        hidePasswordButton.constraintInsideTo(.height, passwordStackView)
+        hidePasswordButton.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+        hidePasswordButton.constraintInsideTo(.centerY, passwordStackView)
+        hidePasswordButton.constraintInsideTo(.trailing, passwordStackView)
         
-        confirmStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        confirmStackView.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
-        confirmStackView.constraintInsideTo(.right, view.safeAreaLayoutGuide, -20)
-        confirmStackView.constraintOutsideTo(.top, passwordStackView, 10)
+        confirmStackView.constraintInsideTo(.height, passwordStackView)
+        confirmStackView.constraintInsideTo(.leading, passwordStackView)
+        confirmStackView.constraintInsideTo(.trailing, passwordStackView)
+        confirmStackView.constraintOutsideTo(.top, passwordStackView, CGFloat(10).generateSizeForScreen)
         
-        hideConfirmPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        hideConfirmPasswordButton.constraintInsideTo(.top, confirmStackView, 25)
-        hideConfirmPasswordButton.constraintInsideTo(.right, confirmStackView, -15)
+        hideConfirmPasswordButton.constraintInsideTo(.height, hidePasswordButton)
+        hideConfirmPasswordButton.constraintInsideTo(.width, hidePasswordButton)
+        hideConfirmPasswordButton.constraintInsideTo(.centerY, confirmStackView)
+        hideConfirmPasswordButton.constraintInsideTo(.trailing, confirmStackView)
         
-        numberCharEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
-        numberCharEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        numberCharEllipse.constraintOutsideTo(.top, confirmStackView, 15)
-        numberCharEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        numberCharEllipse.heightAnchorInSuperview(CGFloat(4).generateSizeForScreen)
+        numberCharEllipse.constraintOutsideTo(.width, numberCharEllipse)
+        numberCharEllipse.constraintOutsideTo(.top, confirmStackView, CGFloat(11).generateSizeForScreen)
+        numberCharEllipse.constraintInsideTo(.leading, confirmStackView)
         
-        numberCharLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        numberCharLabel.constraintOutsideTo(.top, confirmStackView, 10)
-        numberCharLabel.constraintOutsideTo(.left, numberCharEllipse, 10)
+        numberCharLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
+        numberCharLabel.constraintInsideTo(.centerY, numberCharEllipse)
+        numberCharLabel.constraintOutsideTo(.leading, numberCharEllipse, CGFloat(5).generateSizeForScreen)
         
-        upperCaseEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
-        upperCaseEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        upperCaseEllipse.constraintOutsideTo(.top, numberCharEllipse, 10)
-        upperCaseEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        upperCaseEllipse.constraintInsideTo(.height, numberCharEllipse)
+        upperCaseEllipse.constraintOutsideTo(.width, upperCaseEllipse)
+        upperCaseEllipse.constraintOutsideTo(.top, numberCharEllipse, CGFloat(10).generateSizeForScreen)
+        upperCaseEllipse.constraintInsideTo(.leading, numberCharEllipse)
         
-        upperCaseLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        upperCaseLabel.constraintOutsideTo(.top, numberCharLabel, 5)
-        upperCaseLabel.constraintOutsideTo(.left, upperCaseEllipse, 10)
+        upperCaseLabel.constraintInsideTo(.height, numberCharLabel)
+        upperCaseLabel.constraintInsideTo(.centerY, upperCaseEllipse)
+        upperCaseLabel.constraintInsideTo(.leading, numberCharLabel)
         
-        lowerCaseEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
-        lowerCaseEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        lowerCaseEllipse.constraintOutsideTo(.top, upperCaseEllipse, 10)
-        lowerCaseEllipse.constraintInsideTo(.left, view.safeAreaLayoutGuide, 20)
+        lowerCaseEllipse.constraintInsideTo(.height, numberCharEllipse)
+        lowerCaseEllipse.constraintOutsideTo(.width, lowerCaseEllipse)
+        lowerCaseEllipse.constraintOutsideTo(.top, upperCaseEllipse, CGFloat(10).generateSizeForScreen)
+        lowerCaseEllipse.constraintInsideTo(.leading, upperCaseEllipse)
         
-        lowerCaseLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        lowerCaseLabel.constraintOutsideTo(.top, upperCaseLabel, 5)
-        lowerCaseLabel.constraintOutsideTo(.left, lowerCaseEllipse, 10)
+        lowerCaseLabel.constraintInsideTo(.height, numberCharLabel)
+        lowerCaseLabel.constraintInsideTo(.centerY, lowerCaseEllipse)
+        lowerCaseLabel.constraintInsideTo(.leading, numberCharLabel)
         
-        numberEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
-        numberEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        numberEllipse.constraintOutsideTo(.top, confirmStackView, 15)
-        numberEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
+        numberEllipse.constraintInsideTo(.height, numberCharEllipse)
+        numberEllipse.constraintOutsideTo(.width, numberEllipse)
+        numberEllipse.constraintInsideTo(.top, numberCharEllipse)
+        numberEllipse.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(120).generateSizeForScreen)
         
-        numberLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        numberLabel.constraintOutsideTo(.top, confirmStackView, 10)
-        numberLabel.constraintOutsideTo(.left, numberEllipse, 10)
+        numberLabel.constraintInsideTo(.height, numberCharLabel)
+        numberLabel.constraintInsideTo(.centerY, numberEllipse)
+        numberLabel.constraintOutsideTo(.leading, numberEllipse, CGFloat(5).generateSizeForScreen)
         
-        specialCharEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
-        specialCharEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        specialCharEllipse.constraintOutsideTo(.top, numberEllipse, 10)
-        specialCharEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
+        specialCharEllipse.constraintInsideTo(.height, numberCharEllipse)
+        specialCharEllipse.constraintOutsideTo(.width, specialCharEllipse)
+        specialCharEllipse.constraintOutsideTo(.top, numberEllipse, CGFloat(10).generateSizeForScreen)
+        specialCharEllipse.constraintInsideTo(.leading, numberEllipse)
         
-        specialCharLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        specialCharLabel.constraintOutsideTo(.top, numberLabel, 5)
-        specialCharLabel.constraintOutsideTo(.left, specialCharEllipse, 10)
+        specialCharLabel.constraintInsideTo(.height, numberCharLabel)
+        specialCharLabel.constraintInsideTo(.centerY, specialCharEllipse)
+        specialCharLabel.constraintInsideTo(.leading, numberLabel)
         
-        samePasswordEllipse.heightAnchor.constraint(equalToConstant: 4).isActive = true
-        samePasswordEllipse.widthAnchor.constraint(equalToConstant: 4).isActive = true
-        samePasswordEllipse.constraintOutsideTo(.top, specialCharEllipse, 10)
-        samePasswordEllipse.constraintInsideTo(.right, view.safeAreaLayoutGuide, -120)
+        samePasswordEllipse.constraintInsideTo(.height, numberCharEllipse)
+        samePasswordEllipse.constraintOutsideTo(.width, samePasswordEllipse)
+        samePasswordEllipse.constraintOutsideTo(.top, specialCharEllipse, CGFloat(10).generateSizeForScreen)
+        samePasswordEllipse.constraintInsideTo(.leading, specialCharEllipse)
         
-        samePasswordLabel.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        samePasswordLabel.constraintOutsideTo(.top, specialCharLabel, 5)
-        samePasswordLabel.constraintOutsideTo(.left, samePasswordEllipse, 10)
+        samePasswordLabel.constraintInsideTo(.height, numberCharLabel)
+        samePasswordLabel.constraintInsideTo(.centerY, samePasswordEllipse)
+        samePasswordLabel.constraintInsideTo(.leading, numberLabel)
         
-        continueButton.heightAnchor.constraint(equalToConstant: 51).isActive = true
-        continueButton.constraintInsideTo(.left, view.safeAreaLayoutGuide)
-        continueButton.constraintInsideTo(.right, view.safeAreaLayoutGuide)
-        continueButton.constraintOutsideTo(.bottom, view.keyboardLayoutGuide)
+        hideWrongPasswordButton.constraintInsideTo(.height, passwordStackView)
+        hideWrongPasswordButton.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+        hideWrongPasswordButton.constraintInsideTo(.centerY, passwordStackView)
+        hideWrongPasswordButton.constraintInsideTo(.trailing, passwordStackView)
         
-        hideWrongPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        hideWrongPasswordButton.constraintInsideTo(.top, passwordStackView, 25)
-        hideWrongPasswordButton.constraintInsideTo(.right, passwordStackView, -15)
-        
-        hideWrongConfirmPasswordButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        hideWrongConfirmPasswordButton.constraintInsideTo(.top, confirmStackView, 25)
-        hideWrongConfirmPasswordButton.constraintInsideTo(.right, confirmStackView, -15)
-        
+        hideWrongConfirmPasswordButton.constraintInsideTo(.height, hideWrongPasswordButton)
+        hideWrongConfirmPasswordButton.constraintInsideTo(.width, hideWrongPasswordButton)
+        hideWrongConfirmPasswordButton.constraintInsideTo(.centerY, confirmStackView)
+        hideWrongConfirmPasswordButton.constraintInsideTo(.trailing, confirmStackView)
+
     }
     
-    @objc func goBack(sender: UIButton){
-        print("Going Back")
-    }
     
-    @objc func continueAction() {
-        print("Going On")
-    }
-    
-    @objc func hideConfirmPassword(_ sender: UIButton){
-        confirmPasswordTextField.isSecureTextEntry.toggle()
-        
-        if confirmPasswordTextField.isSecureTextEntry {
-            hideConfirmPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-        } else {
-            hideConfirmPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        }
-    }
-    
-    @objc func hidePassword(_ sender: UIButton){
-        passwordTextField.isSecureTextEntry.toggle()
-        
-        if passwordTextField.isSecureTextEntry {
-            hidePasswordButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-        } else {
-            hidePasswordButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        }
-    }
-    
-    @objc func hidingWrongPassword(_ sender: UIButton){
-        passwordTextField.isSecureTextEntry.toggle()
-        
-        if passwordTextField.isSecureTextEntry {
-            hideWrongPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-        } else {
-            hideWrongPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
-        }
-        
-    }
-    
-    @objc func hidingWrongConfirmPassword(_ sender: UIButton){
-        confirmPasswordTextField.isSecureTextEntry.toggle()
-        
-        if confirmPasswordTextField.isSecureTextEntry {
-            hideWrongConfirmPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-        } else {
-            hideWrongConfirmPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
-        }
-    
-        
-    }
-    
-    func addTargets() {
-        let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
-        passwordStackView.addGestureRecognizer(stackViewTap)
-        
-        let stackViewTap_ = UITapGestureRecognizer(target: self, action: #selector(confirmStackViewTapped))
-        confirmStackView.addGestureRecognizer(stackViewTap_)
-    }
-    
-    @objc func confirmStackViewTapped() {
-        confirmPasswordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
-        confirmPasswordTextField.addTarget(self, action: #selector(confirmChangeText), for: .editingChanged)
-        confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
-        confirmPasswordTextField.isHidden = false
-    }
-    
-    @objc func stackViewTapped() {
-        passwordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
-        passwordTextField.addTarget(self, action: #selector(changeText), for: .editingChanged)
-        passwordStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
-        passwordTextField.isHidden = false
-    }
-    
-    @objc func changeText(_ sender: UITextField) {
-        let upperCaseRegEx = ".*[A-Z]+.*"
-        let upperCaseTest = NSPredicate(format: "SELF MATCHES %@", upperCaseRegEx)
-        let numericRegEx = ".*[0-9]+.*"
-        let numericRegExTest = NSPredicate(format: "SELF MATCHES %@", numericRegEx)
-        let specialCharacterRegEx = ".*[!&^%$#@()/.*+]+.*"
-        let specialChracterTest = NSPredicate(format: "SELF MATCHES %@", specialCharacterRegEx)
-        let lowerCaseRegEx = ".*[a-z]+.*"
-        let lowerCaseTest = NSPredicate(format: "SELF MATCHES %@", lowerCaseRegEx)
-        
-        var passwordText: String = ""
-        
-        if let password = passwordTextField.text {
-            passwordText = password
-        }
-        
-        if passwordText.isEmpty {
-            numberCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-            upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-            lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-            numberEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-            specialCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-        } else {
-            if upperCaseTest.evaluate(with: passwordTextField.text!){
-                upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                upperCaseLabel.textColor = .label
-            } else {
-                upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                upperCaseLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-            }
-            
-            if lowerCaseTest.evaluate(with: passwordTextField.text!){
-                lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                lowerCaseLabel.textColor = .label
-            } else {
-                lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                lowerCaseLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-            }
-            
-            if numericRegExTest.evaluate(with: passwordTextField.text!){
-                numberEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                numberLabel.textColor = .label
-            } else {
-                numberEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                numberLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-            }
-            
-            if specialChracterTest.evaluate(with: passwordTextField.text!){
-                specialCharEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                specialCharLabel.textColor = .label
-            } else {
-                specialCharEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                specialCharLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-            }
-            
-            if (passwordTextField.text?.count ?? 0) < 6 {
-                numberCharEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                numberCharLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-            } else {
-                numberCharEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                numberCharLabel.textColor = .label
-            }
-            
-        }
-    }
-    
-    @objc func confirmChangeText(_ sender: UITextField) {
-        var passwordText: String = ""
-        
-        if let password = confirmPasswordTextField.text {
-            passwordText = password
-        }
-        
-        if passwordText.isEmpty {
-            samePasswordEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-            samePasswordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-            continueButton.backgroundColor = .gray
-        } else {
-            if confirmPasswordTextField.text == passwordTextField.text {
-                samePasswordEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                samePasswordLabel.textColor = .label
-                
-            } else {
-                samePasswordEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                samePasswordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-                continueButton.backgroundColor = .gray
-            }
-        }
-        
-        if samePasswordEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue) {
-            if numberCharEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
-                if upperCaseEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
-                    if lowerCaseEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
-                        if numberEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
-                            if specialCharEllipse.image == UIImage(named: IconsBravve.ellipseGreen.rawValue){
-                                continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-                                continueButton.addTarget(nil, action: #selector(continueAction), for: .touchUpInside)
-                            } else {
-                                continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
-                                continueButton.backgroundColor = .gray
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            continueButton.removeTarget(nil, action: #selector(continueAction), for: .touchUpInside)
-            continueButton.backgroundColor = .gray
-        }
-        if samePasswordEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue) {
-            if numberCharEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue){
-                if upperCaseEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue){
-                    if lowerCaseEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue){
-                        if numberEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue){
-                            if specialCharEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue){
-                                
-                                passwordTFLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-                                passwordStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.redAlertLabel.rawValue) ?? .red, width: 1, y: 1)
-                                
-                                confirmPasswordTFLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-                                confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.redAlertLabel.rawValue) ?? .red, width: 1, y: 1)
-                                
-                                hideWrongPasswordButton.isHidden = false
-                                hidePasswordButton.isHidden = true
-                                hideWrongPasswordButton.addTarget(self, action: #selector(hidingWrongPassword), for: .touchUpInside)
-                                hideWrongConfirmPasswordButton.isHidden = false
-                                hideConfirmPasswordButton.isHidden = true
-                                hideWrongConfirmPasswordButton.addTarget(self, action: #selector(hidingWrongConfirmPassword), for: .touchUpInside)
-                                
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            passwordTFLabel.textColor = .gray
-            passwordStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
-            
-            confirmPasswordTFLabel.textColor = .gray
-            confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
-            
-            hidePasswordButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-            hideConfirmPasswordButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-            
-            hideWrongPasswordButton.isHidden = true
-            hidePasswordButton.isHidden = false
-            
-            hideWrongConfirmPasswordButton.isHidden = true
-            hideConfirmPasswordButton.isHidden = false
-        }
-    }        }
+}
 
 
 
