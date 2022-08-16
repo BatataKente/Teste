@@ -229,8 +229,7 @@ class NomeView: UIViewController {
             
             userToRegister.name = viewElements.rightTextField.text ?? ""
             
-//            let phoneView = PhoneView(userToRegister)
-            let phoneView = PhoneView()
+            let phoneView = PhoneView(userToRegister)
             phoneView.modalPresentationStyle = .fullScreen
             present(phoneView, animated: false)
         }

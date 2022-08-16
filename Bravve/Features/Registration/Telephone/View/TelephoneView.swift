@@ -1,5 +1,5 @@
 //
-//  TelefoneView.swift
+//  PhoneView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -8,7 +8,24 @@
 import UIKit
 
 class PhoneView: UIViewController {
-
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
 
         setupView()
@@ -31,6 +48,14 @@ class PhoneView: UIViewController {
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
 
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: dismissHandler),
+                             for: .touchUpInside)
+        
         return buttons
     }()
 
@@ -202,7 +227,7 @@ class PhoneView: UIViewController {
 
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
 
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
 
         view.setToDefaultBackgroundColor()
@@ -291,10 +316,20 @@ class PhoneView: UIViewController {
     }
 
     @objc func changeScreen() {
-
-        let emailView = EmailView()
-        emailView.modalPresentationStyle = .fullScreen
-        present(emailView, animated: true)
+        
+        if validateCellPhone(viewElements.rightTextField.text ?? "") {
+            
+            userToRegister.phone_number = viewElements.rightTextField.text ?? ""
+            
+//            let emailView = EmailView(userToRegister)
+            let emailView = EmailView()
+            emailView.modalPresentationStyle = .fullScreen
+            present(emailView, animated: false)
+        }
+        else {
+            
+            phoneViewModel.makeFailScreen()
+        }
     }
 
     @objc func changeText(_ sender: UITextField) {
@@ -317,17 +352,20 @@ class PhoneView: UIViewController {
 }
 
 extension PhoneView: PhoneViewModelProtocol {
-
+    
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool]) {
 
         viewElements.leftStackView.isHidden = leftStackView
         viewElements.ddiChoseLabel.isHidden = ddiChoseLabel
-        viewElements.alertButton.isHidden = true
-        registerFailLabel.isHidden = true
+        viewElements.alertButton.isHidden = alertButton
+        self.registerFailLabel.isHidden = registerFailLabel
         viewElements.ddisButton.isEnabled = false
-        viewElements.rightTextField.isHidden = true
+        viewElements.rightTextField.isHidden = rightTextField
 
         self.ways[0].isHidden = ways[0]
         self.ways[1].isHidden = ways[1]
