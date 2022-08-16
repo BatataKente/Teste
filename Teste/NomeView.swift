@@ -124,6 +124,7 @@ class NomeView: UIViewController {
         let registerStackView = UIStackView(arrangedSubviews: [viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
 
@@ -215,6 +216,8 @@ class NomeView: UIViewController {
                                               size: CGFloat(10).generateSizeForScreen)
         
         customShaddow.isHidden = false
+        
+        registerStackView.layer.borderWidth = 0
         
         viewElements.rightTextField.isHidden = false
         

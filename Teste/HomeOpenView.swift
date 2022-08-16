@@ -9,6 +9,19 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
+    init(_ willLoad: Bool = false) {
+        
+        imageView.isHidden = willLoad
+        coverView.isHidden = willLoad
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
 
         super.viewDidDisappear(animated)

@@ -164,6 +164,7 @@ class PhoneView: UIViewController {
                                                                viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
 
@@ -304,7 +305,9 @@ class PhoneView: UIViewController {
         viewElements.ddisLabel.text = "+55"
 
         customShaddow.isHidden = false
-
+        
+        registerStackView.layer.borderWidth = 0
+        
         viewElements.rightTextField.isHidden = false
         viewElements.ddiChoseLabel.isHidden = false
         viewElements.ddisButton.isEnabled = true
