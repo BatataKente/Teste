@@ -15,6 +15,9 @@ class NomeViewModel {
         
         delegate?.setIshidden(leftStackView: true,
                               ddiChoseLabel: false,
+                              alertButton: true,
+                              registerFailLabel: true,
+                              rightTextField: true,
                               ways: [true, true, false])
         
         delegate?.setFont(font: UIFont(name: FontsBravve.light.rawValue,
@@ -32,12 +35,28 @@ class NomeViewModel {
         
         delegate?.setKeyboardType(keyboardType: .namePhonePad)
     }
+    
+    func makeFailScreen() {
+        
+        delegate?.setIshidden(leftStackView: true,
+                              ddiChoseLabel: false,
+                              alertButton: false,
+                              registerFailLabel: false,
+                              rightTextField: false,
+                              ways: [true, true, false])
+        
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue))
+    }
 }
 
 protocol NomeViewModelProtocol {
     
     func setIshidden(leftStackView: Bool,
                      ddiChoseLabel: Bool,
+                     alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool])
     
     func setFont(font: UIFont)
