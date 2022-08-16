@@ -198,11 +198,115 @@ extension UIViewController {
 /// - Returns: True if is a valid number, or false if not
     func validateCellPhone(_ phone: String) -> Bool {
         
-        let phoneRegEx = "\\([0-9]{4}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{13}"
+        let phoneRegEx = "\\([0-9]{2}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{11}"
 
         let phonePred = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
         
         if phonePred.evaluate(with: phone) {
+            
+            return true
+        }
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid text
+/// - Parameter text: A string with the text
+/// - Returns: True if is a valid text, or false if not
+    func validateTextField(_ text: String) -> Bool {
+        
+        if text != "" {
+
+            return true
+        }
+        
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid cpf
+/// - Parameter cpf: A string with the cpf
+/// - Returns: True if is a valid cpf, or false if not
+    func validateCPF(_ cpf: String) -> Bool {
+        
+        if cpf.isCPF {
+            
+            return true
+        }
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid password
+/// - Parameters:
+///   - password: A string with the password
+///   - passwordConfirm: A string with the passwordConfirm
+/// - Returns: True if is password is equal to passwordConfirm, or false if not
+    func validatePassword(_ password: String,
+                          _ passwordConfirm: String) -> Bool {
+        
+        if password == passwordConfirm {
+            
+            return true
+        }
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid email
+/// - Parameter cpf: A string with the email
+/// - Returns: True if is a valid email, or false if not
+    func validateEmail(_ email: String) -> Bool {
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        
+        if emailPred.evaluate(with: email) {
+            
+            return true
+        }
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid date
+/// - Parameter cpf: A string with the date
+/// - Returns: True if is a valid date, or false if not
+    func validateDate(_ date: String) -> Bool {
+        
+        let dateRegEx = "[0-9]{2}+/[0-9]{2}+/[0-9]{4}||[0-9]{8}"
+        
+        let datePred = NSPredicate(format:"SELF MATCHES %@", dateRegEx)
+        
+        if datePred.evaluate(with: date) {
+            
+            return true
+        }
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid name
+/// - Parameter cpf: A string with the name
+/// - Returns: True if is a valid name, or false if not
+    func validateName(_ name: String) -> Bool {
+        
+        let nameRegEx = "(?<! )[A-ZÀ-Ú]+[-a-zà-ú']+ [A-ZÀ-Ú]+[-a-zà-ú']{2,26}"
+
+        let namePred = NSPredicate(format:"SELF MATCHES %@", nameRegEx)
+        
+        if namePred.evaluate(with: name) {
+            
+            return true
+        }
+        return false
+    }
+    
+/// This is a regex that checks if it's a valid cep
+/// - Parameter cpf: A string with the cep
+/// - Returns: True if is a valid cep, or false if not
+    func validateCep(_ cep: String) -> Bool {
+        
+        let cepRegEx = "[0-9]{5}+[0-9]{3}||[0-9]{5}+-[0-9]{3}"
+
+        let cepPred = NSPredicate(format:"SELF MATCHES %@", cepRegEx)
+        
+        if cepPred.evaluate(with: cep) {
             
             return true
         }
@@ -221,8 +325,11 @@ extension UIViewController {
         let capitalizedTextTest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
         
         if capitalizedTextTest.evaluate(with: text) {
+            
             return true
-        } else {
+        }
+        else {
+            
             return false
         }
     }
@@ -266,8 +373,11 @@ extension UIViewController {
         let normalLetterTextTest = NSPredicate(format: "SELF MATCHES %@", normalLetterRegEx)
         
         if normalLetterTextTest.evaluate(with: text) {
+            
             return true
-        } else {
+        }
+        else {
+            
             return false
         }
     }
