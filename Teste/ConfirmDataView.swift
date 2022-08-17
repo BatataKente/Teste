@@ -31,37 +31,37 @@ class ConfirmDataView: UIViewController {
         
         let quadruploDismissHandler = {(action: UIAction) in
             
-            if let passwordView = self.presentingViewController,
-               let emailView = self.presentingViewController,
-               let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+            if let confirmDataView = self.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController {
                 
+                confirmDataView.view.isHidden = true
                 passwordView.view.isHidden = true
                 emailView.view.isHidden = true
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+                phoneView.dismiss(animated: false)
             }
         }
         
         let tripleDismissHandler = {(action: UIAction) in
             
-            if let emailView = self.presentingViewController,
-               let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+            if let passwordView = self.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController {
                 
+                passwordView.view.isHidden = true
                 emailView.view.isHidden = true
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+                phoneView.dismiss(animated: false)
             }
         }
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            if let phoneView = self.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+            if let passwordView = self.presentingViewController,
+               let phoneView = passwordView.presentingViewController {
                 
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+                passwordView.view.isHidden = true
+                phoneView.dismiss(animated: false)
             }
         }
         
@@ -70,9 +70,10 @@ class ConfirmDataView: UIViewController {
             self.dismiss(animated: false)
         }
         
-        buttons[0].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
-        buttons[1].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
-        buttons[2].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
+        buttons[0].addAction(UIAction(handler: quadruploDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
+        buttons[2].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[3].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
         
         return buttons
     }()
@@ -186,7 +187,19 @@ class ConfirmDataView: UIViewController {
         view.addSubviews([ label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
-            self.dismiss(animated: true)
+            
+            if let confirmDataView = self.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let loginView = phoneView.presentingViewController {
+                
+                confirmDataView.view.isHidden = true
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                loginView.dismiss(animated: false)
+            }
         }
         
         defaults()
