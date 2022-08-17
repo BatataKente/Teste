@@ -65,6 +65,33 @@ class MinhasReservasVazioView: UIViewController {
     
     private func setConstraints() {
         
+        setLabelConstraints()
+        setButtonConstraints()
+    }
+    
+    private func setLabelConstraints(){
+        
+        let constraint = [
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 343),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 114.5),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -110.5),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setButtonConstraints(){
+        
+        let constraint = [
+            searchNewSpaceButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            searchNewSpaceButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            searchNewSpaceButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            searchNewSpaceButton.heightAnchor.constraint(equalToConstant: 52)
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
     }
     
 }
