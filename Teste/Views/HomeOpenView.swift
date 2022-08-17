@@ -28,6 +28,8 @@ class HomeOpenView: UIViewController {
         tabBar.selectedItem = tabBar.items?[0]
     }
     
+    let sessionManager = SessionManager()
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -175,10 +177,10 @@ class HomeOpenView: UIViewController {
         coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         coverView.constraintInsideTo(.bottom, view)
         
-        imageView.constraintInsideTo(.centerX, coverView)
+        imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.height, coverView, multiplier: 0.0725446428571429)
-        imageView.constraintInsideTo(.width, coverView, multiplier: 0.6634)
+        imageView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.08)
+        imageView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.6634)
     }
 }
 

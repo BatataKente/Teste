@@ -1,5 +1,5 @@
 //
-//  NomeView.swift
+//  OpenDetailsView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -597,11 +597,8 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         
         cell?.imageView.image = UIImage(named: images[indexPath.row])
         
-        return cell ?? UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         pageControl.currentPage = indexPath.row
+        
+        return cell ?? UICollectionViewCell()
     }
 }

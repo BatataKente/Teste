@@ -30,6 +30,7 @@
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
 		140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */; };
+		140ED61B28ADA3FF00AC5B92 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 140ED61A28ADA3FF00AC5B92 /* SDWebImage */; };
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
 		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
@@ -210,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140ED61B28ADA3FF00AC5B92 /* SDWebImage in Frameworks */,
 				13080CB728A17F0000A064B0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +244,64 @@
 				14054AC32899E79900BB4E3B /* KoHo-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		140ED61C28ADA53C00AC5B92 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
+				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
+				C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */,
+				14A375C428A302A100B48F9D /* PasswordView.swift */,
+				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
+				14BDBBE328ABB626004C32BF /* HelpViewController.swift */,
+				143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */,
+				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
+				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
+				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
+				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
+				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
+				14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */,
+				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
+				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
+				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
+				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
+				14937D6B28A4703F004A1E7A /* HelpViewModel.swift */,
+				14937D6928A47033004A1E7A /* HelpView.swift */,
+				134D68102890151C00D5572B /* BulletPoint.swift */,
+				134D68122890154E00D5572B /* TextField.swift */,
+				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
+				1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */,
+				1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */,
+				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
+				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
+				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
+				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
+				145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */,
+				145B07DE28AABE6900ABCCF0 /* PhoneView.swift */,
+				145B07E428AABED600ABCCF0 /* EmailViewModel.swift */,
+				145B07E028AABEAD00ABCCF0 /* EmailView.swift */,
+				1410B92428A1740400C36902 /* FilterScreen.swift */,
+				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
+				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
+				CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */,
+				CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */,
+				CFBF087328A2ACFC00D39DCF /* HobbiesView.swift */,
+				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
+				13F1768528941C6200C5FD05 /* ConfirmDataView.swift */,
+				0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */,
+				138C85AD2892BE2800997FBC /* MinhasReservas.swift */,
+				0953C3BF28AC15BC00C78D93 /* MinhasReservasVazioView.swift */,
+				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
+				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
+				C616D877289C40C40045AEED /* ProfileScreen.swift */,
+				13080CB328A17EC000A064B0 /* Network.swift */,
+				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
+				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
+				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
+				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1440616528A2BCA500F82171 /* Extensions */ = {
@@ -302,65 +362,15 @@
 		14CBDBC42889B72300EA8EDD /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				140ED61C28ADA53C00AC5B92 /* Views */,
 				1440616628A2BCB700F82171 /* Enums */,
 				1440616528A2BCA500F82171 /* Extensions */,
 				13080CBC28A1890000A064B0 /* Service */,
 				14054ACD2899E7DE00BB4E3B /* Fonts */,
-				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
-				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
-				C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */,
-				14A375C428A302A100B48F9D /* PasswordView.swift */,
-				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
-				14BDBBE328ABB626004C32BF /* HelpViewController.swift */,
-				143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */,
-				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
-				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
-				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
-				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
-				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
-				14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */,
-				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
-				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
-				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
-				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
-				14937D6B28A4703F004A1E7A /* HelpViewModel.swift */,
-				14937D6928A47033004A1E7A /* HelpView.swift */,
-				134D68102890151C00D5572B /* BulletPoint.swift */,
-				134D68122890154E00D5572B /* TextField.swift */,
-				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
-				1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */,
-				1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */,
-				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
-				1340F094289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift */,
-				14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */,
-				14CBDBDD2889B80400EA8EDD /* NomeView.swift */,
-				145B07E228AABECA00ABCCF0 /* PhoneViewModel.swift */,
-				145B07DE28AABE6900ABCCF0 /* PhoneView.swift */,
-				145B07E428AABED600ABCCF0 /* EmailViewModel.swift */,
-				145B07E028AABEAD00ABCCF0 /* EmailView.swift */,
-				1410B92428A1740400C36902 /* FilterScreen.swift */,
-				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
-				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
-				CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */,
-				CFBF087228A2ACFC00D39DCF /* ActivitiesView.swift */,
-				CFBF087328A2ACFC00D39DCF /* HobbiesView.swift */,
-				CFFE8036288B051C00CA51BC /* ConfirmationCodeView.swift */,
-				13F1768528941C6200C5FD05 /* ConfirmDataView.swift */,
-				0ECFDE90289AD7E5005A009C /* AdviceCheckoutView.swift */,
-				138C85AD2892BE2800997FBC /* MinhasReservas.swift */,
-				0953C3BF28AC15BC00C78D93 /* MinhasReservasVazioView.swift */,
-				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
-				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
-				C616D877289C40C40045AEED /* ProfileScreen.swift */,
-				13080CB328A17EC000A064B0 /* Network.swift */,
-				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
-				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
+				3029F16528ABDCE4006E1229 /* Utils */,
+				147B1C852898482100A5E3EE /* Assets.xcassets */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
-				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
-				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
-				147B1C852898482100A5E3EE /* Assets.xcassets */,
-				3029F16528ABDCE4006E1229 /* Utils */,
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
 				14CBDBD02889B72500EA8EDD /* LaunchScreen.storyboard */,
 				14CBDBD32889B72500EA8EDD /* Info.plist */,
@@ -394,6 +404,7 @@
 			name = Teste;
 			packageProductDependencies = (
 				13080CB628A17F0000A064B0 /* Alamofire */,
+				140ED61A28ADA3FF00AC5B92 /* SDWebImage */,
 			);
 			productName = Teste;
 			productReference = 14CBDBC22889B72300EA8EDD /* Teste.app */;
@@ -425,6 +436,7 @@
 			mainGroup = 14CBDBB92889B72300EA8EDD;
 			packageReferences = (
 				13080CB528A17F0000A064B0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				140ED61928ADA3FF00AC5B92 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 14CBDBC32889B72300EA8EDD /* Products */;
 			projectDirPath = "";
@@ -762,6 +774,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		140ED61928ADA3FF00AC5B92 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -769,6 +789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 13080CB528A17F0000A064B0 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		140ED61A28ADA3FF00AC5B92 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 140ED61928ADA3FF00AC5B92 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

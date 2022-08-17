@@ -70,7 +70,7 @@ struct PartnerAddress: Codable {
     var street_number: Int?
     var neighborhood: String?
     var complement: String?
-    var postal_code: Int?
+    var postal_code: String?
     var state_id: Int?
     var state_name: String?
     var city_id: Int?
@@ -133,13 +133,13 @@ struct Space: Codable {
     var name: String?
     var slogan: String?
     var description: String?
-    var hourly_price: Double?
-    var daily_price: Double?
-    var monthly_price: Double?
+    var hourly_price: String?
+    var daily_price: String?
+    var monthly_price: String?
     var allow_workpass: Bool?
-    var hourly_credits: Double?
-    var daily_credits: Double?
-    var monthly_credits: Double?
+    var hourly_credits: String?
+    var daily_credits: String?
+    var monthly_credits: String?
     var is_active: Bool?
     var favorite_space: Bool?
     var partner_site_id: Int?
@@ -153,16 +153,16 @@ struct Space: Codable {
 }
 
 struct SpaceListParameters: Codable {
-    var space_state_id: Int
-    var space_city_id: Int
-    var allow_workpass: Bool
-    var seats_qty: Int
-    var space_type_id: Int
-    var space_classification_id: Int
-    var space_category_id: Int
-    var space_facilities_id: [Int]
-    var space_noise_level_id: Int
-    var space_contract_Type: Int
+    var space_state_id: Int?
+    var space_city_id: Int?
+    var allow_workpass: Bool?
+    var seats_qty: Int?
+    var space_type_id: Int?
+    var space_classification_id: Int?
+    var space_category_id: Int?
+    var space_facilities_id: [Int]?
+    var space_noise_level_id: Int?
+    var space_contract_Type: Int?
 }
 
 struct SpaceFavoriteParameters: Codable {
