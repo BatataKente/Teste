@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MinhasReservasVazioView: UIViewController {
+class EmptyReservation: UIViewController {
     
     let navCustomBar = UIView()
     
