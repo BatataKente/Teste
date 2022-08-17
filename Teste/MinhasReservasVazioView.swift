@@ -11,7 +11,12 @@ class MinhasReservasVazioView: UIViewController {
     
     let navCustomBar = UIView()
     
-    let topRightWay = UIImageView()
+    let topRightWay: UIImageView = {
+        let image = UIImage(named: "wayReserv2")
+        let imageTop = UIImageView(image: image)
+        //imageTop.contentMode = .scaleToFill
+        return imageTop
+    }()
 
     let label: UILabel = {
         let label = UILabel()
@@ -35,6 +40,12 @@ class MinhasReservasVazioView: UIViewController {
     
     let bottomLeftWay = UIImageView()
     
+    lazy var tabBar: BravveClosedTabBar = {
+        let tabBar = BravveClosedTabBar(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        return tabBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
@@ -54,6 +65,7 @@ class MinhasReservasVazioView: UIViewController {
         view.addSubview(label)
         view.addSubview(searchNewSpaceButton)
         view.addSubview(bottomLeftWay)
+        view.addSubview(tabBar)
         
     }
     
@@ -65,6 +77,47 @@ class MinhasReservasVazioView: UIViewController {
     
     private func setConstraints() {
         
+        setLabelConstraints()
+        setButtonConstraints()
+        setTabBarConstraints()
+    }
+    
+    
+    private func setLabelConstraints(){
+        
+        let constraint = [
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 343),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 114.5),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -110.5),
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setButtonConstraints(){
+        
+        let constraint = [
+            searchNewSpaceButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            searchNewSpaceButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            searchNewSpaceButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            searchNewSpaceButton.heightAnchor.constraint(equalToConstant: 52)
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setTabBarConstraints(){
+        
+        let constraint = [
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
     }
     
 }
