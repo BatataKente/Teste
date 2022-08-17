@@ -15,7 +15,7 @@ class EmailView: UIViewController {
                                                            password: "")) {
         
         self.userToRegister = userToRegister
-        
+        print("$$$$$$$$\(self.userToRegister)")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,17 +55,16 @@ class EmailView: UIViewController {
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            if let phoneView = self.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
-                
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
-            }
+            let nomeView = NomeView(self.userToRegister)
+            nomeView.modalPresentationStyle = .fullScreen
+            self.present(nomeView, animated: false)
         }
         
         let dismissHandler = {(action: UIAction) in
             
-            self.dismiss(animated: false)
+            let phoneView = PhoneView(self.userToRegister)
+            phoneView.modalPresentationStyle = .fullScreen
+            self.present(phoneView, animated: false)
         }
         
         buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
@@ -175,7 +174,9 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            self.dismiss(animated: false)
+            let loginView = LoginView()
+            loginView.modalPresentationStyle = .fullScreen
+            self.present(loginView, animated: true)
         }
         
         view.setToDefaultBackgroundColor()
