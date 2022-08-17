@@ -15,7 +15,7 @@ class NomeView: UIViewController {
                                                            password: "")) {
         
         self.userToRegister = userToRegister
-        
+        print("$$$$$$$$\(self.userToRegister)")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -174,7 +174,9 @@ class NomeView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            self.dismiss(animated: true)
+            let loginView = LoginView()
+            loginView.modalPresentationStyle = .fullScreen
+            self.present(loginView, animated: true)
         }
         
         view.setToDefaultBackgroundColor()

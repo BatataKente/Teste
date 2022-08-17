@@ -9,23 +9,6 @@ import UIKit
 
 class ConfirmDataView: UIViewController {
     
-    init(_ userToRegister: UserParameters = UserParameters(name: "",
-                                                           phone_number: "",
-                                                           email: "",
-                                                           password: "")) {
-        
-        self.userToRegister = userToRegister
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    var userToRegister: UserParameters
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override var prefersStatusBarHidden: Bool {
 
             return true
@@ -37,14 +20,60 @@ class ConfirmDataView: UIViewController {
     private let backgroundImage2 = UIImageView()
     
     private lazy var buttons: [UIButton] = {
-        let buttons =  createProgressBarButtons([
+        
+        let buttons =  createProgressBarButtonsWithoutActions([
             IconsBravve.userGray.rawValue,
             IconsBravve.cellGray.rawValue,
             IconsBravve.emailGray.rawValue,
             IconsBravve.padlockGray.rawValue,
             IconsBravve.pencilBlue.rawValue
         ])
-        buttons[4].setTitle(" Confirmação", for: .normal)
+        
+        let quadruploDismissHandler = {(action: UIAction) in
+            
+            if let passwordView = self.presentingViewController,
+               let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let tripleDismissHandler = {(action: UIAction) in
+            
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[2].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
+        
         return buttons
     }()
     
@@ -157,9 +186,7 @@ class ConfirmDataView: UIViewController {
         view.addSubviews([ label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
-            let vc = PasswordView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
         
         defaults()
@@ -206,17 +233,28 @@ class ConfirmDataView: UIViewController {
         
         buttonContinue.addTarget(self, action: #selector(actionButtonContinue), for: .touchUpInside)
         
+        buttons[0].addTarget(self, action: #selector(actionEditButtonName), for: .touchUpInside)
+        buttons[1].addTarget(self, action: #selector(actionEditButtonPhone), for: .touchUpInside)
+        buttons[2].addTarget(self, action: #selector(actionEditButtonEmail), for: .touchUpInside)
+        buttons[3].addTarget(self, action: #selector(actionButtonPassword), for: .touchUpInside)
+        
         editButtonName.addTarget(self, action: #selector(actionEditButtonName), for: .touchUpInside)
-        editButtonCell.addTarget(self, action: #selector(actionEditButtonCell), for: .touchUpInside)
+        editButtonCell.addTarget(self, action: #selector(actionEditButtonPhone), for: .touchUpInside)
         editButtonEmail.addTarget(self, action: #selector(actionEditButtonEmail), for: .touchUpInside)
         
     }
     
     
-    @objc func actionButtonContinue() {
-        let vc = FotoView()
+    @objc func actionButtonPassword() {
+        let vc = PasswordView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    
+    @objc func actionButtonContinue() {
+//        let vc = TokenView()
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true)
     }
     
     @objc func actionEditButtonName() {
@@ -225,7 +263,7 @@ class ConfirmDataView: UIViewController {
         present(vc, animated: true)
     }
     
-    @objc func actionEditButtonCell() {
+    @objc func actionEditButtonPhone() {
         let vc = PhoneView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
