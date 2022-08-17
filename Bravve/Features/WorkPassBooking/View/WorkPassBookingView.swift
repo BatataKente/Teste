@@ -195,7 +195,7 @@ class WorkPassBookingView: UIViewController {
         navBarView.addSubviews([navBarBackgroundImageView, backBarButton, navBarLabelStackView])
         tableView.delegate = self
         tableView.dataSource = self
-        tabBar.selectedItem = tabBar.items?[1]
+        tabBar.selectedItem = tabBar.items?[0]
         
         setupConstraints()
         
