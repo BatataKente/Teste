@@ -28,6 +28,8 @@ class HomeOpenView: UIViewController {
         tabBar.selectedItem = tabBar.items?[0]
     }
     
+    let sessionManager = SessionManager()
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
