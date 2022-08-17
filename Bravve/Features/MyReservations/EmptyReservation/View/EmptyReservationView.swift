@@ -51,7 +51,7 @@ class EmptyReservation: UIViewController {
         setConstraints()
         setDefaults()
         view.backgroundColor = UIColor(named: "background")
-        
+        tabBar.selectedItem = tabBar.items?[1]
         navCustomBar.setToDefaultCustomBarWithBackButton(viewTitle: "Minhas Reservas") { _ in
             return
         }
