@@ -1,5 +1,5 @@
 //
-//  NomeView.swift
+//  OpenDetailsView.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -8,18 +8,6 @@
 import UIKit
 
 class OpenDetailsView: UIViewController {
-    
-    let images = [ImagesBravve.homeOpen_1.rawValue,
-                  ImagesBravve.homeOpen_2.rawValue,
-                  ImagesBravve.homeOpen_3.rawValue,
-                  ImagesBravve.homeOpen_4.rawValue,
-                  ImagesBravve.imageReservs_1.rawValue,
-                  ImagesBravve.imageReservs_2.rawValue,
-                  ImagesBravve.imageReservs_3.rawValue,
-                  ImagesBravve.imageReservs_4.rawValue,
-                  ImagesBravve.example_1.rawValue,
-                  ImagesBravve.example_2.rawValue,
-                  ImagesBravve.example_3.rawValue]
     
     init(_ space: Space) {
         
@@ -48,10 +36,22 @@ class OpenDetailsView: UIViewController {
         setupConstraints()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override var prefersStatusBarHidden: Bool {
         
-        .lightContent
+        true
     }
+    
+    let images = [ImagesBravve.homeOpen_1.rawValue,
+                  ImagesBravve.homeOpen_2.rawValue,
+                  ImagesBravve.homeOpen_3.rawValue,
+                  ImagesBravve.homeOpen_4.rawValue,
+                  ImagesBravve.imageReservs_1.rawValue,
+                  ImagesBravve.imageReservs_2.rawValue,
+                  ImagesBravve.imageReservs_3.rawValue,
+                  ImagesBravve.imageReservs_4.rawValue,
+                  ImagesBravve.example_1.rawValue,
+                  ImagesBravve.example_2.rawValue,
+                  ImagesBravve.example_3.rawValue]
     
     private var space: Space
     
@@ -327,7 +327,16 @@ class OpenDetailsView: UIViewController {
         
         return localFacilitiesStackView
     }()
+    
+    private lazy var pageControl: UIPageControl = {
         
+        let pageControl = UIPageControl()
+        pageControl.numberOfPages = images.count
+        pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
+        return pageControl
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         
         let itemSize = 256
@@ -454,7 +463,7 @@ class OpenDetailsView: UIViewController {
         label_8.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, tagsStackView, nameLabel, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView, localFacilitiesStackView])
+        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, nameLabel, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView, localFacilitiesStackView])
         
         view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
         view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
@@ -474,13 +483,19 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
-        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(20).generateSizeForScreen)
+        pageControl.constraintInsideTo(.centerX, photoCollectionView)
+        pageControl.constraintOutsideTo(.top, photoCollectionView,
+                                        CGFloat(10).generateSizeForScreen)
+        pageControl.constraintInsideTo(.leading, photoCollectionView)
+        pageControl.constraintInsideTo(.trailing, photoCollectionView)
+        
+        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(45).generateSizeForScreen)
         nameLabel.constraintInsideTo(.leading, photoCollectionView)
         
         label_1.constraintOutsideTo(.top, nameLabel, CGFloat(7.5).generateSizeForScreen)
         label_1.constraintInsideTo(.leading, nameLabel)
         
-        label_2.constraintOutsideTo(.top, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        label_2.constraintInsideTo(.centerY, nameLabel)
         label_2.constraintOutsideTo(.trailing, label_3, CGFloat(5).generateSizeForScreen)
         
         label_3.constraintInsideTo(.bottom, label_2)
@@ -573,7 +588,7 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        images.count
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -583,5 +598,10 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         cell?.imageView.image = UIImage(named: images[indexPath.row])
         
         return cell ?? UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        pageControl.currentPage = indexPath.row
     }
 }
