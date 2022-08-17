@@ -7,11 +7,11 @@
 
 import UIKit
 
-class TokenView: UIViewController, UITextFieldDelegate {
-
+class TokenView: UIViewController {
+    
     
     let backgroundImage = UIImageView()
-        
+    
     let continueButton = UIButton()
     
     let messageSentLabel: UILabel = {
@@ -32,7 +32,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     let insertCodeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +45,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
     
     lazy var code1TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -53,12 +54,12 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         textField.becomeFirstResponder()
-        textField.tag = 1
         return textField
     }()
     
     lazy var code2TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -66,12 +67,12 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
-        textField.tag = 2
         return textField
     }()
     
     lazy var code3TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -79,12 +80,12 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
-        textField.tag = 3
         return textField
     }()
     
     lazy var code4TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -92,12 +93,12 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
-        textField.tag = 4
         return textField
     }()
     
     lazy var code5TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -105,12 +106,12 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
-        textField.tag = 5
         return textField
     }()
     
     lazy var code6TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -118,10 +119,9 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
-        textField.tag = 6
         return textField
     }()
-        
+    
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [code1TextField, code2TextField, code3TextField, code4TextField, code5TextField,code6TextField])
         stackView.axis = .horizontal
@@ -131,7 +131,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-        
+    
     let messageNotReceivedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -164,11 +164,27 @@ class TokenView: UIViewController, UITextFieldDelegate {
         button.addTarget(TokenView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
+    
+    
+    override func viewDidLoad() {
+        
+        setupView()
+        setupDefaults()
+        setupConstraints()
+        
+        self.code1TextField.delegate = self
+        self.code2TextField.delegate = self
+        self.code3TextField.delegate = self
+        self.code4TextField.delegate = self
+        self.code5TextField.delegate = self
+        self.code6TextField.delegate = self
+    }
+    
     func filledCode() {
         
         if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
-
+            
             continueButton.addTarget(nil,
                                      action: #selector(continueButtonTapped),
                                      for: .touchUpInside)
@@ -192,7 +208,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
     }
     
     @objc func resendCodeButtonTapped() {
-            
+        
         print("Novo código enviado")
     }
     
@@ -203,56 +219,16 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.layer.cornerRadius = CGFloat(5).generateSizeForScreen
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text?.count == 1{
-            textField.endEditing(true)
-            textField.resignFirstResponder()
-            
-            switch textField.tag{
-            case 1:
-                code2TextField.becomeFirstResponder()
-            case 2:
-                code3TextField.becomeFirstResponder()
-            case 3:
-                code4TextField.becomeFirstResponder()
-            case 4:
-                code5TextField.becomeFirstResponder()
-            case 5:
-                code6TextField.becomeFirstResponder()
-            case 6:
-                code2TextField.resignFirstResponder()
-            default:
-                textField.endEditing(true)
-                textField.resignFirstResponder()
-            }
-        }
-
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         textField.layer.borderWidth = 0
         filledCode()
     }
     
-    override func viewDidLoad() {
-        
-        setupView()
-        setupDefaults()
-        setupConstraints()
-        
-        self.code1TextField.delegate = self
-        self.code2TextField.delegate = self
-        self.code3TextField.delegate = self
-        self.code4TextField.delegate = self
-        self.code5TextField.delegate = self
-        self.code6TextField.delegate = self
-    }
-    
     func setupView() {
         
         view.addSubviews([backgroundImage, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
-
+        
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
@@ -260,7 +236,6 @@ class TokenView: UIViewController, UITextFieldDelegate {
         }
         
     }
-
     
     func setupDefaults() {
         
@@ -371,5 +346,30 @@ class TokenView: UIViewController, UITextFieldDelegate {
             item.isActive = true
         }
     }
+    
+}
 
+extension TokenView: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        additionalCellTextFieldSetup(textField)
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+        
+    }
+    
+    func additionalCellTextFieldSetup(_ textField: UITextField?) {
+        switch textField?.tag{
+        case 1:
+            textField?.text = textField?.text?.formatMask(mask: "#")
+        default:
+            break
+        }
+    }
+    
 }
