@@ -36,12 +36,11 @@ class PasswordView: UIViewController{
     
     lazy var progressBarButtons: [UIButton] = {
         
-        let buttons = createProgressBarButtons([IconsBravve.userGray.rawValue,
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
                                                 IconsBravve.cellGray.rawValue,
                                                 IconsBravve.emailGray.rawValue,
                                                 IconsBravve.padlockBlue.rawValue,
                                                 IconsBravve.pencilGray.rawValue])
-        buttons[3].setTitle(" Senha", for: .normal)
         return buttons
     }()
     
@@ -259,9 +258,7 @@ class PasswordView: UIViewController{
         view.addSubviews([backWay, descriptionLabel, backView,passwordStackView, hidePasswordButton, backViewConfirm ,confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
         
         view.createRegisterCustomBar(progressBarButtons: progressBarButtons) {_ in
-            let emailView = EmailView()
-            emailView.modalPresentationStyle = .fullScreen
-            self.present(emailView, animated: true)
+            self.dismiss(animated: true)
         }
         
         continueButton.setToBottomButtonKeyboardDefault()

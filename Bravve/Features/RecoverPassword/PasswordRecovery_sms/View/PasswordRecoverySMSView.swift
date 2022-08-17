@@ -8,10 +8,11 @@
 import UIKit
 
 class PasswordRecoverySMSView: UIViewController {
-
+    
+    var alert = CustomAlert()
     
     let backgroundImage = UIImageView()
-        
+    
     let continueButton = UIButton()
     
     let messageSentLabel: UILabel = {
@@ -32,7 +33,7 @@ class PasswordRecoverySMSView: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     let insertCodeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -121,7 +122,7 @@ class PasswordRecoverySMSView: UIViewController {
         textField.textAlignment = .center
         return textField
     }()
-        
+    
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [code1TextField, code2TextField, code3TextField, code4TextField, code5TextField,code6TextField])
         stackView.axis = .horizontal
@@ -131,7 +132,7 @@ class PasswordRecoverySMSView: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-        
+    
     let messageNotReceivedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -164,11 +165,11 @@ class PasswordRecoverySMSView: UIViewController {
         button.addTarget(PasswordRecoverySMSView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
     func filledCode() {
         
         if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
-
+            
             continueButton.addTarget(nil,
                                      action: #selector(continueButtonTapped),
                                      for: .touchUpInside)
@@ -186,13 +187,15 @@ class PasswordRecoverySMSView: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-        let vc = LoginView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        alert.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Senha alterada com sucesso!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+            let vc = LoginView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), on: self)
     }
     
     @objc func resendCodeButtonTapped() {
-            
+        
         print("Novo código enviado")
     }
     
@@ -228,15 +231,15 @@ class PasswordRecoverySMSView: UIViewController {
     func setupView() {
         
         view.addSubviews([backgroundImage, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
-
+        
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
-            return
+            self.dismiss(animated: true)
         }
         
     }
-
+    
     
     func setupDefaults() {
         
@@ -347,13 +350,13 @@ class PasswordRecoverySMSView: UIViewController {
             item.isActive = true
         }
     }
-
+    
 }
 extension PasswordRecoverySMSView: UITextFieldDelegate {
-     
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         additionalCellTextFieldSetup(textField)
-    
+        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -363,17 +366,13 @@ extension PasswordRecoverySMSView: UITextFieldDelegate {
         
     }
     
-        func additionalCellTextFieldSetup(_ textField: UITextField?) {
-            switch textField?.tag{
-            case 1:
-                textField?.text = textField?.text?.formatMask(mask: "#")
-            default:
-                break
-            }
+    func additionalCellTextFieldSetup(_ textField: UITextField?) {
+        switch textField?.tag{
+        case 1:
+            textField?.text = textField?.text?.formatMask(mask: "#")
+        default:
+            break
         }
-        
     }
     
-    
-    
-
+}

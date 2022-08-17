@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WorkPassBookingView: UIViewController{
+class WorkPassBookingView: UIViewController {
     
     
     private let tableView : UITableView = {
@@ -45,8 +45,13 @@ class WorkPassBookingView: UIViewController{
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc func backButtonTapped(){
+        self.dismiss(animated: true)
+    }
     
     private let siteNameLabel: UILabel = {
         let label = UILabel()

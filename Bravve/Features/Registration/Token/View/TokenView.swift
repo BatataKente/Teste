@@ -53,6 +53,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         textField.becomeFirstResponder()
+        textField.tag = 1
         return textField
     }()
     
@@ -65,6 +66,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
+        textField.tag = 2
         return textField
     }()
     
@@ -77,6 +79,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
+        textField.tag = 3
         return textField
     }()
     
@@ -89,6 +92,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
+        textField.tag = 4
         return textField
     }()
     
@@ -101,6 +105,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
+        textField.tag = 5
         return textField
     }()
     
@@ -113,6 +118,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
+        textField.tag = 6
         return textField
     }()
         
@@ -180,7 +186,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
     }
     
     @objc func continueButtonTapped() {
-        let vc = LoginView()
+        let vc = FotoView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -195,6 +201,32 @@ class TokenView: UIViewController, UITextFieldDelegate {
         textField.layer.borderWidth = CGFloat(1).generateSizeForScreen
         textField.layer.borderColor = UIColor(named: ColorsBravve.buttonPink.rawValue)?.cgColor
         textField.layer.cornerRadius = CGFloat(5).generateSizeForScreen
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text?.count == 1{
+            textField.endEditing(true)
+            textField.resignFirstResponder()
+            
+            switch textField.tag{
+            case 1:
+                code2TextField.becomeFirstResponder()
+            case 2:
+                code3TextField.becomeFirstResponder()
+            case 3:
+                code4TextField.becomeFirstResponder()
+            case 4:
+                code5TextField.becomeFirstResponder()
+            case 5:
+                code6TextField.becomeFirstResponder()
+            case 6:
+                code2TextField.resignFirstResponder()
+            default:
+                textField.endEditing(true)
+                textField.resignFirstResponder()
+            }
+        }
+
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -224,7 +256,7 @@ class TokenView: UIViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
-            return
+            self.dismiss(animated: true)
         }
         
     }
