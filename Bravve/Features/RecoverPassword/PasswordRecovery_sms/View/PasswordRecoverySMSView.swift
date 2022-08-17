@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
+class PasswordRecoverySMSView: UIViewController {
 
     
     let backgroundImage = UIImageView()
@@ -45,6 +45,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     lazy var code1TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -58,6 +59,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     lazy var code2TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -70,6 +72,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     lazy var code3TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -82,6 +85,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     lazy var code4TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -94,6 +98,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     lazy var code5TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -106,6 +111,7 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     
     lazy var code6TextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -216,6 +222,8 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
         self.code5TextField.delegate = self
         self.code6TextField.delegate = self
     }
+    
+    
     
     func setupView() {
         
@@ -341,5 +349,31 @@ class PasswordRecoverySMSView: UIViewController, UITextFieldDelegate {
     }
 
 }
-
+extension PasswordRecoverySMSView: UITextFieldDelegate {
+     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        additionalCellTextFieldSetup(textField)
+    
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+        
+    }
+    
+        func additionalCellTextFieldSetup(_ textField: UITextField?) {
+            switch textField?.tag{
+            case 1:
+                textField?.text = textField?.text?.formatMask(mask: "#")
+            default:
+                break
+            }
+        }
+        
+    }
+    
+    
+    
 
