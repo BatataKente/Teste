@@ -34,7 +34,29 @@ class NomeView: UIViewController {
         setupConstraints()
         
         super.viewDidLoad()
+        
+        view.addSubview(pageControl)
+        
+        pageControl.constraintInsideTo(.centerX, view)
+        pageControl.constraintInsideTo(.centerY, view)
+        
+        pageControl.sizeAnchorInSuperview(50)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
+    private lazy var pageControl: UIPageControl = {
+        
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .blue
+        pageControl.numberOfPages = 5
+        
+        return pageControl
+    }()
     
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
