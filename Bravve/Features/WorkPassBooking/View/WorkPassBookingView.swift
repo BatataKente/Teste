@@ -266,19 +266,19 @@ extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
         case 1 :
             cell.firstLabel.text = "Foursys"
             cell.secondLabel.text = "Workpass"
-            cell.thirdLabel.text = "X creditos"
+           
             cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
             
         case 2 :
             cell.firstLabel.text = "Bravve"
             cell.secondLabel.text = "Workpass"
-            cell.thirdLabel.text = "X creditos"
+          
             cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
             
         default :
             cell.firstLabel.text = "Cartão de credito"
             cell.secondLabel.text = "Conta pessoal"
-            cell.thirdLabel.isHidden = true
+            cell.creditsStackView.isHidden = true
             cell.circleButton.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
             
         }
