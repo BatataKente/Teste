@@ -521,3 +521,15 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    func getTitleLabelBackgroundColor(_ text: String) -> UIColor {
+        switch text {
+        case "COWORKING": return UIColor(named: ColorsBravve.coWorking.rawValue) ?? .black
+        case "COOLWORKING": return UIColor(named: ColorsBravve.coolWorking.rawValue) ?? .black
+        case "HOTEL": return UIColor(named: ColorsBravve.hotel.rawValue) ?? .black
+        case "BOXOFFICE": return UIColor(named: ColorsBravve.boxOffice.rawValue) ?? .black
+        default: return .white
+        }
+    }
+}
