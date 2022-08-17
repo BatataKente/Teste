@@ -39,14 +39,12 @@ class HomeOpenView: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         
-       true
+        true
     }
-    
-    private let authManager = NetworkManager()
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo"]
+    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
     
     private var cells: [Space] = []
      
@@ -63,6 +61,7 @@ class HomeOpenView: UIViewController {
         stackView.isHidden = false
         stackView.alignment = .leading
         stackView.spacing = 5
+        stackView.distribution = .fillProportionally
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
@@ -145,87 +144,17 @@ class HomeOpenView: UIViewController {
         
         view.setToDefaultBackgroundColor()
         
-        var customBarWithFilter: CustomBarWithFilter
-        let smallFont = UIFont(name: FontsBravve.light.rawValue,
-                               size: CGFloat(11).generateSizeForScreen)
-        
-        customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
+        let customBar = customBar.setToDefaultCustomBarWithFilter() {_ in
 
             let filterView = FilterScreen()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
         
-        authManager.getDataArray (endpoint: .utilsStates) { (states: [States]?) in
-
-            guard let states = states else {
-                return
-            }
-
-            var actions = [UIAction]()
-
-            let stateHandler = {(action: UIAction) in
-
-                for state in states {
-
-                    if state.code == action.title {
-
-                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
-
-                            guard let cities = cities else {return}
-
-                            var actions = [UIAction]()
-
-                            let cityHandler = {(action: UIAction) in
-                                
-                                customBarWithFilter.cityChosedLabel.text = action.title
-                                customBarWithFilter.cityLabel.font = smallFont
-                            }
-                            
-                            for city in cities {
-
-                                guard let cityname = city.name else {return}
-
-                                actions.append(UIAction(title: cityname,
-                                                        handler: cityHandler))
-                            }
-                            
-                            customBarWithFilter.stateChosedLabel.text = action.title
-                            customBarWithFilter.stateLabel.font = smallFont
-
-                            customBarWithFilter.rightButton.setMenuForButton(actions)
-                        }
-                    }
-                }
-            }
-            
-            for state in states {
-
-                actions.append(UIAction(title: state.code,
-                                        handler: stateHandler))
-            }
-
-            customBarWithFilter.leftButton.setMenuForButton(actions)
-        }
+        let homeOpenViewModel = HomeOpenViewModel(customBar)
         
-        let parameters = SpaceListParameters(space_state_id: 1, space_city_id: 2, allow_workpass: true, seats_qty: 3, space_type_id: 4, space_classification_id: 5, space_category_id: 6, space_facilities_id: [0], space_noise_level_id: 7, space_contract_Type: 8)
-        
-        authManager.postDataWithArrayResponse(endpoint: .spacesList, parameters: parameters) { (spaces: [Space]?) in
-            guard let spaces = spaces else {
-                return
-            }
-            
-            self.cells = spaces
-            
-            self.tableView.reloadData()
-            
-            UIView.animate(withDuration: 0.6,
-                           delay: 0.3) {
-                    
-                self.coverView.alpha = 0
-                self.imageView.alpha = 0
-            }
-        }
+        homeOpenViewModel.delegate = self
+        homeOpenViewModel.manageCustomBar()
     }
     
     private func setupConstraints() {
@@ -302,5 +231,18 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     }
 }
 
-
+extension HomeOpenView: HomeOpenViewModelProtocol {
+    
+    func setSpaces(_ spaces: [Space]) {
+        
+        self.cells = spaces
+        self.tableView.reloadData()
+    }
+    
+    func setCoverView(_ alpha: CGFloat) {
+        
+        self.coverView.alpha = alpha
+        self.imageView.alpha = alpha
+    }
+}
 
