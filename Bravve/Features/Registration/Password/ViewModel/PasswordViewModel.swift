@@ -9,8 +9,9 @@ import UIKit
 
 extension PasswordView: UITextFieldDelegate {
     @objc func continueAction() {
-        
-        print("Going On")
+        let confirmView = ConfirmDataView()
+        confirmView.modalPresentationStyle = .fullScreen
+        present(confirmView, animated: true)
     }
     
     @objc func hideConfirmPassword(_ sender: UIButton){
@@ -59,6 +60,11 @@ extension PasswordView: UITextFieldDelegate {
     
     func addTargets() {
         
+        progressBarButtons[0].addTarget(self, action: #selector(actionButtonName), for: .touchUpInside)
+        progressBarButtons[1].addTarget(self, action: #selector(actionButtonPhone), for: .touchUpInside)
+        progressBarButtons[2].addTarget(self, action: #selector(actionButtonEmail), for: .touchUpInside)
+
+        
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         passwordStackView.addGestureRecognizer(stackViewTap)
         
@@ -66,20 +72,40 @@ extension PasswordView: UITextFieldDelegate {
         confirmStackView.addGestureRecognizer(stackViewTap_)
     }
     
+    @objc func actionButtonName() {
+        let vc = NomeView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    @objc func actionButtonPhone() {
+        let vc = PhoneView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    @objc func actionButtonEmail() {
+        let vc = EmailView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
     @objc func confirmStackViewTapped() {
         
         confirmPasswordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         confirmPasswordTextField.addTarget(self, action: #selector(confirmChangeText), for: .editingChanged)
-        confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
+        backViewConfirm.isHidden = false
         confirmPasswordTextField.isHidden = false
+        confirmPasswordTextField.becomeFirstResponder()
     }
     
     @objc func stackViewTapped() {
         
         passwordTFLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
         passwordTextField.addTarget(self, action: #selector(changeText), for: .editingChanged)
-        passwordStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
+        backView.isHidden = false
         passwordTextField.isHidden = false
+        passwordTextField.becomeFirstResponder()
     }
     
     @objc func changeText(_ sender: UITextField) {
@@ -102,11 +128,17 @@ extension PasswordView: UITextFieldDelegate {
         
         if passwordText.isEmpty {
             
-            numberCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            upperCaseLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
             upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-            lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            numberLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
             numberEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            numberCharLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            numberCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            lowerCaseLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            specialCharLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
             specialCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            samePasswordLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         }
         else {
             
@@ -178,8 +210,18 @@ extension PasswordView: UITextFieldDelegate {
         
         if passwordText.isEmpty {
             
-            samePasswordEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-            samePasswordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            upperCaseLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            numberLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            numberEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            numberCharLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            numberCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            lowerCaseLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            specialCharLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            specialCharEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+            samePasswordLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            samePasswordEllipse.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
             continueButton.backgroundColor = .gray
         }
         else {
@@ -236,13 +278,14 @@ extension PasswordView: UITextFieldDelegate {
                             if specialCharEllipse.image == UIImage(named: IconsBravve.ellipseRed.rawValue){
                                 
                                 passwordTFLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-                                passwordStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.redAlertLabel.rawValue) ?? .red, width: 1, y: 1)
+                                backView.backgroundColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                                 
                                 hideWrongPasswordButton.isHidden = false
                                 hidePasswordButton.isHidden = true
                                 
                                 confirmPasswordTFLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-                                confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.redAlertLabel.rawValue) ?? .red, width: 1, y: 1)
+                                backViewConfirm.backgroundColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+                                
                                 
                                 hideWrongConfirmPasswordButton.isHidden = false
                                 hideConfirmPasswordButton.isHidden = true
@@ -254,15 +297,15 @@ extension PasswordView: UITextFieldDelegate {
                 }
             }
         }
-        else {
+        if confirmPasswordTextField.text == "" || passwordTextField.text == ""{
             
             passwordTFLabel.textColor = .gray
-            passwordStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
+            backView.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
             hideWrongPasswordButton.isHidden = true
             hidePasswordButton.isHidden = false
             
             confirmPasswordTFLabel.textColor = .gray
-            confirmStackView.addBottomLineWithColor(color: UIColor(named: ColorsBravve.blue.rawValue) ?? .blue, width: 1, y: 1)
+            backViewConfirm.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
             hideWrongConfirmPasswordButton.isHidden = true
             hideConfirmPasswordButton.isHidden = false
             

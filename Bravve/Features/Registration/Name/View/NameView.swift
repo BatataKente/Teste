@@ -36,6 +36,11 @@ class NomeView: UIViewController {
         super.viewDidLoad()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
     private let registerButton = UIButton()
@@ -85,6 +90,7 @@ class NomeView: UIViewController {
         
         let rightTextField = UITextField()
         rightTextField.font = font
+        rightTextField.becomeFirstResponder()
         
         let stackView = UIStackView(arrangedSubviews: [rightLabel,
                                                        rightTextField])
@@ -124,6 +130,7 @@ class NomeView: UIViewController {
         let registerStackView = UIStackView(arrangedSubviews: [viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
 
@@ -216,6 +223,8 @@ class NomeView: UIViewController {
         
         customShaddow.isHidden = false
         
+        registerStackView.layer.borderWidth = 0
+        
         viewElements.rightTextField.isHidden = false
         
         viewElements.rightTextField.addTarget(self,
@@ -225,31 +234,28 @@ class NomeView: UIViewController {
         
     @objc func changeScreen() {
         
-        if validateName(viewElements.rightTextField.text ?? "") {
-            
-            userToRegister.name = viewElements.rightTextField.text ?? ""
-            
-            let phoneView = PhoneView(userToRegister)
-            phoneView.modalPresentationStyle = .fullScreen
-            present(phoneView, animated: false)
-        }
-        else {
-            
-            nomeViewModel.makeFailScreen()
-        }
+        userToRegister.name = viewElements.rightTextField.text ?? ""
+        
+        let phoneView = PhoneView(userToRegister)
+        phoneView.modalPresentationStyle = .fullScreen
+        present(phoneView, animated: false)
     }
     
     @objc func changeText(_ sender: UITextField) {
         
-        if sender.text != "" {
-
+        if validateName(sender.text ?? "") {
+            
+            nomeViewModel.refreshScreen()
+            
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
-
+            
+            nomeViewModel.makeFailScreen()
+            
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
@@ -260,9 +266,7 @@ class NomeView: UIViewController {
 
 extension NomeView: NomeViewModelProtocol {
     
-    func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool,
-                     alertButton: Bool,
+    func setIshidden(alertButton: Bool,
                      registerFailLabel: Bool,
                      rightTextField: Bool,
                      ways: [Bool])  {

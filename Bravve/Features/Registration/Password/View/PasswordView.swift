@@ -9,6 +9,24 @@ import UIKit
 
 class PasswordView: UIViewController{
     
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        print(userToRegister)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let backWay: UIImageView = {
         
         let image = UIImageView()
@@ -19,10 +37,10 @@ class PasswordView: UIViewController{
     lazy var progressBarButtons: [UIButton] = {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
-                                                              IconsBravve.cellGray.rawValue,
-                                                              IconsBravve.emailGray.rawValue,
-                                                              IconsBravve.padlockBlue.rawValue,
-                                                              IconsBravve.pencilGray.rawValue])
+                                                IconsBravve.cellGray.rawValue,
+                                                IconsBravve.emailGray.rawValue,
+                                                IconsBravve.padlockBlue.rawValue,
+                                                IconsBravve.pencilGray.rawValue])
         return buttons
     }()
     
@@ -213,17 +231,34 @@ class PasswordView: UIViewController{
     
     let continueButton = UIButton()
     
+    let backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        return view
+    }()
+    
+    let backViewConfirm: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        return view
+    }()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.addSubviews([backWay, descriptionLabel, passwordStackView, hidePasswordButton, confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
+        view.addSubviews([backWay, descriptionLabel, backView,passwordStackView, hidePasswordButton, backViewConfirm ,confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
         
         view.createRegisterCustomBar(progressBarButtons: progressBarButtons) {_ in
-            
-            print("Going Back")
+            self.dismiss(animated: true)
         }
         
         continueButton.setToBottomButtonKeyboardDefault()
@@ -245,6 +280,11 @@ class PasswordView: UIViewController{
         descriptionLabel.constraintInsideTo(.left, view.safeAreaLayoutGuide)
         descriptionLabel.constraintInsideTo(.right, view.safeAreaLayoutGuide)
         
+        backView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        backView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        backView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        backView.constraintOutsideTo(.top, descriptionLabel, CGFloat(31).generateSizeForScreen)
+        
         passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
@@ -254,6 +294,11 @@ class PasswordView: UIViewController{
         hidePasswordButton.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
         hidePasswordButton.constraintInsideTo(.centerY, passwordStackView)
         hidePasswordButton.constraintInsideTo(.trailing, passwordStackView)
+        
+        backViewConfirm.constraintInsideTo(.height, passwordStackView)
+        backViewConfirm.constraintInsideTo(.leading, passwordStackView)
+        backViewConfirm.constraintInsideTo(.trailing, passwordStackView)
+        backViewConfirm.constraintOutsideTo(.top, passwordStackView, CGFloat(11.4).generateSizeForScreen)
         
         confirmStackView.constraintInsideTo(.height, passwordStackView)
         confirmStackView.constraintInsideTo(.leading, passwordStackView)

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TermsOfPrivacy: UIViewController {
+class TermsAndConditionViewController: UIViewController {
    
         
         private let customBar = UIView()
@@ -25,7 +25,7 @@ class TermsOfPrivacy: UIViewController {
        return view
     }()
     
-    private lazy var tabBar = BravveTabBar(self,
+    private lazy var tabBar = TabBarClosed(self,
                                            itemImagesNames: [ButtonsBravve.locationGray.rawValue,
                                                              ButtonsBravve.calendarButtonGray.rawValue,
                                                              ButtonsBravve.userLoginGray.rawValue
@@ -50,8 +50,7 @@ class TermsOfPrivacy: UIViewController {
             tabBar.selectedItem = tabBar.items?[1]
             view.addSubviews([shadowView,wayImage1,wayImage2,customBar, myTableView,tabBar])
             customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Termos de privacidade") { _ in
-            
-                return
+                self.dismiss(animated: true)
             }
             
             setConstraints()
@@ -83,7 +82,7 @@ class TermsOfPrivacy: UIViewController {
         }
     }
 
-    extension TermsOfPrivacy: UITableViewDelegate, UITableViewDataSource {
+    extension TermsAndConditionViewController: UITableViewDelegate, UITableViewDataSource {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             1

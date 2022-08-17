@@ -198,7 +198,7 @@ extension UIViewController {
 /// - Returns: True if is a valid number, or false if not
     func validateCellPhone(_ phone: String) -> Bool {
         
-        let phoneRegEx = "\\([0-9]{2}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{11}"
+        let phoneRegEx = "\\([0-9]{2}+\\)[0-9]{4,5}+-[0-9]{4}||[0-9]{10,11}"
 
         let phonePred = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
         

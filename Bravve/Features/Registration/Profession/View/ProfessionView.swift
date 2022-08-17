@@ -135,9 +135,7 @@ class ProfessionView: UIViewController {
    
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen) {_ in
-            let vc = FotoView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
         continueButton.setToBottomButtonKeyboardDefault()
         continueButton.addTarget(self, action: #selector(continueToHobbies), for: .touchUpInside)
