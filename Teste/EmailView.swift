@@ -36,6 +36,11 @@ class EmailView: UIViewController {
         super.viewDidLoad()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
     private let registerButton = UIButton()
