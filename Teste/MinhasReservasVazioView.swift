@@ -11,7 +11,12 @@ class MinhasReservasVazioView: UIViewController {
     
     let navCustomBar = UIView()
     
-    let topRightWay = UIImageView()
+    let topRightWay: UIImageView = {
+        let image = UIImage(named: "wayReserv2")
+        let imageTop = UIImageView(image: image)
+        //imageTop.contentMode = .scaleToFill
+        return imageTop
+    }()
 
     let label: UILabel = {
         let label = UILabel()
@@ -35,6 +40,12 @@ class MinhasReservasVazioView: UIViewController {
     
     let bottomLeftWay = UIImageView()
     
+    lazy var tabBar: BravveClosedTabBar = {
+        let tabBar = BravveClosedTabBar(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        return tabBar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
@@ -54,6 +65,7 @@ class MinhasReservasVazioView: UIViewController {
         view.addSubview(label)
         view.addSubview(searchNewSpaceButton)
         view.addSubview(bottomLeftWay)
+        view.addSubview(tabBar)
         
     }
     
@@ -67,7 +79,9 @@ class MinhasReservasVazioView: UIViewController {
         
         setLabelConstraints()
         setButtonConstraints()
+        setTabBarConstraints()
     }
+    
     
     private func setLabelConstraints(){
         
@@ -88,6 +102,18 @@ class MinhasReservasVazioView: UIViewController {
             searchNewSpaceButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             searchNewSpaceButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             searchNewSpaceButton.heightAnchor.constraint(equalToConstant: 52)
+        ]
+        constraint.forEach { item in
+            item.isActive = true
+        }
+    }
+    
+    private func setTabBarConstraints(){
+        
+        let constraint = [
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ]
         constraint.forEach { item in
             item.isActive = true
