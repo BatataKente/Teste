@@ -99,9 +99,7 @@ class FotoView: UIViewController {
         secondWay.setWayToDefault(.wayCell)
         bravveIcon.setLogoToDefault()
         backButton.setToBackButtonDefault(.backPink) {_ in
-            let vc = ConfirmDataView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
         registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }

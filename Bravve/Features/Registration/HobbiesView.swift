@@ -155,9 +155,7 @@ class HobbiesView: UIViewController {
         view.createRegisterCustomBar(progressBarButtons: buttons,
                                      jumpAction: UIAction(handler: handler)) {_ in
             
-            let vc = ProfessionView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
         
     }
