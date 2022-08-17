@@ -26,7 +26,7 @@ class TabBarClosed: UITabBar, UITabBarDelegate {
             
             case tabBar.items?[1]:
             
-                let homeOpenView = WorkPassBookingView()
+                let homeOpenView = EmptyReservation()
 
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)

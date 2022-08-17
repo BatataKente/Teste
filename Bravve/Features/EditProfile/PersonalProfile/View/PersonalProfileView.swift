@@ -264,24 +264,32 @@ class PersonalProfileView: UIViewController{
         nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
         nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
         nextPageButton3.addTarget(self, action: #selector(policyPage), for: .touchUpInside)
-        nextPageButton3.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
+        nextPageButton4.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
         addConstraints()
     }
     
     @objc func reservationPage(sender: UIButton){
-        print("Going Next")
+        //TODO: Needs a logic to pressents two states of the same view, one empty and one with at least onde reservation. If number of reservations equals zero, then presents the empty view, else, presents the table view with the reservations.
+        print("Do not have")
     }
     
     @objc func helpPage(sender: UIButton){
-        print("Going Next")
+        let vc = HelpViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
     
     @objc func policyPage(sender: UIButton){
-        print("Going Next")
+        let vc = TermsAndConditionViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
     
     @objc func goOutPage(sender: UIButton){
-        print("Going Next")
+        let vc = HomeOpenView()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+        print("OOOI")
     }
     
     func addConstraints(){

@@ -87,9 +87,7 @@ class PasswordRecoveryEmailView: UIViewController {
         view.addSubviews([backgroundImage, label, customShaddow, stackViewEmail, buttonContinue])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
-            let vc = LoginView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
         
         defaults()

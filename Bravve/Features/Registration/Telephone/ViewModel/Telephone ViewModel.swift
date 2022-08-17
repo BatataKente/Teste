@@ -60,6 +60,19 @@ class PhoneViewModel {
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue),
                             customShaddowbackgroundColor: UIColor(named: ColorsBravve.redAlertLabel.rawValue))
     }
+    
+    func refreshScreen() {
+        
+        delegate?.setIshidden(leftStackView: false,
+                              ddiChoseLabel: false,
+                              alertButton: true,
+                              registerFailLabel: true,
+                              rightTextField: false,
+                              ways: [true, false, true])
+        
+        delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
+    }
 }
 
 protocol PhoneViewModelProtocol {

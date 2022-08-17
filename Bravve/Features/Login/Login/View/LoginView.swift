@@ -11,6 +11,7 @@ class LoginView: UIViewController {
     
     let backButton = UIButton()
     private let viewModel: LoginViewModel = LoginViewModel()
+    private let customAlert: CustomAlert = CustomAlert()
     
     override func viewDidLoad() {
         
@@ -285,7 +286,6 @@ class LoginView: UIViewController {
         
         if self.viewModel.isValid(phone: phone, password: password) == true{
             present(vc, animated: false)
-            print("Login Válido")
         }
         else{
             loginLabel.textColor = .systemRed
@@ -295,7 +295,10 @@ class LoginView: UIViewController {
             }else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
                 eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
             }
-            print("login Inválido")
+            customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                  message: "Usuário e/ou senha incorretos",
+                                  enterAttributed: "Tentar Novamente",
+                                  on: self)
         }
     }
     

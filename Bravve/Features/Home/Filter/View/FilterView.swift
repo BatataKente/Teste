@@ -36,8 +36,15 @@ final class FilterScreen: UIViewController {
         view.titleLabel?.font = UIFont(name: "Ubuntu-Bold", size: 16)
         view.titleLabel?.font = UIFont(name: "Ubuntu-Regular", size: 13)
         view.setTitleColor(UIColor.white, for: .normal)
+        view.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         return view
     }()
+    
+    @objc func filterButtonTapped(){
+        print("filterButtonTapped")
+        //TODO: Put here a logic that get the selected items before the dismiss, then reload HomeOpenView.
+        self.dismiss(animated: true)
+    }
     
     //MARK: loadView
     override func loadView() {
@@ -67,8 +74,13 @@ lineImage,spaceType,roomsImage,meetingRoomButton,eventRoomButton,areaShareRoomLa
         view.setTitleColor(UIColor.systemBackground, for: .normal)
         view.setImage(UIImage(named: "xmarkBlue"), for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
        return view
     }()
+    
+    @objc func dismissAction(){
+        self.dismiss(animated: true)
+    }
     
     //MARK: filterLabel
     private lazy var filterLabel: UILabel = {

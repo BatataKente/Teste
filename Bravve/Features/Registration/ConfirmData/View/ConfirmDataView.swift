@@ -20,14 +20,13 @@ class ConfirmDataView: UIViewController {
     private let backgroundImage2 = UIImageView()
     
     private lazy var buttons: [UIButton] = {
-        let buttons =  createProgressBarButtons([
+        let buttons =  createProgressBarButtonsWithoutActions([
             IconsBravve.userGray.rawValue,
             IconsBravve.cellGray.rawValue,
             IconsBravve.emailGray.rawValue,
             IconsBravve.padlockGray.rawValue,
             IconsBravve.pencilBlue.rawValue
         ])
-        buttons[4].setTitle(" Confirmação", for: .normal)
         return buttons
     }()
     
@@ -140,9 +139,7 @@ class ConfirmDataView: UIViewController {
         view.addSubviews([ label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
-            let vc = PasswordView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
         
         defaults()
@@ -189,15 +186,26 @@ class ConfirmDataView: UIViewController {
         
         buttonContinue.addTarget(self, action: #selector(actionButtonContinue), for: .touchUpInside)
         
+        buttons[0].addTarget(self, action: #selector(actionEditButtonName), for: .touchUpInside)
+        buttons[1].addTarget(self, action: #selector(actionEditButtonPhone), for: .touchUpInside)
+        buttons[2].addTarget(self, action: #selector(actionEditButtonEmail), for: .touchUpInside)
+        buttons[3].addTarget(self, action: #selector(actionButtonPassword), for: .touchUpInside)
+        
         editButtonName.addTarget(self, action: #selector(actionEditButtonName), for: .touchUpInside)
-        editButtonCell.addTarget(self, action: #selector(actionEditButtonCell), for: .touchUpInside)
+        editButtonCell.addTarget(self, action: #selector(actionEditButtonPhone), for: .touchUpInside)
         editButtonEmail.addTarget(self, action: #selector(actionEditButtonEmail), for: .touchUpInside)
         
     }
     
     
+    @objc func actionButtonPassword() {
+        let vc = PasswordView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
     @objc func actionButtonContinue() {
-        let vc = FotoView()
+        let vc = TokenView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -208,7 +216,7 @@ class ConfirmDataView: UIViewController {
         present(vc, animated: true)
     }
     
-    @objc func actionEditButtonCell() {
+    @objc func actionEditButtonPhone() {
         let vc = PhoneView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
