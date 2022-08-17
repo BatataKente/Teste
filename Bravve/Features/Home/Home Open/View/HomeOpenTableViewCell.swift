@@ -180,10 +180,10 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     func setupConstraints() {
         
-        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, CGFloat(10).generateSizeForScreen)
         viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide)
+        viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide, CGFloat(10).generateSizeForScreen)
     }
     
     func setup(_ space: Space,_ indexPath: IndexPath) {
