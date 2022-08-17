@@ -206,4 +206,10 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
         }
     }
     
+    @objc func actionButtonEmail() {
+        let vc = PasswordRecoveryEmailView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
 }
