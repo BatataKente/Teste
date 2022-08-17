@@ -35,6 +35,11 @@ class PhoneView: UIViewController {
 
         super.viewDidLoad()
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
 
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
 
@@ -48,13 +53,12 @@ class PhoneView: UIViewController {
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
 
-        let dismissHandler = {(action: UIAction) in
+        let handler = {(action: UIAction) in
             
             self.dismiss(animated: false)
         }
         
-        buttons[0].addAction(UIAction(handler: dismissHandler),
-                             for: .touchUpInside)
+        buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
         
         return buttons
     }()
@@ -165,6 +169,7 @@ class PhoneView: UIViewController {
                                                                viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
 
@@ -305,7 +310,9 @@ class PhoneView: UIViewController {
         viewElements.ddisLabel.text = "+55"
 
         customShaddow.isHidden = false
-
+        
+        registerStackView.layer.borderWidth = 0
+        
         viewElements.rightTextField.isHidden = false
         viewElements.ddiChoseLabel.isHidden = false
         viewElements.ddisButton.isEnabled = true
@@ -317,24 +324,19 @@ class PhoneView: UIViewController {
 
     @objc func changeScreen() {
         
-        if validateCellPhone(viewElements.rightTextField.text ?? "") {
-            
-            userToRegister.phone_number = viewElements.rightTextField.text ?? ""
-            
-//            let emailView = EmailView(userToRegister)
-            let emailView = EmailView()
-            emailView.modalPresentationStyle = .fullScreen
-            present(emailView, animated: false)
-        }
-        else {
-            
-            phoneViewModel.makeFailScreen()
-        }
+        userToRegister.phone_number = viewElements.rightTextField.text ?? ""
+        
+//        let emailView = EmailView(userToRegister)
+        let emailView = EmailView()
+        emailView.modalPresentationStyle = .fullScreen
+        present(emailView, animated: false)
     }
 
     @objc func changeText(_ sender: UITextField) {
 
-        if sender.text != "" {
+        if validateCellPhone(sender.text ?? "") {
+            
+            phoneViewModel.refreshScreen()
 
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
@@ -342,6 +344,8 @@ class PhoneView: UIViewController {
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
+            
+            phoneViewModel.makeFailScreen()
 
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
