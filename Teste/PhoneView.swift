@@ -35,6 +35,11 @@ class PhoneView: UIViewController {
 
         super.viewDidLoad()
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
 
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
 
@@ -184,23 +189,27 @@ class PhoneView: UIViewController {
     private lazy var scrollView: UIScrollView = {
 
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: view.frame.size.width/3,
+                                                    width: view.frame.size.width/5,
                                                     height: view.frame.size.height/5))
 
         var ddis = [UIButton]()
-
-        let handler = {(action: UIAction) in
-
-            scrollView.frame.size = .zero
-        }
 
         for ddi in phoneViewModel.createDDIs() {
 
             let button = UIButton()
             button.setTitle(ddi, for: .normal)
-            button.addAction(UIAction(handler: handler), for: .touchUpInside)
             button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                     for: .normal)
+                                 for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                             size: CGFloat(15).generateSizeForScreen)
+            
+            let handler = {(action: UIAction) in
+
+                self.viewElements.ddiChoseLabel.text = button.currentTitle
+                scrollView.frame.size = .zero
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
             ddis.append(button)
         }
         scrollView.turnIntoAList(ddis)
