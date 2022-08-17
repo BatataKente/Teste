@@ -36,6 +36,7 @@
 		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */; };
+		143E621328AD04B800AD6BEA /* HomeOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
 		143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */; };
 		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
@@ -133,6 +134,7 @@
 		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenViewModel.swift; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
 		143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarWithFilterStruct.swift; sourceTree = "<group>"; };
 		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
@@ -311,6 +313,7 @@
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
 				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
 				14BDBBE328ABB626004C32BF /* HelpViewController.swift */,
+				143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */,
 				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
 				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
 				14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */,
@@ -483,6 +486,7 @@
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
 				13080CB428A17EC000A064B0 /* Network.swift in Sources */,
 				14937D6A28A47033004A1E7A /* HelpView.swift in Sources */,
+				143E621328AD04B800AD6BEA /* HomeOpenViewModel.swift in Sources */,
 				CFFE8037288B051C00CA51BC /* ConfirmationCodeView.swift in Sources */,
 				14CBDBC62889B72300EA8EDD /* AppDelegate.swift in Sources */,
 				145B07E128AABEAD00ABCCF0 /* EmailView.swift in Sources */,
