@@ -9,6 +9,23 @@ import UIKit
 
 class EmailView: UIViewController {
     
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var userToRegister: UserParameters
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         
         setupView()
@@ -17,6 +34,11 @@ class EmailView: UIViewController {
         setupConstraints()
         
         super.viewDidLoad()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
     }
     
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
@@ -30,6 +52,24 @@ class EmailView: UIViewController {
                                                               IconsBravve.emailBlue.rawValue,
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
+        
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
         
         return buttons
     }()
@@ -107,6 +147,7 @@ class EmailView: UIViewController {
         let registerStackView = UIStackView(arrangedSubviews: [viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
 
@@ -123,18 +164,18 @@ class EmailView: UIViewController {
         return registerFailLabel
     }()
     
-    private let nomeViewModel = EmailViewModel()
+    private let emailViewModel = EmailViewModel()
     
     private func setupView() {
         
-        nomeViewModel.delegate = self
-        nomeViewModel.makeEmailScreen()
+        emailViewModel.delegate = self
+        emailViewModel.makeEmailScreen()
         
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel])
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
         
         view.setToDefaultBackgroundColor()
@@ -199,6 +240,8 @@ class EmailView: UIViewController {
         
         customShaddow.isHidden = false
         
+        registerStackView.layer.borderWidth = 0
+        
         viewElements.rightTextField.isHidden = false
         
         viewElements.rightTextField.addTarget(self,
@@ -208,22 +251,29 @@ class EmailView: UIViewController {
         
     @objc func changeScreen() {
         
+        userToRegister.email = viewElements.rightTextField.text ?? ""
+        
+//        let passwordView = PasswordView(userToRegister)
         let passwordView = PasswordView()
         passwordView.modalPresentationStyle = .fullScreen
-        present(passwordView, animated: true)
+        present(passwordView, animated: false)
     }
     
     @objc func changeText(_ sender: UITextField) {
         
-        if sender.text != "" {
-
+        if validateEmail(sender.text ?? "") {
+            
+            emailViewModel.refreshScreen()
+            
             registerButton.addTarget(nil,
                                      action: #selector(changeScreen),
                                      for: .touchUpInside)
             registerButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
-
+            
+            emailViewModel.makeFailScreen()
+            
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
@@ -234,13 +284,14 @@ class EmailView: UIViewController {
 
 extension EmailView: EmailViewModelProtocol {
     
-    func setIshidden(leftStackView: Bool,
-                     ddiChoseLabel: Bool,
+    func setIshidden(alertButton: Bool,
+                     registerFailLabel: Bool,
+                     rightTextField: Bool,
                      ways: [Bool]) {
         
-        viewElements.alertButton.isHidden = true
-        registerFailLabel.isHidden = true
-        viewElements.rightTextField.isHidden = true
+        viewElements.alertButton.isHidden = alertButton
+        self.registerFailLabel.isHidden = registerFailLabel
+        viewElements.rightTextField.isHidden = rightTextField
         
         self.ways[0].isHidden = ways[0]
         self.ways[1].isHidden = ways[1]
