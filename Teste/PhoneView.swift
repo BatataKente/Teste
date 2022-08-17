@@ -15,7 +15,7 @@ class PhoneView: UIViewController {
                                                            password: "")) {
         
         self.userToRegister = userToRegister
-        print("$$$$$$$$\(self.userToRegister)")
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,9 +55,7 @@ class PhoneView: UIViewController {
 
         let handler = {(action: UIAction) in
             
-            let nomeView = NomeView(self.userToRegister)
-            nomeView.modalPresentationStyle = .fullScreen
-            self.present(nomeView, animated: false)
+            self.dismiss(animated: false)
         }
         
         buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
@@ -238,9 +236,12 @@ class PhoneView: UIViewController {
 
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            let loginView = LoginView()
-            loginView.modalPresentationStyle = .fullScreen
-            self.present(loginView, animated: true)
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
         }
 
         view.setToDefaultBackgroundColor()

@@ -16,7 +16,6 @@ class PasswordView: UIViewController{
         
         self.userToRegister = userToRegister
         
-        print("$$$$$$$$\(self.userToRegister)")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,23 +43,23 @@ class PasswordView: UIViewController{
         
         let tripleDismissHandler = {(action: UIAction) in
             
-            if let emailView = self.presentingViewController,
-               let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+            if let passwordView = self.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController {
                 
+                passwordView.view.isHidden = true
                 emailView.view.isHidden = true
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+                phoneView.dismiss(animated: false)
             }
         }
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            if let phoneView = self.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+            if let passwordView = self.presentingViewController,
+               let phoneView = passwordView.presentingViewController {
                 
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+                passwordView.view.isHidden = true
+                phoneView.dismiss(animated: false)
             }
         }
         
@@ -290,7 +289,17 @@ class PasswordView: UIViewController{
         view.addSubviews([backWay, descriptionLabel, backView,passwordStackView, hidePasswordButton, backViewConfirm ,confirmStackView, hideConfirmPasswordButton, numberCharEllipse, numberCharLabel, upperCaseEllipse, upperCaseLabel, lowerCaseEllipse, lowerCaseLabel, numberEllipse, numberLabel, specialCharEllipse, specialCharLabel, samePasswordEllipse, samePasswordLabel, continueButton, hideWrongPasswordButton, hideWrongConfirmPasswordButton])
         
         view.createRegisterCustomBar(progressBarButtons: progressBarButtons) {_ in
-            self.dismiss(animated: true)
+            
+            if let passwordView = self.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
         }
         
         continueButton.setToBottomButtonKeyboardDefault()

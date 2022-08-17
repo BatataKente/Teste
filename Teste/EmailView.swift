@@ -15,7 +15,7 @@ class EmailView: UIViewController {
                                                            password: "")) {
         
         self.userToRegister = userToRegister
-        print("$$$$$$$$\(self.userToRegister)")
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,16 +55,17 @@ class EmailView: UIViewController {
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            let nomeView = NomeView(self.userToRegister)
-            nomeView.modalPresentationStyle = .fullScreen
-            self.present(nomeView, animated: false)
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController {
+                
+                emailView.view.isHidden = true
+                phoneView.dismiss(animated: false)
+            }
         }
         
         let dismissHandler = {(action: UIAction) in
             
-            let phoneView = PhoneView(self.userToRegister)
-            phoneView.modalPresentationStyle = .fullScreen
-            self.present(phoneView, animated: false)
+            self.dismiss(animated: false)
         }
         
         buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
@@ -174,9 +175,14 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            let loginView = LoginView()
-            loginView.modalPresentationStyle = .fullScreen
-            self.present(loginView, animated: true)
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
         }
         
         view.setToDefaultBackgroundColor()
