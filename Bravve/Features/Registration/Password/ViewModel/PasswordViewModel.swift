@@ -59,10 +59,6 @@ extension PasswordView: UITextFieldDelegate {
     }
     
     func addTargets() {
-        
-        progressBarButtons[0].addTarget(self, action: #selector(actionButtonName), for: .touchUpInside)
-        progressBarButtons[1].addTarget(self, action: #selector(actionButtonPhone), for: .touchUpInside)
-        progressBarButtons[2].addTarget(self, action: #selector(actionButtonEmail), for: .touchUpInside)
 
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
@@ -70,24 +66,6 @@ extension PasswordView: UITextFieldDelegate {
         
         let stackViewTap_ = UITapGestureRecognizer(target: self, action: #selector(confirmStackViewTapped))
         confirmStackView.addGestureRecognizer(stackViewTap_)
-    }
-    
-    @objc func actionButtonName() {
-        let vc = NomeView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-    
-    @objc func actionButtonPhone() {
-        let vc = PhoneView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-    
-    @objc func actionButtonEmail() {
-        let vc = EmailView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
     }
     
     @objc func confirmStackViewTapped() {
