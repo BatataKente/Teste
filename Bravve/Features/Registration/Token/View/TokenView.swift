@@ -59,7 +59,7 @@ class TokenView: UIViewController {
     
     lazy var code2TextField: UITextField = {
         let textField = UITextField()
-        textField.tag = 1
+        textField.tag = 2
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -72,7 +72,7 @@ class TokenView: UIViewController {
     
     lazy var code3TextField: UITextField = {
         let textField = UITextField()
-        textField.tag = 1
+        textField.tag = 3
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -85,7 +85,7 @@ class TokenView: UIViewController {
     
     lazy var code4TextField: UITextField = {
         let textField = UITextField()
-        textField.tag = 1
+        textField.tag = 4
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -98,7 +98,7 @@ class TokenView: UIViewController {
     
     lazy var code5TextField: UITextField = {
         let textField = UITextField()
-        textField.tag = 1
+        textField.tag = 5
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -111,7 +111,7 @@ class TokenView: UIViewController {
     
     lazy var code6TextField: UITextField = {
         let textField = UITextField()
-        textField.tag = 1
+        textField.tag = 6
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = UIKeyboardType.numberPad
         textField.returnKeyType = UIReturnKeyType.done
@@ -364,9 +364,22 @@ extension TokenView: UITextFieldDelegate {
     }
     
     func additionalCellTextFieldSetup(_ textField: UITextField?) {
+        textField?.text = textField?.text?.formatMask(mask: "#")
+        
         switch textField?.tag{
         case 1:
-            textField?.text = textField?.text?.formatMask(mask: "#")
+            code2TextField.becomeFirstResponder()
+        case 2:
+            code3TextField.becomeFirstResponder()
+        case 3:
+            code4TextField.becomeFirstResponder()
+        case 4:
+            code5TextField.becomeFirstResponder()
+        case 5:
+            code6TextField.becomeFirstResponder()
+        case 6:
+            textField?.endEditing(true)
+            textField?.resignFirstResponder()
         default:
             break
         }
