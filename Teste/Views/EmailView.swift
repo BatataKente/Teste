@@ -108,6 +108,7 @@ class EmailView: UIViewController {
         
         let rightTextField = UITextField()
         rightTextField.font = font
+        rightTextField.becomeFirstResponder()
         
         let stackView = UIStackView(arrangedSubviews: [rightLabel,
                                                        rightTextField])
