@@ -9,33 +9,6 @@ import UIKit
 
 class PhoneView: UIViewController {
     
-    init(_ userToRegister: UserParameters = UserParameters(name: "",
-                                                           phone_number: "",
-                                                           email: "",
-                                                           password: "")) {
-        
-        self.userToRegister = userToRegister
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    var userToRegister: UserParameters
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-
-        setupView()
-        setupDefaults()
-        setupTargets()
-        setupConstraints()
-
-        super.viewDidLoad()
-    }
-    
     override var prefersStatusBarHidden: Bool {
         
         true
@@ -125,6 +98,7 @@ class PhoneView: UIViewController {
 
         let rightTextField = UITextField()
         rightTextField.font = font
+        rightTextField.becomeFirstResponder()
 
         let stackView = UIStackView(arrangedSubviews: [rightLabel,
                                                        rightTextField])
@@ -190,7 +164,7 @@ class PhoneView: UIViewController {
 
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
                                                     width: view.frame.size.width/5,
-                                                    height: view.frame.size.height/5))
+                                                    height: view.frame.size.height/2.5))
 
         var ddis = [UIButton]()
 
@@ -217,10 +191,37 @@ class PhoneView: UIViewController {
 
         return scrollView
     }()
-
+    
+    var userToRegister: UserParameters
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         scrollView.frame.size = .zero
+    }
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: "",
+                                                           phone_number: "",
+                                                           email: "",
+                                                           password: "")) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+
+        setupView()
+        setupDefaults()
+        setupTargets()
+        setupConstraints()
+
+        super.viewDidLoad()
     }
 
     private let phoneViewModel = PhoneViewModel()

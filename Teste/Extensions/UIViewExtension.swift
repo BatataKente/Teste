@@ -233,8 +233,6 @@ extension UIView {
         let margins: CGFloat = 10
         let initialFont = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(15).generateSizeForScreen)
-        let smallFont = UIFont(name: FontsBravve.light.rawValue,
-                               size: CGFloat(11).generateSizeForScreen)
         let chosedLabelFont = UIFont(name: FontsBravve.light.rawValue,
                                      size: CGFloat(16).generateSizeForScreen)
         let buttonsImage = ButtonsBravve.arrowDown.rawValue
@@ -243,35 +241,11 @@ extension UIView {
         stateLabel.font = initialFont
         stateChosedLabel.font = chosedLabelFont
         
-        let stateHandler = {(action: UIAction) in
-
-            stateChosedLabel.text = action.title
-            stateLabel.font = smallFont
-        }
-        
         leftButton.setImage(UIImage(named: buttonsImage), for: .normal)
-        leftButton.setMenuForButton([
-
-            UIAction(title: "action1",handler: stateHandler),
-            UIAction(title: "action2",handler: stateHandler)
-
-        ])
-        
-        let cityHandler = {(action: UIAction) in
-
-            cityChosedLabel.text = action.title
-            cityLabel.font = smallFont
-        }
         
         cityLabel.text = "Cidade"
         cityLabel.font = initialFont
         cityChosedLabel.font = chosedLabelFont
-        rightButton.setMenuForButton([
-            
-            UIAction(title: "action1", handler: cityHandler),
-            UIAction(title: "action2", handler: cityHandler)
-
-        ])
         rightButton.setImage(UIImage(named: buttonsImage), for: .normal)
         
         let leftStackView = UIStackView(arrangedSubviews: [stateLabel,
@@ -322,7 +296,8 @@ extension UIView {
         
         stackView.constraintInsideTo(.centerY, self, CGFloat(15).generateSizeForScreen)
         stackView.constraintInsideTo(.leading, self, CGFloat(20).generateSizeForScreen)
-        stackView.constraintOutsideTo(.trailing, filterButton, CGFloat(5).generateSizeForScreen)
+        stackView.constraintOutsideTo(.trailing, filterButton,
+                                      CGFloat(5).generateSizeForScreen)
         
         filterButton.constraintInsideTo(.centerY, stackView)
         filterButton.constraintInsideTo(.trailing, self, CGFloat(10).generateSizeForScreen)

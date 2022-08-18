@@ -200,7 +200,8 @@ extension UIButton {
 ///   - window: The view that will be the subWindow
 ///   - orientation: The position that window will move
     func addSubWindow(_ window: UIView,
-                      _ orientation: Orientation = .downRight) {
+                      _ orientation: Orientation = .downRight,
+                      origin: CGPoint? = nil) {
         
         let size = window.frame.size
         window.frame.size = .zero
@@ -224,8 +225,15 @@ extension UIButton {
                 
                 case .downLeft:
                 
-                    window.frame.origin = CGPoint(x: self.center.x,
-                                                  y: self.center.y)
+                    if let origin = origin {
+                        
+                        window.frame.origin = origin
+                    }
+                    else {
+                        
+                        window.frame.origin = CGPoint(x: self.frame.maxX,
+                                                      y: self.frame.maxY)
+                    }
                 
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
@@ -236,8 +244,15 @@ extension UIButton {
                 
                 case .downRight:
                 
-                    window.frame.origin = CGPoint(x: self.center.x,
-                                                  y: self.center.y)
+                    if let origin = origin {
+                        
+                        window.frame.origin = origin
+                    }
+                    else {
+                        
+                        window.frame.origin = CGPoint(x: self.frame.minX,
+                                                      y: self.frame.maxY)
+                    }
                 
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
@@ -247,8 +262,15 @@ extension UIButton {
                 
                 case .upLeft:
                 
-                    window.frame.origin = CGPoint(x: self.center.x,
-                                                  y: self.center.y)
+                    if let origin = origin {
+                        
+                        window.frame.origin = origin
+                    }
+                    else {
+                        
+                        window.frame.origin = CGPoint(x: self.frame.maxX,
+                                                      y: self.frame.minY)
+                    }
                 
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
@@ -260,8 +282,15 @@ extension UIButton {
                 
                 case .upRight:
                 
-                    window.frame.origin = CGPoint(x: self.center.x,
-                                                  y: self.center.y)
+                    if let origin = origin {
+                        
+                        window.frame.origin = origin
+                    }
+                    else {
+                        
+                        window.frame.origin = CGPoint(x: self.frame.minX,
+                                                      y: self.frame.minY)
+                    }
                 
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
@@ -272,8 +301,15 @@ extension UIButton {
                 
                 default:
                 
-                    window.frame.origin = CGPoint(x: self.superview?.center.x ?? self.center.x,
-                                                  y: self.superview?.center.y ?? self.center.x)
+                    if let origin = origin {
+                        
+                        window.frame.origin = origin
+                    }
+                    else {
+                        
+                        window.frame.origin = CGPoint(x: self.superview?.center.x ?? self.center.x,
+                                                      y: self.superview?.center.y ?? self.center.x)
+                    }
                 
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
