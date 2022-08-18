@@ -227,9 +227,18 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
-        detalhesAbertoView.modalPresentationStyle = .fullScreen
-        present(detalhesAbertoView, animated: false)
+        guard let spaceId = cells[indexPath.row].id else { return }
+        
+        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
+            guard let space = space else {
+                return
+            }
+            let detalhesAbertoView = OpenDetailsView(space)
+            detalhesAbertoView.modalPresentationStyle = .fullScreen
+            self.present(detalhesAbertoView, animated: false)
+        }
+        
+        
     }
 }
 

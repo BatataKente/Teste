@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import SDWebImage
 
 class OpenDetailsView: UIViewController {
     
-    init(_ space: Space) {
+    init(_ space: SpaceDetail) {
         
         self.space = space
         
@@ -20,6 +21,8 @@ class OpenDetailsView: UIViewController {
         
         fatalError("init(coder:) has not been implemented")
     }
+    
+    let sessionManager = SessionManager()
     
     override func viewDidDisappear(_ animated: Bool) {
         
@@ -41,19 +44,8 @@ class OpenDetailsView: UIViewController {
         true
     }
     
-    let images = [ImagesBravve.homeOpen_1.rawValue,
-                  ImagesBravve.homeOpen_2.rawValue,
-                  ImagesBravve.homeOpen_3.rawValue,
-                  ImagesBravve.homeOpen_4.rawValue,
-                  ImagesBravve.imageReservs_1.rawValue,
-                  ImagesBravve.imageReservs_2.rawValue,
-                  ImagesBravve.imageReservs_3.rawValue,
-                  ImagesBravve.imageReservs_4.rawValue,
-                  ImagesBravve.example_1.rawValue,
-                  ImagesBravve.example_2.rawValue,
-                  ImagesBravve.example_3.rawValue]
     
-    private var space: Space
+    private var space: SpaceDetail
     
     private let customBar = UIView()
     
@@ -169,17 +161,35 @@ class OpenDetailsView: UIViewController {
         title.textColor = textColor
         title.text = "Detalhes do local"
         
-        let texts:[String] = ["Segunda: 08:00h - 17:00h",
-                              "Terça: 08:00h - 17:00h",
-                              "Quarta: 08:00h - 17:00h",
-                              "Quinta: 08:00h - 17:00h",
-                              "Sexta: 08:00h - 17:00h"]
+        guard var business_hours = space.space_business_hours else { return UIStackView() }
+        business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
+            
+            guard let lhsWeekDay = lhs.week_day else { return false }
+            guard let rhsWeekDay = rhs.week_day else { return false }
+            return lhsWeekDay < rhsWeekDay
+        }
+        
+        var texts:[String] {
+            var textArray: [String] = []
+            
+            for business_hour in business_hours {
+
+                if business_hour.flag_closed_day != nil {
+                    if !business_hour.flag_closed_day! {
+                        textArray.append("\(business_hour.day_name ?? ""): \(business_hour.start_time ?? "")h - \(business_hour.end_time ?? "")h")
+                    }
+                }
+            }
+           
+            return textArray
+        }
+   
         var itens = [UIStackView]()
         
-        itens.append(createStackView("Até 6 pessoas",
+        itens.append(createStackView("Até \(space.seats_qty ?? 0) pessoas",
                                      UIImage(named: IconsBravve.users.rawValue),
                                      textColor: textColor))
-        itens.append(createStackView("Av. São João, Cj. Boulevard, nº900, Sâo Paulo. SP 06020-010, BR",
+        itens.append(createStackView("\(space.partner_site_address?.address?.street ?? ""), \(space.partner_site_address?.address?.neighborhood ?? ""), nº\(space.partner_site_address?.address?.street_number ?? 0), \(space.partner_site_address?.address?.city_name ?? ""). \(space.partner_site_address?.address?.state_name ?? "") \(space.partner_site_address?.address?.postal_code ?? ""), BR",
                                      UIImage(named: IconsBravve.map.rawValue),
                                      textColor: textColor))
         itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
@@ -331,7 +341,9 @@ class OpenDetailsView: UIViewController {
     private lazy var pageControl: UIPageControl = {
         
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = images.count
+        
+        guard let pictures = space.pictures else { return pageControl }
+        pageControl.numberOfPages = pictures.count
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
         return pageControl
@@ -354,11 +366,11 @@ class OpenDetailsView: UIViewController {
         spaceCategoryNameLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         spaceCategoryNameLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
-        spaceCategoryNameLabel.text = space.space_category?.name
+        spaceCategoryNameLabel.text = space.space_category?.name?.uppercased()
         
         let titleLabelView = UIView()
         titleLabelView.addSubview(spaceCategoryNameLabel)
-        titleLabelView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        titleLabelView.backgroundColor = titleLabelView.getTitleLabelBackgroundColor(space.space_category?.name?.uppercased() ?? "")
         
         spaceCategoryNameLabel.constraintInsideTo(.top, titleLabelView,
                                       CGFloat(2.5).generateSizeForScreen)
@@ -396,19 +408,19 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.delegate = self
         
         let nameLabel = UILabel()
-        nameLabel.text = space.name
+        nameLabel.text = space.local_name
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(20).generateSizeForScreen)
         nameLabel.textColor = textColor
         
         let label_1 = UILabel()
-        label_1.text = "UM Coffee Co."
+        label_1.text = space.description
         label_1.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label_1.font = UIFont(name: FontsBravve.regular.rawValue,
                               size: 12)
         
         let label_2 = UILabel()
-        label_2.text = "3,50"
+        label_2.text = space.hourly_credits
         label_2.font = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(30).generateSizeForScreen)
         label_2.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
@@ -420,18 +432,18 @@ class OpenDetailsView: UIViewController {
                               size: CGFloat(12).generateSizeForScreen)
         
         let label_4 = UILabel()
-        label_4.text = "18,20"
+        label_4.text = space.daily_credits
         label_4.textColor = textColor
         label_4.font = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(20).generateSizeForScreen)
         
         let label_5 = UILabel()
-        label_5.text = "crédito/hora"
+        label_5.text = "crédito/dia"
         label_5.textColor = textColor
         label_5.font = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
         
-        let buttons = createCapsuleButtons(["Tecnológico", "Sala de reunião", "Colaborativo"],
+        let buttons = createCapsuleButtons([space.space_classification?.name ?? "", space.space_type?.name ?? "", space.space_noise_level?.name ?? ""],
                                             .capsuleButton,
                                             strokeColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) ?? UIColor())
         
@@ -588,14 +600,22 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return images.count
+        guard let pictures = space.pictures else { return 0 }
+        
+        return pictures.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? OpenDetailsCollectionViewCell
         
-        cell?.imageView.image = UIImage(named: images[indexPath.row])
+        guard let pictures = space.pictures else { return UICollectionViewCell() }
+        
+//        cell?.imageView.image = UIImage(named: images[indexPath.row])
+        
+        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
+        
+        cell?.imageView.sd_setImage(with: URL(string: picture))
         
         pageControl.currentPage = indexPath.row
         
