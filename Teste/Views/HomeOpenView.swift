@@ -52,8 +52,6 @@ class HomeOpenView: UIViewController {
      
     private let titleLabel = UILabel()
     
-    private let customBar = UIView()
-    
     private lazy var filterStackView: UIStackView = {
         
         let margins = CGFloat(10).generateSizeForScreen
@@ -128,15 +126,69 @@ class HomeOpenView: UIViewController {
         return coverView
     }()
     
+    private lazy var leftDropDown: UIScrollView = {
+
+        let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                      width: CGFloat(view.frame.size.width/5).generateSizeForScreen,
+                                                      height: CGFloat(view.frame.size.height/3).generateSizeForScreen))
+        leftDropDown.delegate = self
+
+        return leftDropDown
+    }()
+    
+    private lazy var rightDropDown: UIScrollView = {
+
+        let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                       width: CGFloat(view.frame.size.width/2).generateSizeForScreen,
+                                                       height: CGFloat(view.frame.size.height/2.5).generateSizeForScreen))
+        rightDropDown.delegate = self
+
+        return rightDropDown
+    }()
+    
+    private lazy var homeOpenViewModel: HomeOpenViewModel = {
+        
+        let homeOpenViewModel = HomeOpenViewModel(customBarWithFilter)
+        return homeOpenViewModel
+    }()
+    
+    private let customBar = UIView()
+    
+    private lazy var customBarWithFilter: CustomBarWithFilter = {
+        
+        let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
+
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
+        }
+        
+        return customBarWithFilter
+    }()
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        reduceDropDowns()
+    }
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar, coverView, imageView])
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
         
         filterButtons = createCapsuleButtons(seletedFilterItems)
+        
+        for button in filterButtons {
+            
+            let handler = {(action: UIAction) in
+                
+                self.reduceDropDowns()
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+        }
         
         filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
@@ -146,17 +198,17 @@ class HomeOpenView: UIViewController {
         
         view.setToDefaultBackgroundColor()
         
-        let customBar = customBar.setToDefaultCustomBarWithFilter() {_ in
-
-            let filterView = FilterScreen()
-            filterView.modalPresentationStyle = .fullScreen
-            self.present(filterView, animated: true)
-        }
-        
-        let homeOpenViewModel = HomeOpenViewModel(customBar)
+        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
+                                         y: view.frame.size.height * 0.12)
+        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
+                                          y: view.frame.size.height * 0.12)
         
         homeOpenViewModel.delegate = self
         homeOpenViewModel.manageCustomBar()
+        
+        customBarWithFilter.leftButton.addSubWindow(leftDropDown, origin: leftDropDownOrigin)
+        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
+                                                     origin: rightDropDownOrigin)
     }
     
     private func setupConstraints() {
@@ -185,6 +237,11 @@ class HomeOpenView: UIViewController {
 }
 
 extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        reduceDropDowns()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -223,6 +280,16 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension HomeOpenView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
+        
+        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+    }
+}
+
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
@@ -245,6 +312,23 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         
         self.coverView.alpha = alpha
         self.imageView.alpha = alpha
+    }
+    
+    func reduceDropDowns() {
+        
+        self.customBarWithFilter.leftButton.isSelected = false
+        leftDropDown.frame.size = .zero
+        rightDropDown.frame.size = .zero
+    }
+    
+    func setupLeftDropDown(_ buttons: [UIButton]) {
+        
+        leftDropDown.turnIntoAList(buttons)
+    }
+    
+    func setupRightDropDown(_ buttons: [UIButton]){
+        
+        rightDropDown.turnIntoAList(buttons)
     }
 }
 
