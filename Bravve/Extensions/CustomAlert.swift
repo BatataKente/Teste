@@ -181,8 +181,26 @@ class CustomAlert: UIViewController {
     
     @objc func dismissAlert() {
         
-        self.alertView.removeFromSuperview()
-        self.backgroundView.removeFromSuperview()
+        guard let targetView = myTargetView else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25,
+                       animations: {
+            self.alertView.center = targetView.center
+            
+        }, completion: { done in
+            if done {
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.backgroundView.alpha = 0
+                }, completion: { done in
+                    if done {
+                        self.alertView.removeFromSuperview()
+                        self.backgroundView.removeFromSuperview()
+                    }
+                })
+            }
+        })
     
     }
 }
