@@ -137,6 +137,21 @@ class SessionManager {
         }
     }
     
+    func getOpenData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (T?) -> Void) {
+        
+            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+            
+            AF.request(url).responseDecodable(of: T.self) { response in
+//                print(response.debugDescription)
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    print(response.response?.statusCode)
+                    completionHandler(nil)
+                }
+            }
+    }
+    
     /// Method to post data to the API with a response decoded as an array
     /// - Parameters:
     ///   - id: Optional argument to pass the id to the API endpoint
@@ -189,7 +204,7 @@ class SessionManager {
         guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [T].self) { response in
-            print(response.debugDescription)
+//            print(response.debugDescription)
             if let data = response.value {
                 completionHandler(data)
             } else {

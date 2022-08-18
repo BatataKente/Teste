@@ -189,8 +189,18 @@ class HomeOpenTableViewCell: UITableViewCell {
     func setup(_ space: Space,_ indexPath: IndexPath) {
         
         viewElements.descriptionLabel.text = space.slogan
-        viewElements.photoView.sd_setImage(with: URL(string: space.space_pictures?[0].url ?? ""), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
-        viewElements.nameLabel.text = space.name
+        
+        guard let pictures = space.space_pictures else { return }
+        
+        var picture = ""
+        
+        if pictures.count != 0 {
+            guard let pictureSelected = pictures[0].url else { return }
+            picture = pictureSelected
+        }
+        
+        viewElements.photoView.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+        viewElements.nameLabel.text = space.local_name
         viewElements.subNameLabel.text = space.description
         viewElements.priceLabel.text = "\(space.hourly_credits ?? "") crédito/hora"
         viewElements.detailsLabel.text = "\(space.partner_site_address?.address?.city_name ?? "")/\(space.partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(space.seats_qty ?? 0) pessoas\n\(space.space_type?.name ?? "")"
