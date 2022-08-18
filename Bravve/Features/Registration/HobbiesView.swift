@@ -24,16 +24,32 @@ class HobbiesView: UIViewController {
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.photoGray.rawValue,
                                                        IconsBravve.noteGray.rawValue,
                                                        IconsBravve.hobbiesBlue.rawValue,
-                                                       IconsBravve.activitiesGray.rawValue])
+                                                              IconsBravve.activitiesGray.rawValue])
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let professionView = self.presentingViewController,
+               let photoView = professionView.presentingViewController {
+                
+                professionView.view.isHidden = true
+                photoView.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
+        
         return buttons
     }()
     
     lazy var progressBarStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = CGFloat(8).generateSizeForScreen
         return stackView
     }()
-    
     
     let infoLabel: UILabel = {
         let label = UILabel()
@@ -176,10 +192,7 @@ class HobbiesView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons,
                                      jumpAction: UIAction(handler: handler)) {_ in
-            
-            let vc = ProfessionView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            self.dismiss(animated: true)
         }
     }
     

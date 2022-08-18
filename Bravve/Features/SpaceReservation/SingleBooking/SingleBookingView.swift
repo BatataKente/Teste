@@ -30,7 +30,11 @@ class SingleBookingView: UIViewController {
     
     let nextButton = UIButton()
         
-    
+    @objc func nextButtonTapped(){
+        let reserveViewController = Reservas2()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
+    }
     
     
     override func viewDidLoad() {
@@ -40,10 +44,11 @@ class SingleBookingView: UIViewController {
         self.view.backgroundColor=Style.bgColor
         view.addSubview(nextButton)
         self.nextButton.setToBottomButtonKeyboardDefault()
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         self.view.backgroundColor = .red
         
         view.createReservationCustomBar (progressBarButtons: buttons) { _ in
-            print("Lero Lero")
+            self.dismiss(animated: true)
         }
         
         
