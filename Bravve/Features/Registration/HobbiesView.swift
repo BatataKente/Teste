@@ -9,18 +9,22 @@ import UIKit
 
 class HobbiesView: UIViewController {
     
+    let networkManager = NetworkManager()
+    
+    let sessionManager = SessionManager()
+    
+    var aPIHobbiesArray: [String] = []
+
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
     
-    private let registerButton = UIButton()
-    
     private lazy var buttons: [UIButton] = {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.photoGray.rawValue,
-                                                      IconsBravve.noteGray.rawValue,
-                                                      IconsBravve.hobbiesBlue.rawValue,
-                                                      IconsBravve.activitiesGray.rawValue])
+                                                       IconsBravve.noteGray.rawValue,
+                                                       IconsBravve.hobbiesBlue.rawValue,
+                                                       IconsBravve.activitiesGray.rawValue])
         return buttons
     }()
     
@@ -49,36 +53,41 @@ class HobbiesView: UIViewController {
     }()
     
     
+    var sessionHobbiesButtons = [UIButton]()
+            
     lazy var hobbiesButtons: [UIButton] = {
-           var hobbiesButtons = [UIButton]()
-        hobbiesButtons = createCapsuleButtons(["Futebol", "Ciclismo", "Yoga", "Corrida", "Culinária", "Fotografia", "Viagens", "Artes", "Games", "Natação", "Leitura", "Música"], ColorsBravve.capsuleButton)
+        var hobbiesButtons = [UIButton]()
+        hobbiesButtons = createCapsuleButtons(["Futebol", "Ciclismo", "Natação", "Corrida", "Culinária", "Fotografia", "Viagens", "Artes", "Games", "Yoga", "Leitura", "Música"], ColorsBravve.capsuleButton)
         
         for hobbiesButton in hobbiesButtons {
-            hobbiesButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            hobbiesButton.addTarget(self, action: #selector(chooseHobbie), for: .touchUpInside)
         }
         return hobbiesButtons
         
     }()
     
+    lazy var stackLine1: UIStackView = {
+        let stack1 = UIStackView()
+        stack1.axis = .horizontal
+        stack1.spacing = CGFloat(4).generateSizeForScreen
+        return stack1
+    }()
     
     lazy var hobbiesStackView: UIStackView = {
-        let line1 = UIStackView(arrangedSubviews: [hobbiesButtons[0], hobbiesButtons[1], hobbiesButtons[2]])
-        line1.axis = .horizontal
-        line1.spacing = CGFloat(4).generateSizeForScreen
-
+        
         let line2 = UIStackView(arrangedSubviews: [hobbiesButtons[3], hobbiesButtons[4], hobbiesButtons[5]])
         line2.axis = .horizontal
         line2.spacing = CGFloat(4).generateSizeForScreen
-
+        
         let line3 = UIStackView(arrangedSubviews: [hobbiesButtons[6], hobbiesButtons[7], hobbiesButtons[8]])
         line3.axis = .horizontal
         line3.spacing = CGFloat(4).generateSizeForScreen
-
+        
         let line4 = UIStackView(arrangedSubviews: [hobbiesButtons[9], hobbiesButtons[10], hobbiesButtons[11]])
         line4.axis = .horizontal
         line4.spacing = CGFloat(4).generateSizeForScreen
         
-        let stackView = UIStackView(arrangedSubviews: [line1, line2, line3, line4])
+        let stackView = UIStackView(arrangedSubviews: [stackLine1, line2, line3, line4])
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = CGFloat(12).generateSizeForScreen
@@ -86,10 +95,37 @@ class HobbiesView: UIViewController {
         return stackView
     }()
     
+    override func viewDidLoad() {
+        
+        setupView()
+        setupDefaults()
+        setupConstraints()
+        activeButton()
+        setupHobbiesArray()
+    }
+    
+    func setupHobbiesArray() {
+
+        networkManager.getDataArray(endpoint: .usersHobbies) { (hobbiesList: [Hobbies]? ) in
+
+            guard let hobbiesList = hobbiesList else { return }
+            
+            for hobbies in hobbiesList {
+                (self.aPIHobbiesArray.append(hobbies.name ?? ""))
+            }
+            self.sessionHobbiesButtons = self.createCapsuleButtons(self.aPIHobbiesArray, ColorsBravve.capsuleButton)
+            
+            for hobbiesButton in self.sessionHobbiesButtons {
+                hobbiesButton.addTarget(self, action: #selector(self.chooseHobbie), for: .touchUpInside)
+            }
+            
+            self.stackLine1.addArrangedSubviews(self.sessionHobbiesButtons)
+        }
+    }
     
     var arrayItems: [String] = []
     
-    @objc func buttonTapped(button: UIButton) {
+    @objc func chooseHobbie(button: UIButton) {
         if arrayItems.count >= 3 {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -106,18 +142,17 @@ class HobbiesView: UIViewController {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 arrayItems.append(button.titleLabel?.text ?? "")
-                } else {
-                    button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                    button.configuration?.attributedTitle?.foregroundColor = .black
-                    let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
-                    arrayItems = filteredArray
-                }
+            } else {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .black
+                let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
+                arrayItems = filteredArray
+            }
         }
-        print(arrayItems)
     }
     
     func activeButton() {
-
+        
         continueButton.addTarget(nil, action: #selector(continueButtonTapped), for: .touchUpInside)
         continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
@@ -127,23 +162,10 @@ class HobbiesView: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
-    
-    @objc func hideJumpButtonTapped() {
-       
-    }
-    
-    
-    override func viewDidLoad() {
 
-        setupView()
-        setupDefaults()
-        setupConstraints()
-        activeButton()
-    }
-    
     func setupView() {
-            
-        view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
+        
+        view.addSubviews([backgroundImage, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         let handler = {(action: UIAction) in
@@ -155,9 +177,10 @@ class HobbiesView: UIViewController {
         view.createRegisterCustomBar(progressBarButtons: buttons,
                                      jumpAction: UIAction(handler: handler)) {_ in
             
-            self.dismiss(animated: true)
+            let vc = ProfessionView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
-        
     }
     
     func setupDefaults() {
@@ -193,5 +216,6 @@ class HobbiesView: UIViewController {
             item.isActive = true
         }
     }
-
+    
 }
+
