@@ -182,11 +182,15 @@ class WorkPassBookingView: UIViewController {
         button.setTitle("Proxima Etapa", for: .normal)
         button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
-        
+        button.addTarget(self, action: #selector(nextStageButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    
+    @objc func nextStageButtonTapped(){
+        let reserveViewController = SingleBookingView()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

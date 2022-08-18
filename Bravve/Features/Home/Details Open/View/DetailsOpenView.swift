@@ -37,6 +37,7 @@ class OpenDetailsView: UIViewController {
         setupView()
         setupDefaults()
         setupConstraints()
+        reserveButton.addTarget(self, action: #selector(reserveButtonTapped), for: .touchUpInside)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -563,7 +564,7 @@ class OpenDetailsView: UIViewController {
         return scrollView
     }()
     
-    let reserveButton = UIButton()
+    @objc let reserveButton = UIButton()
     
     private func setupView() {
         
@@ -581,6 +582,13 @@ class OpenDetailsView: UIViewController {
         reserveButton.setToBottomButtonDefaultAbove("Reservar",
                                                     backgroundColor: .buttonPink,
                                                     above: tabBar)
+       
+    }
+    
+    @objc func reserveButtonTapped(){
+        let reserveViewController = LoginView()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
     }
     
     private func setupConstraints() {
