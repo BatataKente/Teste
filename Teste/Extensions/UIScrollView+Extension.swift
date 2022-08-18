@@ -13,11 +13,14 @@ extension UIScrollView {
 /// - Parameter views: Views to set in the list
     func turnIntoAList(_ views: [UIView]) {
         
-        if self.subviews.count > 0 {
+        if self.subviews.count > 1 {
             
             for subview in self.subviews {
                 
-                subview.removeFromSuperview()
+                if subview.alpha == 1 {
+                    
+                    subview.removeFromSuperview()
+                }
             }
         }
         
@@ -32,7 +35,7 @@ extension UIScrollView {
         
         let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .vertical
-        stackView.backgroundColor = .white
+        stackView.setToDefaultBackgroundColor()
         
         view.addSubview(stackView)
         

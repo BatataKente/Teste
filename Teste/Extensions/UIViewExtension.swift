@@ -298,6 +298,7 @@ extension UIView {
         stackView.constraintInsideTo(.leading, self, CGFloat(20).generateSizeForScreen)
         stackView.constraintOutsideTo(.trailing, filterButton,
                                       CGFloat(5).generateSizeForScreen)
+        stackView.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
         
         filterButton.constraintInsideTo(.centerY, stackView)
         filterButton.constraintInsideTo(.trailing, self, CGFloat(10).generateSizeForScreen)

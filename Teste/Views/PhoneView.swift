@@ -163,9 +163,8 @@ class PhoneView: UIViewController {
     private lazy var scrollView: UIScrollView = {
 
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: view.frame.size.width/5,
-                                                    height: view.frame.size.height/2.5))
-
+                                                    width: CGFloat(view.frame.size.width/7).generateSizeForScreen,
+                                                    height: CGFloat(view.frame.size.height/2.5).generateSizeForScreen))
         var ddis = [UIButton]()
 
         for ddi in phoneViewModel.createDDIs() {
@@ -184,6 +183,9 @@ class PhoneView: UIViewController {
             }
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            button.titleLabel?.constraintInsideTo(.leading, button,
+                                                  CGFloat(15).generateSizeForScreen)
+            
             ddis.append(button)
         }
         scrollView.turnIntoAList(ddis)
@@ -196,6 +198,7 @@ class PhoneView: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
+        viewElements.ddisButton.isSelected = false
         scrollView.frame.size = .zero
     }
     
@@ -233,7 +236,10 @@ class PhoneView: UIViewController {
 
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, scrollView])
 
-        viewElements.ddisButton.addSubWindow(scrollView, .downRight)
+        let origin = CGPoint(x: CGFloat(view.frame.size.width*0.23).generateSizeForScreen,
+                             y: CGFloat(view.frame.size.height*0.49).generateSizeForScreen)
+        
+        viewElements.ddisButton.addSubWindow(scrollView, .downRight, origin: origin)
 
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
@@ -432,7 +438,7 @@ extension PhoneView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         let indicator = scrollView.subviews[scrollView.subviews.count - 1]
-
+        
         indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
 }

@@ -208,8 +208,15 @@ extension UIButton {
         
         let animate = {
             
+            self.isSelected = true
             window.frame.size = size
             window.alpha = 1
+        }
+        
+        let reduce = {
+            
+            self.isSelected = false
+            window.frame.size = .zero
         }
         
         let timing: (duration: CGFloat,
@@ -225,78 +232,106 @@ extension UIButton {
                 
                 case .downLeft:
                 
-                    if let origin = origin {
+                    if self.isSelected {
                         
-                        window.frame.origin = origin
+                        reduce()
                     }
                     else {
                         
-                        window.frame.origin = CGPoint(x: self.frame.maxX,
-                                                      y: self.frame.maxY)
-                    }
-                
-                    UIView.animate(withDuration: timing.duration,
-                                   delay: timing.delay) {
-                        
-                        animate()
-                        window.frame.origin.x -= size.width
+                        if let origin = origin {
+                            
+                            window.frame.origin = origin
+                        }
+                        else {
+                            
+                            window.frame.origin = CGPoint(x: self.frame.maxX,
+                                                          y: self.frame.maxY)
+                        }
+                    
+                        UIView.animate(withDuration: timing.duration,
+                                       delay: timing.delay) {
+                            
+                            animate()
+                            window.frame.origin.x -= size.width
+                        }
                     }
                 
                 case .downRight:
                 
-                    if let origin = origin {
+                    if self.isSelected {
                         
-                        window.frame.origin = origin
+                        reduce()
                     }
                     else {
                         
-                        window.frame.origin = CGPoint(x: self.frame.minX,
-                                                      y: self.frame.maxY)
-                    }
-                
-                    UIView.animate(withDuration: timing.duration,
-                                   delay: timing.delay) {
-                        
-                        animate()
+                        if let origin = origin {
+                            
+                            window.frame.origin = origin
+                        }
+                        else {
+                            
+                            window.frame.origin = CGPoint(x: self.frame.minX,
+                                                          y: self.frame.maxY)
+                        }
+                    
+                        UIView.animate(withDuration: timing.duration,
+                                       delay: timing.delay) {
+                            
+                            animate()
+                        }
                     }
                 
                 case .upLeft:
                 
-                    if let origin = origin {
+                    if self.isSelected {
                         
-                        window.frame.origin = origin
+                        reduce()
                     }
                     else {
-                        
-                        window.frame.origin = CGPoint(x: self.frame.maxX,
-                                                      y: self.frame.minY)
-                    }
-                
-                    UIView.animate(withDuration: timing.duration,
-                                   delay: timing.delay) {
-                        
-                        animate()
-                        window.frame.origin.x -= size.width
-                        window.frame.origin.y -= size.height
+                            
+                        if let origin = origin {
+                            
+                            window.frame.origin = origin
+                        }
+                        else {
+                            
+                            window.frame.origin = CGPoint(x: self.frame.maxX,
+                                                          y: self.frame.minY)
+                        }
+                    
+                        UIView.animate(withDuration: timing.duration,
+                                       delay: timing.delay) {
+                            
+                            animate()
+                            window.frame.origin.x -= size.width
+                            window.frame.origin.y -= size.height
+                        }
                     }
                 
                 case .upRight:
                 
-                    if let origin = origin {
+                    if self.isSelected {
                         
-                        window.frame.origin = origin
+                        reduce()
                     }
                     else {
                         
-                        window.frame.origin = CGPoint(x: self.frame.minX,
-                                                      y: self.frame.minY)
-                    }
-                
-                    UIView.animate(withDuration: timing.duration,
-                                   delay: timing.delay) {
-                        
-                        animate()
-                        window.frame.origin.y -= size.height
+                        if let origin = origin {
+                            
+                            window.frame.origin = origin
+                        }
+                        else {
+                            
+                            window.frame.origin = CGPoint(x: self.frame.minX,
+                                                          y: self.frame.minY)
+                        }
+                    
+                        UIView.animate(withDuration: timing.duration,
+                                       delay: timing.delay) {
+                            
+                            animate()
+                            window.frame.origin.y -= size.height
+                        }
                     }
                 
                 default:

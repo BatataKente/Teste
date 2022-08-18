@@ -189,7 +189,7 @@ class HomeOpenTableViewCell: UITableViewCell {
     func setup(_ space: Space,_ indexPath: IndexPath) {
         
         viewElements.descriptionLabel.text = space.slogan
-        viewElements.photoView.sd_setImage(with: URL(string: space.space_pictures?[0].url ?? ""), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+//        viewElements.photoView.sd_setImage(with: URL(string: space.space_pictures?[0].url ?? ""), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
         viewElements.nameLabel.text = space.name
         viewElements.subNameLabel.text = space.description
         viewElements.priceLabel.text = "\(space.hourly_credits ?? "") crédito/hora"
