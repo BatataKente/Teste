@@ -21,14 +21,44 @@ class ActivitiesView: UIViewController {
                                                       IconsBravve.noteGray.rawValue,
                                                       IconsBravve.hobbiesGray.rawValue,
                                                       IconsBravve.activitiesBlue.rawValue])
+        
+        let tripleDismissHandler = {(action: UIAction) in
+            if let hobbiesView = self.presentingViewController,
+               let professionView = hobbiesView.presentingViewController,
+               let photoView = professionView.presentingViewController{
+                
+                hobbiesView.view.isHidden = true
+                professionView.view.isHidden = true
+                photoView.dismiss(animated: false)
+            }
+        }
+        
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let professionView = self.presentingViewController,
+               let photoView = professionView.presentingViewController {
+                
+                professionView.view.isHidden = true
+                photoView.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[2].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
         return buttons
     }()
     
     lazy var progressBarStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = CGFloat(8).generateSizeForScreen
         return stackView
     }()
+    
     
     
     let infoLabel: UILabel = {
