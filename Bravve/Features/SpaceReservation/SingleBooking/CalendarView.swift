@@ -14,19 +14,19 @@ enum MyTheme {
 
 struct Colors {
     
-    static var darkGray = #colorLiteral(red: 0.3764705882, green: 0.3647058824, blue: 0.3647058824, alpha: 1)
-    static var darkRed = #colorLiteral(red: 0.5019607843, green: 0.1529411765, blue: 0.1764705882, alpha: 1)
+    static var darkGray = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+    static var darkRed = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
 }
 
 struct Style {
     
-    static var bgColor = UIColor.white
-    static var monthViewLblColor = UIColor.white
-    static var monthViewBtnRightColor = UIColor.white
-    static var monthViewBtnLeftColor = UIColor.white
+    static var bgColor = UIColor.black
+    static var monthViewLblColor = UIColor.black
+    static var monthViewBtnRightColor = UIColor.black
+    static var monthViewBtnLeftColor = UIColor.black
     static var activeCellLblColor = UIColor.white
     static var activeCellLblColorHighlighted = UIColor.black
-    static var weekdaysLblColor = UIColor.white
+    static var weekdaysLblColor = UIColor.black
     
     static func themeDark(){
         
@@ -51,7 +51,7 @@ struct Style {
     }
 }
 
-class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CalendarMonthViewDelegate {
+class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CalendarMonthViewDelegate{
     
     var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var currentMonthIndex: Int = 0
@@ -149,16 +149,50 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var seletedDays:[String] = []
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? dateCVCell
         
-        let cell = collectionView.cellForItem(at: indexPath)
-        let lbl = cell?.subviews[0] as? UILabel
+        if  cell?.backgroundColor == .clear {
+            
+            
+            cell?.backgroundColor = Colors.darkRed
+            print(cell?.lbl.text ?? "")
+        } else {
+            
+            cell?.backgroundColor = .clear
+            
+        }
         
-        cell?.backgroundColor = Colors.darkRed
         
-        seletedDays.append(lbl?.text ?? "")
         
-        lbl?.textColor = UIColor.white
+      
+
     }
+
+    
+    // MODE DE SELECAO UNICA!!
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//
+//        let cell = collectionView.cellForItem(at: indexPath)
+//        let lbl = cell?.subviews[0] as? UILabel
+//
+//        cell?.backgroundColor = Colors.darkRed
+//        seletedDays.append(lbl?.text ?? "")
+//
+//            lbl?.textColor = UIColor.white
+//
+//
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//
+//        let cell = collectionView.cellForItem(at: indexPath)
+//
+//        cell?.backgroundColor = .clear
+//
+//    }
+
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -212,7 +246,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         monthView.topAnchor.constraint(equalTo: topAnchor).isActive=true
         monthView.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
         monthView.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        monthView.heightAnchor.constraint(equalToConstant: 35).isActive=true
+        monthView.heightAnchor.constraint(equalToConstant: 70).isActive=true
         monthView.delegate=self
         
         addSubview(weekdaysView)
