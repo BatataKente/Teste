@@ -41,6 +41,9 @@
 		2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */; };
 		2E57CDE328AC1DA9004214A9 /* EmptyReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */; };
 		2E57CDE528AC1DB7004214A9 /* EmptyReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */; };
+		2E57CDE728AEA53C004214A9 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE628AEA53C004214A9 /* CalendarView.swift */; };
+		2E57CDE928AEA56D004214A9 /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */; };
+		2E57CDEB28AEA598004214A9 /* CalendarWeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -226,6 +229,9 @@
 		2E57CDDD28AC0600004214A9 /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
 		2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReservationViewModel.swift; sourceTree = "<group>"; };
 		2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReservationView.swift; sourceTree = "<group>"; };
+		2E57CDE628AEA53C004214A9 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthView.swift; sourceTree = "<group>"; };
+		2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekDaysView.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1465,9 +1471,12 @@
 		C696174C2881EBC000281633 /* SingleBooking */ = {
 			isa = PBXGroup;
 			children = (
-				C69617522881EC3000281633 /* ViewModel */,
-				C69617512881EC2C00281633 /* View */,
-				C69617502881EC2800281633 /* Model */,
+				C69617572881EC5C00281633 /* SingleBookingViewModel.swift */,
+				C69617552881EC5400281633 /* SingleBookingView.swift */,
+				C69617532881EC4C00281633 /* SingleBookingModel.swift */,
+				2E57CDE628AEA53C004214A9 /* CalendarView.swift */,
+				2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */,
+				2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */,
 			);
 			path = SingleBooking;
 			sourceTree = "<group>";
@@ -1500,30 +1509,6 @@
 				C696176B2881ECC600281633 /* Model */,
 			);
 			path = ReservationCompleted;
-			sourceTree = "<group>";
-		};
-		C69617502881EC2800281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69617532881EC4C00281633 /* SingleBookingModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69617512881EC2C00281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69617552881EC5400281633 /* SingleBookingView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69617522881EC3000281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617572881EC5C00281633 /* SingleBookingViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C69617592881EC6300281633 /* Model */ = {
@@ -2024,6 +2009,7 @@
 				C69617562881EC5400281633 /* SingleBookingView.swift in Sources */,
 				C69616C32881E7EF00281633 /* RecoverPasswordModalView.swift in Sources */,
 				2E57CDE328AC1DA9004214A9 /* EmptyReservationViewModel.swift in Sources */,
+				2E57CDEB28AEA598004214A9 /* CalendarWeekDaysView.swift in Sources */,
 				C69616A82881E75500281633 /* PasswordRecoveryEmailView.swift in Sources */,
 				C69616CB2881E88600281633 /* HomeOpenModel.swift in Sources */,
 				C69617802881EE1E00281633 /* CheckInModel.swift in Sources */,
@@ -2066,6 +2052,7 @@
 				C69617182881EA8A00281633 /* ConfirmDataModel.swift in Sources */,
 				2ED5D10D28940F8B001C11DC /* TermsAndConditionView.swift in Sources */,
 				C69617452881EB7B00281633 /* FinalizeView.swift in Sources */,
+				2E57CDE928AEA56D004214A9 /* CalendarMonthView.swift in Sources */,
 				2E57CDE528AC1DB7004214A9 /* EmptyReservationView.swift in Sources */,
 				2ED5D10928940F48001C11DC /* TermsAndConditionModel.swift in Sources */,
 				C69617042881EA1500281633 /* EmailModel.swift in Sources */,
@@ -2091,6 +2078,7 @@
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
 				14CADA0328A52EF6002E9736 /* EndPointMockEnum.swift in Sources */,
+				2E57CDE728AEA53C004214A9 /* CalendarView.swift in Sources */,
 				130544D5289845180026FCE6 /* CancelReservationCell.swift in Sources */,
 				C696178B2881EE5B00281633 /* CheckOutView.swift in Sources */,
 				C696175D2881EC7700281633 /* Reservation2Model.swift in Sources */,
