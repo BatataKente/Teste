@@ -32,19 +32,26 @@ class ProfessionView: UIViewController {
                                                                IconsBravve.noteBlue.rawValue,
                                                                IconsBravve.hobbiesGray.rawValue,
                                                                IconsBravve.activitiesGray.rawValue])
+        
+        let handler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return buttons
     } ()
     
     lazy var progressBarStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: progressBarButtons)
-        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
     
     let infoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Queremos te conhecer um pouco mais pra que possamos te indicar coisas legais! Qual é a sua profissão?"
+        label.text = "Queremos te conhecer um pouco mais para que possamos te indicar coisas legais! Qual é a sua profissão?"
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textAlignment = .center
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
