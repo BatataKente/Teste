@@ -53,9 +53,17 @@ class EmptyReservation: UIViewController {
         view.backgroundColor = UIColor(named: "background")
         tabBar.selectedItem = tabBar.items?[1]
         navCustomBar.setToDefaultCustomBarWithBackButton(viewTitle: "Minhas Reservas") { _ in
-            return
+            self.dismiss(animated: true)
         }
+        
+        searchNewSpaceButton.addTarget(self, action: #selector(actionSearchNewSpaceButton), for: .touchUpInside)
 
+    }
+    
+    @objc func actionSearchNewSpaceButton() {
+        let vc = HomeClosedView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     private func addSubViews() {

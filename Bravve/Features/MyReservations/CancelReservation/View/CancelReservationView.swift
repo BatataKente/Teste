@@ -43,7 +43,7 @@ class CancelReservationView: UIViewController {
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Minhas Reservas") { _ in
             
-            return
+            self.dismiss(animated: true)
         }
         
         setConstraints()

@@ -40,6 +40,7 @@ final class ReservationsThreeViewController: UIViewController {
         let cpfStackViewTap = UITapGestureRecognizer(target: self, action: #selector(cpfStackViewTapped))
         cpfStackView.addGestureRecognizer(cpfStackViewTap)
         
+        finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         
     }
     
@@ -653,10 +654,9 @@ final class ReservationsThreeViewController: UIViewController {
     lazy var finishButton = UIButton()
         
     @objc func finishButtonTapped(){
-        print("Falta a tela")
-//        let reserveViewController = WorkPassBookingView()
-//        reserveViewController.modalPresentationStyle = .fullScreen
-//        present(reserveViewController, animated: true)
+        let reserveViewController = ReservationCompletedView()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
     }
     
         //MARK: SetupConstrains

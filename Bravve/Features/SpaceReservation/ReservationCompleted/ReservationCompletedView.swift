@@ -345,6 +345,14 @@ class ReservationCompletedView: UIViewController {
         buttonConstraints()
         iconsConstraints()
         
+        doneButton.addTarget(self, action: #selector(actionDoneButton), for: .touchUpInside)
+        
+    }
+    
+    @objc func actionDoneButton() {
+        let vc = CancelReservationView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     private func setupScrollView() {
