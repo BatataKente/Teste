@@ -688,9 +688,10 @@
 		2ED5D0F828940E2E001C11DC /* WorkPassBooking */ = {
 			isa = PBXGroup;
 			children = (
-				2ED5D10128940E94001C11DC /* Model */,
-				2ED5D10028940E8D001C11DC /* ViewModel */,
-				2ED5D0FF28940E86001C11DC /* View */,
+				2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */,
+				2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */,
+				2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */,
+				0EB927E328A5420A00D42F04 /* WorkPassCell.swift */,
 			);
 			path = WorkPassBooking;
 			sourceTree = "<group>";
@@ -741,31 +742,6 @@
 			isa = PBXGroup;
 			children = (
 				2ED5D10828940F48001C11DC /* TermsAndConditionModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2ED5D0FF28940E86001C11DC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */,
-				0EB927E328A5420A00D42F04 /* WorkPassCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2ED5D10028940E8D001C11DC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2ED5D10128940E94001C11DC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
