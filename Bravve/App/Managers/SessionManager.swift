@@ -455,7 +455,7 @@ class SessionManager {
         case .sitesId: urlEndpoint = EndPoints.sites.rawValue + "/\(id)"
         case .sitesContacts: urlEndpoint = EndPoints.sites.rawValue + "/\(id)/contacts"
             
-        case .spacesTypes: urlEndpoint = EndPoints.sitesSiteClassification.rawValue
+        case .spacesTypes: urlEndpoint = EndPoints.spacesTypes.rawValue
         case .spacesClassifications: urlEndpoint = EndPoints.spacesClassifications.rawValue
         case .spacesCategories: urlEndpoint = EndPoints.spacesCategories.rawValue
         case .spacesFacilities: urlEndpoint = EndPoints.spacesFacilities.rawValue

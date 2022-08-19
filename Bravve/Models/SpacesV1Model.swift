@@ -33,6 +33,11 @@ struct SpaceNoise: Codable {
 }
 
 struct SpaceContract: Codable {
+    var id: Int?
+    var name: String?
+}
+
+struct SpaceContractDetails: Codable {
     var id_contract: Int?
     var name_contracts: String?
 }
@@ -121,7 +126,7 @@ struct SpaceDetail: Codable {
     var space_noise_level: SpaceNoise?
     var space_facilities: [SpaceFacility]?
     var space_business_hours: [SpaceBusinessHours]?
-    var space_types_contracts: [SpaceContract]?
+    var space_types_contracts: [SpaceContractDetails]?
     var doors: [Door]?
     var partner_site_address: PartnerSiteAddress?
     var contact: [SpaceContact]?
