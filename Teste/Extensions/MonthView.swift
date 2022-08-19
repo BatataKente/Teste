@@ -1,23 +1,23 @@
 //
-//  MonthView.swift
-//  Teste
+//  CalendarMonthView.swift
+//  Bravve
 //
-//  Created by Josicleison on 15/08/22.
+//  Created by Evandro Rodrigo Minamoto on 18/08/22.
 //
 
 import UIKit
 
-protocol MonthViewDelegate: AnyObject {
+protocol CalendarMonthViewDelegate: AnyObject {
     
     func didChangeMonth(monthIndex: Int, year: Int)
 }
 
-class MonthView: UIView {
+class CalendarMonthView: UIView {
     
     var monthsArr = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
     var currentMonthIndex = 0
     var currentYear: Int = 0
-    var delegate: MonthViewDelegate?
+    var delegate: CalendarMonthViewDelegate?
     
     override init(frame: CGRect) {
         
@@ -42,7 +42,7 @@ class MonthView: UIView {
                 currentYear += 1
             }
         } else {
-            
+
             currentMonthIndex -= 1
             if currentMonthIndex < 0 {
                 currentMonthIndex = 11
@@ -93,7 +93,7 @@ class MonthView: UIView {
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
-        btn.addTarget(MonthView.self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
     }()
     
@@ -103,7 +103,7 @@ class MonthView: UIView {
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
-        btn.addTarget(MonthView.self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         btn.setTitleColor(UIColor.lightGray, for: .disabled)
         return btn
     }()

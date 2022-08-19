@@ -304,39 +304,13 @@ extension HomeOpenView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         
-            if #available(iOS 13, *) {
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
                 
-//                print((scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).frame.origin.x)
-                
-                
-                for subview in scrollView.subviews {
-                    
-                    print(subview.frame.origin.x)
-                    
-                    if subview.frame.origin.x != 0 {
-                        
-                        subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-                    }
-                }
-                
-//                (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = .green
-                
-                //verticalIndicator
-
-    //                (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = .blue //horizontalIndicator
-
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
             }
-//            else {
-//
-//                if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-//
-//                    verticalIndicator.backgroundColor = .systemRed
-//                }
-//                if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
-//
-//                    horizontalIndicator.backgroundColor = .systemPink
-//                }
-//            }
+        }
     }
 }
 
@@ -344,16 +318,16 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-//        guard let spaceId = cells[indexPath.row].id else { return }
-//
-//        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
-//            guard let space = space else {
-//                return
-//            }
-//            let detalhesAbertoView = OpenDetailsView(space)
-//            detalhesAbertoView.modalPresentationStyle = .fullScreen
-//            self.present(detalhesAbertoView, animated: false)
-//        }
+        guard let spaceId = cells[indexPath.row].id else { return }
+
+        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
+            guard let space = space else {
+                return
+            }
+            let detalhesAbertoView = OpenDetailsView(space)
+            detalhesAbertoView.modalPresentationStyle = .fullScreen
+            self.present(detalhesAbertoView, animated: false)
+        }
     }
 }
 

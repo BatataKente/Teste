@@ -42,6 +42,7 @@ class SessionManager {
         UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
     }
     
+    
     /// Method to get data from the API with a response decoded as an array
     /// - Parameters:
     ///   - id: Optional argument to pass the id to the API endpoint
@@ -125,15 +126,30 @@ class SessionManager {
             ]
             
             AF.request(url, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.error as Any)
+                print(response.error)
                 if let data = response.value {
                     completionHandler(data)
                 } else {
-                    print(response.response?.statusCode as Any)
+                    print(response.response?.statusCode)
                     completionHandler(nil)
                 }
             }
         }
+    }
+    
+    func getOpenData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (T?) -> Void) {
+        
+            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+            
+            AF.request(url).responseDecodable(of: T.self) { response in
+//                print(response.debugDescription)
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    print(response.response?.statusCode)
+                    completionHandler(nil)
+                }
+            }
     }
     
     /// Method to post data to the API with a response decoded as an array
@@ -188,7 +204,7 @@ class SessionManager {
         guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [T].self) { response in
-            print(response.debugDescription)
+//            print(response.debugDescription)
             if let data = response.value {
                 completionHandler(data)
             } else {
@@ -224,7 +240,7 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             print(url)
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.response?.statusCode as Any)
+                print(response.response?.statusCode)
                 if let data = response.value {
                     completionHandler(data)
                 } else {
@@ -264,7 +280,7 @@ class SessionManager {
             AF.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(picture_url, withName: "picture")
             }, to: url, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.response?.statusCode as Any)
+                print(response.response?.statusCode)
                 if let data = response.value {
                     completionHandler(data)
                 } else {

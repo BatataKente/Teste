@@ -36,6 +36,7 @@
 		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
 		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
+		142367CC28B00CDD0080738E /* SingleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142367CB28B00CDD0080738E /* SingleBook.swift */; };
 		143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */; };
 		143E621328AD04B800AD6BEA /* HomeOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
@@ -54,7 +55,6 @@
 		146A8BE428AAAAC9007650A8 /* CustomViewCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */; };
 		146A8BE628AAAB2F007650A8 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE528AAAB2F007650A8 /* MonthView.swift */; };
 		146A8BE928AAAB55007650A8 /* WeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BE828AAAB55007650A8 /* WeekDaysView.swift */; };
-		146A8BEB28AAAB86007650A8 /* ThemeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8BEA28AAAB86007650A8 /* ThemeEnum.swift */; };
 		1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */; };
 		1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */; };
 		147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */; };
@@ -134,6 +134,7 @@
 		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
+		142367CB28B00CDD0080738E /* SingleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBook.swift; sourceTree = "<group>"; };
 		143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenViewModel.swift; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
@@ -152,7 +153,6 @@
 		146A8BE328AAAAC9007650A8 /* CustomViewCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCalendar.swift; sourceTree = "<group>"; };
 		146A8BE528AAAB2F007650A8 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		146A8BE828AAAB55007650A8 /* WeekDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysView.swift; sourceTree = "<group>"; };
-		146A8BEA28AAAB86007650A8 /* ThemeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnum.swift; sourceTree = "<group>"; };
 		1478A21A28995E1000B409E5 /* FontsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsBravveEnum.swift; sourceTree = "<group>"; };
 		1478A22028995EBA00B409E5 /* IconsBravveEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsBravveEnum.swift; sourceTree = "<group>"; };
 		147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsView.swift; sourceTree = "<group>"; };
@@ -300,6 +300,7 @@
 				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
 				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
 				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
+				142367CB28B00CDD0080738E /* SingleBook.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,7 +339,6 @@
 				14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */,
 				143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */,
 				147BA88328A81ECF006924C8 /* OrientationEnum.swift */,
-				146A8BEA28AAAB86007650A8 /* ThemeEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -518,6 +518,7 @@
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
 				306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
+				142367CC28B00CDD0080738E /* SingleBook.swift in Sources */,
 				3029F16728ABDD9E006E1229 /* UIViewPreview.swift in Sources */,
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
@@ -541,7 +542,6 @@
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
-				146A8BEB28AAAB86007650A8 /* ThemeEnum.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */,
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,

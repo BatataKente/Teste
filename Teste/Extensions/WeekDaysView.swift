@@ -1,13 +1,13 @@
 //
-//  WeekDaysView.swift
-//  Teste
+//  CalendarWeekDaysView.swift
+//  Bravve
 //
-//  Created by Josicleison on 15/08/22.
+//  Created by Evandro Rodrigo Minamoto on 18/08/22.
 //
 
 import UIKit
 
-class WeekdaysView: UIView {
+class CalendarWeekdaysView: UIView {
     
     override init(frame: CGRect) {
         
