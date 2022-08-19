@@ -133,7 +133,6 @@ final class FilterScreen: UIViewController {
     }()
     
     
-    
     // NÃO TEM LINE NO ENUM
     //MARK: lineImage
     private lazy var lineImage: UIImageView = {
@@ -161,6 +160,7 @@ final class FilterScreen: UIViewController {
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -171,6 +171,7 @@ final class FilterScreen: UIViewController {
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -181,6 +182,7 @@ final class FilterScreen: UIViewController {
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -222,6 +224,7 @@ final class FilterScreen: UIViewController {
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -232,6 +235,7 @@ final class FilterScreen: UIViewController {
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -271,6 +275,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -280,6 +285,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -318,6 +324,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -327,6 +334,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -336,6 +344,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -345,6 +354,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -354,6 +364,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -363,6 +374,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -372,6 +384,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -381,6 +394,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -390,6 +404,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -399,6 +414,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -409,7 +425,6 @@ final class FilterScreen: UIViewController {
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
-        view.distribution = .fillProportionally
         view.axis = .vertical
         return view
     }()
@@ -438,6 +453,7 @@ final class FilterScreen: UIViewController {
         view.spacing = 4
         view.backgroundColor = .white
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         return view
     }()
     
