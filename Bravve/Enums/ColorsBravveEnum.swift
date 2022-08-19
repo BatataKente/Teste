@@ -16,6 +16,7 @@ public enum ColorsBravve: String {
     case backgroundBravve = "backgroundBravve"
     case backgroundHelp = "backgroundHelp"
     case backgroundTerms = "backgroundTerms"
+    case black_black = "black_black"
     case blackWhiteAlert = "blackWhiteAlert"
     case blue = "blueBravve"
     case blue_cyan = "blue_cyan"

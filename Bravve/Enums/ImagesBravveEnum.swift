@@ -12,6 +12,7 @@
 
 public enum ImagesBravve: String {
 
+    
     case example_1 = "Example1"
     case example_2 = "Example2"
     case example_3 = "Example3"
