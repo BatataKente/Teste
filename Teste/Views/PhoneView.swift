@@ -163,8 +163,8 @@ class PhoneView: UIViewController {
     private lazy var scrollView: UIScrollView = {
 
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: CGFloat(view.frame.size.width/7).generateSizeForScreen,
-                                                    height: CGFloat(view.frame.size.height/2.5).generateSizeForScreen))
+                                                    width: view.frame.size.width/7,
+                                                    height: view.frame.size.height/2.5))
         var ddis = [UIButton]()
 
         for ddi in phoneViewModel.createDDIs() {
@@ -236,8 +236,8 @@ class PhoneView: UIViewController {
 
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, scrollView])
 
-        let origin = CGPoint(x: CGFloat(view.frame.size.width*0.23).generateSizeForScreen,
-                             y: CGFloat(view.frame.size.height*0.49).generateSizeForScreen)
+        let origin = CGPoint(x: view.frame.size.width*0.23,
+                             y: view.frame.size.height*0.49)
         
         viewElements.ddisButton.addSubWindow(scrollView, .downRight, origin: origin)
 

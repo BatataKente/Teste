@@ -129,8 +129,8 @@ class HomeOpenView: UIViewController {
     private lazy var leftDropDown: UIScrollView = {
 
         let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                      width: CGFloat(view.frame.size.width/5).generateSizeForScreen,
-                                                      height: CGFloat(view.frame.size.height/3).generateSizeForScreen))
+                                                      width: view.frame.size.width/5,
+                                                      height: view.frame.size.height/3))
         leftDropDown.delegate = self
 
         return leftDropDown
@@ -139,8 +139,8 @@ class HomeOpenView: UIViewController {
     private lazy var rightDropDown: UIScrollView = {
 
         let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                       width: CGFloat(view.frame.size.width/2).generateSizeForScreen,
-                                                       height: CGFloat(view.frame.size.height/2.5).generateSizeForScreen))
+                                                       width: view.frame.size.width/2,
+                                                       height: view.frame.size.height/2.5))
         rightDropDown.delegate = self
 
         return rightDropDown
@@ -199,9 +199,9 @@ class HomeOpenView: UIViewController {
         view.setToDefaultBackgroundColor()
         
         let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
-                                         y: view.frame.size.height * 0.12)
+                                         y: view.frame.size.height * 0.15)
         let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
-                                          y: view.frame.size.height * 0.12)
+                                          y: view.frame.size.height * 0.15)
         
         homeOpenViewModel.delegate = self
         homeOpenViewModel.manageCustomBar()
