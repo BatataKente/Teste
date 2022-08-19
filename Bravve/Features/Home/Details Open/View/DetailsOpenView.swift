@@ -229,43 +229,50 @@ class OpenDetailsView: UIViewController {
                             size: 15)
         title.textColor = textColor
         
-        let texts:[String] = ["Ar condicionado",
-                              "Ás àreas comuns",
-                              "Auditório/sala de treinamento",
-                              "Água",
-                              "Café",
-                              "Chá",
-                              "a",
-                              "b",
-                              "c",
-                              "d",
-                              "e",
-                              "f",
-                              "g"]
+        var texts:[String] {
+            
+            var facilitiesArray: [String] = []
+            
+            guard let facilities = space.space_facilities else { return [] }
+            for facility in facilities {
+                guard let facilityName = facility.name else { return [] }
+                facilitiesArray.append(facilityName)
+            }
+            
+            return facilitiesArray
+        }
+
         var itens = [UIStackView]()
         
-        for i in 0...5 {
+        let structureStackView = UIStackView()
+        
+        if texts.count < 7 {
+            for text in texts {
+                itens.append(createStackView(text, textColor: textColor))
+            }
+            structureStackView.addArrangedSubviews([title] + itens)
+        } else {
+            for i in 0...5 {
+                
+                itens.append(createStackView(texts[i],
+                                             textColor: textColor))
+            }
             
-            itens.append(createStackView(texts[i],
-                                         textColor: textColor))
+            for i in 6...texts.count - 1 {
+                
+                itens.append(createStackView(texts[i],
+                                             isHidden: true,
+                                             textColor: textColor))
+            }
+            
+            let buttons = createSeeButtonsStackView(6...itens.count-1,
+                                                    itens: itens,
+                                                    titleColor: .capsuleButtonSelected,
+                                                    downButtonImages: .arrowDown,
+                                                    upButtonImages: .arrowUp)
+            structureStackView.addArrangedSubviews([title] + itens + [buttons])
         }
         
-        for i in 6...texts.count - 1 {
-            
-            itens.append(createStackView(texts[i],
-                                         isHidden: true,
-                                         textColor: textColor))
-        }
-        
-        let buttons = createSeeButtonsStackView(6...itens.count-1,
-                                                itens: itens,
-                                                titleColor: .capsuleButtonSelected,
-                                                downButtonImages: .arrowDown,
-                                                upButtonImages: .arrowUp)
-        
-        let structureStackView = UIStackView(arrangedSubviews: [title] +
-                                             itens +
-                                             [buttons])
         structureStackView.axis = .vertical
         structureStackView.spacing = CGFloat(10).generateSizeForScreen
         structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
@@ -290,41 +297,48 @@ class OpenDetailsView: UIViewController {
                             size: 15)
         title.textColor = .white
         
-        let texts:[String] = ["Ar condicionado",
-                              "Ás àreas comuns",
-                              "Auditório/sala de treinamento",
-                              "Água",
-                              "Café",
-                              "Chá",
-                              "a",
-                              "b",
-                              "c",
-                              "d",
-                              "e",
-                              "f",
-                              "g"]
+        var texts:[String] {
+            
+            var facilitiesArray: [String] = []
+            
+            guard let facilities = space.space_facilities else { return [] }
+            for facility in facilities {
+                guard let facilityName = facility.name else { return [] }
+                facilitiesArray.append(facilityName)
+            }
+            
+            return facilitiesArray
+        }
+
         var itens = [UIStackView]()
         
-        for i in 0...5 {
+        let localFacilitiesStackView = UIStackView()
+        
+        if texts.count < 7 {
+            for text in texts {
+                itens.append(createStackView(text))
+            }
+            localFacilitiesStackView.addArrangedSubviews([title] + itens)
+        } else {
+            for i in 0...5 {
+                
+                itens.append(createStackView(texts[i]))
+            }
             
-            itens.append(createStackView(texts[i]))
+            for i in 6...texts.count - 1 {
+                
+                itens.append(createStackView(texts[i],
+                                             isHidden: true))
+            }
+            
+            let buttons = createSeeButtonsStackView(6...itens.count-1,
+                                                    itens: itens,
+                                                    titleColor: .capsuleButtonSelected,
+                                                    downButtonImages: .arrowDown,
+                                                    upButtonImages: .arrowUp)
+            localFacilitiesStackView.addArrangedSubviews([title] + itens + [buttons])
         }
         
-        for i in 6...texts.count - 1 {
-            
-            itens.append(createStackView(texts[i],
-                                         isHidden: true))
-        }
-        
-        let buttons = createSeeButtonsStackView(6...itens.count-1,
-                                                itens: itens,
-                                                titleColor: .backgroundHelp,
-                                                downButtonImages: .arrowDown,
-                                                upButtonImages: .arrowUp)
-        
-        let localFacilitiesStackView = UIStackView(arrangedSubviews: [title] +
-                                                   itens +
-                                                   [buttons])
         localFacilitiesStackView.axis = .vertical
         localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
         localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
@@ -345,6 +359,8 @@ class OpenDetailsView: UIViewController {
         
         guard let pictures = space.pictures else { return pageControl }
         pageControl.numberOfPages = pictures.count
+        pageControl.backgroundStyle = .prominent
+        pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
         return pageControl
@@ -606,6 +622,7 @@ class OpenDetailsView: UIViewController {
 
 extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate {
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         guard let pictures = space.pictures else { return 0 }
@@ -619,16 +636,25 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         
         guard let pictures = space.pictures else { return UICollectionViewCell() }
         
-//        cell?.imageView.image = UIImage(named: images[indexPath.row])
-        
         guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
         
         cell?.imageView.sd_setImage(with: URL(string: picture))
         
-        pageControl.currentPage = indexPath.row
-        
-        pageControl.currentPage = indexPath.row
-        
         return cell ?? UICollectionViewCell()
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
+        let index = scrollView.contentOffset.x / witdh
+        var roundedIndex = 0.0
+        if index < 0.2 {
+            roundedIndex = round(index)
+        } else {
+            roundedIndex = ceil(index)
+        }
+        
+        self.pageControl.currentPage = Int(roundedIndex)
+    }
+    
 }
+
