@@ -1388,9 +1388,9 @@
 		C696174D2881EC0A00281633 /* Reservation 2 de 3 */ = {
 			isa = PBXGroup;
 			children = (
-				C696175B2881EC6D00281633 /* ViewModel */,
-				C696175A2881EC6700281633 /* View */,
-				C69617592881EC6300281633 /* Model */,
+				C696175C2881EC7700281633 /* Reservation2Model.swift */,
+				C69617602881EC9000281633 /* Reservation2ViewModel.swift */,
+				C696175E2881EC7F00281633 /* Reservation2View.swift */,
 			);
 			path = "Reservation 2 de 3";
 			sourceTree = "<group>";
@@ -1398,9 +1398,9 @@
 		C696174E2881EC1200281633 /* Reservation 3 de 3 */ = {
 			isa = PBXGroup;
 			children = (
-				C69617642881ECA100281633 /* ViewModel */,
-				C69617632881EC9D00281633 /* View */,
-				C69617622881EC9900281633 /* Model */,
+				C69617652881ECAD00281633 /* Reservation3Model.swift */,
+				C69617692881ECBF00281633 /* Reservation3ViewModel.swift */,
+				C69617672881ECB600281633 /* Reservation3View.swift */,
 			);
 			path = "Reservation 3 de 3";
 			sourceTree = "<group>";
@@ -1408,83 +1408,11 @@
 		C696174F2881EC1A00281633 /* ReservationCompleted */ = {
 			isa = PBXGroup;
 			children = (
-				C696176D2881ECD100281633 /* ViewModel */,
-				C696176C2881ECCC00281633 /* View */,
-				C696176B2881ECC600281633 /* Model */,
-			);
-			path = ReservationCompleted;
-			sourceTree = "<group>";
-		};
-		C69617592881EC6300281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C696175C2881EC7700281633 /* Reservation2Model.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C696175A2881EC6700281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C696175E2881EC7F00281633 /* Reservation2View.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C696175B2881EC6D00281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617602881EC9000281633 /* Reservation2ViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69617622881EC9900281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69617652881ECAD00281633 /* Reservation3Model.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69617632881EC9D00281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69617672881ECB600281633 /* Reservation3View.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69617642881ECA100281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617692881ECBF00281633 /* Reservation3ViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C696176B2881ECC600281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
 				C69617702881ECEB00281633 /* ReservationCompletedModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C696176C2881ECCC00281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
+				C69617722881ECF700281633 /* ReservationCompletedViewModel.swift */,
 				C696176E2881ECDF00281633 /* ReservationCompletedView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C696176D2881ECD100281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617722881ECF700281633 /* ReservationCompletedViewModel.swift */,
-			);
-			path = ViewModel;
+			path = ReservationCompleted;
 			sourceTree = "<group>";
 		};
 		C69617742881ED5100281633 /* CancelReservation */ = {
