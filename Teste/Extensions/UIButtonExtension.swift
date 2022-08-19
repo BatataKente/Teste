@@ -199,6 +199,7 @@ extension UIButton {
 /// - Parameters:
 ///   - window: The view that will be the subWindow
 ///   - orientation: The position that window will move
+///   - origin: The origin of window
     func addSubWindow(_ window: UIView,
                       _ orientation: Orientation = .downRight,
                       origin: CGPoint? = nil) {
