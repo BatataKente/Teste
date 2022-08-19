@@ -12,9 +12,19 @@ class ProfessionView: UIViewController {
     let backButton = UIButton()
     let logoBravve = UIImageView()
     let backgroundImageView = UIImageView()
-    let selectAreaButton = UIButton()
-    let workRegimeButton = UIButton()
     let continueButton = UIButton ()
+    
+    let selectAreaButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrowDown"), for: .normal)
+        return button
+    }()
+    
+    let workRegimeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrowDown"), for: .normal)
+        return button
+    }()
     
     lazy var progressBarButtons: [UIButton] = {
         var buttons = [UIButton]()
@@ -27,7 +37,7 @@ class ProfessionView: UIViewController {
     
     lazy var progressBarStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: progressBarButtons)
-        stackView.spacing = 10
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -58,6 +68,34 @@ class ProfessionView: UIViewController {
         label.isHidden = true
         return label
     }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                    width: view.frame.size.width/5,
+                                                    height: view.frame.size.height/5))
+        var jobs = [UIButton]()
+        
+        for job in professionViewModel.addingJobs(){
+            let button = UIButton()
+            button.setTitle("Trabalho", for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+            
+            let handler = {(action: UIAction) in
+                self.selectAreaAPILabel.text = button.currentTitle
+                scrollView.frame.size = .zero
+                self.selectAreaLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
+                self.selectAreaAPILabel.isHidden = false
+                self.selectAreaAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
+            }
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            jobs.append(button)
+        }
+        scrollView.turnIntoAList(jobs)
+        scrollView.delegate = self
+        
+        return scrollView
+    }()
 
     lazy var selectAreaTextStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [selectAreaLabel, selectAreaAPILabel])
@@ -67,13 +105,13 @@ class ProfessionView: UIViewController {
     } ()
     
     lazy var selectAreaStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [selectAreaTextStackView, selectAreaButton])
+        let stackView = UIStackView(arrangedSubviews: [selectAreaTextStackView])
         stackView.layer.cornerRadius = 8
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = CGColor(red: 208.0/255.0, green: 213.0/255.0, blue: 221.0/225.0, alpha: 1.00)
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +135,43 @@ class ProfessionView: UIViewController {
         return label
     } ()
     
+    private lazy var scrollViewWork: UIScrollView = {
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                    width: view.frame.size.width/5,
+                                                    height: view.frame.size.height/5))
+        var jobs = [UIButton]()
+        
+        for job in professionViewModel.addingWorkModels(){
+            let button = UIButton()
+            button.setTitle("Trabalho", for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+            
+            let handler = {(action: UIAction) in
+                self.workRegimeAPILabel.text = button.currentTitle
+                scrollView.frame.size = .zero
+                self.workRegimeLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
+                self.workRegimeAPILabel.isHidden = false
+                self.workRegimeAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
+                
+                if self.selectAreaAPILabel.isHidden == false && self.workRegimeAPILabel.isHidden == false {
+                    self.continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+                    self.continueButton.addTarget(nil, action: #selector(self.continueToHobbies), for: .touchUpInside)
+                } else {
+                    self.continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
+                    self.continueButton.removeTarget(nil, action: #selector(self.continueToHobbies), for: .touchUpInside)
+                }
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            jobs.append(button)
+        }
+        scrollView.turnIntoAList(jobs)
+        scrollView.delegate = self
+        
+        return scrollView
+    }()
+    
     lazy var workRegimeTextStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [workRegimeLabel, workRegimeAPILabel])
         stackView.axis = .vertical
@@ -105,7 +180,7 @@ class ProfessionView: UIViewController {
     } ()
     
     lazy var workRegimeStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [workRegimeTextStackView, workRegimeButton])
+        let stackView = UIStackView(arrangedSubviews: [workRegimeTextStackView])
         stackView.layer.cornerRadius = 8
         stackView.axis = .horizontal
         stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
@@ -124,76 +199,81 @@ class ProfessionView: UIViewController {
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
+        scrollViewDidScroll(scrollView)
+        scrollViewDidScroll(scrollViewWork)
+        
         view.addSubviews([backButton,
                                     infoLabel,
                                     selectAreaStackView,
+                                    selectAreaButton,
                                     workRegimeStackView,
+                                    workRegimeButton,
                                     logoBravve,
                                     continueButton,
                                     progressBarStackView,
-                                    backgroundImageView])
+                                    backgroundImageView,
+                                    scrollView,
+                                    scrollViewWork
+                                    ])
    
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen) {_ in
             self.dismiss(animated: true)
         }
         continueButton.setToBottomButtonKeyboardDefault()
-        continueButton.addTarget(self, action: #selector(continueToHobbies), for: .touchUpInside)
         
         backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         
-        professionViewModel.selectAreaMenu(label: selectAreaAPILabel, button: selectAreaButton)
+       addingConstraints()
         
-        professionViewModel.workRegimeMenu(label: workRegimeAPILabel, button: workRegimeButton)
+        selectAreaButton.addSubWindow(scrollView, .downLeft)
+        workRegimeButton.addSubWindow(scrollViewWork,.downLeft)
+    }
+    
+    func addingConstraints(){
+        progressBarStackView.constraintOutsideTo(.top, logoBravve, CGFloat(50).generateSizeForScreen)
+        progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        progressBarStackView.heightAnchor.constraint(equalToConstant: CGFloat(27).generateSizeForScreen).isActive = true
         
-        NSLayoutConstraint.activate([
-            
-            progressBarStackView.topAnchor.constraint(equalTo: logoBravve.bottomAnchor, constant: CGFloat(50).generateSizeForScreen),
-            progressBarStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            progressBarStackView.heightAnchor.constraint(equalToConstant: CGFloat(27).generateSizeForScreen),
-            
-            infoLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: CGFloat(238.5).generateSizeForScreen),
-            infoLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
-            infoLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
-            
-            selectAreaStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(15).generateSizeForScreen),
-            selectAreaStackView.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor),
-            selectAreaStackView.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor),
-            selectAreaStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
-            selectAreaTextStackView.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.9),
-            selectAreaButton.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.1),
-            
-            workRegimeStackView.topAnchor.constraint(equalTo: selectAreaStackView.bottomAnchor, constant: CGFloat(15).generateSizeForScreen),
-            workRegimeStackView.leadingAnchor.constraint(equalTo: selectAreaStackView.leadingAnchor),
-            workRegimeStackView.trailingAnchor.constraint(equalTo: selectAreaStackView.trailingAnchor),
-            workRegimeStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
-            workRegimeTextStackView.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.9),
-            workRegimeButton.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.1),
-        ])
+        infoLabel.constraintOutsideTo(.top, logoBravve, CGFloat(139).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
+        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
         
-        let selectAreaTap = UITapGestureRecognizer(target: self, action: #selector(selectAreaTapped))
-        selectAreaStackView.addGestureRecognizer(selectAreaTap)
-        selectAreaButton.addGestureRecognizer(selectAreaTap)
+        selectAreaStackView.constraintOutsideTo(.top, infoLabel, CGFloat(15).generateSizeForScreen)
+        selectAreaStackView.constraintInsideTo(.leading, infoLabel)
+        selectAreaStackView.constraintInsideTo(.trailing, infoLabel)
+        selectAreaStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
         
-        let workRegimeTap = UITapGestureRecognizer(target: self, action: #selector(workRegimeTapped))
-        workRegimeStackView.addGestureRecognizer(workRegimeTap)
-        workRegimeButton.addGestureRecognizer(workRegimeTap)
+        selectAreaTextStackView.widthAnchor.constraint(equalTo: selectAreaStackView.widthAnchor, multiplier: 0.9).isActive = true
+        
+        selectAreaButton.constraintInsideTo(.top, selectAreaStackView,  CGFloat(28).generateSizeForScreen)
+        selectAreaButton.constraintInsideTo(.trailing, selectAreaStackView,  CGFloat(-24.34).generateSizeForScreen)
+        selectAreaButton.widthAnchor.constraint(equalToConstant:  CGFloat(14.53).generateSizeForScreen).isActive = true
+        selectAreaButton.heightAnchor.constraint(equalToConstant:  CGFloat(7.66).generateSizeForScreen).isActive = true
+        
+        workRegimeStackView.constraintOutsideTo(.top, selectAreaStackView,  CGFloat(15).generateSizeForScreen)
+        workRegimeStackView.constraintInsideTo(.leading, selectAreaStackView)
+        workRegimeStackView.constraintInsideTo(.trailing, selectAreaStackView)
+        workRegimeStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
+        workRegimeTextStackView.widthAnchor.constraint(equalTo: workRegimeStackView.widthAnchor, multiplier: 0.9).isActive = true
+        
+        workRegimeButton.constraintInsideTo(.top, workRegimeStackView,  CGFloat(28).generateSizeForScreen)
+        workRegimeButton.constraintInsideTo(.trailing, workRegimeStackView,  CGFloat(-24.34).generateSizeForScreen)
+        workRegimeButton.widthAnchor.constraint(equalToConstant:  CGFloat(14.53).generateSizeForScreen).isActive = true
+        workRegimeButton.heightAnchor.constraint(equalToConstant:  CGFloat(7.66).generateSizeForScreen).isActive = true
+        
+        selectAreaButton.imageView?.heightAnchorInSuperview(7.66)
+        selectAreaButton.imageView?.constraintOutsideTo(.width, selectAreaButton, multiplier: 2)
+        
+        workRegimeButton.imageView?.heightAnchorInSuperview(7.66)
+        workRegimeButton.imageView?.constraintOutsideTo(.width, workRegimeButton, multiplier: 2)
         
     }
     
-    @objc func selectAreaTapped() {
-        
-        selectAreaLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
-        selectAreaAPILabel.isHidden = false
-                                      selectAreaAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
-    }
-    
-    @objc func workRegimeTapped() {
-        
-        workRegimeLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
-        workRegimeAPILabel.isHidden = false
-        workRegimeAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
-    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            scrollView.frame.size = .zero
+        scrollViewWork.frame.size = .zero
+        }
     
     @objc func continueToHobbies() {
         let hobbiesView = HobbiesView ()
@@ -202,4 +282,12 @@ class ProfessionView: UIViewController {
     }
 }
 
+extension ProfessionView: UIScrollViewDelegate {
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
+
+        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+    }
+}

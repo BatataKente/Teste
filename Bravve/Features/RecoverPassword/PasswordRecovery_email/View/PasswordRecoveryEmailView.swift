@@ -23,7 +23,6 @@ class PasswordRecoveryEmailView: UIViewController {
             IconsBravve.emailBlue.rawValue,
             IconsBravve.padlockGray.rawValue
         ])
-        buttons[0].setTitle(" Email ", for: .normal)
         return buttons
     }()
     
