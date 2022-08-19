@@ -668,9 +668,11 @@
 		2ED5D0F628940E00001C11DC /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				2ED5D0FB28940E4E001C11DC /* Model */,
-				2ED5D0FA28940E47001C11DC /* ViewModel */,
-				2ED5D0F928940E41001C11DC /* View */,
+				2ED5D10E28940FB6001C11DC /* HelpModel.swift */,
+				2ED5D11028940FCD001C11DC /* HelpViewModel.swift */,
+				2ED5D11228940FE3001C11DC /* HelpView.swift */,
+				30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */,
+				30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -678,9 +680,9 @@
 		2ED5D0F728940E17001C11DC /* TermsAndCondition */ = {
 			isa = PBXGroup;
 			children = (
-				2ED5D0FE28940E7B001C11DC /* Model */,
-				2ED5D0FD28940E6B001C11DC /* ViewModel */,
-				2ED5D0FC28940E5B001C11DC /* View */,
+				2ED5D10828940F48001C11DC /* TermsAndConditionModel.swift */,
+				2ED5D10A28940F67001C11DC /* TermsAndConditionViewModel.swift */,
+				2ED5D10C28940F8B001C11DC /* TermsAndConditionView.swift */,
 			);
 			path = TermsAndCondition;
 			sourceTree = "<group>";
@@ -694,56 +696,6 @@
 				0EB927E328A5420A00D42F04 /* WorkPassCell.swift */,
 			);
 			path = WorkPassBooking;
-			sourceTree = "<group>";
-		};
-		2ED5D0F928940E41001C11DC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D11228940FE3001C11DC /* HelpView.swift */,
-				30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */,
-				30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2ED5D0FA28940E47001C11DC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D11028940FCD001C11DC /* HelpViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2ED5D0FB28940E4E001C11DC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10E28940FB6001C11DC /* HelpModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2ED5D0FC28940E5B001C11DC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10C28940F8B001C11DC /* TermsAndConditionView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2ED5D0FD28940E6B001C11DC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10A28940F67001C11DC /* TermsAndConditionViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2ED5D0FE28940E7B001C11DC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2ED5D10828940F48001C11DC /* TermsAndConditionModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		5FC75CDF2892CB5F000CCE71 /* Resources */ = {
@@ -771,7 +723,8 @@
 		C69616912881E65900281633 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				C69616A32881E71800281633 /* Login */,
+				C696169D2881E70000281633 /* LoginView.swift */,
+				C69616A12881E71100281633 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -808,22 +761,6 @@
 			isa = PBXGroup;
 			children = (
 				C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69616962881E69700281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C696169D2881E70000281633 /* LoginView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69616982881E6A200281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69616A12881E71100281633 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -866,15 +803,6 @@
 				C69616BF2881E7D800281633 /* View */,
 			);
 			path = RecoverPassword_modal;
-			sourceTree = "<group>";
-		};
-		C69616A32881E71800281633 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				C69616982881E6A200281633 /* ViewModel */,
-				C69616962881E69700281633 /* View */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		C69616A42881E73C00281633 /* View */ = {
