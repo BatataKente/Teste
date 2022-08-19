@@ -22,6 +22,7 @@ final class FilterScreen: UIViewController {
         view.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
         view.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
         view.setTitleColor(UIColor.white, for: .normal)
+        view.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -32,6 +33,7 @@ final class FilterScreen: UIViewController {
         view.setImage(UIImage(named: ButtonsBravve.xmarkBlue.rawValue), for: .normal)
         view.addTarget(self, action: #selector(exitTap), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
        return view
     }()
     

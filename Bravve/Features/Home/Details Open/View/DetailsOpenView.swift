@@ -627,6 +627,8 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         
         pageControl.currentPage = indexPath.row
         
+        pageControl.currentPage = indexPath.row
+        
         return cell ?? UICollectionViewCell()
     }
 }
