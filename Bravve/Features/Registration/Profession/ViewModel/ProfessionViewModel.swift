@@ -9,6 +9,26 @@ import UIKit
 
 class ProfessionViewModel {
     
+    func addingJobs() -> [String]{
+        var jobs: [String] = []
+        
+        for i in 1...20 {
+            jobs.append("\(i)")
+        }
+        
+        return jobs
+    }
+    
+    func addingWorkModels() -> [String]{
+        var jobs: [String] = []
+        
+        for i in 1...20 {
+            jobs.append("\(i)")
+        }
+        
+        return jobs
+    }
+    
     let networkManager =  NetworkManager()
     
     func selectAreaMenu(label: UILabel, button: UIButton) {

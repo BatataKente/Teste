@@ -13,6 +13,14 @@ extension UIScrollView {
 /// - Parameter views: Views to set in the list
     func turnIntoAList(_ views: [UIView]) {
         
+        if self.subviews.count > 0 {
+            
+            for subview in self.subviews {
+                
+                subview.removeFromSuperview()
+            }
+        }
+        
         let view = UIView()
         self.addSubview(view)
         

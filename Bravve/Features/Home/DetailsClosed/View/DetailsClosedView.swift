@@ -514,6 +514,13 @@ class DetailsClosedView: UIViewController {
         reserveButton.setToBottomButtonDefaultAbove("Reservar",
                                                     backgroundColor: .buttonPink,
                                                     above: tabBar)
+        reserveButton.addTarget(self, action: #selector(reserveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func reserveButtonTapped(){
+        let reserveViewController = WorkPassBookingView()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
     }
     
     private func setupConstraints() {

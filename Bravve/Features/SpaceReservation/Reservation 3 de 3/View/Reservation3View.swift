@@ -291,6 +291,7 @@ final class ReservationsThreeViewController: UIViewController {
             numberCardLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
            
         numberCardTextfield.isHidden = false
+        numberCardTextfield.becomeFirstResponder()
         
     
     }
@@ -366,6 +367,7 @@ final class ReservationsThreeViewController: UIViewController {
             ccValidateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
         
         ccValidateExpirationTextfield.isHidden = false
+        ccValidateExpirationTextfield.becomeFirstResponder()
         
     }
     
@@ -423,6 +425,7 @@ final class ReservationsThreeViewController: UIViewController {
             sourceSecurityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
         
         sourceSecurityTextfield.isHidden = false
+        sourceSecurityTextfield.becomeFirstResponder()
         
     }
     
@@ -514,6 +517,7 @@ final class ReservationsThreeViewController: UIViewController {
            
 
         countryField.isHidden = false
+        countryField.becomeFirstResponder()
         
     }
     
@@ -580,6 +584,7 @@ final class ReservationsThreeViewController: UIViewController {
             nameHolderLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
         
         nameHolderTextfield.isHidden = false
+        nameHolderTextfield.becomeFirstResponder()
     }
     
     
@@ -640,13 +645,19 @@ final class ReservationsThreeViewController: UIViewController {
            
 
         cpfTextfield.isHidden = false
+        cpfTextfield.becomeFirstResponder()
         
     }
     
     //MARK: FinishButton
     lazy var finishButton = UIButton()
         
-    
+    @objc func finishButtonTapped(){
+        print("Falta a tela")
+//        let reserveViewController = WorkPassBookingView()
+//        reserveViewController.modalPresentationStyle = .fullScreen
+//        present(reserveViewController, animated: true)
+    }
     
         //MARK: SetupConstrains
         private func setupConstrains() {

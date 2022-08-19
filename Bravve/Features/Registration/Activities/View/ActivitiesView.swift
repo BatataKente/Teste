@@ -21,14 +21,44 @@ class ActivitiesView: UIViewController {
                                                       IconsBravve.noteGray.rawValue,
                                                       IconsBravve.hobbiesGray.rawValue,
                                                       IconsBravve.activitiesBlue.rawValue])
+        
+        let tripleDismissHandler = {(action: UIAction) in
+            if let hobbiesView = self.presentingViewController,
+               let professionView = hobbiesView.presentingViewController,
+               let photoView = professionView.presentingViewController{
+                
+                hobbiesView.view.isHidden = true
+                professionView.view.isHidden = true
+                photoView.dismiss(animated: false)
+            }
+        }
+        
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let professionView = self.presentingViewController,
+               let photoView = professionView.presentingViewController {
+                
+                professionView.view.isHidden = true
+                photoView.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[2].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
         return buttons
     }()
     
     lazy var progressBarStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = CGFloat(8).generateSizeForScreen
         return stackView
     }()
+    
     
     
     let infoLabel: UILabel = {
@@ -49,40 +79,33 @@ class ActivitiesView: UIViewController {
     }()
     
     
-    lazy var hobbiesButtons: [UIButton] = {
-           var hobbiesButtons = [UIButton]()
-        hobbiesButtons = createCapsuleButtons(["Tecnologia", "Empreendedorismo", "Ciência", "Cultura", "Inovação", "Investimentos", "Networking", "ESG", "Blockchain", "Startups", "AI", "Finanças"], ColorsBravve.capsuleButton)
-        
-        for hobbiesButton in hobbiesButtons {
-            hobbiesButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        }
-        return hobbiesButtons
-        
-    }()
     
+    lazy var interestsButtons: [UIButton] = []
+        
     
-    lazy var hobbiesStackView: UIStackView = {
-        let line1 = UIStackView(arrangedSubviews: [hobbiesButtons[0], hobbiesButtons[1]])
-        line1.axis = .horizontal
-        line1.spacing = CGFloat(4).generateSizeForScreen
-
-        let line2 = UIStackView(arrangedSubviews: [hobbiesButtons[2], hobbiesButtons[3], hobbiesButtons[4]])
-        line2.axis = .horizontal
-        line2.spacing = CGFloat(4).generateSizeForScreen
-
-        let line3 = UIStackView(arrangedSubviews: [hobbiesButtons[5], hobbiesButtons[6], hobbiesButtons[7]])
-        line3.axis = .horizontal
-        line3.spacing = CGFloat(4).generateSizeForScreen
-
-        let line4 = UIStackView(arrangedSubviews: [hobbiesButtons[8], hobbiesButtons[9]])
-        line4.axis = .horizontal
-        line4.spacing = CGFloat(4).generateSizeForScreen
-        
-        let line5 = UIStackView(arrangedSubviews: [hobbiesButtons[10], hobbiesButtons[11]])
-        line4.axis = .horizontal
-        line4.spacing = CGFloat(4).generateSizeForScreen
-        
-        let stackView = UIStackView(arrangedSubviews: [line1, line2, line3, line4, line5])
+    lazy var interestsStackView: UIStackView = {
+//        let line1 = UIStackView(arrangedSubviews: [interestsButtons[0], interestsButtons[1]])
+//        line1.axis = .horizontal
+//        line1.spacing = CGFloat(4).generateSizeForScreen
+//
+//        let line2 = UIStackView(arrangedSubviews: [interestsButtons[2], interestsButtons[3], interestsButtons[4]])
+//        line2.axis = .horizontal
+//        line2.spacing = CGFloat(4).generateSizeForScreen
+//
+//        let line3 = UIStackView(arrangedSubviews: [interestsButtons[5], interestsButtons[6], interestsButtons[7]])
+//        line3.axis = .horizontal
+//        line3.spacing = CGFloat(4).generateSizeForScreen
+//
+//        let line4 = UIStackView(arrangedSubviews: [interestsButtons[8], interestsButtons[9]])
+//        line4.axis = .horizontal
+//        line4.spacing = CGFloat(4).generateSizeForScreen
+//
+//        let line5 = UIStackView(arrangedSubviews: [interestsButtons[10], interestsButtons[11]])
+//        line4.axis = .horizontal
+//        line4.spacing = CGFloat(4).generateSizeForScreen
+//
+//        let stackView = UIStackView(arrangedSubviews: [line1, line2, line3, line4, line5])
+        let stackView = UIStackView(arrangedSubviews: interestsButtons)
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = CGFloat(12).generateSizeForScreen
@@ -90,8 +113,19 @@ class ActivitiesView: UIViewController {
         return stackView
     }()
     
-    
     var arrayItems: [String] = []
+    var interestArray: [String] = []
+    let networkManager = NetworkManager()
+       
+    override func viewDidLoad() {
+
+        setupView()
+        setupDefaults()
+        setupConstraints()
+        activeButton()
+        interestActivities()
+        print(interestArray)
+    }
     
     @objc func buttonTapped(button: UIButton) {
         if arrayItems.count >= 3 {
@@ -102,7 +136,7 @@ class ActivitiesView: UIViewController {
                 let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
                 arrayItems = filteredArray
             } else {
-                print("Escolha no máximo 3 Hobbies")
+                print("Escolha no máximo 3 interesses")
             }
         } else {
             button.isSelected.toggle()
@@ -137,18 +171,26 @@ class ActivitiesView: UIViewController {
         print("Pulando tela")
     }
     
-    
-    override func viewDidLoad() {
-
-        setupView()
-        setupDefaults()
-        setupConstraints()
-        activeButton()
+    func interestActivities() {
+        networkManager.getDataArray(endpoint: .usersInterests) { (interestActivities: [Interests]?) in
+            guard let interestActivities = interestActivities else {
+                return
+            }
+            for interestActivity in interestActivities {
+                self.interestArray.append(interestActivity.name ?? "")
+                print(self.interestArray)
+            }
+            self.interestsButtons = self.createCapsuleButtons(self.interestArray, ColorsBravve.capsuleButton)
+            for InterestButton in self.interestsButtons {
+                InterestButton.addTarget(self, action: #selector(self.buttonTapped), for: .touchUpInside)
+            }
+            self.interestsStackView.addArrangedSubviews(self.interestsButtons)
+        }
     }
     
     func setupView() {
             
-        view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
+        view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, interestsStackView, continueButton])
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         let handler = {(action: UIAction) in
@@ -190,8 +232,8 @@ class ActivitiesView: UIViewController {
     
     private func setHobbiesStackConstraints() {
         let constraint = [
-            hobbiesStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
-            hobbiesStackView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
+            interestsStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
+            interestsStackView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
         ]
         constraint.forEach { item in
             item.isActive = true

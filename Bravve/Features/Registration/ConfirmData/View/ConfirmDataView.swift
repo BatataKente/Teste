@@ -27,6 +27,50 @@ class ConfirmDataView: UIViewController {
             IconsBravve.padlockGray.rawValue,
             IconsBravve.pencilBlue.rawValue
         ])
+        let fourDismissHandler = {(action: UIAction) in
+            if let passwordView = self.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController{
+                
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let tripleDismissHandler = {(action: UIAction) in
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController{
+                
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: fourDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
+        buttons[2].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[3].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
+        
         return buttons
     }()
     

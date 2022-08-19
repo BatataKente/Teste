@@ -26,8 +26,13 @@ class Reservas2: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc func backButtonTapped(){
+        self.dismiss(animated: true)
+    }
     
     private let siteNameLabel: UILabel = {
         let label = UILabel()
@@ -351,9 +356,15 @@ class Reservas2: UIViewController {
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return button
     }()
     
+    @objc func confirmButtonTapped(){
+        let reserveViewController = ReservationsThreeViewController()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -59,6 +59,7 @@ extension PasswordView: UITextFieldDelegate {
     }
     
     func addTargets() {
+
         
         progressBarButtons[0].addTarget(self, action: #selector(actionButtonName), for: .touchUpInside)
         progressBarButtons[1].addTarget(self, action: #selector(actionButtonPhone), for: .touchUpInside)

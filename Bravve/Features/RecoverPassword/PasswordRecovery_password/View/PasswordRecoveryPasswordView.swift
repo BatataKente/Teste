@@ -20,23 +20,15 @@ class PasswordRecoveryPassword: UIViewController {
     
     private let way = UIImageView()
     
-    private let bravveIcon = UIImageView()
-    
-    private let backButton = UIButton()
-    
     let registerButton = UIButton()
     
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
-        
-        let buttons = createProgressBarButtons([IconsBravve.emailGray.rawValue,
-                                                IconsBravve.padlockBlue.rawValue])
-        buttons[1].setTitle("  Recuperação de senha", for: .normal)
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = CGFloat(7).generateSizeForScreen
-        
-        return (stack: stackView,
-                buttons: buttons)
+    private lazy var buttons: [UIButton] = {
+        let buttons =  createProgressBarButtonsWithoutActions([
+            IconsBravve.emailGray.rawValue,
+            IconsBravve.padlockBlue.rawValue
+        ])
+        buttons[1].setTitle("Recuperação de senha", for: .normal)
+        return buttons
     }()
     
     private let sectionLabel: UILabel = {
@@ -97,7 +89,7 @@ class PasswordRecoveryPassword: UIViewController {
         
         view.setToDefaultBackgroundColor()
         
-        view.addSubviews([way, bravveIcon, backButton, progressBarStackView.stack, sectionLabel, passwordTextFieldClass.shadow, passwordStackView, confirmPasswordTextFieldClass.shadow, confirmPasswordStackView, leftStackView, rightStackView, registerButton])
+        view.addSubviews([way, sectionLabel, passwordTextFieldClass.shadow, passwordStackView, confirmPasswordTextFieldClass.shadow, confirmPasswordStackView, leftStackView, rightStackView, registerButton])
         
         setupDefaults()
         setupConstraints()
@@ -112,17 +104,17 @@ class PasswordRecoveryPassword: UIViewController {
         
         registerButton.addTarget(self, action: #selector(actionRegisterButton), for: .touchUpInside)
         
+        buttons[0].addTarget(self, action: #selector(actionButtonEmail), for: .touchUpInside)
+        
     }
-    
     
     /// Set the default layout of the top elements and the bottom button of the view
     private func setupDefaults() {
         way.setWayToDefault(.wayPassword)
-        backButton.setToBackButtonDefault(.backPink) {_ in
-            
+
+        view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
             self.dismiss(animated: true)
         }
-        bravveIcon.setLogoToDefault()
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }
     
@@ -130,15 +122,11 @@ class PasswordRecoveryPassword: UIViewController {
     /// Set the constraints of the view
     private func setupConstraints() {
         
-        progressBarStackView.stack.constraintOutsideTo(.top, bravveIcon, CGFloat(40).generateSizeForScreen)
-        progressBarStackView.stack.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        progressBarStackView.stack.heightAnchorInSuperview()
-        
-        sectionLabel.constraintOutsideTo(.top, progressBarStackView.stack, CGFloat(40).generateSizeForScreen)
+        sectionLabel.constraintInsideTo(.top, view, CGFloat(250).generateSizeForScreen)
         sectionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         sectionLabel.constraintInsideTo(.width, view.safeAreaLayoutGuide, CGFloat(331).generateSizeForScreen)
         
-        passwordStackView.constraintOutsideTo(.top, sectionLabel, CGFloat(10).generateSizeForScreen)
+        passwordStackView.constraintOutsideTo(.top, sectionLabel, CGFloat(15).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         passwordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
         passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)

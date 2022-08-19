@@ -51,7 +51,7 @@ class CustomTextField: UIStackView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.isSecureTextEntry = true
         
-        shadow.backgroundColor = .blue
+        shadow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         shadow.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         shadow.isHidden = true
         
