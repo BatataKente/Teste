@@ -15,6 +15,7 @@ public enum IconsBravve: String {
     case activitiesBlue = "activitiesBlue"
     case activitiesGray = "activitiesGray"
     case book = "book"
+    case calendar = "calendar"
     case calendarBlue = "calendarBlue"
     case calendarGray = "calendarGray"
     case cellBlue = "cellBlue"
