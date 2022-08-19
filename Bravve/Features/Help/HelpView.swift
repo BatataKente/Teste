@@ -1134,9 +1134,7 @@ class HelpViewController: UIViewController {
     
     private func setupDefaults() {
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes") {_ in
-            let navBar = HelpViewController()
-            navBar.modalPresentationStyle = .fullScreen
-            self.present(navBar, animated: false)
+            self.dismiss(animated: true)
         }
     }
     
