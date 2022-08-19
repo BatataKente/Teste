@@ -9,6 +9,7 @@ import Foundation
 
 extension String {
     
+/// A variable that returns whether it is a CPF or not
     var isCPF: Bool {
         
         let numbers = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
@@ -45,8 +46,8 @@ extension String {
         return temp1 == d1 && temp2 == d2
     }
     
-    
     func formatMask(mask: String) -> String {
+        
         let cleanField = components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         
         var result = ""
@@ -66,6 +67,7 @@ extension String {
     }
     
     func clearFormatMask() -> String{
+        
         return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
 }
