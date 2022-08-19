@@ -9,7 +9,6 @@ import UIKit
 
 class TokenView: UIViewController {
     
-    
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
@@ -171,8 +170,6 @@ class TokenView: UIViewController {
         return button
     }()
     
-    
-    
     override func viewDidLoad() {
         
         setupView()
@@ -225,32 +222,6 @@ class TokenView: UIViewController {
         textField.layer.cornerRadius = CGFloat(5).generateSizeForScreen
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text?.count == 1{
-            textField.endEditing(true)
-            textField.resignFirstResponder()
-            
-            switch textField.tag{
-            case 1:
-                code2TextField.becomeFirstResponder()
-            case 2:
-                code3TextField.becomeFirstResponder()
-            case 3:
-                code4TextField.becomeFirstResponder()
-            case 4:
-                code5TextField.becomeFirstResponder()
-            case 5:
-                code6TextField.becomeFirstResponder()
-            case 6:
-                code2TextField.resignFirstResponder()
-            default:
-                textField.endEditing(true)
-                textField.resignFirstResponder()
-            }
-        }
-
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         textField.layer.borderWidth = 0
@@ -286,7 +257,6 @@ class TokenView: UIViewController {
         setResendCodeButtonConstraints()
     }
     
-    
     private func setMessageSentLabelConstraints() {
         
         let constraint = [
@@ -311,7 +281,6 @@ class TokenView: UIViewController {
             item.isActive = true
         }
     }
-    
     
     private func setInsertCodeLabelConstraints() {
         
