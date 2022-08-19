@@ -9,40 +9,7 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
-    init(_ willLoad: Bool = false) {
-        
-        imageView.isHidden = willLoad
-        coverView.isHidden = willLoad
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-
-        super.viewDidDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
-    
     let sessionManager = SessionManager()
-    
-    override func viewDidLoad() {
-
-        super.viewDidLoad()
-        
-        setupView()
-        setupConstraints()
-        setupDefaults()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
     
     private let cellIdentifier = "Cell"
     
@@ -51,8 +18,6 @@ class HomeOpenView: UIViewController {
     private var cells: [Space] = []
      
     private let titleLabel = UILabel()
-    
-    private let customBar = UIView()
     
     private lazy var filterStackView: UIStackView = {
         
@@ -128,32 +93,139 @@ class HomeOpenView: UIViewController {
         return coverView
     }()
     
+    private lazy var leftDropDown: UIScrollView = {
+
+        let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                      width: view.frame.size.width/5,
+                                                      height: view.frame.size.height/3))
+        leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        leftDropDown.delegate = self
+
+        return leftDropDown
+    }()
     
-    private func setupView() {
-        
-        view.addSubviews([stackView, customBar, tabBar, coverView, imageView])
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        filterButtons = createCapsuleButtons(seletedFilterItems)
-        
-        filterStackView.addArrangedSubviews(filterButtons)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
+    private lazy var rightDropDown: UIScrollView = {
+
+        let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                       width: view.frame.size.width/2,
+                                                       height: view.frame.size.height/2.5))
+        rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        rightDropDown.delegate = self
+
+        return rightDropDown
+    }()
     
-    private func setupDefaults() {
+    private lazy var homeOpenViewModel: HomeOpenViewModel = {
         
-        view.setToDefaultBackgroundColor()
+        let homeOpenViewModel = HomeOpenViewModel(customBarWithFilter)
+        return homeOpenViewModel
+    }()
+    
+    private let customBar = UIView()
+    
+    private lazy var customBarWithFilter: CustomBarWithFilter = {
         
-        let customBar = customBar.setToDefaultCustomBarWithFilter() {_ in
+        let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
 
             let filterView = FilterScreen()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
         
-        let homeOpenViewModel = HomeOpenViewModel(customBar)
+        return customBarWithFilter
+    }()
+    
+    init(_ willLoad: Bool = false) {
+        
+        imageView.isHidden = willLoad
+        coverView.isHidden = willLoad
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override func viewDidLoad() {
+
+        super.viewDidLoad()
+        
+        setupView()
+        setupConstraints()
+        setupDefaults()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        reduceDropDowns()
+    }
+    
+    private func setupView() {
+        
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        filterButtons = createCapsuleButtons(seletedFilterItems)
+        
+        for button in filterButtons {
+            
+            let handler = {(action: UIAction) in
+                
+                self.reduceDropDowns()
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+        }
+        
+        filterStackView.addArrangedSubviews(filterButtons)
+        tabBar.selectedItem = tabBar.items?[0]
+        
+        let dropDownsY = CGFloat(100).generateSizeForScreen
+        
+        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
+                                         y: dropDownsY)
+        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
+                                          y: dropDownsY)
+        
+        let leftHandler = {(action: UIAction) in
+            
+            self.customBarWithFilter.rightButton.isSelected = false
+            self.rightDropDown.frame.size = .zero
+        }
+        
+        let rightHandler = {(action: UIAction) in
+            
+            self.customBarWithFilter.leftButton.isSelected = false
+            self.leftDropDown.frame.size = .zero
+        }
+        
+        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
+        customBarWithFilter.leftButton.addSubWindow(leftDropDown,
+                                                    origin:   leftDropDownOrigin)
+        
+        customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
+        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
+                                                     origin: rightDropDownOrigin)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
+    private func setupDefaults() {
+        
+        view.setToDefaultBackgroundColor()
         
         homeOpenViewModel.delegate = self
         homeOpenViewModel.manageCustomBar()
@@ -185,6 +257,11 @@ class HomeOpenView: UIViewController {
 }
 
 extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        reduceDropDowns()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -223,6 +300,20 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension HomeOpenView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
+    }
+}
+
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
@@ -237,8 +328,6 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
             detalhesAbertoView.modalPresentationStyle = .fullScreen
             self.present(detalhesAbertoView, animated: false)
         }
-        
-        
     }
 }
 
@@ -255,5 +344,21 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         self.coverView.alpha = alpha
         self.imageView.alpha = alpha
     }
+    
+    func reduceDropDowns() {
+        
+        self.customBarWithFilter.leftButton.isSelected = false
+        leftDropDown.frame.size = .zero
+        rightDropDown.frame.size = .zero
+    }
+    
+    func setupLeftDropDown(_ buttons: [UIButton]) {
+        
+        leftDropDown.turnIntoAList(buttons)
+    }
+    
+    func setupRightDropDown(_ buttons: [UIButton]){
+        
+        rightDropDown.turnIntoAList(buttons)
+    }
 }
-
