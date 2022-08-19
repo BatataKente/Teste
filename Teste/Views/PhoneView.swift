@@ -206,7 +206,6 @@ class PhoneView: UIViewController {
                                                            phone_number: "",
                                                            email: "",
                                                            password: "")) {
-        
         self.userToRegister = userToRegister
         
         super.init(nibName: nil, bundle: nil)

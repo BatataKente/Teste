@@ -251,6 +251,7 @@ class NomeView: UIViewController {
         
     @objc func changeScreen() {
         
+        print("$$$$$$$$$$\(userToRegister)")
         userToRegister.name = viewElements.rightTextField.text ?? ""
         
         let phoneView = PhoneView(userToRegister)

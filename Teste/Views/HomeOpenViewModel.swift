@@ -54,6 +54,9 @@ class HomeOpenViewModel {
                     
                     parameters = SpaceListParameters(space_state_id: state.id, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)
                     
+                    self.customBarWithFilter.leftButton.isEnabled = false
+                    self.customBarWithFilter.rightButton.isEnabled = true
+                    
                     self.sessionManager.getOpenDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
                         
                         guard let cities = cities else {return}
@@ -69,7 +72,10 @@ class HomeOpenViewModel {
                             cityButton.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                                              size: CGFloat(15).generateSizeForScreen)
                             let cityHandler = {(action: UIAction) in
-
+                                
+                                self.customBarWithFilter.leftButton.isEnabled = true
+                                self.customBarWithFilter.rightButton.isEnabled = false
+                                
                                 self.customBarWithFilter.cityLabel.font = smallFont
                                 self.customBarWithFilter.cityChosedLabel.text = cityButton.currentTitle
                                 self.customBarWithFilter.cityChosedLabel.isHidden = false

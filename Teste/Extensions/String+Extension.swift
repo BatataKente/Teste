@@ -9,6 +9,7 @@ import Foundation
 
 extension String {
     
+/// A variable that returns whether it is a CPF or not
     var isCPF: Bool {
         
         let numbers = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()

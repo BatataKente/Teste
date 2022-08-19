@@ -9,40 +9,7 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
-    init(_ willLoad: Bool = false) {
-        
-        imageView.isHidden = willLoad
-        coverView.isHidden = willLoad
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-
-        super.viewDidDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
-    
     let sessionManager = SessionManager()
-    
-    override func viewDidLoad() {
-
-        super.viewDidLoad()
-        
-        setupView()
-        setupConstraints()
-        setupDefaults()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
     
     private let cellIdentifier = "Cell"
     
@@ -131,6 +98,7 @@ class HomeOpenView: UIViewController {
         let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
                                                       width: view.frame.size.width/5,
                                                       height: view.frame.size.height/3))
+        leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         leftDropDown.delegate = self
 
         return leftDropDown
@@ -141,6 +109,7 @@ class HomeOpenView: UIViewController {
         let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
                                                        width: view.frame.size.width/2,
                                                        height: view.frame.size.height/2.5))
+        rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
 
         return rightDropDown
@@ -165,6 +134,34 @@ class HomeOpenView: UIViewController {
         
         return customBarWithFilter
     }()
+    
+    init(_ willLoad: Bool = false) {
+        
+        imageView.isHidden = willLoad
+        coverView.isHidden = willLoad
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override func viewDidLoad() {
+
+        super.viewDidLoad()
+        
+        setupView()
+        setupConstraints()
+        setupDefaults()
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -192,23 +189,46 @@ class HomeOpenView: UIViewController {
         
         filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
+        
+        let dropDownsY = CGFloat(100).generateSizeForScreen
+        
+        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
+                                         y: dropDownsY)
+        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
+                                          y: dropDownsY)
+        
+        let leftHandler = {(action: UIAction) in
+            
+            self.customBarWithFilter.rightButton.isSelected = false
+            self.rightDropDown.frame.size = .zero
+        }
+        
+        let rightHandler = {(action: UIAction) in
+            
+            self.customBarWithFilter.leftButton.isSelected = false
+            self.leftDropDown.frame.size = .zero
+        }
+        
+        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
+        customBarWithFilter.leftButton.addSubWindow(leftDropDown,
+                                                    origin:   leftDropDownOrigin)
+        
+        customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
+        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
+                                                     origin: rightDropDownOrigin)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
     }
     
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
         
-        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
-                                         y: view.frame.size.height * 0.15)
-        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
-                                          y: view.frame.size.height * 0.15)
-        
         homeOpenViewModel.delegate = self
         homeOpenViewModel.manageCustomBar()
-        
-        customBarWithFilter.leftButton.addSubWindow(leftDropDown, origin: leftDropDownOrigin)
-        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
-                                                     origin: rightDropDownOrigin)
     }
     
     private func setupConstraints() {
@@ -282,11 +302,41 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
 
 extension HomeOpenView: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
         
-        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
-        
-        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            if #available(iOS 13, *) {
+                
+//                print((scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).frame.origin.x)
+                
+                
+                for subview in scrollView.subviews {
+                    
+                    print(subview.frame.origin.x)
+                    
+                    if subview.frame.origin.x != 0 {
+                        
+                        subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+                    }
+                }
+                
+//                (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = .green
+                
+                //verticalIndicator
+
+    //                (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = .blue //horizontalIndicator
+
+            }
+//            else {
+//
+//                if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
+//
+//                    verticalIndicator.backgroundColor = .systemRed
+//                }
+//                if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
+//
+//                    horizontalIndicator.backgroundColor = .systemPink
+//                }
+//            }
     }
 }
 
@@ -294,9 +344,16 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
         
-        let detalhesAbertoView = OpenDetailsView(cells[indexPath.row])
-        detalhesAbertoView.modalPresentationStyle = .fullScreen
-        present(detalhesAbertoView, animated: false)
+//        guard let spaceId = cells[indexPath.row].id else { return }
+//
+//        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
+//            guard let space = space else {
+//                return
+//            }
+//            let detalhesAbertoView = OpenDetailsView(space)
+//            detalhesAbertoView.modalPresentationStyle = .fullScreen
+//            self.present(detalhesAbertoView, animated: false)
+//        }
     }
 }
 
@@ -331,4 +388,3 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         rightDropDown.turnIntoAList(buttons)
     }
 }
-
