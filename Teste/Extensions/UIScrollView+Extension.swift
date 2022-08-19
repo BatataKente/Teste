@@ -35,6 +35,7 @@ extension UIScrollView {
         
         let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .vertical
+        stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stackView.setToDefaultBackgroundColor()
         
         view.addSubview(stackView)
