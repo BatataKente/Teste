@@ -13,14 +13,11 @@ extension UIScrollView {
 /// - Parameter views: Views to set in the list
     func turnIntoAList(_ views: [UIView]) {
         
-        if self.subviews.count > 1 {
+        for subview in self.subviews {
             
-            for subview in self.subviews {
+            if subview.frame.origin.x == 0 {
                 
-                if subview.alpha == 1 {
-                    
-                    subview.removeFromSuperview()
-                }
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
             }
         }
         
