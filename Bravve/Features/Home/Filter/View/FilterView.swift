@@ -564,13 +564,17 @@ final class FilterScreen: UIViewController {
     
     //MARK: - exitTap
     @objc private func exitTap() {
-        print("exitTap")
+        self.dismiss(animated: true)
     }
     
     //MARK: - clearTap
     @objc private func clearTap() {
         print("tapClear")
         
+    }
+    
+    @objc private func filterButtonTapped(){
+        self.dismiss(animated: true)
     }
     
     //MARK: - capacityTap
