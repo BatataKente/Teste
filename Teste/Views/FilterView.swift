@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-
-final class FilterScreen: UIViewController {
+final class FilterView: UIViewController {
     
     let sessionManager = SessionManager()
     
@@ -124,14 +123,45 @@ final class FilterScreen: UIViewController {
     //MARK: capacityButton
     private lazy var capacityButton: UIButton = {
         let view = UIButton()
-        view.setImage(UIImage(named: "arrowUp"), for: .selected)
-        view.setImage(UIImage(named: "arrowDown"), for: .normal)
-        view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
+//        view.setImage(UIImage(named: "arrowUp"), for: .selected)
+        view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        
+        let origin = CGPoint(x: 20,
+                             y: 187)
+        
+        view.addSubWindow(capacityDropDown, origin: origin)
+//        view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     
+    //MARK: capacityDropDown
+    private lazy var capacityDropDown: UIScrollView = {
+        
+        let capacityDropDown = UIScrollView(frame: CGRect(x: 0,
+                                                          y: 0,
+                                                          width: 121, height: 180))
+        
+        var buttons = [UIButton]()
+        let capacities = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16+"]
+        
+        for capacity in capacities {
+            
+            let button = UIButton()
+            button.setTitle(capacity, for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                 for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                             size: CGFloat(14).generateSizeForScreen)
+            
+            buttons.append(button)
+        }
+        capacityDropDown.turnIntoAList(buttons)
+        capacityDropDown.delegate = self
+        
+        return capacityDropDown
+    }()
     
     // NÃO TEM LINE NO ENUM
     //MARK: lineImage
@@ -572,6 +602,7 @@ final class FilterScreen: UIViewController {
                                 roomsStackContract,
                                 lineImage7,
                                 filterButton,
+                                capacityDropDown,
                                ])
         
         tabBar.selectedItem = tabBar.items?[0]
@@ -943,6 +974,16 @@ final class FilterScreen: UIViewController {
     
 }
 
-
-
-
+extension FilterView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
+    }
+}

@@ -127,7 +127,7 @@ class HomeOpenView: UIViewController {
         
         let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
 
-            let filterView = FilterScreen()
+            let filterView = FilterView()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
