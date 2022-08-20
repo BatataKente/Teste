@@ -32,11 +32,11 @@
 		140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */; };
 		140ED61B28ADA3FF00AC5B92 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 140ED61A28ADA3FF00AC5B92 /* SDWebImage */; };
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
-		1410B92528A1740400C36902 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92428A1740400C36902 /* FilterScreen.swift */; };
 		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
 		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
 		142367CC28B00CDD0080738E /* SingleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142367CB28B00CDD0080738E /* SingleBook.swift */; };
+		143054AD28B1671900A8065C /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143054AC28B1671900A8065C /* FilterView.swift */; };
 		143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */; };
 		143E621328AD04B800AD6BEA /* HomeOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
@@ -130,11 +130,11 @@
 		14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveClosedTabBar.swift; sourceTree = "<group>"; };
 		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
-		1410B92428A1740400C36902 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
 		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
 		142367CB28B00CDD0080738E /* SingleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBook.swift; sourceTree = "<group>"; };
+		143054AC28B1671900A8065C /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenViewModel.swift; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
@@ -281,7 +281,6 @@
 				145B07DE28AABE6900ABCCF0 /* PhoneView.swift */,
 				145B07E428AABED600ABCCF0 /* EmailViewModel.swift */,
 				145B07E028AABEAD00ABCCF0 /* EmailView.swift */,
-				1410B92428A1740400C36902 /* FilterScreen.swift */,
 				14CBDBDB2889B7ED00EA8EDD /* FotoView.swift */,
 				14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */,
 				CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */,
@@ -301,6 +300,7 @@
 				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
 				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				142367CB28B00CDD0080738E /* SingleBook.swift */,
+				143054AC28B1671900A8065C /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -534,10 +534,10 @@
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14BDBC1828ABDF12004C32BF /* String+Extension.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
-				1410B92528A1740400C36902 /* FilterScreen.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
 				CFBF085D28A2810600D39DCF /* ModelSubscriptionsV1.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
+				143054AD28B1671900A8065C /* FilterView.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
