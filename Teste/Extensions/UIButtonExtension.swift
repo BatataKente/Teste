@@ -44,7 +44,7 @@ extension UIButton {
                                                  attributes: attribute as [NSAttributedString.Key : Any])
         
         self.configuration?.attributedTitle = AttributedString(attributedTitle)
-        
+        self.titleLabel?.numberOfLines = 1
         self.configuration?.background.backgroundColor = UIColor(named: backgroundColor.rawValue)
         if backgroundColor == .capsuleButton {
 
