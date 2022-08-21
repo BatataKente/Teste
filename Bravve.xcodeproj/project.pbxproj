@@ -752,9 +752,9 @@
 		C69616992881E6AF00281633 /* PasswordRecovery_email */ = {
 			isa = PBXGroup;
 			children = (
-				C69616A62881E74700281633 /* ViewModel */,
-				C69616A52881E74200281633 /* Model */,
-				C69616A42881E73C00281633 /* View */,
+				C69616AB2881E76C00281633 /* PasswordRecoveryEmailViewModel.swift */,
+				C69616A92881E76000281633 /* PasswordRecoveryEmailModel.swift */,
+				C69616A72881E75500281633 /* PasswordRecoveryEmailView.swift */,
 			);
 			path = PasswordRecovery_email;
 			sourceTree = "<group>";
@@ -762,9 +762,9 @@
 		C696169A2881E6D100281633 /* PasswordRecovery_password */ = {
 			isa = PBXGroup;
 			children = (
-				C69616AF2881E77D00281633 /* ViewModel */,
-				C69616AE2881E77800281633 /* Model */,
-				C69616AD2881E77300281633 /* View */,
+				C69616B42881E79E00281633 /* PasswordRecoveryPasswordViewModel.swift */,
+				C69616B22881E79400281633 /* PasswordRecoveryPasswordModel.swift */,
+				C69616B02881E78A00281633 /* PasswordRecoveryPasswordView.swift */,
 			);
 			path = PasswordRecovery_password;
 			sourceTree = "<group>";
@@ -772,9 +772,9 @@
 		C696169B2881E6D800281633 /* PasswordRecovery_sms */ = {
 			isa = PBXGroup;
 			children = (
-				C69616B82881E7B000281633 /* ViewModel */,
-				C69616B72881E7AB00281633 /* Model */,
-				C69616B62881E7A500281633 /* View */,
+				C69616BD2881E7D100281633 /* PasswordRecoverySMSViewModel.swift */,
+				C69616BB2881E7C700281633 /* PasswordRecoverySMSModel.swift */,
+				C69616B92881E7BD00281633 /* PasswordRecoverySMSView.swift */,
 			);
 			path = PasswordRecovery_sms;
 			sourceTree = "<group>";
@@ -782,107 +782,11 @@
 		C696169C2881E6E100281633 /* RecoverPassword_modal */ = {
 			isa = PBXGroup;
 			children = (
-				C69616C12881E7E100281633 /* ViewModel */,
-				C69616C02881E7DD00281633 /* Model */,
-				C69616BF2881E7D800281633 /* View */,
-			);
-			path = RecoverPassword_modal;
-			sourceTree = "<group>";
-		};
-		C69616A42881E73C00281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69616A72881E75500281633 /* PasswordRecoveryEmailView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69616A52881E74200281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69616A92881E76000281633 /* PasswordRecoveryEmailModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69616A62881E74700281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69616AB2881E76C00281633 /* PasswordRecoveryEmailViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69616AD2881E77300281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69616B02881E78A00281633 /* PasswordRecoveryPasswordView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69616AE2881E77800281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69616B22881E79400281633 /* PasswordRecoveryPasswordModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69616AF2881E77D00281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69616B42881E79E00281633 /* PasswordRecoveryPasswordViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69616B62881E7A500281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69616B92881E7BD00281633 /* PasswordRecoverySMSView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69616B72881E7AB00281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69616BB2881E7C700281633 /* PasswordRecoverySMSModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69616B82881E7B000281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69616BD2881E7D100281633 /* PasswordRecoverySMSViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69616BF2881E7D800281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
+				C69616C62881E80600281633 /* RecoverPasswordModalViewModel.swift */,
+				C69616C42881E7F900281633 /* RecoverPasswordModalModel.swift */,
 				C69616C22881E7EF00281633 /* RecoverPasswordModalView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69616C02881E7DD00281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69616C42881E7F900281633 /* RecoverPasswordModalModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69616C12881E7E100281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69616C62881E80600281633 /* RecoverPasswordModalViewModel.swift */,
-			);
-			path = ViewModel;
+			path = RecoverPassword_modal;
 			sourceTree = "<group>";
 		};
 		C69616C82881E83A00281633 /* Home Open */ = {
