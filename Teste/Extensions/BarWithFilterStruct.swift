@@ -9,6 +9,7 @@ import UIKit
 
 struct CustomBarWithFilter {
     
+    let stackView: UIStackView
     let leftButton: UIButton
     let stateLabel: UILabel
     let stateChosedLabel: UILabel

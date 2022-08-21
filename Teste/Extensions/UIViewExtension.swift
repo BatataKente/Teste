@@ -309,7 +309,8 @@ extension UIView {
         self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
         self.heightAnchorInSuperview(CGFloat(125).generateSizeForScreen)
         
-        return CustomBarWithFilter(leftButton: leftButton,
+        return CustomBarWithFilter(stackView: stackView,
+                                   leftButton: leftButton,
                                    stateLabel: stateLabel,
                                    stateChosedLabel: stateChosedLabel,
                                    rightButton: rightButton,
@@ -505,6 +506,81 @@ extension UIView {
         case "HOTEL": return UIColor(named: ColorsBravve.hotel.rawValue) ?? .black
         case "BOXOFFICE": return UIColor(named: ColorsBravve.boxOffice.rawValue) ?? .black
         default: return .white
+        }
+    }
+}
+
+extension UIView {
+    
+/// This Functions shows an view like a window
+/// - Parameters:
+///   - size: The size of the window
+///   - origin: The origin of the window
+///   - orientation: The orientation to show the window
+    func showLikeAWindow(size: CGSize,
+                         origin: CGPoint,
+                         _ orientation: Orientation = .downRight) {
+        
+        self.frame.origin = origin
+        
+        let timing: (duration: CGFloat,
+                     delay: CGFloat) = (duration: 0.3,
+                                        delay: 0.1)
+        
+        if self.frame.size == .zero {
+            
+            switch orientation {
+                
+                case .downLeft:
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+
+                        self.frame.origin.x -= size.width
+                        self.frame.size = size
+                    }
+                
+                case .downRight:
+                    
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+
+                        self.frame.size = size
+                    }
+                
+                case .upLeft:
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+
+                        self.frame.origin.x -= size.width
+                        self.frame.origin.y -= size.height
+                        self.frame.size = size
+                    }
+                
+                case .upRight:
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+
+                        self.frame.origin.y -= size.height
+                        self.frame.size = size
+                    }
+                
+                default:
+                
+                    UIView.animate(withDuration: timing.duration,
+                                   delay: timing.delay) {
+
+                        self.frame.origin.x -= size.width/2
+                        self.frame.origin.y -= size.height/2
+                        self.frame.size = size
+                    }
+            }
+        }
+        else {
+            
+            self.frame.size = .zero
         }
     }
 }

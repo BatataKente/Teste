@@ -217,13 +217,14 @@ class PhoneView: UIViewController {
     }
     
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
 
         setupView()
         setupDefaults()
         setupTargets()
         setupConstraints()
-
-        super.viewDidLoad()
+        setupDropDown()
     }
 
     private let phoneViewModel = PhoneViewModel()
@@ -234,11 +235,6 @@ class PhoneView: UIViewController {
         phoneViewModel.makePhoneScreen()
 
         view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, scrollView])
-
-        let origin = CGPoint(x: view.frame.size.width*0.23,
-                             y: view.frame.size.height*0.49)
-        
-        viewElements.ddisButton.addSubWindow(scrollView, .downRight, origin: origin)
 
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
@@ -251,6 +247,11 @@ class PhoneView: UIViewController {
         }
 
         view.setToDefaultBackgroundColor()
+    }
+    
+    private func setupDropDown() {
+        
+        viewElements.ddisButton.addSubWindow(scrollView, .downRight)
     }
 
     private func setupDefaults() {
@@ -433,11 +434,15 @@ extension PhoneView: PhoneViewModelProtocol {
 }
 
 extension PhoneView: UIScrollViewDelegate {
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
         
-        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
 }

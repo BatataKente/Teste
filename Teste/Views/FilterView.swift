@@ -34,18 +34,7 @@ final class FilterView: UIViewController {
                                                                    ButtonsBravve.exitGray.rawValue])
     
     //MARK: - filterButton
-    private lazy var filterButton: UIButton = {
-        let view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        view.setTitle("Filtrar", for: .normal)
-        view.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        view.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        view.setTitleColor(UIColor.white, for: .normal)
-        //        view.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        return view
-    }()
-    
+    private lazy var filterButton: UIButton = UIButton()
     
     //MARK: - exitButton
     private lazy var exitButton: UIButton = {
@@ -126,13 +115,6 @@ final class FilterView: UIViewController {
 //        view.setImage(UIImage(named: "arrowUp"), for: .selected)
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
         
-        let origin = CGPoint(x: 20,
-                             y: 187)
-        
-        view.addSubWindow(capacityDropDown, origin: origin)
-//        view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
@@ -154,6 +136,14 @@ final class FilterView: UIViewController {
                                  for: .normal)
             button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
                                              size: CGFloat(14).generateSizeForScreen)
+            
+            let handler = {(action: UIAction) in
+                
+                self.numberLabel.text = button.currentTitle
+                self.capacityDropDown.frame.size = .zero
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
             
             buttons.append(button)
         }
@@ -366,6 +356,7 @@ final class FilterView: UIViewController {
         view.heightAnchor.constraint(equalToConstant: 1500).isActive = true
         setupView()
         setupConstrains()
+        setupDropDown()
     }
     
     //MARK: - setupView
@@ -379,7 +370,7 @@ final class FilterView: UIViewController {
         scrollView.isScrollEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         uiview.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubviews([scrollView,tabBar])
+        view.addSubviews([scrollView, tabBar, filterButton])
         scrollView.addSubviews([uiview,
                                 exitButton,
                                 filterLabel,
@@ -407,12 +398,23 @@ final class FilterView: UIViewController {
                                 typeOfContarctLabel,
                                 roomsStackContract,
                                 lineImage7,
-                                filterButton,
-                                capacityDropDown,
+                                capacityDropDown
                                ])
         
         tabBar.selectedItem = tabBar.items?[0]
+        filterButton.setToBottomButtonDefaultAbove("Filtrar",
+                                                   backgroundColor: .buttonPink,
+                                                   above: tabBar)
+    }
+    
+    private func setupDropDown() {
         
+        let origin = CGPoint(x: CGFloat(self.view.frame.size.width).generateSizeForScreen*0.152/3,
+                             y: CGFloat(self.view.frame.size.height).generateSizeForScreen*0.1633825944162562)
+        
+        capacityButton.addSubWindow(capacityDropDown, origin: origin)
+        capacityButton.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
+        capacityButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     //MARK: - ACTIONS AND METHODS
@@ -642,63 +644,69 @@ final class FilterView: UIViewController {
     
     //MARK: setupConstrains
     private func setupConstrains() {
+        
+        //MARK: scrollView
+        scrollView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
+        scrollView.constraintInsideTo(.leading, view)
+        scrollView.constraintInsideTo(.trailing, view)
+        scrollView.constraintOutsideTo(.bottom, filterButton)
+        
+        //MARK: Filter & Capacity & Clear
+        uiview.constraintInsideTo(.top, scrollView.contentLayoutGuide)
+        uiview.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
+        uiview.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
+        uiview.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
+        uiview.heightAnchorInSuperview(1250)
+        uiview.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        
+        //MARK: exitButton
+        exitButton.constraintInsideTo(.top, uiview)
+        exitButton.constraintInsideTo(.leading, uiview,
+                                      CGFloat(20).generateSizeForScreen)
+        exitButton.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
+        exitButton.constraintOutsideTo(.width, exitButton)
+        
+        //MARK: filterLabel
+        filterLabel.constraintOutsideTo(.top, exitButton,
+                                        CGFloat(19).generateSizeForScreen)
+        filterLabel.constraintInsideTo(.leading, exitButton)
+        
+        //MARK: clearLabel
+        clearButton.constraintInsideTo(.centerY, filterLabel)
+        clearButton.constraintInsideTo(.trailing, uiview,
+                                       CGFloat(35).generateSizeForScreen)
+        
+        //MARK: capacityView
+        capacityView.constraintOutsideTo(.top, filterLabel,
+                                         CGFloat(19).generateSizeForScreen)
+        capacityView.constraintInsideTo(.leading, filterLabel)
+        
+        //MARK: capacityLabel
+        capacityLabel.constraintInsideTo(.top, capacityView,
+                                         CGFloat(12).generateSizeForScreen)
+        capacityLabel.constraintInsideTo(.leading, capacityView,
+                                         CGFloat(16).generateSizeForScreen)
+        capacityLabel.constraintInsideTo(.trailing, capacityView,
+                                         CGFloat(48).generateSizeForScreen)
+        
+        //MARK: numberLabel
+        numberLabel.constraintOutsideTo(.top, capacityLabel,
+                                        CGFloat(7).generateSizeForScreen)
+        numberLabel.constraintInsideTo(.leading, capacityView,
+                                       CGFloat(16).generateSizeForScreen)
+        numberLabel.constraintInsideTo(.bottom, capacityView,
+                                       CGFloat(11).generateSizeForScreen)
+        
+        //MARK: capacityButton
+        capacityButton.constraintInsideTo(.top, capacityView,
+                                          CGFloat(28).generateSizeForScreen)
+        capacityButton.constraintInsideTo(.centerY, capacityView)
+        capacityButton.constraintOutsideTo(.leading, capacityLabel,
+                                           CGFloat(22).generateSizeForScreen)
+        capacityButton.heightAnchorInSuperview(CGFloat(7.66).generateSizeForScreen)
+        capacityButton.constraintOutsideTo(.width, capacityButton, multiplier: 2)
+        
         NSLayoutConstraint.activate([
-            
-            //MARK: scrollView
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            //MARK: Filter & Capacity & Clear
-            uiview.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            uiview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            uiview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            uiview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            uiview.heightAnchor.constraint(equalToConstant: 1250),
-            uiview.widthAnchor.constraint(equalTo: view.widthAnchor),
-            
-            //MARK: exitButton
-            exitButton.topAnchor.constraint(equalTo: uiview.topAnchor, constant: 35),
-            exitButton.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            exitButton.widthAnchor.constraint(equalToConstant: 14),
-            exitButton.heightAnchor.constraint(equalToConstant: 14),
-            
-            //MARK: filterLabel
-            filterLabel.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 19),
-            filterLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            filterLabel.widthAnchor.constraint(equalToConstant: 93),
-            filterLabel.heightAnchor.constraint(equalToConstant: 40),
-            
-            //MARK: clearLabel
-            clearButton.centerYAnchor.constraint(equalTo: filterLabel.centerYAnchor),
-            clearButton.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -35),
-            
-            //MARK: capacityView
-            capacityView.topAnchor.constraint(equalTo: filterLabel.bottomAnchor, constant: 19),
-            capacityView.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            capacityView.widthAnchor.constraint(equalToConstant: 121),
-            capacityView.heightAnchor.constraint(equalToConstant: 60),
-            
-            //MARK: capacityLabel
-            capacityLabel.topAnchor.constraint(equalTo: capacityView.topAnchor, constant: 12),
-            capacityLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
-            capacityLabel.trailingAnchor.constraint(equalTo: capacityView.trailingAnchor, constant: -48),
-            capacityLabel.widthAnchor.constraint(equalToConstant: 67),
-            capacityLabel.heightAnchor.constraint(equalToConstant: 13),
-            
-            //MARK: numberLabel
-            numberLabel.topAnchor.constraint(equalTo: capacityLabel.bottomAnchor, constant: 7),
-            numberLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
-            numberLabel.widthAnchor.constraint(equalToConstant: 26),
-            numberLabel.heightAnchor.constraint(equalToConstant: 17),
-            
-            //MARK: capacityButton
-            capacityButton.topAnchor.constraint(equalTo: capacityView.topAnchor, constant: 28),
-            capacityButton.centerYAnchor.constraint(equalTo: capacityView.centerYAnchor),
-            capacityButton.leadingAnchor.constraint(equalTo: capacityLabel.trailingAnchor, constant: 22),
-            capacityButton.widthAnchor.constraint(equalToConstant: 13.3),
-            capacityButton.heightAnchor.constraint(equalToConstant: 7.66),
             
             //MARK: lineImage
             lineImage.topAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: 16),
@@ -783,14 +791,9 @@ final class FilterView: UIViewController {
             lineImage7.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             lineImage7.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineImage7.heightAnchor.constraint(equalToConstant: 1),
-            
-            //MARK: FilterButton
-            filterButton.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
-            filterButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            filterButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            filterButton.heightAnchor.constraint(equalToConstant: 52)
         ])
         
+        //MARK: tabBar
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)

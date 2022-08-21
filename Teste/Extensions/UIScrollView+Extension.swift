@@ -31,8 +31,9 @@ extension UIScrollView {
         view.constraintInsideTo(.width, self.frameLayoutGuide)
         
         let stackView = UIStackView(arrangedSubviews: views)
+        stackView.arrangedSubviews[0].heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         stackView.axis = .vertical
-        stackView.spacing = CGFloat(8).generateSizeForScreen
+        stackView.distribution = .fillEqually
         stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stackView.setToDefaultBackgroundColor()
         
