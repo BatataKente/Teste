@@ -81,10 +81,6 @@ class PhoneView: UIViewController {
         ddiStackView.axis = .vertical
         ddiStackView.spacing = 10
 
-        let ddisButton = UIButton()
-        ddisButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
-                            for: .normal)
-
         let leftStackView = UIStackView(arrangedSubviews: [ddiStackView])
         leftStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         leftStackView.layer.cornerRadius = 10
@@ -93,6 +89,21 @@ class PhoneView: UIViewController {
                                                    left: stackHorizontalMargins,
                                                    bottom: stackVerticalMargins,
                                                    right: 0)
+        
+        let ddisButton = UIButton()
+        
+        let handler = {(action: UIAction) in
+            
+            self.ddisDropDown.showLikeAWindow(size: CGSize(width: self.registerStackView.frame.size.width*0.25,
+                                                           height: CGFloat(144).generateSizeForScreen),
+                                              origin: CGPoint(x: self.registerStackView.frame.minX,
+                                                              y: self.registerStackView.frame.maxY))
+        }
+        
+        ddisButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
+        ddisButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+                            for: .normal)
 
         let rightLabel = UILabel()
 
@@ -160,11 +171,9 @@ class PhoneView: UIViewController {
         return registerFailLabel
     }()
 
-    private lazy var scrollView: UIScrollView = {
+    private lazy var ddisDropDown: UIScrollView = {
 
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: view.frame.size.width/7,
-                                                    height: view.frame.size.height/2.5))
+        let ddisDropDown = UIScrollView()
         var ddis = [UIButton]()
 
         for ddi in phoneViewModel.createDDIs() {
@@ -179,7 +188,7 @@ class PhoneView: UIViewController {
             let handler = {(action: UIAction) in
 
                 self.viewElements.ddiChoseLabel.text = button.currentTitle
-                scrollView.frame.size = .zero
+                ddisDropDown.frame.size = .zero
             }
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
@@ -188,10 +197,10 @@ class PhoneView: UIViewController {
             
             ddis.append(button)
         }
-        scrollView.turnIntoAList(ddis)
-        scrollView.delegate = self
+        ddisDropDown.turnIntoAList(ddis)
+        ddisDropDown.delegate = self
 
-        return scrollView
+        return ddisDropDown
     }()
     
     var userToRegister: UserParameters
@@ -199,7 +208,7 @@ class PhoneView: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         viewElements.ddisButton.isSelected = false
-        scrollView.frame.size = .zero
+        ddisDropDown.frame.size = .zero
     }
     
     init(_ userToRegister: UserParameters = UserParameters(name: "",
@@ -224,7 +233,6 @@ class PhoneView: UIViewController {
         setupDefaults()
         setupTargets()
         setupConstraints()
-        setupDropDown()
     }
 
     private let phoneViewModel = PhoneViewModel()
@@ -234,7 +242,7 @@ class PhoneView: UIViewController {
         phoneViewModel.delegate = self
         phoneViewModel.makePhoneScreen()
 
-        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, scrollView])
+        view.addSubviews(ways + [infoLabel, customShaddow, registerStackView, registerButton, registerFailLabel, viewElements.ddisButton, ddisDropDown])
 
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
@@ -247,11 +255,6 @@ class PhoneView: UIViewController {
         }
 
         view.setToDefaultBackgroundColor()
-    }
-    
-    private func setupDropDown() {
-        
-        viewElements.ddisButton.addSubWindow(scrollView, .downRight)
     }
 
     private func setupDefaults() {

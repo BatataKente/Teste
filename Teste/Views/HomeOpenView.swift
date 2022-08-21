@@ -204,32 +204,28 @@ class HomeOpenView: UIViewController {
     
     private func setupDropDowns() {
         
-        let dropDownsY = CGFloat(20).generateSizeForScreen
-        
-        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
-                                         y: dropDownsY)
-        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
-                                          y: dropDownsY)
+        let dropDownsHeight = CGFloat(144).generateSizeForScreen
+        let dropOriginPointY = customBarWithFilter.stackView.frame.maxY
         
         let leftHandler = {(action: UIAction) in
             
-            self.customBarWithFilter.rightButton.isSelected = false
-            self.rightDropDown.frame.size = .zero
+            self.leftDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*0.25,
+                                                           height: dropDownsHeight),
+                                              origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX,
+                                                              y: dropOriginPointY))
         }
         
         let rightHandler = {(action: UIAction) in
             
-            self.customBarWithFilter.leftButton.isSelected = false
-            self.leftDropDown.frame.size = .zero
+            self.rightDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*0.75,
+                                                            height: dropDownsHeight),
+                                               origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX + self.customBarWithFilter.stackView.frame.size.width*0.25,
+                                                               y: dropOriginPointY))
         }
         
         customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
-        customBarWithFilter.leftButton.addSubWindow(leftDropDown,
-                                                    origin:   leftDropDownOrigin)
         
         customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
-        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
-                                                     origin: rightDropDownOrigin)
     }
     
     private func setupDefaults() {
