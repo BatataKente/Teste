@@ -182,43 +182,9 @@ final class FilterView: UIViewController {
         return label
     }()
     
-    
-    //MARK: - stackSpaceType
-    private lazy var stackSpaceType1: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackSpaceType
-    private lazy var stackSpaceType2: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackSpaceType3
-    private lazy var stackSpaceType3: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
     //MARK: roomsStackspaceType2
     private lazy var roomsStackspaceType: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [stackSpaceType1,stackSpaceType2,stackSpaceType3])
+        let view = UIStackView()
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -247,31 +213,9 @@ final class FilterView: UIViewController {
         return label
     }()
     
-    //MARK: - stackClassification1
-    private lazy var stackClassification1: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackClassification2
-    private lazy var stackClassification2: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
     //MARK: stackClassification
     private lazy var roomsStackClassification: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [stackClassification1,stackClassification2])
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
@@ -299,29 +243,9 @@ final class FilterView: UIViewController {
         return label
     }()
     
-    //MARK: - stackClassification1
-    private lazy var stackCategory1: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackClassification2
-    private lazy var stackCategory2: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
     //MARK: - stackClassification
     private lazy var roomsStackCategory: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [stackCategory1,stackCategory2])
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
@@ -348,109 +272,9 @@ final class FilterView: UIViewController {
         return label
     }()
     
-    //MARK: - stackFacilities1
-    private lazy var stackFacilities1: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: stackFacilities2
-    private lazy var stackFacilities2: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities3
-    private lazy var stackFacilities3: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities4
-    private lazy var stackFacilities4: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities5
-    private lazy var stackFacilities5: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities6
-    private lazy var stackFacilities6: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities7
-    private lazy var stackFacilities7: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities8
-    private lazy var stackFacilities8: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities9
-    private lazy var stackFacilities9: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
-    //MARK: - stackFacilities10
-    private lazy var stackFacilities10: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.distribution = .fillProportionally
-        return view
-    }()
-    
     //MARK: - stackFacilities
     private lazy var roomsStackFacilities: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [stackFacilities1,stackFacilities2,stackFacilities3, stackFacilities4, stackFacilities5,stackFacilities6,stackFacilities7, stackFacilities8, stackFacilities9, stackFacilities10])
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
@@ -516,27 +340,9 @@ final class FilterView: UIViewController {
         return label
     }()
     
-    //MARK: - stackContract1
-    private lazy var stackContract1: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 4
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        return view
-    }()
-    
-    //MARK: - stackContract2
-    private lazy var stackContract2: UIStackView = {
-        let view = UIStackView()
-        view.backgroundColor = .white
-        view.axis = .horizontal
-        view.spacing = 4
-        return view
-    }()
-    
     //MARK: roomsImageContract
     private lazy var roomsStackContract: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [stackContract1,stackContract2])
+        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
@@ -564,12 +370,12 @@ final class FilterView: UIViewController {
     
     //MARK: - setupView
     private func setupView() {
-        setupTypesButtons()
-        setupClassificationsButtons()
-        setupCategoriesButtons()
-        setupFacilitiesButtons()
-        setupNoisesButtons()
-        setupContractsButtons()
+        setupTypesButtons(roomsStackspaceType)
+        setupClassificationsButtons(roomsStackClassification)
+        setupCategoriesButtons(roomsStackCategory)
+        setupFacilitiesButtons(roomsStackFacilities)
+        setupNoisesButtons(roomsStackNoise)
+        setupContractsButtons(roomsStackContract)
         scrollView.isScrollEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         uiview.translatesAutoresizingMaskIntoConstraints = false
@@ -666,126 +472,143 @@ final class FilterView: UIViewController {
         capacityButton.isSelected.toggle()
     }
     
+    //MARK: - createStackView
+    private func createStackView(_ views: [UIView]) -> UIStackView {
+        
+        let stackView = UIStackView(arrangedSubviews: views)
+        
+            stackView.spacing = 4
+            stackView.backgroundColor = .white
+            stackView.axis = .horizontal
+            stackView.distribution = .fillProportionally
+        
+        return stackView
+    }
+    
     //MARK: - API Functions
-    func setupTypesButtons() {
+    
+    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
+        
+        var stackViews = [UIStackView]()
+        
+        var from = 0
+        
+        if buttons.count % 2 != 0 {
+            
+            from += 1
+            
+            buttons[0].addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
+            
+            stackViews.append(self.createStackView([buttons[0]]))
+        }
+        
+        for i in stride(from: from,
+                        to: buttons.count - 1,
+                        by: 2) {
+            
+            buttons[i].addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
+            buttons[i+1].addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
+            
+            stackViews.append(self.createStackView([buttons[i],
+                                                    buttons[i+1]]))
+        }
+        
+        return stackViews
+    }
+    
+    func setupTypesButtons(_ stackView: UIStackView) {
         
         sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (typesList: [SpaceType]? ) in
             
-            guard let typesList = typesList else { return }
+            guard let typesList = typesList else {return}
             
             for types in typesList {
                 (self.typesArray.append(types.name ?? ""))
             }
-            self.typesButtons = self.createCapsuleButtons(self.typesArray, ColorsBravve.capsuleButton)
+            self.typesButtons = self.createCapsuleButtons(self.typesArray,
+                                                          ColorsBravve.capsuleButton)
             
-            for button in self.typesButtons {
-                button.addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            }
-            self.stackSpaceType1 .addArrangedSubviews([self.typesButtons[0], self.typesButtons[1]])
-            self.stackSpaceType2 .addArrangedSubviews([self.typesButtons[2], self.typesButtons[3]])
-            self.stackSpaceType3 .addArrangedSubviews([self.typesButtons[4], self.typesButtons[5]])
+            stackView.addArrangedSubviews(self.setupStackView(self.typesButtons))
         }
     }
     
-    func setupClassificationsButtons() {
+    func setupClassificationsButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesClassifications) { (typesList: [SpaceClassification]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesClassifications) {(typesList: [SpaceClassification]?) in
             
-            guard let typesList = typesList else { return }
+            guard let typesList = typesList else {return}
             
             for types in typesList {
                 (self.classificationsArray.append(types.name ?? ""))
             }
-            self.classificationButtons = self.createCapsuleButtons(self.classificationsArray, ColorsBravve.capsuleButton)
+            self.classificationButtons = self.createCapsuleButtons(self.classificationsArray,
+                                          ColorsBravve.capsuleButton)
             
-            for button in self.classificationButtons {
-                button.addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            }
-            self.stackClassification1 .addArrangedSubviews([self.classificationButtons[0], self.classificationButtons[1]])
-            self.stackClassification2 .addArrangedSubviews([self.classificationButtons[2], self.classificationButtons[3]])
+            stackView.addArrangedSubviews(self.setupStackView(self.classificationButtons))
         }
     }
     
-    func setupCategoriesButtons() {
+    func setupCategoriesButtons(_ stackView: UIStackView) {
         
         sessionManager.getOpenDataArray(endpoint: .spacesCategories) { (typesList: [SpaceCategory]? ) in
             
-            guard let typesList = typesList else { return }
+            guard let typesList = typesList else {return}
             
             for types in typesList {
                 (self.categoriesArray.append(types.name ?? ""))
             }
-            self.categoriesButtons = self.createCapsuleButtons(self.categoriesArray, ColorsBravve.capsuleButton)
+            self.categoriesButtons = self.createCapsuleButtons(self.categoriesArray,
+                                                               ColorsBravve.capsuleButton)
             
-            for button in self.categoriesButtons {
-                button.addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            }
-            self.stackCategory1 .addArrangedSubviews([self.categoriesButtons[0], self.categoriesButtons[1]])
-            self.stackCategory2 .addArrangedSubviews([self.categoriesButtons[2], self.categoriesButtons[3]])
+            stackView.addArrangedSubviews(self.setupStackView(self.categoriesButtons))
         }
     }
     
-    func setupFacilitiesButtons() {
+    func setupFacilitiesButtons(_ stackView: UIStackView) {
         
         sessionManager.getOpenDataArray(endpoint: .spacesFacilities) { (typesList: [SpaceFacility]? ) in
             
-            guard let typesList = typesList else { return }
+            guard let typesList = typesList else {return}
             
             for types in typesList {
                 (self.facilitiesArray.append(types.name ?? ""))
             }
-            self.facilitiesButtons = self.createCapsuleButtons(self.facilitiesArray, ColorsBravve.capsuleButton)
+            self.facilitiesButtons = self.createCapsuleButtons(self.facilitiesArray,
+                                                               ColorsBravve.capsuleButton)
             
-            for button in self.facilitiesButtons {
-                button.addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            }
-            self.stackFacilities1 .addArrangedSubviews([self.facilitiesButtons[0], self.facilitiesButtons[1]])
-            self.stackFacilities2 .addArrangedSubviews([self.facilitiesButtons[2], self.facilitiesButtons[3]])
-            self.stackFacilities3 .addArrangedSubviews([self.facilitiesButtons[4], self.facilitiesButtons[5]])
-            self.stackFacilities4 .addArrangedSubviews([self.facilitiesButtons[6], self.facilitiesButtons[7]])
-            self.stackFacilities5 .addArrangedSubviews([self.facilitiesButtons[8], self.facilitiesButtons[9]])
-            self.stackFacilities6 .addArrangedSubviews([self.facilitiesButtons[10], self.facilitiesButtons[11]])
-            self.stackFacilities7 .addArrangedSubviews([self.facilitiesButtons[12], self.facilitiesButtons[13]])
-            self.stackFacilities8 .addArrangedSubviews([self.facilitiesButtons[14], self.facilitiesButtons[15]])
-            self.stackFacilities9 .addArrangedSubviews([self.facilitiesButtons[16], self.facilitiesButtons[17]])
-            self.stackFacilities10 .addArrangedSubviews([self.facilitiesButtons[18], self.facilitiesButtons[19]])
+            stackView.addArrangedSubviews(self.setupStackView(self.facilitiesButtons))
         }
     }
     
-    func setupNoisesButtons() {
+    func setupNoisesButtons(_ stackView: UIStackView) {
         
         sessionManager.getOpenDataArray(endpoint: .spacesNoises) { (typesList: [SpaceNoise]? ) in
             
-            guard let typesList = typesList else { return }
+            guard let typesList = typesList else {return}
             
             for types in typesList {
                 (self.noisesArray.append(types.name ?? ""))
             }
-            self.noisesButtons = self.createCapsuleButtons(self.noisesArray, ColorsBravve.capsuleButton)
+            self.noisesButtons = self.createCapsuleButtons(self.noisesArray,
+                                                               ColorsBravve.capsuleButton)
             
-            for button in self.noisesButtons {
-                button.addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            }
-            self.stackNoises1 .addArrangedSubviews([self.noisesButtons[0], self.noisesButtons[1]])
+            stackView.addArrangedSubviews(self.setupStackView(self.noisesButtons))
         }
     }
     
-    func setupContractsButtons() {
+    func setupContractsButtons(_ stackView: UIStackView) {
         
         sessionManager.getOpenDataArray(endpoint: .spacesContracts) { (typesList: [SpaceContract]? ) in
             
-            guard let typesList = typesList else { return }
+            guard let typesList = typesList else {return}
             
             for types in typesList {
                 (self.contractsArray.append(types.name ?? ""))
             }
-            self.contractButtons = self.createCapsuleButtons(self.contractsArray, ColorsBravve.capsuleButton)
+            self.contractButtons = self.createCapsuleButtons(self.contractsArray,
+                                                               ColorsBravve.capsuleButton)
             
-            for button in self.contractButtons {
-                button.addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            }
-            self.stackContract1 .addArrangedSubviews([self.contractButtons[0], self.contractButtons[1]])
-            self.stackContract2 .addArrangedSubviews([self.contractButtons[2], self.contractButtons[3]])
+            stackView.addArrangedSubviews(self.setupStackView(self.contractButtons))
         }
     }
     
@@ -819,7 +642,7 @@ final class FilterView: UIViewController {
     private func setupConstrains() {
         NSLayoutConstraint.activate([
             
-            //MARK: scroolView
+            //MARK: scrollView
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -834,24 +657,24 @@ final class FilterView: UIViewController {
             uiview.widthAnchor.constraint(equalTo: view.widthAnchor),
             
             //MARK: exitButton
-            exitButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 35),
-            exitButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            exitButton.topAnchor.constraint(equalTo: uiview.topAnchor, constant: 35),
+            exitButton.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             exitButton.widthAnchor.constraint(equalToConstant: 14),
             exitButton.heightAnchor.constraint(equalToConstant: 14),
             
             //MARK: filterLabel
             filterLabel.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 19),
-            filterLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            filterLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             filterLabel.widthAnchor.constraint(equalToConstant: 93),
             filterLabel.heightAnchor.constraint(equalToConstant: 40),
             
             //MARK: clearLabel
             clearButton.centerYAnchor.constraint(equalTo: filterLabel.centerYAnchor),
-            clearButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -35),
+            clearButton.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -35),
             
             //MARK: capacityView
             capacityView.topAnchor.constraint(equalTo: filterLabel.bottomAnchor, constant: 19),
-            capacityView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            capacityView.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             capacityView.widthAnchor.constraint(equalToConstant: 121),
             capacityView.heightAnchor.constraint(equalToConstant: 60),
             
@@ -882,11 +705,11 @@ final class FilterView: UIViewController {
             lineImage.heightAnchor.constraint(equalToConstant: 1),
             
             spaceType.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 19),
-            spaceType.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            spaceType.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             
             roomsStackspaceType.topAnchor.constraint(equalTo: spaceType.bottomAnchor, constant: 19),
-            roomsStackspaceType.leadingAnchor.constraint(equalTo: scrollView .leadingAnchor, constant: 20),
-            roomsStackspaceType.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            roomsStackspaceType.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
+            roomsStackspaceType.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             
             //MARK: lineImage2
             lineImage2.topAnchor.constraint(equalTo: roomsStackspaceType.bottomAnchor, constant: 19),
@@ -895,11 +718,11 @@ final class FilterView: UIViewController {
             lineImage2.heightAnchor.constraint(equalToConstant: 1),
             
             classificationLabel.topAnchor.constraint(equalTo: lineImage2.bottomAnchor, constant: 19),
-            classificationLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            classificationLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             
             roomsStackClassification.topAnchor.constraint(equalTo: classificationLabel.bottomAnchor, constant: 19),
-            roomsStackClassification.leadingAnchor.constraint(equalTo: scrollView .leadingAnchor, constant: 20),
-            roomsStackClassification.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            roomsStackClassification.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
+            roomsStackClassification.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             
             //MARK: lineImage3
             lineImage3.topAnchor.constraint(equalTo: roomsStackClassification.bottomAnchor, constant: 19),
@@ -908,11 +731,11 @@ final class FilterView: UIViewController {
             lineImage3.heightAnchor.constraint(equalToConstant: 1),
             
             categoryLabel.topAnchor.constraint(equalTo: lineImage3.bottomAnchor, constant: 19),
-            categoryLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            categoryLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             
             roomsStackCategory.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 19),
-            roomsStackCategory.leadingAnchor.constraint(equalTo: scrollView .leadingAnchor, constant: 20),
-            roomsStackCategory.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            roomsStackCategory.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
+            roomsStackCategory.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             
             //MARK: lineImage4
             lineImage4.topAnchor.constraint(equalTo: roomsStackCategory.bottomAnchor, constant: 19),
@@ -921,11 +744,11 @@ final class FilterView: UIViewController {
             lineImage4.heightAnchor.constraint(equalToConstant: 1),
             
             facilitiesLabel.topAnchor.constraint(equalTo: lineImage4.bottomAnchor, constant: 19),
-            facilitiesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            facilitiesLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             
             roomsStackFacilities.topAnchor.constraint(equalTo: facilitiesLabel.bottomAnchor, constant: 19),
-            roomsStackFacilities.leadingAnchor.constraint(equalTo: scrollView .leadingAnchor, constant: 20),
-            roomsStackFacilities.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            roomsStackFacilities.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
+            roomsStackFacilities.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             
             //MARK: lineImage5
             lineImage5.topAnchor.constraint(equalTo: roomsStackFacilities.bottomAnchor, constant: 19),
@@ -934,11 +757,11 @@ final class FilterView: UIViewController {
             lineImage5.heightAnchor.constraint(equalToConstant: 1),
             
             NoiseLabel.topAnchor.constraint(equalTo: lineImage5.bottomAnchor, constant: 19),
-            NoiseLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            NoiseLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             
             roomsStackNoise.topAnchor.constraint(equalTo: NoiseLabel.bottomAnchor, constant: 19),
-            roomsStackNoise.leadingAnchor.constraint(equalTo: scrollView .leadingAnchor, constant: 20),
-            roomsStackNoise.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            roomsStackNoise.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
+            roomsStackNoise.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             
             //MARK: lineImage6
             lineImage6.topAnchor.constraint(equalTo: roomsStackNoise.bottomAnchor, constant: 19),
@@ -947,11 +770,11 @@ final class FilterView: UIViewController {
             lineImage6.heightAnchor.constraint(equalToConstant: 1),
             
             typeOfContarctLabel.topAnchor.constraint(equalTo: lineImage6.bottomAnchor, constant: 19),
-            typeOfContarctLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            typeOfContarctLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             
             roomsStackContract.topAnchor.constraint(equalTo: typeOfContarctLabel.bottomAnchor, constant: 19),
-            roomsStackContract.leadingAnchor.constraint(equalTo: scrollView .leadingAnchor, constant: 20),
-            roomsStackContract.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            roomsStackContract.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
+            roomsStackContract.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             
             //MARK: lineImage6
             lineImage7.topAnchor.constraint(equalTo: roomsStackContract.bottomAnchor, constant: 19),
@@ -969,9 +792,7 @@ final class FilterView: UIViewController {
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
     }
-    
 }
 
 extension FilterView: UIScrollViewDelegate {
