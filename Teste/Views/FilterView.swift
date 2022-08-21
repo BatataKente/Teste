@@ -27,7 +27,15 @@ final class FilterView: UIViewController {
     var contractButtons = [UIButton]()
     
     //MARK: - var and let
-    let scrollView = UIScrollView()
+    let scrollView: UIScrollView = {
+        
+        let scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
+        
+        return scrollView
+    }()
+    
+    
     let uiview = UIView()
     private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                                    
@@ -41,7 +49,6 @@ final class FilterView: UIViewController {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.xmarkBlue.rawValue), for: .normal)
         view.addTarget(self, action: #selector(exitTap), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
         //        view.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         return view
     }()
@@ -52,7 +59,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Filtrar"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -72,7 +78,6 @@ final class FilterView: UIViewController {
         button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(clearTap), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -83,7 +88,6 @@ final class FilterView: UIViewController {
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
         return view
     }()
@@ -94,7 +98,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Capacidade"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         return label
     }()
@@ -104,7 +107,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "16+"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -114,6 +116,7 @@ final class FilterView: UIViewController {
         let view = UIButton()
 //        view.setImage(UIImage(named: "arrowUp"), for: .selected)
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
         
         return view
     }()
@@ -121,9 +124,7 @@ final class FilterView: UIViewController {
     //MARK: capacityDropDown
     private lazy var capacityDropDown: UIScrollView = {
         
-        let capacityDropDown = UIScrollView(frame: CGRect(x: 0,
-                                                          y: 0,
-                                                          width: 121, height: 180))
+        let capacityDropDown = UIScrollView()
         
         var buttons = [UIButton]()
         let capacities = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16+"]
@@ -158,7 +159,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -167,7 +167,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Tipo de Espaço"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -176,7 +175,6 @@ final class FilterView: UIViewController {
     private lazy var roomsStackspaceType: UIStackView = {
         let view = UIStackView()
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
@@ -189,7 +187,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage2: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -198,7 +195,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Classificação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -206,7 +202,6 @@ final class FilterView: UIViewController {
     //MARK: stackClassification
     private lazy var roomsStackClassification: UIStackView = {
         let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
@@ -218,7 +213,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage3: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -228,7 +222,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Categoria"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -236,7 +229,6 @@ final class FilterView: UIViewController {
     //MARK: - stackClassification
     private lazy var roomsStackCategory: UIStackView = {
         let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
@@ -248,7 +240,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage4: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -257,7 +248,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Facilities"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -265,7 +255,6 @@ final class FilterView: UIViewController {
     //MARK: - stackFacilities
     private lazy var roomsStackFacilities: UIStackView = {
         let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
@@ -277,7 +266,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage5: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -286,7 +274,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Conforto Auditivo"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -304,7 +291,6 @@ final class FilterView: UIViewController {
     //MARK: roomsStackNoise
     private lazy var roomsStackNoise: UIStackView = {
         let view = UIStackView(arrangedSubviews: [stackNoises1])
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
@@ -316,7 +302,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage6: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -325,7 +310,6 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Tipo de Contratação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         return label
     }()
@@ -333,7 +317,6 @@ final class FilterView: UIViewController {
     //MARK: roomsImageContract
     private lazy var roomsStackContract: UIStackView = {
         let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
@@ -345,7 +328,6 @@ final class FilterView: UIViewController {
     private lazy var lineImage7: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -356,7 +338,6 @@ final class FilterView: UIViewController {
         view.heightAnchor.constraint(equalToConstant: 1500).isActive = true
         setupView()
         setupConstrains()
-        setupDropDown()
     }
     
     //MARK: - setupView
@@ -367,54 +348,42 @@ final class FilterView: UIViewController {
         setupFacilitiesButtons(roomsStackFacilities)
         setupNoisesButtons(roomsStackNoise)
         setupContractsButtons(roomsStackContract)
-        scrollView.isScrollEnabled = true
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        uiview.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubviews([scrollView, tabBar, filterButton])
-        scrollView.addSubviews([uiview,
-                                exitButton,
-                                filterLabel,
-                                clearButton,
-                                capacityView,
-                                capacityLabel,
-                                numberLabel,
-                                capacityButton,
-                                lineImage,
-                                spaceType,
-                                roomsStackspaceType,
-                                lineImage2,
-                                classificationLabel,
-                                roomsStackClassification,
-                                lineImage3,
-                                categoryLabel,
-                                roomsStackCategory,
-                                lineImage4,
-                                facilitiesLabel,
-                                roomsStackFacilities,
-                                lineImage5,
-                                NoiseLabel,
-                                roomsStackNoise,
-                                lineImage6,
-                                typeOfContarctLabel,
-                                roomsStackContract,
-                                lineImage7,
-                                capacityDropDown
-                               ])
+        
+        scrollView.addSubviews([uiview, capacityDropDown])
+        
+        uiview.addSubviews([exitButton,
+                            filterLabel,
+                            clearButton,
+                            capacityView,
+                            capacityLabel,
+                            numberLabel,
+                            capacityButton,
+                            lineImage,
+                            spaceType,
+                            roomsStackspaceType,
+                            lineImage2,
+                            classificationLabel,
+                            roomsStackClassification,
+                            lineImage3,
+                            categoryLabel,
+                            roomsStackCategory,
+                            lineImage4,
+                            facilitiesLabel,
+                            roomsStackFacilities,
+                            lineImage5,
+                            NoiseLabel,
+                            roomsStackNoise,
+                            lineImage6,
+                            typeOfContarctLabel,
+                            roomsStackContract,
+                            lineImage7])
         
         tabBar.selectedItem = tabBar.items?[0]
         filterButton.setToBottomButtonDefaultAbove("Filtrar",
                                                    backgroundColor: .buttonPink,
                                                    above: tabBar)
-    }
-    
-    private func setupDropDown() {
-        
-        let origin = CGPoint(x: CGFloat(self.view.frame.size.width).generateSizeForScreen*0.152/3,
-                             y: CGFloat(self.view.frame.size.height).generateSizeForScreen*0.1633825944162562)
-        
-        capacityButton.addSubWindow(capacityDropDown, origin: origin)
-        capacityButton.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
-        capacityButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     //MARK: - ACTIONS AND METHODS
@@ -471,7 +440,12 @@ final class FilterView: UIViewController {
     
     //MARK: - capacityTap
     @objc private func capacityTap() {
-        capacityButton.isSelected.toggle()
+        
+        capacityDropDown.showLikeAWindow(size: CGSize(width: capacityView.frame.size.width,
+                                                      height: CGFloat(144).generateSizeForScreen),
+                                         origin: CGPoint(x: capacityView.frame.maxX,
+                                                         y: capacityView.frame.maxY),
+                                         .downLeft)
     }
     
     //MARK: - createStackView
@@ -527,8 +501,10 @@ final class FilterView: UIViewController {
             guard let typesList = typesList else {return}
             
             for types in typesList {
+                print(types.name ?? "")
                 (self.typesArray.append(types.name ?? ""))
             }
+            
             self.typesButtons = self.createCapsuleButtons(self.typesArray,
                                                           ColorsBravve.capsuleButton)
             
@@ -645,6 +621,8 @@ final class FilterView: UIViewController {
     //MARK: setupConstrains
     private func setupConstrains() {
         
+        let spacing = CGFloat(19).generateSizeForScreen
+        
         //MARK: scrollView
         scrollView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
         scrollView.constraintInsideTo(.leading, view)
@@ -656,7 +634,6 @@ final class FilterView: UIViewController {
         uiview.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
         uiview.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
         uiview.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        uiview.heightAnchorInSuperview(1250)
         uiview.constraintInsideTo(.width, scrollView.frameLayoutGuide)
         
         //MARK: exitButton
@@ -667,8 +644,7 @@ final class FilterView: UIViewController {
         exitButton.constraintOutsideTo(.width, exitButton)
         
         //MARK: filterLabel
-        filterLabel.constraintOutsideTo(.top, exitButton,
-                                        CGFloat(19).generateSizeForScreen)
+        filterLabel.constraintOutsideTo(.top, exitButton, spacing)
         filterLabel.constraintInsideTo(.leading, exitButton)
         
         //MARK: clearLabel
@@ -677,8 +653,7 @@ final class FilterView: UIViewController {
                                        CGFloat(35).generateSizeForScreen)
         
         //MARK: capacityView
-        capacityView.constraintOutsideTo(.top, filterLabel,
-                                         CGFloat(19).generateSizeForScreen)
+        capacityView.constraintOutsideTo(.top, filterLabel, spacing)
         capacityView.constraintInsideTo(.leading, filterLabel)
         
         //MARK: capacityLabel
@@ -698,100 +673,110 @@ final class FilterView: UIViewController {
                                        CGFloat(11).generateSizeForScreen)
         
         //MARK: capacityButton
-        capacityButton.constraintInsideTo(.top, capacityView,
-                                          CGFloat(28).generateSizeForScreen)
-        capacityButton.constraintInsideTo(.centerY, capacityView)
+        capacityButton.constraintInsideTo(.top, capacityView)
         capacityButton.constraintOutsideTo(.leading, capacityLabel,
-                                           CGFloat(22).generateSizeForScreen)
-        capacityButton.heightAnchorInSuperview(CGFloat(7.66).generateSizeForScreen)
-        capacityButton.constraintOutsideTo(.width, capacityButton, multiplier: 2)
+                                           CGFloat(10).generateSizeForScreen)
+        capacityButton.constraintInsideTo(.trailing, capacityView)
+        capacityButton.constraintInsideTo(.bottom, capacityView)
         
-        NSLayoutConstraint.activate([
-            
-            //MARK: lineImage
-            lineImage.topAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: 16),
-            lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage.heightAnchor.constraint(equalToConstant: 1),
-            
-            spaceType.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 19),
-            spaceType.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            
-            roomsStackspaceType.topAnchor.constraint(equalTo: spaceType.bottomAnchor, constant: 19),
-            roomsStackspaceType.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
-            roomsStackspaceType.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
-            
-            //MARK: lineImage2
-            lineImage2.topAnchor.constraint(equalTo: roomsStackspaceType.bottomAnchor, constant: 19),
-            lineImage2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage2.heightAnchor.constraint(equalToConstant: 1),
-            
-            classificationLabel.topAnchor.constraint(equalTo: lineImage2.bottomAnchor, constant: 19),
-            classificationLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            
-            roomsStackClassification.topAnchor.constraint(equalTo: classificationLabel.bottomAnchor, constant: 19),
-            roomsStackClassification.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
-            roomsStackClassification.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
-            
-            //MARK: lineImage3
-            lineImage3.topAnchor.constraint(equalTo: roomsStackClassification.bottomAnchor, constant: 19),
-            lineImage3.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage3.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage3.heightAnchor.constraint(equalToConstant: 1),
-            
-            categoryLabel.topAnchor.constraint(equalTo: lineImage3.bottomAnchor, constant: 19),
-            categoryLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            
-            roomsStackCategory.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 19),
-            roomsStackCategory.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
-            roomsStackCategory.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
-            
-            //MARK: lineImage4
-            lineImage4.topAnchor.constraint(equalTo: roomsStackCategory.bottomAnchor, constant: 19),
-            lineImage4.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage4.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage4.heightAnchor.constraint(equalToConstant: 1),
-            
-            facilitiesLabel.topAnchor.constraint(equalTo: lineImage4.bottomAnchor, constant: 19),
-            facilitiesLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            
-            roomsStackFacilities.topAnchor.constraint(equalTo: facilitiesLabel.bottomAnchor, constant: 19),
-            roomsStackFacilities.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
-            roomsStackFacilities.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
-            
-            //MARK: lineImage5
-            lineImage5.topAnchor.constraint(equalTo: roomsStackFacilities.bottomAnchor, constant: 19),
-            lineImage5.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage5.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage5.heightAnchor.constraint(equalToConstant: 1),
-            
-            NoiseLabel.topAnchor.constraint(equalTo: lineImage5.bottomAnchor, constant: 19),
-            NoiseLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            
-            roomsStackNoise.topAnchor.constraint(equalTo: NoiseLabel.bottomAnchor, constant: 19),
-            roomsStackNoise.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
-            roomsStackNoise.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
-            
-            //MARK: lineImage6
-            lineImage6.topAnchor.constraint(equalTo: roomsStackNoise.bottomAnchor, constant: 19),
-            lineImage6.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage6.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage6.heightAnchor.constraint(equalToConstant: 1),
-            
-            typeOfContarctLabel.topAnchor.constraint(equalTo: lineImage6.bottomAnchor, constant: 19),
-            typeOfContarctLabel.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
-            
-            roomsStackContract.topAnchor.constraint(equalTo: typeOfContarctLabel.bottomAnchor, constant: 19),
-            roomsStackContract.leadingAnchor.constraint(equalTo: uiview .leadingAnchor, constant: 20),
-            roomsStackContract.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
-            
-            //MARK: lineImage6
-            lineImage7.topAnchor.constraint(equalTo: roomsStackContract.bottomAnchor, constant: 19),
-            lineImage7.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            lineImage7.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lineImage7.heightAnchor.constraint(equalToConstant: 1),
-        ])
+        //MARK: lineImage
+        lineImage.constraintOutsideTo(.top, capacityView,
+                                      CGFloat(16).generateSizeForScreen)
+        lineImage.constraintInsideTo(.leading, capacityView)
+        lineImage.constraintInsideTo(.trailing, uiview,
+                                     CGFloat(20).generateSizeForScreen)
+        lineImage.heightAnchorInSuperview(1)
+        
+        //MARK: spaceType
+        spaceType.constraintOutsideTo(.top, lineImage, spacing)
+        spaceType.constraintInsideTo(.leading, lineImage)
+        
+        //MARK: roomsStackspaceType
+        roomsStackspaceType.constraintOutsideTo(.top, spaceType, spacing)
+        roomsStackspaceType.constraintInsideTo(.leading, lineImage)
+        roomsStackspaceType.constraintInsideTo(.trailing, lineImage)
+        
+        //MARK: lineImage2
+        lineImage2.constraintOutsideTo(.top, roomsStackspaceType, spacing)
+        lineImage2.constraintInsideTo(.leading, lineImage)
+        lineImage2.constraintInsideTo(.trailing, lineImage)
+        lineImage2.constraintInsideTo(.height, lineImage)
+        
+        //MARK: classificationLabel
+        classificationLabel.constraintOutsideTo(.top, lineImage2, spacing)
+        classificationLabel.constraintInsideTo(.leading, lineImage)
+        
+        //MARK: roomsStackClassification
+        roomsStackClassification.constraintOutsideTo(.top, classificationLabel, spacing)
+        roomsStackClassification.constraintInsideTo(.leading, lineImage)
+        roomsStackClassification.constraintInsideTo(.trailing, lineImage)
+        
+        //MARK: lineImage3
+        lineImage3.constraintOutsideTo(.top, roomsStackClassification, spacing)
+        lineImage3.constraintInsideTo(.leading, lineImage)
+        lineImage3.constraintInsideTo(.trailing, lineImage)
+        lineImage3.constraintInsideTo(.height, lineImage)
+        
+        //MARK: categoryLabel
+        categoryLabel.constraintOutsideTo(.top, lineImage3, spacing)
+        categoryLabel.constraintInsideTo(.leading, lineImage)
+        
+        //MARK: roomsStackCategory
+        roomsStackCategory.constraintOutsideTo(.top, categoryLabel, spacing)
+        roomsStackCategory.constraintInsideTo(.leading, lineImage)
+        roomsStackCategory.constraintInsideTo(.trailing, lineImage)
+        
+        //MARK: lineImage4
+        lineImage4.constraintOutsideTo(.top, roomsStackCategory, spacing)
+        lineImage4.constraintInsideTo(.leading, lineImage)
+        lineImage4.constraintInsideTo(.trailing, lineImage)
+        lineImage4.constraintInsideTo(.height, lineImage)
+        
+        //MARK: facilitiesLabel
+        facilitiesLabel.constraintOutsideTo(.top, lineImage4, spacing)
+        facilitiesLabel.constraintInsideTo(.leading, lineImage)
+        
+        //MARK: roomsStackFacilities
+        roomsStackFacilities.constraintOutsideTo(.top, facilitiesLabel, spacing)
+        roomsStackFacilities.constraintInsideTo(.leading, lineImage)
+        roomsStackFacilities.constraintInsideTo(.trailing, lineImage)
+        
+        //MARK: lineImage5
+        lineImage5.constraintOutsideTo(.top, roomsStackFacilities, spacing)
+        lineImage5.constraintInsideTo(.leading, lineImage)
+        lineImage5.constraintInsideTo(.trailing, lineImage)
+        lineImage5.constraintInsideTo(.height, lineImage)
+        
+        //MARK: NoiseLabel
+        NoiseLabel.constraintOutsideTo(.top, lineImage5, spacing)
+        NoiseLabel.constraintInsideTo(.leading, lineImage)
+        
+        //MARK: roomsStackNoise
+        roomsStackNoise.constraintOutsideTo(.top, NoiseLabel, spacing)
+        roomsStackNoise.constraintInsideTo(.leading, lineImage)
+        roomsStackNoise.constraintInsideTo(.trailing, lineImage)
+        
+        //MARK: lineImage6
+        lineImage6.constraintOutsideTo(.top, roomsStackNoise, spacing)
+        lineImage6.constraintInsideTo(.leading, lineImage)
+        lineImage6.constraintInsideTo(.trailing, lineImage)
+        lineImage6.constraintInsideTo(.height, lineImage)
+        
+        //MARK: typeOfContarctLabel
+        typeOfContarctLabel.constraintOutsideTo(.top, lineImage6, spacing)
+        typeOfContarctLabel.constraintInsideTo(.leading, lineImage)
+        
+        //MARK: lineImage6
+        roomsStackContract.constraintOutsideTo(.top, typeOfContarctLabel, spacing)
+        roomsStackContract.constraintInsideTo(.leading, lineImage)
+        roomsStackContract.constraintInsideTo(.trailing, lineImage)
+        
+        //MARK: lineImage6
+        lineImage7.constraintOutsideTo(.top, roomsStackContract, spacing)
+        lineImage7.constraintInsideTo(.leading, lineImage)
+        lineImage7.constraintInsideTo(.trailing, lineImage)
+        lineImage7.constraintInsideTo(.bottom, uiview, spacing)
+        lineImage7.constraintInsideTo(.height, lineImage)
         
         //MARK: tabBar
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
