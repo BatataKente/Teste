@@ -17,7 +17,7 @@ extension UIScrollView {
             
             if subview.frame.origin.x == 0 {
                 
-                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+                subview.removeFromSuperview()
             }
         }
         

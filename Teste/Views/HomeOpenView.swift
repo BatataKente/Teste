@@ -95,9 +95,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var leftDropDown: UIScrollView = {
 
-        let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                      width: view.frame.size.width/5,
-                                                      height: view.frame.size.height/3))
+        let leftDropDown = UIScrollView()
         leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         leftDropDown.delegate = self
 
@@ -106,9 +104,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var rightDropDown: UIScrollView = {
 
-        let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                       width: view.frame.size.width/2,
-                                                       height: view.frame.size.height/2.5))
+        let rightDropDown = UIScrollView()
         rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
 
@@ -131,6 +127,29 @@ class HomeOpenView: UIViewController {
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
+        
+        let leftHandler = {(action: UIAction) in
+            
+            self.rightDropDown.frame.size = .zero
+            self.leftDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width/3,
+                                                           height: CGFloat(144).generateSizeForScreen),
+                                              origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX + self.customBarWithFilter.stackView.frame.size.width/3,
+                                                              y: self.customBarWithFilter.stackView.frame.maxY),
+                                              .downLeft)
+        }
+        
+        let rightandler = {(action: UIAction) in
+            
+            self.leftDropDown.frame.size = .zero
+            self.rightDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*2/3,
+                                                            height: CGFloat(144).generateSizeForScreen),
+                                               origin: CGPoint(x: self.customBarWithFilter.stackView.frame.maxX,
+                                                               y: self.customBarWithFilter.stackView.frame.maxY),
+                                               .downLeft)
+        }
+        
+        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
+        customBarWithFilter.rightButton.addAction(UIAction(handler: rightandler), for: .touchUpInside)
         
         return customBarWithFilter
     }()
@@ -164,11 +183,6 @@ class HomeOpenView: UIViewController {
         setupDefaults()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        viewDidAppear(animated)
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         reduceDropDowns()
@@ -176,7 +190,7 @@ class HomeOpenView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar, coverView, imageView])
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -204,28 +218,6 @@ class HomeOpenView: UIViewController {
     
     private func setupDropDowns() {
         
-        let dropDownsHeight = CGFloat(144).generateSizeForScreen
-        let dropOriginPointY = customBarWithFilter.stackView.frame.maxY
-        
-        let leftHandler = {(action: UIAction) in
-            
-            self.leftDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*0.25,
-                                                           height: dropDownsHeight),
-                                              origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX,
-                                                              y: dropOriginPointY))
-        }
-        
-        let rightHandler = {(action: UIAction) in
-            
-            self.rightDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*0.75,
-                                                            height: dropDownsHeight),
-                                               origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX + self.customBarWithFilter.stackView.frame.size.width*0.25,
-                                                               y: dropOriginPointY))
-        }
-        
-        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
-        
-        customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
     }
     
     private func setupDefaults() {
