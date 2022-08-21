@@ -493,21 +493,23 @@ final class FilterView: UIViewController {
         
         var from = 0
         
-        if buttons.count % 2 != 0 {
+        if buttons.count%2 != 0 {
+            
+            buttons[from].addTarget(self, action: #selector(self.selectItems),
+                                    for: .touchUpInside)
+            stackViews.append(self.createStackView([buttons[from]]))
             
             from += 1
-            
-            buttons[0].addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            
-            stackViews.append(self.createStackView([buttons[0]]))
         }
         
         for i in stride(from: from,
                         to: buttons.count - 1,
                         by: 2) {
-            
-            buttons[i].addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
-            buttons[i+1].addTarget(self, action: #selector(self.selectItems), for: .touchUpInside)
+                
+            buttons[i].addTarget(self, action: #selector(self.selectItems),
+                                 for: .touchUpInside)
+            buttons[i+1].addTarget(self, action: #selector(self.selectItems),
+                                   for: .touchUpInside)
             
             stackViews.append(self.createStackView([buttons[i],
                                                     buttons[i+1]]))
