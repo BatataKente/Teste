@@ -222,6 +222,7 @@
 		13080CBC28A1890000A064B0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
 				CFBF085828A2810600D39DCF /* ModelUtilsV1.swift */,
 				CFBF085B28A2810600D39DCF /* ModelUsersV1.swift */,
 				CFBF085928A2810600D39DCF /* ModelPartnersV1.swift */,
@@ -295,7 +296,6 @@
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
 				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
-				13080CBA28A17F6B00A064B0 /* StatesModel.swift */,
 				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
 				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				142367CB28B00CDD0080738E /* SingleBook.swift */,

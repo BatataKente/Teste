@@ -159,8 +159,14 @@ class HomeOpenView: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupDropDowns()
         setupConstraints()
         setupDefaults()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        viewDidAppear(animated)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -170,7 +176,7 @@ class HomeOpenView: UIViewController {
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -189,8 +195,16 @@ class HomeOpenView: UIViewController {
         
         filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override var prefersStatusBarHidden: Bool {
         
-        let dropDownsY = CGFloat(100).generateSizeForScreen
+        true
+    }
+    
+    private func setupDropDowns() {
+        
+        let dropDownsY = CGFloat(20).generateSizeForScreen
         
         let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
                                          y: dropDownsY)
@@ -216,11 +230,6 @@ class HomeOpenView: UIViewController {
         customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
         customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
                                                      origin: rightDropDownOrigin)
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
     }
     
     private func setupDefaults() {
@@ -319,7 +328,7 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
     func chosePlace(_ indexPath: IndexPath) {
         
         guard let spaceId = cells[indexPath.row].id else { return }
-
+        
         sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
             guard let space = space else {
                 return
