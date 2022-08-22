@@ -155,11 +155,20 @@ final class FilterView: UIViewController {
     }()
     
     // NÃO TEM LINE NO ENUM
-    //MARK: lineImage
-    private lazy var lineImage: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        return view
+    
+    //MARK: lines
+    let lines: [UIImageView] = {
+        
+        var lines:[UIImageView] = []
+        
+        for i in 0...6 {
+            
+            let line = UIImageView()
+            line.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
+            lines.append(line)
+        }
+        
+        return lines
     }()
     
     //MARK: - spaceType
@@ -182,14 +191,6 @@ final class FilterView: UIViewController {
         return view
     }()
     
-    // NÃO TEM LINE NO ENUM
-    //MARK: lineImage2
-    private lazy var lineImage2: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        return view
-    }()
-    
     //MARK: - ClassificationLabel
     private lazy var classificationLabel: UILabel = {
         let label = UILabel()
@@ -206,13 +207,6 @@ final class FilterView: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
-        return view
-    }()
-    
-    //MARK: - lineImage3
-    private lazy var lineImage3: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
         return view
     }()
     
@@ -236,13 +230,6 @@ final class FilterView: UIViewController {
         return view
     }()
     
-    //MARK: - lineImage4
-    private lazy var lineImage4: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        return view
-    }()
-    
     //MARK: - faciltiesLabel
     private lazy var facilitiesLabel: UILabel = {
         let label = UILabel()
@@ -259,13 +246,6 @@ final class FilterView: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
-        return view
-    }()
-    
-    //MARK: - lineImage5
-    private lazy var lineImage5: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
         return view
     }()
     
@@ -298,13 +278,6 @@ final class FilterView: UIViewController {
         return view
     }()
     
-    //MARK: - lineImage6
-    private lazy var lineImage6: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
-        return view
-    }()
-    
     //MARK: - typeOfContarctLabel
     private lazy var typeOfContarctLabel: UILabel = {
         let label = UILabel()
@@ -321,13 +294,6 @@ final class FilterView: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
-        return view
-    }()
-    
-    //MARK: - lineImage7
-    private lazy var lineImage7: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
         return view
     }()
     
@@ -353,32 +319,25 @@ final class FilterView: UIViewController {
         
         scrollView.addSubviews([uiview, capacityDropDown])
         
-        uiview.addSubviews([exitButton,
-                            filterLabel,
-                            clearButton,
-                            capacityView,
-                            capacityLabel,
-                            numberLabel,
-                            capacityButton,
-                            lineImage,
-                            spaceType,
-                            roomsStackspaceType,
-                            lineImage2,
-                            classificationLabel,
-                            roomsStackClassification,
-                            lineImage3,
-                            categoryLabel,
-                            roomsStackCategory,
-                            lineImage4,
-                            facilitiesLabel,
-                            roomsStackFacilities,
-                            lineImage5,
-                            NoiseLabel,
-                            roomsStackNoise,
-                            lineImage6,
-                            typeOfContarctLabel,
-                            roomsStackContract,
-                            lineImage7])
+        uiview.addSubviews(lines + [exitButton,
+                                    filterLabel,
+                                    clearButton,
+                                    capacityView,
+                                    capacityLabel,
+                                    numberLabel,
+                                    capacityButton,
+                                    spaceType,
+                                    roomsStackspaceType,
+                                    classificationLabel,
+                                    roomsStackClassification,
+                                    categoryLabel,
+                                    roomsStackCategory,
+                                    facilitiesLabel,
+                                    roomsStackFacilities,
+                                    NoiseLabel,
+                                    roomsStackNoise,
+                                    typeOfContarctLabel,
+                                    roomsStackContract])
         
         tabBar.selectedItem = tabBar.items?[0]
         filterButton.setToBottomButtonDefaultAbove("Filtrar",
@@ -679,104 +638,104 @@ final class FilterView: UIViewController {
         capacityButton.constraintInsideTo(.trailing, capacityView)
         capacityButton.constraintInsideTo(.bottom, capacityView)
         
-        //MARK: lineImage
-        lineImage.constraintOutsideTo(.top, capacityView,
+        //MARK: lines[0]
+        lines[0].constraintOutsideTo(.top, capacityView,
                                       CGFloat(16).generateSizeForScreen)
-        lineImage.constraintInsideTo(.leading, capacityView)
-        lineImage.constraintInsideTo(.trailing, uiview,
+        lines[0].constraintInsideTo(.leading, capacityView)
+        lines[0].constraintInsideTo(.trailing, uiview,
                                      CGFloat(20).generateSizeForScreen)
-        lineImage.heightAnchorInSuperview(1)
+        lines[0].heightAnchorInSuperview(1)
         
         //MARK: spaceType
-        spaceType.constraintOutsideTo(.top, lineImage, spacing)
-        spaceType.constraintInsideTo(.leading, lineImage)
+        spaceType.constraintOutsideTo(.top, lines[0], spacing)
+        spaceType.constraintInsideTo(.leading, lines[0])
         
         //MARK: roomsStackspaceType
         roomsStackspaceType.constraintOutsideTo(.top, spaceType, spacing)
-        roomsStackspaceType.constraintInsideTo(.leading, lineImage)
-        roomsStackspaceType.constraintInsideTo(.trailing, lineImage)
+        roomsStackspaceType.constraintInsideTo(.leading, lines[0])
+        roomsStackspaceType.constraintInsideTo(.trailing, lines[0])
         
         //MARK: lineImage2
-        lineImage2.constraintOutsideTo(.top, roomsStackspaceType, spacing)
-        lineImage2.constraintInsideTo(.leading, lineImage)
-        lineImage2.constraintInsideTo(.trailing, lineImage)
-        lineImage2.constraintInsideTo(.height, lineImage)
+        lines[1].constraintOutsideTo(.top, roomsStackspaceType, spacing)
+        lines[1].constraintInsideTo(.leading, lines[0])
+        lines[1].constraintInsideTo(.trailing, lines[0])
+        lines[1].constraintInsideTo(.height, lines[0])
         
         //MARK: classificationLabel
-        classificationLabel.constraintOutsideTo(.top, lineImage2, spacing)
-        classificationLabel.constraintInsideTo(.leading, lineImage)
+        classificationLabel.constraintOutsideTo(.top, lines[1], spacing)
+        classificationLabel.constraintInsideTo(.leading, lines[0])
         
         //MARK: roomsStackClassification
         roomsStackClassification.constraintOutsideTo(.top, classificationLabel, spacing)
-        roomsStackClassification.constraintInsideTo(.leading, lineImage)
-        roomsStackClassification.constraintInsideTo(.trailing, lineImage)
+        roomsStackClassification.constraintInsideTo(.leading, lines[0])
+        roomsStackClassification.constraintInsideTo(.trailing, lines[0])
         
         //MARK: lineImage3
-        lineImage3.constraintOutsideTo(.top, roomsStackClassification, spacing)
-        lineImage3.constraintInsideTo(.leading, lineImage)
-        lineImage3.constraintInsideTo(.trailing, lineImage)
-        lineImage3.constraintInsideTo(.height, lineImage)
+        lines[2].constraintOutsideTo(.top, roomsStackClassification, spacing)
+        lines[2].constraintInsideTo(.leading, lines[0])
+        lines[2].constraintInsideTo(.trailing, lines[0])
+        lines[2].constraintInsideTo(.height, lines[0])
         
         //MARK: categoryLabel
-        categoryLabel.constraintOutsideTo(.top, lineImage3, spacing)
-        categoryLabel.constraintInsideTo(.leading, lineImage)
+        categoryLabel.constraintOutsideTo(.top, lines[2], spacing)
+        categoryLabel.constraintInsideTo(.leading, lines[0])
         
         //MARK: roomsStackCategory
         roomsStackCategory.constraintOutsideTo(.top, categoryLabel, spacing)
-        roomsStackCategory.constraintInsideTo(.leading, lineImage)
-        roomsStackCategory.constraintInsideTo(.trailing, lineImage)
+        roomsStackCategory.constraintInsideTo(.leading, lines[0])
+        roomsStackCategory.constraintInsideTo(.trailing, lines[0])
         
         //MARK: lineImage4
-        lineImage4.constraintOutsideTo(.top, roomsStackCategory, spacing)
-        lineImage4.constraintInsideTo(.leading, lineImage)
-        lineImage4.constraintInsideTo(.trailing, lineImage)
-        lineImage4.constraintInsideTo(.height, lineImage)
+        lines[3].constraintOutsideTo(.top, roomsStackCategory, spacing)
+        lines[3].constraintInsideTo(.leading, lines[0])
+        lines[3].constraintInsideTo(.trailing, lines[0])
+        lines[3].constraintInsideTo(.height, lines[0])
         
         //MARK: facilitiesLabel
-        facilitiesLabel.constraintOutsideTo(.top, lineImage4, spacing)
-        facilitiesLabel.constraintInsideTo(.leading, lineImage)
+        facilitiesLabel.constraintOutsideTo(.top, lines[3], spacing)
+        facilitiesLabel.constraintInsideTo(.leading, lines[0])
         
         //MARK: roomsStackFacilities
         roomsStackFacilities.constraintOutsideTo(.top, facilitiesLabel, spacing)
-        roomsStackFacilities.constraintInsideTo(.leading, lineImage)
-        roomsStackFacilities.constraintInsideTo(.trailing, lineImage)
+        roomsStackFacilities.constraintInsideTo(.leading, lines[0])
+        roomsStackFacilities.constraintInsideTo(.trailing, lines[0])
         
         //MARK: lineImage5
-        lineImage5.constraintOutsideTo(.top, roomsStackFacilities, spacing)
-        lineImage5.constraintInsideTo(.leading, lineImage)
-        lineImage5.constraintInsideTo(.trailing, lineImage)
-        lineImage5.constraintInsideTo(.height, lineImage)
+        lines[4].constraintOutsideTo(.top, roomsStackFacilities, spacing)
+        lines[4].constraintInsideTo(.leading, lines[0])
+        lines[4].constraintInsideTo(.trailing, lines[0])
+        lines[4].constraintInsideTo(.height, lines[0])
         
         //MARK: NoiseLabel
-        NoiseLabel.constraintOutsideTo(.top, lineImage5, spacing)
-        NoiseLabel.constraintInsideTo(.leading, lineImage)
+        NoiseLabel.constraintOutsideTo(.top, lines[4], spacing)
+        NoiseLabel.constraintInsideTo(.leading, lines[0])
         
         //MARK: roomsStackNoise
         roomsStackNoise.constraintOutsideTo(.top, NoiseLabel, spacing)
-        roomsStackNoise.constraintInsideTo(.leading, lineImage)
-        roomsStackNoise.constraintInsideTo(.trailing, lineImage)
+        roomsStackNoise.constraintInsideTo(.leading, lines[0])
+        roomsStackNoise.constraintInsideTo(.trailing, lines[0])
         
         //MARK: lineImage6
-        lineImage6.constraintOutsideTo(.top, roomsStackNoise, spacing)
-        lineImage6.constraintInsideTo(.leading, lineImage)
-        lineImage6.constraintInsideTo(.trailing, lineImage)
-        lineImage6.constraintInsideTo(.height, lineImage)
+        lines[5].constraintOutsideTo(.top, roomsStackNoise, spacing)
+        lines[5].constraintInsideTo(.leading, lines[0])
+        lines[5].constraintInsideTo(.trailing, lines[0])
+        lines[5].constraintInsideTo(.height, lines[0])
         
         //MARK: typeOfContarctLabel
-        typeOfContarctLabel.constraintOutsideTo(.top, lineImage6, spacing)
-        typeOfContarctLabel.constraintInsideTo(.leading, lineImage)
+        typeOfContarctLabel.constraintOutsideTo(.top, lines[5], spacing)
+        typeOfContarctLabel.constraintInsideTo(.leading, lines[0])
         
         //MARK: lineImage6
         roomsStackContract.constraintOutsideTo(.top, typeOfContarctLabel, spacing)
-        roomsStackContract.constraintInsideTo(.leading, lineImage)
-        roomsStackContract.constraintInsideTo(.trailing, lineImage)
+        roomsStackContract.constraintInsideTo(.leading, lines[0])
+        roomsStackContract.constraintInsideTo(.trailing, lines[0])
         
         //MARK: lineImage6
-        lineImage7.constraintOutsideTo(.top, roomsStackContract, spacing)
-        lineImage7.constraintInsideTo(.leading, lineImage)
-        lineImage7.constraintInsideTo(.trailing, lineImage)
-        lineImage7.constraintInsideTo(.bottom, uiview, spacing)
-        lineImage7.constraintInsideTo(.height, lineImage)
+        lines[6].constraintOutsideTo(.top, roomsStackContract, spacing)
+        lines[6].constraintInsideTo(.leading, lines[0])
+        lines[6].constraintInsideTo(.trailing, lines[0])
+        lines[6].constraintInsideTo(.bottom, uiview, spacing)
+        lines[6].constraintInsideTo(.height, lines[0])
         
         //MARK: tabBar
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
