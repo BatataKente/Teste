@@ -10,6 +10,8 @@ import UIKit
 class LoginView: UIViewController {
     
     let backButton = UIButton()
+    private let viewModel: LoginViewModel = LoginViewModel()
+    private let customAlert: CustomAlert = CustomAlert()
     
     override func viewDidLoad() {
         
@@ -19,14 +21,14 @@ class LoginView: UIViewController {
         setupLayoutConstraints()
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override var prefersStatusBarHidden: Bool {
         
-        return .lightContent
+        return true
     }
     
     func setupView() {
         
-        view.addSubviews([wayImage, titleLabel, subTitleLabel, cellStackView, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
+        view.addSubviews([wayImage, titleLabel, subTitleLabel, loginStackView, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
         
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
         
@@ -34,14 +36,14 @@ class LoginView: UIViewController {
         
         let cellStackViewTap = UITapGestureRecognizer(target: self,
                                                       action: #selector(cellStackViewTapped))
-        cellStackView.addGestureRecognizer(cellStackViewTap)
+        loginStackView.addGestureRecognizer(cellStackViewTap)
         
         let passwordStackViewTap = UITapGestureRecognizer(target: self,
                                                           action: #selector(passwordStackViewTapped))
         passwordStackView.addGestureRecognizer(passwordStackViewTap)
         
         backButton.setToBackButtonDefault {_ in
-
+            
             self.dismiss(animated: true)
         }
     }
@@ -51,10 +53,10 @@ class LoginView: UIViewController {
         let layoutVerticalMargins = CGFloat(10).generateSizeForScreen
         let layoutHorizontalMargins = CGFloat(15).generateSizeForScreen
         
-        cellLabel.font = UIFont(name: FontsBravve.light.rawValue,
+        loginLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                 size: CGFloat(10).generateSizeForScreen)
-        cellTextField.isHidden = false
-        cellStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
+        loginTextField.isHidden = false
+        loginStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
                                                    left: layoutHorizontalMargins,
                                                    bottom: layoutVerticalMargins,
                                                    right: layoutHorizontalMargins)
@@ -122,10 +124,10 @@ class LoginView: UIViewController {
         return view
     }()
     
-    private lazy var cellLabel: UILabel = {
+    private lazy var loginLabel: UILabel = {
         
         let view = UILabel()
-        view.text =  "Número de Celular"
+        view.text =  "Login"
         view.font = UIFont(name: FontsBravve.light.rawValue,
                            size: CGFloat(15).generateSizeForScreen)
         view.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -133,23 +135,24 @@ class LoginView: UIViewController {
         return view
     }()
     
-    private lazy var cellTextField: UITextField = {
+    private lazy var loginTextField: UITextField = {
         
         let view = UITextField()
         view.font = UIFont(name: FontsBravve.medium.rawValue,
                            size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
         view.keyboardType = .namePhonePad
+        view.delegate = self
         
         return view
     }()
         
-    private lazy var cellStackView: UIStackView = {
+    private lazy var loginStackView: UIStackView = {
 
         let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let stackHotizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
 
-        let cellStackView = UIStackView(arrangedSubviews: [cellLabel,cellTextField])
+        let cellStackView = UIStackView(arrangedSubviews: [loginLabel,loginTextField])
         cellStackView.spacing = CGFloat(5).generateSizeForScreen
         cellStackView.axis = .vertical
         cellStackView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
@@ -179,6 +182,8 @@ class LoginView: UIViewController {
         view.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
         view.keyboardType = .namePhonePad
+        view.delegate = self
+        view.isSecureTextEntry = true
         
         return view
     }()
@@ -186,8 +191,8 @@ class LoginView: UIViewController {
     private lazy var eyeButton: UIButton = {
         
         let view = UIButton(type: .custom)
-        view.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .selected)
+        view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+//        view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
         
@@ -200,8 +205,10 @@ class LoginView: UIViewController {
         
         if eyeButton.isSelected {
             passwordTextField.isSecureTextEntry = true
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
         } else {
             passwordTextField.isSecureTextEntry  = false
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
         }
     }
 
@@ -235,9 +242,16 @@ class LoginView: UIViewController {
 
         let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+        view.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
         
         return view
     }()
+    
+    @objc func forgotPasswordButtonTapped(){
+        let vc = PasswordRecoveryEmailView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
     
     private lazy var enterButton: UIButton = {
         
@@ -258,10 +272,36 @@ class LoginView: UIViewController {
 
         let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
+        view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
         return view
     }()
     
+    @objc func loginButtonTapped(){
+        
+        let vc = HomeClosedView()
+        vc.modalPresentationStyle = .fullScreen
+        
+        guard let phone = self.loginTextField.text else {return}
+        guard let password = self.passwordTextField.text else {return}
+        
+        if self.viewModel.isValid(phone: phone, password: password) == true{
+            present(vc, animated: false)
+        }
+        else{
+            loginLabel.textColor = .systemRed
+            passwordLabel.textColor = .systemRed
+            if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeOpen.rawValue){
+                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
+            }else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
+                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
+            }
+            customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                  message: "Usuário e/ou senha incorretos",
+                                  enterAttributed: "Tentar Novamente",
+                                  on: self)
+        }
+    }
     
     private lazy var newLabel : UILabel  = {
         
@@ -325,11 +365,11 @@ class LoginView: UIViewController {
         subTitleLabel.constraintInsideTo(.leading, titleLabel)
         subTitleLabel.constraintInsideTo(.trailing, titleLabel)
         
-        cellStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
-        cellStackView.constraintInsideTo(.leading, passwordStackView)
-        cellStackView.constraintInsideTo(.trailing, passwordStackView)
+        loginStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
+        loginStackView.constraintInsideTo(.leading, passwordStackView)
+        loginStackView.constraintInsideTo(.trailing, passwordStackView)
         
-        passwordStackView.constraintOutsideTo(.top, cellStackView, CGFloat(15).generateSizeForScreen)
+        passwordStackView.constraintOutsideTo(.top, loginStackView, CGFloat(15).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.leading, subTitleLabel)
         passwordStackView.constraintInsideTo(.trailing, subTitleLabel)
         
@@ -354,5 +394,19 @@ class LoginView: UIViewController {
         registerButton.constraintInsideTo(.leading, enterButton)
         registerButton.constraintInsideTo(.trailing, enterButton)
         registerButton.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+    }
+}
+
+
+extension LoginView: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        loginLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        passwordLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        loginTextField.text = loginTextField.text?.formatMask(mask: "(##) #####-####")
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        loginTextField.text = loginTextField.text?.formatMask(mask: "(##) #####-####")
     }
 }
