@@ -87,6 +87,19 @@
 		14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */; };
 		14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */; };
 		14DADD30289037A1001A55F3 /* PasswordRecoveryEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */; };
+		14DD08A728B3B31E006C1D3A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08A628B3B31E006C1D3A /* LoginViewModel.swift */; };
+		14DD08A928B3B372006C1D3A /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08A828B3B372006C1D3A /* CustomAlert.swift */; };
+		14DD08AB28B3B397006C1D3A /* HomeClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08AA28B3B396006C1D3A /* HomeClosedView.swift */; };
+		14DD08AD28B3B3F3006C1D3A /* TabBarClosed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08AC28B3B3F3006C1D3A /* TabBarClosed.swift */; };
+		14DD08AF28B3B452006C1D3A /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08AE28B3B452006C1D3A /* SessionManager.swift */; };
+		14DD08B128B3B487006C1D3A /* HomeClosedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08B028B3B487006C1D3A /* HomeClosedTableViewCell.swift */; };
+		14DD08B328B3B4B8006C1D3A /* EmptyReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08B228B3B4B8006C1D3A /* EmptyReservationView.swift */; };
+		14DD08B528B3B4D6006C1D3A /* PersonalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08B428B3B4D6006C1D3A /* PersonalProfileView.swift */; };
+		14DD08B728B3B508006C1D3A /* DetailsClosedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08B628B3B508006C1D3A /* DetailsClosedView.swift */; };
+		14DD08B928B3B531006C1D3A /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08B828B3B531006C1D3A /* TermsAndConditionViewController.swift */; };
+		14DD08BB28B3B56C006C1D3A /* DetailsClosedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08BA28B3B56C006C1D3A /* DetailsClosedCollectionViewCell.swift */; };
+		14DD08BD28B3B5DE006C1D3A /* WorkPassBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08BC28B3B5DE006C1D3A /* WorkPassBookingView.swift */; };
+		14DD08BF28B3B64C006C1D3A /* WorkPassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD08BE28B3B64C006C1D3A /* WorkPassCell.swift */; };
 		14F55C3A2889FE19003A8A34 /* TesteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F55C392889FE19003A8A34 /* TesteView.xib */; };
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		3029F16728ABDD9E006E1229 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029F16628ABDD9E006E1229 /* UIViewPreview.swift */; };
@@ -187,6 +200,19 @@
 		14CBDBDF2889B81A00EA8EDD /* StageEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageEnum.swift; sourceTree = "<group>"; };
 		14CBDBE12889B83900EA8EDD /* NomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NomeViewModel.swift; sourceTree = "<group>"; };
 		14DADD2F289037A1001A55F3 /* PasswordRecoveryEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryEmailView.swift; sourceTree = "<group>"; };
+		14DD08A628B3B31E006C1D3A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		14DD08A828B3B372006C1D3A /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		14DD08AA28B3B396006C1D3A /* HomeClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedView.swift; sourceTree = "<group>"; };
+		14DD08AC28B3B3F3006C1D3A /* TabBarClosed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarClosed.swift; sourceTree = "<group>"; };
+		14DD08AE28B3B452006C1D3A /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		14DD08B028B3B487006C1D3A /* HomeClosedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedTableViewCell.swift; sourceTree = "<group>"; };
+		14DD08B228B3B4B8006C1D3A /* EmptyReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyReservationView.swift; sourceTree = "<group>"; };
+		14DD08B428B3B4D6006C1D3A /* PersonalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalProfileView.swift; sourceTree = "<group>"; };
+		14DD08B628B3B508006C1D3A /* DetailsClosedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedView.swift; sourceTree = "<group>"; };
+		14DD08B828B3B531006C1D3A /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
+		14DD08BA28B3B56C006C1D3A /* DetailsClosedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsClosedCollectionViewCell.swift; sourceTree = "<group>"; };
+		14DD08BC28B3B5DE006C1D3A /* WorkPassBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingView.swift; sourceTree = "<group>"; };
+		14DD08BE28B3B64C006C1D3A /* WorkPassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassCell.swift; sourceTree = "<group>"; };
 		14F55C392889FE19003A8A34 /* TesteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesteView.xib; sourceTree = "<group>"; };
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		3029F16628ABDD9E006E1229 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
@@ -271,6 +297,7 @@
 				14937D6928A47033004A1E7A /* HelpView.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
+				14DD08A628B3B31E006C1D3A /* LoginViewModel.swift */,
 				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
 				1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */,
 				1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */,
@@ -295,11 +322,20 @@
 				138C85AF2892BF4200997FBC /* ReservaCell.swift */,
 				1340F096289BFF3F00F9A2A5 /* Reservas2.swift */,
 				C616D877289C40C40045AEED /* ProfileScreen.swift */,
+				14DD08B228B3B4B8006C1D3A /* EmptyReservationView.swift */,
 				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
+				14DD08BE28B3B64C006C1D3A /* WorkPassCell.swift */,
+				14DD08BA28B3B56C006C1D3A /* DetailsClosedCollectionViewCell.swift */,
 				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
 				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
 				142367CB28B00CDD0080738E /* SingleBook.swift */,
+				14DD08B428B3B4D6006C1D3A /* PersonalProfileView.swift */,
+				14DD08B828B3B531006C1D3A /* TermsAndConditionViewController.swift */,
+				14DD08BC28B3B5DE006C1D3A /* WorkPassBookingView.swift */,
+				14DD08B628B3B508006C1D3A /* DetailsClosedView.swift */,
 				143054AC28B1671900A8065C /* FilterView.swift */,
+				14DD08AA28B3B396006C1D3A /* HomeClosedView.swift */,
+				14DD08B028B3B487006C1D3A /* HomeClosedTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,8 +347,10 @@
 				14BDBC1728ABDF12004C32BF /* String+Extension.swift */,
 				143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */,
 				14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */,
+				14DD08AC28B3B3F3006C1D3A /* TabBarClosed.swift */,
 				14C6954128944A2800BD3B79 /* UIImageViewExtension.swift */,
 				14C6954328944A2E00BD3B79 /* UILabelExtension.swift */,
+				14DD08A828B3B372006C1D3A /* CustomAlert.swift */,
 				14C6954528944A3400BD3B79 /* UIStackViewExtension.swift */,
 				14C6954928944A3900BD3B79 /* UIViewControllerExtension.swift */,
 				14C6954728944A3600BD3B79 /* UIViewExtension.swift */,
@@ -369,6 +407,7 @@
 				3029F16528ABDCE4006E1229 /* Utils */,
 				147B1C852898482100A5E3EE /* Assets.xcassets */,
 				13080CB328A17EC000A064B0 /* Network.swift */,
+				14DD08AE28B3B452006C1D3A /* SessionManager.swift */,
 				14CBDBC52889B72300EA8EDD /* AppDelegate.swift */,
 				14CBDBC72889B72300EA8EDD /* SceneDelegate.swift */,
 				14F55C392889FE19003A8A34 /* TesteView.xib */,
@@ -472,11 +511,14 @@
 			files = (
 				148A86EB289C64540019ECFE /* BravveTabBar.swift in Sources */,
 				14A375C528A302A100B48F9D /* PasswordView.swift in Sources */,
+				14DD08B528B3B4D6006C1D3A /* PersonalProfileView.swift in Sources */,
+				14DD08B128B3B487006C1D3A /* HomeClosedTableViewCell.swift in Sources */,
 				CFBF087528A2ACFC00D39DCF /* HobbiesView.swift in Sources */,
 				1440616E28A2BD7900F82171 /* ImagesBravveEnum.swift in Sources */,
 				14CBDBE22889B83900EA8EDD /* NomeViewModel.swift in Sources */,
 				0953C3C028AC15BC00C78D93 /* MinhasReservasVazioView.swift in Sources */,
 				143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */,
+				14DD08A928B3B372006C1D3A /* CustomAlert.swift in Sources */,
 				284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */,
 				CFBF085E28A2810600D39DCF /* ModelUtilsV1.swift in Sources */,
 				134D68152890158A00D5572B /* RecuperacaoDeSenha3.swift in Sources */,
@@ -493,6 +535,7 @@
 				CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */,
 				14937D6C28A4703F004A1E7A /* HelpViewModel.swift in Sources */,
 				1478A22128995EBA00B409E5 /* IconsBravveEnum.swift in Sources */,
+				14DD08BD28B3B5DE006C1D3A /* WorkPassBookingView.swift in Sources */,
 				145663C8288D73C500852049 /* OpenDetailsCollectionViewCell.swift in Sources */,
 				14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */,
 				1478A21B28995E1000B409E5 /* FontsBravveEnum.swift in Sources */,
@@ -504,6 +547,7 @@
 				145B07E128AABEAD00ABCCF0 /* EmailView.swift in Sources */,
 				147BA88428A81ECF006924C8 /* OrientationEnum.swift in Sources */,
 				138C85B02892BF4200997FBC /* ReservaCell.swift in Sources */,
+				14DD08AB28B3B397006C1D3A /* HomeClosedView.swift in Sources */,
 				134D68132890154E00D5572B /* TextField.swift in Sources */,
 				14421BF828A12E4000EA46FE /* FinalizacaoCadastroView.swift in Sources */,
 				CFBF085C28A2810600D39DCF /* ModelCorporatesV1.swift in Sources */,
@@ -512,7 +556,9 @@
 				145B07E328AABECA00ABCCF0 /* PhoneViewModel.swift in Sources */,
 				1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */,
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
+				14DD08AD28B3B3F3006C1D3A /* TabBarClosed.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
+				14DD08B328B3B4B8006C1D3A /* EmptyReservationView.swift in Sources */,
 				14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */,
 				0ECFDE91289AD7E5005A009C /* AdviceCheckoutView.swift in Sources */,
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
@@ -537,14 +583,20 @@
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
 				CFBF085D28A2810600D39DCF /* ModelSubscriptionsV1.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
+				14DD08AF28B3B452006C1D3A /* SessionManager.swift in Sources */,
+				14DD08B928B3B531006C1D3A /* TermsAndConditionViewController.swift in Sources */,
 				143054AD28B1671900A8065C /* FilterView.swift in Sources */,
+				14DD08A728B3B31E006C1D3A /* LoginViewModel.swift in Sources */,
 				14CBDBDC2889B7ED00EA8EDD /* FotoView.swift in Sources */,
+				14DD08B728B3B508006C1D3A /* DetailsClosedView.swift in Sources */,
 				13F1768628941C6200C5FD05 /* ConfirmDataView.swift in Sources */,
 				CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */,
 				13080CBB28A17F6B00A064B0 /* StatesModel.swift in Sources */,
 				14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */,
+				14DD08BB28B3B56C006C1D3A /* DetailsClosedCollectionViewCell.swift in Sources */,
 				14CBDBE02889B81A00EA8EDD /* StageEnum.swift in Sources */,
 				1480986F289EC3D000B1BDE2 /* ProfessionView.swift in Sources */,
+				14DD08BF28B3B64C006C1D3A /* WorkPassCell.swift in Sources */,
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
 				145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */,

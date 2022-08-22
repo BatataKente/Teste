@@ -1,8 +1,8 @@
 //
-//  Network.swift
-//  Teste
+//  SessionManager.swift
+//  Bravve
 //
-//  Created by user208023 on 8/5/22.
+//  Created by Evandro Rodrigo Minamoto on 05/08/22.
 //
 
 import Foundation
@@ -10,13 +10,13 @@ import UIKit
 import Alamofire
 
 /// Class to manage API Requests
-class NetworkManager {
+class SessionManager {
     
     var accessToken: String? {
         return UserDefaults.standard.string(forKey: "access_token")
     }
-        
-    private let baseAPIString = "https://api-design.dev.bravve.app/api/v1"
+    
+    private let baseAPIString = "https://api.dev.bravve.app"
     
     /// Method to get the token to access the BravveAPI
     /// - Parameter completioHandler: Completion handler that holds the API token as parameter to manage the result of the API Call
@@ -29,9 +29,9 @@ class NetworkManager {
         
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: AccessToken.self) { response in
             if let data = response.value {
-
-                    self.cacheToken(result: data)
-                    completioHandler(data.access_token)
+                
+                self.cacheToken(result: data)
+                completioHandler(data.access_token)
             }
         }
     }
@@ -59,7 +59,7 @@ class NetworkManager {
             guard let accessToken = accessToken else { return }
             
             
-         
+            
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             let headers: HTTPHeaders = [
@@ -68,12 +68,36 @@ class NetworkManager {
             
             AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
                 if let data = response.value {
-//                    print(response.response?.statusCode)
+                    //                    print(response.response?.statusCode)
                     completionHandler(data)
                 } else {
-//                    print(response.response?.statusCode)
+                    //                    print(response.response?.statusCode)
                     completionHandler(nil)
                 }
+            }
+        }
+    }
+    
+    
+    /// Method to get open data in the API with response as an array
+    /// - Parameters:
+    ///   - id: Optional argument to pass an id as a url string parameter
+    ///   - phoneNumber: Optional argument to pass a phone number as a url string parameter
+    ///   - uuid: Optional argument to pass a uuid as a url string parameter
+    ///   - picture: Optional argument to pass a picture path as a url string parameter
+    ///   - picture_uuid: Optional argument to pass a picture_uuid as a url string parameter
+    ///   - payment_type_id: Optional argument to pass a payment_type_id as a url string parameter
+    ///   - endpoint: Endpoint of the API call as a EndpointEnum
+    ///   - completionHandler: Completion handler to manage the API call result
+    func getOpenDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping ([T]?) -> Void) {
+        
+        guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+        
+        AF.request(url).responseDecodable(of: [T].self) { response in
+            if let data = response.value {
+                completionHandler(data)
+            } else {
+                completionHandler(nil)
             }
         }
     }
@@ -113,6 +137,21 @@ class NetworkManager {
         }
     }
     
+    func getOpenData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (T?) -> Void) {
+        
+            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+            
+            AF.request(url).responseDecodable(of: T.self) { response in
+//                print(response.debugDescription)
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    print(response.response?.statusCode as Any)
+                    completionHandler(nil)
+                }
+            }
+    }
+    
     /// Method to post data to the API with a response decoded as an array
     /// - Parameters:
     ///   - id: Optional argument to pass the id to the API endpoint
@@ -139,11 +178,37 @@ class NetworkManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: [T].self) { response in
+                print(response.debugDescription)
                 if let data = response.value {
                     completionHandler(data)
                 } else {
                     completionHandler(nil)
                 }
+            }
+        }
+    }
+    
+    /// Method to post data to an open API with an array as response
+    /// - Parameters:
+    ///   - id: Optional argument id to be passed as a url string parametetr
+    ///   - phoneNumber: Optional argument phone number to be passed as a url string parameter
+    ///   - uuid: Optional argument uuid to be passed as a url string parameter
+    ///   - picture: Optional argument picture path to be passed as a url string parameter
+    ///   - picture_uuid: Optional argument picture_uuid to be passed as a url string parameter
+    ///   - payment_type_id: Optional argument payment_type_id to be passed as a url string parameter
+    ///   - endpoint: API URL endpoint to be passed as a EndpointEnum
+    ///   - parameters: API body parameters to be passed as a Codable
+    ///   - completionHandler: Completion handler to manage the API response
+    func postDataWithOpenArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping ([T]?) -> Void) {
+        
+        guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+        
+        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [T].self) { response in
+//            print(response.debugDescription)
+            if let data = response.value {
+                completionHandler(data)
+            } else {
+                completionHandler(nil)
             }
         }
     }
@@ -163,7 +228,7 @@ class NetworkManager {
     func postDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
-
+            
             guard let accessToken = accessToken else {
                 return
             }
@@ -200,7 +265,7 @@ class NetworkManager {
     func uploadPictureWithResponse<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, picture_url: URL, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
-
+            
             guard let accessToken = accessToken else {
                 return
             }
@@ -239,7 +304,7 @@ class NetworkManager {
     func postDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?) -> Void) {
         
         getToken { accessToken in
-
+            
             guard let accessToken = accessToken else {
                 return
             }
@@ -251,7 +316,7 @@ class NetworkManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-
+                
                 if let statusCode = response.response?.statusCode {
                     completionHandler(statusCode)
                 } else {
@@ -276,7 +341,7 @@ class NetworkManager {
     func putDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
         
         getToken { accessToken in
-
+            
             guard let accessToken = accessToken else {
                 return
             }
@@ -311,7 +376,7 @@ class NetworkManager {
     func deleteData(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?) -> Void) {
         
         getToken { accessToken in
-
+            
             guard let accessToken = accessToken else {
                 return
             }
@@ -323,7 +388,7 @@ class NetworkManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .delete, headers: headers).response { response in
-
+                
                 if let statusCode = response.response?.statusCode {
                     completionHandler(statusCode)
                 } else {
@@ -384,7 +449,7 @@ class NetworkManager {
         case .partnersFinancial: urlEndpoint = EndPoints.partners.rawValue + "\(id)financial"
         case .partnersContacts: urlEndpoint = EndPoints.partners.rawValue + "\(id)contacts"
         case .partnersDoorLocks: urlEndpoint = EndPoints.partners.rawValue + "\(id)doorLocks"
-        
+            
         case .sitesSiteClassification: urlEndpoint = EndPoints.sitesSiteClassification.rawValue
         case .sites: urlEndpoint = EndPoints.sites.rawValue
         case .sitesId: urlEndpoint = EndPoints.sites.rawValue + "/\(id)"
@@ -414,7 +479,7 @@ class NetworkManager {
         case .reservationsPayments: urlEndpoint = EndPoints.reservationsPayments.rawValue
         case .reservationsPaymentsWorkpass: urlEndpoint = EndPoints.reservationsPaymentsWorkpass.rawValue
         case .reservationsPaymentSummary: urlEndpoint = EndPoints.reservationsPaymentSummary.rawValue + "/\(payment_type_id)"
-        
+            
         }
         
         let url = URL(string: self.baseAPIString + urlEndpoint)

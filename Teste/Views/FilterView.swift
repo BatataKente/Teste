@@ -420,8 +420,7 @@ final class FilterView: UIViewController {
         return stackView
     }
     
-    //MARK: - API Functions
-    
+    //MARK: - setupStackView
     func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
         
         var stackViews = [UIStackView]()
@@ -453,6 +452,7 @@ final class FilterView: UIViewController {
         return stackViews
     }
     
+    //MARK: - API Functions
     func setupTypesButtons(_ stackView: UIStackView) {
         
         sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (typesList: [SpaceType]? ) in
