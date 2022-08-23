@@ -165,12 +165,14 @@ class OpenDetailsView: UIViewController {
         guard var business_hours = space.space_business_hours else { return UIStackView() }
         business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
             
-            guard let lhsWeekDay = lhs.week_day else { return false }
-            guard let rhsWeekDay = rhs.week_day else { return false }
+            guard let lhsWeekDay = lhs.week_day else {return false}
+            guard let rhsWeekDay = rhs.week_day else {return false}
+            
             return lhsWeekDay < rhsWeekDay
         }
         
         var texts:[String] {
+            
             var textArray: [String] = []
             
             for business_hour in business_hours {

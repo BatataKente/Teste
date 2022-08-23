@@ -35,12 +35,14 @@
 		1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */; };
 		1411D90228A4730D003AAB70 /* Reservations3-3ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */; };
 		1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415AB75288B07100077CE08 /* HomeOpenView.swift */; };
-		142367CC28B00CDD0080738E /* SingleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142367CB28B00CDD0080738E /* SingleBook.swift */; };
 		143054AD28B1671900A8065C /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143054AC28B1671900A8065C /* FilterView.swift */; };
 		143C266E28A93C9100917E0C /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */; };
 		143E621328AD04B800AD6BEA /* HomeOpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */; };
 		143E967F28A2C0DC00532A1F /* EndPointsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */; };
 		143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */; };
+		143F88CE28B4F37600F9460A /* SingleBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F88CD28B4F37600F9460A /* SingleBookingView.swift */; };
+		143F88D028B4FD9D00F9460A /* OpenDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F88CF28B4FD9D00F9460A /* OpenDetailsViewModel.swift */; };
+		143F88D228B5010600F9460A /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F88D128B5010600F9460A /* HelpModel.swift */; };
 		1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616728A2BD5F00F82171 /* RideUpEnum.swift */; };
 		1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */; };
 		1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */; };
@@ -69,7 +71,6 @@
 		14A375C528A302A100B48F9D /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A375C428A302A100B48F9D /* PasswordView.swift */; };
 		14AA1CF12897FCC2008CCC31 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */; };
 		14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */; };
-		14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE328ABB626004C32BF /* HelpViewController.swift */; };
 		14BDBBE628ABB62E004C32BF /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */; };
 		14BDBC1828ABDF12004C32BF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDBC1728ABDF12004C32BF /* String+Extension.swift */; };
 		14C6954028944A1F00BD3B79 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */; };
@@ -104,7 +105,6 @@
 		284DF2EB289D43860047F545 /* CheckInQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */; };
 		3029F16728ABDD9E006E1229 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3029F16628ABDD9E006E1229 /* UIViewPreview.swift */; };
 		306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9628A29D630057D49C /* HelpTableViewCell.swift */; };
-		306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F6E9728A29D630057D49C /* FAQViewModel.swift */; };
 		C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616D877289C40C40045AEED /* ProfileScreen.swift */; };
 		C636F6E828ABC76D000804D2 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */; };
 		CF4A2AC628A19AE6001D9588 /* PasswordRecovery_sms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */; };
@@ -146,12 +146,14 @@
 		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
 		1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewModel.swift"; sourceTree = "<group>"; };
 		1415AB75288B07100077CE08 /* HomeOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenView.swift; sourceTree = "<group>"; };
-		142367CB28B00CDD0080738E /* SingleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBook.swift; sourceTree = "<group>"; };
 		143054AC28B1671900A8065C /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		143C266D28A93C9100917E0C /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOpenViewModel.swift; sourceTree = "<group>"; };
 		143E967E28A2C0DC00532A1F /* EndPointsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointsEnum.swift; sourceTree = "<group>"; };
 		143E968228A2DC8500532A1F /* BarWithFilterStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarWithFilterStruct.swift; sourceTree = "<group>"; };
+		143F88CD28B4F37600F9460A /* SingleBookingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleBookingView.swift; sourceTree = "<group>"; };
+		143F88CF28B4FD9D00F9460A /* OpenDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDetailsViewModel.swift; sourceTree = "<group>"; };
+		143F88D128B5010600F9460A /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
 		1440616728A2BD5F00F82171 /* RideUpEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideUpEnum.swift; path = Teste/RideUpEnum.swift; sourceTree = SOURCE_ROOT; };
 		1440616928A2BD6700F82171 /* ButtonsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonsBravveEnum.swift; path = Teste/ButtonsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
 		1440616B28A2BD6E00F82171 /* ColorsBravveEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorsBravveEnum.swift; path = Teste/ColorsBravveEnum.swift; sourceTree = SOURCE_ROOT; };
@@ -180,7 +182,6 @@
 		14A375C428A302A100B48F9D /* PasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		14AA1CF02897FCC2008CCC31 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQScrollViewTesteViewController.swift; sourceTree = "<group>"; };
-		14BDBBE328ABB626004C32BF /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
 		14BDBC1728ABDF12004C32BF /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		14C6953F28944A1F00BD3B79 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -217,7 +218,6 @@
 		284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInQrCodeViewController.swift; sourceTree = "<group>"; };
 		3029F16628ABDD9E006E1229 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		306F6E9628A29D630057D49C /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
-		306F6E9728A29D630057D49C /* FAQViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
 		C616D877289C40C40045AEED /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		CF4A2AC528A19AE6001D9588 /* PasswordRecovery_sms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery_sms.swift; sourceTree = "<group>"; };
@@ -276,25 +276,27 @@
 		140ED61C28ADA53C00AC5B92 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				143F88CD28B4F37600F9460A /* SingleBookingView.swift */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */,
 				14A375C428A302A100B48F9D /* PasswordView.swift */,
-				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
-				14BDBBE328ABB626004C32BF /* HelpViewController.swift */,
 				145663C5288D73B900852049 /* HomeOpenTableViewCell.swift */,
 				143E621228AD04B800AD6BEA /* HomeOpenViewModel.swift */,
 				1415AB75288B07100077CE08 /* HomeOpenView.swift */,
 				1480986C289EA79D00B1BDE2 /* HomeOpenModel.swift */,
 				145663C7288D73C500852049 /* OpenDetailsCollectionViewCell.swift */,
+				143F88CF28B4FD9D00F9460A /* OpenDetailsViewModel.swift */,
 				147AC2ED2891AB9B00ABE48E /* OpenDetailsView.swift */,
 				14BDBBE128ABB618004C32BF /* FAQScrollViewTesteViewController.swift */,
 				14421BF728A12E4000EA46FE /* FinalizacaoCadastroView.swift */,
 				14809870289EC3DC00B1BDE2 /* ProfessionViewModel.swift */,
 				1480986E289EC3D000B1BDE2 /* ProfessionView.swift */,
 				284DF2EA289D43860047F545 /* CheckInQrCodeViewController.swift */,
+				14BDBBE528ABB62E004C32BF /* HelpViewTableViewCell.swift */,
 				14937D6B28A4703F004A1E7A /* HelpViewModel.swift */,
 				14937D6928A47033004A1E7A /* HelpView.swift */,
+				143F88D128B5010600F9460A /* HelpModel.swift */,
 				134D68102890151C00D5572B /* BulletPoint.swift */,
 				134D68122890154E00D5572B /* TextField.swift */,
 				14DD08A628B3B31E006C1D3A /* LoginViewModel.swift */,
@@ -326,9 +328,7 @@
 				13080CB828A17F2A00A064B0 /* AccessTokenModel.swift */,
 				14DD08BE28B3B64C006C1D3A /* WorkPassCell.swift */,
 				14DD08BA28B3B56C006C1D3A /* DetailsClosedCollectionViewCell.swift */,
-				306F6E9728A29D630057D49C /* FAQViewModel.swift */,
 				306F6E9628A29D630057D49C /* HelpTableViewCell.swift */,
-				142367CB28B00CDD0080738E /* SingleBook.swift */,
 				14DD08B428B3B4D6006C1D3A /* PersonalProfileView.swift */,
 				14DD08B828B3B531006C1D3A /* TermsAndConditionViewController.swift */,
 				14DD08BC28B3B5DE006C1D3A /* WorkPassBookingView.swift */,
@@ -527,7 +527,6 @@
 				146A8BE628AAAB2F007650A8 /* MonthView.swift in Sources */,
 				14C6954828944A3600BD3B79 /* UIViewExtension.swift in Sources */,
 				1440616C28A2BD6E00F82171 /* ColorsBravveEnum.swift in Sources */,
-				306F6E9B28A29D640057D49C /* FAQViewModel.swift in Sources */,
 				146A8BE928AAAB55007650A8 /* WeekDaysView.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
@@ -554,9 +553,11 @@
 				145B07E528AABED600ABCCF0 /* EmailViewModel.swift in Sources */,
 				0E4F4ED0289BFAA90067592A /* TermsAndCondition.swift in Sources */,
 				145B07E328AABECA00ABCCF0 /* PhoneViewModel.swift in Sources */,
+				143F88D228B5010600F9460A /* HelpModel.swift in Sources */,
 				1411D90028A47303003AAB70 /* Reservations3-3ViewController.swift in Sources */,
 				CFBF086128A2810600D39DCF /* ModelUsersV1.swift in Sources */,
 				14DD08AD28B3B3F3006C1D3A /* TabBarClosed.swift in Sources */,
+				143F88CE28B4F37600F9460A /* SingleBookingView.swift in Sources */,
 				145663C6288D73B900852049 /* HomeOpenTableViewCell.swift in Sources */,
 				14DD08B328B3B4B8006C1D3A /* EmptyReservationView.swift in Sources */,
 				14BDBBE228ABB618004C32BF /* FAQScrollViewTesteViewController.swift in Sources */,
@@ -564,7 +565,6 @@
 				140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */,
 				306F6E9A28A29D640057D49C /* HelpTableViewCell.swift in Sources */,
 				14C6954428944A2E00BD3B79 /* UILabelExtension.swift in Sources */,
-				142367CC28B00CDD0080738E /* SingleBook.swift in Sources */,
 				3029F16728ABDD9E006E1229 /* UIViewPreview.swift in Sources */,
 				1440616A28A2BD6700F82171 /* ButtonsBravveEnum.swift in Sources */,
 				13080CBE28A1893200A064B0 /* ModelSitesV1.swift in Sources */,
@@ -576,7 +576,6 @@
 				1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
-				14BDBBE428ABB626004C32BF /* HelpViewController.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14BDBC1828ABDF12004C32BF /* String+Extension.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
@@ -600,6 +599,7 @@
 				C616D878289C40C40045AEED /* ProfileScreen.swift in Sources */,
 				14809871289EC3DC00B1BDE2 /* ProfessionViewModel.swift in Sources */,
 				145B07DF28AABE6900ABCCF0 /* PhoneView.swift in Sources */,
+				143F88D028B4FD9D00F9460A /* OpenDetailsViewModel.swift in Sources */,
 				143E968328A2DC8500532A1F /* BarWithFilterStruct.swift in Sources */,
 				14C6954628944A3400BD3B79 /* UIStackViewExtension.swift in Sources */,
 				1480986D289EA79D00B1BDE2 /* HomeOpenModel.swift in Sources */,

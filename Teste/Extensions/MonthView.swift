@@ -79,7 +79,7 @@ class CalendarMonthView: UIView {
         
         let lbl = UILabel()
         lbl.text = "Default Month Year text"
-        lbl.textColor = Style.monthViewLblColor
+        lbl.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lbl.textAlignment = .center
         lbl.font = UIFont.boldSystemFont(ofSize: 16)
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +91,7 @@ class CalendarMonthView: UIView {
         
         let btn=UIButton()
         btn.setTitle(">", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+        btn.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
         btn.addTarget(CalendarMonthView.self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
@@ -101,7 +101,7 @@ class CalendarMonthView: UIView {
         
         let btn=UIButton()
         btn.setTitle("<", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+        btn.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
         btn.addTarget(CalendarMonthView.self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         btn.setTitleColor(UIColor.lightGray, for: .disabled)
