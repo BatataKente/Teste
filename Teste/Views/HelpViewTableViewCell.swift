@@ -5,7 +5,6 @@
 //  Created by user217584 on 04/08/22.
 //
 
-import Foundation
 import UIKit
 
 class HelpViewTableViewCell: UITableViewCell {

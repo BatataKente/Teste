@@ -178,7 +178,6 @@ class HomeOpenView: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        setupDropDowns()
         setupConstraints()
         setupDefaults()
     }
@@ -214,10 +213,6 @@ class HomeOpenView: UIViewController {
     override var prefersStatusBarHidden: Bool {
         
         true
-    }
-    
-    private func setupDropDowns() {
-        
     }
     
     private func setupDefaults() {
