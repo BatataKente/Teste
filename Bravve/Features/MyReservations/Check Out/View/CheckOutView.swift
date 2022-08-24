@@ -14,8 +14,12 @@ class CheckOutScreen: UIViewController{
     
     let customBar = UIView()
     private let myTableView = UITableView()
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    
+    lazy var tabBar: TabBarClosed = {
+        let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        return tabBar
+    }()
     
     lazy var lineView1:UIView = {
         let line = UIView()
@@ -600,7 +604,7 @@ class CheckOutScreen: UIViewController{
     }()
 
     @objc func buttonCheckOut(){
-
+        checkOutButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
 
     }
 
@@ -621,15 +625,12 @@ class CheckOutScreen: UIViewController{
         
        
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        super.viewDidDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
+
     func setupViews(){
         view.addSubview(buttonMainDoor)
         view.addSubview(buttonOpenSpace)
         view.addSubview(myTableView)
+        tabBar.selectedItem = tabBar.items?[1]
         myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,newDayLabel,newCheckInLabel,newCheckOutLabel,hourLabel,hourCheckInLabel,hourCheckOutLabel,newHourLabel,newHourCheckInLabel,newHourCheckOutLabel,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,arrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,checkOutButton,arrowIconImage2])
         view.addSubview(customBar)
         view.addSubview(tabBar)
@@ -640,17 +641,18 @@ class CheckOutScreen: UIViewController{
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Check out"){
             _ in
+            self.dismiss(animated: true)
             
         }
     }
     func setupContraints(){
         NSLayoutConstraint.activate([
-            buttonMainDoor.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            buttonMainDoor.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
             buttonMainDoor.leadingAnchor.constraint(equalTo:view.leadingAnchor),
             buttonMainDoor.widthAnchor.constraint(equalToConstant: 188),
             buttonMainDoor.heightAnchor.constraint(equalToConstant: 52),
             
-            buttonOpenSpace.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            buttonOpenSpace.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
             buttonOpenSpace.leadingAnchor.constraint(equalTo: buttonMainDoor.trailingAnchor),
             buttonOpenSpace.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             buttonOpenSpace.widthAnchor.constraint(equalToConstant: 188),

@@ -14,8 +14,14 @@ class BookingDetailsView: UIViewController{
     
     let customBar = UIView()
     private let myTableView = UITableView()
-    private lazy var tabBar = BravveTabBar(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.exitGray.rawValue])
+    private let customAlert: CustomAlert = CustomAlert()
+    private let alertCustom: CustomAlert = CustomAlert()
+    
+    lazy var tabBar: TabBarClosed = {
+        let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        return tabBar
+    }()
     
     lazy var lineView1:UIView = {
         let line = UIView()
@@ -318,20 +324,20 @@ class BookingDetailsView: UIViewController{
         return image
     }()
     
-    lazy var arrowIconImage1: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: ButtonsBravve.arrowDown.rawValue)
+    lazy var buttonArrowIconImage1: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
 
-        return image
+        return button
     }()
     
-    lazy var arrowIconImage2: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: ButtonsBravve.arrowDown.rawValue)
+    lazy var buttonArrowIconImage2: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
 
-        return image
+        return button
     }()
     
     lazy var cellIconImage: UIImageView = {
@@ -552,7 +558,18 @@ class BookingDetailsView: UIViewController{
         
     }
     
-    lazy var buttonCancelreserv: UIButton = {
+    lazy var buttonCheckIn: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Check-in", for: .normal)
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(buttonTapCheckIn), for: .touchUpInside)
+        return button
+    }()
+    lazy var buttonCancelReserv: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Cancelar reserva", for: .normal)
@@ -566,7 +583,21 @@ class BookingDetailsView: UIViewController{
     }()
     
     @objc func buttonTapCancelReserv(){
-        
+        customAlert.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", cancelAttributed: "Cancelar reserva", cancelHandler: UIAction(handler: { _ in
+            let vc = CancelReservationView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), on: self)
+    }
+    
+    @objc func buttonTapCheckIn() {
+        alertCustom.showAlert( message: "Precisamos acessar a câmera. Para realizar o Check-in, é permitir acesso à câmera do celular!", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
+            let vc = CheckInQrCodeViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), cancelAttributed: "Não permitir", cancelHandler: UIAction(handler: { _ in
+            self.alertCustom.dismissAlert()
+        }), on: self)
     }
     
     override func viewDidLoad() {
@@ -585,33 +616,32 @@ class BookingDetailsView: UIViewController{
         
        
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        super.viewDidDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
+   
     func setupViews(){
-        view.addSubview(buttonCancelreserv)
+        view.addSubview(buttonCheckIn)
         view.addSubview(myTableView)
-        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,newDayLabel,newCheckInLabel,newCheckOutLabel,hourLabel,hourCheckInLabel,hourCheckOutLabel,newHourLabel,newHourCheckInLabel,newHourCheckOutLabel,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,arrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,arrowIconImage2])
         view.addSubview(customBar)
         view.addSubview(tabBar)
+        tabBar.selectedItem = tabBar.items?[1]
+        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,newDayLabel,newCheckInLabel,newCheckOutLabel,hourLabel,hourCheckInLabel,hourCheckOutLabel,newHourLabel,newHourCheckInLabel,newHourCheckOutLabel,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,buttonArrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,buttonArrowIconImage2,buttonCancelReserv])
         
     
 
     }
     private func setupDefaults(){
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Check out"){
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
             _ in
+            self.dismiss(animated: true)
             
         }
+        
     }
     func setupContraints(){
         NSLayoutConstraint.activate([
-            buttonCancelreserv.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            buttonCancelreserv.leadingAnchor.constraint(equalTo:view.leadingAnchor,constant: 22),
-            buttonCancelreserv.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -22),
-            buttonCancelreserv.heightAnchor.constraint(equalToConstant: 51),
+            buttonCheckIn.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            buttonCheckIn.leadingAnchor.constraint(equalTo:view.leadingAnchor),
+            buttonCheckIn.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonCheckIn.heightAnchor.constraint(equalToConstant: 52),
             
            
             
@@ -719,11 +749,11 @@ class BookingDetailsView: UIViewController{
             clockIconImage.topAnchor.constraint(equalTo: localizationIconImage.bottomAnchor,constant: 20),
             clockIconImage.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
             
-            arrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
-            arrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
+            buttonArrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
+            buttonArrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
             
-            arrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
-            arrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
+            buttonArrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
+            buttonArrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
             
             numberPeopleLabel.centerYAnchor.constraint(equalTo: numberPeopleImage.centerYAnchor),
             numberPeopleLabel.leadingAnchor.constraint(equalTo: numberPeopleImage.trailingAnchor,constant: 12.43),
@@ -766,6 +796,11 @@ class BookingDetailsView: UIViewController{
             contactEmailLabel.centerYAnchor.constraint(equalTo: emailIconImage.centerYAnchor),
             contactEmailLabel.leadingAnchor.constraint(equalTo: emailIconImage.trailingAnchor,constant: 13),
             
+            buttonCancelReserv.topAnchor.constraint(equalTo: contactEmailLabel.bottomAnchor,constant: 18),
+            buttonCancelReserv.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 22),
+            buttonCancelReserv.heightAnchor.constraint(equalToConstant: 51),
+            buttonCancelReserv.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            
             lineView1.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 15),
             lineView1.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             lineView1.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
@@ -794,11 +829,12 @@ class BookingDetailsView: UIViewController{
             myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
             myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            myTableView.bottomAnchor.constraint(equalTo: buttonCancelreserv.topAnchor),
+            myTableView.bottomAnchor.constraint(equalTo: buttonCheckIn.topAnchor),
 
-            tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            
          
             
         ])

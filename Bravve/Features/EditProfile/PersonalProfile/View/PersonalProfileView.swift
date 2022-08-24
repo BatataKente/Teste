@@ -32,6 +32,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Olá, Ana!"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(30).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -39,7 +40,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "ana.maria@teste.com.br"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(15).generateSizeForScreen)
-        label.textColor = .gray
+        label.textColor = UIColor(named: "profileLabel")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -47,7 +48,7 @@ class PersonalProfileView: UIViewController{
     var backView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "background")
-        view.layer.borderColor = UIColor(red: 1, green: 0.125, blue: 0.475, alpha: 0.1).cgColor
+        view.layer.borderColor = UIColor(named: "borderAccounts")?.cgColor
         view.clipsToBounds = true
         view.layer.cornerRadius = 12
         view.layer.borderWidth = 1
@@ -57,7 +58,8 @@ class PersonalProfileView: UIViewController{
     let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "Foursys"
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -65,14 +67,14 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Conta corporativa"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.textColor = .gray
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
     var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "background")
-        view.layer.borderColor = UIColor(red: 1, green: 0.125, blue: 0.475, alpha: 0.1).cgColor
+        view.layer.borderColor =  UIColor(named: "borderAccounts")?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -80,7 +82,8 @@ class PersonalProfileView: UIViewController{
     let bravveInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "Bravve"
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -88,7 +91,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Conta corporativa"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-        label.textColor = .gray
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -102,6 +105,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Histórico de reservas"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -114,7 +118,7 @@ class PersonalProfileView: UIViewController{
     var separatorView2: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
-        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -129,6 +133,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Ajuda"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -141,7 +146,7 @@ class PersonalProfileView: UIViewController{
     var separatorView3: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
-        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -156,6 +161,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Política e Termos de uso"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -168,7 +174,7 @@ class PersonalProfileView: UIViewController{
     var separatorView4: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
-        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -183,6 +189,7 @@ class PersonalProfileView: UIViewController{
         let label = UILabel()
         label.text = "Sair"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
 
@@ -195,7 +202,7 @@ class PersonalProfileView: UIViewController{
     var separatorView5: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
-        view.layer.borderColor = UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 0.3).cgColor
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
@@ -203,7 +210,7 @@ class PersonalProfileView: UIViewController{
     var smallView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
-        view.layer.borderColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1).cgColor
+        view.layer.borderColor = UIColor(named: "borderCredit")?.cgColor
         view.clipsToBounds = true
         view.layer.cornerRadius = 4
         view.layer.borderWidth = 1
@@ -228,7 +235,7 @@ class PersonalProfileView: UIViewController{
     var smallView2: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
-        view.layer.borderColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1).cgColor
+        view.layer.borderColor = UIColor(named: "borderCredit")?.cgColor
         view.clipsToBounds = true
         view.layer.cornerRadius = 4
         view.layer.borderWidth = 1

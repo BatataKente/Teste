@@ -9,7 +9,8 @@ import UIKit
 
 extension PasswordView: UITextFieldDelegate {
     @objc func continueAction() {
-        let confirmView = ConfirmDataView()
+        self.userToRegister.password = passwordTextField.text
+        let confirmView = ConfirmDataView(userToRegister)
         confirmView.modalPresentationStyle = .fullScreen
         present(confirmView, animated: true)
     }

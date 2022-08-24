@@ -51,20 +51,58 @@ struct Style {
     }
 }
 
-class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CalendarMonthViewDelegate{
+class CalendarView: UIView, CalendarMonthViewDelegate {
     
-    var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    var currentMonthIndex: Int = 0
-    var currentYear: Int = 0
-    var presentMonthIndex = 0
-    var presentYear = 0
-    var todaysDate = 0
-    var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
+    private var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    private var currentMonthIndex: Int = 0
+    private var currentYear: Int = 0
+    private var presentMonthIndex = 0
+    private var presentYear = 0
+    private var todaysDate = 0
+    private var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
+    
+    var delegate: CalendarViewProtocol?
+    
+    private var seletedDays:[String] = []
+    
+    private let monthView: CalendarMonthView = {
+        
+        let calendarMonthView = CalendarMonthView()
+        calendarMonthView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return calendarMonthView
+    }()
+    
+    private let weekdaysView: CalendarWeekdaysView = {
+        
+        let calendarWeekdaysView = CalendarWeekdaysView()
+        calendarWeekdaysView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return calendarWeekdaysView
+    }()
+    
+    let myCollectionView: UICollectionView = {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        let myCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        myCollectionView.showsHorizontalScrollIndicator = false
+        myCollectionView.translatesAutoresizingMaskIntoConstraints=false
+        myCollectionView.backgroundColor = .clear
+        myCollectionView.allowsMultipleSelection = false
+        return myCollectionView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         initializeView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
     }
     
     convenience init(theme: MyTheme) {
@@ -95,7 +133,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
     }
     
-    func initializeView() {
+    private func initializeView() {
         
         currentMonthIndex = Calendar.current.component(.month, from: Date())
         currentYear = Calendar.current.component(.year, from: Date())
@@ -118,101 +156,28 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         myCollectionView.register(dateCVCell.self, forCellWithReuseIdentifier: "Cell")
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    private func setupViews() {
         
-        let numDays = numOfDaysInMonth[currentMonthIndex-1]
-        let num = numDays + firstWeekDayOfMonth - 2
-        return num
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       
-       let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
-       cell.backgroundColor=UIColor.clear
-       if indexPath.item <= firstWeekDayOfMonth - 3 {
-           cell.isHidden=true
-       } else {
-           let calcDate = indexPath.row-firstWeekDayOfMonth+3
-           cell.isHidden=false
-           cell.lbl.text="\(calcDate)"
-           if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
-               cell.isUserInteractionEnabled=false
-               cell.lbl.textColor = UIColor.lightGray
-            } else {
-                cell.isUserInteractionEnabled=true
-                cell.lbl.textColor = Style.activeCellLblColor
-            }
-        }
-        return cell
+        addSubview(monthView)
+        monthView.topAnchor.constraint(equalTo: topAnchor).isActive=true
+        monthView.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive=true
+        monthView.rightAnchor.constraint(equalTo: rightAnchor, constant:  -30).isActive=true
+        monthView.heightAnchor.constraint(equalToConstant: 70).isActive=true
+        monthView.delegate=self
+        
+        addSubview(weekdaysView)
+        weekdaysView.topAnchor.constraint(equalTo: monthView.bottomAnchor).isActive=true
+        weekdaysView.centerXAnchor.constraint(equalTo: monthView.centerXAnchor).isActive = true
+        weekdaysView.widthAnchor.constraint(equalToConstant: 280).isActive = true
+        
+        addSubview(myCollectionView)
+        myCollectionView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 10).isActive=true
+        myCollectionView.centerXAnchor.constraint(equalTo: weekdaysView.centerXAnchor).isActive = true
+        myCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        myCollectionView.widthAnchor.constraint(equalToConstant: 280).isActive = true
     }
     
-    var seletedDays:[String] = []
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? dateCVCell
-        
-        if  cell?.backgroundColor == .clear {
-            
-            
-            cell?.backgroundColor = Colors.darkRed
-            print(cell?.lbl.text ?? "")
-        } else {
-            
-            cell?.backgroundColor = .clear
-            
-        }
-        
-        
-        
-      
-
-    }
-
-    
-    // MODE DE SELECAO UNICA!!
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        let cell = collectionView.cellForItem(at: indexPath)
-//        let lbl = cell?.subviews[0] as? UILabel
-//
-//        cell?.backgroundColor = Colors.darkRed
-//        seletedDays.append(lbl?.text ?? "")
-//
-//            lbl?.textColor = UIColor.white
-//
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//
-//        let cell = collectionView.cellForItem(at: indexPath)
-//
-//        cell?.backgroundColor = .clear
-//
-//    }
-
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width = collectionView.frame.width/7 - 8
-        let height: CGFloat = 40
-        
-        return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 8.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 8.0
-    }
-    
-    func getFirstWeekDay() -> Int {
+    private func getFirstWeekDay() -> Int {
         
         let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday)!      //1-7 -> Sun-Sat
         return day == 1 ? 8 : day
@@ -225,7 +190,9 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         //for leap year, make february month of 29 days
         if monthIndex == 1 {
+            
             if currentYear % 4 == 0 {
+                
                 numOfDaysInMonth[monthIndex] = 29
             } else {
                 numOfDaysInMonth[monthIndex] = 28
@@ -233,102 +200,123 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
         //end
         
-        firstWeekDayOfMonth=getFirstWeekDay()
+        firstWeekDayOfMonth = getFirstWeekDay()
         
         myCollectionView.reloadData()
         
         monthView.btnLeft.isEnabled = !(currentMonthIndex == presentMonthIndex && currentYear == presentYear)
     }
+}
+
+extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func setupViews() {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        addSubview(monthView)
-        monthView.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        monthView.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        monthView.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        monthView.heightAnchor.constraint(equalToConstant: 70).isActive=true
-        monthView.delegate=self
+        let numDays = numOfDaysInMonth[currentMonthIndex-1]
+        let num = numDays + firstWeekDayOfMonth - 2
+        return num
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       
+       let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
         
-        addSubview(weekdaysView)
-        weekdaysView.topAnchor.constraint(equalTo: monthView.bottomAnchor).isActive=true
-        weekdaysView.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        weekdaysView.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        weekdaysView.heightAnchor.constraint(equalToConstant: 30).isActive=true
-        weekdaysView.widthAnchor.constraint(equalToConstant: 30).isActive=true
-        
-        addSubview(myCollectionView)
-        myCollectionView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 0).isActive=true
-        myCollectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive=true
-        myCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive=true
-        myCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
+       cell.backgroundColor = UIColor.clear
+       if indexPath.item <= firstWeekDayOfMonth - 3 {
+           cell.isHidden = true
+       }
+        else {
+            
+           let calcDate = indexPath.row-firstWeekDayOfMonth+3
+           cell.isHidden = false
+           cell.label.text = "\(calcDate)"
+           if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
+               cell.isUserInteractionEnabled=false
+               cell.label.textColor = UIColor.lightGray
+            }
+            else {
+                
+                cell.isUserInteractionEnabled=true
+                // trocar para cor do bravve
+                cell.label.textColor = .blue
+            }
+        }
+        return cell
     }
     
-    let monthView: CalendarMonthView = {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let v=CalendarMonthView()
-        v.translatesAutoresizingMaskIntoConstraints=false
-        return v
-    }()
+        let cell = collectionView.cellForItem(at: indexPath) as? dateCVCell
+        
+        if cell?.backgroundColor == .clear {
+            
+            cell?.backgroundColor = Colors.darkRed
+            delegate?.chosedDays(cell?.label.text ?? "")
+        }
+        else {
+            
+            cell?.backgroundColor = .clear
+            delegate?.unchoseDays(cell?.label.text ?? "")
+        }
+    }
+}
+
+extension CalendarView: UICollectionViewDelegateFlowLayout {
     
-    let weekdaysView: CalendarWeekdaysView = {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let v=CalendarWeekdaysView()
-        v.translatesAutoresizingMaskIntoConstraints=false
-        return v
-    }()
+        let width: CGFloat = 40
+        let height: CGFloat = 40
+        
+        return CGSize(width: width, height: height)
+    }
     
-    let myCollectionView: UICollectionView = {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        let myCollectionView=UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        myCollectionView.showsHorizontalScrollIndicator = false
-        myCollectionView.translatesAutoresizingMaskIntoConstraints=false
-        myCollectionView.backgroundColor=UIColor.clear
-        myCollectionView.allowsMultipleSelection=false
-        return myCollectionView
-    }()
+        return 0
+    }
     
-    required init?(coder aDecoder: NSCoder) {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        fatalError("init(coder:) has not been implemented")
+        return 0
     }
 }
 
 class dateCVCell: UICollectionViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor=UIColor.clear
-        layer.cornerRadius = frame.size.width/2
-        layer.masksToBounds = true
-        setupViews()
-    }
-    
-    func setupViews() {
-        
-        addSubview(lbl)
-        lbl.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        lbl.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        lbl.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        lbl.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
-    }
-    
-    let lbl: UILabel = {
+    let label: UILabel = {
         
         let label = UILabel()
         label.text = "00"
         label.textAlignment = .center
         label.font=UIFont.systemFont(ofSize: 16)
         label.textColor=Colors.darkGray
+        label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints=false
         return label
     }()
     
+    override init(frame: CGRect) {
+        
+        super.init(frame: frame)
+        backgroundColor=UIColor.clear
+        layer.cornerRadius = frame.size.height/2
+        layer.masksToBounds = true
+        setupViews()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+        
+        addSubview(label)
+        label.topAnchor.constraint(equalTo: topAnchor).isActive=true
+        label.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
+        label.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
     }
 }
 
@@ -347,10 +335,12 @@ extension Date {
 
 //get date from string
 extension String {
+    
     static var dateFormatter: DateFormatter = {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        
         return formatter
     }()
     
@@ -358,4 +348,11 @@ extension String {
         
         return String.dateFormatter.date(from: self)
     }
+}
+
+protocol CalendarViewProtocol {
+    
+    func chosedDays(_ day: String)
+    
+    func unchoseDays(_ day: String)
 }

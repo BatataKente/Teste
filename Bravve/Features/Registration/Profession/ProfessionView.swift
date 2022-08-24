@@ -12,7 +12,8 @@ class ProfessionView: UIViewController {
     let backButton = UIButton()
     let logoBravve = UIImageView()
     let backgroundImageView = UIImageView()
-    let continueButton = UIButton ()
+    let continueButton = UIButton()
+    
     
     let selectAreaButton: UIButton = {
         let button = UIButton()
@@ -77,28 +78,9 @@ class ProfessionView: UIViewController {
     }()
     
     private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: view.frame.size.width/5,
-                                                    height: view.frame.size.height/5))
-        var jobs = [UIButton]()
-        
-        for job in professionViewModel.addingJobs(){
-            let button = UIButton()
-            button.setTitle("Trabalho", for: .normal)
-            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),for: .normal)
-            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
-            
-            let handler = {(action: UIAction) in
-                self.selectAreaAPILabel.text = button.currentTitle
-                scrollView.frame.size = .zero
-                self.selectAreaLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
-                self.selectAreaAPILabel.isHidden = false
-                self.selectAreaAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
-            }
-            button.addAction(UIAction(handler: handler), for: .touchUpInside)
-            jobs.append(button)
-        }
-        scrollView.turnIntoAList(jobs)
+        let scrollView = UIScrollView()
+
+        professionViewModel.selectAreaMenu(label: self.selectAreaAPILabel, scrollView: scrollView)
         scrollView.delegate = self
         
         return scrollView
@@ -143,37 +125,9 @@ class ProfessionView: UIViewController {
     } ()
     
     private lazy var scrollViewWork: UIScrollView = {
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                    width: view.frame.size.width/5,
-                                                    height: view.frame.size.height/5))
-        var jobs = [UIButton]()
+        let scrollView = UIScrollView()
         
-        for job in professionViewModel.addingWorkModels(){
-            let button = UIButton()
-            button.setTitle("Trabalho", for: .normal)
-            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),for: .normal)
-            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
-            
-            let handler = {(action: UIAction) in
-                self.workRegimeAPILabel.text = button.currentTitle
-                scrollView.frame.size = .zero
-                self.workRegimeLabel.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
-                self.workRegimeAPILabel.isHidden = false
-                self.workRegimeAPILabel.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
-                
-                if self.selectAreaAPILabel.isHidden == false && self.workRegimeAPILabel.isHidden == false {
-                    self.continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-                    self.continueButton.addTarget(nil, action: #selector(self.continueToHobbies), for: .touchUpInside)
-                } else {
-                    self.continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
-                    self.continueButton.removeTarget(nil, action: #selector(self.continueToHobbies), for: .touchUpInside)
-                }
-            }
-            
-            button.addAction(UIAction(handler: handler), for: .touchUpInside)
-            jobs.append(button)
-        }
-        scrollView.turnIntoAList(jobs)
+        professionViewModel.workRegimeMenu(label: workRegimeAPILabel, scrollView: scrollView)
         scrollView.delegate = self
         
         return scrollView
@@ -201,13 +155,12 @@ class ProfessionView: UIViewController {
     
     let professionViewModel = ProfessionViewModel()
     
+    let sessionManager = SessionManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        
-        scrollViewDidScroll(scrollView)
-        scrollViewDidScroll(scrollViewWork)
         
         view.addSubviews([backButton,
                                     infoLabel,
@@ -225,16 +178,36 @@ class ProfessionView: UIViewController {
    
         logoBravve.setLogoToDefault()
         backButton.setToBackButtonDefault(ButtonsBravve.backPink, CGFloat(22).generateSizeForScreen) {_ in
-            self.dismiss(animated: true)
+            if let photoView = self.presentingViewController,
+               let tokenView = photoView.presentingViewController,
+               let confirmDataView = tokenView.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController{
+                
+                tokenView.view.isHidden = true
+                confirmDataView.view.isHidden = true
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: false)
+            }
         }
-        continueButton.setToBottomButtonKeyboardDefault()
+        continueButton.setToBottomButtonKeyboardDefault(backgroundColor: ColorsBravve.buttonPink)
         
         backgroundImageView.setWayToDefault(ImagesBravve(rawValue: ImagesBravve.wayPassword.rawValue)!)
         
        addingConstraints()
         
-        selectAreaButton.addSubWindow(scrollView, .downLeft)
-        workRegimeButton.addSubWindow(scrollViewWork,.downLeft)
+        selectAreaButton.addAction(UIAction(handler: { action in
+            self.scrollView.showLikeAWindow(size: CGSize(width: self.selectAreaStackView.frame.size.width, height: 144), origin: CGPoint(x: self.selectAreaStackView.frame.maxX, y: self.selectAreaStackView.frame.maxY), .downLeft)
+        }), for: .touchUpInside)
+        workRegimeButton.addAction(UIAction(handler: { action in
+            self.scrollViewWork.showLikeAWindow(size: CGSize(width: self.workRegimeStackView.frame.size.width, height: 144), origin: CGPoint(x: self.workRegimeStackView.frame.maxX, y: self.workRegimeStackView.frame.maxY), .downLeft)
+        }), for: .touchUpInside)
     }
     
     func addingConstraints(){
@@ -293,8 +266,12 @@ extension ProfessionView: UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        let indicator = scrollView.subviews[scrollView.subviews.count - 1]
-
-        indicator.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
 }

@@ -54,11 +54,8 @@ class SessionManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - completionHandler: Completion handler to use the result of the API call
     func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping ([T]?) -> Void) {
-        
-        getToken { accessToken in
+            
             guard let accessToken = accessToken else { return }
-            
-            
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
@@ -67,15 +64,13 @@ class SessionManager {
             ]
             
             AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
+                print(response.debugDescription)
                 if let data = response.value {
-                    //                    print(response.response?.statusCode)
                     completionHandler(data)
                 } else {
-                    //                    print(response.response?.statusCode)
                     completionHandler(nil)
                 }
             }
-        }
     }
     
     
@@ -248,6 +243,20 @@ class SessionManager {
                 }
             }
         }
+    }
+    
+    func postDataWithOpenResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
+            
+            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+            print(url)
+            AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: T.self) { response in
+                print(response.response?.statusCode)
+                if let data = response.value {
+                    completionHandler(data)
+                } else {
+                    completionHandler(nil)
+                }
+            }
     }
     
     

@@ -7,39 +7,24 @@
 
 import UIKit
 
+
+
 class NomeView: UIViewController {
     
-    init(_ userToRegister: UserParameters = UserParameters(name: "",
-                                                           phone_number: "",
-                                                           email: "",
-                                                           password: "")) {
+    var userToRegister: UserParameters
+    
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: nil,
+                                                           phone_number: nil,
+                                                           email: nil,
+                                                           password: nil)) {
         
         self.userToRegister = userToRegister
         
         super.init(nibName: nil, bundle: nil)
     }
     
-    var userToRegister: UserParameters
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        
-        setupView()
-        setupDefaults()
-        setupTargets()
-        setupConstraints()
-        
-        super.viewDidLoad()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
+    //MARK: Elements
     
     private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
@@ -52,10 +37,9 @@ class NomeView: UIViewController {
                                                               IconsBravve.emailGray.rawValue,
                                                               IconsBravve.padlockGray.rawValue,
                                                               IconsBravve.pencilGray.rawValue])
-        
         return buttons
     }()
-    
+    //MARK: - UILabels
     private let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
@@ -67,6 +51,16 @@ class NomeView: UIViewController {
         return infoLabel
     }()
     
+    private let registerFailLabel: UILabel = {
+        
+        let registerFailLabel = UILabel()
+        registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                        size: CGFloat(11).generateSizeForScreen)
+        registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        
+        return registerFailLabel
+    }()
+    
     private let customShaddow: UIView = {
         
         let customShaddow = UIView()
@@ -75,7 +69,7 @@ class NomeView: UIViewController {
         
         return customShaddow
     }()
-    
+    //MARK: viewElements
     private lazy var viewElements: (rightStackView: UIStackView,
                                     rightTextField: UITextField,
                                     rightLabel: UILabel,
@@ -91,6 +85,8 @@ class NomeView: UIViewController {
         let rightTextField = UITextField()
         rightTextField.font = font
         rightTextField.becomeFirstResponder()
+        rightTextField.autocapitalizationType = .sentences
+        
         
         let stackView = UIStackView(arrangedSubviews: [rightLabel,
                                                        rightTextField])
@@ -130,25 +126,38 @@ class NomeView: UIViewController {
         let registerStackView = UIStackView(arrangedSubviews: [viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
-        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
-
+        
         return registerStackView
     }()
     
-    private let registerFailLabel: UILabel = {
-        
-        let registerFailLabel = UILabel()
-        registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                        size: CGFloat(11).generateSizeForScreen)
-        registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-        
-        return registerFailLabel
-    }()
+   
     
     private let nomeViewModel = NomeViewModel()
     
+    //MARK: viewDidLoad
+    override func viewDidLoad() {
+        
+        setupView()
+        setupDefaults()
+        setupTargets()
+        setupConstraints()
+        super.viewDidLoad()
+       
+        
+    }
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    //MARK: setupView
     private func setupView() {
         
         nomeViewModel.delegate = self
@@ -163,7 +172,7 @@ class NomeView: UIViewController {
         
         view.setToDefaultBackgroundColor()
     }
-    
+    //MARK: setupDefaults
     private func setupDefaults() {
         
         registerButton.setToBottomButtonKeyboardDefault()
@@ -171,7 +180,7 @@ class NomeView: UIViewController {
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
     }
-    
+    //MARK: setupConstraints
     private func setupConstraints() {
         
         infoLabel.constraintInsideTo(.top,
@@ -201,26 +210,27 @@ class NomeView: UIViewController {
         customShaddow.constraintInsideTo(.trailing, registerStackView)
         customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
     }
-    
+    //MARK: setupTarget
     private func setupTargets() {
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
     }
     
+    
+    //MARK: stackViewTapped
     @objc func stackViewTapped() {
         
         let stackVerticalMargins: CGFloat = CGFloat(10).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
         
         viewElements.rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
-                                                                left: stackHorizontalMargins,
-                                                                bottom: stackVerticalMargins,
-                                                                right: stackHorizontalMargins)
+                                                                 left: stackHorizontalMargins,
+                                                                 bottom: stackVerticalMargins,
+                                                                 right: stackHorizontalMargins)
         
         viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                               size: CGFloat(10).generateSizeForScreen)
-        
         customShaddow.isHidden = false
         
         registerStackView.layer.borderWidth = 0
@@ -231,20 +241,26 @@ class NomeView: UIViewController {
                                               action: #selector(changeText),
                                               for: .editingChanged)
     }
-        
+    
+    //MARK: changeScreen
     @objc func changeScreen() {
         
-        userToRegister.name = viewElements.rightTextField.text ?? ""
+//        userToRegister.name = viewElements.rightTextField.text ?? ""
+        UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Name")
         
+        if flag == 0{
         let phoneView = PhoneView(userToRegister)
         phoneView.modalPresentationStyle = .fullScreen
         present(phoneView, animated: false)
+        }else{
+            self.dismiss(animated: true)
+        }
     }
     
+    //MARK: changeText
     @objc func changeText(_ sender: UITextField) {
         
         if validateName(sender.text ?? "") {
-            
             nomeViewModel.refreshScreen()
             
             registerButton.addTarget(nil,
@@ -255,7 +271,6 @@ class NomeView: UIViewController {
         else {
             
             nomeViewModel.makeFailScreen()
-            
             registerButton.removeTarget(nil,
                                         action: #selector(changeScreen),
                                         for: .touchUpInside)
@@ -263,7 +278,7 @@ class NomeView: UIViewController {
         }
     }
 }
-
+//MARK: Extension
 extension NomeView: NomeViewModelProtocol {
     
     func setIshidden(alertButton: Bool,
@@ -287,9 +302,7 @@ extension NomeView: NomeViewModelProtocol {
     
     func setColors(textColor: UIColor?,
                    customShaddowbackgroundColor: UIColor?) {
-        
         viewElements.rightLabel.textColor = textColor
-        
         customShaddow.backgroundColor = customShaddowbackgroundColor
     }
     
@@ -301,7 +314,6 @@ extension NomeView: NomeViewModelProtocol {
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
         self.registerFailLabel.text = registerFailLabel
-
         self.infoLabel.text = infoLabel
     }
     
@@ -314,7 +326,6 @@ extension NomeView: NomeViewModelProtocol {
     }
     
     func setKeyboardType(keyboardType: UIKeyboardType) {
-        
         viewElements.rightTextField.keyboardType = keyboardType
     }
 }

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+    var flag: Int = 0
+  
+
+
+///
+///Nome -> Telefone -> Email -> Senha -> ConfirmData -> Nome (x), -> Email (x), ->Telephone (x)

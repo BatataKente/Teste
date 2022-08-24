@@ -10,6 +10,8 @@ import UIKit
 
 class CheckInQrCodeViewController: UIViewController{
     
+    private let customAlert: CustomAlert = CustomAlert()
+    
     private lazy var backButton: UIButton = {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -97,11 +99,13 @@ class CheckInQrCodeViewController: UIViewController{
     }
     
     @objc func backButtonTapped(){
-        print("back button")
+        self.dismiss(animated: true)
     }
     
     @objc func cantScanButtonTapped(){
-        print("Cant Scan Button")
+        customAlert.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Por favor entre em contato com o Community Manager ou outro responsável pelo espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+            self.dismiss(animated: true)
+        }), on: self)
     }
     
 }

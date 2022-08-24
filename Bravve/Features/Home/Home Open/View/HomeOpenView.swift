@@ -16,7 +16,7 @@ class HomeOpenView: UIViewController {
     private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
     
     private var cells: [Space] = []
-     
+    
     private let titleLabel = UILabel()
     
     private lazy var filterStackView: UIStackView = {
@@ -73,7 +73,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var tabBar = BravveTabBar(self,
                                            itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                            ButtonsBravve.exitGray.rawValue
+                                                             ButtonsBravve.exitGray.rawValue
                                                             ])
     private let imageView: UIImageView = {
         
@@ -95,9 +95,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var leftDropDown: UIScrollView = {
 
-        let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                      width: view.frame.size.width/5,
-                                                      height: view.frame.size.height/3))
+        let leftDropDown = UIScrollView()
         leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         leftDropDown.delegate = self
 
@@ -106,12 +104,10 @@ class HomeOpenView: UIViewController {
     
     private lazy var rightDropDown: UIScrollView = {
 
-        let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                       width: view.frame.size.width/2,
-                                                       height: view.frame.size.height/2.5))
+        let rightDropDown = UIScrollView()
         rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
-
+        
         return rightDropDown
     }()
     
@@ -126,11 +122,34 @@ class HomeOpenView: UIViewController {
     private lazy var customBarWithFilter: CustomBarWithFilter = {
         
         let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
-
+            
             let filterView = FilterScreen()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
+        
+        let leftHandler = {(action: UIAction) in
+            
+            self.rightDropDown.frame.size = .zero
+            self.leftDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width/3,
+                                                           height: CGFloat(144).generateSizeForScreen),
+                                              origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX + self.customBarWithFilter.stackView.frame.size.width/3,
+                                                              y: self.customBarWithFilter.stackView.frame.maxY),
+                                              .downLeft)
+        }
+        
+        let rightandler = {(action: UIAction) in
+            
+            self.leftDropDown.frame.size = .zero
+            self.rightDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*2/3,
+                                                            height: CGFloat(144).generateSizeForScreen),
+                                               origin: CGPoint(x: self.customBarWithFilter.stackView.frame.maxX,
+                                                               y: self.customBarWithFilter.stackView.frame.maxY),
+                                               .downLeft)
+        }
+        
+        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
+        customBarWithFilter.rightButton.addAction(UIAction(handler: rightandler), for: .touchUpInside)
         
         return customBarWithFilter
     }()
@@ -143,24 +162,24 @@ class HomeOpenView: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
-
+        
         super.viewDidDisappear(animated)
         tabBar.selectedItem = tabBar.items?[0]
     }
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         
         setupView()
         setupConstraints()
         setupDefaults()
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -189,33 +208,6 @@ class HomeOpenView: UIViewController {
         
         filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
-        
-        let dropDownsY = CGFloat(100).generateSizeForScreen
-        
-        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
-                                         y: dropDownsY)
-        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
-                                          y: dropDownsY)
-        
-        let leftHandler = {(action: UIAction) in
-            
-            self.customBarWithFilter.rightButton.isSelected = false
-            self.rightDropDown.frame.size = .zero
-        }
-        
-        let rightHandler = {(action: UIAction) in
-            
-            self.customBarWithFilter.leftButton.isSelected = false
-            self.leftDropDown.frame.size = .zero
-        }
-        
-        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
-        customBarWithFilter.leftButton.addSubWindow(leftDropDown,
-                                                    origin:   leftDropDownOrigin)
-        
-        customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
-        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
-                                                     origin: rightDropDownOrigin)
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -65,10 +65,10 @@ struct CreditWallet: Codable {
 }
 
 struct UserParameters: Codable {
-    var name: String
-    var phone_number: String
-    var email: String
-    var password: String
+    var name: String?
+    var phone_number: String?
+    var email: String?
+    var password: String?
 }
 
 struct UpdateUserParameters: Codable {

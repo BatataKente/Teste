@@ -9,9 +9,8 @@ import Foundation
 
 class LoginViewModel{
     
-    func isValid(phone: String, password: String) -> Bool{
-        let _phone = phone.clearFormatMask()
-        if _phone.count <= 10 || password.isEmpty{
+    func isValid(email: String, password: String) -> Bool{
+        if email.isEmpty || password.isEmpty{
             return false
         }
         else{

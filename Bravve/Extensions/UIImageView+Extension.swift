@@ -103,7 +103,7 @@ extension UIImageView {
             
             case ImagesBravve.wayReserv_1:
             
-                self.constraintInsideTo(.bottom, superview)
+                self.constraintInsideTo(.bottom, superview, CGFloat(-20).generateSizeForScreen)
                 self.constraintInsideTo(.leading, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(CGFloat(190).generateSizeForScreen)
                 self.constraintOutsideTo(.width, self, multiplier: 0.7)

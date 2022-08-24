@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol CancelReservationCellDelegate: AnyObject {
+    func presentViewController(_ viewController: UIViewController)
+}
+
 class CancelReservationCell: UITableViewCell {
+    
+    weak var delegate: CancelReservationCellDelegate?
     
     let cellView: UIView = {
         let view = UIView()
@@ -131,6 +137,7 @@ class CancelReservationCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowPink"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(actionArrowButton), for: .touchUpInside)
         return button
     }()
     
@@ -144,10 +151,15 @@ class CancelReservationCell: UITableViewCell {
         contentView.addSubview(cellView)
         
         setupConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func actionArrowButton() {
+        self.delegate?.presentViewController(BookingDetailsView())
     }
     
     func setupConstraints() {

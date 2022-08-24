@@ -9,73 +9,68 @@ import UIKit
 
 class ProfessionViewModel {
     
-    func addingJobs() -> [String]{
-        var jobs: [String] = []
-        
-        for i in 1...20 {
-            jobs.append("\(i)")
-        }
-        
-        return jobs
-    }
+    let sessionManager =  SessionManager()
     
-    func addingWorkModels() -> [String]{
-        var jobs: [String] = []
+    func selectAreaMenu(label: UILabel, scrollView: UIScrollView) {
         
-        for i in 1...20 {
-            jobs.append("\(i)")
-        }
-        
-        return jobs
-    }
-    
-    let networkManager =  NetworkManager()
-    
-    func selectAreaMenu(label: UILabel, button: UIButton) {
-        
-        networkManager.getDataArray(endpoint: .usersOccupations) { (occupations: [Occupations]?) in
+        sessionManager.getDataArray(endpoint: .usersOccupations) { (occupations: [Occupations]?) in
             
-            var selectAreaMenu: [UIAction] = []
+            var selectAreaMenu: [UIButton] = []
             
             guard let occupations = occupations else {
                 return
             }
-            
-            let handler = { (action: UIAction) in
-                label.text = action.title
-            }
-            
             for occupation in occupations {
-                guard let occupationName = occupation.name else { return }
-                selectAreaMenu.append(UIAction(title: occupationName , handler: handler))
-                button.setMenuForButton(selectAreaMenu)
-            }
             
+            guard let occupationName = occupation.name else { return }
+            let button = UIButton()
+            button.setTitle(occupationName, for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+                button.titleLabel?.numberOfLines = 0
+            
+            let handler = {(action: UIAction) in
+                label.text = button.currentTitle
+                scrollView.frame.size = .zero
+                label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
+                label.isHidden = false
+                label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
+            }
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                selectAreaMenu.append(button)
+            }
+            scrollView.turnIntoAList(selectAreaMenu)
         }
-        
-        
     }
     
-    func workRegimeMenu(label: UILabel, button: UIButton) {
+    func workRegimeMenu(label: UILabel, scrollView: UIScrollView) {
         
-        networkManager.getDataArray(endpoint: .usersWorkModels) { (workModels: [WorkModels]?) in
+        sessionManager.getDataArray(endpoint: .usersWorkModels) { (workModels: [WorkModels]?) in
             
-            var workRegimeMenu: [UIAction] = []
+            var workRegimeMenu: [UIButton] = []
             
             guard let workModels = workModels else {
                 return
             }
-            
-            let handler = { (action: UIAction) in
-                label.text = action.title
-            }
-            
             for workModel in workModels {
-                guard let workModelName = workModel.name else { return }
-                workRegimeMenu.append(UIAction(title: workModelName , handler: handler))
-                button.setMenuForButton(workRegimeMenu)
-            }
             
+            guard let workModelName = workModel.name else { return }
+            let button = UIButton()
+            button.setTitle(workModelName, for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+            
+            let handler = {(action: UIAction) in
+                label.text = button.currentTitle
+                scrollView.frame.size = .zero
+                label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
+                label.isHidden = false
+                label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
+            }
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+                workRegimeMenu.append(button)
+            }
+            scrollView.turnIntoAList(workRegimeMenu)
         }
     }
 }
