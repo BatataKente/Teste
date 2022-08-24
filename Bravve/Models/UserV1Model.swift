@@ -53,7 +53,7 @@ struct Pictures: Codable {
 }
 
 struct UploadPicture: Codable {
-    var uuid: String?
+    var picture_uuid: String?
     var filename: String?
     var content_type: String?
 }
@@ -89,6 +89,6 @@ struct UpdatePasswordParameters: Codable {
 }
 
 struct ValidateUserParameter: Codable {
-    var code: String
+    var code: String?
 }
-    
+ 

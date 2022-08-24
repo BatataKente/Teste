@@ -191,7 +191,7 @@ class TokenView: UIViewController {
         button.addSubview(borderBottom)
         button.setTitleColor(UIColor(named: ColorsBravve.blue_cyan.rawValue), for: .normal)
         button.isHidden = true
-        button.addTarget(TokenView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -250,7 +250,7 @@ class TokenView: UIViewController {
                 self.sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: LoginParameters(email: self.userEmail, password: self.userPassword)) { (token: Token?) in
                     UserDefaults.standard.setValue(token?.token, forKey: "access_token")
                     
-                    let vc = FotoView()
+                    let vc = FotoView(userUUID: self.userUUID)
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
                 }
@@ -260,6 +260,11 @@ class TokenView: UIViewController {
     
     @objc func resendCodeButtonTapped() {
         
+        let parameters = ValidateUserParameter()
+        
+        self.sessionManager.postOpenDataWithoutResponse(uuid: "9544eb3f-8bd8-41e3-8e44-96f450ace4ff", endpoint: .usersCode, parameters: parameters) { statusCode in
+            print(statusCode)
+        }
         print("Novo código enviado")
     }
     
