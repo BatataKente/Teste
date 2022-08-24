@@ -192,7 +192,24 @@ class HobbiesView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons,
                                      jumpAction: UIAction(handler: handler)) {_ in
-            self.dismiss(animated: true)
+            if let professionView = self.presentingViewController,
+               let photoView = professionView.presentingViewController,
+               let tokenView = photoView.presentingViewController,
+               let confirmDataView = tokenView.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController{
+                
+                tokenView.view.isHidden = true
+                confirmDataView.view.isHidden = true
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: false)
+            }
         }
     }
     

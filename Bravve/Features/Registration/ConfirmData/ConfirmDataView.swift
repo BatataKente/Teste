@@ -9,16 +9,34 @@ import UIKit
 
 class ConfirmDataView: UIViewController {
     
+    var userToRegister: UserParameters
+    
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: nil,
+                                                           phone_number: nil,
+                                                           email: nil,
+                                                           password: nil)) {
+        
+        self.userToRegister = userToRegister
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
+    
+    
+    
     override var prefersStatusBarHidden: Bool {
-
-            return true
-
-        }
+        
+        return true
+        
+    }
     
     private let backgroundImage1 = UIImageView()
     
     private let backgroundImage2 = UIImageView()
     
+    //MARK: - Buttons
     private lazy var buttons: [UIButton] = {
         let buttons =  createProgressBarButtonsWithoutActions([
             IconsBravve.userGray.rawValue,
@@ -73,7 +91,7 @@ class ConfirmDataView: UIViewController {
         
         return buttons
     }()
-    
+    //MARK: - Labels
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Bravo! Que tal revisar suas informações, aqui você pode alterá-las!"
@@ -84,32 +102,32 @@ class ConfirmDataView: UIViewController {
         return label
     }()
     
-    private let labelName: UILabel = {
+    private lazy var labelName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        // label.text = "Ana Maria Silva"
+        label.text = userToRegister.name
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
-    private let labelCell: UILabel = {
+    private lazy var labelCell: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        // label.text = "11 99686 2647"
+//        label.text = userToRegister.phone_number
         return label
     }()
     
-    private let labelEmail: UILabel = {
+    private lazy var labelEmail: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        // label.text = "teste@bravve.com.br"
+        label.text = userToRegister.email
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    
+    //MARK: - EditButtons
     private lazy var editButtonName: UIButton = {
         let button = myButton()
         return button
@@ -122,7 +140,7 @@ class ConfirmDataView: UIViewController {
         let button = myButton()
         return button
     }()
-    
+    //MARK: - stackViews
     private lazy var stackViewName: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [labelName, editButtonName])
         stackView.alignment = .fill
@@ -175,23 +193,54 @@ class ConfirmDataView: UIViewController {
     
     private let buttonContinue = UIButton()
     
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         view.setToDefaultBackgroundColor()
-         
+        
         view.addSubviews([ label, backgroundImage1, backgroundImage2, stackViewLabels, buttonContinue])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
-            self.dismiss(animated: true)
+            
+            if let passwordView = self.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController {
+                
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: true)
+            }
         }
-        
+        print("teste", userToRegister)
         defaults()
         addConstraints()
         addTargets()
         
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        flag = 1
+        
+        let data = UserDefaults.standard
+        
+        labelName.text = data.string(forKey: "Name")
+        labelCell.text = data.string(forKey: "Number")
+        labelEmail.text = data.string(forKey: "Mail")
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    //MARK: - Funcs
     func myButton() -> UIButton {
         let button = UIButton()
         button.setImage(UIImage(named: IconsBravve.edit_blue.rawValue), for: .normal)
@@ -205,7 +254,7 @@ class ConfirmDataView: UIViewController {
         backgroundImage2.setWayToDefault(.wayConfirm_1)
         
     }
-    
+    //MARK: - addConstraints
     private func addConstraints() {
         
         label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
@@ -223,9 +272,9 @@ class ConfirmDataView: UIViewController {
         stackViewLabels.constraintInsideTo(.leading, label)
         stackViewLabels.constraintInsideTo(.trailing, label)
         stackViewLabels.constraintOutsideTo(.top, label, CGFloat(60).generateSizeForScreen)
-    
+        
     }
-    
+    //MARK: - addTargets
     private func addTargets() {
         
         buttonContinue.addTarget(self, action: #selector(actionButtonContinue), for: .touchUpInside)
@@ -241,7 +290,7 @@ class ConfirmDataView: UIViewController {
         
     }
     
-    
+    //MARK: - @objc Funcs
     @objc func actionButtonPassword() {
         let vc = PasswordView()
         vc.modalPresentationStyle = .fullScreen
@@ -249,6 +298,8 @@ class ConfirmDataView: UIViewController {
     }
     
     @objc func actionButtonContinue() {
+        self.userToRegister = UserParameters(name: labelName.text, phone_number: labelCell.text, email: labelEmail.text, password: userToRegister.password)
+        print("user", self.userToRegister)
         let vc = TokenView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)

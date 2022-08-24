@@ -36,7 +36,7 @@ class PhoneViewModel {
                                        size: CGFloat(15).generateSizeForScreen) ?? UIFont())
         
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
-                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue.rawValue))
+                            customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue_cyan.rawValue))
         
         delegate?.setText(rightLabel: "Telefone",
                           rightTextField: "",

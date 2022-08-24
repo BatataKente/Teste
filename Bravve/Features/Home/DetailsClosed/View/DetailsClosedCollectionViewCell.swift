@@ -13,7 +13,8 @@ class DetailsClosedCollectionViewCell: UICollectionViewCell {
         
         let imageView = UIImageView()
         imageView.backgroundColor = .darkGray
-        imageView.layer.cornerRadius = 12
+        imageView.layer.cornerRadius = 25
+        imageView.clipsToBounds = true
         
         return imageView
     }()

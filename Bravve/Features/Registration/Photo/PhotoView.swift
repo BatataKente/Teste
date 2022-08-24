@@ -10,9 +10,7 @@ import UIKit
 class FotoView: UIViewController {
     
     private let bravveIcon = UIImageView()
-    
-    private let backButton = UIButton()
-    
+        
     private let registerButton = UIButton()
     
     private let firstWay = UIImageView(),
@@ -58,7 +56,7 @@ class FotoView: UIViewController {
     private let editButton: UIButton = {
         
         let editButton = UIButton()
-        editButton.setImage(UIImage(named: IconsBravve.photoBlue.rawValue),
+        editButton.setImage(UIImage(named: ButtonsBravve.photoButtonPink.rawValue),
                             for: .normal)
         
         return editButton
@@ -83,24 +81,49 @@ class FotoView: UIViewController {
         imagePicker.sourceType = .photoLibrary;
         imagePicker.allowsEditing = true
         
+        
+        let handler = {(action: UIAction) in
+            let vc = ProfessionView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+        
+        view.createRegisterCustomBar(jumpAction: UIAction(handler: handler)) {_ in
+                if let tokenView = self.presentingViewController,
+                   let confirmDataView = tokenView.presentingViewController,
+                   let passwordView = confirmDataView.presentingViewController,
+                   let emailView = passwordView.presentingViewController,
+                   let phoneView = emailView.presentingViewController,
+                   let nomeView = phoneView.presentingViewController,
+                   let loginView = nomeView.presentingViewController{
+                    
+                    tokenView.view.isHidden = true
+                    confirmDataView.view.isHidden = true
+                    passwordView.view.isHidden = true
+                    emailView.view.isHidden = true
+                    phoneView.view.isHidden = true
+                    nomeView.view.isHidden = true
+                    loginView.dismiss(animated: false)
+                }
+            }
+
+        
         super.viewDidLoad()
     }
     
     private func setupView() {
         
-        view.addSubviews([firstWay, secondWay, bravveIcon, backButton, progressBarStackView, infoLabel, registerButton, imageView, editButton, tutorialLabel])
+        view.addSubviews([firstWay, secondWay, bravveIcon, progressBarStackView, infoLabel, registerButton, imageView, editButton, tutorialLabel])
         
         view.setToDefaultBackgroundColor()
     }
     
     private func setupDefaults() {
         
-        firstWay.setWayToDefault(.wayConfirm_1)
-        secondWay.setWayToDefault(.wayCell)
+        firstWay.setWayToDefault(.wayPhoto)
+        secondWay.setWayToDefault(.wayConfirm_2)
         bravveIcon.setLogoToDefault()
-        backButton.setToBackButtonDefault(.backPink) {_ in
-            self.dismiss(animated: true)
-        }
+       
         registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
     
@@ -129,6 +152,7 @@ class FotoView: UIViewController {
         editButton.sizeAnchorInSuperview(CGFloat(32).generateSizeForScreen)
         editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
         editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
+        
     }
     
     @objc func actionRegisterButton() {

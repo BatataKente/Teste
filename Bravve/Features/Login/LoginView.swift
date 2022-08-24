@@ -284,7 +284,7 @@ class LoginView: UIViewController {
         guard let phone = self.loginTextField.text else {return}
         guard let password = self.passwordTextField.text else {return}
         
-        if self.viewModel.isValid(phone: phone, password: password) == true{
+        if self.viewModel.isValid(email: phone, password: password) == true{
             present(vc, animated: false)
         }
         else{
@@ -402,10 +402,7 @@ extension LoginView: UITextFieldDelegate{
         loginLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         passwordLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         
-        loginTextField.text = loginTextField.text?.formatMask(mask: "(##) #####-####")
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        loginTextField.text = loginTextField.text?.formatMask(mask: "(##) #####-####")
-    }
+
 }

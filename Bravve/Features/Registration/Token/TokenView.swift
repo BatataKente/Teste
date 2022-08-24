@@ -13,6 +13,8 @@ class TokenView: UIViewController {
     
     let continueButton = UIButton()
     
+    var counter = 30
+    
     let messageSentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -140,14 +142,14 @@ class TokenView: UIViewController {
     let messageNotReceivedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        let begginingText = "Não recebeu? Aguarde "
+        let begginingText = ""
         let normalAttrs = [NSMutableAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,size: CGFloat(14).generateSizeForScreen)]
         let labelattributedString = NSMutableAttributedString(string: begginingText, attributes: normalAttrs as [NSAttributedString.Key : Any])
-        let boldString = "30 "
+        let boldString = ""
         let attrs = [NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(14).generateSizeForScreen)]
         let boldMutableString = NSMutableAttributedString(string: boldString, attributes: attrs as [NSAttributedString.Key : Any])
         labelattributedString.append(boldMutableString)
-        let endingString = "segundos"
+        let endingString = ""
         let endingMutableString = NSMutableAttributedString(string: endingString, attributes: normalAttrs as [NSAttributedString.Key : Any])
         labelattributedString.append(endingMutableString)
         label.attributedText = labelattributedString
@@ -163,9 +165,10 @@ class TokenView: UIViewController {
         button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,size: CGFloat(15).generateSizeForScreen)
         let frame = CGRect(x: 0, y: button.frame.size.height + CGFloat(6).generateSizeForScreen, width: button.frame.size.width.generateSizeForScreen, height: CGFloat(1).generateSizeForScreen)
         let borderBottom = UIView(frame: frame)
-        borderBottom.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        borderBottom.backgroundColor = UIColor(named: ColorsBravve.blue_cyan.rawValue)
         button.addSubview(borderBottom)
-        button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
+        button.setTitleColor(UIColor(named: ColorsBravve.blue_cyan.rawValue), for: .normal)
+        button.isHidden = true
         button.addTarget(TokenView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -182,6 +185,8 @@ class TokenView: UIViewController {
         self.code4TextField.delegate = self
         self.code5TextField.delegate = self
         self.code6TextField.delegate = self
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        
     }
     
     func filledCode() {
@@ -215,6 +220,19 @@ class TokenView: UIViewController {
         print("Novo código enviado")
     }
     
+    @objc func updateCounter() {
+        
+        if counter > 0 {
+            messageNotReceivedLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 14)
+            messageNotReceivedLabel.text = ("Não recebeu? Aguarde \(counter) segundos")
+            counter -= 1
+        }
+        else if counter == 0 {
+            messageNotReceivedLabel.isHidden = true
+            resendCodeButton.isHidden = false
+        }
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         textField.layer.borderWidth = CGFloat(1).generateSizeForScreen
@@ -235,7 +253,9 @@ class TokenView: UIViewController {
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
-            self.dismiss(animated: true)
+            let login = LoginView()
+            login.modalPresentationStyle = .fullScreen
+            self.present(login, animated: true)
         }
         
     }

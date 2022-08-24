@@ -59,8 +59,6 @@ class ActivitiesView: UIViewController {
         return stackView
     }()
     
-    
-    
     let infoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,33 +76,9 @@ class ActivitiesView: UIViewController {
         return label
     }()
     
-    
-    
     lazy var interestsButtons: [UIButton] = []
-        
     
     lazy var interestsStackView: UIStackView = {
-//        let line1 = UIStackView(arrangedSubviews: [interestsButtons[0], interestsButtons[1]])
-//        line1.axis = .horizontal
-//        line1.spacing = CGFloat(4).generateSizeForScreen
-//
-//        let line2 = UIStackView(arrangedSubviews: [interestsButtons[2], interestsButtons[3], interestsButtons[4]])
-//        line2.axis = .horizontal
-//        line2.spacing = CGFloat(4).generateSizeForScreen
-//
-//        let line3 = UIStackView(arrangedSubviews: [interestsButtons[5], interestsButtons[6], interestsButtons[7]])
-//        line3.axis = .horizontal
-//        line3.spacing = CGFloat(4).generateSizeForScreen
-//
-//        let line4 = UIStackView(arrangedSubviews: [interestsButtons[8], interestsButtons[9]])
-//        line4.axis = .horizontal
-//        line4.spacing = CGFloat(4).generateSizeForScreen
-//
-//        let line5 = UIStackView(arrangedSubviews: [interestsButtons[10], interestsButtons[11]])
-//        line4.axis = .horizontal
-//        line4.spacing = CGFloat(4).generateSizeForScreen
-//
-//        let stackView = UIStackView(arrangedSubviews: [line1, line2, line3, line4, line5])
         let stackView = UIStackView(arrangedSubviews: interestsButtons)
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -116,6 +90,7 @@ class ActivitiesView: UIViewController {
     var arrayItems: [String] = []
     var interestArray: [String] = []
     let networkManager = NetworkManager()
+//    let activitiesViewModel = ActivitiesViewModel()
        
     override func viewDidLoad() {
 
@@ -124,7 +99,6 @@ class ActivitiesView: UIViewController {
         setupConstraints()
         activeButton()
         interestActivities()
-        print(interestArray)
     }
     
     @objc func buttonTapped(button: UIButton) {
@@ -160,6 +134,47 @@ class ActivitiesView: UIViewController {
         continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
     
+    private func createStackView(_ views: [UIView]) -> UIStackView {
+            
+        let stackView = UIStackView(arrangedSubviews: views)
+        stackView.spacing = 4
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        
+        return stackView
+    }
+    
+    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
+            
+        var stackViews = [UIStackView]()
+        
+        var from = 0
+        
+        if buttons.count%2 != 0 {
+            
+            buttons[from].addTarget(self, action: #selector(self.buttonTapped),
+                                    for: .touchUpInside)
+            stackViews.append(self.createStackView([buttons[from]]))
+            
+            from += 1
+        }
+        
+        for i in stride(from: from,
+                        to: buttons.count - 1,
+                        by: 2) {
+                
+            buttons[i].addTarget(self, action: #selector(self.buttonTapped),
+                                 for: .touchUpInside)
+            buttons[i+1].addTarget(self, action: #selector(self.buttonTapped),
+                                   for: .touchUpInside)
+            
+            stackViews.append(self.createStackView([buttons[i],
+                                                    buttons[i+1]]))
+        }
+        
+        return stackViews
+        }
+    
     @objc func continueButtonTapped() {
         let vc = FinalizeView()
         vc.modalPresentationStyle = .fullScreen
@@ -184,7 +199,7 @@ class ActivitiesView: UIViewController {
             for InterestButton in self.interestsButtons {
                 InterestButton.addTarget(self, action: #selector(self.buttonTapped), for: .touchUpInside)
             }
-            self.interestsStackView.addArrangedSubviews(self.interestsButtons)
+            self.interestsStackView.addArrangedSubviews(self.setupStackView(self.interestsButtons))
         }
     }
     
@@ -201,7 +216,25 @@ class ActivitiesView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons,
                                      jumpAction: UIAction(handler: handler)) {_ in
-            self.dismiss(animated: true)
+            if let hobbiesView = self.presentingViewController,
+               let professionView = hobbiesView.presentingViewController,
+               let photoView = professionView.presentingViewController,
+               let tokenView = photoView.presentingViewController,
+               let confirmDataView = tokenView.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController{
+                
+                tokenView.view.isHidden = true
+                confirmDataView.view.isHidden = true
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: false)
+            }
         }
         
     }

@@ -8,17 +8,16 @@
 import UIKit
 
 class HomeOpenViewModel {
-    
-    init(_ customBarWithFilter: CustomBarWithFilter) {
-        
-        self.customBarWithFilter = customBarWithFilter
-    }
-    
     var delegate: HomeOpenViewModelProtocol?
     
     private let sessionManager = SessionManager()
     
     private let customBarWithFilter: CustomBarWithFilter
+    
+    init(_ customBarWithFilter: CustomBarWithFilter) {
+        
+        self.customBarWithFilter = customBarWithFilter
+    }
     
     func manageCustomBar() {
         

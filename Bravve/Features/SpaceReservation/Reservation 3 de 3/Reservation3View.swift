@@ -10,15 +10,455 @@ import UIKit
 
 final class ReservationsThreeViewController: UIViewController {
     
-
+    //MARK: - preferredStatusBarStyle
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+        
+        
+    }
+    
+    
+    //MARK: - var and let
+    private let alertCc = CustomAlert()
+    private let alertSource = CustomAlert()
+    private let bravveIcon = UIImageView()
     private let viewModel = ReservationsViewModel()
     
-    private let bravveIcon = UIImageView()
+    //MARK: FinishButton
+    let finishButton = UIButton()
     
-    //MARK: LoadView
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+
+       
+        //MARK: - NavWallpapper
+        private lazy var navWalppapper: UIImageView = {
+            let view = UIImageView()
+            view.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.contentMode = .scaleToFill
+           return view
+        }()
+        
+        //MARK: - NameSpace
+       private lazy var nameSpace: UILabel = {
+            let label = UILabel()
+            label.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
+            label.text = "Nome do espaço"
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
+           return label
+        }()
+        
+    //MARK: - NameLocalPartner
+       private lazy var nameLocalPartner: UILabel = {
+            let label = UILabel()
+            label.text = "Nome do local parceiro"
+            label.font = UIFont(name: FontsBravve.regular.rawValue, size: 16)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
+           return label
+        }()
+    
+    //MARK: - ProgressBarStackView
+    private lazy var progressBarStackView: (stack: UIStackView,
+                                            buttons: [UIButton]) = {
+
+        let buttons = createProgressBarButtons([IconsBravve.walletGray.rawValue, IconsBravve.calendarGray.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditBlue.rawValue])
+        
+        buttons[3].setTitle("  Pagamento", for: .normal)
+        
+        let stackView = UIStackView(arrangedSubviews: buttons)
+        stackView.spacing = 8
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.semanticContentAttribute = .unspecified
+        stackView.contentMode = .scaleToFill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return (stack: stackView,
+                buttons: buttons)
+    }()
+        
+       
+    
+    //MARK: - paymentLabel
+    private lazy var paymentLabel: UILabel = {
+         let label = UILabel()
+        label.textColor = .black
+         label.text = "Pagamento"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+         label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+     }()
+    
+    
+    //MARK: - resumeLabel
+    private lazy var resumeLabel: UILabel = {
+         let label = UILabel()
+        label.textColor = .black
+         label.text = "Resumo"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
+         label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
+     }()
+    
+    //MARK: - resumeButton
+    private lazy var resumeButton: UIButton = {
+        let view = UIButton()
+        view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    //MARK: - lineImage
+    private lazy var lineImage: UIImageView = {
+       let view = UIImageView()
+        view.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+
+    //MARK: - imageBack Resume
+    lazy var imageBack: UIImageView = {
+        let tableview = UIImageView()
+        tableview.translatesAutoresizingMaskIntoConstraints = false
+        tableview.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        return tableview
+    }()
+    
+    
+    //MARK: - CardCreditLabel
+        private lazy var cardCreditLabel: UILabel = {
+             let label = UILabel()
+            label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+             label.text = "Cartão de Crédito"
+            label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
+             label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+         }()
+    
+    
+    
+    //MARK: - numberCardStackView
+    private lazy var numberCardStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [numberCardLabel, numberCardTextfield])
+        
+        let stackTop: CGFloat = 12
+        let stackLeft: CGFloat = 16
+        let stackRight: CGFloat = 16
+        let stackBottom: CGFloat = 16
+        stack.layoutMargins = UIEdgeInsets(top: stackTop,
+                                           left: stackLeft,
+                                           bottom: stackRight,
+                                           right: stackBottom)
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        stack.layer.borderWidth = 0.3
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layer.cornerRadius = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    //MARK: - numberCardLabel
+    private lazy var numberCardLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.text = "Número do cartão"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+        
+    //MARK: - numberCardTextField
+        private lazy var numberCardTextfield: UITextField = {
+            let view = UITextField()
+            view.becomeFirstResponder()
+            view.isHidden = true
+            view.tag = 1
+            view.layer.cornerRadius = 8
+            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+            view.delegate = self
+            view.addTarget(self, action: #selector(numberTfEmpity), for: .editingChanged)
+            view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+    
+    //MARK: - ccValidateStackView
+    private lazy var ccValidateStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [ccValidateLabel, ccValidateExpirationTextfield,accessoryButtonCcValidate])
+        
+        let stackTop: CGFloat = 12
+        let stackLeft: CGFloat = 16
+        let stackRight: CGFloat = 16
+        let stackBottom: CGFloat = 16
+        stack.layoutMargins = UIEdgeInsets(top: stackTop,
+                                           left: stackLeft,
+                                           bottom: stackRight,
+                                           right: stackBottom)
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        stack.layer.borderWidth = 0.3
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layer.cornerRadius = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    //MARK: - numberCardLabel
+    private lazy var ccValidateLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.text = "Validade"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - ccValidateExpirationTextfield
+        private lazy var ccValidateExpirationTextfield: UITextField = {
+            let view = UITextField()
+            view.layer.cornerRadius = 8
+            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+            view.isHidden = true
+            view.tag = 3
+            view.delegate = self
+            view.addTarget(self, action: #selector(ccEmpity), for: .editingChanged)
+            view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.rightViewMode = .always
+            return view
+        }()
+    
+
+    //MARK: - accessoryButtonCcValidate
+        private lazy var accessoryButtonCcValidate: UIButton = {
+        let view = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
+        let image = UIImage(named: IconsBravve.questionCircleBlue_1.rawValue)
+        view.setImage(image, for: .normal)
+            view.addTarget(self, action: #selector(tapCc), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+        }()
+    
+    //MARK: - sourceSecutiryStackView
+    private lazy var sourceSecurityStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [sourceSecurityLabel, sourceSecurityTextfield])
+        
+        let stackTop: CGFloat = 12
+        let stackLeft: CGFloat = 16
+        let stackRight: CGFloat = 16
+        let stackBottom: CGFloat = 16
+        stack.layoutMargins = UIEdgeInsets(top: stackTop,
+                                           left: stackLeft,
+                                           bottom: stackRight,
+                                           right: stackBottom)
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        stack.layer.borderWidth = 0.3
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layer.cornerRadius = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    //MARK: - sourceSecurityLabel
+    private lazy var sourceSecurityLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.text = "CVV"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - sourceSecurityTextfield
+        private lazy var sourceSecurityTextfield: UITextField = {
+            let view = UITextField()
+            view.layer.cornerRadius = 8
+            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+            view.isHidden = true
+            view.delegate = self
+            view.tag = 5
+            view.addTarget(self, action: #selector(sourceEmpity), for: .editingChanged)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+    
+    
+    
+    //MARK: - accessoryButtonSourceSecurity
+        private lazy var accessoryButtonSourceSecurity: UIButton = {
+        let view = UIButton()
+        let image = UIImage(named: IconsBravve.questionCircleBlue_1.rawValue)
+        view.setImage(image, for: .normal)
+        view.addTarget(self, action: #selector(tapAcessorySource), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+        }()
+    
+    //MARK: - contryStackView
+    private lazy var countryStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [countryLabel, countryField])
+        
+        let stackTop: CGFloat = 12
+        let stackLeft: CGFloat = 16
+        let stackRight: CGFloat = 16
+        let stackBottom: CGFloat = 16
+        stack.layoutMargins = UIEdgeInsets(top: stackTop,
+                                           left: stackLeft,
+                                           bottom: stackRight,
+                                           right: stackBottom)
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        stack.layer.borderWidth = 0.3
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layer.cornerRadius = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    //MARK: countryLabel
+    private lazy var countryLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.text = "País"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+        
+    //MARK: - countryTextfield
+        private lazy var countryField: UITextField = {
+            let view = UITextField()
+            view.layer.cornerRadius = 8
+            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+            view.isHidden = true
+            view.addTarget(self, action: #selector(countryEmpity), for: .editingChanged)
+            view.isUserInteractionEnabled = false
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+    
+    
+    
+    
+    //MARK: - accessoryButtonCountryArrow
+        private lazy var accessoryButtonCountryArrow: UIButton = {
+        let view = UIButton()
+        view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+            
+        }()
+    
+    
+ 
+    //MARK: - nameHolderStackView
+    private lazy var nameHolderStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [nameHolderLabel, nameHolderTextfield])
+        
+        let stackTop: CGFloat = 12
+        let stackLeft: CGFloat = 16
+        let stackRight: CGFloat = 16
+        let stackBottom: CGFloat = 16
+        stack.layoutMargins = UIEdgeInsets(top: stackTop,
+                                           left: stackLeft,
+                                           bottom: stackRight,
+                                           right: stackBottom)
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        stack.layer.borderWidth = 0.3
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layer.cornerRadius = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    //MARK: - nameHolderLabel
+    private lazy var nameHolderLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.text = "Nome impresso no cartão"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    //MARK: - nameHolderTextfield
+        private lazy var nameHolderTextfield: UITextField = {
+            let view = UITextField()
+            view.layer.cornerRadius = 8
+            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+            view.tag = 4
+            view.isHidden = true
+            view.addTarget(self, action: #selector(nameHolderEmpity), for: .editingChanged)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+    
+    
+
+    //MARK: - cpfStackView
+    private lazy var cpfStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [cpfLabel, cpfTextfield])
+        
+        let stackTop: CGFloat = 12
+        let stackLeft: CGFloat = 16
+        let stackRight: CGFloat = 16
+        let stackBottom: CGFloat = 16
+        stack.layoutMargins = UIEdgeInsets(top: stackTop,
+                                           left: stackLeft,
+                                           bottom: stackRight,
+                                           right: stackBottom)
+        stack.spacing = 2
+        stack.axis = .vertical
+        stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        stack.layer.borderWidth = 0.3
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layer.cornerRadius = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    //MARK: cpfLabel
+    private lazy var cpfLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.text = "CPF"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+        
+    //MARK: cpfTextfield
+        private lazy var cpfTextfield: UITextField = {
+            let view = UITextField()
+            view.tag = 2
+            view.delegate = self
+            view.layer.cornerRadius = 8
+            view.isHidden = true
+            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+            view.addTarget(self, action: #selector(cpfEmpity), for: .editingChanged)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+    
+   
+   
+    //MARK: - LoadView
+    override func loadView() {
+        super.loadView()
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         setupView()
         setupConstrains()
         
@@ -40,454 +480,121 @@ final class ReservationsThreeViewController: UIViewController {
         let cpfStackViewTap = UITapGestureRecognizer(target: self, action: #selector(cpfStackViewTapped))
         cpfStackView.addGestureRecognizer(cpfStackViewTap)
         
-        finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
+    //MARK: - SetupView
+    private func setupView() {
+        view.addSubviews([navWalppapper,
+                          nameSpace,
+                          nameLocalPartner,
+                          progressBarStackView.stack,
+                          paymentLabel,
+                          lineImage,
+                          resumeLabel,
+                          imageBack,
+                          numberCardStackView,
+                          cardCreditLabel,
+                          ccValidateStackView,
+                          sourceSecurityStackView,
+                          countryStackView,
+                          nameHolderStackView,
+                          cpfStackView,
+                          accessoryButtonCcValidate,
+                          accessoryButtonSourceSecurity,
+                          countryImageFlag,
+                          accessoryButtonCountryArrow,
+                          resumeButton,
+                          finishButton
+                         ])
+        
         
         
     }
     
-       //MARK: SetupView
-       private func setupView() {
-           view.addSubviews([navWalppapper,
-                             nameSpace,
-                             nameLocalPartner,
-                             progressBarStackView.stack,
-                             paymentLabel,
-                             lineImage,
-                             resumeLabel,
-                             tableviewCc,
-                             numberCardStackView,
-                             cardCreditLabel,
-                             ccValidateStackView,
-                             sourceSecurityStackView,
-                             countryStackView,
-                             nameHolderStackView,
-                             cpfStackView,
-                             accessoryButtonCcValidate,
-                             accessoryButtonSourceSecurity,
-                             countryImageFlag,
-                             accessoryButtonCountryArrow,
-                             resumeButton,
-                             finishButton
-                            
-                             
-                             
-                            ])
-       }
-       
-        //MARK: NavWallpapper
-        private lazy var navWalppapper: UIImageView = {
-            let view = UIImageView()
-            view.image = UIImage(named: "imageReservsNav")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.contentMode = .scaleToFill
-           return view
-        }()
-        
-        //MARK: NameSpace
-       private lazy var nameSpace: UILabel = {
-            let label = UILabel()
-            label.text = "Nome do espaço"
-            label.font = UIFont(name: "Ubuntu-Bold", size: 16)
-            label.textAlignment = .center
-            label.translatesAutoresizingMaskIntoConstraints = false
-            //label.textColor = UIColor(named: "Brigth-white")
-            label.textColor = .white
-           return label
-        }()
-        
-    //MARK: NameLocalPartner
-       private lazy var nameLocalPartner: UILabel = {
-            let label = UILabel()
-            label.text = "Nome do local parceiro"
-            label.font = UIFont(name: "Ubuntu-Regular", size: 16)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            //label.textColor = UIColor(named: "Brigth-white")
-            label.textColor = .white
-           return label
-        }()
-    
-    //MARK: ProgressBarStackView
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
-
-        let buttons = createProgressBarButtons([IconsBravve.walletGray.rawValue, IconsBravve.calendarGray.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditBlue.rawValue])
-        
-        buttons[3].setTitle("  Pagamento", for: .normal)
-        
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 8
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.axis = .horizontal
-        stackView.semanticContentAttribute = .unspecified
-        stackView.contentMode = .scaleToFill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return (stack: stackView,
-                buttons: buttons)
-        
-        
-    }()
-        
-       
-        //MARK: cardButton
-        private lazy var cardButton: UIButton = {
-            let view = UIButton()
-            view.setImage(UIImage(named: "userGray"), for: .normal)
-            view.translatesAutoresizingMaskIntoConstraints = false
-         return view
-        }()
-        
-    //MARK: schedulingButton
-        private lazy var schedulingButton: UIImageView = {
-            let view = UIImageView()
-            view.image = UIImage(named: "creditBlue")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-         return view
-        }()
-        
-    //MARK: revisionButton
-        private lazy var revisionButton: UIImageView = {
-            let view = UIImageView()
-            view.image = UIImage(named: "creditBlue")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-         return view
-        }()
-        
-    //MARK: paymentButton
-        private lazy var paymentButton: UIImageView = {
-            let view = UIImageView()
-            view.image = UIImage(named: "creditBlue")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-         return view
-        }()
-    
-    //MARK: paymentLabel
-    private lazy var paymentLabel: UILabel = {
-         let label = UILabel()
-        label.textColor = .black
-         label.text = "Pagamento"
-         label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-         label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-     }()
     
     
-    //MARK: resumeLabel
-    private lazy var resumeLabel: UILabel = {
-         let label = UILabel()
-        label.textColor = .black
-         label.text = "Resumo"
-         label.font = UIFont(name: "Ubuntu-Bold", size: 15)
-         label.translatesAutoresizingMaskIntoConstraints = false
-
-        return label
-        
-     }()
-    private lazy var resumeButton: UIButton = {
-        let view = UIButton()
-        view.setImage(UIImage(named: "arrowDown"), for: .normal)
-        view.setImage(UIImage(named: "arrowUp"), for: .selected)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    //MARK: lineImage
-    private lazy var lineImage: UIButton = {
-       let view = UIButton()
-        view.backgroundColor = UIColor(named: "grayAlertLabel")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    
-    
-    
-    //MARK: TableView Resume
-    lazy var tableviewCc: UITableView = {
-        let tableview = UITableView()
-        tableview.translatesAutoresizingMaskIntoConstraints = false
-        tableview.backgroundColor = .white
-        return tableview
-        
-    }()
-    
-    
-    //MARK: CardCreditLabel
-        private lazy var cardCreditLabel: UILabel = {
-             let label = UILabel()
-            label.textColor = .black
-             label.text = "Cartão de Crédito"
-             label.font = UIFont(name: "Ubuntu-Bold", size: 15)
-             label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-         }()
-    
-    
-    
-    //MARK: numberCardStackView
-    private lazy var numberCardStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [numberCardLabel, numberCardTextfield])
-        
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
-        stack.axis = .vertical
-        stack.backgroundColor = .white
-        stack.layer.borderWidth = 0.3
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    //MARK: numberCardLabel
-    private lazy var numberCardLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = UIColor(named: "labelTextField")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.text = "Número do cartão"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-        
-    //MARK: numberCardTextField
-        private lazy var numberCardTextfield: UITextField = {
-            let view = UITextField()
-            view.becomeFirstResponder()
-            view.isHidden = true
-            view.tag = 1
-            view.layer.cornerRadius = 8
-            view.backgroundColor = .white
-            view.delegate = self
-            view.addTarget(self, action: #selector(numberTfEmpity), for: .editingChanged)
-            view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-            
-        }()
+    //MARK: actions and methods
     
     //MARK: numberTfEmpity
     @objc private func numberTfEmpity()  {
-        numberCardStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        
+        if numberCardTextfield.text!.count >= 19 {
+            numberCardStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        } else {
+            numberCardStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+        }
     }
     
-    //MARK: numberStackViewTapped
+    //MARK: - numberStackViewTapped
     @objc func numberStackViewTapped() {
-            numberCardLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        numberCardLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
            
         numberCardTextfield.isHidden = false
         numberCardTextfield.becomeFirstResponder()
-        
-    
     }
     
-    //MARK: ccValidateStackView
-    private lazy var ccValidateStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [ccValidateLabel, ccValidateExpirationTextfield])
-        
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
-        stack.axis = .vertical
-        stack.backgroundColor = .white
-        stack.layer.borderWidth = 0.3
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
     
-    //MARK: numberCardLabel
-    private lazy var ccValidateLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = UIColor(named: "labelTextField")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.text = "Validade"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    //MARK: ccValidateExpirationTextfield
-        private lazy var ccValidateExpirationTextfield: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = .white
-            view.isHidden = true
-            view.tag = 3
-            view.delegate = self
-            view.addTarget(self, action: #selector(ccEmpity), for: .editingChanged)
-            view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.rightViewMode = .always
-            return view
-            
-        }()
-    
-    //MARK: ccEmpity
+    //MARK: - ccEmpity
     @objc private func ccEmpity()  {
-        ccValidateStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        
+        if ccValidateExpirationTextfield.text!.count >= 4 {
+            ccValidateStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        } else {
+            ccValidateStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+        }
     }
     
-    //MARK: accessoryButtonCcValidate
-        private lazy var accessoryButtonCcValidate: UIButton = {
-        let view = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
-        let image = UIImage(systemName: "questionmark.circle.fill")
-        view.tintColor = UIColor(named: "blueNav")
-        view.setImage(image, for: .normal)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-            
-        }()
-    
-    //MARK: ccValidatestackViewTapped
+    //MARK: - ccValidatestackViewTapped
     @objc func ccValidatestackViewTapped() {
-            ccValidateLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        ccValidateLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
         
         ccValidateExpirationTextfield.isHidden = false
         ccValidateExpirationTextfield.becomeFirstResponder()
         
     }
     
-    //MARK: sourceSecutiryStackView
-    private lazy var sourceSecurityStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [sourceSecurityLabel, sourceSecurityTextfield])
-        
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
-        stack.axis = .vertical
-        stack.backgroundColor = .white
-        stack.layer.borderWidth = 0.3
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    //MARK: numberCardLabel
-    private lazy var sourceSecurityLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = UIColor(named: "labelTextField")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.text = "CVV"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    //MARK: sourceSecurityTextfield
-        private lazy var sourceSecurityTextfield: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = .white
-            view.isHidden = true
-            view.addTarget(self, action: #selector(sourceEmpity), for: .editingChanged)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-    
-    //MARK: sourceEmpity
-    @objc private func sourceEmpity()  {
-        sourceSecurityStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        
+    @objc func tapCc() {
+        alertCc.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue),
+                          message: "A data de validade se encontra na mesma área que o número do cartão.",
+                          enterAttributed: "Entendi",
+                          enterHandler: nil,
+                          cancelAttributed: nil,
+                          cancelHandler: nil,
+                          on: self)
     }
     
-    //MARK: sourceSecutiryStackViewTapped
+    //MARK: - sourceEmpity
+    @objc private func sourceEmpity()  {
+        if sourceSecurityTextfield.text!.count >= 3 {
+            sourceSecurityStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        } else {
+            sourceSecurityStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+        }
+    }
+    
+    //MARK: - sourceSecutiryStackViewTapped
     @objc func sourceSecutirytackViewTapped() {
-            sourceSecurityLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        sourceSecurityLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
         
         sourceSecurityTextfield.isHidden = false
         sourceSecurityTextfield.becomeFirstResponder()
         
     }
     
-    //MARK: accessoryButtonCcValidate
-        private lazy var accessoryButtonSourceSecurity: UIButton = {
-        let view = UIButton()
-        let image = UIImage(systemName: "questionmark.circle.fill")
-        view.tintColor = UIColor(named: "blueNav")
-        view.setImage(image, for: .normal)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-            
-        }()
     
-    //MARK: contryStackView
-    private lazy var countryStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [countryLabel, countryField])
-        
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
-        stack.axis = .vertical
-        stack.backgroundColor = .white
-        stack.layer.borderWidth = 0.3
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    //MARK: countryLabel
-    private lazy var countryLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = UIColor(named: "labelTextField")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.text = "País"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-        
-    //MARK: countryTextfield
-        private lazy var countryField: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = .white
-            view.isHidden = true
-            view.addTarget(self, action: #selector(countryEmpity), for: .editingChanged)
-            view.isUserInteractionEnabled = false
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-    
-    //MARK: countryEmpity
+    //MARK: - tapAcessorySource
+    @objc private func tapAcessorySource() {
+        alertSource.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue),
+                              message: "CVV é um número de 3 dígitos que se encontra na mesma área que o número do cartão.",
+                              enterAttributed: "Entendi",
+                              enterHandler: nil,
+                              cancelAttributed: nil,
+                              cancelHandler: nil,
+                              on: self)
+    }
+
+    //MARK: - countryEmpity
     @objc private func countryEmpity()  {
-        countryStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
+        countryStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
         
     }
     
@@ -496,170 +603,68 @@ final class ReservationsThreeViewController: UIViewController {
        let view = UIImageView(image: UIImage(named: "book"))
         view.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 15, height: 15))
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
     
-    //MARK: accessoryButtonCcValidate
-        private lazy var accessoryButtonCountryArrow: UIButton = {
-        let view = UIButton()
-        view.setImage(UIImage(named: "arrowDown"), for: .normal)
-        view.setImage(UIImage(named: "arrowUp"), for: .selected)
-        view.addTarget(self, action: #selector(tapAccessoryCc), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-            
-        }()
-    
     //MARK: ccValidatestackViewTapped
     @objc func countryStackViewTapped() {
-            countryLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        countryLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
            
-
         countryField.isHidden = false
         countryField.becomeFirstResponder()
         
     }
     
-    //MARK: TapAcessoryCc
-    @objc private func tapAccessoryCc() {
-        accessoryButtonCountryArrow.isSelected.toggle()
-    }
- 
-    
-    //MARK: contryStackView
-    private lazy var nameHolderStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [nameHolderLabel, nameHolderTextfield])
-        
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
-        stack.axis = .vertical
-        stack.backgroundColor = .white
-        stack.layer.borderWidth = 0.3
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    //MARK: numberCardLabel
-    private lazy var nameHolderLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = UIColor(named: "labelTextField")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.text = "Nome impresso no cartão"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    //MARK: nameHolderTextfield
-        private lazy var nameHolderTextfield: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = .white
-            view.tag = 4
-            view.isHidden = true
-            view.addTarget(self, action: #selector(nameHolderEmpity), for: .editingChanged)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-    
-    
-    //MARK: nameHolderEmpity
+
+    //MARK: - nameHolderEmpity
     @objc private func nameHolderEmpity()  {
-        nameHolderStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        
+        if nameHolderTextfield.text!.count >= 6 {
+            nameHolderStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        } else {
+            nameHolderStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+        }
     }
     
     //MARK: nameHoldertackViewTapped
     @objc func nameHolderStackViewTapped() {
-            nameHolderLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        nameHolderLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
         
         nameHolderTextfield.isHidden = false
         nameHolderTextfield.becomeFirstResponder()
     }
     
     
-    //MARK: cpfStackView
-    private lazy var cpfStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [cpfLabel, cpfTextfield])
-        
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
-        stack.axis = .vertical
-        stack.backgroundColor = .white
-        stack.layer.borderWidth = 0.3
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    //MARK: cpfLabel
-    private lazy var cpfLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = UIColor(named: "labelTextField")
-        label.font = UIFont(name: "Ubuntu-Regular", size: 15)
-        label.text = "CPF"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-        
-    //MARK: cpfTextfield
-        private lazy var cpfTextfield: UITextField = {
-            let view = UITextField()
-            view.tag = 2
-            view.delegate = self
-            view.layer.cornerRadius = 8
-            view.isHidden = true
-            view.backgroundColor = .white
-            view.addTarget(self, action: #selector(cpfEmpity), for: .editingChanged)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-    
-    //MARK: cpfEmpity
+    //MARK: - cpfEmpity
     @objc private func cpfEmpity()  {
-        cpfStackView.setBottomBorderOnlyWith(color: UIColor.blue.cgColor)
-        
+        if cpfTextfield.text!.count >= 14 {
+            cpfStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        } else {
+            cpfStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+        }
     }
     
     //MARK: cpfStackViewTapped
     @objc func cpfStackViewTapped() {
-            cpfLabel.font = UIFont(name: "Ubuntu-Light", size: 11)
+        cpfLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
            
-
         cpfTextfield.isHidden = false
         cpfTextfield.becomeFirstResponder()
         
     }
     
-    //MARK: FinishButton
-    lazy var finishButton = UIButton()
+    
+    //MARK: - finishButtonTapped
+    @objc func finishButtonTapped() {
         
-    @objc func finishButtonTapped(){
-        let reserveViewController = ReservationCompletedView()
-        reserveViewController.modalPresentationStyle = .fullScreen
-        present(reserveViewController, animated: true)
+//        let reserveViewController = WorkPassBookingView()
+//        reserveViewController.modalPresentationStyle = .fullScreen
+//        present(reserveViewController, animated: true)
     }
     
-        //MARK: SetupConstrains
+    
+    
+        //MARK: - SetupConstrains
         private func setupConstrains() {
             
             NSLayoutConstraint.activate([
@@ -700,10 +705,10 @@ final class ReservationsThreeViewController: UIViewController {
                 resumeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
                 
                 //MARK: tableViewCc
-                tableviewCc.topAnchor.constraint(equalTo: resumeLabel.bottomAnchor, constant: 8),
-                tableviewCc.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
-                tableviewCc.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-                tableviewCc.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+                imageBack.topAnchor.constraint(equalTo: resumeLabel.bottomAnchor, constant: 8),
+                imageBack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+                imageBack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+                imageBack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
                 
                 //MARK: cardCreditLabel
                 cardCreditLabel.topAnchor.constraint(equalTo: resumeLabel.bottomAnchor, constant: 24),
@@ -712,32 +717,32 @@ final class ReservationsThreeViewController: UIViewController {
                       
                 //MARK: numberCardStackView
                 numberCardStackView.topAnchor.constraint(equalTo: cardCreditLabel.bottomAnchor, constant: 15),
-                numberCardStackView.centerXAnchor.constraint(equalTo: tableviewCc.centerXAnchor),
-                numberCardStackView.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
-                numberCardStackView.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
+                numberCardStackView.centerXAnchor.constraint(equalTo: imageBack.centerXAnchor),
+                numberCardStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+                numberCardStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 numberCardStackView.heightAnchor.constraint(equalToConstant: 60),
                 
                 
                 //MARK: ccValidateExpirationTextField
                 ccValidateStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 15),
-                ccValidateStackView.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
-                ccValidateStackView.widthAnchor.constraint(equalToConstant: 159),
+                ccValidateStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
                 ccValidateStackView.heightAnchor.constraint(equalToConstant: 60),
+                ccValidateStackView.widthAnchor.constraint(equalToConstant: 159),
                 accessoryButtonCcValidate.trailingAnchor.constraint(equalTo: ccValidateStackView.trailingAnchor, constant:  -13),
                 accessoryButtonCcValidate.centerYAnchor.constraint(equalTo: ccValidateStackView.centerYAnchor),
               
                 //MARK: sourceSecurityTextfield
                 sourceSecurityStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 15),
-                sourceSecurityStackView.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
-                sourceSecurityStackView.widthAnchor.constraint(equalToConstant: 159),
+                sourceSecurityStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 sourceSecurityStackView.heightAnchor.constraint(equalToConstant: 60),
+                sourceSecurityStackView.widthAnchor.constraint(equalToConstant: 159),
                 accessoryButtonSourceSecurity.trailingAnchor.constraint(equalTo: sourceSecurityStackView.trailingAnchor, constant:  -13),
                 accessoryButtonSourceSecurity.centerYAnchor.constraint(equalTo: sourceSecurityStackView.centerYAnchor),
                 
                 //MARK: countryField
                 countryStackView.topAnchor.constraint(equalTo: ccValidateStackView.bottomAnchor, constant: 15),
-                countryStackView.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
-                countryStackView.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
+                countryStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+                countryStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 countryStackView.heightAnchor.constraint(equalToConstant: 60),
                 
                 countryImageFlag.trailingAnchor.constraint(equalTo: accessoryButtonCountryArrow.leadingAnchor, constant:  -16),
@@ -757,16 +762,16 @@ final class ReservationsThreeViewController: UIViewController {
             
                 //MARK: nameHolderTextfield
                 nameHolderStackView.topAnchor.constraint(equalTo: countryStackView.bottomAnchor, constant: 15),
-                nameHolderStackView.centerXAnchor.constraint(equalTo: tableviewCc.centerXAnchor),
-                nameHolderStackView.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
-                nameHolderStackView.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
+                nameHolderStackView.centerXAnchor.constraint(equalTo: imageBack.centerXAnchor),
+                nameHolderStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+                nameHolderStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 nameHolderStackView.heightAnchor.constraint(equalToConstant: 60),
                 
                 //MARK: cpfTextfield
                 cpfStackView.topAnchor.constraint(equalTo: nameHolderStackView.bottomAnchor, constant: 15),
-                cpfStackView.centerXAnchor.constraint(equalTo: tableviewCc.centerXAnchor),
-                cpfStackView.leadingAnchor.constraint(equalTo: tableviewCc.leadingAnchor),
-                cpfStackView.trailingAnchor.constraint(equalTo: tableviewCc.trailingAnchor),
+                cpfStackView.centerXAnchor.constraint(equalTo: imageBack.centerXAnchor),
+                cpfStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+                cpfStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 cpfStackView.heightAnchor.constraint(equalToConstant: 60),
                 
 
@@ -774,6 +779,7 @@ final class ReservationsThreeViewController: UIViewController {
     
             //MARK: finishButton
             finishButton.setToBottomButtonKeyboardDefault()
+            finishButton.setTitle("Finalizar", for: .normal)
           
         }
     
@@ -795,6 +801,8 @@ extension ReservationsThreeViewController: UITextFieldDelegate {
             textField?.text = textField?.text?.formatMask(mask: "##/##")
         case 4:
             textField?.text = textField?.text?.uppercased()
+        case 5:
+            textField?.text = textField?.text?.formatMask(mask: "####")
         default:
             break
         }
@@ -804,9 +812,20 @@ extension ReservationsThreeViewController: UITextFieldDelegate {
 
 
 extension UIStackView {
-    func setBottomBorderOnlyWith(color: CGColor) {
+    func setBottomBorderOnlyWithBlue(color: CGColor) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = CGColor(red: 26/255, green: 23/255, blue: 80/255, alpha: 1)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.03
+        
+    }
+}
+
+extension UIStackView {
+    func setBottomBorderOnlyWithRed(color: CGColor) {
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = CGColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
         self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         self.layer.shadowOpacity = 1.0
         self.layer.shadowRadius = 0.03

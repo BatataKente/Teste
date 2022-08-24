@@ -9,8 +9,6 @@ import UIKit
 
 class EmptyReservation: UIViewController {
     
-    let navCustomBar = UIView()
-    
     let topRightWay: UIImageView = {
         let image = UIImage(named: "wayReserv2")
         let imageTop = UIImageView(image: image)
@@ -22,22 +20,36 @@ class EmptyReservation: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Nada por aqui, ainda!"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.textColor = .black
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         return label
     }()
     
     let searchNewSpaceButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Procurar um Espaço", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(red: 1, green: 0.13, blue: 0.47, alpha: 1)
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
+        let attributesFont: [NSAttributedString.Key : Any] = [
+            
+            NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
+            NSAttributedString.Key.foregroundColor: UIColor.white as Any]
+
+        let attributedString = NSMutableAttributedString(string: "Procurar um Espaço",
+                                                         attributes: attributesFont)
+        button.setAttributedTitle(NSAttributedString(attributedString: attributedString),
+                                for: .normal)
         return button
     }()
     
-    let bottomLeftWay = UIImageView()
+    let bottomLeftWay: UIImageView = {
+        let image = UIImage(named: "wayReserv_1")
+        let imageBottom = UIImageView(image: image)
+        imageBottom.contentMode = .scaleAspectFill
+        return imageBottom
+    }()
+        
+    lazy var navCustomBar = UIView()
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -67,8 +79,8 @@ class EmptyReservation: UIViewController {
     }
     
     private func addSubViews() {
-        view.addSubview(navCustomBar)
         view.addSubview(topRightWay)
+        view.addSubview(navCustomBar)
         view.addSubview(label)
         view.addSubview(searchNewSpaceButton)
         view.addSubview(bottomLeftWay)
@@ -93,9 +105,9 @@ class EmptyReservation: UIViewController {
     private func setLabelConstraints(){
         
         let constraint = [
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 343),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 114.5),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -110.5),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(343).generateSizeForScreen),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(114.5).generateSizeForScreen),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-110.5).generateSizeForScreen),
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -105,10 +117,10 @@ class EmptyReservation: UIViewController {
     private func setButtonConstraints(){
         
         let constraint = [
-            searchNewSpaceButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
-            searchNewSpaceButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
-            searchNewSpaceButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            searchNewSpaceButton.heightAnchor.constraint(equalToConstant: 52)
+            searchNewSpaceButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: CGFloat(8).generateSizeForScreen),
+            searchNewSpaceButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
+            searchNewSpaceButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
+            searchNewSpaceButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen)
         ]
         constraint.forEach { item in
             item.isActive = true
@@ -126,5 +138,4 @@ class EmptyReservation: UIViewController {
             item.isActive = true
         }
     }
-    
 }

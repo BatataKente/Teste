@@ -13,14 +13,11 @@ extension UIScrollView {
 /// - Parameter views: Views to set in the list
     func turnIntoAList(_ views: [UIView]) {
         
-        if self.subviews.count > 1 {
+        for subview in self.subviews {
             
-            for subview in self.subviews {
+            if subview.frame.origin.x == 0 {
                 
-                if subview.alpha == 1 {
-                    
-                    subview.removeFromSuperview()
-                }
+                subview.removeFromSuperview()
             }
         }
         
@@ -34,7 +31,9 @@ extension UIScrollView {
         view.constraintInsideTo(.width, self.frameLayoutGuide)
         
         let stackView = UIStackView(arrangedSubviews: views)
+        stackView.arrangedSubviews[0].heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         stackView.axis = .vertical
+        stackView.distribution = .fillEqually
         stackView.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stackView.setToDefaultBackgroundColor()
         

@@ -368,7 +368,7 @@ class OpenDetailsView: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         
-        let itemSize = 256
+        let itemSize = 300
         let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         let black_White = UIColor(named: ColorsBravve.textField.rawValue)
         

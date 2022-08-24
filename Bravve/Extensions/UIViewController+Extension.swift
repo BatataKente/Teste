@@ -169,7 +169,7 @@ extension UIViewController {
 /// - Returns: True if is a valid name, or false if not
     func validateName(_ name: String) -> Bool {
         
-        let nameRegEx = "(?<! )[A-ZÀ-Ú]+[-a-zà-ú']+ [A-ZÀ-Ú]+[-a-zà-ú']{2,26}"
+        let nameRegEx = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
 
         let namePred = NSPredicate(format:"SELF MATCHES %@", nameRegEx)
         

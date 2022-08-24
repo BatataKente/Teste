@@ -2,12 +2,19 @@
 import UIKit
 
 class TermsAndConditionViewController: UIViewController {
-   
-        
+    
         private let customBar = UIView()
         private let myTableView = UITableView()
-        private let shadowView = UIView()
-        
+    
+    private let shadowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.shadowOpacity = 0.2
+        view.clipsToBounds = false
+        view.layer.cornerRadius = 20
+        view.frame = view.frame
+        return view
+    }()
     
     private lazy var wayImage1: UIImageView = {
         let view = UIImageView()
@@ -36,19 +43,19 @@ class TermsAndConditionViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             
-            view.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
+            view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
             myTableView.delegate = self
             myTableView.dataSource = self
+            myTableView.tableFooterView = UIView()
+            myTableView.frame = view.bounds
+            myTableView.rowHeight = 1092
             myTableView.translatesAutoresizingMaskIntoConstraints = false
             myTableView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
-            myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-           // myTableView.rowHeight = CGFloat(520).generateSizeForScreen
+            myTableView.register(TermsAndConditionCell.self, forCellReuseIdentifier: "Cell")
             myTableView.separatorStyle = .none
             myTableView.layer.cornerRadius = CGFloat(16).generateSizeForScreen
-            shadowView.backgroundColor = .systemBackground
-            shadowView.layer.shadowOpacity = 0.4
             tabBar.selectedItem = tabBar.items?[1]
-            view.addSubviews([shadowView,wayImage1,wayImage2,customBar, myTableView,tabBar])
+            view.addSubviews([shadowView,wayImage1,wayImage2, customBar, myTableView,tabBar])
             customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Termos de privacidade") { _ in
                 self.dismiss(animated: true)
             }
@@ -58,16 +65,19 @@ class TermsAndConditionViewController: UIViewController {
         }
         
         private func setConstraints() {
-            myTableView.constraintOutsideTo(.top, customBar, CGFloat(43).generateSizeForScreen)
-            myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(43).generateSizeForScreen)
-            myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-43).generateSizeForScreen)
-            myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide,CGFloat(-70).generateSizeForScreen)
             
-            shadowView.constraintOutsideTo(.top, customBar, CGFloat(43).generateSizeForScreen)
-            shadowView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(43).generateSizeForScreen)
-            shadowView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-43).generateSizeForScreen)
-            shadowView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-            shadowView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide,CGFloat(-69).generateSizeForScreen)
+            myTableView.constraintOutsideTo(.top, customBar, CGFloat(26).generateSizeForScreen)
+            myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
+            myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-35).generateSizeForScreen)
+            myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide, CGFloat(-59).generateSizeForScreen)
+            myTableView.heightAnchor.constraint(equalToConstant: CGFloat(1092).generateSizeForScreen).isActive = true
+            myTableView.widthAnchor.constraint(equalToConstant: CGFloat(324).generateSizeForScreen).isActive = true
+            
+            shadowView.constraintOutsideTo(.top, customBar, CGFloat(26).generateSizeForScreen)
+            shadowView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
+            shadowView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-35).generateSizeForScreen)
+            shadowView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide, CGFloat(-59).generateSizeForScreen)
+
             
             wayImage1.constraintInsideTo(.top, view.safeAreaLayoutGuide)
             wayImage1.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
@@ -89,14 +99,8 @@ class TermsAndConditionViewController: UIViewController {
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.textColor = UIColor(named: ColorsBravve.label.rawValue)
-            cell.textLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
-            cell.layer.cornerRadius =  CGFloat(20).generateSizeForScreen
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.text = "  Esses Termos de Uso da BoxOffice são celebrados entre você, o usuário (“Você”), e a BoxOffice Soluções em Mobilidade Ltda. (“BoxOffice”), uma empresa brasileira inscrita no CNPJ/MF sob no 31.333.999/0001-14, com sede na Rua Tenente Gomes Ribeiro 182, em São Paulo, Estado de São Paulo. Os Termos de Uso da BoxOffice, conjuntamente com a Política de Privacidade da Box Office, formam o acordo integral entre Você e a BoxOffice (“Contrato do Usuário”) para a utilização dos equipamentos da BoxOffice, conforme disposto a seguir.A BoxOffice é uma empresa que fornece espaços compactos autônomos para realizar negócios, entrevistas, reuniões, estudos e outras atividades em geral, com conforto acústico, privacidade e climatizados, e de equipamentos colocados à disposição para locação temporária (“BOX” ou “BOXES” OU “Equipamentos”), por meio de um aplicativo para dispositivos móveis (o “App da BoxOffice”), em diversos locais nas cidades brasileiras (as “Cidades”), que podem ser consultados no App da BoxOffice. Os BOXES oferecidos poderão incluir, sem limitação, espaço com conforto acústico, wifi, TV, sofás e mesas de apoio, além de climatização interior e abertura da porta pelo aplicativo, ou seja, de uso livre, e disponibilizados dentro áreas de pré-definidas pela BoxOffice. Os Boxes, conjuntamente com outros equipamentos que a BoxOffice venha a oferecer, formam conjuntamente os “Equipamentos”. Os Equipamentos disponíveis para locação em cada uma das cidades ou regiões podem ser consultados no App da BoxOffice."
-            
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? TermsAndConditionCell
+            return cell ?? UITableViewCell()
         }
         
         
