@@ -26,7 +26,7 @@ class Reservas2: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.addTarget(Reservas2.self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -356,7 +356,7 @@ class Reservas2: UIViewController {
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        button.addTarget(Reservas2.self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return button
     }()
     

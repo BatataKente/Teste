@@ -137,7 +137,7 @@ class CancelReservationCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowPink"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(actionArrowButton), for: .touchUpInside)
+        button.addTarget(CancelReservationCell.self, action: #selector(actionArrowButton), for: .touchUpInside)
         return button
     }()
     
