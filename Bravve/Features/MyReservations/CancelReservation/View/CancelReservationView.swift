@@ -36,11 +36,11 @@ class CancelReservationView: UIViewController {
         
         myTableView.register(CancelReservationCell.self, forCellReuseIdentifier: "Cell")
         
-        myTableView.rowHeight = 538
+        myTableView.rowHeight = CGFloat(538).generateSizeForScreen
         
         myTableView.separatorStyle = .none
         
-        myTableView.layer.cornerRadius = 12
+        myTableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         
         view.addSubviews([topRightWay, bottomLeftWay, customBar, myTableView, tabBar])
         
@@ -62,9 +62,9 @@ class CancelReservationView: UIViewController {
     }
     
     func setConstraints() {
-        myTableView.constraintOutsideTo(.top, customBar, 13)
-        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, 20)
-        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, -20)
+        myTableView.constraintOutsideTo(.top, customBar, CGFloat(13).generateSizeForScreen)
+        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
+        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
         myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)

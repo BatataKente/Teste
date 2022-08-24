@@ -17,7 +17,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let cellView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 12
+        view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
@@ -139,7 +139,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let arrowButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "arrowPink"), for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(BookingHistoryCustomCell.self, action: #selector(actionArrowButton), for: .touchUpInside)
         return button
