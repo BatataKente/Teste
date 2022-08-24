@@ -9,6 +9,8 @@ import UIKit
 
 class ConfirmDataView: UIViewController {
     
+    let sessionManager = SessionManager()
+    
     var userToRegister: UserParameters
     
     
@@ -298,11 +300,24 @@ class ConfirmDataView: UIViewController {
     }
     
     @objc func actionButtonContinue() {
-        self.userToRegister = UserParameters(name: labelName.text, phone_number: labelCell.text, email: labelEmail.text, password: userToRegister.password)
+        self.userToRegister = UserParameters(name: labelName.text, phone_number: "+55\(labelCell.text ?? "")", email: labelEmail.text, password: userToRegister.password)
+        
         print("user", self.userToRegister)
-        let vc = TokenView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        
+        sessionManager.postDataWithOpenResponse(endpoint: .users, parameters: self.userToRegister) { (user: User?) in
+            
+            guard let userUUID = user?.uuid else {
+                return
+            }
+            
+            guard let userEmail = user?.email else { return }
+            
+            guard let userPassword = self.userToRegister.password else { return }
+            
+            let vc = TokenView(userUUID: userUUID, userEmail: userEmail, userPassword: userPassword)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
     }
     
     @objc func actionEditButtonName() {

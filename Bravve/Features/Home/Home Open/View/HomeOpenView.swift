@@ -13,7 +13,7 @@ class HomeOpenView: UIViewController {
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
+    private var seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
     
     private var cells: [Space] = []
     
@@ -154,12 +154,23 @@ class HomeOpenView: UIViewController {
         return customBarWithFilter
     }()
     
-    init(_ willLoad: Bool = false) {
+    init(_ willLoad: Bool = false, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil), _ selectedItemsArray: [String] = []) {
         
         imageView.isHidden = willLoad
         coverView.isHidden = willLoad
         
+        self.spaceParameters = spaceParameters
+        self.selectedItemsArray = selectedItemsArray
+        
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    var spaceParameters: SpaceListParameters
+    var selectedItemsArray: [String]
+
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -171,15 +182,11 @@ class HomeOpenView: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        //seletedFilterItems = selectedItemsArray
+   
         setupView()
         setupConstraints()
         setupDefaults()
-    }
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -354,3 +361,4 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         rightDropDown.turnIntoAList(buttons)
     }
 }
+

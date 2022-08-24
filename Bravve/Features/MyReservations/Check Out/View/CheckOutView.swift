@@ -322,20 +322,20 @@ class CheckOutScreen: UIViewController{
         return image
     }()
     
-    lazy var arrowIconImage1: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: ButtonsBravve.arrowDown.rawValue)
+    lazy var buttonArrowIconImage1: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
 
-        return image
+        return button
     }()
     
-    lazy var arrowIconImage2: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: ButtonsBravve.arrowDown.rawValue)
+    lazy var buttonArrowIconImage2: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
 
-        return image
+        return button
     }()
     
     lazy var cellIconImage: UIImageView = {
@@ -631,7 +631,7 @@ class CheckOutScreen: UIViewController{
         view.addSubview(buttonOpenSpace)
         view.addSubview(myTableView)
         tabBar.selectedItem = tabBar.items?[1]
-        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,newDayLabel,newCheckInLabel,newCheckOutLabel,hourLabel,hourCheckInLabel,hourCheckOutLabel,newHourLabel,newHourCheckInLabel,newHourCheckOutLabel,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,arrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,checkOutButton,arrowIconImage2])
+        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,newDayLabel,newCheckInLabel,newCheckOutLabel,hourLabel,hourCheckInLabel,hourCheckOutLabel,newHourLabel,newHourCheckInLabel,newHourCheckOutLabel,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,buttonArrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,checkOutButton,buttonArrowIconImage2])
         view.addSubview(customBar)
         view.addSubview(tabBar)
         
@@ -763,11 +763,11 @@ class CheckOutScreen: UIViewController{
             clockIconImage.topAnchor.constraint(equalTo: localizationIconImage.bottomAnchor,constant: 20),
             clockIconImage.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
             
-            arrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
-            arrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
+            buttonArrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
+            buttonArrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
             
-            arrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
-            arrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
+            buttonArrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
+            buttonArrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
             
             numberPeopleLabel.centerYAnchor.constraint(equalTo: numberPeopleImage.centerYAnchor),
             numberPeopleLabel.leadingAnchor.constraint(equalTo: numberPeopleImage.trailingAnchor,constant: 12.43),

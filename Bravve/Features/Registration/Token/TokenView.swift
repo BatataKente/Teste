@@ -9,11 +9,33 @@ import UIKit
 
 class TokenView: UIViewController {
     
+    private var userUUID: String
+    
+    private let userEmail: String
+    
+    private let userPassword: String
+    
+    init(userUUID: String, userEmail: String, userPassword: String) {
+        self.userUUID = userUUID
+        self.userEmail = userEmail
+        self.userPassword = userPassword
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
     
     var counter = 30
+    
+    var code = ""
+    
+    let sessionManager = SessionManager()
     
     let messageSentLabel: UILabel = {
         let label = UILabel()
@@ -169,7 +191,7 @@ class TokenView: UIViewController {
         button.addSubview(borderBottom)
         button.setTitleColor(UIColor(named: ColorsBravve.blue_cyan.rawValue), for: .normal)
         button.isHidden = true
-        button.addTarget(TokenView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -193,6 +215,10 @@ class TokenView: UIViewController {
         
         if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
             
+            if let code1 = code1TextField.text, let code2 = code2TextField.text, let code3 = code3TextField.text, let code4 = code4TextField.text, let code5 = code5TextField.text, let code6 = code6TextField.text {
+                self.code = "\(code1)\(code2)\(code3)\(code4)\(code5)\(code6)"
+            }
+            
             continueButton.addTarget(nil,
                                      action: #selector(continueButtonTapped),
                                      for: .touchUpInside)
@@ -210,13 +236,35 @@ class TokenView: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-        let vc = FotoView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        
+        let parameters = ValidateUserParameter(code: self.code)
+        
+        print("UUID: \(self.userUUID), Email: \(self.userEmail), Password: \(self.userPassword)")
+        
+        sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID,endpoint: .usersValidate, parameters: parameters) { statusCode in
+            guard let statusCode = statusCode else {
+                return
+            }
+            
+            if statusCode == 204 {
+                self.sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: LoginParameters(email: self.userEmail, password: self.userPassword)) { (token: Token?) in
+                    UserDefaults.standard.setValue(token?.token, forKey: "access_token")
+                    
+                    let vc = FotoView(userUUID: self.userUUID)
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
+                }
+            }
+        }
     }
     
     @objc func resendCodeButtonTapped() {
         
+        let parameters = ValidateUserParameter()
+        
+        self.sessionManager.postOpenDataWithoutResponse(uuid: "9544eb3f-8bd8-41e3-8e44-96f450ace4ff", endpoint: .usersCode, parameters: parameters) { statusCode in
+            print(statusCode as Any)
+        }
         print("Novo código enviado")
     }
     
@@ -253,9 +301,20 @@ class TokenView: UIViewController {
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
-            let login = LoginView()
-            login.modalPresentationStyle = .fullScreen
-            self.present(login, animated: true)
+            if let confirmDataView = self.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController{
+                
+                confirmDataView.view.isHidden = true
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: false)
+            }
         }
         
     }

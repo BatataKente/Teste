@@ -102,11 +102,11 @@ class NetworkManager {
             ]
             
             AF.request(url, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.error)
+                print(response.error as Any)
                 if let data = response.value {
                     completionHandler(data)
                 } else {
-                    print(response.response?.statusCode)
+                    print(response.response?.statusCode as Any)
                     completionHandler(nil)
                 }
             }
@@ -175,7 +175,7 @@ class NetworkManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             print(url)
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.response?.statusCode)
+                print(response.response?.statusCode as Any)
                 if let data = response.value {
                     completionHandler(data)
                 } else {
@@ -215,7 +215,7 @@ class NetworkManager {
             AF.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(picture_url, withName: "picture")
             }, to: url, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.response?.statusCode)
+                print(response.response?.statusCode as Any)
                 if let data = response.value {
                     completionHandler(data)
                 } else {

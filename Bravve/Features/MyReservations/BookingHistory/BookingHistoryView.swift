@@ -1,13 +1,13 @@
 //
-//  CancelReservationView.swift
-//  Teste
+//  BookingHistoryView.swift
+//  Bravve
 //
-//  Created by user208023 on 7/28/22.
+//  Created by Evandro Rodrigo Minamoto on 24/08/22.
 //
 
 import UIKit
 
-class CancelReservationView: UIViewController {
+class BookingHistoryView: UIViewController {
     
     let customBar = UIView()
     
@@ -22,7 +22,6 @@ class CancelReservationView: UIViewController {
         return tabBar
     }()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +33,7 @@ class CancelReservationView: UIViewController {
         myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.backgroundColor = UIColor(named: "background")
         
-        myTableView.register(CancelReservationCell.self, forCellReuseIdentifier: "Cell")
+        myTableView.register(BookingHistoryCustomCell.self, forCellReuseIdentifier: "Cell")
         
         myTableView.rowHeight = CGFloat(538).generateSizeForScreen
         
@@ -46,7 +45,7 @@ class CancelReservationView: UIViewController {
         
         tabBar.selectedItem = tabBar.items?[1]
         
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Minhas Reservas") { _ in
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") { _ in
             
             self.dismiss(animated: true)
         }
@@ -73,27 +72,23 @@ class CancelReservationView: UIViewController {
     }
 }
 
-extension CancelReservationView: UITableViewDelegate, UITableViewDataSource {
+extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CancelReservationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BookingHistoryCustomCell
         cell?.delegate = self
         return cell ?? UITableViewCell()
     }
-    
-    
 }
 
-extension CancelReservationView: CancelReservationCellDelegate {
+extension BookingHistoryView: BookingHistoryCustomCellDelegate {
     
     func presentViewController(_ viewController: UIViewController) {
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
     }
-    
-    
 }
