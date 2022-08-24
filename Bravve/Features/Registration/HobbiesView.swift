@@ -71,39 +71,11 @@ class HobbiesView: UIViewController {
     
     var sessionHobbiesButtons = [UIButton]()
             
-    lazy var hobbiesButtons: [UIButton] = {
-        var hobbiesButtons = [UIButton]()
-        hobbiesButtons = createCapsuleButtons(["Futebol", "Ciclismo", "Natação", "Corrida", "Culinária", "Fotografia", "Viagens", "Artes", "Games", "Yoga", "Leitura", "Música"], ColorsBravve.capsuleButton)
-        
-        for hobbiesButton in hobbiesButtons {
-            hobbiesButton.addTarget(self, action: #selector(chooseHobbie), for: .touchUpInside)
-        }
-        return hobbiesButtons
-        
-    }()
-    
-    lazy var stackLine1: UIStackView = {
-        let stack1 = UIStackView()
-        stack1.axis = .horizontal
-        stack1.spacing = CGFloat(4).generateSizeForScreen
-        return stack1
-    }()
+    lazy var hobbiesButtons: [UIButton] = []
     
     lazy var hobbiesStackView: UIStackView = {
         
-        let line2 = UIStackView(arrangedSubviews: [hobbiesButtons[3], hobbiesButtons[4], hobbiesButtons[5]])
-        line2.axis = .horizontal
-        line2.spacing = CGFloat(4).generateSizeForScreen
-        
-        let line3 = UIStackView(arrangedSubviews: [hobbiesButtons[6], hobbiesButtons[7], hobbiesButtons[8]])
-        line3.axis = .horizontal
-        line3.spacing = CGFloat(4).generateSizeForScreen
-        
-        let line4 = UIStackView(arrangedSubviews: [hobbiesButtons[9], hobbiesButtons[10], hobbiesButtons[11]])
-        line4.axis = .horizontal
-        line4.spacing = CGFloat(4).generateSizeForScreen
-        
-        let stackView = UIStackView(arrangedSubviews: [stackLine1, line2, line3, line4])
+        let stackView = UIStackView(arrangedSubviews: hobbiesButtons)
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = CGFloat(12).generateSizeForScreen
@@ -129,13 +101,13 @@ class HobbiesView: UIViewController {
             for hobbies in hobbiesList {
                 (self.aPIHobbiesArray.append(hobbies.name ?? ""))
             }
-            self.sessionHobbiesButtons = self.createCapsuleButtons(self.aPIHobbiesArray, ColorsBravve.capsuleButton)
+            self.hobbiesButtons = self.createCapsuleButtons(self.aPIHobbiesArray, ColorsBravve.capsuleButton)
             
-            for hobbiesButton in self.sessionHobbiesButtons {
+            for hobbiesButton in self.hobbiesButtons {
                 hobbiesButton.addTarget(self, action: #selector(self.chooseHobbie), for: .touchUpInside)
             }
             
-            self.stackLine1.addArrangedSubviews(self.sessionHobbiesButtons)
+            self.hobbiesStackView.addArrangedSubviews(self.setupStackView(self.hobbiesButtons))
         }
     }
     
@@ -178,6 +150,48 @@ class HobbiesView: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
+    
+    private func createStackView(_ views: [UIView]) -> UIStackView {
+            
+        let stackView = UIStackView(arrangedSubviews: views)
+        stackView.spacing = 4
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        
+        return stackView
+    }
+    
+    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
+            
+        var stackViews = [UIStackView]()
+        
+        var from = 0
+        
+        if buttons.count%2 != 0 {
+            
+            buttons[from].addTarget(self, action: #selector(self.chooseHobbie),
+                                    for: .touchUpInside)
+            stackViews.append(self.createStackView([buttons[from]]))
+            
+            from += 1
+        }
+        
+        for i in stride(from: from,
+                        to: buttons.count - 1,
+                        by: 2) {
+                
+            buttons[i].addTarget(self, action: #selector(self.chooseHobbie),
+                                 for: .touchUpInside)
+            buttons[i+1].addTarget(self, action: #selector(self.chooseHobbie),
+                                   for: .touchUpInside)
+            
+            stackViews.append(self.createStackView([buttons[i],
+                                                    buttons[i+1]]))
+        }
+        
+        return stackViews
+        }
+
 
     func setupView() {
         
