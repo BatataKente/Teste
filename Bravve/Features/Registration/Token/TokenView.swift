@@ -9,11 +9,33 @@ import UIKit
 
 class TokenView: UIViewController {
     
+    private var userUUID: String
+    
+    private let userEmail: String
+    
+    private let userPassword: String
+    
+    init(userUUID: String, userEmail: String, userPassword: String) {
+        self.userUUID = userUUID
+        self.userEmail = userEmail
+        self.userPassword = userPassword
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
     
     var counter = 30
+    
+    var code = ""
+    
+    let sessionManager = SessionManager()
     
     let messageSentLabel: UILabel = {
         let label = UILabel()
@@ -193,6 +215,10 @@ class TokenView: UIViewController {
         
         if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
             
+            if let code1 = code1TextField.text, let code2 = code2TextField.text, let code3 = code3TextField.text, let code4 = code4TextField.text, let code5 = code5TextField.text, let code6 = code6TextField.text {
+                self.code = "\(code1)\(code2)\(code3)\(code4)\(code5)\(code6)"
+            }
+            
             continueButton.addTarget(nil,
                                      action: #selector(continueButtonTapped),
                                      for: .touchUpInside)
@@ -210,9 +236,26 @@ class TokenView: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-        let vc = FotoView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        
+        let parameters = ValidateUserParameter(code: self.code)
+        
+        print("UUID: \(self.userUUID), Email: \(self.userEmail), Password: \(self.userPassword)")
+        
+        sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID,endpoint: .usersValidate, parameters: parameters) { statusCode in
+            guard let statusCode = statusCode else {
+                return
+            }
+            
+            if statusCode == 204 {
+                self.sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: LoginParameters(email: self.userEmail, password: self.userPassword)) { (token: Token?) in
+                    UserDefaults.standard.setValue(token?.token, forKey: "access_token")
+                    
+                    let vc = FotoView()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
+                }
+            }
+        }
     }
     
     @objc func resendCodeButtonTapped() {
