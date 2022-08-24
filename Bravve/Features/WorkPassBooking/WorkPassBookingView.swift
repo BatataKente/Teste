@@ -10,7 +10,7 @@ import UIKit
 
 class WorkPassBookingView: UIViewController {
     
-    
+    //MARK: TableView
     private let tableView : UITableView = {
         
         let tableView = UITableView()
@@ -21,6 +21,15 @@ class WorkPassBookingView: UIViewController {
         tableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         return tableView
     }()
+    //MARK: Views
+    private let locationStackViewSeparator: UIView = {
+        
+        
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let navBarView: UIView = {
         let view = UIView()
@@ -28,31 +37,14 @@ class WorkPassBookingView: UIViewController {
         return view
     }()
     
-    private let navBarBackgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    //MARK: tabBar
     private lazy var tabBar = TabBarClosed(self, itemImagesNames: [
-                                            ButtonsBravve.locationGray.rawValue,
-                                            ButtonsBravve.calendarButtonPink.rawValue,
-                                            ButtonsBravve.userLoginGray.rawValue
-                                           ])
+        ButtonsBravve.locationGray.rawValue,
+        ButtonsBravve.calendarButtonPink.rawValue,
+        ButtonsBravve.userLoginGray.rawValue
+    ])
     
-    
-    private let backBarButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func backButtonTapped(){
-        self.dismiss(animated: true)
-    }
-    
+    //MARK: Labels
     private let siteNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Nome do espaço"
@@ -72,13 +64,53 @@ class WorkPassBookingView: UIViewController {
         return label
     }()
     
-    private lazy var navBarLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [siteNameLabel, partnerNameLabel])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .center
-        return stackView
+    private let revisionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Carteira"
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(14).generateSizeForScreen)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
+    private let addressLabel: UILabel = {
+        
+        let label = UILabel()
+        label.text = "Qual forma de pagamento deseja realizar?"
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let locationDetailLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Forma de pagamento"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    //MARK: Buttons
+    lazy var pinkButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Proxima Etapa", for: .normal)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
+        button.addTarget(self, action: #selector(nextStageButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let backBarButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(WorkPassBookingView.self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     
     private let cardButton: UIButton = {
         let button = UIButton()
@@ -104,14 +136,6 @@ class WorkPassBookingView: UIViewController {
         return button
     }()
     
-    private let revisionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Carteira"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(14).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     private let paymentButton: UIButton = {
         let button = UIButton()
@@ -119,6 +143,39 @@ class WorkPassBookingView: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         return button
+    }()
+    //MARK: ImageView
+    private let locationIcon: UIImageView = {
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: IconsBravve.questionCircleBlue_2.rawValue)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let navBarBackgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    //MARK: StackView
+    private lazy var locationStackView: UIStackView = {
+        
+        let stackView = UIStackView(arrangedSubviews: [locationIcon, addressLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        stackView.spacing = CGFloat(8).generateSizeForScreen
+        return stackView
+    }()
+    
+    private lazy var navBarLabelStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [siteNameLabel, partnerNameLabel])
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .center
+        return stackView
     }()
     
     private lazy var buttonStackView: UIStackView = {
@@ -130,68 +187,7 @@ class WorkPassBookingView: UIViewController {
     }()
     
     
-    private let locationDetailLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Forma de pagamento"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(15).generateSizeForScreen)
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        label.adjustsFontSizeToFitWidth = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let locationIcon: UIImageView = {
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: IconsBravve.questionCircleBlue_2.rawValue)
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private let addressLabel: UILabel = {
-        
-        let label = UILabel()
-        label.text = "Qual forma de pagamento deseja realizar?"
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(12).generateSizeForScreen)
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        label.numberOfLines = 2
-        label.adjustsFontSizeToFitWidth = true
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var locationStackView: UIStackView = {
-        
-        let stackView = UIStackView(arrangedSubviews: [locationIcon, addressLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        stackView.spacing = CGFloat(8).generateSizeForScreen
-        return stackView
-    }()
-    
-    private let locationStackViewSeparator: UIView = {
-        
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    lazy var pinkButton : UIButton = {
-     let button = UIButton()
-        button.setTitle("Proxima Etapa", for: .normal)
-        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
-        button.addTarget(self, action: #selector(nextStageButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func nextStageButtonTapped(){
-        let reserveViewController = SingleBookingView()
-        reserveViewController.modalPresentationStyle = .fullScreen
-        present(reserveViewController, animated: true)
-    }
-    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
@@ -204,8 +200,19 @@ class WorkPassBookingView: UIViewController {
         setupConstraints()
         
     }
+    //MARK: Funcs
+    @objc func nextStageButtonTapped(){
+        let reserveViewController = SingleBookingView()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
+    }
+    
+    @objc func backButtonTapped(){
+        self.dismiss(animated: true)
+    }
+    //MARK: Constraints
     private func setupConstraints() {
-      
+        
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
@@ -260,28 +267,28 @@ class WorkPassBookingView: UIViewController {
     }
     
 }
-
+//MARK: Extension
 extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkPassCell", for: indexPath) as? WorkPassCell else { return UITableViewCell() }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkPassCell", for: indexPath) as? WorkPassCell else { return UITableViewCell() }
         
         switch indexPath.row {
             
         case 1 :
             cell.firstLabel.text = "Foursys"
             cell.secondLabel.text = "Workpass"
-           
+            
             cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
             
         case 2 :
             cell.firstLabel.text = "Bravve"
             cell.secondLabel.text = "Workpass"
-          
+            
             cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
             
         default :
