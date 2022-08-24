@@ -263,7 +263,7 @@ class TokenView: UIViewController {
         let parameters = ValidateUserParameter()
         
         self.sessionManager.postOpenDataWithoutResponse(uuid: "9544eb3f-8bd8-41e3-8e44-96f450ace4ff", endpoint: .usersCode, parameters: parameters) { statusCode in
-            print(statusCode)
+            print(statusCode as Any)
         }
         print("Novo código enviado")
     }
