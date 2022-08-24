@@ -479,26 +479,10 @@
 		2E57CDDF28AC1D23004214A9 /* EmptyReservation */ = {
 			isa = PBXGroup;
 			children = (
-				2E57CDE128AC1D55004214A9 /* ViewModel */,
-				2E57CDE028AC1D4D004214A9 /* View */,
-			);
-			path = EmptyReservation;
-			sourceTree = "<group>";
-		};
-		2E57CDE028AC1D4D004214A9 /* View */ = {
-			isa = PBXGroup;
-			children = (
+				2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */,
 				2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2E57CDE128AC1D55004214A9 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */,
-			);
-			path = ViewModel;
+			path = EmptyReservation;
 			sourceTree = "<group>";
 		};
 		2EA90BA7289D0DF0003100FE /* Features */ = {
