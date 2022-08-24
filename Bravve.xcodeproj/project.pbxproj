@@ -1092,9 +1092,9 @@
 		C69617762881ED6400281633 /* Check In */ = {
 			isa = PBXGroup;
 			children = (
-				C696177E2881EE1200281633 /* ViewModel */,
-				C696177D2881EE0E00281633 /* View */,
-				C696177C2881EE0900281633 /* Model */,
+				C69617832881EE3400281633 /* CheckInViewModel.swift */,
+				C69617812881EE2A00281633 /* CheckInView.swift */,
+				C696177F2881EE1E00281633 /* CheckInModel.swift */,
 			);
 			path = "Check In";
 			sourceTree = "<group>";
@@ -1102,9 +1102,9 @@
 		C69617772881ED6D00281633 /* Check Out */ = {
 			isa = PBXGroup;
 			children = (
-				C69617872881EE4500281633 /* ViewModel */,
-				C69617862881EE4000281633 /* View */,
-				C69617852881EE3C00281633 /* Model */,
+				C696178C2881EE6500281633 /* CheckOutViewModel.swift */,
+				C696178A2881EE5B00281633 /* CheckOutView.swift */,
+				C69617882881EE5000281633 /* CheckOutModel.swift */,
 			);
 			path = "Check Out";
 			sourceTree = "<group>";
@@ -1149,54 +1149,6 @@
 				C69617A92881EF1800281633 /* Model */,
 			);
 			path = EditProfile;
-			sourceTree = "<group>";
-		};
-		C696177C2881EE0900281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C696177F2881EE1E00281633 /* CheckInModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C696177D2881EE0E00281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69617812881EE2A00281633 /* CheckInView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C696177E2881EE1200281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617832881EE3400281633 /* CheckInViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69617852881EE3C00281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69617882881EE5000281633 /* CheckOutModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69617862881EE4000281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C696178A2881EE5B00281633 /* CheckOutView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69617872881EE4500281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C696178C2881EE6500281633 /* CheckOutViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C696178E2881EE6C00281633 /* Model */ = {
