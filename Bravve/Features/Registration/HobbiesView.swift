@@ -94,12 +94,14 @@ class HobbiesView: UIViewController {
     
     func setupHobbiesArray() {
 
-        networkManager.getDataArray(endpoint: .usersHobbies) { (hobbiesList: [Hobbies]? ) in
+        sessionManager.getDataArray(endpoint: .usersHobbies) { (hobbiesList: [Hobbies]? ) in
 
             guard let hobbiesList = hobbiesList else { return }
             
             for hobbies in hobbiesList {
-                (self.aPIHobbiesArray.append(hobbies.name ?? ""))
+                
+                guard let hobbiesName = hobbies.name else { return }
+                self.aPIHobbiesArray.append(hobbiesName)
             }
             self.hobbiesButtons = self.createCapsuleButtons(self.aPIHobbiesArray, ColorsBravve.capsuleButton)
             
