@@ -89,7 +89,7 @@ class ActivitiesView: UIViewController {
     
     var arrayItems: [String] = []
     var interestArray: [String] = []
-    let networkManager = NetworkManager()
+    let sessionManager = SessionManager()
 //    let activitiesViewModel = ActivitiesViewModel()
        
     override func viewDidLoad() {
@@ -187,12 +187,13 @@ class ActivitiesView: UIViewController {
     }
     
     func interestActivities() {
-        networkManager.getDataArray(endpoint: .usersInterests) { (interestActivities: [Interests]?) in
+        sessionManager.getDataArray(endpoint: .usersInterests) { (interestActivities: [Interests]?) in
             guard let interestActivities = interestActivities else {
                 return
             }
             for interestActivity in interestActivities {
-                self.interestArray.append(interestActivity.name ?? "")
+                guard let activityName = interestActivity.name else { return }
+                self.interestArray.append(activityName)
                 print(self.interestArray)
             }
             self.interestsButtons = self.createCapsuleButtons(self.interestArray, ColorsBravve.capsuleButton)

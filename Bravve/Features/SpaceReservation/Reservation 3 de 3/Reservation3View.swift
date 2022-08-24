@@ -1,3 +1,4 @@
+
 //
 //  Reserva3View.swift
 //  Bravve
@@ -37,6 +38,16 @@ final class ReservationsThreeViewController: UIViewController {
             view.contentMode = .scaleToFill
            return view
         }()
+    
+    
+    //MARK: - backButton
+            private lazy var backButton: UIButton = {
+               let button = UIButton()
+                button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
+                button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                return button
+            }()
         
         //MARK: - NameSpace
        private lazy var nameSpace: UILabel = {
@@ -52,6 +63,7 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: - NameLocalPartner
        private lazy var nameLocalPartner: UILabel = {
             let label = UILabel()
+           label.textAlignment = .center
             label.text = "Nome do local parceiro"
             label.font = UIFont(name: FontsBravve.regular.rawValue, size: 16)
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -84,10 +96,10 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: - paymentLabel
     private lazy var paymentLabel: UILabel = {
          let label = UILabel()
-        label.textColor = .black
-         label.text = "Pagamento"
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.text = "Pagamento"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-         label.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
      }()
     
@@ -95,10 +107,10 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: - resumeLabel
     private lazy var resumeLabel: UILabel = {
          let label = UILabel()
-        label.textColor = .black
-         label.text = "Resumo"
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.text = "Resumo"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
-         label.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
         
      }()
@@ -156,7 +168,8 @@ final class ReservationsThreeViewController: UIViewController {
         stack.spacing = 2
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        stack.layer.borderWidth = 0.3
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -203,7 +216,8 @@ final class ReservationsThreeViewController: UIViewController {
         stack.spacing = 2
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        stack.layer.borderWidth = 0.3
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -261,7 +275,8 @@ final class ReservationsThreeViewController: UIViewController {
         stack.spacing = 2
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        stack.layer.borderWidth = 0.3
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -318,7 +333,8 @@ final class ReservationsThreeViewController: UIViewController {
         stack.spacing = 2
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        stack.layer.borderWidth = 0.3
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -376,7 +392,8 @@ final class ReservationsThreeViewController: UIViewController {
         stack.spacing = 2
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        stack.layer.borderWidth = 0.3
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -423,7 +440,8 @@ final class ReservationsThreeViewController: UIViewController {
         stack.spacing = 2
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        stack.layer.borderWidth = 0.3
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -486,6 +504,7 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: - SetupView
     private func setupView() {
         view.addSubviews([navWalppapper,
+                          backButton,
                           nameSpace,
                           nameLocalPartner,
                           progressBarStackView.stack,
@@ -509,6 +528,7 @@ final class ReservationsThreeViewController: UIViewController {
                          ])
         
         
+        finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         
     }
     
@@ -516,6 +536,12 @@ final class ReservationsThreeViewController: UIViewController {
     
     //MARK: actions and methods
     
+    
+    //MARK: numberTfEmpity
+    @objc private func tapBackButton() {
+        self.dismiss(animated: true)
+        }
+
     //MARK: numberTfEmpity
     @objc private func numberTfEmpity()  {
         if numberCardTextfield.text!.count >= 19 {
@@ -639,8 +665,10 @@ final class ReservationsThreeViewController: UIViewController {
     @objc private func cpfEmpity()  {
         if cpfTextfield.text!.count >= 14 {
             cpfStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+            finishButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         } else {
             cpfStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+            finishButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         }
     }
     
@@ -656,10 +684,10 @@ final class ReservationsThreeViewController: UIViewController {
     
     //MARK: - finishButtonTapped
     @objc func finishButtonTapped() {
-        
-//        let reserveViewController = WorkPassBookingView()
-//        reserveViewController.modalPresentationStyle = .fullScreen
-//        present(reserveViewController, animated: true)
+        let reservationcompletedview = ReservationCompletedView()
+            reservationcompletedview.modalPresentationStyle = .fullScreen
+            present(reservationcompletedview, animated: true)
+
     }
     
     
@@ -675,6 +703,15 @@ final class ReservationsThreeViewController: UIViewController {
                 navWalppapper.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 navWalppapper.heightAnchor.constraint(equalToConstant: CGFloat(153).generateSizeForScreen),
            
+                
+                
+                //MARK: backButton
+                backButton.centerYAnchor.constraint(equalTo:navWalppapper.centerYAnchor),
+                backButton.leadingAnchor.constraint(equalTo: navWalppapper.leadingAnchor, constant: CGFloat(32).generateSizeForScreen),
+                backButton.heightAnchor.constraint(equalToConstant: CGFloat(14).generateSizeForScreen),
+                backButton.widthAnchor.constraint(equalToConstant: CGFloat(8.48).generateSizeForScreen),
+
+
                 //MARK: nameSpace
                 nameSpace.bottomAnchor.constraint(equalTo: nameLocalPartner.topAnchor, constant: -4),
                 nameSpace.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(125).generateSizeForScreen),

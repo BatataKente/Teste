@@ -174,12 +174,77 @@ extension SingleBookingView: CalendarViewProtocol {
         let timeLabel = UILabel()
         timeLabel.text = "Horários"
         
+        let timesStack = UIStackView()
+        timesStack.axis = .vertical
+        
         let addtimeButton = UIButton()
+        
+        let handler = {(action: UIAction) in
+            
+            let timeInStack: UIStackView = {
+                
+                let inLabel = UILabel()
+                inLabel.text = "Entrada"
+                
+                let hourLabel = UILabel()
+                hourLabel.text = "08:00"
+                
+                let stackView = UIStackView(arrangedSubviews: [inLabel, hourLabel])
+                stackView.axis = .vertical
+                
+                let dropDownButton = UIButton()
+                dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+                                        for: .normal)
+                
+                let timeInStack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
+                
+                return timeInStack
+            }()
+            
+            let timeOutStack: UIStackView = {
+                
+                let outLabel = UILabel()
+                outLabel.text = "Saída"
+                
+                let hourLabel = UILabel()
+                hourLabel.text = "08:00"
+                
+                let stackView = UIStackView(arrangedSubviews: [outLabel, hourLabel])
+                stackView.axis = .vertical
+                
+                let dropDownButton = UIButton()
+                dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+                                        for: .normal)
+                
+                let timeOutStack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
+                
+                return timeOutStack
+            }()
+            
+            let trashButton = UIButton()
+            trashButton.setImage(UIImage(named: ButtonsBravve.alert.rawValue),
+                                    for: .normal)
+            
+            let timeStack = UIStackView(arrangedSubviews: [timeInStack, timeOutStack, trashButton])
+            timeStack.distribution = .fillProportionally
+            
+            let handler = {(action: UIAction) in
+                
+                timeStack.removeFromSuperview()
+            }
+            
+            trashButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+            
+            timesStack.addArrangedSubview(timeStack)
+        }
+        
+        addtimeButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         addtimeButton.setTitle("+ Adicionar horário", for: .normal)
         addtimeButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                     for: .normal)
         
-        let chosedDayStack = UIStackView(arrangedSubviews: [dayLabelStack, timeLabel, addtimeButton])
+        let chosedDayStack = UIStackView(arrangedSubviews: [dayLabelStack, timeLabel, timesStack, addtimeButton])
         chosedDayStack.axis = .vertical
         
         self.schedulesStack.addArrangedSubview(chosedDayStack)

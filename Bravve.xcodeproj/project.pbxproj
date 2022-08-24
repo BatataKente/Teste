@@ -79,6 +79,11 @@
 		2EB18FDD28A41F8B008A80BF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FDC28A41F8B008A80BF /* CustomTextField.swift */; };
 		2EB18FDF28A4201E008A80BF /* CustomBulletPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB18FDE28A4201E008A80BF /* CustomBulletPoint.swift */; };
 		2EB1902028A53735008A80BF /* HomeClosedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB1901F28A53735008A80BF /* HomeClosedTableViewCell.swift */; };
+		2ECC1E5128B66CDF00FB221D /* BookingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5028B66CDF00FB221D /* BookingHistoryView.swift */; };
+		2ECC1E5328B66CED00FB221D /* BookingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5228B66CED00FB221D /* BookingHistoryViewModel.swift */; };
+		2ECC1E5528B66CFC00FB221D /* BookingHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5428B66CFC00FB221D /* BookingHistoryModel.swift */; };
+		2ECC1E5728B66D2900FB221D /* TermsAndConditionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5628B66D2900FB221D /* TermsAndConditionCustomCell.swift */; };
+		2ECC1E5928B6713D00FB221D /* BookingHistoryCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5828B6713D00FB221D /* BookingHistoryCustomCell.swift */; };
 		2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */; };
 		2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* WorkPassBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */; };
@@ -268,6 +273,11 @@
 		2EB18FDC28A41F8B008A80BF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2EB18FDE28A4201E008A80BF /* CustomBulletPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBulletPoint.swift; sourceTree = "<group>"; };
 		2EB1901F28A53735008A80BF /* HomeClosedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedTableViewCell.swift; sourceTree = "<group>"; };
+		2ECC1E5028B66CDF00FB221D /* BookingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryView.swift; sourceTree = "<group>"; };
+		2ECC1E5228B66CED00FB221D /* BookingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryViewModel.swift; sourceTree = "<group>"; };
+		2ECC1E5428B66CFC00FB221D /* BookingHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryModel.swift; sourceTree = "<group>"; };
+		2ECC1E5628B66D2900FB221D /* TermsAndConditionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionCustomCell.swift; sourceTree = "<group>"; };
+		2ECC1E5828B6713D00FB221D /* BookingHistoryCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryCustomCell.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBooking.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingView.swift; sourceTree = "<group>"; };
@@ -469,26 +479,10 @@
 		2E57CDDF28AC1D23004214A9 /* EmptyReservation */ = {
 			isa = PBXGroup;
 			children = (
-				2E57CDE128AC1D55004214A9 /* ViewModel */,
-				2E57CDE028AC1D4D004214A9 /* View */,
-			);
-			path = EmptyReservation;
-			sourceTree = "<group>";
-		};
-		2E57CDE028AC1D4D004214A9 /* View */ = {
-			isa = PBXGroup;
-			children = (
+				2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */,
 				2E57CDE428AC1DB7004214A9 /* EmptyReservationView.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2E57CDE128AC1D55004214A9 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2E57CDE228AC1DA9004214A9 /* EmptyReservationViewModel.swift */,
-			);
-			path = ViewModel;
+			path = EmptyReservation;
 			sourceTree = "<group>";
 		};
 		2EA90BA7289D0DF0003100FE /* Features */ = {
@@ -649,6 +643,17 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		2ECC1E4F28B66CAE00FB221D /* BookingHistory */ = {
+			isa = PBXGroup;
+			children = (
+				2ECC1E5028B66CDF00FB221D /* BookingHistoryView.swift */,
+				2ECC1E5228B66CED00FB221D /* BookingHistoryViewModel.swift */,
+				2ECC1E5428B66CFC00FB221D /* BookingHistoryModel.swift */,
+				2ECC1E5828B6713D00FB221D /* BookingHistoryCustomCell.swift */,
+			);
+			path = BookingHistory;
+			sourceTree = "<group>";
+		};
 		2ED5D0F628940E00001C11DC /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +672,7 @@
 				2ED5D10828940F48001C11DC /* TermsAndConditionModel.swift */,
 				2ED5D10A28940F67001C11DC /* TermsAndConditionViewModel.swift */,
 				2ED5D10C28940F8B001C11DC /* TermsAndConditionView.swift */,
+				2ECC1E5628B66D2900FB221D /* TermsAndConditionCustomCell.swift */,
 			);
 			path = TermsAndCondition;
 			sourceTree = "<group>";
@@ -1107,6 +1113,7 @@
 			isa = PBXGroup;
 			children = (
 				C69617752881ED5A00281633 /* BookingDetails */,
+				2ECC1E4F28B66CAE00FB221D /* BookingHistory */,
 				C69617742881ED5100281633 /* CancelReservation */,
 				C69617772881ED6D00281633 /* Check Out */,
 				C69617762881ED6400281633 /* Check In */,
@@ -1439,6 +1446,7 @@
 				C696176A2881ECBF00281633 /* Reservation3ViewModel.swift in Sources */,
 				C69617082881EA2500281633 /* EmailViewModel.swift in Sources */,
 				2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */,
+				2ECC1E5128B66CDF00FB221D /* BookingHistoryView.swift in Sources */,
 				C69616CF2881E89D00281633 /* HomeOpenViewModel.swift in Sources */,
 				C69617962881EEA300281633 /* CancelReservationViewModel.swift in Sources */,
 				2E57CDDC28AC05EC004214A9 /* TokenView.swift in Sources */,
@@ -1452,6 +1460,8 @@
 				2EB18FD528A2F162008A80BF /* SpacesV1Model.swift in Sources */,
 				C69617A82881EF0F00281633 /* PersonalProfileViewModel.swift in Sources */,
 				C696176F2881ECDF00281633 /* ReservationCompletedView.swift in Sources */,
+				2ECC1E5728B66D2900FB221D /* TermsAndConditionCustomCell.swift in Sources */,
+				2ECC1E5328B66CED00FB221D /* BookingHistoryViewModel.swift in Sources */,
 				2EB18FDB28A2F1B4008A80BF /* SubscriptionsV1Model.swift in Sources */,
 				2EB18FDD28A41F8B008A80BF /* CustomTextField.swift in Sources */,
 				C69617352881EB1F00281633 /* HobbiesViewModel.swift in Sources */,
@@ -1478,6 +1488,7 @@
 				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
+				2ECC1E5928B6713D00FB221D /* BookingHistoryCustomCell.swift in Sources */,
 				2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
 				146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */,
@@ -1568,6 +1579,7 @@
 				C69617062881EA1C00281633 /* EmailView.swift in Sources */,
 				C69616F62881E9CD00281633 /* NameViewModel.swift in Sources */,
 				2EB18FD728A2F17A008A80BF /* ReservationsV1Model.swift in Sources */,
+				2ECC1E5528B66CFC00FB221D /* BookingHistoryModel.swift in Sources */,
 				2E57CDB828A58BA2004214A9 /* DetailsClosedCollectionViewCell.swift in Sources */,
 				C69617922881EE8800281633 /* CancelReservationModel.swift in Sources */,
 				2E57CDB628A58606004214A9 /* DetailsClosedView.swift in Sources */,

@@ -9,6 +9,8 @@ import UIKit
 
 class LoginView: UIViewController {
     
+    let sessionManager = SessionManager()
+    
     let backButton = UIButton()
     private let viewModel: LoginViewModel = LoginViewModel()
     private let customAlert: CustomAlert = CustomAlert()
@@ -19,6 +21,11 @@ class LoginView: UIViewController {
         
         setupView()
         setupLayoutConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        flag = 0
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -281,11 +288,19 @@ class LoginView: UIViewController {
         let vc = HomeClosedView()
         vc.modalPresentationStyle = .fullScreen
         
-        guard let phone = self.loginTextField.text else {return}
+        guard let email = self.loginTextField.text else {return}
         guard let password = self.passwordTextField.text else {return}
         
-        if self.viewModel.isValid(email: phone, password: password) == true{
-            present(vc, animated: false)
+        if self.viewModel.isValid(email: email, password: password) == true{
+            
+            let parameters = LoginParameters(email: email, password: password)
+            
+            sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: parameters) { (token: Token?) in
+                UserDefaults.standard.setValue(token?.token, forKey: "access_token")
+                self.present(vc, animated: false)
+            }
+            
+           
         }
         else{
             loginLabel.textColor = .systemRed

@@ -9,6 +9,19 @@ import UIKit
 
 class FotoView: UIViewController {
     
+    private let userUUID: String
+    
+    private var imageURL: URL?
+    
+    init(userUUID: String) {
+        self.userUUID = userUUID
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let bravveIcon = UIImageView()
         
     private let registerButton = UIButton()
@@ -64,7 +77,7 @@ class FotoView: UIViewController {
     
     let imagePicker = UIImagePickerController()
     
-    let networkManager = NetworkManager()
+    let sessionManager = SessionManager()
     
     
     override func viewDidLoad() {
@@ -156,9 +169,17 @@ class FotoView: UIViewController {
     }
     
     @objc func actionRegisterButton() {
-        let vc = ProfessionView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        
+        guard let imageURL = imageURL else {
+            return
+        }
+        
+        sessionManager.uploadPictureWithResponse(uuid: userUUID,endpoint: .usersPictures, picture_url: imageURL) { (updatedPicture: UploadPicture?) in
+            let vc = ProfessionView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+        
     }
     
    
@@ -181,9 +202,7 @@ extension FotoView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             
             guard let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
             
-            networkManager.uploadPictureWithResponse(uuid: "466c669a-a1d4-4bcd-9808-1e49afb1b806",endpoint: .usersPictures, picture_url: imageURL) { (updatedPicture: UploadPicture?) in
-                print(updatedPicture)
-            }
+            self.imageURL = imageURL
             
             dismiss(animated: true)
             
