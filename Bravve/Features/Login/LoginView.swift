@@ -21,6 +21,11 @@ class LoginView: UIViewController {
         setupLayoutConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        flag = 0
+    }
+    
     override var prefersStatusBarHidden: Bool {
         
         return true

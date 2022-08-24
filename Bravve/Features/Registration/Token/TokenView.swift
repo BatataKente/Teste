@@ -253,9 +253,20 @@ class TokenView: UIViewController {
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
-            let login = LoginView()
-            login.modalPresentationStyle = .fullScreen
-            self.present(login, animated: true)
+            if let confirmDataView = self.presentingViewController,
+               let passwordView = confirmDataView.presentingViewController,
+               let emailView = passwordView.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController{
+                
+                confirmDataView.view.isHidden = true
+                passwordView.view.isHidden = true
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: false)
+            }
         }
         
     }
