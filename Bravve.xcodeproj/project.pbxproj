@@ -83,6 +83,7 @@
 		2ECC1E5328B66CED00FB221D /* BookingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5228B66CED00FB221D /* BookingHistoryViewModel.swift */; };
 		2ECC1E5528B66CFC00FB221D /* BookingHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5428B66CFC00FB221D /* BookingHistoryModel.swift */; };
 		2ECC1E5728B66D2900FB221D /* TermsAndConditionCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5628B66D2900FB221D /* TermsAndConditionCustomCell.swift */; };
+		2ECC1E5928B6713D00FB221D /* BookingHistoryCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5828B6713D00FB221D /* BookingHistoryCustomCell.swift */; };
 		2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */; };
 		2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* WorkPassBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */; };
@@ -276,6 +277,7 @@
 		2ECC1E5228B66CED00FB221D /* BookingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryViewModel.swift; sourceTree = "<group>"; };
 		2ECC1E5428B66CFC00FB221D /* BookingHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryModel.swift; sourceTree = "<group>"; };
 		2ECC1E5628B66D2900FB221D /* TermsAndConditionCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionCustomCell.swift; sourceTree = "<group>"; };
+		2ECC1E5828B6713D00FB221D /* BookingHistoryCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryCustomCell.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBooking.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingView.swift; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				2ECC1E5028B66CDF00FB221D /* BookingHistoryView.swift */,
 				2ECC1E5228B66CED00FB221D /* BookingHistoryViewModel.swift */,
 				2ECC1E5428B66CFC00FB221D /* BookingHistoryModel.swift */,
+				2ECC1E5828B6713D00FB221D /* BookingHistoryCustomCell.swift */,
 			);
 			path = BookingHistory;
 			sourceTree = "<group>";
@@ -1501,6 +1504,7 @@
 				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
+				2ECC1E5928B6713D00FB221D /* BookingHistoryCustomCell.swift in Sources */,
 				2E57CDDE28AC0600004214A9 /* TokenViewModel.swift in Sources */,
 				C69616FD2881E9F300281633 /* TelephoneView.swift in Sources */,
 				146A8BE228AA7E7B007650A8 /* OrientationEnum.swift in Sources */,
