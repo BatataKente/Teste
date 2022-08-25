@@ -137,7 +137,6 @@ class CancelReservationCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(CancelReservationCell.self, action: #selector(actionArrowButton), for: .touchUpInside)
         return button
     }()
     
@@ -151,6 +150,8 @@ class CancelReservationCell: UITableViewCell {
         contentView.addSubview(cellView)
         
         setupConstraints()
+        
+        arrowButton.addTarget(self, action: #selector(actionArrowButton), for: .touchUpInside)
         
     }
     

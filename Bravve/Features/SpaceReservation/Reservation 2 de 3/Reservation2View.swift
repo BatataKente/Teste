@@ -356,7 +356,6 @@ class Reservas2: UIViewController {
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(Reservas2.self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -373,6 +372,8 @@ class Reservas2: UIViewController {
         
         navBarView.addSubviews([navBarBackgroundImageView, backBarButton, navBarLabelStackView])
         view.addSubviews([navBarView, buttonStackView, revisionTitleLabel, locationDetailLabel, locationStackView, locationStackViewSeparator, summaryTitleLabel, dailyLabel, numberOfDaysLabel, hoursLabel, numberOfHoursLabel, editButton, summarySeparator, firstDateLabel, clockIcon, timeLabel, costLabel, clockIconReserv2, timeLabelReserv2, costLabelReserv2, dateSeparator, secondDateLabel, secondDateClockIcon, secondDateTimeLabel, secondDateCostLabel, confirmReservationButton])
+        
+        confirmReservationButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
         
