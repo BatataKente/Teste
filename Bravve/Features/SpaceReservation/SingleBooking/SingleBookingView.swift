@@ -12,6 +12,10 @@ class SingleBookingView: UIViewController {
     
     private var theme = MyTheme.light
     private var capacityNumber = 4
+    private var availableTimes = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"]
+    private let dropDownHeight = CGFloat(160).generateSizeForScreen
+    private let timeStacksSize = CGSize(width: CGFloat(120).generateSizeForScreen,
+                                        height: CGFloat(60).generateSizeForScreen)
     
     private lazy var  buttons: [UIButton] = {
         
@@ -64,11 +68,12 @@ class SingleBookingView: UIViewController {
         return calenderView
     }()
     
-    private let scrollView: UIScrollView = {
+    private lazy var bodyScrollView: UIScrollView = {
         
-        let view = UIScrollView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let bodyScrollView = UIScrollView()
+        bodyScrollView.delegate = self
+        
+        return bodyScrollView
     }()
     
     private let viewToScroll: UIView = {
@@ -77,17 +82,25 @@ class SingleBookingView: UIViewController {
         return viewToScroll
     }()
     
-    let nextButton = UIButton()
+    private lazy var dropDown: UIScrollView = {
+        
+        let dropDown = UIScrollView()
+        dropDown.delegate = self
+        
+        return dropDown
+    }()
+    
+    private let nextButton = UIButton()
         
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.title = "My Calender"
         self.navigationController?.navigationBar.isTranslucent=false
-        self.view.backgroundColor=Style.bgColor
-        view.addSubviews([scrollView, nextButton])
-        scrollView.addSubview(viewToScroll)
-        viewToScroll.addSubviews([calenderView, daysChoiceLabel, capacityLabel, lineView, schedulesStack])
+        self.view.backgroundColor = Style.bgColor
+        view.addSubviews([bodyScrollView, nextButton])
+        bodyScrollView.addSubview(viewToScroll)
+        viewToScroll.addSubviews([calenderView, daysChoiceLabel, capacityLabel, lineView, schedulesStack, dropDown])
         self.nextButton.setToBottomButtonKeyboardDefault("Próxima Etapa", backgroundColor: .buttonPink)
         self.view.setToDefaultBackgroundColor()
         
@@ -101,16 +114,16 @@ class SingleBookingView: UIViewController {
         calenderView.constraintInsideTo(.trailing, viewToScroll, 40)
         calenderView.heightAnchorInSuperview(338)
 
-        scrollView.constraintInsideTo(.top, view, 220)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, nextButton)
+        bodyScrollView.constraintInsideTo(.top, view, 220)
+        bodyScrollView.constraintInsideTo(.leading, view)
+        bodyScrollView.constraintInsideTo(.trailing, view)
+        bodyScrollView.constraintOutsideTo(.bottom, nextButton)
         
-        viewToScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        viewToScroll.constraintInsideTo(.top, bodyScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.leading, bodyScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.trailing, bodyScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.bottom, bodyScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.width, bodyScrollView.frameLayoutGuide)
     
         daysChoiceLabel.constraintInsideTo(.top, viewToScroll)
         daysChoiceLabel.constraintInsideTo(.leading, viewToScroll, 20)
@@ -128,7 +141,7 @@ class SingleBookingView: UIViewController {
         schedulesStack.constraintOutsideTo(.top, lineView, 24)
         schedulesStack.constraintInsideTo(.leading, lineView)
         schedulesStack.constraintInsideTo(.trailing, lineView)
-        schedulesStack.constraintInsideTo(.bottom, viewToScroll, 24)
+        schedulesStack.constraintInsideTo(.bottom, viewToScroll, dropDownHeight)
         
         let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
         self.navigationItem.rightBarButtonItem = rightBarBtn
@@ -157,14 +170,68 @@ class SingleBookingView: UIViewController {
         self.view.backgroundColor = Style.bgColor
         calenderView.changeTheme()
     }
+    
+    @objc func showDropDown(_ sender: UIButton) {
+        
+        let myButtonCenter = schedulesStack.convert(sender.center, from: sender.superview)
+        
+        var buttons = [UIButton]()
+        
+        for time in self.availableTimes {
+            
+            let button = UIButton()
+            button.setTitle(time, for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                 for: .normal)
+            
+            let handler = {(action: UIAction) in
+                
+                if let timeStack = sender.superview as? UIStackView,
+                   let stack = timeStack.arrangedSubviews[0] as? UIStackView,
+                   let hourLabel = stack.arrangedSubviews[1] as? UILabel {
+                    
+                    self.dropDown.frame.size = .zero
+                    hourLabel.text = time
+                }
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            
+            buttons.append(button)
+        }
+        
+        dropDown.turnIntoAList(buttons)
+        
+        dropDown.showLikeAWindow(size: CGSize(width: sender.superview?.frame.size.width ?? 0,
+                                                   height: dropDownHeight),
+                                      origin: CGPoint(x: sender.superview?.frame.maxX ?? 0,
+                                                      y: schedulesStack.frame.minY + myButtonCenter.y + sender.frame.height/2),
+                                      .downLeft)
+        
+        schedulesStack.bringSubviewToFront(dropDown)
+    }
+}
+
+extension SingleBookingView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
+    }
 }
 
 extension SingleBookingView: CalendarViewProtocol {
     
-    func chosedDays(_ day: String) {
+    func chosedDays(_ day: String,_ month: String,_ year: String) {
         
         let dayLabel = UILabel()
-        dayLabel.text = "\(day)/01/2022"
+        dayLabel.text = "\(day)/\(month)/\(year)"
         
         let entireDayLabel = UILabel()
         entireDayLabel.text = "Dia inteiro"
@@ -198,6 +265,9 @@ extension SingleBookingView: CalendarViewProtocol {
                 
                 let timeInStack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
                 
+                dropDownButton.addTarget(self, action: #selector(self.showDropDown),
+                                         for: .touchUpInside)
+                
                 return timeInStack
             }()
             
@@ -216,6 +286,9 @@ extension SingleBookingView: CalendarViewProtocol {
                 dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                                         for: .normal)
                 
+                dropDownButton.addTarget(self, action: #selector(self.showDropDown),
+                                         for: .touchUpInside)
+                
                 let timeOutStack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
                 
                 return timeOutStack
@@ -227,6 +300,11 @@ extension SingleBookingView: CalendarViewProtocol {
             
             let timeStack = UIStackView(arrangedSubviews: [timeInStack, timeOutStack, trashButton])
             timeStack.distribution = .fillProportionally
+            
+            timeInStack.widthAnchorInSuperview(self.timeStacksSize.width)
+            timeInStack.heightAnchorInSuperview(self.timeStacksSize.height)
+            timeOutStack.widthAnchorInSuperview(self.timeStacksSize.width)
+            timeOutStack.heightAnchorInSuperview(self.timeStacksSize.height)
             
             let handler = {(action: UIAction) in
                 
@@ -250,21 +328,21 @@ extension SingleBookingView: CalendarViewProtocol {
         self.schedulesStack.addArrangedSubview(chosedDayStack)
     }
     
-    func unchoseDays(_ day: String) {
+    func unchoseDays(_ day: String,_ month: String,_ year: String) {
         
-        for stack in self.schedulesStack.arrangedSubviews {
+        for view in self.schedulesStack.arrangedSubviews {
             
-            if let stack = stack as? UIStackView {
+            if let chosedDayStack = view as? UIStackView {
                 
-                if let stack = stack.arrangedSubviews[0] as? UIStackView {
+                if let dayLabelStack = chosedDayStack.arrangedSubviews[0] as? UIStackView {
                     
-                    if let label = stack.arrangedSubviews[0] as? UILabel {
+                    if let dayLabel = dayLabelStack.arrangedSubviews[0] as? UILabel {
                         
-                        if let text = label.text {
+                        if let text = dayLabel.text {
                             
-                            if text.contains(day) {
+                            if text.contains(day) && text.contains(month) && text.contains(year) {
                                 
-                                stack.superview?.removeFromSuperview()
+                                chosedDayStack.removeFromSuperview()
                             }
                         }
                     }
