@@ -12,4 +12,5 @@ struct Subscription: Codable {
     var name: String?
     var credit_amount: Int?
     var price: Int?
+    var message: String?
 }

@@ -9,4 +9,5 @@ import Foundation
 
 public struct AccessToken: Codable {
     var access_token: String
+    var message: String?
 }

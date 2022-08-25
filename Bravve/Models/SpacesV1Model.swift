@@ -10,36 +10,43 @@ import Foundation
 struct SpaceType: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct SpaceClassification: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct SpaceCategory: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct SpaceFacility: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct SpaceNoise: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct SpaceContract: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct SpaceContractDetails: Codable {
     var id_contract: Int?
     var name_contracts: String?
+    var message: String?
 }
 
 struct SpaceBusinessHours: Codable {
@@ -48,6 +55,7 @@ struct SpaceBusinessHours: Codable {
     var start_time: String?
     var end_time: String?
     var flag_closed_day: Bool?
+    var message: String?
 }
 
 struct Door: Codable {
@@ -57,17 +65,20 @@ struct Door: Codable {
     var door_lock_code: String?
     var door_lock_key: String?
     var door_lock_manufacture: DoorLockManufacture?
+    var message: String?
 }
 
 struct DoorLockManufacture: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct PartnerSiteAddress: Codable {
     var address_id: Int?
     var business_name: String?
     var address: PartnerAddress?
+    var message: String?
 }
 
 struct PartnerAddress: Codable {
@@ -82,6 +93,7 @@ struct PartnerAddress: Codable {
     var city_name: String?
     var latitude: String?
     var longitude: String?
+    var message: String?
 }
 
 struct SpaceContact: Codable {
@@ -89,6 +101,7 @@ struct SpaceContact: Codable {
     var name: String?
     var email: String?
     var phone: String?
+    var message: String?
 }
 
 struct SpacePicture: Codable {
@@ -98,6 +111,7 @@ struct SpacePicture: Codable {
     var name: String?
     var url: String?
     var is_cover_photo: Bool?
+    var message: String?
 }
 
 struct SpaceDetail: Codable {
@@ -131,6 +145,7 @@ struct SpaceDetail: Codable {
     var partner_site_address: PartnerSiteAddress?
     var contact: [SpaceContact]?
     var pictures: [SpacePicture]?
+    var message: String?
 }
 
 struct Space: Codable {
@@ -156,6 +171,7 @@ struct Space: Codable {
     var space_classification: SpaceClassification?
     var space_noise_level: SpaceNoise?
     var space_pictures: [SpacePicture]?
+    var message: String?
 }
 
 struct SpaceListParameters: Codable {
