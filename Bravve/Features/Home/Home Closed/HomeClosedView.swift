@@ -312,8 +312,10 @@ extension HomeClosedView: HomeClosedTableViewCellProtocol {
     func chosePlace(_ indexPath: IndexPath) {
         guard let spaceId = cells[indexPath.row].id else { return }
         
-        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
+        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
             guard let space = space else {
+                print(statusCode)
+                print(error?.localizedDescription)
                 return
             }
             let detailsClosedView = DetailsClosedView(space)

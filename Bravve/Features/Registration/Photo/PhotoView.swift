@@ -174,7 +174,14 @@ class FotoView: UIViewController {
             return
         }
         
-        sessionManager.uploadPictureWithResponse(uuid: userUUID,endpoint: .usersPictures, picture_url: imageURL) { (updatedPicture: UploadPicture?) in
+        sessionManager.uploadPictureWithResponse(uuid: userUUID,endpoint: .usersPictures, picture_url: imageURL) { (statusCode, error, updatedPicture: UploadPicture?) in
+            
+            guard let updatedPicture = updatedPicture else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+            }
+
             let vc = ProfessionView()
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)

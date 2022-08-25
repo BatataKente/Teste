@@ -241,14 +241,21 @@ class TokenView: UIViewController {
         
         print("UUID: \(self.userUUID), Email: \(self.userEmail), Password: \(self.userPassword)")
         
-        sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID,endpoint: .usersValidate, parameters: parameters) { statusCode in
+        sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID,endpoint: .usersValidate, parameters: parameters) { statusCode, error in
             guard let statusCode = statusCode else {
+                print(error?.localizedDescription)
                 return
             }
             
             if statusCode == 204 {
-                self.sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: LoginParameters(email: self.userEmail, password: self.userPassword)) { (token: Token?) in
-                    UserDefaults.standard.setValue(token?.token, forKey: "access_token")
+                self.sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: LoginParameters(email: self.userEmail, password: self.userPassword)) { (statusCode, error, token: Token?) in
+                    guard let token = token else {
+                        print(statusCode)
+                        print(error?.localizedDescription)
+                        return
+                    }
+
+                    UserDefaults.standard.setValue(token.token, forKey: "access_token")
                     
                     let vc = FotoView(userUUID: self.userUUID)
                     vc.modalPresentationStyle = .fullScreen
@@ -262,8 +269,9 @@ class TokenView: UIViewController {
         
         let parameters = ValidateUserParameter()
         
-        self.sessionManager.postOpenDataWithoutResponse(uuid: "9544eb3f-8bd8-41e3-8e44-96f450ace4ff", endpoint: .usersCode, parameters: parameters) { statusCode in
-            print(statusCode as Any)
+        self.sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID, endpoint: .usersCode, parameters: parameters) { statusCode, error in
+            print(statusCode)
+            print(error?.localizedDescription)
         }
         print("Novo código enviado")
     }
