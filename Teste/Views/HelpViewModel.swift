@@ -30,20 +30,29 @@ class HelpViewModel{
     ]
     
     var count: Int {
+        
         return questionAnswer.count+1
     }
     
+    func getQuestionsAmmount() -> Int {
+        
+        return questionAnswer.count
+    }
+    
     func getQuestionAnswer(indexPath: IndexPath) -> HelpModel{
+        
         return self.questionAnswer[indexPath.row-1]
     }
     
     func paragraphStyle(lineHeight: CGFloat) -> NSMutableParagraphStyle {
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = lineHeight
         return paragraphStyle
     }
     
     func returnHelp(number: Int) -> HelpModel {
+        
         return self.questionAnswer[number]
     }
 }

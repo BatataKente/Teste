@@ -29,12 +29,12 @@ class CalendarMonthView: UIView {
         
         setupViews()
         
-        btnLeft.isEnabled=false
+        buttonLeft.isEnabled = false
     }
     
-    @objc func btnLeftRightAction(sender: UIButton) {
+    @objc func btnLeftRightAction(_ sender: UIButton) {
         
-        if sender == btnRight {
+        if sender == buttonRight {
             
             currentMonthIndex += 1
             if currentMonthIndex > 11 {
@@ -60,19 +60,19 @@ class CalendarMonthView: UIView {
         lblName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
         lblName.widthAnchor.constraint(equalToConstant: 150).isActive=true
         lblName.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
-        lblName.text="\(monthsArr[currentMonthIndex]) \(currentYear)"
+        lblName.text = "\(monthsArr[currentMonthIndex]) \(currentYear)"
         
-        self.addSubview(btnRight)
-        btnRight.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        btnRight.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        btnRight.widthAnchor.constraint(equalToConstant: 50).isActive=true
-        btnRight.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
+        self.addSubview(buttonRight)
+        buttonRight.topAnchor.constraint(equalTo: topAnchor).isActive=true
+        buttonRight.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
+        buttonRight.widthAnchor.constraint(equalToConstant: 50).isActive=true
+        buttonRight.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
         
-        self.addSubview(btnLeft)
-        btnLeft.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        btnLeft.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        btnLeft.widthAnchor.constraint(equalToConstant: 50).isActive=true
-        btnLeft.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
+        self.addSubview(buttonLeft)
+        buttonLeft.topAnchor.constraint(equalTo: topAnchor).isActive=true
+        buttonLeft.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
+        buttonLeft.widthAnchor.constraint(equalToConstant: 50).isActive=true
+        buttonLeft.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
     }
     
     let lblName: UILabel = {
@@ -87,25 +87,27 @@ class CalendarMonthView: UIView {
         return lbl
     }()
     
-    let btnRight: UIButton = {
+    lazy var buttonRight: UIButton = {
         
-        let btn=UIButton()
-        btn.setTitle(">", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
-        btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
-        return btn
+        let buttonRight = UIButton()
+        buttonRight.setTitle(">", for: .normal)
+        buttonRight.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+        buttonRight.translatesAutoresizingMaskIntoConstraints = false
+        buttonRight.addTarget(self,
+                              action: #selector(btnLeftRightAction), for: .touchUpInside)
+        return buttonRight
     }()
     
-    let btnLeft: UIButton = {
+    lazy var buttonLeft: UIButton = {
         
-        let btn=UIButton()
-        btn.setTitle("<", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
-        btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
-        btn.setTitleColor(UIColor.lightGray, for: .disabled)
-        return btn
+        let buttonLeft = UIButton()
+        buttonLeft.setTitle("<", for: .normal)
+        buttonLeft.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+        buttonLeft.translatesAutoresizingMaskIntoConstraints=false
+        buttonLeft.addTarget(self,
+                      action: #selector(btnLeftRightAction), for: .touchUpInside)
+        buttonLeft.setTitleColor(UIColor.lightGray, for: .disabled)
+        return buttonLeft
     }()
     
     required init?(coder aDecoder: NSCoder) {
