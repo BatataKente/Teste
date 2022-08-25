@@ -29,6 +29,7 @@ public enum ColorsBravve: String {
     case buttonRecoveryPassword = "buttonRecoveryPassword"
     case buttonUnderline = "buttonUnderline"
     case capsuleButton = "capsuleButton"
+    case capsuleButtonsBorder = "capsuleButtonsBorder"
     case capsuleButtonSelected = "capsuleButtonSelected"
     case cardFacilities = "cardFacilities"
     case cards = "cards"
