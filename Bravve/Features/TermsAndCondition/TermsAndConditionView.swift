@@ -32,14 +32,11 @@ class TermsAndConditionViewController: UIViewController {
        return view
     }()
     
-    private lazy var tabBar = TabBarClosed(self,
-                                           itemImagesNames: [ButtonsBravve.locationGray.rawValue,
-                                                             ButtonsBravve.calendarButtonGray.rawValue,
-                                                             ButtonsBravve.userLoginGray.rawValue
-                                                            ])
+    private lazy var tabBar: TabBarClosed = {
+        let tabBar = TabBarClosed(self)
+        return tabBar
+    }()
     
-    
-
         override func viewDidLoad() {
             super.viewDidLoad()
             
@@ -54,7 +51,7 @@ class TermsAndConditionViewController: UIViewController {
             myTableView.register(TermsAndConditionCell.self, forCellReuseIdentifier: "Cell")
             myTableView.separatorStyle = .none
             myTableView.layer.cornerRadius = CGFloat(16).generateSizeForScreen
-            tabBar.selectedItem = tabBar.items?[1]
+            tabBar.selectedItem = tabBar.items?[2]
             view.addSubviews([shadowView,wayImage1,wayImage2, customBar, myTableView,tabBar])
             customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Termos de privacidade") { _ in
                 self.dismiss(animated: true)
