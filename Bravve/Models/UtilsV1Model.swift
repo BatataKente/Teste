@@ -11,27 +11,32 @@ struct UtilsStates: Codable {
      var id: Int?
      var code: String?
      var name: String?
+     var message: String?
 }
 
 struct Cities: Codable {
      var id: Int?
      var name: String?
+     var message: String?
 }
 
 struct MarketSegments: Codable {
      var id: Int?
      var name: String?
+     var message: String?
 }
 
 struct CompanySizes: Codable {
      var id: Int?
      var name: String?
+     var message: String?
 }
 
 struct CompanyClassifications: Codable {
      var id: Int?
      var code: String?
      var name: String?
+     var message: String?
 }
 
 struct phoneNumber: Codable {
@@ -41,5 +46,6 @@ struct phoneNumber: Codable {
      var uuid: String?
      var is_active: Bool?
      var is_superuser: Bool?
+     var message: String?
 }
 

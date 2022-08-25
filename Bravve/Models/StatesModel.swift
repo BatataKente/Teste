@@ -11,4 +11,5 @@ public struct States: Codable {
     var id: Int
     var code: String
     var name: String
+    var message: String?
 }

@@ -35,6 +35,7 @@ struct Reservations: Codable {
     var space_contact: SpaceContact?
     var picture: [SpacePicture]?
     var space_address: SpaceAddress?
+    var message: String?
 }
 
 struct SpaceAddress: Codable {
@@ -45,6 +46,7 @@ struct SpaceAddress: Codable {
     var postal_code: Int?
     var state_name: String?
     var city_name: String?
+    var message: String?
 }
 
 struct HoursParameters: Codable {
@@ -56,6 +58,7 @@ struct HoursParameters: Codable {
 struct ReservationHours: Codable {
     var hour: String?
     var flag: Bool?
+    var message: String?
 }
 
 struct ReservationParameters: Codable {
@@ -93,6 +96,7 @@ struct UpdatedReservation: Codable {
     var start_dt: String?
     var end_dt: String?
     var bill_items: BillItems?
+    var message: String?
 }
 
 
@@ -102,6 +106,7 @@ struct BillItems: Codable {
     var gross_amont: Double
     var net_amont: Double
     var payment_id: Int
+    var message: String?
 }
 
 struct CancelReservationParameters: Codable {
@@ -141,6 +146,7 @@ struct CardPayment: Codable {
     var holder_document: String
     var charged_amount: Double
     var country_code: String
+    var message: String?
 }
 
 struct WorkPassPaymentParameters: Codable {
@@ -156,6 +162,7 @@ struct PaymentSummary: Codable {
     var slogan: String?
     var description: String?
     var space_facilities: [SpaceFacility]?
+    var message: String?
 }
 
 struct WPAccount: Codable {
@@ -164,4 +171,5 @@ struct WPAccount: Codable {
     var credit_amount: Double?
     var wp_account_type_id: Int?
     var wp_account_type_name: String?
+    var message: String?
 }

@@ -10,6 +10,7 @@ import Foundation
 struct SiteClassification: Codable {
     var id: Int?
     var name: String?
+    var message: String?
 }
 
 struct Sites: Codable {
@@ -23,6 +24,7 @@ struct Sites: Codable {
     var classification_id: Int?
     var classification_name: String?
     var address: Address?
+    var message: String?
 }
 
 struct Address: Codable {
@@ -35,6 +37,7 @@ struct Address: Codable {
     var city_id: Int?
     var latitude: String?
     var longitude: String?
+    var message: String?
 }
 
 struct Contact: Codable {
@@ -43,4 +46,5 @@ struct Contact: Codable {
     var phone_number: String?
     var site_contact_type: Int?
     var id: Int?
+    var message: String?
 }
