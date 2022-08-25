@@ -9,22 +9,34 @@ import Foundation
 import UIKit
 class WorkPassCell: UITableViewCell {
     
-    var credits = 666
+    
+    var delegate:WorkPassCellProtocol?
+    
     static let reuseId: String = "WorkPassCell"
     
     //MARK: Elements
+    
+    lazy var lineView: UIView = {
+        let view = UIView()
+        // view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(named: ColorsBravve.borderCredit.rawValue)
+        
+        return view
+    }()
+    
     lazy var cellView: UIView = {
         let view = UIView()
         // view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+        view.setToDefaultBackgroundColor()
         
         return view
     }()
     
     lazy var  firstLabel: UILabel = {
         let label = UILabel()
-        label.text = "teste1"
+        label.text = ""
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.font = UIFont(name: "Ubuntu-Bold", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +44,7 @@ class WorkPassCell: UITableViewCell {
     }()
     lazy var secondLabel: UILabel = {
         let label = UILabel()
-        label.text = "teste2"
+        label.text = ""
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +52,7 @@ class WorkPassCell: UITableViewCell {
     }()
     lazy var pinkCreditsLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(credits)"
+        
         label.textColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,10 +61,6 @@ class WorkPassCell: UITableViewCell {
     
     lazy var creditsLabel: UILabel = {
         let label = UILabel()
-        
-        label.text = "teste3"
-        
-        label.text = "créditos"
         
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
@@ -65,24 +73,31 @@ class WorkPassCell: UITableViewCell {
         stackView.spacing = CGFloat(5).generateSizeForScreen
         stackView.axis = .horizontal
         stackView.alignment = .leading
+        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 13, bottom: 8, right: 13)
+        stackView.layer.borderColor = UIColor(named: ColorsBravve.borderCredit.rawValue)?.cgColor
+        stackView.layer.borderWidth = 1
+        stackView.layer.cornerRadius = 4
+        
+        
         return stackView
     }()
     
     lazy var circleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        button.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     //MARK: override FUNC
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        if selected {
-            circleButton.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
-        } else {
-            circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
-        }
+    
+    @objc func buttonTapped (sender:UIButton) {
+        delegate?.setButtonTapped(sender: sender)
+       
     }
+
+    
     //MARK: override INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -92,7 +107,7 @@ class WorkPassCell: UITableViewCell {
         cellView.addSubviews([firstLabel, secondLabel, creditsStackView, circleButton])
         
         
-        contentView.addSubview(cellView)
+        contentView.addSubviews([cellView,lineView])
         
         setupConstraints()
     }
@@ -107,8 +122,14 @@ class WorkPassCell: UITableViewCell {
         cellView.constraintInsideTo(.leading, contentView)
         cellView.constraintInsideTo(.trailing, contentView)
         cellView.constraintInsideTo(.bottom, contentView, CGFloat(-26).generateSizeForScreen)
-        cellView.heightAnchorInSuperview(CGFloat(70).generateSizeForScreen)
+        cellView.heightAnchorInSuperview(CGFloat(68).generateSizeForScreen)
         
+        
+        
+        lineView.constraintInsideTo(.leading, contentView,CGFloat(19).generateSizeForScreen)
+        lineView.constraintInsideTo(.trailing, contentView,CGFloat(22).generateSizeForScreen)
+        lineView.constraintInsideTo(.bottom, contentView)
+        lineView.heightAnchorInSuperview(CGFloat(1).generateSizeForScreen)
         
         
         firstLabel.constraintInsideTo(.top, cellView, CGFloat(9).generateSizeForScreen)
@@ -130,4 +151,9 @@ class WorkPassCell: UITableViewCell {
         
         
     }
+    
+}
+// MARK: DelegateProtocol
+protocol WorkPassCellProtocol {
+    func setButtonTapped (sender:UIButton)
 }
