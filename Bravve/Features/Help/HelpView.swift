@@ -20,11 +20,10 @@ class HelpViewController: UIViewController {
     var arrayButtons: [UIButton] = []
     var arrayStackViews: [UIStackView] = []
     
-    private lazy var tabBar = BravveTabBar(self,
-                                           itemImagesNames: [ButtonsBravve.locationGray.rawValue,
-                                                             ButtonsBravve.calendarButtonGray.rawValue,
-                                                             ButtonsBravve.userLoginGray.rawValue
-                                                            ])
+    private lazy var tabBar: TabBarClosed = {
+        let tabBar = TabBarClosed(self)
+        return tabBar
+    }()
     
     private lazy var headerView: UIView = {
         let view = UIView()

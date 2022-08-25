@@ -43,7 +43,7 @@ class BookingHistoryView: UIViewController {
         
         view.addSubviews([topRightWay, bottomLeftWay, customBar, myTableView, tabBar])
         
-        tabBar.selectedItem = tabBar.items?[1]
+        tabBar.selectedItem = tabBar.items?[2]
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") { _ in
             
