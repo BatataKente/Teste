@@ -10,6 +10,9 @@ import UIKit
 
 class CheckOutScreen: UIViewController{
  
+    private let customAlertOk: CustomAlert = CustomAlert()
+    private let customAlertCancel: CustomAlert = CustomAlert()
+    
     //MARK: - Labels
     
     let customBar = UIView()
@@ -567,10 +570,7 @@ class CheckOutScreen: UIViewController{
         button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
         return button
     }()
-    
-    @objc func buttonMaindoorTap(){
-        
-    }
+
     lazy var buttonOpenSpace: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -583,10 +583,6 @@ class CheckOutScreen: UIViewController{
         return button
     }()
     
-    
-    @objc func buttonOpenSpaceTap(){
-        
-    }
     lazy var checkOutButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -602,11 +598,6 @@ class CheckOutScreen: UIViewController{
         
         return button
     }()
-
-    @objc func buttonCheckOut(){
-        checkOutButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-
-    }
 
 
     override func viewDidLoad() {
@@ -624,6 +615,28 @@ class CheckOutScreen: UIViewController{
         setupContraints()
         
        
+    }
+    
+    
+    @objc func buttonMaindoorTap(){
+        print("main door")
+    }
+    
+    @objc func buttonOpenSpaceTap(){
+        print("space door")
+    }
+    
+    @objc func buttonCheckOut(){
+        checkOutButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
+        customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Após realizar o check-out você não poderá mais abrir a porta do espaço.", enterAttributed: "Confirmar Check-out", enterHandler: UIAction(handler: { _ in
+            self.customAlertOk.dismissAlert()
+            self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+                print("ok")
+            }), on: self)
+        }), cancelAttributed: "Cancelar Check-out", cancelHandler: UIAction(handler: { _ in
+            self.customAlertOk.dismissAlert()
+        }), on: self)
+
     }
 
     func setupViews(){

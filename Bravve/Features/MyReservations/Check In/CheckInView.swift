@@ -10,7 +10,8 @@ import UIKit
 
 class CheckInQrCodeViewController: UIViewController{
     
-    private let customAlert: CustomAlert = CustomAlert()
+    private let customAlertFail: CustomAlert = CustomAlert()
+    private let customAlertSuccess: CustomAlert = CustomAlert()
     
     private lazy var backButton: UIButton = {
         let view = UIButton()
@@ -45,6 +46,7 @@ class CheckInQrCodeViewController: UIViewController{
         view.layer.cornerRadius = CGFloat(29).generateSizeForScreen
         view.layer.borderColor = UIColor(named: ColorsBravve.buttonPink.rawValue)?.cgColor
         view.backgroundColor = .lightGray
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -65,11 +67,25 @@ class CheckInQrCodeViewController: UIViewController{
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        addViewTarget()
     }
     
     private func setupViews(){
         view.backgroundColor = .black
         view.addSubviews([backButton, cameraImageView, qrCodeReaderView, cantScanButton, qrCodeLabel])
+    }
+    
+    private func addViewTarget(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(action))
+        self.qrCodeReaderView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func action(){
+        customAlertSuccess.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-in realizado com sucesso.\nSeja Bem-Vindo ao seu espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: {[weak self] _ in
+            let vc = CheckOutScreen()
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
+        }), on: self)
     }
     
     private func setupConstraints(){
@@ -103,7 +119,7 @@ class CheckInQrCodeViewController: UIViewController{
     }
     
     @objc func cantScanButtonTapped(){
-        customAlert.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Por favor entre em contato com o Community Manager ou outro responsável pelo espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+        customAlertFail.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Por favor entre em contato com o Community Manager ou outro responsável pelo espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
             self.dismiss(animated: true)
         }), on: self)
     }

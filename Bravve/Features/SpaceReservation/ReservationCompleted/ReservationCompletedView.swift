@@ -267,11 +267,17 @@ class ReservationCompletedView: UIViewController {
         viewsConstraints()
         viewElementsConstraints()
         
+        buttonReservation.addTarget(self, action: #selector(tapButtonReservation), for: .touchUpInside)
+        
 //        self.buttonReservation.isHidden = true
         
     }
     
-    
+    @objc func tapButtonReservation() {
+        let vc = CancelReservationView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
     
     
     func iconsConstraints() {
