@@ -190,97 +190,7 @@ class BookingDetailsView: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
-    lazy var newDayLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "10/04/22"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var newCheckInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-in"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var newCheckOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-Out"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var hourLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Hora(3)"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var hourCheckInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var hourCheckOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "12:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var newHourLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Hora"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var newHourCheckInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "18:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    lazy var newHourCheckOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "19:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-
+    
     lazy var payFormLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -588,6 +498,7 @@ class BookingDetailsView: UIViewController{
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.bounces = false
         myTableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         myTableView.separatorStyle = .none
@@ -623,7 +534,7 @@ class BookingDetailsView: UIViewController{
         view.addSubview(customBar)
         view.addSubview(tabBar)
         tabBar.selectedItem = tabBar.items?[1]
-        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,newDayLabel,newCheckInLabel,newCheckOutLabel,hourLabel,hourCheckInLabel,hourCheckOutLabel,newHourLabel,newHourCheckInLabel,newHourCheckOutLabel,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,buttonArrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,buttonArrowIconImage2,buttonCancelReserv])
+        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,buttonArrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,buttonArrowIconImage2,buttonCancelReserv])
         
     
 
@@ -642,8 +553,11 @@ class BookingDetailsView: UIViewController{
             buttonCheckIn.leadingAnchor.constraint(equalTo:view.leadingAnchor),
             buttonCheckIn.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             buttonCheckIn.heightAnchor.constraint(equalToConstant: 52),
-            
-           
+
+            buttonCancelReserv.topAnchor.constraint(equalTo: contactEmailLabel.bottomAnchor,constant: 18),
+            buttonCancelReserv.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 22),
+            buttonCancelReserv.heightAnchor.constraint(equalToConstant: 51),
+            buttonCancelReserv.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: myTableView.bottomAnchor,constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 24),
@@ -677,67 +591,40 @@ class BookingDetailsView: UIViewController{
             
             diaryLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor,constant: 11.5),
             diaryLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            
-            newDayLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 15.5),
-            newDayLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            
-            hourLabel.topAnchor.constraint(equalTo: newDayLabel.bottomAnchor,constant: 11.5),
-            hourLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            
-            newHourLabel.topAnchor.constraint(equalTo: hourLabel.bottomAnchor,constant: 11),
-            newHourLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            
+  
             checkInLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
             checkInLabel.leadingAnchor.constraint(equalTo: detailLocalLabel.trailingAnchor,constant: 1),
             
             dayDiaryCheckInLabel.topAnchor.constraint(equalTo: checkInLabel.bottomAnchor,constant: 12.5),
             dayDiaryCheckInLabel.trailingAnchor.constraint(equalTo: checkInLabel.trailingAnchor),
             
-            newCheckInLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 15.5),
-            newCheckInLabel.trailingAnchor.constraint(equalTo: checkInLabel.trailingAnchor),
-            
-            hourCheckInLabel.topAnchor.constraint(equalTo: newCheckInLabel.bottomAnchor,constant: 12.5),
-            hourCheckInLabel.trailingAnchor.constraint(equalTo: newCheckInLabel.trailingAnchor),
-            
-            newHourCheckInLabel.topAnchor.constraint(equalTo: hourCheckInLabel.bottomAnchor,constant: 12.5),
-            newHourCheckInLabel.trailingAnchor.constraint(equalTo: hourCheckInLabel.trailingAnchor),
-            
             checkOutLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
             checkOutLabel.leadingAnchor.constraint(equalTo: checkInLabel.trailingAnchor,constant: 22),
             
             dayDiaryCheckOutLabel.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor,constant: 12.5),
             dayDiaryCheckOutLabel.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
-            
-            newCheckOutLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 15.5),
-            newCheckOutLabel.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
-            
-            hourCheckOutLabel.topAnchor.constraint(equalTo: newCheckOutLabel.bottomAnchor,constant: 12.5),
-            hourCheckOutLabel.trailingAnchor.constraint(equalTo: newCheckOutLabel.trailingAnchor),
-            
-            newHourCheckOutLabel.topAnchor.constraint(equalTo: hourCheckInLabel.bottomAnchor,constant: 12.5),
-            newHourCheckOutLabel.trailingAnchor.constraint(equalTo: hourCheckOutLabel.trailingAnchor),
-            
+
             payFormLabel.leadingAnchor.constraint(equalTo: imagePay.trailingAnchor,constant: 9),
-            payFormLabel.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 20.5),
+            payFormLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 20.5),
             
             imageDetail.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 25),
             imageDetail.centerYAnchor.constraint(equalTo: detailLocalLabel.centerYAnchor),
             
             imagePay.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 25),
-            imagePay.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 21),
+            imagePay.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 21),
             
             creditCard.topAnchor.constraint(equalTo: imagePay.bottomAnchor,constant: 26),
             creditCard.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
             creditCardTextField.topAnchor.constraint(equalTo: creditCard.bottomAnchor),
             creditCardTextField.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            creditCardTextField.trailingAnchor.constraint(equalTo: newCheckOutLabel.trailingAnchor),
+            creditCardTextField.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             creditCardTextField.heightAnchor.constraint(equalToConstant: 67),
             
             totalLabel.topAnchor.constraint(equalTo: creditCardTextField.bottomAnchor,constant: 14),
             totalLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
-            localDetail.topAnchor.constraint(equalTo: lineView3.bottomAnchor,constant: 15),
+            localDetail.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 15),
             localDetail.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
             numberPeopleImage.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 21.43),
@@ -768,7 +655,7 @@ class BookingDetailsView: UIViewController{
             showMoreButton1.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 12),
             showMoreButton1.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
-            responsablePeople.topAnchor.constraint(equalTo: lineView4.bottomAnchor,constant: 15),
+            responsablePeople.topAnchor.constraint(equalTo: lineView3.bottomAnchor,constant: 15),
             responsablePeople.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
             responsableNameLabel.topAnchor.constraint(equalTo: responsablePeople.bottomAnchor,constant: 8),
@@ -781,7 +668,7 @@ class BookingDetailsView: UIViewController{
             showMoreButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: 8),
             showMoreButton2.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
-            contactsLabel.topAnchor.constraint(equalTo: lineView5.bottomAnchor,constant: 15),
+            contactsLabel.topAnchor.constraint(equalTo: lineView4.bottomAnchor,constant: 15),
             contactsLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             
             cellIconImage.topAnchor.constraint(equalTo: contactsLabel.bottomAnchor,constant: 13),
@@ -796,35 +683,26 @@ class BookingDetailsView: UIViewController{
             contactEmailLabel.centerYAnchor.constraint(equalTo: emailIconImage.centerYAnchor),
             contactEmailLabel.leadingAnchor.constraint(equalTo: emailIconImage.trailingAnchor,constant: 13),
             
-            buttonCancelReserv.topAnchor.constraint(equalTo: contactEmailLabel.bottomAnchor,constant: 18),
-            buttonCancelReserv.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 22),
-            buttonCancelReserv.heightAnchor.constraint(equalToConstant: 51),
-            buttonCancelReserv.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             
-            lineView1.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 15),
+            lineView1.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 17),
             lineView1.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
             lineView1.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             lineView1.heightAnchor.constraint(equalToConstant: 0.5),
             
-            lineView2.topAnchor.constraint(equalTo: newHourLabel.bottomAnchor,constant: 17),
+            lineView2.topAnchor.constraint(equalTo: totalLabel.bottomAnchor,constant: 17),
             lineView2.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView2.trailingAnchor.constraint(equalTo: newHourCheckOutLabel.trailingAnchor),
+            lineView2.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             lineView2.heightAnchor.constraint(equalToConstant: 0.5),
-            
-            lineView3.topAnchor.constraint(equalTo: totalLabel.bottomAnchor,constant: 17),
+        
+            lineView3.topAnchor.constraint(equalTo: showMoreButton1.bottomAnchor,constant: 16),
             lineView3.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView3.trailingAnchor.constraint(equalTo: newHourCheckOutLabel.trailingAnchor),
+            lineView3.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             lineView3.heightAnchor.constraint(equalToConstant: 0.5),
             
-            lineView4.topAnchor.constraint(equalTo: showMoreButton1.bottomAnchor,constant: 15),
+            lineView4.topAnchor.constraint(equalTo: showMoreButton2.bottomAnchor,constant: 16),
             lineView4.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView4.trailingAnchor.constraint(equalTo: newHourCheckOutLabel.trailingAnchor),
+            lineView4.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
             lineView4.heightAnchor.constraint(equalToConstant: 0.5),
-            
-            lineView5.topAnchor.constraint(equalTo: showMoreButton2.bottomAnchor,constant: 15),
-            lineView5.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView5.trailingAnchor.constraint(equalTo: newHourCheckOutLabel.trailingAnchor),
-            lineView5.heightAnchor.constraint(equalToConstant: 0.5),
             
             myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
             myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -850,7 +728,7 @@ extension BookingDetailsView: UITableViewDelegate, UITableViewDataSource {
         1
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        1500
+        1400
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
