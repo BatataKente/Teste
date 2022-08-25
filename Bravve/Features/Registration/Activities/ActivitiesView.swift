@@ -187,8 +187,10 @@ class ActivitiesView: UIViewController {
     }
     
     func interestActivities() {
-        sessionManager.getDataArray(endpoint: .usersInterests) { (interestActivities: [Interests]?) in
+        sessionManager.getDataArray(endpoint: .usersInterests) { (statusCode, error, interestActivities: [Interests]?) in
             guard let interestActivities = interestActivities else {
+                print(statusCode)
+                print(error?.localizedDescription)
                 return
             }
             for interestActivity in interestActivities {

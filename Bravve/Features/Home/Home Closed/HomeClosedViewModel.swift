@@ -30,9 +30,14 @@ class HomeClosedViewModel {
         
         var parameters = SpaceListParameters()
         
-        sessionManager.getOpenDataArray (endpoint: .utilsStates){ (states: [States]?) in
+        sessionManager.getOpenDataArray (endpoint: .utilsStates){ (statusCode, error, states: [States]?) in
 
-            guard let states = states else {return}
+            guard let states = states else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             
             var stateButtons = [UIButton]()
 
@@ -57,9 +62,14 @@ class HomeClosedViewModel {
                     self.customBarWithFilter.leftButton.isEnabled = false
                     self.customBarWithFilter.rightButton.isEnabled = false
                     
-                    self.sessionManager.getOpenDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
+                    self.sessionManager.getOpenDataArray(id: "\(state.id)", endpoint: .utilsCities) { (statusCode, error, cities: [Cities]?) in
                         
-                        guard let cities = cities else {return}
+                        guard let cities = cities else {
+                            print(statusCode)
+                            print(error?.localizedDescription)
+                            return
+                            
+                        }
                         
                         var cityButtons = [UIButton]()
                         
@@ -100,9 +110,14 @@ class HomeClosedViewModel {
             self.delegate?.setupLeftDropDown(stateButtons)
         }
         
-        sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(spaces: [Space]?) in
+        sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
             
-            guard let spaces = spaces else {return}
+            guard let spaces = spaces else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             
             self.delegate?.setSpaces(spaces)
             
