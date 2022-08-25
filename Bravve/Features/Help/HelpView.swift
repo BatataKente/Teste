@@ -1061,8 +1061,8 @@ lazy var questionAnswer11StackView: UIStackView = {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubviews([scrollView, customBar, tabBar])
+        tabBar.selectedItem = tabBar.items?[2]
         self.arrayAnswer = [answer1Label, answer2Label, answer3Label, answer4Label, answer5Label, answer6Label, answer7Label, answer8Label, answer9Label, answer10Label, answer11Label]
         self.arrayButtons =  [showAnswer1Button, showAnswer2Button, showAnswer3Button, showAnswer4Button, showAnswer5Button, showAnswer6Button, showAnswer7Button, showAnswer8Button, showAnswer9Button, showAnswer10Button, showAnswer11Button]
         self.arrayStackViews = [questionAnswer1StackView, questionAnswer2StackView, questionAnswer3StackView, questionAnswer4StackView, questionAnswer5StackView, questionAnswer6StackView, questionAnswer7StackView, questionAnswer8StackView, questionAnswer9StackView, questionAnswer10StackView, questionAnswer11StackView]
@@ -1072,7 +1072,7 @@ lazy var questionAnswer11StackView: UIStackView = {
     
     private func setupDefaults() {
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes") {_ in
-            let navBar = HelpViewController()
+            let navBar = PersonalProfileView()
             navBar.modalPresentationStyle = .fullScreen
             self.present(navBar, animated: false)
         }
