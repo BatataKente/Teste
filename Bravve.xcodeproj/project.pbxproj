@@ -96,8 +96,6 @@
 		2ED5D11128940FCD001C11DC /* HelpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11028940FCD001C11DC /* HelpViewModel.swift */; };
 		2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D11228940FE3001C11DC /* HelpView.swift */; };
 		2EF23F4828931B760078B6B8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF23F4728931B760078B6B8 /* UIView+Extension.swift */; };
-		30D3120A28AAAE1600BF9311 /* HelpViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */; };
-		30D3120C28AAAE3B00BF9311 /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */; };
 		C696169E2881E70000281633 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696169D2881E70000281633 /* LoginView.swift */; };
 		C69616A02881E70700281633 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696169F2881E70700281633 /* LoginModel.swift */; };
 		C69616A22881E71100281633 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69616A12881E71100281633 /* LoginViewModel.swift */; };
@@ -292,8 +290,6 @@
 		2ED5D11028940FCD001C11DC /* HelpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewModel.swift; sourceTree = "<group>"; };
 		2ED5D11228940FE3001C11DC /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		2EF23F4728931B760078B6B8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewTableViewCell.swift; sourceTree = "<group>"; };
-		30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
 		C696169D2881E70000281633 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C696169F2881E70700281633 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		C69616A12881E71100281633 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -633,8 +629,6 @@
 				2ED5D10E28940FB6001C11DC /* HelpModel.swift */,
 				2ED5D11028940FCD001C11DC /* HelpViewModel.swift */,
 				2ED5D11228940FE3001C11DC /* HelpView.swift */,
-				30D3120928AAAE1600BF9311 /* HelpViewTableViewCell.swift */,
-				30D3120B28AAAE3B00BF9311 /* HelpTableViewCell.swift */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -1315,7 +1309,6 @@
 				C69617332881EB1200281633 /* HobbiesView.swift in Sources */,
 				146A8BED28AAB2D3007650A8 /* UIScrollView+Extension.swift in Sources */,
 				1478A236289965F800B409E5 /* FontsBravveEnum.swift in Sources */,
-				30D3120C28AAAE3B00BF9311 /* HelpTableViewCell.swift in Sources */,
 				2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */,
 				14BDBBEA28ABD71F004C32BF /* String+Extension.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
@@ -1323,7 +1316,6 @@
 				C69617472881EB8700281633 /* FinalizeViewModel.swift in Sources */,
 				2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */,
 				C696173A2881EB4000281633 /* ActivitiesModel.swift in Sources */,
-				30D3120A28AAAE1600BF9311 /* HelpViewTableViewCell.swift in Sources */,
 				C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */,
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
