@@ -26,20 +26,18 @@ class CalendarWeekdaysView: UIView {
         myStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
         
         let daysArr = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
-        
         for i in 0..<7 {
-            
-            let label = UILabel()
-            label.text = daysArr[i]
-            label.textAlignment = .center
-            label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-            myStackView.addArrangedSubview(label)
+            let lbl=UILabel()
+            lbl.text=daysArr[i]
+            lbl.textAlignment = .center
+            lbl.textColor = Style.weekdaysLblColor
+            myStackView.addArrangedSubview(lbl)
         }
     }
     
     let myStackView: UIStackView = {
         
-        let stackView = UIStackView()
+        let stackView=UIStackView()
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints=false
         return stackView

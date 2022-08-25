@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
 
-        window.rootViewController = ProfessionView()
+        window.rootViewController = SingleBookingView()
         
         window.makeKeyAndVisible()
         

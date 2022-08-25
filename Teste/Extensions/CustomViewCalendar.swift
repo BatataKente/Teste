@@ -53,28 +53,32 @@ struct Style {
 
 class CalendarView: UIView, CalendarMonthViewDelegate {
     
-    var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    var currentMonthIndex: Int = 0
-    var currentYear: Int = 0
-    var presentMonthIndex = 0
-    var presentYear = 0
-    var todaysDate = 0
-    var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
+    private var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    private var currentMonthIndex: Int = 0
+    private var currentYear: Int = 0
+    private var presentMonthIndex = 0
+    private var presentYear = 0
+    private var todaysDate = 0
+    private var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
     
-    var seletedDays:[String] = []
+    var delegate: CalendarViewProtocol?
     
-    let monthView: CalendarMonthView = {
+    private var seletedDays:[String] = []
+    
+    private let monthView: CalendarMonthView = {
         
-        let v=CalendarMonthView()
-        v.translatesAutoresizingMaskIntoConstraints=false
-        return v
+        let calendarMonthView = CalendarMonthView()
+        calendarMonthView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return calendarMonthView
     }()
     
-    let weekdaysView: CalendarWeekdaysView = {
+    private let weekdaysView: CalendarWeekdaysView = {
         
-        let v=CalendarWeekdaysView()
-        v.translatesAutoresizingMaskIntoConstraints=false
-        return v
+        let calendarWeekdaysView = CalendarWeekdaysView()
+        calendarWeekdaysView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return calendarWeekdaysView
     }()
     
     let myCollectionView: UICollectionView = {
@@ -82,11 +86,11 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        let myCollectionView=UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        let myCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         myCollectionView.showsHorizontalScrollIndicator = false
         myCollectionView.translatesAutoresizingMaskIntoConstraints=false
-        myCollectionView.backgroundColor=UIColor.black
-        myCollectionView.allowsMultipleSelection=false
+        myCollectionView.backgroundColor = .clear
+        myCollectionView.allowsMultipleSelection = false
         return myCollectionView
     }()
     
@@ -129,7 +133,7 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         }
     }
     
-    func initializeView() {
+    private func initializeView() {
         
         currentMonthIndex = Calendar.current.component(.month, from: Date())
         currentYear = Calendar.current.component(.year, from: Date())
@@ -152,7 +156,7 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         myCollectionView.register(dateCVCell.self, forCellWithReuseIdentifier: "Cell")
     }
     
-    func setupViews() {
+    private func setupViews() {
         
         addSubview(monthView)
         monthView.topAnchor.constraint(equalTo: topAnchor).isActive=true
@@ -169,42 +173,11 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         addSubview(myCollectionView)
         myCollectionView.topAnchor.constraint(equalTo: weekdaysView.bottomAnchor, constant: 10).isActive=true
         myCollectionView.centerXAnchor.constraint(equalTo: weekdaysView.centerXAnchor).isActive = true
-        
         myCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         myCollectionView.widthAnchor.constraint(equalToConstant: 280).isActive = true
     }
     
-   
-
-    
-    // MODE DE SELECAO UNICA!!
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        let cell = collectionView.cellForItem(at: indexPath)
-//        let lbl = cell?.subviews[0] as? UILabel
-//
-//        cell?.backgroundColor = Colors.darkRed
-//        seletedDays.append(lbl?.text ?? "")
-//
-//            lbl?.textColor = UIColor.white
-//
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//
-//        let cell = collectionView.cellForItem(at: indexPath)
-//
-//        cell?.backgroundColor = .clear
-//
-//    }
-
-    
-    
-    
-    
-    func getFirstWeekDay() -> Int {
+    private func getFirstWeekDay() -> Int {
         
         let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday)!      //1-7 -> Sun-Sat
         return day == 1 ? 8 : day
@@ -217,7 +190,9 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         
         //for leap year, make february month of 29 days
         if monthIndex == 1 {
+            
             if currentYear % 4 == 0 {
+                
                 numOfDaysInMonth[monthIndex] = 29
             } else {
                 numOfDaysInMonth[monthIndex] = 28
@@ -225,14 +200,12 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         }
         //end
         
-        firstWeekDayOfMonth=getFirstWeekDay()
+        firstWeekDayOfMonth = getFirstWeekDay()
         
         myCollectionView.reloadData()
         
         monthView.btnLeft.isEnabled = !(currentMonthIndex == presentMonthIndex && currentYear == presentYear)
     }
-    
-    
 }
 
 extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -247,38 +220,44 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
-       cell.backgroundColor=UIColor.clear
+        
+       cell.backgroundColor = UIColor.clear
        if indexPath.item <= firstWeekDayOfMonth - 3 {
-           cell.isHidden=true
-       } else {
+           cell.isHidden = true
+       }
+        else {
+            
            let calcDate = indexPath.row-firstWeekDayOfMonth+3
-           cell.isHidden=false
-           cell.lbl.text="\(calcDate)"
+           cell.isHidden = false
+           cell.label.text = "\(calcDate)"
            if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
                cell.isUserInteractionEnabled=false
-               cell.lbl.textColor = UIColor.lightGray
-            } else {
+               cell.label.textColor = UIColor.lightGray
+            }
+            else {
+                
                 cell.isUserInteractionEnabled=true
-                cell.lbl.textColor = Style.activeCellLblColor
+                // trocar para cor do bravve
+                cell.label.textColor = .blue
             }
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let cell = collectionView.cellForItem(at: indexPath) as? dateCVCell
         
-        if  cell?.backgroundColor == .clear {
-            
+        if cell?.backgroundColor == .clear {
             
             cell?.backgroundColor = Colors.darkRed
-            print(cell?.lbl.text ?? "")
-        } else {
+            delegate?.chosedDays(cell?.label.text ?? "")
+        }
+        else {
             
             cell?.backgroundColor = .clear
-            
+            delegate?.unchoseDays(cell?.label.text ?? "")
         }
-
     }
 }
 
@@ -305,7 +284,7 @@ extension CalendarView: UICollectionViewDelegateFlowLayout {
 
 class dateCVCell: UICollectionViewCell {
     
-    let lbl: UILabel = {
+    let label: UILabel = {
         
         let label = UILabel()
         label.text = "00"
@@ -318,6 +297,7 @@ class dateCVCell: UICollectionViewCell {
     }()
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         backgroundColor=UIColor.clear
         layer.cornerRadius = frame.size.height/2
@@ -332,16 +312,12 @@ class dateCVCell: UICollectionViewCell {
     
     func setupViews() {
         
-        addSubview(lbl)
-        lbl.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        lbl.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        lbl.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        lbl.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
+        addSubview(label)
+        label.topAnchor.constraint(equalTo: topAnchor).isActive=true
+        label.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
+        label.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
     }
-    
-    
-    
-   
 }
 
 //get first day of the month
@@ -359,10 +335,12 @@ extension Date {
 
 //get date from string
 extension String {
+    
     static var dateFormatter: DateFormatter = {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        
         return formatter
     }()
     
@@ -370,4 +348,11 @@ extension String {
         
         return String.dateFormatter.date(from: self)
     }
+}
+
+protocol CalendarViewProtocol {
+    
+    func chosedDays(_ day: String)
+    
+    func unchoseDays(_ day: String)
 }
