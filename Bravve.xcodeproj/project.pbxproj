@@ -404,14 +404,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		130544D3289845040026FCE6 /* CancelReservationCell */ = {
-			isa = PBXGroup;
-			children = (
-				130544D4289845180026FCE6 /* CancelReservationCell.swift */,
-			);
-			path = CancelReservationCell;
-			sourceTree = "<group>";
-		};
 		1478A2262899651D00B409E5 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,9 +1064,10 @@
 		C69617742881ED5100281633 /* CancelReservation */ = {
 			isa = PBXGroup;
 			children = (
-				C69617902881EE7600281633 /* ViewModel */,
-				C696178F2881EE7000281633 /* View */,
-				C696178E2881EE6C00281633 /* Model */,
+				C69617932881EE9500281633 /* CancelReservationView.swift */,
+				C69617952881EEA300281633 /* CancelReservationViewModel.swift */,
+				C69617912881EE8800281633 /* CancelReservationModel.swift */,
+				130544D4289845180026FCE6 /* CancelReservationCell.swift */,
 			);
 			path = CancelReservation;
 			sourceTree = "<group>";
@@ -1082,9 +1075,9 @@
 		C69617752881ED5A00281633 /* BookingDetails */ = {
 			isa = PBXGroup;
 			children = (
-				C69617992881EEB500281633 /* View */,
-				C69617982881EEAF00281633 /* ViewModel */,
-				C69617972881EEAB00281633 /* Model */,
+				C696179E2881EED900281633 /* BookingDetailsView.swift */,
+				C696179C2881EECD00281633 /* BookingDetailsViewModel.swift */,
+				C696179A2881EEC100281633 /* BookingDetailsModel.swift */,
 			);
 			path = BookingDetails;
 			sourceTree = "<group>";
@@ -1149,55 +1142,6 @@
 				C69617A92881EF1800281633 /* Model */,
 			);
 			path = EditProfile;
-			sourceTree = "<group>";
-		};
-		C696178E2881EE6C00281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69617912881EE8800281633 /* CancelReservationModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C696178F2881EE7000281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				130544D3289845040026FCE6 /* CancelReservationCell */,
-				C69617932881EE9500281633 /* CancelReservationView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69617902881EE7600281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617952881EEA300281633 /* CancelReservationViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69617972881EEAB00281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C696179A2881EEC100281633 /* BookingDetailsModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69617982881EEAF00281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C696179C2881EECD00281633 /* BookingDetailsViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69617992881EEB500281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C696179E2881EED900281633 /* BookingDetailsView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C69617A02881EEE100281633 /* Model */ = {
