@@ -523,9 +523,21 @@ extension UIView {
         
         self.frame.origin = origin
         
+        let animate = {
+            
+            self.frame.size = size
+            self.alpha = 1
+        }
+        
+        let reduce = {
+            
+            self.frame.size = .zero
+            self.alpha = 0
+        }
+        
         let timing: (duration: CGFloat,
-                     delay: CGFloat) = (duration: 0.3,
-                                        delay: 0.1)
+                     delay: CGFloat) = (duration: 0.4,
+                                        delay: 0.15)
         
         if self.frame.size == .zero {
             
@@ -537,15 +549,15 @@ extension UIView {
                                    delay: timing.delay) {
 
                         self.frame.origin.x -= size.width
-                        self.frame.size = size
+                        animate()
                     }
                 
                 case .downRight:
                     
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
-
-                        self.frame.size = size
+                        
+                        animate()
                     }
                 
                 case .upLeft:
@@ -555,7 +567,7 @@ extension UIView {
 
                         self.frame.origin.x -= size.width
                         self.frame.origin.y -= size.height
-                        self.frame.size = size
+                        animate()
                     }
                 
                 case .upRight:
@@ -564,7 +576,7 @@ extension UIView {
                                    delay: timing.delay) {
 
                         self.frame.origin.y -= size.height
-                        self.frame.size = size
+                        animate()
                     }
                 
                 default:
@@ -574,13 +586,13 @@ extension UIView {
 
                         self.frame.origin.x -= size.width/2
                         self.frame.origin.y -= size.height/2
-                        self.frame.size = size
+                        animate()
                     }
             }
         }
         else {
             
-            self.frame.size = .zero
+            reduce()
         }
     }
 }
