@@ -21,6 +21,13 @@ class SingleBookingView: UIViewController {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.walletGray.rawValue, IconsBravve.calendarBlue.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditGray.rawValue])
         
+        let handler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return buttons
     }()
     
@@ -90,40 +97,48 @@ class SingleBookingView: UIViewController {
         return dropDown
     }()
     
+    private lazy var tabBar = TabBarClosed(self)
+    
     private let nextButton = UIButton()
         
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.title = "My Calender"
-        self.navigationController?.navigationBar.isTranslucent=false
+        self.navigationController?.navigationBar.isTranslucent = false
         self.view.backgroundColor = Style.bgColor
-        view.addSubviews([bodyScrollView, nextButton])
+        view.addSubviews([bodyScrollView, nextButton, tabBar])
         bodyScrollView.addSubview(viewToScroll)
         viewToScroll.addSubviews([calenderView, daysChoiceLabel, capacityLabel, lineView, schedulesStack, dropDown])
-        self.nextButton.setToBottomButtonKeyboardDefault("Próxima Etapa", backgroundColor: .buttonPink)
+//        self.nextButton.setToBottomButtonKeyboardDefault("Próxima Etapa")
+        self.nextButton.setToBottomButtonDefaultAbove("Próxima Etapa", above: tabBar)
         self.view.setToDefaultBackgroundColor()
         
         view.createReservationCustomBar (progressBarButtons: buttons) { _ in
-            
-            print("Lero Lero")
+            self.dismiss(animated: true)
         }
-        
-        calenderView.constraintInsideTo(.top, viewToScroll, 44)
-        calenderView.constraintInsideTo(.leading, viewToScroll, 40)
-        calenderView.constraintInsideTo(.trailing, viewToScroll, 40)
-        calenderView.heightAnchorInSuperview(338)
 
         bodyScrollView.constraintInsideTo(.top, view, 220)
         bodyScrollView.constraintInsideTo(.leading, view)
         bodyScrollView.constraintInsideTo(.trailing, view)
         bodyScrollView.constraintOutsideTo(.bottom, nextButton)
         
+        tabBar.constraintInsideTo(.leading, view)
+        tabBar.constraintInsideTo(.trailing, view)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
+//        viewToScroll constraints
+        
         viewToScroll.constraintInsideTo(.top, bodyScrollView.contentLayoutGuide)
         viewToScroll.constraintInsideTo(.leading, bodyScrollView.contentLayoutGuide)
         viewToScroll.constraintInsideTo(.trailing, bodyScrollView.contentLayoutGuide)
         viewToScroll.constraintInsideTo(.bottom, bodyScrollView.contentLayoutGuide)
         viewToScroll.constraintInsideTo(.width, bodyScrollView.frameLayoutGuide)
+        
+        calenderView.constraintInsideTo(.top, viewToScroll, 44)
+        calenderView.constraintInsideTo(.leading, viewToScroll, 40)
+        calenderView.constraintInsideTo(.trailing, viewToScroll, 40)
+        calenderView.heightAnchorInSuperview(338)
     
         daysChoiceLabel.constraintInsideTo(.top, viewToScroll)
         daysChoiceLabel.constraintInsideTo(.leading, viewToScroll, 20)
@@ -177,6 +192,8 @@ class SingleBookingView: UIViewController {
         
         var buttons = [UIButton]()
         
+        
+        
         for time in self.availableTimes {
             
             let button = UIButton()
@@ -228,10 +245,10 @@ extension SingleBookingView: UIScrollViewDelegate {
 
 extension SingleBookingView: CalendarViewProtocol {
     
-    func chosedDays(_ day: String) {
+    func chosedDays(_ day: String,_ month: String,_ year: String) {
         
         let dayLabel = UILabel()
-        dayLabel.text = "\(day)/01/2022"
+        dayLabel.text = "\(day)/\(month)/\(year)"
         
         let entireDayLabel = UILabel()
         entireDayLabel.text = "Dia inteiro"
@@ -295,7 +312,7 @@ extension SingleBookingView: CalendarViewProtocol {
             }()
             
             let trashButton = UIButton()
-            trashButton.setImage(UIImage(named: ButtonsBravve.alert.rawValue),
+            trashButton.setImage(UIImage(named: "trash"),
                                     for: .normal)
             
             let timeStack = UIStackView(arrangedSubviews: [timeInStack, timeOutStack, trashButton])
@@ -328,21 +345,21 @@ extension SingleBookingView: CalendarViewProtocol {
         self.schedulesStack.addArrangedSubview(chosedDayStack)
     }
     
-    func unchoseDays(_ day: String) {
+    func unchoseDays(_ day: String,_ month: String,_ year: String) {
         
-        for stack in self.schedulesStack.arrangedSubviews {
+        for view in self.schedulesStack.arrangedSubviews {
             
-            if let stack = stack as? UIStackView {
+            if let chosedDayStack = view as? UIStackView {
                 
-                if let stack = stack.arrangedSubviews[0] as? UIStackView {
+                if let dayLabelStack = chosedDayStack.arrangedSubviews[0] as? UIStackView {
                     
-                    if let label = stack.arrangedSubviews[0] as? UILabel {
+                    if let dayLabel = dayLabelStack.arrangedSubviews[0] as? UILabel {
                         
-                        if let text = label.text {
+                        if let text = dayLabel.text {
                             
-                            if text.contains(day) {
+                            if text.contains(day) && text.contains(month) && text.contains(year) {
                                 
-                                stack.superview?.removeFromSuperview()
+                                chosedDayStack.removeFromSuperview()
                             }
                         }
                     }
