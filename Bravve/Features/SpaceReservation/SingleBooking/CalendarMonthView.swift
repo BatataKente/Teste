@@ -29,7 +29,7 @@ class CalendarMonthView: UIView {
         
         setupViews()
         
-        btnLeft.isEnabled=false
+        btnLeft.isEnabled = false
     }
     
     @objc func btnLeftRightAction(sender: UIButton) {
