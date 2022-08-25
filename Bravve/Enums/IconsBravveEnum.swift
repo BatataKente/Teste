@@ -49,6 +49,7 @@ public enum IconsBravve: String {
     case photoWhite = "photoWhite"
     case questionCircleBlue_1 = "questionCircleBlue"
     case questionCircleBlue_2 = "questionCircleBlue2"
+    case receipt = "receipt"
     case userBlue = "userBlue"
     case userGray = "userGray"
     case users = "users"

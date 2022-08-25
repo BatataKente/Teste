@@ -13,11 +13,13 @@ class ProfessionViewModel {
     
     func selectAreaMenu(label: UILabel, scrollView: UIScrollView) {
         
-        sessionManager.getDataArray(endpoint: .usersOccupations) { (occupations: [Occupations]?) in
+        sessionManager.getDataArray(endpoint: .usersOccupations) { (statusCode, error, occupations: [Occupations]?) in
             
             var selectAreaMenu: [UIButton] = []
             
             guard let occupations = occupations else {
+                print(statusCode)
+                print(error?.localizedDescription)
                 return
             }
             for occupation in occupations {
@@ -45,11 +47,13 @@ class ProfessionViewModel {
     
     func workRegimeMenu(label: UILabel, scrollView: UIScrollView) {
         
-        sessionManager.getDataArray(endpoint: .usersWorkModels) { (workModels: [WorkModels]?) in
+        sessionManager.getDataArray(endpoint: .usersWorkModels) { (statusCode, error, workModels: [WorkModels]?) in
             
             var workRegimeMenu: [UIButton] = []
             
             guard let workModels = workModels else {
+                print(statusCode)
+                print(error?.localizedDescription)
                 return
             }
             for workModel in workModels {
