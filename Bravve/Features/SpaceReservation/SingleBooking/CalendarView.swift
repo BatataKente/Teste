@@ -251,12 +251,16 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
         if cell?.backgroundColor == .clear {
             
             cell?.backgroundColor = Colors.darkRed
-            delegate?.chosedDays(cell?.label.text ?? "")
+            delegate?.chosedDays(cell?.label.text ?? "",
+                                 "\(currentMonthIndex)",
+                                 "\(currentYear)")
         }
         else {
             
             cell?.backgroundColor = .clear
-            delegate?.unchoseDays(cell?.label.text ?? "")
+            delegate?.unchoseDays(cell?.label.text ?? "",
+                                  "\(currentMonthIndex)",
+                                  "\(currentYear)")
         }
     }
 }
@@ -352,7 +356,7 @@ extension String {
 
 protocol CalendarViewProtocol {
     
-    func chosedDays(_ day: String)
+    func chosedDays(_ day: String,_ month: String,_ year: String)
     
-    func unchoseDays(_ day: String)
+    func unchoseDays(_ day: String,_ month: String,_ year: String)
 }

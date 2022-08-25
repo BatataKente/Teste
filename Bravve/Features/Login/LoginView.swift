@@ -295,8 +295,16 @@ class LoginView: UIViewController {
             
             let parameters = LoginParameters(email: email, password: password)
             
-            sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: parameters) { (token: Token?) in
-                UserDefaults.standard.setValue(token?.token, forKey: "access_token")
+            sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: parameters) { (statusCode, error, token: Token?) in
+               
+                guard let tokenResponse = token?.token else {
+                    
+                    print(statusCode)
+                    print(token?.message)
+                    return
+                }
+                
+                UserDefaults.standard.setValue(tokenResponse, forKey: "access_token")
                 self.present(vc, animated: false)
             }
             

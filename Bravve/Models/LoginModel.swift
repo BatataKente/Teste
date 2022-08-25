@@ -24,4 +24,5 @@ struct LoginParameters: Codable {
 
 struct Token: Codable {
     var token: String?
+    var message: String?
 }

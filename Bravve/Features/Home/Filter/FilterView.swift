@@ -522,9 +522,14 @@ final class FilterScreen: UIViewController {
     //MARK: - API Functions
     func setupTypesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (typesList: [SpaceType]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (statusCode, error, typesList: [SpaceType]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             print(typesList)
             self.sortedTypesArray = typesList
             
@@ -544,9 +549,14 @@ final class FilterScreen: UIViewController {
     
     func setupClassificationsButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesClassifications) {(typesList: [SpaceClassification]?) in
+        sessionManager.getOpenDataArray(endpoint: .spacesClassifications) {(statusCode, error, typesList: [SpaceClassification]?) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             print(typesList)
             self.sortedClassificationsArray = typesList
             
@@ -565,9 +575,14 @@ final class FilterScreen: UIViewController {
     
     func setupCategoriesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesCategories) { (typesList: [SpaceCategory]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesCategories) { (statusCode, error, typesList: [SpaceCategory]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             print(typesList)
             self.sortedCategoriesArray = typesList
             
@@ -586,9 +601,14 @@ final class FilterScreen: UIViewController {
     
     func setupFacilitiesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesFacilities) { (typesList: [SpaceFacility]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesFacilities) { (statusCode, error, typesList: [SpaceFacility]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             print(typesList)
             self.sortedFacilitiesArray = typesList
             
@@ -607,9 +627,14 @@ final class FilterScreen: UIViewController {
     
     func setupNoisesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesNoises) { (typesList: [SpaceNoise]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesNoises) { (statusCode, error, typesList: [SpaceNoise]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             print(typesList)
             self.sortedNoisesArray = typesList
             
@@ -628,9 +653,14 @@ final class FilterScreen: UIViewController {
     
     func setupContractsButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesContracts) { (typesList: [SpaceContract]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesContracts) { (statusCode, error, typesList: [SpaceContract]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             print(typesList)
             self.sortedContractsArray = typesList
             for types in typesList {

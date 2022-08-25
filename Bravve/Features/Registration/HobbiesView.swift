@@ -94,9 +94,14 @@ class HobbiesView: UIViewController {
     
     func setupHobbiesArray() {
 
-        sessionManager.getDataArray(endpoint: .usersHobbies) { (hobbiesList: [Hobbies]? ) in
+        sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbiesList: [Hobbies]? ) in
 
-            guard let hobbiesList = hobbiesList else { return }
+            guard let hobbiesList = hobbiesList else {
+                print(statusCode)
+                print(error?.localizedDescription)
+                return
+                
+            }
             
             for hobbies in hobbiesList {
                 
