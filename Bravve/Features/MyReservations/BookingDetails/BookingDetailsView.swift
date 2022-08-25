@@ -582,24 +582,6 @@ class BookingDetailsView: UIViewController{
         return button
     }()
     
-    @objc func buttonTapCancelReserv(){
-        customAlert.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", cancelAttributed: "Cancelar reserva", cancelHandler: UIAction(handler: { _ in
-            let vc = CancelReservationView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }), on: self)
-    }
-    
-    @objc func buttonTapCheckIn() {
-        alertCustom.showAlert( message: "Precisamos acessar a câmera. Para realizar o Check-in, é permitir acesso à câmera do celular!", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
-            let vc = CheckInQrCodeViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }), cancelAttributed: "Não permitir", cancelHandler: UIAction(handler: { _ in
-            self.alertCustom.dismissAlert()
-        }), on: self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
@@ -615,6 +597,24 @@ class BookingDetailsView: UIViewController{
         setupContraints()
         
        
+    }
+    
+    @objc func buttonTapCancelReserv(){
+        customAlert.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", cancelAttributed: "Cancelar reserva", cancelHandler: UIAction(handler: { _ in
+            let vc = CancelReservationView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), on: self)
+    }
+    
+    @objc func buttonTapCheckIn() {
+        alertCustom.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Para realizar o Check-in, é necessário permissão de uso da câmera do celular.", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
+            let vc = CheckInQrCodeViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), cancelAttributed: "Negar", cancelHandler: UIAction(handler: { _ in
+            self.alertCustom.dismissAlert()
+        }), on: self)
     }
    
     func setupViews(){
