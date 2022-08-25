@@ -177,8 +177,8 @@ class FotoView: UIViewController {
         sessionManager.uploadPictureWithResponse(uuid: userUUID,endpoint: .usersPictures, picture_url: imageURL) { (statusCode, error, updatedPicture: UploadPicture?) in
             
             guard let updatedPicture = updatedPicture else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
             }
 

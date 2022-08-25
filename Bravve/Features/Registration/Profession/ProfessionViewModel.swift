@@ -18,8 +18,8 @@ class ProfessionViewModel {
             var selectAreaMenu: [UIButton] = []
             
             guard let occupations = occupations else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
             }
             for occupation in occupations {
@@ -52,8 +52,8 @@ class ProfessionViewModel {
             var workRegimeMenu: [UIButton] = []
             
             guard let workModels = workModels else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
             }
             for workModel in workModels {

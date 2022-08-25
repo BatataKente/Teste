@@ -314,8 +314,8 @@ extension HomeClosedView: HomeClosedTableViewCellProtocol {
         
         sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
             guard let space = space else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
             }
             let detailsClosedView = DetailsClosedView(space)
