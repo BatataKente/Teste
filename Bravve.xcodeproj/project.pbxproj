@@ -1023,9 +1023,9 @@
 		C696177A2881EDF600281633 /* PersonalProfile */ = {
 			isa = PBXGroup;
 			children = (
-				C69617A22881EEEB00281633 /* ViewModel */,
-				C69617A12881EEE600281633 /* View */,
-				C69617A02881EEE100281633 /* Model */,
+				C69617A52881EF0400281633 /* PersonalProfileView.swift */,
+				C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */,
+				C69617A32881EEF700281633 /* PersonalProfileModel.swift */,
 			);
 			path = PersonalProfile;
 			sourceTree = "<group>";
@@ -1033,59 +1033,11 @@
 		C696177B2881EDFE00281633 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
-				C69617AB2881EF2000281633 /* ViewModel */,
-				C69617AA2881EF1C00281633 /* View */,
-				C69617A92881EF1800281633 /* Model */,
-			);
-			path = EditProfile;
-			sourceTree = "<group>";
-		};
-		C69617A02881EEE100281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69617A32881EEF700281633 /* PersonalProfileModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69617A12881EEE600281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69617A52881EF0400281633 /* PersonalProfileView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69617A22881EEEB00281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617A72881EF0F00281633 /* PersonalProfileViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C69617A92881EF1800281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
+				C69617AE2881EF3700281633 /* EditProfileView.swift */,
+				C69617B02881EF4800281633 /* EditProfileViewModel.swift */,
 				C69617AC2881EF2C00281633 /* EditProfileModel.swift */,
 			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69617AA2881EF1C00281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C69617AE2881EF3700281633 /* EditProfileView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69617AB2881EF2000281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69617B02881EF4800281633 /* EditProfileViewModel.swift */,
-			);
-			path = ViewModel;
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
