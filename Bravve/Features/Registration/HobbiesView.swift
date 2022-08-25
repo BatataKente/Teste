@@ -97,8 +97,8 @@ class HobbiesView: UIViewController {
         sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbiesList: [Hobbies]? ) in
 
             guard let hobbiesList = hobbiesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }

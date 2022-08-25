@@ -243,15 +243,15 @@ class TokenView: UIViewController {
         
         sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID,endpoint: .usersValidate, parameters: parameters) { statusCode, error in
             guard let statusCode = statusCode else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
                 return
             }
             
             if statusCode == 204 {
                 self.sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: LoginParameters(email: self.userEmail, password: self.userPassword)) { (statusCode, error, token: Token?) in
                     guard let token = token else {
-                        print(statusCode)
-                        print(error?.localizedDescription)
+                        print(statusCode as Any)
+                        print(error?.localizedDescription as Any)
                         return
                     }
 
@@ -270,8 +270,8 @@ class TokenView: UIViewController {
         let parameters = ValidateUserParameter()
         
         self.sessionManager.postOpenDataWithoutResponse(uuid: self.userUUID, endpoint: .usersCode, parameters: parameters) { statusCode, error in
-            print(statusCode)
-            print(error?.localizedDescription)
+            print(statusCode as Any)
+            print(error?.localizedDescription as Any)
         }
         print("Novo código enviado")
     }

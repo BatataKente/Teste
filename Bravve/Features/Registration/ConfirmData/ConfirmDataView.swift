@@ -307,8 +307,8 @@ class ConfirmDataView: UIViewController {
         sessionManager.postDataWithOpenResponse(endpoint: .users, parameters: self.userToRegister) { (statusCode, error, user: User?) in
             
             guard let userUUID = user?.uuid else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
             }
             

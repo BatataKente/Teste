@@ -525,8 +525,8 @@ final class FilterScreen: UIViewController {
         sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (statusCode, error, typesList: [SpaceType]? ) in
             
             guard let typesList = typesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }
@@ -552,8 +552,8 @@ final class FilterScreen: UIViewController {
         sessionManager.getOpenDataArray(endpoint: .spacesClassifications) {(statusCode, error, typesList: [SpaceClassification]?) in
             
             guard let typesList = typesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }
@@ -578,8 +578,8 @@ final class FilterScreen: UIViewController {
         sessionManager.getOpenDataArray(endpoint: .spacesCategories) { (statusCode, error, typesList: [SpaceCategory]? ) in
             
             guard let typesList = typesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }
@@ -604,8 +604,8 @@ final class FilterScreen: UIViewController {
         sessionManager.getOpenDataArray(endpoint: .spacesFacilities) { (statusCode, error, typesList: [SpaceFacility]? ) in
             
             guard let typesList = typesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }
@@ -630,8 +630,8 @@ final class FilterScreen: UIViewController {
         sessionManager.getOpenDataArray(endpoint: .spacesNoises) { (statusCode, error, typesList: [SpaceNoise]? ) in
             
             guard let typesList = typesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }
@@ -656,8 +656,8 @@ final class FilterScreen: UIViewController {
         sessionManager.getOpenDataArray(endpoint: .spacesContracts) { (statusCode, error, typesList: [SpaceContract]? ) in
             
             guard let typesList = typesList else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }

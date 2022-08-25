@@ -32,8 +32,8 @@ class HomeOpenViewModel {
         sessionManager.getOpenDataArray (endpoint: .utilsStates){ (statusCode, error, states: [States]?) in
 
             guard let states = states else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
                 
             }
@@ -64,8 +64,8 @@ class HomeOpenViewModel {
                     self.sessionManager.getOpenDataArray(id: "\(state.id)", endpoint: .utilsCities) { (statusCode, error, cities: [Cities]?) in
                         
                         guard let cities = cities else {
-                            print(statusCode)
-                            print(error)
+                            print(statusCode as Any)
+                            print(error as Any)
                             return
                             
                         }
@@ -112,8 +112,8 @@ class HomeOpenViewModel {
         sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
             
             guard let spaces = spaces else {
-                print(statusCode)
-                print(error?.localizedDescription)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
                 return
             }
             
