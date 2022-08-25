@@ -722,31 +722,6 @@
 			path = RecoverPassword;
 			sourceTree = "<group>";
 		};
-		C69616932881E68100281633 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C69616CA2881E88600281633 /* HomeOpenModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C69616942881E68900281633 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */,
-				C69616CC2881E89200281633 /* HomeOpenView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		C69616952881E68E00281633 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		C69616992881E6AF00281633 /* PasswordRecovery_email */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,9 +765,10 @@
 		C69616C82881E83A00281633 /* Home Open */ = {
 			isa = PBXGroup;
 			children = (
-				C69616952881E68E00281633 /* ViewModel */,
-				C69616942881E68900281633 /* View */,
-				C69616932881E68100281633 /* Model */,
+				C69616CC2881E89200281633 /* HomeOpenView.swift */,
+				C69616CE2881E89D00281633 /* HomeOpenViewModel.swift */,
+				C69616CA2881E88600281633 /* HomeOpenModel.swift */,
+				1416C28928941BFA00FCE10E /* HomeOpenTableViewCell.swift */,
 			);
 			path = "Home Open";
 			sourceTree = "<group>";
