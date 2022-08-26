@@ -13,7 +13,19 @@ class WorkPassBookingView: UIViewController {
     var arrayFirstLabel = ["Cartão de Crédito","Foursys","Bravve"]
     var arraySecoundLabel = ["Conta pessoal","Workpass","Workpass"]
     var arrayStackView = ["","666","666"]
-
+    private let space: SpaceDetail?
+    
+    init(_ space: SpaceDetail? = nil) {
+        
+        self.space = space
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: progressBarButtons
     private lazy var  buttons: [UIButton] = {
         
@@ -52,25 +64,6 @@ class WorkPassBookingView: UIViewController {
         ButtonsBravve.userLoginGray.rawValue
     ])
     
-    //MARK: Labels
-    private let siteNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Nome do espaço"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let partnerNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Nome do local parceiro"
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     private let addressLabel: UILabel = {
         
         let label = UILabel()
@@ -133,8 +126,7 @@ class WorkPassBookingView: UIViewController {
         tableView.dataSource = self
         tabBar.selectedItem = tabBar.items?[0]
         
-        view.createReservationCustomBar (progressBarButtons: buttons) {_ in
-            
+        view.createReservationCustomBarAPI(spaceName: space?.space_name, localName: space?.local_name, imageURL: space?.pictures?[0].url, progressBarButtons: buttons) { _ in
             self.dismiss(animated: true)
         }
         

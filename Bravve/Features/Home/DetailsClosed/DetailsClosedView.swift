@@ -596,7 +596,7 @@ class DetailsClosedView: UIViewController {
     }
     
     @objc func reserveButtonTapped(){
-        let reserveViewController = WorkPassBookingView()
+        let reserveViewController = WorkPassBookingView(self.space)
         reserveViewController.modalPresentationStyle = .fullScreen
         present(reserveViewController, animated: true)
     }
