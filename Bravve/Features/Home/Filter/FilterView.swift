@@ -56,12 +56,12 @@ final class FilterScreen: UIViewController {
     var selectedNoisesArray: [String] = []
     var selectedContractsArray: [String] = []
     
-    var spaceTypeId = 0
-    var spaceClassificationId = 0
-    var spaceCategoryId = 0
-    var spaceFacilitiesId: [Int] = []
-    var spaceNoiseId = 0
-    var spaceContractId = 0
+    var spaceTypeId: Int?
+    var spaceClassificationId: Int?
+    var spaceCategoryId: Int?
+    var spaceFacilitiesId: [Int]?
+    var spaceNoiseId: Int?
+    var spaceContractId: Int?
     
     //MARK: - var and let
     let scrollView: UIScrollView = {
@@ -141,7 +141,6 @@ final class FilterScreen: UIViewController {
     //MARK: numberLabel
     private lazy var numberLabel: UILabel = {
         let label = UILabel()
-        label.text = "16+"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
@@ -470,6 +469,8 @@ final class FilterScreen: UIViewController {
                 selectedContractsArray = []
                 selectedItemsArray = []
         }
+        
+        numberLabel.text = nil
     }
     
     @objc private func filterButtonTapped(){
@@ -686,7 +687,7 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .black
                 let filteredArray = selectedTypesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedTypesArray = filteredArray
-                spaceTypeId = 0
+                spaceTypeId = nil
             } else {
                 print("Escolha no máximo 1 tipo de espaço.")
             }
@@ -698,7 +699,7 @@ final class FilterScreen: UIViewController {
                 selectedTypesArray.append(button.titleLabel?.text ?? "")
                 for type in sortedTypesArray {
                     if button.titleLabel?.text == type.name {
-                        spaceTypeId = type.id ?? 0
+                        spaceTypeId = type.id
                     }
                 }
             } else {
@@ -706,11 +707,9 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 let filteredArray = selectedTypesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedTypesArray = filteredArray
-                spaceTypeId = 0
+                spaceTypeId = nil
             }
         }
-        print(selectedTypesArray)
-        print(spaceTypeId)
     }
     
     @objc func selectClassification(button: UIButton) {
@@ -721,7 +720,7 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .black
                 let filteredArray = selectedClassificationsArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedClassificationsArray = filteredArray
-                spaceClassificationId = 0
+                spaceClassificationId = nil
             } else {
                 print("Escolha no máximo 1 classificação.")
             }
@@ -733,7 +732,7 @@ final class FilterScreen: UIViewController {
                 selectedClassificationsArray.append(button.titleLabel?.text ?? "")
                 for classification in sortedClassificationsArray {
                     if button.titleLabel?.text == classification.name {
-                        spaceClassificationId = classification.id ?? 0
+                        spaceClassificationId = classification.id
                     }
                 }
             } else {
@@ -741,11 +740,9 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 let filteredArray = selectedClassificationsArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedClassificationsArray = filteredArray
-                spaceClassificationId = 0
+                spaceClassificationId = nil
             }
         }
-        print(selectedClassificationsArray)
-        print(spaceClassificationId)
     }
     
     @objc func selectCategories(button: UIButton) {
@@ -756,7 +753,7 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .black
                 let filteredArray = selectedCategoriesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedCategoriesArray = filteredArray
-                spaceCategoryId = 0
+                spaceCategoryId = nil
             } else {
                 print("Escolha no máximo 1 categoria.")
             }
@@ -768,7 +765,7 @@ final class FilterScreen: UIViewController {
                 selectedCategoriesArray.append(button.titleLabel?.text ?? "")
                 for category in sortedCategoriesArray {
                     if button.titleLabel?.text == category.name {
-                        spaceCategoryId = category.id ?? 0
+                        spaceCategoryId = category.id
                     }
                 }
             } else {
@@ -776,11 +773,9 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 let filteredArray = selectedCategoriesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedCategoriesArray = filteredArray
-                spaceCategoryId = 0
+                spaceCategoryId = nil
             }
         }
-        print(selectedCategoriesArray)
-        print(spaceCategoryId)
     }
     
     @objc func selectFacilities(button: UIButton) {
@@ -792,8 +787,8 @@ final class FilterScreen: UIViewController {
             selectedFacilitiesArray = filteredArray
             for facility in sortedFacilitiesArray {
                 if button.titleLabel?.text == facility.name {
-                    let typeId = facility.id ?? 0
-                    let filteredIds = spaceFacilitiesId.filter {$0 != typeId}
+                    let typeId = facility.id
+                    let filteredIds = spaceFacilitiesId?.filter {$0 != typeId}
                     spaceFacilitiesId = filteredIds
                 }
             }
@@ -805,7 +800,8 @@ final class FilterScreen: UIViewController {
                 selectedFacilitiesArray.append(button.titleLabel?.text ?? "")
                 for facility in sortedFacilitiesArray {
                     if button.titleLabel?.text == facility.name {
-                        spaceFacilitiesId.append(facility.id ?? 0)
+                        guard let facilityId = facility.id else {return}
+                        spaceFacilitiesId?.append(facilityId)
                     }
                 }
             } else {
@@ -816,14 +812,12 @@ final class FilterScreen: UIViewController {
                 for facility in sortedFacilitiesArray {
                     if button.titleLabel?.text == facility.name {
                         let typeId = facility.id ?? 0
-                        let filteredIds = spaceFacilitiesId.filter {$0 != typeId}
+                        let filteredIds = spaceFacilitiesId?.filter {$0 != typeId}
                         spaceFacilitiesId = filteredIds
                     }
                 }
             }
         }
-        print(selectedFacilitiesArray)
-        print(spaceFacilitiesId)
     }
     
     @objc func selectNoise(button: UIButton) {
@@ -834,7 +828,7 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .black
                 let filteredArray = selectedNoisesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedNoisesArray = filteredArray
-                spaceNoiseId = 0
+                spaceNoiseId = nil
             } else {
                 print("Escolha no máximo 1 tipo de conforto auditivo.")
             }
@@ -846,7 +840,7 @@ final class FilterScreen: UIViewController {
                 selectedNoisesArray.append(button.titleLabel?.text ?? "")
                 for noise in sortedNoisesArray {
                     if button.titleLabel?.text == noise.name {
-                        spaceNoiseId = noise.id ?? 0
+                        spaceNoiseId = noise.id
                     }
                 }
             } else {
@@ -854,11 +848,9 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 let filteredArray = selectedNoisesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedNoisesArray = filteredArray
-                spaceNoiseId = 0
+                spaceNoiseId = nil
             }
         }
-        print(selectedNoisesArray)
-        print(spaceNoiseId)
     }
     
     @objc func selectContract(button: UIButton) {
@@ -869,7 +861,7 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .black
                 let filteredArray = selectedContractsArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedContractsArray = filteredArray
-                spaceContractId = 0
+                spaceContractId = nil
             } else {
                 print("Escolha no máximo 1 tipo de contrato.")
             }
@@ -881,7 +873,7 @@ final class FilterScreen: UIViewController {
                 selectedContractsArray.append(button.titleLabel?.text ?? "")
                 for contract in sortedContractsArray {
                     if button.titleLabel?.text == contract.name {
-                        spaceContractId = contract.id ?? 0
+                        spaceContractId = contract.id
                     }
                 }
             } else {
@@ -889,11 +881,9 @@ final class FilterScreen: UIViewController {
                 button.configuration?.attributedTitle?.foregroundColor = .white
                 let filteredArray = selectedContractsArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedContractsArray = filteredArray
-                spaceContractId = 0
+                spaceContractId = nil
             }
         }
-        print(selectedContractsArray)
-        print(spaceContractId)
     }
     
     //MARK: setupConstrains
