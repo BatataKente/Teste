@@ -9,74 +9,30 @@ import UIKit
 
 class HomeClosedView: UIViewController {
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        super.viewDidDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        setupView()
-        setupConstraints()
-        setupDefaults()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        
-        .lightContent
-    }
-    
-    let authManager = NetworkManager()
+    let sessionManager = SessionManager()
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["Smart Office", "Inspirador"]
+    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
     
-    private let cells: [ReserveData] = [ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named: ImagesBravve.example_1.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named: ImagesBravve.example_2.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo"),
-                                        ReserveData(title: "BOXOFFICE",
-                                                    description: "Numa esquina charmosa, um hotel",
-                                                    image: UIImage(named:ImagesBravve.example_3.rawValue) ?? UIImage(),
-                                                    photoTitle: "WORKPASS",
-                                                    name: "Hotel Saint",
-                                                    subName: "UM Coffee Co.",
-                                                    price: "3,50 crédito/ hora",
-                                                    details: "São Paulo / Jardim Paulistano\nCapacidade: 6 pessoas\nEspaço privativo")]
+    private var cells: [Space] = []
     
     private let titleLabel = UILabel()
     
-    private let customBar = UIView()
-    
     private lazy var filterStackView: UIStackView = {
         
-        let margins = CGFloat(13).generateSizeForScreen
+        let margins = CGFloat(10).generateSizeForScreen
         
         let stackView = UIStackView()
         stackView.setToDefaultBackgroundColor()
         stackView.isHidden = false
         stackView.alignment = .leading
         stackView.spacing = 5
+        stackView.distribution = .fillProportionally
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
-                                               bottom: CGFloat(13).generateSizeForScreen,
+                                               bottom: margins,
                                                right: margins)
         
         return stackView
@@ -115,90 +71,163 @@ class HomeClosedView: UIViewController {
     
     private var filterButtons = [UIButton]()
     
-    private lazy var tabBar = TabBarClosed(self, itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                                   ButtonsBravve.calendarButtonGray.rawValue,
-                                                                   ButtonsBravve.userLoginGray.rawValue
-                                                                  ])
+    private lazy var tabBar = TabBarClosed.init(self, itemImagesNames: [ButtonsBravve.locationGray.rawValue,
+                                                                        ButtonsBravve.calendarButtonGray.rawValue,
+                                                                        ButtonsBravve.userLoginGray.rawValue
+                                                                       ])
+    private let imageView: UIImageView = {
+        
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
+    private let coverView: UIView = {
+        
+        let coverView = UIView()
+        coverView.backgroundColor = UIColor(red: 4/255, green: 0, blue: 94/255, alpha: 1)
+        
+        return coverView
+    }()
+    
+    private lazy var leftDropDown: UIScrollView = {
+        
+        let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                      width: view.frame.size.width/5,
+                                                      height: view.frame.size.height/3))
+        leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        leftDropDown.delegate = self
+        
+        return leftDropDown
+    }()
+    
+    private lazy var rightDropDown: UIScrollView = {
+        
+        let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
+                                                       width: view.frame.size.width/2,
+                                                       height: view.frame.size.height/2.5))
+        rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        rightDropDown.delegate = self
+        
+        return rightDropDown
+    }()
+    
+    private lazy var homeClosedViewModel: HomeClosedViewModel = {
+        
+        let homeClosedViewModel = HomeClosedViewModel(customBarWithFilter)
+        return homeClosedViewModel
+    }()
+    
+    private let customBar = UIView()
+    
+    private lazy var customBarWithFilter: CustomBarWithFilter = {
+        
+        let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
+            
+            let filterView = FilterScreen()
+            filterView.modalPresentationStyle = .fullScreen
+            self.present(filterView, animated: true)
+        }
+        
+        return customBarWithFilter
+    }()
+    
+    init(_ willLoad: Bool = false) {
+        
+        imageView.isHidden = willLoad
+        coverView.isHidden = willLoad
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupView()
+        setupConstraints()
+        setupDefaults()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        reduceDropDowns()
+    }
     
     private func setupView() {
         
-        view.addSubviews([stackView, customBar, tabBar])
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
         
         filterButtons = createCapsuleButtons(seletedFilterItems)
         
+        for button in filterButtons {
+            
+            let handler = {(action: UIAction) in
+                
+                self.reduceDropDowns()
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+        }
+        
         filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
+        
+        let dropDownsY = CGFloat(100).generateSizeForScreen
+        
+        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
+                                         y: dropDownsY)
+        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
+                                          y: dropDownsY)
+        
+        let leftHandler = {(action: UIAction) in
+            
+            self.customBarWithFilter.rightButton.isSelected = false
+            self.rightDropDown.frame.size = .zero
+        }
+        
+        let rightHandler = {(action: UIAction) in
+            
+            self.customBarWithFilter.leftButton.isSelected = false
+            self.leftDropDown.frame.size = .zero
+        }
+        
+        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
+        customBarWithFilter.leftButton.addSubWindow(leftDropDown,
+                                                    origin:   leftDropDownOrigin)
+        
+        customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
+        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
+                                                     origin: rightDropDownOrigin)
     }
+    
+    
     
     private func setupDefaults() {
         
         view.setToDefaultBackgroundColor()
         
-        var customBarWithFilter: CustomBarWithFilter
-        let smallFont = UIFont(name: FontsBravve.light.rawValue,
-                               size: CGFloat(11).generateSizeForScreen)
-        
-        customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
-            
-            let filterView = FilterView()
-            filterView.modalPresentationStyle = .fullScreen
-            self.present(filterView, animated: true)
-        }
-        
-        authManager.getDataArray (endpoint: .utilsStates){ (states: [States]?) in
-
-            guard let states = states else {
-                return
-            }
-            
-            var actions = [UIAction]()
-            
-            let stateHandler = {(action: UIAction) in
-                
-                for state in states {
-                    
-                    if state.code == action.title {
-
-                        self.authManager.getDataArray(id: "\(state.id)", endpoint: .utilsCities) { (cities: [Cities]?) in
-
-                            guard let cities = cities else {return}
-                            
-                            var actions = [UIAction]()
-                            
-                            let cityHandler = {(action: UIAction) in
-                                
-                                customBarWithFilter.cityChosedLabel.text = action.title
-                                customBarWithFilter.cityLabel.font = smallFont
-                            }
-                            
-                            for city in cities {
-                                
-                                guard let cityname = city.name else {return}
-                                
-                                actions.append(UIAction(title: cityname,
-                                                        handler: cityHandler))
-                            }
-                            
-                            customBarWithFilter.stateChosedLabel.text = action.title
-                            customBarWithFilter.stateLabel.font = smallFont
-                            
-                            customBarWithFilter.rightButton.setMenuForButton(actions)
-                        }
-                    }
-                }
-            }
-            
-            for state in states {
-                
-                actions.append(UIAction(title: state.code,
-                                        handler: stateHandler))
-            }
-            
-            customBarWithFilter.leftButton.setMenuForButton(actions)
-        }
+        homeClosedViewModel.delegate = self
+        homeClosedViewModel.manageCustomBar()
     }
     
     private func setupConstraints() {
@@ -213,10 +242,25 @@ class HomeClosedView: UIViewController {
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
+        coverView.constraintInsideTo(.top, view)
+        coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        coverView.constraintInsideTo(.bottom, view)
+        
+        imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
+        imageView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.08)
+        imageView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.6634)
     }
 }
 
 extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        reduceDropDowns()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -226,9 +270,7 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.count > 1 {
-            
             if indexPath.row == 0 {
-                
                 let spaceTitleCell = UITableViewCell()
                 spaceTitleCell.textLabel?.setToDefault(text: "Espaços", .left)
                 spaceTitleCell.textLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
@@ -238,13 +280,10 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
                 return spaceTitleCell
             }
             else {
-                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeClosedTableViewCell
+                cell?.setup(cells[indexPath.row - 1], IndexPath(row: indexPath.row - 1,
+                                                                section: indexPath.section - 1))
                 cell?.delegate = self
-                
-                cell?.indexPath = IndexPath(row: indexPath.row - 1,
-                                            section: indexPath.section - 1)
-                cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }
@@ -256,12 +295,59 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension HomeClosedView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        for subview in scrollView.subviews {
+            if subview.frame.origin.x != 0 {
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
+    }
+}
+
+
 extension HomeClosedView: HomeClosedTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
+        guard let spaceId = cells[indexPath.row].id else { return }
         
-        let detailsClosedView = DetailsClosedView(cells[indexPath.row])
-        detailsClosedView.modalPresentationStyle = .fullScreen
-        present(detailsClosedView, animated: false)
+        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
+            guard let space = space else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            let detailsClosedView = DetailsClosedView(space, spaceId: spaceId)
+            detailsClosedView.modalPresentationStyle = .fullScreen
+            self.present(detailsClosedView, animated: false)
+        }
+    }
+}
+
+extension HomeClosedView: HomeClosedViewModelProtocol {
+    
+    func setSpaces(_ spaces: [Space]) {
+        self.cells = spaces
+        self.tableView.reloadData()
+    }
+    
+    func setCoverView(_ alpha: CGFloat) {
+        self.coverView.alpha = alpha
+        self.imageView.alpha = alpha
+    }
+    
+    func reduceDropDowns() {
+        self.customBarWithFilter.leftButton.isSelected = false
+        leftDropDown.frame.size = .zero
+        rightDropDown.frame.size = .zero
+    }
+    
+    func setupLeftDropDown(_ buttons: [UIButton]) {
+        leftDropDown.turnIntoAList(buttons)
+    }
+    
+    func setupRightDropDown(_ buttons: [UIButton]){
+        rightDropDown.turnIntoAList(buttons)
     }
 }

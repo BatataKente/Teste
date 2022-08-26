@@ -10,6 +10,26 @@ import UIKit
 
 class WorkPassBookingView: UIViewController {
     
+    var arrayFirstLabel = ["Cartão de Crédito","Foursys","Bravve"]
+    var arraySecoundLabel = ["Conta pessoal","Workpass","Workpass"]
+    var arrayStackView = ["","666","666"]
+    private let space: SpaceDetail?
+    
+    private let spaceId: Int
+    
+    init(_ space: SpaceDetail? = nil, spaceId: Int) {
+        
+        self.space = space
+        
+        self.spaceId = spaceId
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: progressBarButtons
     private lazy var  buttons: [UIButton] = {
         
@@ -26,6 +46,8 @@ class WorkPassBookingView: UIViewController {
         tableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         tableView.register(WorkPassCell.self, forCellReuseIdentifier: WorkPassCell.reuseId)
         tableView.separatorStyle = .none
+        tableView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.rowHeight = 68
         tableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         return tableView
     }()
@@ -46,25 +68,6 @@ class WorkPassBookingView: UIViewController {
         ButtonsBravve.userLoginGray.rawValue
     ])
     
-    //MARK: Labels
-    private let siteNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Nome do espaço"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let partnerNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Nome do local parceiro"
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     private let addressLabel: UILabel = {
         
         let label = UILabel()
@@ -127,8 +130,7 @@ class WorkPassBookingView: UIViewController {
         tableView.dataSource = self
         tabBar.selectedItem = tabBar.items?[0]
         
-        view.createReservationCustomBar (progressBarButtons: buttons) {_ in
-            
+        view.createReservationCustomBarAPI(spaceName: space?.space_name, localName: space?.local_name, imageURL: space?.pictures?[0].url, progressBarButtons: buttons) { _ in
             self.dismiss(animated: true)
         }
         
@@ -136,7 +138,12 @@ class WorkPassBookingView: UIViewController {
     }
     //MARK: Funcs
     @objc func nextStageButtonTapped(){
-        let reserveViewController = SingleBookingView()
+        
+        guard let space = space else {
+            return
+        }
+
+        let reserveViewController = SingleBookingView(space, spaceId: spaceId)
         reserveViewController.modalPresentationStyle = .fullScreen
         present(reserveViewController, animated: true)
     }
@@ -179,41 +186,42 @@ class WorkPassBookingView: UIViewController {
 //MARK: Extension
 extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
     
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        arrayFirstLabel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkPassCell", for: indexPath) as? WorkPassCell else { return UITableViewCell() }
+        cell.delegate = self
         
-        switch indexPath.row {
-            
-            
-        case 0 :
-            
-            cell.firstLabel.text = "Cartão de credito"
-            cell.secondLabel.text = "Conta pessoal"
-            
-            cell.creditsStackView.isHidden = true
-            cell.circleButton.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
-            
-        case 1 :
-            
-            cell.firstLabel.text = "Foursys"
-            cell.secondLabel.text = "Workpass"
-            
-            cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
-            
-        default :
-            
-            cell.firstLabel.text = "Bravve"
-            cell.secondLabel.text = "Workpass"
-            
-            cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
-            
+        cell.firstLabel.text = arrayFirstLabel[indexPath.row]
+        cell.secondLabel.text = arraySecoundLabel[indexPath.row]
+        if arrayStackView[indexPath.row] != ""{
+        cell.creditsStackView.isLayoutMarginsRelativeArrangement = true
+        cell.pinkCreditsLabel.text = arrayStackView[indexPath.row]
+        cell.creditsLabel.text = "créditos"
         }
         
+
         return cell
     }
+}
+extension WorkPassBookingView:WorkPassCellProtocol{
+    func setButtonTapped(sender:UIButton) {
+        let tableView = self.tableView
+        for cell in tableView.visibleCells{
+         if  let cell = cell as? WorkPassCell{
+             if cell.circleButton != sender {
+                 cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
+             }
+            }
+        }
+        sender.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
+        
+    }
+    
+    
 }

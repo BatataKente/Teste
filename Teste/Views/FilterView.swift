@@ -8,10 +8,33 @@
 import Foundation
 import UIKit
 
-final class FilterView: UIViewController {
+final class FilterScreen: UIViewController {
+    
+    init(_ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil), _ seletedItemsArray: [String] = []) {
+        
+        self.spaceParameters = spaceParameters
+        self.selectedItemsArray = seletedItemsArray
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    var spaceParameters: SpaceListParameters
+    var selectedItemsArray: [String]
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
     
     let sessionManager = SessionManager()
     
+    var sortedTypesArray: [SpaceType] = []
+    var sortedClassificationsArray: [SpaceClassification] = []
+    var sortedCategoriesArray: [SpaceCategory] = []
+    var sortedFacilitiesArray: [SpaceFacility] = []
+    var sortedNoisesArray: [SpaceNoise] = []
+    var sortedContractsArray: [SpaceContract] = []
+   
     var typesArray: [String] = []
     var classificationsArray: [String] = []
     var categoriesArray: [String] = []
@@ -24,7 +47,21 @@ final class FilterView: UIViewController {
     var categoriesButtons = [UIButton]()
     var facilitiesButtons = [UIButton]()
     var noisesButtons = [UIButton]()
-    var contractButtons = [UIButton]()
+    var contractsButtons = [UIButton]()
+    
+    var selectedTypesArray: [String] = []
+    var selectedClassificationsArray: [String] = []
+    var selectedCategoriesArray: [String] = []
+    var selectedFacilitiesArray: [String] = []
+    var selectedNoisesArray: [String] = []
+    var selectedContractsArray: [String] = []
+    
+    var spaceTypeId: Int?
+    var spaceClassificationId: Int?
+    var spaceCategoryId: Int?
+    var spaceFacilitiesId: [Int]?
+    var spaceNoiseId: Int?
+    var spaceContractId: Int?
     
     //MARK: - var and let
     let scrollView: UIScrollView = {
@@ -49,7 +86,6 @@ final class FilterView: UIViewController {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.xmarkBlue.rawValue), for: .normal)
         view.addTarget(self, action: #selector(exitTap), for: .touchUpInside)
-        //        view.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         return view
     }()
     
@@ -59,7 +95,7 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Filtrar"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -68,7 +104,7 @@ final class FilterView: UIViewController {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 38, height: 14))
         let yourAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 14),
-            .foregroundColor: UIColor(named: ColorsBravve.blue.rawValue) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.blue_cyan.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         let attributeString = NSMutableAttributedString(
@@ -88,7 +124,7 @@ final class FilterView: UIViewController {
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.layer.cornerRadius = 8
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         return view
     }()
     
@@ -98,16 +134,15 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Capacidade"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
-        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
     //MARK: numberLabel
     private lazy var numberLabel: UILabel = {
         let label = UILabel()
-        label.text = "16+"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -164,7 +199,7 @@ final class FilterView: UIViewController {
         for i in 0...6 {
             
             let line = UIImageView()
-            line.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
+            line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
             lines.append(line)
         }
         
@@ -176,7 +211,7 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Tipo de Espaço"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -184,7 +219,6 @@ final class FilterView: UIViewController {
     private lazy var roomsStackspaceType: UIStackView = {
         let view = UIStackView()
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
@@ -196,14 +230,13 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Classificação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
     //MARK: stackClassification
     private lazy var roomsStackClassification: UIStackView = {
         let view = UIStackView()
-        view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
@@ -216,14 +249,13 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Categoria"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
     //MARK: - stackClassification
     private lazy var roomsStackCategory: UIStackView = {
         let view = UIStackView()
-        view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
@@ -235,14 +267,13 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Facilities"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
     //MARK: - stackFacilities
     private lazy var roomsStackFacilities: UIStackView = {
         let view = UIStackView()
-        view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
@@ -254,7 +285,7 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Conforto Auditivo"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -262,7 +293,6 @@ final class FilterView: UIViewController {
     private lazy var stackNoises1: UIStackView = {
         let view = UIStackView()
         view.spacing = 4
-        view.backgroundColor = .white
         view.axis = .horizontal
         view.distribution = .fillProportionally
         return view
@@ -271,7 +301,6 @@ final class FilterView: UIViewController {
     //MARK: roomsStackNoise
     private lazy var roomsStackNoise: UIStackView = {
         let view = UIStackView(arrangedSubviews: [stackNoises1])
-        view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
@@ -283,24 +312,61 @@ final class FilterView: UIViewController {
         let label = UILabel()
         label.text = "Tipo de Contratação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
     //MARK: roomsImageContract
     private lazy var roomsStackContract: UIStackView = {
         let view = UIStackView()
-        view.backgroundColor = .white
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
         return view
     }()
     
+    //MARK: - createStackView
+    private func createStackView(_ views: [UIView]) -> UIStackView {
+        
+        let stackView = UIStackView(arrangedSubviews: views)
+        
+            stackView.spacing = 4
+        stackView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
+            stackView.axis = .horizontal
+            stackView.distribution = .fillProportionally
+        
+        return stackView
+    }
+    
+    //MARK: - setupStackView
+    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
+        
+        var stackViews = [UIStackView]()
+        
+        var from = 0
+        
+        if buttons.count%2 != 0 {
+            
+            stackViews.append(self.createStackView([buttons[from]]))
+            
+            from += 1
+        }
+        
+        for i in stride(from: from,
+                        to: buttons.count - 1,
+                        by: 2) {
+            
+            stackViews.append(self.createStackView([buttons[i],
+                                                    buttons[i+1]]))
+        }
+        
+        return stackViews
+    }
+    
     //MARK: - loadView
     override func loadView() {
         super.loadView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.heightAnchor.constraint(equalToConstant: 1500).isActive = true
         setupView()
         setupConstrains()
@@ -343,6 +409,7 @@ final class FilterView: UIViewController {
         filterButton.setToBottomButtonDefaultAbove("Filtrar",
                                                    backgroundColor: .buttonPink,
                                                    above: tabBar)
+        filterButton.addTarget(self, action: #selector(self.filterButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - ACTIONS AND METHODS
@@ -359,42 +426,88 @@ final class FilterView: UIViewController {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black}
+                selectedTypesArray = []
+                selectedItemsArray = []
         }
         for button in classificationButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black}
+                selectedClassificationsArray = []
+                selectedItemsArray = []
         }
         for button in categoriesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black}
+                selectedCategoriesArray = []
+                selectedItemsArray = []
         }
         for button in facilitiesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black}
+                selectedFacilitiesArray = []
+                selectedItemsArray = []
         }
         for button in noisesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black}
+                selectedNoisesArray = []
+                selectedItemsArray = []
         }
-        for button in contractButtons {
+        for button in contractsButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .black}
+                selectedContractsArray = []
+                selectedItemsArray = []
         }
-        selectedItemsArray = []
+        
+        numberLabel.text = nil
     }
     
     @objc private func filterButtonTapped(){
-        self.dismiss(animated: true)
+        
+        if selectedTypesArray.count > 0 {
+            selectedItemsArray.append(selectedTypesArray[0])
+        }
+        if selectedClassificationsArray.count > 0 {
+            selectedItemsArray.append(selectedClassificationsArray[0])
+        }
+        if selectedCategoriesArray.count > 0 {
+            selectedItemsArray.append(selectedCategoriesArray[0])
+        }
+        if selectedNoisesArray.count > 0 {
+            selectedItemsArray.append(selectedNoisesArray[0])
+        }
+        if selectedContractsArray.count > 0 {
+            selectedItemsArray.append(selectedContractsArray[0])
+        }
+        selectedItemsArray.append(contentsOf: selectedFacilitiesArray)
+        print(selectedItemsArray)
+        
+        spaceParameters.space_type_id = spaceTypeId
+        spaceParameters.space_classification_id = spaceClassificationId
+        spaceParameters.space_category_id = spaceCategoryId
+        spaceParameters.space_noise_level_id = spaceNoiseId
+        spaceParameters.space_contract_Type = spaceContractId
+        spaceParameters.space_facilities_id = spaceFacilitiesId
+        
+        if numberLabel.text == "16+" {
+            numberLabel.text = "16"
+        }
+        spaceParameters.seats_qty = Int(numberLabel.text ?? "")
+
+        let HomeOpenView = HomeOpenView(true, spaceParameters, selectedItemsArray)
+        HomeOpenView.modalPresentationStyle = .fullScreen
+        present(HomeOpenView, animated: false)
     }
     
     //MARK: - capacityTap
@@ -407,174 +520,370 @@ final class FilterView: UIViewController {
                                          .downLeft)
     }
     
-    //MARK: - createStackView
-    private func createStackView(_ views: [UIView]) -> UIStackView {
-        
-        let stackView = UIStackView(arrangedSubviews: views)
-        
-            stackView.spacing = 4
-            stackView.backgroundColor = .white
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
-        
-        return stackView
-    }
-    
-    //MARK: - setupStackView
-    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
-        
-        var stackViews = [UIStackView]()
-        
-        var from = 0
-        
-        if buttons.count%2 != 0 {
-            
-            buttons[from].addTarget(self, action: #selector(self.selectItems),
-                                    for: .touchUpInside)
-            stackViews.append(self.createStackView([buttons[from]]))
-            
-            from += 1
-        }
-        
-        for i in stride(from: from,
-                        to: buttons.count - 1,
-                        by: 2) {
-                
-            buttons[i].addTarget(self, action: #selector(self.selectItems),
-                                 for: .touchUpInside)
-            buttons[i+1].addTarget(self, action: #selector(self.selectItems),
-                                   for: .touchUpInside)
-            
-            stackViews.append(self.createStackView([buttons[i],
-                                                    buttons[i+1]]))
-        }
-        
-        return stackViews
-    }
-    
     //MARK: - API Functions
     func setupTypesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (typesList: [SpaceType]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesTypes) { (statusCode, error, typesList: [SpaceType]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
+            }
+            print(typesList)
+            self.sortedTypesArray = typesList
             
             for types in typesList {
-                print(types.name ?? "")
-                (self.typesArray.append(types.name ?? ""))
+                self.typesArray.append(types.name ?? "")
             }
             
             self.typesButtons = self.createCapsuleButtons(self.typesArray,
                                                           ColorsBravve.capsuleButton)
             
+            for button in self.typesButtons {
+                button.addTarget(self, action: #selector(self.selectType), for: .touchUpInside)
+            }
             stackView.addArrangedSubviews(self.setupStackView(self.typesButtons))
         }
     }
     
     func setupClassificationsButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesClassifications) {(typesList: [SpaceClassification]?) in
+        sessionManager.getOpenDataArray(endpoint: .spacesClassifications) {(statusCode, error, typesList: [SpaceClassification]?) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
+            }
+            print(typesList)
+            self.sortedClassificationsArray = typesList
             
             for types in typesList {
-                (self.classificationsArray.append(types.name ?? ""))
+                self.classificationsArray.append(types.name ?? "")
             }
             self.classificationButtons = self.createCapsuleButtons(self.classificationsArray,
                                           ColorsBravve.capsuleButton)
             
+            for button in self.classificationButtons {
+                button.addTarget(self, action: #selector(self.selectClassification), for: .touchUpInside)
+            }
             stackView.addArrangedSubviews(self.setupStackView(self.classificationButtons))
         }
     }
     
     func setupCategoriesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesCategories) { (typesList: [SpaceCategory]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesCategories) { (statusCode, error, typesList: [SpaceCategory]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
+            }
+            print(typesList)
+            self.sortedCategoriesArray = typesList
             
             for types in typesList {
-                (self.categoriesArray.append(types.name ?? ""))
+                self.categoriesArray.append(types.name ?? "")
             }
             self.categoriesButtons = self.createCapsuleButtons(self.categoriesArray,
                                                                ColorsBravve.capsuleButton)
             
+            for button in self.categoriesButtons {
+                button.addTarget(self, action: #selector(self.selectCategories), for: .touchUpInside)
+            }
             stackView.addArrangedSubviews(self.setupStackView(self.categoriesButtons))
         }
     }
     
     func setupFacilitiesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesFacilities) { (typesList: [SpaceFacility]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesFacilities) { (statusCode, error, typesList: [SpaceFacility]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
+            }
+            print(typesList)
+            self.sortedFacilitiesArray = typesList
             
             for types in typesList {
-                (self.facilitiesArray.append(types.name ?? ""))
+                self.facilitiesArray.append(types.name ?? "")
             }
             self.facilitiesButtons = self.createCapsuleButtons(self.facilitiesArray,
                                                                ColorsBravve.capsuleButton)
             
+            for button in self.facilitiesButtons {
+                button.addTarget(self, action: #selector(self.selectFacilities), for: .touchUpInside)
+            }
             stackView.addArrangedSubviews(self.setupStackView(self.facilitiesButtons))
         }
     }
     
     func setupNoisesButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesNoises) { (typesList: [SpaceNoise]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesNoises) { (statusCode, error, typesList: [SpaceNoise]? ) in
             
-            guard let typesList = typesList else {return}
+            guard let typesList = typesList else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
+            }
+            print(typesList)
+            self.sortedNoisesArray = typesList
             
             for types in typesList {
-                (self.noisesArray.append(types.name ?? ""))
+                self.noisesArray.append(types.name ?? "")
             }
             self.noisesButtons = self.createCapsuleButtons(self.noisesArray,
                                                                ColorsBravve.capsuleButton)
             
+            for button in self.noisesButtons {
+                button.addTarget(self, action: #selector(self.selectNoise), for: .touchUpInside)
+            }
             stackView.addArrangedSubviews(self.setupStackView(self.noisesButtons))
         }
     }
     
     func setupContractsButtons(_ stackView: UIStackView) {
         
-        sessionManager.getOpenDataArray(endpoint: .spacesContracts) { (typesList: [SpaceContract]? ) in
+        sessionManager.getOpenDataArray(endpoint: .spacesContracts) { (statusCode, error, typesList: [SpaceContract]? ) in
             
-            guard let typesList = typesList else {return}
-            
-            for types in typesList {
-                (self.contractsArray.append(types.name ?? ""))
+            guard let typesList = typesList else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
             }
-            self.contractButtons = self.createCapsuleButtons(self.contractsArray,
+            print(typesList)
+            self.sortedContractsArray = typesList
+            for types in typesList {
+                self.contractsArray.append(types.name ?? "")
+            }
+            self.contractsButtons = self.createCapsuleButtons(self.contractsArray,
                                                                ColorsBravve.capsuleButton)
             
-            stackView.addArrangedSubviews(self.setupStackView(self.contractButtons))
+            for button in self.contractsButtons {
+                button.addTarget(self, action: #selector(self.selectContract), for: .touchUpInside)
+            }
+            stackView.addArrangedSubviews(self.setupStackView(self.contractsButtons))
         }
     }
     
     //MARK: selectedItemsArray
-    var selectedItemsArray: [String] = []
-    
-    @objc func selectItems(button: UIButton) {
-        if button.isSelected == true {
-            button.isSelected.toggle()
-            button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-            button.configuration?.attributedTitle?.foregroundColor = .black
-            let filteredArray = selectedItemsArray.filter {$0 != button.titleLabel?.text ?? ""}
-            selectedItemsArray = filteredArray
+
+    @objc func selectType(button: UIButton) {
+        if selectedTypesArray.count >= 1 {
+            if button.isSelected == true {
+                button.isSelected.toggle()
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .black
+                let filteredArray = selectedTypesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedTypesArray = filteredArray
+                spaceTypeId = nil
+            } else {
+                print("Escolha no máximo 1 tipo de espaço.")
+            }
         } else {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
                 button.configuration?.attributedTitle?.foregroundColor = .white
-                selectedItemsArray.append(button.titleLabel?.text ?? "")
+                selectedTypesArray.append(button.titleLabel?.text ?? "")
+                for type in sortedTypesArray {
+                    if button.titleLabel?.text == type.name {
+                        spaceTypeId = type.id
+                    }
+                }
             } else {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
-                let filteredArray = selectedItemsArray.filter {$0 != button.titleLabel?.text ?? ""}
-                selectedItemsArray = filteredArray
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                let filteredArray = selectedTypesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedTypesArray = filteredArray
+                spaceTypeId = nil
             }
         }
-        print(selectedItemsArray)
+    }
+    
+    @objc func selectClassification(button: UIButton) {
+        if selectedClassificationsArray.count >= 1 {
+            if button.isSelected == true {
+                button.isSelected.toggle()
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .black
+                let filteredArray = selectedClassificationsArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedClassificationsArray = filteredArray
+                spaceClassificationId = nil
+            } else {
+                print("Escolha no máximo 1 classificação.")
+            }
+        } else {
+            button.isSelected.toggle()
+            if button.isSelected {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                selectedClassificationsArray.append(button.titleLabel?.text ?? "")
+                for classification in sortedClassificationsArray {
+                    if button.titleLabel?.text == classification.name {
+                        spaceClassificationId = classification.id
+                    }
+                }
+            } else {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                let filteredArray = selectedClassificationsArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedClassificationsArray = filteredArray
+                spaceClassificationId = nil
+            }
+        }
+    }
+    
+    @objc func selectCategories(button: UIButton) {
+        if selectedCategoriesArray.count >= 1 {
+            if button.isSelected == true {
+                button.isSelected.toggle()
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .black
+                let filteredArray = selectedCategoriesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedCategoriesArray = filteredArray
+                spaceCategoryId = nil
+            } else {
+                print("Escolha no máximo 1 categoria.")
+            }
+        } else {
+            button.isSelected.toggle()
+            if button.isSelected {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                selectedCategoriesArray.append(button.titleLabel?.text ?? "")
+                for category in sortedCategoriesArray {
+                    if button.titleLabel?.text == category.name {
+                        spaceCategoryId = category.id
+                    }
+                }
+            } else {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                let filteredArray = selectedCategoriesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedCategoriesArray = filteredArray
+                spaceCategoryId = nil
+            }
+        }
+    }
+    
+    @objc func selectFacilities(button: UIButton) {
+        if button.isSelected == true {
+            button.isSelected.toggle()
+            button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+            button.configuration?.attributedTitle?.foregroundColor = .black
+            let filteredArray = selectedFacilitiesArray.filter {$0 != button.titleLabel?.text ?? ""}
+            selectedFacilitiesArray = filteredArray
+            for facility in sortedFacilitiesArray {
+                if button.titleLabel?.text == facility.name {
+                    let typeId = facility.id
+                    let filteredIds = spaceFacilitiesId?.filter {$0 != typeId}
+                    spaceFacilitiesId = filteredIds
+                }
+            }
+        } else {
+            button.isSelected.toggle()
+            if button.isSelected {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                selectedFacilitiesArray.append(button.titleLabel?.text ?? "")
+                for facility in sortedFacilitiesArray {
+                    if button.titleLabel?.text == facility.name {
+                        guard let facilityId = facility.id else {return}
+                        spaceFacilitiesId?.append(facilityId)
+                    }
+                }
+            } else {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                let filteredArray = selectedFacilitiesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedFacilitiesArray = filteredArray
+                for facility in sortedFacilitiesArray {
+                    if button.titleLabel?.text == facility.name {
+                        let typeId = facility.id ?? 0
+                        let filteredIds = spaceFacilitiesId?.filter {$0 != typeId}
+                        spaceFacilitiesId = filteredIds
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func selectNoise(button: UIButton) {
+        if selectedNoisesArray.count >= 1 {
+            if button.isSelected == true {
+                button.isSelected.toggle()
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .black
+                let filteredArray = selectedNoisesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedNoisesArray = filteredArray
+                spaceNoiseId = nil
+            } else {
+                print("Escolha no máximo 1 tipo de conforto auditivo.")
+            }
+        } else {
+            button.isSelected.toggle()
+            if button.isSelected {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                selectedNoisesArray.append(button.titleLabel?.text ?? "")
+                for noise in sortedNoisesArray {
+                    if button.titleLabel?.text == noise.name {
+                        spaceNoiseId = noise.id
+                    }
+                }
+            } else {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                let filteredArray = selectedNoisesArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedNoisesArray = filteredArray
+                spaceNoiseId = nil
+            }
+        }
+    }
+    
+    @objc func selectContract(button: UIButton) {
+        if selectedContractsArray.count >= 1 {
+            if button.isSelected == true {
+                button.isSelected.toggle()
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .black
+                let filteredArray = selectedContractsArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedContractsArray = filteredArray
+                spaceContractId = nil
+            } else {
+                print("Escolha no máximo 1 tipo de contrato.")
+            }
+        } else {
+            button.isSelected.toggle()
+            if button.isSelected {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                selectedContractsArray.append(button.titleLabel?.text ?? "")
+                for contract in sortedContractsArray {
+                    if button.titleLabel?.text == contract.name {
+                        spaceContractId = contract.id
+                    }
+                }
+            } else {
+                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                button.configuration?.attributedTitle?.foregroundColor = .white
+                let filteredArray = selectedContractsArray.filter {$0 != button.titleLabel?.text ?? ""}
+                selectedContractsArray = filteredArray
+                spaceContractId = nil
+            }
+        }
     }
     
     //MARK: setupConstrains
@@ -744,7 +1053,7 @@ final class FilterView: UIViewController {
     }
 }
 
-extension FilterView: UIScrollViewDelegate {
+extension FilterScreen: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         

@@ -274,7 +274,7 @@ class PersonalProfileView: UIViewController{
     }
     
     @objc func helpPage(sender: UIButton){
-        let vc = HelpView()
+        let vc = HelpViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }

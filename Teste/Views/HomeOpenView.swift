@@ -13,29 +13,28 @@ class HomeOpenView: UIViewController {
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
+    private var seletedFilterItems: [String] = []
     
     private var cells: [Space] = []
-     
+    
     private let titleLabel = UILabel()
     
     private lazy var filterStackView: UIStackView = {
         
         let margins = CGFloat(10).generateSizeForScreen
         
-        let stackView = UIStackView()
-        stackView.setToDefaultBackgroundColor()
-        stackView.isHidden = false
-        stackView.alignment = .leading
-        stackView.spacing = 5
-        stackView.distribution = .fillProportionally
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: margins,
-                                               left: margins,
-                                               bottom: margins,
-                                               right: margins)
-        
-        return stackView
+        let view = UIStackView()
+        view.setToDefaultBackgroundColor()
+        view.isHidden = false
+        view.spacing = 4
+        view.alignment = .leading
+        view.axis = .vertical
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(top: margins,
+                                         left: margins,
+                                         bottom: margins,
+                                         right: margins)
+        return view
     }()
     
     private lazy var tableView: UITableView = {
@@ -73,7 +72,7 @@ class HomeOpenView: UIViewController {
     
     private lazy var tabBar = BravveTabBar(self,
                                            itemImagesNames: [ButtonsBravve.locationPink.rawValue,
-                                                            ButtonsBravve.exitGray.rawValue
+                                                             ButtonsBravve.exitGray.rawValue
                                                             ])
     private let imageView: UIImageView = {
         
@@ -107,13 +106,13 @@ class HomeOpenView: UIViewController {
         let rightDropDown = UIScrollView()
         rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
-
+        
         return rightDropDown
     }()
     
     private lazy var homeOpenViewModel: HomeOpenViewModel = {
         
-        let homeOpenViewModel = HomeOpenViewModel(customBarWithFilter)
+        let homeOpenViewModel = HomeOpenViewModel(customBarWithFilter, spaceParameters)
         return homeOpenViewModel
     }()
     
@@ -122,8 +121,8 @@ class HomeOpenView: UIViewController {
     private lazy var customBarWithFilter: CustomBarWithFilter = {
         
         let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
-
-            let filterView = FilterView()
+            
+            let filterView = FilterScreen()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
@@ -154,32 +153,77 @@ class HomeOpenView: UIViewController {
         return customBarWithFilter
     }()
     
-    init(_ willLoad: Bool = false) {
+    init(_ willLoad: Bool = false, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil), _ selectedItemsArray: [String] = []) {
         
         imageView.isHidden = willLoad
         coverView.isHidden = willLoad
         
+        self.spaceParameters = spaceParameters
+        self.selectedItemsArray = selectedItemsArray
+        
         super.init(nibName: nil, bundle: nil)
     }
     
+    var spaceParameters: SpaceListParameters
+    var selectedItemsArray: [String]
+
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-
+        
         super.viewDidDisappear(animated)
         tabBar.selectedItem = tabBar.items?[0]
     }
     
     override func viewDidLoad() {
-
-        super.viewDidLoad()
         
+        super.viewDidLoad()
+        seletedFilterItems = selectedItemsArray
+   
         setupView()
         setupConstraints()
         setupDefaults()
+    }
+    
+    //MARK: - createStackView
+    private func createStackView(_ views: [UIView]) -> UIStackView {
+        
+        let stackView = UIStackView(arrangedSubviews: views)
+        
+            stackView.spacing = 4
+            stackView.backgroundColor = .white
+            stackView.axis = .horizontal
+            stackView.distribution = .fillProportionally
+        
+        return stackView
+    }
+    
+    //MARK: - setupStackView
+    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
+        
+        var stackViews = [UIStackView]()
+        
+        var from = 0
+        
+        if buttons.count%2 != 0 {
+            
+            stackViews.append(self.createStackView([buttons[from]]))
+            
+            from += 1
+        }
+        
+        for i in stride(from: from,
+                        to: buttons.count - 1,
+                        by: 2) {
+            
+            stackViews.append(self.createStackView([buttons[i],
+                                                    buttons[i+1]]))
+        }
+        
+        return stackViews
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -188,13 +232,18 @@ class HomeOpenView: UIViewController {
     }
     
     private func setupView() {
-        
+
         view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        filterButtons = createCapsuleButtons(seletedFilterItems)
+        if self.seletedFilterItems.isEmpty {
+            self.filterStackView.isHidden = true
+        }
+        
+        //filterButtons = createCapsuleButtons(seletedFilterItems)
+        setupSelectedButtons(filterStackView)
         
         for button in filterButtons {
             
@@ -206,8 +255,16 @@ class HomeOpenView: UIViewController {
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
         
-        filterStackView.addArrangedSubviews(filterButtons)
+        //filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    func setupSelectedButtons(_ stackView: UIStackView) {
+        
+        filterButtons = createCapsuleButtons(seletedFilterItems,
+                                      ColorsBravve.capsuleButtonSelected)
+        
+        stackView.addArrangedSubviews(self.setupStackView(self.filterButtons))
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -216,7 +273,7 @@ class HomeOpenView: UIViewController {
     }
     
     private func setupDefaults() {
-        
+
         view.setToDefaultBackgroundColor()
         
         homeOpenViewModel.delegate = self
@@ -309,18 +366,20 @@ extension HomeOpenView: UIScrollViewDelegate {
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
-        
-        guard let spaceId = cells[indexPath.row].id else { return }
-        
-        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (space: SpaceDetail?) in
-            guard let space = space else {
-                return
+            
+            guard let spaceId = cells[indexPath.row].id else { return }
+            
+            sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
+                guard let space = space else {
+                    print(statusCode as Any)
+                    print(error?.localizedDescription as Any)
+                    return
+                }
+                let detalhesAbertoView = OpenDetailsView(space)
+                detalhesAbertoView.modalPresentationStyle = .fullScreen
+                self.present(detalhesAbertoView, animated: false)
             }
-            let detalhesAbertoView = OpenDetailsView(space)
-            detalhesAbertoView.modalPresentationStyle = .fullScreen
-            self.present(detalhesAbertoView, animated: false)
         }
-    }
 }
 
 extension HomeOpenView: HomeOpenViewModelProtocol {
@@ -354,3 +413,4 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         rightDropDown.turnIntoAList(buttons)
     }
 }
+

@@ -75,7 +75,7 @@ class FAQScrollViewTesteViewController: UIViewController {
     
     private func setupDefaults() {
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes") {_ in
-            let navBar = HelpView()
+            let navBar = HelpViewController()
             navBar.modalPresentationStyle = .fullScreen
             self.present(navBar, animated: false)
         }

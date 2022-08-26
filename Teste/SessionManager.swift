@@ -18,31 +18,6 @@ class SessionManager {
     
     private let baseAPIString = "https://api.dev.bravve.app"
     
-    /// Method to get the token to access the BravveAPI
-    /// - Parameter completioHandler: Completion handler that holds the API token as parameter to manage the result of the API Call
-    public func getToken(completioHandler: @escaping (String?) -> Void) {
-        guard let url = URL(string: "https://api-design.dev.bravve.app/api/auth/token") else { return }
-        let parameters = [
-            "username": "kaue",
-            "password": 123,
-        ] as? [String: Any]
-        
-        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: AccessToken.self) { response in
-            if let data = response.value {
-                
-                self.cacheToken(result: data)
-                completioHandler(data.access_token)
-            }
-        }
-    }
-    
-    /// Method to cache the token got from the Bravve API in the UserDefaults
-    /// - Parameter result: A struct in the format of AccessToken model containing the information on the token
-    func cacheToken(result: AccessToken) {
-        UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
-    }
-    
-    
     /// Method to get data from the API with a response decoded as an array
     /// - Parameters:
     ///   - id: Optional argument to pass the id to the API endpoint
@@ -53,27 +28,22 @@ class SessionManager {
     ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - completionHandler: Completion handler to use the result of the API call
-    func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping ([T]?) -> Void) {
+    func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?, [T]?) -> Void) {
         
-        getToken { accessToken in
-            guard let accessToken = accessToken else { return }
-            
-            
-            
-            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
-            
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
-            ]
-            
-            AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
-                if let data = response.value {
-                    //                    print(response.response?.statusCode)
-                    completionHandler(data)
-                } else {
-                    //                    print(response.response?.statusCode)
-                    completionHandler(nil)
-                }
+        guard let accessToken = accessToken else { return }
+        
+        guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        
+        AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
+//            print(response.debugDescription)
+            if let data = response.value {
+                completionHandler(response.response?.statusCode, nil, data)
+            } else {
+                completionHandler(response.response?.statusCode, response.error, nil)
             }
         }
     }
@@ -89,15 +59,16 @@ class SessionManager {
     ///   - payment_type_id: Optional argument to pass a payment_type_id as a url string parameter
     ///   - endpoint: Endpoint of the API call as a EndpointEnum
     ///   - completionHandler: Completion handler to manage the API call result
-    func getOpenDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping ([T]?) -> Void) {
+    func getOpenDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?, [T]?) -> Void) {
         
         guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
         
         AF.request(url).responseDecodable(of: [T].self) { response in
+//            print(response.debugDescription)
             if let data = response.value {
-                completionHandler(data)
+                completionHandler(response.response?.statusCode, nil, data)
             } else {
-                completionHandler(nil)
+                completionHandler(response.response?.statusCode, response.error, nil)
             }
         }
     }
@@ -113,11 +84,9 @@ class SessionManager {
     ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - completionHandler: Completion handler to use the result of the API call
-    func getData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (T?) -> Void) {
+    func getData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?, T?) -> Void) {
         
-        getToken { accessToken in
             guard let accessToken = accessToken else { return }
-            
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
@@ -126,30 +95,27 @@ class SessionManager {
             ]
             
             AF.request(url, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.error as Any)
-                if let data = response.value {
-                    completionHandler(data)
-                } else {
-                    print(response.response?.statusCode as Any)
-                    completionHandler(nil)
-                }
-            }
-        }
-    }
-    
-    func getOpenData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (T?) -> Void) {
-        
-            guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
-            
-            AF.request(url).responseDecodable(of: T.self) { response in
 //                print(response.debugDescription)
                 if let data = response.value {
-                    completionHandler(data)
+                    completionHandler(response.response?.statusCode, nil, data)
                 } else {
-                    print(response.response?.statusCode as Any)
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error, nil)
                 }
             }
+    }
+    
+    func getOpenData<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?, T?) -> Void) {
+        
+        guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+        
+        AF.request(url).responseDecodable(of: T.self) { response in
+//            print(response.debugDescription)
+            if let data = response.value {
+                completionHandler(response.response?.statusCode, nil, data)
+            } else {
+                completionHandler(response.response?.statusCode, response.error, nil)
+            }
+        }
     }
     
     /// Method to post data to the API with a response decoded as an array
@@ -163,10 +129,8 @@ class SessionManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func postDataWithArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping ([T]?) -> Void) {
+    func postDataWithArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?, [T]?) -> Void) {
         
-        getToken { accessToken in
-            
             guard let accessToken = accessToken else {
                 return
             }
@@ -178,14 +142,13 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: [T].self) { response in
-                print(response.debugDescription)
+//                print(response.debugDescription)
                 if let data = response.value {
-                    completionHandler(data)
+                    completionHandler(response.response?.statusCode, nil, data)
                 } else {
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error, nil)
                 }
             }
-        }
     }
     
     /// Method to post data to an open API with an array as response
@@ -199,16 +162,16 @@ class SessionManager {
     ///   - endpoint: API URL endpoint to be passed as a EndpointEnum
     ///   - parameters: API body parameters to be passed as a Codable
     ///   - completionHandler: Completion handler to manage the API response
-    func postDataWithOpenArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping ([T]?) -> Void) {
+    func postDataWithOpenArrayResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?, [T]?) -> Void) {
         
         guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [T].self) { response in
-//            print(response.debugDescription)
+            print(" KaueTeste \(response.debugDescription)")
             if let data = response.value {
-                completionHandler(data)
+                completionHandler(response.response?.statusCode, response.error, data)
             } else {
-                completionHandler(nil)
+                completionHandler(response.response?.statusCode, response.error, nil)
             }
         }
     }
@@ -225,10 +188,8 @@ class SessionManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func postDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
-        
-        getToken { accessToken in
-            
+    func postDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?, T?) -> Void) {
+      
             guard let accessToken = accessToken else {
                 return
             }
@@ -240,12 +201,25 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             print(url)
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.response?.statusCode as Any)
+//                print(response.debugDescription)
                 if let data = response.value {
-                    completionHandler(data)
+                    completionHandler(response.response?.statusCode, nil, data)
                 } else {
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error, nil)
                 }
+            }
+    }
+    
+    func postDataWithOpenResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?, T?) -> Void) {
+        
+        guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+        print(url)
+        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: T.self) { response in
+//            print(response.debugDescription)
+            if let data = response.value {
+                completionHandler(response.response?.statusCode, response.error, data)
+            } else {
+                completionHandler(response.response?.statusCode, response.error, nil)
             }
         }
     }
@@ -262,10 +236,8 @@ class SessionManager {
     ///   - endpoint: API endpoint passed as a endpoint enum
     ///   - picture_url: Local URL of the picture to be send to the API
     ///   - completionHandler: Completio handler to manage the API response
-    func uploadPictureWithResponse<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, picture_url: URL, completionHandler: @escaping (T?) -> Void) {
-        
-        getToken { accessToken in
-            
+    func uploadPictureWithResponse<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, picture_url: URL, completionHandler: @escaping (Int?, Error?, T?) -> Void) {
+
             guard let accessToken = accessToken else {
                 return
             }
@@ -280,14 +252,13 @@ class SessionManager {
             AF.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(picture_url, withName: "picture")
             }, to: url, headers: headers).responseDecodable(of: T.self) { response in
-                print(response.response?.statusCode as Any)
+//                print(response.debugDescription)
                 if let data = response.value {
-                    completionHandler(data)
+                    completionHandler(response.response?.statusCode, nil, data)
                 } else {
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error, nil)
                 }
             }
-        }
     }
     
     /// Method to post data to the API without receiving a response
@@ -301,10 +272,8 @@ class SessionManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func postDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?) -> Void) {
-        
-        getToken { accessToken in
-            
+    func postDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?) -> Void) {
+  
             guard let accessToken = accessToken else {
                 return
             }
@@ -316,12 +285,27 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-                
+//                print(response.debugDescription)
                 if let statusCode = response.response?.statusCode {
-                    completionHandler(statusCode)
+                    completionHandler(statusCode, response.error)
                 } else {
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error)
                 }
+            }
+    }
+    
+    func postOpenDataWithoutResponse<P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?) -> Void) {
+        
+        guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
+        
+        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).response { response in
+            
+//            print(response.debugDescription)
+            
+            if let statusCode = response.response?.statusCode {
+                completionHandler(statusCode, response.error)
+            } else {
+                completionHandler(response.response?.statusCode, response.error)
             }
         }
     }
@@ -338,10 +322,8 @@ class SessionManager {
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - parameters: The parameter to be passed in the post call with a customModel type
     ///   - completionHandler: Completion handler to use the result of the API call
-    func putDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (T?) -> Void) {
-        
-        getToken { accessToken in
-            
+    func putDataWithResponse<T: Codable, P: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, parameters: P, completionHandler: @escaping (Int?, Error?, T?) -> Void) {
+
             guard let accessToken = accessToken else {
                 return
             }
@@ -353,13 +335,13 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .put, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
+                print(response.debugDescription)
                 if let data = response.value {
-                    completionHandler(data)
+                    completionHandler(response.response?.statusCode, nil, data)
                 } else {
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error, nil)
                 }
             }
-        }
     }
     
     
@@ -373,10 +355,8 @@ class SessionManager {
     ///   - payment_type_id: Optional argument to pass a payment_type_id as  a url string parameter
     ///   - endpoint: The API endpoint as a Endpoint Enum
     ///   - completionHandler: Completion Handler to manage the status code returned from the API Call.
-    func deleteData(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?) -> Void) {
-        
-        getToken { accessToken in
-            
+    func deleteData(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?) -> Void) {
+ 
             guard let accessToken = accessToken else {
                 return
             }
@@ -388,14 +368,13 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .delete, headers: headers).response { response in
-                
+                print(response.debugDescription)
                 if let statusCode = response.response?.statusCode {
-                    completionHandler(statusCode)
+                    completionHandler(statusCode, response.error)
                 } else {
-                    completionHandler(nil)
+                    completionHandler(response.response?.statusCode, response.error)
                 }
             }
-        }
     }
     
     
