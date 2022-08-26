@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HelpView: UIViewController {
+class HelpViewController: UIViewController {
     
     private lazy var tabBar: TabBarClosed = {
         
@@ -51,14 +51,14 @@ class HelpView: UIViewController {
         return FAQViewLabel
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    private lazy var questionsScrollView: UIScrollView = {
         
         let scrollView = UIScrollView(frame: view.bounds)
         scrollView.isScrollEnabled = true
         return scrollView
     }()
     
-    private lazy var uiView: UIView = {
+    private lazy var viewToScroll: UIView = {
         
         let uiView = UIView()
         uiView.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
@@ -70,9 +70,14 @@ class HelpView: UIViewController {
         
         var views = [UIView]()
         
-        for i in 0...helpViewModel.getQuestionsAmmount()-1 {
+        views.append(createQuestionView(question: helpViewModel.returnHelp(number: 0).question,
+                                        answer: helpViewModel.returnHelp(number: 0).answer,
+                                        hideAnswerLabel: false))
+        
+        for i in 1...helpViewModel.getQuestionsAmmount()-1 {
             
-            views.append(createQuestion(question: helpViewModel.returnHelp(number: i).question, answer: helpViewModel.returnHelp(number: i).answer))
+            views.append(createQuestionView(question: helpViewModel.returnHelp(number: i).question,
+                                            answer: helpViewModel.returnHelp(number: i).answer))
         }
         
         let questionsStackView = UIStackView(arrangedSubviews: views)
@@ -90,9 +95,9 @@ class HelpView: UIViewController {
         super.viewDidLoad()
         
         view.setToDefaultBackgroundColor()
-        view.addSubviews([scrollView, customBar, tabBar])
-        scrollView.addSubview(uiView)
-        uiView.addSubviews([headerView, questionsStackView])
+        view.addSubviews([questionsScrollView, customBar, tabBar])
+        questionsScrollView.addSubview(viewToScroll)
+        viewToScroll.addSubviews([headerView, questionsStackView])
         headerView.addSubviews([wayHelpImageView, vectorHelpImageView, FAQViewLabel])
         
         tabBar.selectedItem = tabBar.items?[2]
@@ -100,7 +105,7 @@ class HelpView: UIViewController {
         configConstraints()
     }
     
-    private func createQuestion(question: String, answer: NSAttributedString) -> UIView {
+    private func createQuestionView(question: String, answer: NSAttributedString, hideAnswerLabel: Bool = true) -> UIView {
         
         let questionLabel = UILabel()
         questionLabel.text = question
@@ -117,7 +122,7 @@ class HelpView: UIViewController {
         answerLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         answerLabel.textAlignment = .left
         answerLabel.numberOfLines = 0
-        answerLabel.isHidden = true
+        answerLabel.isHidden = hideAnswerLabel
         
         let answerStackView = UIStackView(arrangedSubviews: [answerLabel])
         
@@ -138,8 +143,18 @@ class HelpView: UIViewController {
                                                   constant: 0)
         
         let answerButton = UIButton()
-        answerButton.setImage(UIImage(named: ButtonsBravve.mostButton.rawValue),
-                              for: .normal)
+        
+        if hideAnswerLabel {
+            
+            answerButton.setImage(UIImage(named: ButtonsBravve.mostButton.rawValue),
+                                  for: .normal)
+            answerConstraint.constant = CGFloat(-10).generateSizeForScreen
+        }
+        else {
+            
+            answerButton.setImage(UIImage(named: ButtonsBravve.lessButton.rawValue),
+                                  for: .normal)
+        }
         
         let handler = {(action: UIAction) in
             
@@ -197,20 +212,20 @@ class HelpView: UIViewController {
     
     private func configConstraints() {
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, tabBar)
+        questionsScrollView.constraintOutsideTo(.top, customBar)
+        questionsScrollView.constraintInsideTo(.leading, view)
+        questionsScrollView.constraintInsideTo(.trailing, view)
+        questionsScrollView.constraintOutsideTo(.bottom, tabBar)
         
-        uiView.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        viewToScroll.constraintInsideTo(.top, questionsScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.leading, questionsScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.trailing, questionsScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.bottom, questionsScrollView.contentLayoutGuide)
+        viewToScroll.constraintInsideTo(.width, questionsScrollView.frameLayoutGuide)
         
-        headerView.constraintInsideTo(.top, uiView)
-        headerView.constraintInsideTo(.leading, uiView)
-        headerView.constraintInsideTo(.trailing, uiView)
+        headerView.constraintInsideTo(.top, viewToScroll)
+        headerView.constraintInsideTo(.leading, viewToScroll)
+        headerView.constraintInsideTo(.trailing, viewToScroll)
         headerView.heightAnchorInSuperview(CGFloat(222).generateSizeForScreen)
         
         vectorHelpImageView.constraintInsideTo(.leading, headerView)
@@ -228,9 +243,9 @@ class HelpView: UIViewController {
         FAQViewLabel.constraintInsideTo(.leading, headerView, CGFloat(32.99).generateSizeForScreen)
         
         questionsStackView.constraintOutsideTo(.top, headerView, CGFloat(33).generateSizeForScreen)
-        questionsStackView.constraintInsideTo(.leading, uiView, CGFloat(40).generateSizeForScreen)
-        questionsStackView.constraintInsideTo(.trailing, uiView, CGFloat(40).generateSizeForScreen)
-        questionsStackView.constraintInsideTo(.bottom, uiView, CGFloat(40).generateSizeForScreen)
+        questionsStackView.constraintInsideTo(.leading, viewToScroll, CGFloat(40).generateSizeForScreen)
+        questionsStackView.constraintInsideTo(.trailing, viewToScroll, CGFloat(40).generateSizeForScreen)
+        questionsStackView.constraintInsideTo(.bottom, viewToScroll, CGFloat(40).generateSizeForScreen)
         
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
