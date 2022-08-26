@@ -76,7 +76,7 @@ class HelpView: UIViewController {
         }
         
         let questionsStackView = UIStackView(arrangedSubviews: views)
-        questionsStackView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        questionsStackView.spacing = CGFloat(10).generateSizeForScreen
         questionsStackView.axis = .vertical
         
         return questionsStackView
@@ -104,14 +104,38 @@ class HelpView: UIViewController {
         
         let questionLabel = UILabel()
         questionLabel.text = question
+        questionLabel.lineBreakMode = .byWordWrapping
+        questionLabel.font = UIFont(name: FontsBravve.koho.rawValue, size: 17)
+        questionLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
+        questionLabel.textAlignment = .left
         questionLabel.numberOfLines = 0
         
         let answerLabel = UILabel()
         answerLabel.attributedText = answer
-        answerLabel.isHidden = true
+        answerLabel.lineBreakMode = .byWordWrapping
+        answerLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        answerLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        answerLabel.textAlignment = .left
         answerLabel.numberOfLines = 0
+        answerLabel.isHidden = true
         
         let answerStackView = UIStackView(arrangedSubviews: [answerLabel])
+        
+        let questionView = UIView()
+        questionView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
+        questionView.layer.shadowColor = UIColor.black.cgColor
+        questionView.layer.shadowOpacity = 0.5
+        questionView.layer.shadowRadius = 8
+        questionView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        questionView.layer.cornerRadius = CGFloat(15).generateSizeForScreen
+        
+        let answerConstraint = NSLayoutConstraint(item: answerStackView,
+                                                  attribute: .bottom,
+                                                  relatedBy: .equal,
+                                                  toItem: questionView,
+                                                  attribute: .bottom,
+                                                  multiplier: 1,
+                                                  constant: 0)
         
         let answerButton = UIButton()
         answerButton.setImage(UIImage(named: ButtonsBravve.mostButton.rawValue),
@@ -121,12 +145,14 @@ class HelpView: UIViewController {
             
             if answerLabel.isHidden {
                 
+                answerConstraint.constant = CGFloat(-10).generateSizeForScreen
                 answerButton.setImage(UIImage(named: ButtonsBravve.lessButton.rawValue),
                                       for: .normal)
                 answerLabel.isHidden = false
             }
             else {
                 
+                answerConstraint.constant = CGFloat(0).generateSizeForScreen
                 answerButton.setImage(UIImage(named: ButtonsBravve.mostButton.rawValue),
                                       for: .normal)
                 answerLabel.isHidden = true
@@ -135,17 +161,18 @@ class HelpView: UIViewController {
         
         answerButton.addAction(UIAction(handler: handler), for: .touchUpInside)
         
-        let questionView = UIView()
         questionView.addSubviews([questionLabel, answerStackView, answerButton])
         
         questionLabel.constraintInsideTo(.top, questionView,
                                          CGFloat(15).generateSizeForScreen)
         questionLabel.constraintInsideTo(.leading, questionView,
                                          CGFloat(25).generateSizeForScreen)
-        questionLabel.constraintOutsideTo(.trailing, answerButton,
-                                          CGFloat(35).generateSizeForScreen)
+        questionLabel.constraintInsideTo(.trailing, questionView,
+                                          CGFloat(80).generateSizeForScreen)
         
         answerButton.constraintInsideTo(.centerY, questionLabel)
+        answerButton.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        answerButton.constraintOutsideTo(.width, answerButton)
         answerButton.constraintInsideTo(.trailing, questionView,
                                         CGFloat(25).generateSizeForScreen)
         
@@ -153,8 +180,8 @@ class HelpView: UIViewController {
                                         CGFloat(10).generateSizeForScreen)
         answerStackView.constraintInsideTo(.leading, questionLabel)
         answerStackView.constraintInsideTo(.trailing, answerButton)
-        answerStackView.constraintInsideTo(.bottom, questionView,
-                                       CGFloat(25).generateSizeForScreen)
+        
+        questionView.addConstraint(answerConstraint)
         
         return questionView
     }
@@ -210,6 +237,3 @@ class HelpView: UIViewController {
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
     }
 }
-
-
-
