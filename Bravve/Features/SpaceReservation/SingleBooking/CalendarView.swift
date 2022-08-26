@@ -146,13 +146,13 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
         }
         //end
             
-        presentMonthIndex=currentMonthIndex
-        presentYear=currentYear
+        presentMonthIndex = currentMonthIndex
+        presentYear = currentYear
         
         setupViews()
         
-        myCollectionView.delegate=self
-        myCollectionView.dataSource=self
+        myCollectionView.delegate = self
+        myCollectionView.dataSource = self
         myCollectionView.register(dateCVCell.self, forCellWithReuseIdentifier: "Cell")
     }
     
@@ -210,6 +210,28 @@ class CalendarView: UIView, CalendarMonthViewDelegate {
 
 extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as? dateCVCell
+        
+        if cell?.backgroundColor == .clear {
+            
+            cell?.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+            cell?.label.textColor = .white
+            delegate?.chosedDays(cell?.label.text ?? "",
+                                 "\(currentMonthIndex)",
+                                 "\(currentYear)")
+        }
+        else {
+            
+            cell?.backgroundColor = .clear
+            cell?.label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+            delegate?.unchoseDays(cell?.label.text ?? "",
+                                  "\(currentMonthIndex)",
+                                  "\(currentYear)")
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         let numDays = numOfDaysInMonth[currentMonthIndex-1]
@@ -219,7 +241,7 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
-       let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
         
        cell.backgroundColor = UIColor.clear
        if indexPath.item <= firstWeekDayOfMonth - 3 {
@@ -238,30 +260,10 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
                 
                 cell.isUserInteractionEnabled=true
                 // trocar para cor do bravve
-                cell.label.textColor = .blue
+                cell.label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
             }
         }
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let cell = collectionView.cellForItem(at: indexPath) as? dateCVCell
-        
-        if cell?.backgroundColor == .clear {
-            
-            cell?.backgroundColor = Colors.darkRed
-            delegate?.chosedDays(cell?.label.text ?? "",
-                                 "\(currentMonthIndex)",
-                                 "\(currentYear)")
-        }
-        else {
-            
-            cell?.backgroundColor = .clear
-            delegate?.unchoseDays(cell?.label.text ?? "",
-                                  "\(currentMonthIndex)",
-                                  "\(currentYear)")
-        }
     }
 }
 
@@ -296,7 +298,7 @@ class dateCVCell: UICollectionViewCell {
         label.font=UIFont.systemFont(ofSize: 16)
         label.textColor=Colors.darkGray
         label.clipsToBounds = true
-        label.translatesAutoresizingMaskIntoConstraints=false
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -317,10 +319,10 @@ class dateCVCell: UICollectionViewCell {
     func setupViews() {
         
         addSubview(label)
-        label.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        label.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        label.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
+        label.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        label.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
 
