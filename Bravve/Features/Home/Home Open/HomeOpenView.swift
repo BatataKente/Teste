@@ -241,8 +241,7 @@ class HomeOpenView: UIViewController {
         if self.seletedFilterItems.isEmpty {
             self.filterStackView.isHidden = true
         }
-        
-        //filterButtons = createCapsuleButtons(seletedFilterItems)
+
         setupSelectedButtons(filterStackView)
         
         for button in filterButtons {

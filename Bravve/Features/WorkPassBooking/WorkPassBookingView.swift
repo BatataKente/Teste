@@ -15,9 +15,13 @@ class WorkPassBookingView: UIViewController {
     var arrayStackView = ["","666","666"]
     private let space: SpaceDetail?
     
-    init(_ space: SpaceDetail? = nil) {
+    private let spaceId: Int
+    
+    init(_ space: SpaceDetail? = nil, spaceId: Int) {
         
         self.space = space
+        
+        self.spaceId = spaceId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -134,7 +138,12 @@ class WorkPassBookingView: UIViewController {
     }
     //MARK: Funcs
     @objc func nextStageButtonTapped(){
-        let reserveViewController = SingleBookingView()
+        
+        guard let space = space else {
+            return
+        }
+
+        let reserveViewController = SingleBookingView(space, spaceId: spaceId)
         reserveViewController.modalPresentationStyle = .fullScreen
         present(reserveViewController, animated: true)
     }

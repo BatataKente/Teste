@@ -93,7 +93,7 @@ class CalendarMonthView: UIView {
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
-        btn.addTarget(CalendarMonthView.self,
+        btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
     }()
@@ -104,7 +104,7 @@ class CalendarMonthView: UIView {
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
-        btn.addTarget(CalendarMonthView.self,
+        btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         btn.setTitleColor(UIColor.lightGray, for: .disabled)
         return btn

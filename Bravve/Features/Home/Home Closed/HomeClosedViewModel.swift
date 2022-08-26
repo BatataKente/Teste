@@ -9,14 +9,17 @@ import UIKit
 
 class HomeClosedViewModel {
     
-    init(_ customBarWithFilter: CustomBarWithFilter) {
+    init(_ customBarWithFilter: CustomBarWithFilter, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)) {
         
         self.customBarWithFilter = customBarWithFilter
+        self.spaceParameters = spaceParameters
     }
     
     var delegate: HomeClosedViewModelProtocol?
     
     private let sessionManager = SessionManager()
+    
+    var spaceParameters: SpaceListParameters
     
     private let customBarWithFilter: CustomBarWithFilter
     
@@ -57,7 +60,24 @@ class HomeClosedViewModel {
                                                                      size: CGFloat(15).generateSizeForScreen)
                     self.delegate?.reduceDropDowns()
                     
-                    parameters = SpaceListParameters(space_state_id: state.id, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)
+                    parameters.space_state_id = state.id
+                    
+                    self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
+                        
+                        guard let spaces = spaces else {
+                            print(statusCode as Any)
+                            print(error?.localizedDescription as Any)
+                            return
+                        }
+                        
+                        self.delegate?.setSpaces(spaces)
+                        
+                        UIView.animate(withDuration: 0.6,
+                                       delay: 0.3) {
+
+                            self.delegate?.setCoverView(0)
+                        }
+                    }
                     
                     self.customBarWithFilter.leftButton.isEnabled = false
                     self.customBarWithFilter.rightButton.isEnabled = false
@@ -91,6 +111,25 @@ class HomeClosedViewModel {
                                 self.customBarWithFilter.cityChosedLabel.text = cityButton.currentTitle
                                 self.customBarWithFilter.cityChosedLabel.isHidden = false
                                 self.delegate?.reduceDropDowns()
+                                
+                                parameters.space_city_id = city.id
+                                
+                                self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
+                                    
+                                    guard let spaces = spaces else {
+                                        print(statusCode as Any)
+                                        print(error?.localizedDescription as Any)
+                                        return
+                                    }
+                                    
+                                    self.delegate?.setSpaces(spaces)
+                                    
+                                    UIView.animate(withDuration: 0.6,
+                                                   delay: 0.3) {
+
+                                        self.delegate?.setCoverView(0)
+                                    }
+                                }
                             }
                             
                             cityButton.addAction(UIAction(handler: cityHandler), for: .touchUpInside)
