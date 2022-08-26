@@ -10,11 +10,13 @@ import UIKit
 
 class PasswordRecoveryEmailView: UIViewController {
     
+    let passwordRecoveryEmailViewModel = PasswordRecoveryEmailViewModel()
+    
     override var prefersStatusBarHidden: Bool {
-
-            return true
-
-        }
+        
+        return true
+        
+    }
     
     private let backgroundImage = UIImageView()
     
@@ -41,10 +43,11 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
         textField.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
+        textField.addTarget(self, action: #selector(changeText), for: .allEditingEvents)
         textField.isHidden = true
         return textField
     }()
-
+    
     private let labelEmail_: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
@@ -52,7 +55,7 @@ class PasswordRecoveryEmailView: UIViewController {
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         return label
     }()
-            
+    
     private lazy var stackViewEmail: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [labelEmail_, textFieldEmail])
         stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
@@ -66,7 +69,7 @@ class PasswordRecoveryEmailView: UIViewController {
         stackView.distribution = .equalCentering
         return stackView
     }()
-                                
+    
     private let customShaddow: UIView = {
         let customShaddow = UIView()
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -74,7 +77,15 @@ class PasswordRecoveryEmailView: UIViewController {
         customShaddow.isHidden = true
         return customShaddow
     }()
-
+    
+    private let registerFailLabel: UILabel = {
+            let registerFailLabel = UILabel()
+        registerFailLabel.text = "Formato de e-mail inválido"
+            registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,size: CGFloat(11).generateSizeForScreen)
+            registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            return registerFailLabel
+        }()
+    
     
     private let buttonContinue = UIButton()
     
@@ -82,17 +93,19 @@ class PasswordRecoveryEmailView: UIViewController {
         super.viewDidLoad()
         
         view.setToDefaultBackgroundColor()
-
-        view.addSubviews([backgroundImage, label, customShaddow, stackViewEmail, buttonContinue])
+        
+        view.addSubviews([backgroundImage, label, customShaddow, stackViewEmail, buttonContinue, registerFailLabel])
         
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
             self.dismiss(animated: true)
         }
         
+        registerFailLabel.isHidden = true
+        
         defaults()
         addConstraints()
         addTargets()
-
+        
     }
     
     private func defaults() {
@@ -113,6 +126,9 @@ class PasswordRecoveryEmailView: UIViewController {
         stackViewEmail.constraintInsideTo(.trailing, label)
         stackViewEmail.heightAnchorInSuperview( CGFloat(65).generateSizeForScreen)
         
+        registerFailLabel.constraintOutsideTo(.top, stackViewEmail,CGFloat(5).generateSizeForScreen)
+        registerFailLabel.constraintInsideTo(.leading, stackViewEmail,CGFloat(15).generateSizeForScreen)
+        
         customShaddow.constraintInsideTo(.top, stackViewEmail)
         customShaddow.constraintInsideTo(.leading, stackViewEmail)
         customShaddow.constraintInsideTo(.trailing, stackViewEmail)
@@ -122,24 +138,24 @@ class PasswordRecoveryEmailView: UIViewController {
     }
     
     private func addTargets() {
-                
+        
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         stackViewEmail.addGestureRecognizer(stackViewTap)
     }
     
     @objc func stackViewTapped() {
-
+        
         labelEmail_.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(11).generateSizeForScreen)
-
+        
         customShaddow.isHidden = false
-
+        
         textFieldEmail.isHidden = false
         
         textFieldEmail.becomeFirstResponder()
         
         textFieldEmail.addTarget(self, action: #selector(changeText), for: .editingChanged)
     }
-
+    
     
     @objc func actionButtonContinue() {
         let vc = PasswordRecoveryPassword()
@@ -150,25 +166,31 @@ class PasswordRecoveryEmailView: UIViewController {
     func freezeButton_() {
         
         buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-        
         buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
     }
 
-
+    
+    
+    //MARK: changeText
     @objc func changeText(_ sender: UITextField) {
-           
-           if sender.text != "" {
-
-               buttonContinue.addTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-           }
-           else {
-               
-               buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-               buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
-           }
-       }
-
-    
-    
+        
+        if validateEmail(sender.text ?? "") {
+            
+            passwordRecoveryEmailViewModel.refreshScreen()
+            labelEmail_.textColor = UIColor.gray
+            registerFailLabel.isHidden = true
+            customShaddow.backgroundColor = UIColor.gray
+            buttonContinue.addTarget(nil,action: #selector(actionButtonContinue),for: .touchUpInside)
+            buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        }
+        else {
+            
+            passwordRecoveryEmailViewModel.makeFailScreen()
+            labelEmail_.textColor = UIColor.red
+            registerFailLabel.isHidden = false
+            customShaddow.backgroundColor = UIColor.red
+            buttonContinue.removeTarget(nil,action: #selector(actionButtonContinue),for: .touchUpInside)
+            buttonContinue.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
+        }
+    }
 }
