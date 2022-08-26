@@ -25,108 +25,110 @@ class BookingDetailsView: UIViewController{
     
     lazy var lineView1:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView2:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView3:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView4:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView5:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var titleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.numberOfLines = 1
-        lb.text = "BOXOFFICE"
-        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
-        lb.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.text = "BOXOFFICE"
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textAlignment = .center
+        return label
     }()
     lazy var descriptLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Numa esquina\ncharmosa, um hotel"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakMode = .byWordWrapping
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.31
+        label.attributedText = NSMutableAttributedString(string: "Numa esquina charmosa, um hotel", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        label.textAlignment = .left
+        return label
     }()
     lazy var reserveImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: ImagesBravve.imageReservs_3.rawValue)
-
+        image.contentMode = .scaleAspectFill
         return image
     }()
     lazy var reserveImage2: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: ImagesBravve.imageReservs_4.rawValue)
-
+        image.contentMode = .scaleAspectFill
         return image
     }()
     lazy var infoLocalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Home by Kamy"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Home by Kamy"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        label.textAlignment = .left
+        return label
     }()
     lazy var nameLocalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "UM Coffe Co."
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "UM Coffe Co."
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     lazy var detailLocalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Detalhes da sua reserva"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Detalhes da sua reserva"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        return label
     }()
     lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.calendarGray.rawValue)
+        image.image = UIImage(named: IconsBravve.calendar.rawValue)
 
         return image
     }()
@@ -135,8 +137,8 @@ class BookingDetailsView: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "09/04/22"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        lb.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -145,8 +147,8 @@ class BookingDetailsView: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Check-in"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        lb.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -155,8 +157,8 @@ class BookingDetailsView: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Check-Out"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        lb.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -165,8 +167,8 @@ class BookingDetailsView: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Diária"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        lb.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -175,8 +177,8 @@ class BookingDetailsView: UIViewController{
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "09:00"
         lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        lb.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -186,7 +188,7 @@ class BookingDetailsView: UIViewController{
         lb.text = "20:00"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -197,7 +199,7 @@ class BookingDetailsView: UIViewController{
         lb.text = "Forma de pagamento"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -205,7 +207,7 @@ class BookingDetailsView: UIViewController{
     lazy var imagePay: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.walletBlue.rawValue)
+        image.image = UIImage(named: IconsBravve.receipt.rawValue)
 
         return image
     }()
@@ -237,7 +239,7 @@ class BookingDetailsView: UIViewController{
     lazy var buttonArrowIconImage1: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue), for: .normal)
 
         return button
     }()
@@ -245,7 +247,7 @@ class BookingDetailsView: UIViewController{
     lazy var buttonArrowIconImage2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue), for: .normal)
 
         return button
     }()

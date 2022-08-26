@@ -19,7 +19,7 @@ class CancelReservationCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         return view
     }()
     
@@ -37,7 +37,7 @@ class CancelReservationCell: UITableViewCell {
     let topTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Numa esquina"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -46,7 +46,7 @@ class CancelReservationCell: UITableViewCell {
     let bottomTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "charmosa, um hotel"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -63,7 +63,7 @@ class CancelReservationCell: UITableViewCell {
     let spaceNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hotel Saint"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -83,7 +83,7 @@ class CancelReservationCell: UITableViewCell {
     let spaceSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "UM Coffee Co."
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -92,7 +92,7 @@ class CancelReservationCell: UITableViewCell {
     let locationLabel: UILabel = {
         let label = UILabel()
         label.text = "São Paulo / Jardim Paulistano"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -101,7 +101,7 @@ class CancelReservationCell: UITableViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "21/01/2022 - 22/01/2022"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -110,7 +110,7 @@ class CancelReservationCell: UITableViewCell {
     let hourLabel: UILabel = {
         let label = UILabel()
         label.text = "9h às 18h"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -119,7 +119,7 @@ class CancelReservationCell: UITableViewCell {
     let spaceTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "Espaço privativo"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
