@@ -25,6 +25,7 @@ class HelpViewController: UIViewController {
         return tabBar
     }()
     
+    //MARK: - HearderView
     private lazy var headerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +33,6 @@ class HelpViewController: UIViewController {
         view.addSubviews([wayHelpImageView, vectorHelpImageView, FAQViewLabel])
         return view
     }()
-    
     
     private lazy var wayHelpImageView: UIImageView = {
         let view = UIImageView()
@@ -62,6 +62,7 @@ class HelpViewController: UIViewController {
         return label
     }()
     
+    //MARK: - ScrollView
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: view.bounds)
         scroll.isScrollEnabled = true
@@ -76,6 +77,7 @@ class HelpViewController: UIViewController {
         return view
     }()
     
+    //MARK: - Answers Buttons
     lazy var showAnswer1Button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -264,13 +266,17 @@ class HelpViewController: UIViewController {
         return button
     }()
     
+    //MARK: - Answers Labels
     lazy var answer1Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 0).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 0).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = false
@@ -280,11 +286,20 @@ class HelpViewController: UIViewController {
     
     lazy var answer2Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let stringTwo = "suporte@bravve.com.br"
+        let range = (self.viewModel.returnHelp(number: 1).answer  as NSString).range(of: stringTwo)
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 1).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapEmailSupport(gesture:)))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: ColorsBravve.cyan_black.rawValue) ?? .link, range: range)
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 1).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -294,11 +309,14 @@ class HelpViewController: UIViewController {
     
     lazy var answer3Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 2).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 2).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -308,11 +326,14 @@ class HelpViewController: UIViewController {
     
     lazy var answer4Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 3).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 3).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -322,11 +343,14 @@ class HelpViewController: UIViewController {
     
     lazy var answer5Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 4).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 4).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -336,11 +360,20 @@ class HelpViewController: UIViewController {
     
     lazy var answer6Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let stringRange = "Clique aqui"
+        let range = (self.viewModel.returnHelp(number: 5).answer as NSString).range(of: stringRange)
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 5).answer, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapHereOne(gesture:)))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: ColorsBravve.cyan_black.rawValue) ?? .link, range: range)
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 5).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -350,11 +383,14 @@ class HelpViewController: UIViewController {
     
     lazy var answer7Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 6).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 6).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -364,11 +400,14 @@ class HelpViewController: UIViewController {
     
     lazy var answer8Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 7).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 7).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -378,11 +417,20 @@ class HelpViewController: UIViewController {
     
     lazy var answer9Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let stringRange = "clicar aqui"
+        let range = (self.viewModel.returnHelp(number: 8).answer as NSString).range(of: stringRange)
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 8).answer, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapHereTwo(gesture:)))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: ColorsBravve.cyan_black.rawValue) ?? .link, range: range)
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 8).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -392,11 +440,14 @@ class HelpViewController: UIViewController {
     
     lazy var answer10Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 9).answer , attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 9).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -406,11 +457,20 @@ class HelpViewController: UIViewController {
     
     lazy var answer11Label: UILabel = {
         let label = UILabel()
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.39
+        let stringRange = "contato@bravve.com.br"
+        let range = (self.viewModel.returnHelp(number: 10).answer as NSString).range(of: stringRange)
+        let attributedText = NSMutableAttributedString(string: self.viewModel.returnHelp(number: 10).answer, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapEmailContact(gesture:)))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(named: ColorsBravve.cyan_black.rawValue)  ?? .link, range: range)
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
-        label.attributedText = self.viewModel.returnHelp(number: 10).answer
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.attributedText = attributedText
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.isHidden = true
@@ -418,6 +478,7 @@ class HelpViewController: UIViewController {
         return label
     }()
     
+    //MARK: - UIViews and UIStackViews
     lazy var question1View: UIView = {
         
         lazy var question1Label: UILabel = {
@@ -452,9 +513,9 @@ class HelpViewController: UIViewController {
         ])
         return view
     }()
-        
-    lazy var questionAnswer1StackView: UIStackView = {
     
+    lazy var questionAnswer1StackView: UIStackView = {
+        
         let stack = UIStackView(arrangedSubviews: [question1View, answer1Label])
         stack.isLayoutMarginsRelativeArrangement = true
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -510,8 +571,8 @@ class HelpViewController: UIViewController {
         ])
         return view
     }()
-        
-        lazy var questionAnswer2StackView: UIStackView = {
+    
+    lazy var questionAnswer2StackView: UIStackView = {
         
         let stack = UIStackView(arrangedSubviews: [question2View, answer2Label])
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -568,8 +629,8 @@ class HelpViewController: UIViewController {
         ])
         return view
     }()
-        
-        lazy var questionAnswer3StackView: UIStackView = {
+    
+    lazy var questionAnswer3StackView: UIStackView = {
         
         let stack = UIStackView(arrangedSubviews: [question3View, answer3Label])
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -800,8 +861,8 @@ class HelpViewController: UIViewController {
         ])
         return view
     }()
-        
-        lazy var questionAnswer7StackView: UIStackView = {
+    
+    lazy var questionAnswer7StackView: UIStackView = {
         
         let stack = UIStackView(arrangedSubviews: [question7View, answer7Label])
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -1032,8 +1093,8 @@ class HelpViewController: UIViewController {
         ])
         return view
     }()
-
-lazy var questionAnswer11StackView: UIStackView = {
+    
+    lazy var questionAnswer11StackView: UIStackView = {
         
         let stack = UIStackView(arrangedSubviews: [question11View, answer11Label])
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -1057,9 +1118,10 @@ lazy var questionAnswer11StackView: UIStackView = {
     }()
     
     
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
         view.addSubviews([scrollView, customBar, tabBar])
         tabBar.selectedItem = tabBar.items?[2]
         self.arrayAnswer = [answer1Label, answer2Label, answer3Label, answer4Label, answer5Label, answer6Label, answer7Label, answer8Label, answer9Label, answer10Label, answer11Label]
@@ -1069,14 +1131,58 @@ lazy var questionAnswer11StackView: UIStackView = {
         configConstraints()
     }
     
-    private func setupDefaults() {
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes") {_ in
-            let navBar = PersonalProfileView()
-            navBar.modalPresentationStyle = .fullScreen
-            self.present(navBar, animated: false)
+    //MARK: - func setupDefaults
+    private func setupDefaults(){
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes"){
+            _ in
+            self.dismiss(animated: true)
         }
     }
     
+    //MARK: - Tap Functions
+    
+    @objc func tapEmailSupport(gesture: UITapGestureRecognizer) {
+        let tapRange = (self.viewModel.returnHelp(number: 1).answer as NSString).range(of: "suporte@bravve.com.br")
+        
+        if gesture.didTapAttributedTextInLabel(label: answer2Label, inRange: tapRange) {
+            guard let url = URL(string: "mailto:suporte@bravve.com.br") else {
+                    print("fail")
+                    return
+                }
+                UIApplication.shared.canOpenURL(url)
+        }
+    }
+    
+    @objc func tapHereOne(gesture: UITapGestureRecognizer) {
+        let tapRange = (self.viewModel.returnHelp(number: 5).answer as NSString).range(of: "Clique aqui")
+        
+        if gesture.didTapAttributedTextInLabel(label: answer6Label, inRange: tapRange) {
+            print("Oi")
+        }
+    }
+    
+    @objc func tapHereTwo(gesture: UITapGestureRecognizer) {
+        let tapRange = (self.viewModel.returnHelp(number: 8).answer as NSString).range(of: "clicar aqui")
+        
+        if gesture.didTapAttributedTextInLabel(label: answer9Label, inRange: tapRange) {
+                let url = URL(string: "https://www.bravve.com.br/contact")!
+                UIApplication.shared.open(url)
+            }
+    }
+    
+    @objc func tapEmailContact(gesture: UITapGestureRecognizer) {
+        let tapRange = (self.viewModel.returnHelp(number: 10).answer as NSString).range(of: "contato@bravve.com.br")
+        
+        if gesture.didTapAttributedTextInLabel(label: answer11Label, inRange: tapRange) {
+            guard let url = URL(string: "mailto:suporte@bravve.com.br") else {
+                    print("fail")
+                    return
+                }
+                UIApplication.shared.canOpenURL(url)
+        }
+    }
+    
+    //MARK: - func showAnswer
     @objc func showAnswer(sender: UIButton){
         self.arrayBool = [true, true, true, true, true, true, true, true, true, true, true]
         self.arrayImageButton = [ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue]
@@ -1186,6 +1292,7 @@ lazy var questionAnswer11StackView: UIStackView = {
         }
     }
     
+    //MARK: - func configConstraints
     private func configConstraints() {
         
         scrollView.constraintOutsideTo(.top, customBar)
@@ -1299,11 +1406,43 @@ lazy var questionAnswer11StackView: UIStackView = {
             self.questionAnswer11StackView.bottomAnchor.constraint(equalTo: uiView.bottomAnchor, constant: -10),
         ])
         
-                        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-                        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-                        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
     }
 }
+//MARK: - Extension UITapGestureRecognizer
 
-
-
+extension UITapGestureRecognizer {
+    
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        textContainer.size = labelSize
+        
+        // Find the tapped character location and compare it to the specified range
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        
+        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+        
+        
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        return NSLocationInRange(indexOfCharacter, targetRange)
+    }
+}
