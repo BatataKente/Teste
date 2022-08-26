@@ -158,7 +158,9 @@ class LoginView: UIViewController {
         view.font = UIFont(name: FontsBravve.medium.rawValue,
                            size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
-        view.keyboardType = .namePhonePad
+        view.keyboardType = .emailAddress
+        view.autocapitalizationType = .none
+        view.autocorrectionType = .no
         view.delegate = self
         
         return view
@@ -216,7 +218,6 @@ class LoginView: UIViewController {
         let view = UITextField()
         view.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         view.isHidden = true
-        view.keyboardType = .namePhonePad
         view.delegate = self
         view.isSecureTextEntry = true
         
