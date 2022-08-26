@@ -18,7 +18,7 @@ extension UIViewController {
 /// - Returns: A button for each title
     func createCapsuleButtons(_ buttonTitles: [String],
                                    _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
-                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
+                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.capsuleButtonsBorder.rawValue)) -> [UIButton] {
         
         var buttons: [UIButton] = []
         

@@ -146,56 +146,46 @@ extension PasswordView: UITextFieldDelegate {
             
             if upperCaseTest.evaluate(with: passwordTextField.text!){
                 upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                upperCaseLabel.textColor = .label
             }
             else {
                 
                 upperCaseEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                upperCaseLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             }
             
             if lowerCaseTest.evaluate(with: passwordTextField.text!){
                 
                 lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                lowerCaseLabel.textColor = .label
             }
             else {
                 
                 lowerCaseEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                lowerCaseLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             }
             
             if numericRegExTest.evaluate(with: passwordTextField.text!){
                 
                 numberEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                numberLabel.textColor = .label
             }
             else {
                 
                 numberEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                numberLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             }
             
             if specialChracterTest.evaluate(with: passwordTextField.text!){
                 
                 specialCharEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                specialCharLabel.textColor = .label
             }
             else {
                 
                 specialCharEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                specialCharLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             }
             
             if (passwordTextField.text?.count ?? 0) < 6 {
                 
                 numberCharEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                numberCharLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             }
             else {
                 
                 numberCharEllipse.image = UIImage(named: IconsBravve.ellipseGreen.rawValue)
-                numberCharLabel.textColor = .label
             }
             
         }
@@ -236,7 +226,6 @@ extension PasswordView: UITextFieldDelegate {
             else {
                 
                 samePasswordEllipse.image = UIImage(named: IconsBravve.ellipseRed.rawValue)
-                samePasswordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
                 continueButton.backgroundColor = .gray
             }
         }

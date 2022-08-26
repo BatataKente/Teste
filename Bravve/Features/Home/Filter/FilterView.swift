@@ -95,7 +95,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Filtrar"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -104,7 +104,7 @@ final class FilterScreen: UIViewController {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 38, height: 14))
         let yourAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 14),
-            .foregroundColor: UIColor(named: ColorsBravve.blue.rawValue) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.blue_cyan.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         let attributeString = NSMutableAttributedString(
@@ -124,7 +124,7 @@ final class FilterScreen: UIViewController {
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.layer.cornerRadius = 8
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         return view
     }()
     
@@ -134,7 +134,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Capacidade"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
-        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -143,7 +143,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "16+"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
-        label.textColor = UIColor(named: ColorsBravve.profileLabel.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -200,7 +200,7 @@ final class FilterScreen: UIViewController {
         for i in 0...6 {
             
             let line = UIImageView()
-            line.backgroundColor = UIColor(named: ColorsBravve.grayAlertLabel.rawValue)
+            line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
             lines.append(line)
         }
         
@@ -212,7 +212,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Tipo de Espaço"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -231,7 +231,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Classificação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -250,7 +250,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Categoria"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -268,7 +268,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Facilities"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -286,7 +286,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Conforto Auditivo"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -313,7 +313,7 @@ final class FilterScreen: UIViewController {
         let label = UILabel()
         label.text = "Tipo de Contratação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        label.textColor = UIColor.black
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
@@ -332,7 +332,7 @@ final class FilterScreen: UIViewController {
         let stackView = UIStackView(arrangedSubviews: views)
         
             stackView.spacing = 4
-            stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
             stackView.axis = .horizontal
             stackView.distribution = .fillProportionally
         
@@ -367,7 +367,7 @@ final class FilterScreen: UIViewController {
     //MARK: - loadView
     override func loadView() {
         super.loadView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.heightAnchor.constraint(equalToConstant: 1500).isActive = true
         setupView()
         setupConstrains()

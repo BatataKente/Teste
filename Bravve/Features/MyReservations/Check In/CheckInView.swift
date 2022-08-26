@@ -5,10 +5,13 @@
 //  Created by user218260 on 7/15/22.
 //
 
-import Foundation
+import AVFoundation
 import UIKit
 
-class CheckInQrCodeViewController: UIViewController{
+class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
+    
+    var captureSession: AVCaptureSession!
+    var previewLayer: AVCaptureVideoPreviewLayer!
     
     private let customAlertFail: CustomAlert = CustomAlert()
     private let customAlertSuccess: CustomAlert = CustomAlert()
@@ -31,24 +34,45 @@ class CheckInQrCodeViewController: UIViewController{
     private lazy var qrCodeLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Aponte sua câmera para o QR Code no espaço"
+        view.lineBreakMode = .byWordWrapping
         view.textColor = .white
+        view.numberOfLines = 5
         view.textAlignment = .center
-        view.numberOfLines = 0
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.31
+        view.attributedText = NSMutableAttributedString(string: " Aponte sua câmera para o QR Code no espaço ", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         view.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(19).generateSizeForScreen)
+        let layoutVerticalMargins = CGFloat(50).generateSizeForScreen
+        let layoutHorizontalMargins = CGFloat(50).generateSizeForScreen
+        view.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins, left: layoutHorizontalMargins, bottom: layoutVerticalMargins, right: layoutHorizontalMargins)
         return view
     }()
     
     private lazy var qrCodeReaderView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = CGFloat(5).generateSizeForScreen
         view.layer.cornerRadius = CGFloat(29).generateSizeForScreen
         view.layer.borderColor = UIColor(named: ColorsBravve.buttonPink.rawValue)?.cgColor
         view.backgroundColor = .lightGray
         view.isUserInteractionEnabled = true
         return view
     }()
+    
+    private lazy var qrCodeBackView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = CGFloat(29).generateSizeForScreen
+        view.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        return view
+    }()
+    
+    private lazy var qrCodeBackViewTop: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
     
     private lazy var cantScanButton: UIButton = {
         let view = UIButton()
@@ -72,7 +96,7 @@ class CheckInQrCodeViewController: UIViewController{
     
     private func setupViews(){
         view.backgroundColor = .black
-        view.addSubviews([backButton, cameraImageView, qrCodeReaderView, cantScanButton, qrCodeLabel])
+        view.addSubviews([backButton, cameraImageView, qrCodeBackView , qrCodeBackViewTop, qrCodeReaderView,cantScanButton, qrCodeLabel])
     }
     
     private func addViewTarget(){
@@ -97,18 +121,31 @@ class CheckInQrCodeViewController: UIViewController{
             
             self.cameraImageView.topAnchor.constraint(equalTo: self.backButton.bottomAnchor, constant: CGFloat(40).generateSizeForScreen),
             self.cameraImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.cameraImageView.heightAnchor.constraint(equalToConstant: CGFloat(32).generateSizeForScreen),
+            self.cameraImageView.widthAnchor.constraint(equalToConstant: CGFloat(38).generateSizeForScreen),
             
             self.qrCodeLabel.topAnchor.constraint(equalTo: self.cameraImageView.bottomAnchor, constant: CGFloat(30).generateSizeForScreen),
-            self.qrCodeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: CGFloat(49).generateSizeForScreen),
-            self.qrCodeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: CGFloat(-49).generateSizeForScreen),
-            
+            self.qrCodeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(49).generateSizeForScreen),
+            self.qrCodeLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-49).generateSizeForScreen),
+            self.qrCodeLabel.widthAnchor.constraint(equalToConstant: CGFloat(277).generateSizeForScreen),
+            self.qrCodeLabel.heightAnchor.constraint(equalToConstant: CGFloat(58).generateSizeForScreen),
             
             self.qrCodeReaderView.topAnchor.constraint(equalTo: self.qrCodeLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
             self.qrCodeReaderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.qrCodeReaderView.heightAnchor.constraint(equalToConstant: CGFloat(285).generateSizeForScreen),
-            self.qrCodeReaderView.widthAnchor.constraint(equalToConstant: CGFloat(285).generateSizeForScreen),
+            self.qrCodeReaderView.heightAnchor.constraint(equalToConstant: CGFloat(283).generateSizeForScreen),
+            self.qrCodeReaderView.widthAnchor.constraint(equalToConstant: CGFloat(283).generateSizeForScreen),
             
-            self.cantScanButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-84).generateSizeForScreen),
+            self.qrCodeBackView.topAnchor.constraint(equalTo: self.qrCodeLabel.bottomAnchor, constant: CGFloat(51).generateSizeForScreen),
+            self.qrCodeBackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.qrCodeBackView.heightAnchor.constraint(equalToConstant: CGFloat(291).generateSizeForScreen),
+            self.qrCodeBackView.widthAnchor.constraint(equalToConstant: CGFloat(291).generateSizeForScreen),
+            
+            self.qrCodeBackViewTop.topAnchor.constraint(equalTo: self.qrCodeLabel.bottomAnchor, constant: CGFloat(51).generateSizeForScreen),
+            self.qrCodeBackViewTop.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.qrCodeBackViewTop.heightAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen),
+            self.qrCodeBackViewTop.widthAnchor.constraint(equalToConstant: CGFloat(180).generateSizeForScreen),
+            
+            self.cantScanButton.topAnchor.constraint(equalTo: qrCodeBackView.bottomAnchor, constant: CGFloat(147).generateSizeForScreen),
             self.cantScanButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             
         ])

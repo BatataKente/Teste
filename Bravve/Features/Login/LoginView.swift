@@ -35,7 +35,7 @@ class LoginView: UIViewController {
     
     func setupView() {
         
-        view.addSubviews([wayImage, titleLabel, subTitleLabel, loginStackView, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
+        view.addSubviews([wayImage, titleLabel, subTitleLabel, backViewLogin, loginStackView, backViewPassword, passwordStackView, eyeButton, passwordRecoveryButton, enterButton, newLabel, registerButton, backButton, logoImage])
         
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
         
@@ -55,7 +55,7 @@ class LoginView: UIViewController {
         }
     }
     
-    func showTextFields() {
+    func loginIsTapped() {
         
         let layoutVerticalMargins = CGFloat(10).generateSizeForScreen
         let layoutHorizontalMargins = CGFloat(15).generateSizeForScreen
@@ -68,6 +68,13 @@ class LoginView: UIViewController {
                                                    bottom: layoutVerticalMargins,
                                                    right: layoutHorizontalMargins)
         
+    }
+    
+    func passwordIsTapped(){
+        
+        let layoutVerticalMargins = CGFloat(10).generateSizeForScreen
+        let layoutHorizontalMargins = CGFloat(15).generateSizeForScreen
+        
         passwordLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                     size: CGFloat(10).generateSizeForScreen)
         passwordTextField.isHidden = false
@@ -79,12 +86,15 @@ class LoginView: UIViewController {
     
     @objc func cellStackViewTapped() {
         
-        showTextFields()
+        loginIsTapped()
+        backViewLogin.isHidden = false
+
     }
     
     @objc func passwordStackViewTapped() {
         
-        showTextFields()
+        passwordIsTapped()
+        backViewPassword.isHidden = false
     }
 
     private lazy var backgroundView: UIView = {
@@ -151,6 +161,24 @@ class LoginView: UIViewController {
         view.keyboardType = .namePhonePad
         view.delegate = self
         
+        return view
+    }()
+    
+    let backViewLogin: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.pink_cyan.rawValue)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        return view
+    }()
+    
+    let backViewPassword: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: ColorsBravve.pink_cyan.rawValue)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8
+        view.isHidden = true
         return view
     }()
         
@@ -311,8 +339,10 @@ class LoginView: UIViewController {
            
         }
         else{
-            loginLabel.textColor = .systemRed
-            passwordLabel.textColor = .systemRed
+            loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            passwordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            backViewLogin.backgroundColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            backViewPassword.backgroundColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeOpen.rawValue){
                 eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
             }else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
@@ -387,9 +417,19 @@ class LoginView: UIViewController {
         subTitleLabel.constraintInsideTo(.leading, titleLabel)
         subTitleLabel.constraintInsideTo(.trailing, titleLabel)
         
+        backViewLogin.constraintOutsideTo(.top, subTitleLabel, CGFloat(21).generateSizeForScreen)
+        backViewLogin.constraintInsideTo(.leading, passwordStackView)
+        backViewLogin.constraintInsideTo(.trailing, passwordStackView)
+        backViewLogin.constraintInsideTo(.height, loginStackView)
+        
         loginStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
         loginStackView.constraintInsideTo(.leading, passwordStackView)
         loginStackView.constraintInsideTo(.trailing, passwordStackView)
+        
+        backViewPassword.constraintOutsideTo(.top, loginStackView, CGFloat(16).generateSizeForScreen)
+        backViewPassword.constraintInsideTo(.leading, subTitleLabel)
+        backViewPassword.constraintInsideTo(.trailing, subTitleLabel)
+        backViewPassword.constraintInsideTo(.height, passwordStackView)
         
         passwordStackView.constraintOutsideTo(.top, loginStackView, CGFloat(15).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.leading, subTitleLabel)
