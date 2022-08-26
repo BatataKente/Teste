@@ -33,6 +33,7 @@ public enum IconsBravve: String {
     case emailBlue = "emailBlue"
     case emailGray = "emailGray"
     case exitProfile = "exitProfile"
+    case flag = "flag"
     case hobbiesBlue = "hobbiesBlue"
     case hobbiesGray = "hobbiesGray"
     case info_circle = "info-circle"
