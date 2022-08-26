@@ -1,5 +1,5 @@
 //
-//  HomeAbertaViewModel.swift
+//  HomeFechadaViewModel.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -7,21 +7,16 @@
 
 import UIKit
 
-class HomeOpenViewModel {
+class HomeClosedViewModel {
     
-    init(_ customBarWithFilter: CustomBarWithFilter, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)) {
+    init(_ customBarWithFilter: CustomBarWithFilter) {
         
         self.customBarWithFilter = customBarWithFilter
-        self.spaceParameters = spaceParameters
     }
     
-    var delegate: HomeOpenViewModelProtocol?
+    var delegate: HomeClosedViewModelProtocol?
     
     private let sessionManager = SessionManager()
-    
-    var spaceParameters: SpaceListParameters
-    
-    private let homeOpenView = HomeOpenView()
     
     private let customBarWithFilter: CustomBarWithFilter
     
@@ -33,7 +28,7 @@ class HomeOpenViewModel {
         let smallFont = UIFont(name: FontsBravve.light.rawValue,
                                size: CGFloat(11).generateSizeForScreen)
         
-        var parameters = spaceParameters
+        var parameters = SpaceListParameters()
         
         sessionManager.getOpenDataArray (endpoint: .utilsStates){ (statusCode, error, states: [States]?) in
 
@@ -62,24 +57,7 @@ class HomeOpenViewModel {
                                                                      size: CGFloat(15).generateSizeForScreen)
                     self.delegate?.reduceDropDowns()
                     
-                    parameters.space_state_id = state.id
-                    
-                    self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
-                        
-                        guard let spaces = spaces else {
-                            print(statusCode as Any)
-                            print(error?.localizedDescription as Any)
-                            return
-                        }
-                        
-                        self.delegate?.setSpaces(spaces)
-                        
-                        UIView.animate(withDuration: 0.6,
-                                       delay: 0.3) {
-
-                            self.delegate?.setCoverView(0)
-                        }
-                    }
+                    parameters = SpaceListParameters(space_state_id: state.id, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)
                     
                     self.customBarWithFilter.leftButton.isEnabled = false
                     self.customBarWithFilter.rightButton.isEnabled = false
@@ -88,7 +66,7 @@ class HomeOpenViewModel {
                         
                         guard let cities = cities else {
                             print(statusCode as Any)
-                            print(error as Any)
+                            print(error?.localizedDescription as Any)
                             return
                             
                         }
@@ -113,25 +91,6 @@ class HomeOpenViewModel {
                                 self.customBarWithFilter.cityChosedLabel.text = cityButton.currentTitle
                                 self.customBarWithFilter.cityChosedLabel.isHidden = false
                                 self.delegate?.reduceDropDowns()
-                                
-                                parameters.space_city_id = city.id
-                                
-                                self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
-                                    
-                                    guard let spaces = spaces else {
-                                        print(statusCode as Any)
-                                        print(error?.localizedDescription as Any)
-                                        return
-                                    }
-                                    
-                                    self.delegate?.setSpaces(spaces)
-                                    
-                                    UIView.animate(withDuration: 0.6,
-                                                   delay: 0.3) {
-
-                                        self.delegate?.setCoverView(0)
-                                    }
-                                }
                             }
                             
                             cityButton.addAction(UIAction(handler: cityHandler), for: .touchUpInside)
@@ -151,12 +110,13 @@ class HomeOpenViewModel {
             self.delegate?.setupLeftDropDown(stateButtons)
         }
         
-        sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: spaceParameters) {(statusCode, error, spaces: [Space]?) in
+        sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
             
             guard let spaces = spaces else {
                 print(statusCode as Any)
                 print(error?.localizedDescription as Any)
                 return
+                
             }
             
             self.delegate?.setSpaces(spaces)
@@ -170,7 +130,7 @@ class HomeOpenViewModel {
     }
 }
 
-protocol HomeOpenViewModelProtocol {
+protocol HomeClosedViewModelProtocol {
     
     func setSpaces(_ spaces: [Space])
     

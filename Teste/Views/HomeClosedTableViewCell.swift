@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeClosedTableViewCell: UITableViewCell {
     
@@ -15,9 +16,11 @@ class HomeClosedTableViewCell: UITableViewCell {
     
     private lazy var viewElements: (view: UIView,
                                     titleLabel: UILabel,
+                                    titleLabelView: UIView,
                                     descriptionLabel: UILabel,
                                     photoView: UIImageView,
                                     photoLabel: UILabel,
+                                    photoLabelView: UIView,
                                     nameLabel: UILabel,
                                     subNameLabel: UILabel,
                                     priceLabel: UILabel,
@@ -59,10 +62,12 @@ class HomeClosedTableViewCell: UITableViewCell {
         photoLabel.textColor = .white
         photoLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
+        photoLabel.text = "WORKPASS"
         
         let photoLabelView = UIView()
         photoLabelView.addSubview(photoLabel)
         photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        photoLabelView.isHidden = true
         
         let nameLabel = UILabel()
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
@@ -143,9 +148,11 @@ class HomeClosedTableViewCell: UITableViewCell {
         
         return (view: view,
                 titleLabel: titleLabel,
+                titleLabelView: titleLabelView,
                 descriptionLabel: descriptionLabel,
                 photoView: photoView,
                 photoLabel: photoLabel,
+                photoLabelView: photoLabelView,
                 nameLabel: nameLabel,
                 subNameLabel: subNameLabel,
                 priceLabel: priceLabel,
@@ -153,7 +160,6 @@ class HomeClosedTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
@@ -161,7 +167,6 @@ class HomeClosedTableViewCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -179,16 +184,44 @@ class HomeClosedTableViewCell: UITableViewCell {
         viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide, CGFloat(10).generateSizeForScreen)
     }
     
-    func setup(_ cellInfo: ReserveData) {
+    func setup(_ space: Space,_ indexPath: IndexPath) {
         
-        viewElements.titleLabel.text = cellInfo.title
-        viewElements.descriptionLabel.text = cellInfo.description
-        viewElements.photoView.image = cellInfo.image
-        viewElements.photoLabel.text = cellInfo.photoTitle
-        viewElements.nameLabel.text = cellInfo.name
-        viewElements.subNameLabel.text = cellInfo.subName
-        viewElements.priceLabel.text = cellInfo.price
-        viewElements.detailsLabel.text = cellInfo.details
+        viewElements.descriptionLabel.text = space.slogan
+        
+        guard let pictures = space.space_pictures else { return }
+        
+        var picture = ""
+        
+        if pictures.count != 0 {
+            guard let pictureSelected = pictures[0].url else { return }
+            picture = pictureSelected
+        }
+        
+        viewElements.photoView.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+        viewElements.nameLabel.text = space.local_name
+        viewElements.subNameLabel.text = space.description
+        viewElements.priceLabel.text = "\(space.hourly_credits ?? "") crédito/hora"
+        viewElements.detailsLabel.text = "\(space.partner_site_address?.address?.city_name ?? "")/\(space.partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(space.seats_qty ?? 0) pessoas\n\(space.space_type?.name ?? "")"
+        
+        guard let allowWorkpass = space.allow_workpass else {
+            return
+        }
+        
+        guard let space_category = space.space_category?.name?.uppercased() else {
+            return
+        }
+        
+        viewElements.titleLabel.text = space_category
+        viewElements.titleLabelView.backgroundColor = getTitleLabelBackgroundColor(space_category)
+        
+        
+        if allowWorkpass {
+            viewElements.photoLabelView.isHidden = false
+        } else {
+            viewElements.photoLabelView.isHidden = true
+        }
+        
+        self.indexPath = indexPath
     }
     
     @objc func showDetails() {

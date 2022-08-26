@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 //Extension related to verification of size of screen of a ViewController
 extension UIView {
@@ -62,7 +63,7 @@ extension UIView {
             
             let attribute = [NSAttributedString.Key.font: UIFont(name: FontsBravve.regular.rawValue,
                                                                  size: CGFloat(15).generateSizeForScreen),
-                            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue.rawValue)]
+                            NSAttributedString.Key.foregroundColor: UIColor(named: ColorsBravve.blue_cyan.rawValue)]
             
             let attributedTitle = NSAttributedString(string: "Pular",
                                                      attributes: attribute as [NSAttributedString.Key : Any])
@@ -175,6 +176,72 @@ extension UIView {
                                       CGFloat(30).generateSizeForScreen)
     }
     
+    func createReservationCustomBarAPI(spaceName: String?, localName: String?, imageURL: String?, progressBarButtons: [UIButton]? = nil,
+                                    _ backHandler: @escaping UIActionHandler) {
+        
+        let backButton = UIButton()
+        backButton.configuration = .plain()
+        backButton.configuration?.image = UIImage(named: ButtonsBravve.backWhite.rawValue)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = spaceName
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                 size: CGFloat(16).generateSizeForScreen)
+        
+        let subTitleLabel = UILabel()
+        subTitleLabel.text = localName
+        subTitleLabel.textColor = .white
+        subTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                    size: CGFloat(16).generateSizeForScreen)
+        
+        backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
+        
+        let imageView = UIImageView()
+        guard let imageURL = imageURL else {
+            return
+        }
+
+        imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: ImagesBravve.imageReservsNav.rawValue))
+        
+        self.addSubviews([imageView, backButton, titleLabel, subTitleLabel])
+        
+        if let progressBarButtons = progressBarButtons {
+            
+            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+            
+            self.addSubview(progressBarStackView)
+            
+            progressBarStackView.constraintOutsideTo(.top, imageView,
+                                                     CGFloat(20).generateSizeForScreen)
+            progressBarStackView.constraintInsideTo(.centerX,
+                                                    self.safeAreaLayoutGuide)
+        }
+        
+        imageView.constraintInsideTo(.top, self)
+        imageView.constraintInsideTo(.leading, self)
+        imageView.constraintInsideTo(.trailing, self)
+        
+        imageView.heightAnchorInSuperview(CGFloat(150).generateSizeForScreen)
+        
+        backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
+                                                  multiplier: 0.6)
+        backButton.imageView?.constraintInsideTo(.centerY, backButton)
+        
+        titleLabel.constraintInsideTo(.centerX, imageView)
+        titleLabel.constraintOutsideTo(.bottom, subTitleLabel, CGFloat(5).generateSizeForScreen)
+        
+        subTitleLabel.constraintInsideTo(.centerX, imageView)
+        subTitleLabel.constraintInsideTo(.bottom, imageView, CGFloat(20).generateSizeForScreen)
+        
+        backButton.constraintInsideTo(.centerY, imageView)
+        backButton.constraintInsideTo(.height, imageView)
+        backButton.constraintOutsideTo(.width, backButton)
+        backButton.constraintInsideTo(.leading, self.safeAreaLayoutGuide,
+                                      CGFloat(30).generateSizeForScreen)
+    }
+    
 /// This function transforms a view into a bar with a back button and title
 /// - Parameters:
 ///   - viewTitle: The title in the center of the custom bar
@@ -206,8 +273,7 @@ extension UIView {
         titleLabel.constraintInsideTo(.centerX, self)
         
         backButton.constraintInsideTo(.centerY, titleLabel)
-        backButton.constraintInsideTo(.leading, self, CGFloat(35).generateSizeForScreen)
-        backButton.constraintInsideTo(.height, self, multiplier: 0.5)
+        backButton.constraintInsideTo(.leading, self, CGFloat(20).generateSizeForScreen)
         backButton.constraintOutsideTo(.width, backButton)
         
         self.constraintInsideTo(.top, superview)
@@ -523,21 +589,9 @@ extension UIView {
         
         self.frame.origin = origin
         
-        let animate = {
-            
-            self.frame.size = size
-            self.alpha = 1
-        }
-        
-        let reduce = {
-            
-            self.frame.size = .zero
-            self.alpha = 0
-        }
-        
         let timing: (duration: CGFloat,
-                     delay: CGFloat) = (duration: 0.4,
-                                        delay: 0.15)
+                     delay: CGFloat) = (duration: 0.3,
+                                        delay: 0.1)
         
         if self.frame.size == .zero {
             
@@ -549,15 +603,15 @@ extension UIView {
                                    delay: timing.delay) {
 
                         self.frame.origin.x -= size.width
-                        animate()
+                        self.frame.size = size
                     }
                 
                 case .downRight:
                     
                     UIView.animate(withDuration: timing.duration,
                                    delay: timing.delay) {
-                        
-                        animate()
+
+                        self.frame.size = size
                     }
                 
                 case .upLeft:
@@ -567,7 +621,7 @@ extension UIView {
 
                         self.frame.origin.x -= size.width
                         self.frame.origin.y -= size.height
-                        animate()
+                        self.frame.size = size
                     }
                 
                 case .upRight:
@@ -576,7 +630,7 @@ extension UIView {
                                    delay: timing.delay) {
 
                         self.frame.origin.y -= size.height
-                        animate()
+                        self.frame.size = size
                     }
                 
                 default:
@@ -586,13 +640,13 @@ extension UIView {
 
                         self.frame.origin.x -= size.width/2
                         self.frame.origin.y -= size.height/2
-                        animate()
+                        self.frame.size = size
                     }
             }
         }
         else {
             
-            reduce()
+            self.frame.size = .zero
         }
     }
 }
