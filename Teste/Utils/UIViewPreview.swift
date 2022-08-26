@@ -28,11 +28,11 @@ struct UIViewPreview<View: UIView>: UIViewRepresentable {
 
     }
 
-    func updateUIView(_ uiView: View, context: Context) {
+    func updateUIView(_ viewToScroll: View, context: Context) {
 
-        uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        viewToScroll.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
-        uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        viewToScroll.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
     }
 
