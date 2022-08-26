@@ -13,7 +13,7 @@ class HomeClosedView: UIViewController {
     
     private let cellIdentifier = "Cell"
     
-    private let seletedFilterItems: [String] = ["Sala de Reunião", "Colaborativo", "a", "b", "c"]
+    private var seletedFilterItems: [String] = []
     
     private var cells: [Space] = []
     
@@ -59,6 +59,7 @@ class HomeClosedView: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [filterStackView,
                                                        tableView])
         stackView.axis = .vertical
+        stackView.isHidden = false
         stackView.alignment = .leading
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 0,
@@ -117,7 +118,7 @@ class HomeClosedView: UIViewController {
     
     private lazy var homeClosedViewModel: HomeClosedViewModel = {
         
-        let homeClosedViewModel = HomeClosedViewModel(customBarWithFilter)
+        let homeClosedViewModel = HomeClosedViewModel(customBarWithFilter, spaceParameters)
         return homeClosedViewModel
     }()
     
@@ -135,14 +136,25 @@ class HomeClosedView: UIViewController {
         return customBarWithFilter
     }()
     
-    init(_ willLoad: Bool = false) {
+    init(_ willLoad: Bool = false, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil), _ selectedItemsArray: [String] = []) {
         
         imageView.isHidden = willLoad
         coverView.isHidden = willLoad
         
+        self.spaceParameters = spaceParameters
+        self.selectedItemsArray = selectedItemsArray
+
+        
         super.init(nibName: nil, bundle: nil)
     }
     
+    var spaceParameters: SpaceListParameters
+    var selectedItemsArray: [String]
+
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override var prefersStatusBarHidden: Bool {
         
@@ -156,14 +168,11 @@ class HomeClosedView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        seletedFilterItems = selectedItemsArray
         
         setupView()
         setupConstraints()
         setupDefaults()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -176,6 +185,10 @@ class HomeClosedView: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        if self.seletedFilterItems.isEmpty {
+            self.filterStackView.isHidden = true
+        }
         
         filterButtons = createCapsuleButtons(seletedFilterItems)
         
@@ -318,7 +331,7 @@ extension HomeClosedView: HomeClosedTableViewCellProtocol {
                 print(error?.localizedDescription as Any)
                 return
             }
-            let detailsClosedView = DetailsClosedView(space)
+            let detailsClosedView = DetailsClosedView(space, spaceId: spaceId)
             detailsClosedView.modalPresentationStyle = .fullScreen
             self.present(detailsClosedView, animated: false)
         }

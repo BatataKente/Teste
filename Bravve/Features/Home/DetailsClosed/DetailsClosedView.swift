@@ -11,7 +11,8 @@ import SDWebImage
 class DetailsClosedView: UIViewController {
     
     let sessionManager = SessionManager()
-    private var space: SpaceDetail
+    private let space: SpaceDetail
+    private let spaceId: Int
     
     private let customBar = UIView()
     
@@ -446,8 +447,9 @@ class DetailsClosedView: UIViewController {
         return scrollView
     }()
     
-    init(_ space: SpaceDetail) {
+    init(_ space: SpaceDetail, spaceId: Int) {
         self.space = space
+        self.spaceId = spaceId
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -596,7 +598,7 @@ class DetailsClosedView: UIViewController {
     }
     
     @objc func reserveButtonTapped(){
-        let reserveViewController = WorkPassBookingView(self.space)
+        let reserveViewController = WorkPassBookingView(self.space, spaceId: spaceId)
         reserveViewController.modalPresentationStyle = .fullScreen
         present(reserveViewController, animated: true)
     }
