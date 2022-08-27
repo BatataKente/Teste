@@ -30,6 +30,9 @@
 		14054ACA2899E7B600BB4E3B /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */; };
 		14054ACC2899E7BD00BB4E3B /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */; };
 		140572EC28B95A2E00E2F5F2 /* HomeClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140572EB28B95A2E00E2F5F2 /* HomeClosedViewModel.swift */; };
+		140572EE28B961C200E2F5F2 /* SingleBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140572ED28B961C200E2F5F2 /* SingleBookingViewModel.swift */; };
+		140572F028B9853800E2F5F2 /* ConfirmarDadosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140572EF28B9853800E2F5F2 /* ConfirmarDadosViewModel.swift */; };
+		140572F228B985AF00E2F5F2 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140572F128B985AF00E2F5F2 /* LoginModel.swift */; };
 		140DA88728A3ECF000413161 /* BravveClosedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */; };
 		140ED61B28ADA3FF00AC5B92 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 140ED61A28ADA3FF00AC5B92 /* SDWebImage */; };
 		1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B92228A1440400C36902 /* CheckOutScreen.swift */; };
@@ -143,6 +146,9 @@
 		14054AC92899E7B600BB4E3B /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		14054ACB2899E7BD00BB4E3B /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
 		140572EB28B95A2E00E2F5F2 /* HomeClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClosedViewModel.swift; sourceTree = "<group>"; };
+		140572ED28B961C200E2F5F2 /* SingleBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBookingViewModel.swift; sourceTree = "<group>"; };
+		140572EF28B9853800E2F5F2 /* ConfirmarDadosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmarDadosViewModel.swift; sourceTree = "<group>"; };
+		140572F128B985AF00E2F5F2 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		140DA88628A3ECF000413161 /* BravveClosedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BravveClosedTabBar.swift; sourceTree = "<group>"; };
 		1410B92228A1440400C36902 /* CheckOutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOutScreen.swift; sourceTree = "<group>"; };
 		1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservations3-3ViewController.swift"; sourceTree = "<group>"; };
@@ -278,7 +284,6 @@
 		140ED61C28ADA53C00AC5B92 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				143F88CD28B4F37600F9460A /* SingleBookingView.swift */,
 				0E4F4ECF289BFAA90067592A /* TermsAndCondition.swift */,
 				1410B92228A1440400C36902 /* CheckOutScreen.swift */,
 				C636F6E728ABC76D000804D2 /* PasswordViewModel.swift */,
@@ -303,6 +308,7 @@
 				134D68122890154E00D5572B /* TextField.swift */,
 				14DD08A628B3B31E006C1D3A /* LoginViewModel.swift */,
 				14C8B70D289DC2C600ABC321 /* LoginView.swift */,
+				140572F128B985AF00E2F5F2 /* LoginModel.swift */,
 				1411D90128A4730D003AAB70 /* Reservations3-3ViewModel.swift */,
 				1411D8FF28A47303003AAB70 /* Reservations3-3ViewController.swift */,
 				134D68142890158A00D5572B /* RecuperacaoDeSenha3.swift */,
@@ -339,6 +345,9 @@
 				140572EB28B95A2E00E2F5F2 /* HomeClosedViewModel.swift */,
 				14DD08AA28B3B396006C1D3A /* HomeClosedView.swift */,
 				14DD08B028B3B487006C1D3A /* HomeClosedTableViewCell.swift */,
+				140572ED28B961C200E2F5F2 /* SingleBookingViewModel.swift */,
+				143F88CD28B4F37600F9460A /* SingleBookingView.swift */,
+				140572EF28B9853800E2F5F2 /* ConfirmarDadosViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -533,6 +542,7 @@
 				146A8BE928AAAB55007650A8 /* WeekDaysView.swift in Sources */,
 				14CBDBDE2889B80400EA8EDD /* NomeView.swift in Sources */,
 				138C85AE2892BE2800997FBC /* MinhasReservas.swift in Sources */,
+				140572F228B985AF00E2F5F2 /* LoginModel.swift in Sources */,
 				1410B92328A1440400C36902 /* CheckOutScreen.swift in Sources */,
 				CFBF086028A2810600D39DCF /* ModelReservationsV1.swift in Sources */,
 				14937D6C28A4703F004A1E7A /* HelpViewModel.swift in Sources */,
@@ -578,12 +588,14 @@
 				14C6954228944A2800BD3B79 /* UIImageViewExtension.swift in Sources */,
 				1440616828A2BD5F00F82171 /* RideUpEnum.swift in Sources */,
 				1340F097289BFF3F00F9A2A5 /* Reservas2.swift in Sources */,
+				140572F028B9853800E2F5F2 /* ConfirmarDadosViewModel.swift in Sources */,
 				14C6954A28944A3900BD3B79 /* UIViewControllerExtension.swift in Sources */,
 				1415AB76288B07100077CE08 /* HomeOpenView.swift in Sources */,
 				14BDBC1828ABDF12004C32BF /* String+Extension.swift in Sources */,
 				14CBDBC82889B72300EA8EDD /* SceneDelegate.swift in Sources */,
 				1340F095289BF2D200F9A2A5 /* RecuperacaoDeSenha3ViewModel.swift in Sources */,
 				CFBF085D28A2810600D39DCF /* ModelSubscriptionsV1.swift in Sources */,
+				140572EE28B961C200E2F5F2 /* SingleBookingViewModel.swift in Sources */,
 				147AC2EE2891AB9B00ABE48E /* OpenDetailsView.swift in Sources */,
 				14DD08AF28B3B452006C1D3A /* SessionManager.swift in Sources */,
 				14DD08B928B3B531006C1D3A /* TermsAndConditionViewController.swift in Sources */,

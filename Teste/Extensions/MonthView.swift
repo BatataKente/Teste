@@ -38,13 +38,16 @@ class CalendarMonthView: UIView {
             
             currentMonthIndex += 1
             if currentMonthIndex > 11 {
+                
                 currentMonthIndex = 0
                 currentYear += 1
             }
-        } else {
+        }
+        else {
 
             currentMonthIndex -= 1
             if currentMonthIndex < 0 {
+                
                 currentMonthIndex = 11
                 currentYear -= 1
             }
@@ -89,10 +92,10 @@ class CalendarMonthView: UIView {
     
     let btnRight: UIButton = {
         
-        let btn=UIButton()
+        let btn = UIButton()
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
@@ -100,10 +103,10 @@ class CalendarMonthView: UIView {
     
     let btnLeft: UIButton = {
         
-        let btn=UIButton()
+        let btn = UIButton()
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         btn.setTitleColor(UIColor.lightGray, for: .disabled)
