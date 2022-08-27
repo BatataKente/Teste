@@ -196,6 +196,60 @@ extension SingleBookingView: UIScrollViewDelegate {
             }
         }
     }
+    
+    @objc func showDropDown(_ sender: UIButton) {
+        
+        let myButtonCenter = schedulesStack.convert(sender.center, from: sender.superview)
+        
+        var buttons = [UIButton]()
+        
+        for time in self.availableTimes {
+            
+            let button = UIButton()
+            button.setTitle(time, for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                 for: .normal)
+            
+            let handler = {(action: UIAction) in
+                
+                if let timeStack = sender.superview as? UIStackView,
+                   let stack = timeStack.arrangedSubviews[0] as? UIStackView,
+                   let hourLabel = stack.arrangedSubviews[1] as? UILabel {
+                    
+                    self.dropDown.frame.size = .zero
+                    hourLabel.text = time
+                }
+            }
+            
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            
+            buttons.append(button)
+        }
+        
+        dropDown.turnIntoAList(buttons)
+        
+        dropDown.showLikeAWindow(size: CGSize(width: sender.superview?.frame.size.width ?? 0,
+                                                   height: dropDownHeight),
+                                      origin: CGPoint(x: sender.superview?.frame.maxX ?? 0,
+                                                      y: schedulesStack.frame.minY + myButtonCenter.y + sender.frame.height/2),
+                                      .downLeft)
+        
+        schedulesStack.bringSubviewToFront(dropDown)
+    }
+}
+
+extension SingleBookingView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
+    }
 }
 
 extension SingleBookingView: CalendarViewProtocol {
