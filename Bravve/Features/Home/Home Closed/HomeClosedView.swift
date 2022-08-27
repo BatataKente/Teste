@@ -9,15 +9,23 @@ import UIKit
 
 class HomeClosedView: UIViewController {
     
-    let sessionManager = SessionManager()
+    var spaceParameters: SpaceListParameters
     
-    private let cellIdentifier = "Cell"
+    var selectedItemsArray: [String]
+    
+    let sessionManager = SessionManager()
     
     private var seletedFilterItems: [String] = []
     
     private var cells: [Space] = []
     
+    private var filterButtons = [UIButton]()
+    
+    private let cellIdentifier = "Cell"
+    
     private let titleLabel = UILabel()
+    
+    private let customBar = UIView()
     
     private lazy var filterStackView: UIStackView = {
         
@@ -27,8 +35,8 @@ class HomeClosedView: UIViewController {
         stackView.setToDefaultBackgroundColor()
         stackView.isHidden = false
         stackView.alignment = .leading
-        stackView.spacing = 5
-        stackView.distribution = .fillProportionally
+        stackView.spacing = 4
+        stackView.axis = .vertical
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: margins,
                                                left: margins,
@@ -59,7 +67,6 @@ class HomeClosedView: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [filterStackView,
                                                        tableView])
         stackView.axis = .vertical
-        stackView.isHidden = false
         stackView.alignment = .leading
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 0,
@@ -70,12 +77,8 @@ class HomeClosedView: UIViewController {
         return stackView
     }()
     
-    private var filterButtons = [UIButton]()
+    private lazy var tabBar = TabBarClosed.init(self)
     
-    private lazy var tabBar = TabBarClosed.init(self, itemImagesNames: [ButtonsBravve.locationGray.rawValue,
-                                                                        ButtonsBravve.calendarButtonGray.rawValue,
-                                                                        ButtonsBravve.userLoginGray.rawValue
-                                                                       ])
     private let imageView: UIImageView = {
         
         let imageView = UIImageView()
@@ -96,9 +99,7 @@ class HomeClosedView: UIViewController {
     
     private lazy var leftDropDown: UIScrollView = {
         
-        let leftDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                      width: view.frame.size.width/5,
-                                                      height: view.frame.size.height/3))
+        let leftDropDown = UIScrollView()
         leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         leftDropDown.delegate = self
         
@@ -107,9 +108,7 @@ class HomeClosedView: UIViewController {
     
     private lazy var rightDropDown: UIScrollView = {
         
-        let rightDropDown = UIScrollView(frame: CGRect(x: 0, y: 0,
-                                                       width: view.frame.size.width/2,
-                                                       height: view.frame.size.height/2.5))
+        let rightDropDown = UIScrollView()
         rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
         
@@ -122,16 +121,37 @@ class HomeClosedView: UIViewController {
         return homeClosedViewModel
     }()
     
-    private let customBar = UIView()
-    
     private lazy var customBarWithFilter: CustomBarWithFilter = {
         
         let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
             
-            let filterView = FilterScreen()
+            let filterView = FilterViewClosed()
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
+        
+        let leftHandler = {(action: UIAction) in
+            
+            self.rightDropDown.frame.size = .zero
+            self.leftDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width/3,
+                                                           height: CGFloat(144).generateSizeForScreen),
+                                              origin: CGPoint(x: self.customBarWithFilter.stackView.frame.minX + self.customBarWithFilter.stackView.frame.size.width/3,
+                                                              y: self.customBarWithFilter.stackView.frame.maxY),
+                                              .downLeft)
+        }
+        
+        let rightandler = {(action: UIAction) in
+            
+            self.leftDropDown.frame.size = .zero
+            self.rightDropDown.showLikeAWindow(size: CGSize(width: self.customBarWithFilter.stackView.frame.size.width*2/3,
+                                                            height: CGFloat(144).generateSizeForScreen),
+                                               origin: CGPoint(x: self.customBarWithFilter.stackView.frame.maxX,
+                                                               y: self.customBarWithFilter.stackView.frame.maxY),
+                                               .downLeft)
+        }
+        
+        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
+        customBarWithFilter.rightButton.addAction(UIAction(handler: rightandler), for: .touchUpInside)
         
         return customBarWithFilter
     }()
@@ -143,14 +163,12 @@ class HomeClosedView: UIViewController {
         
         self.spaceParameters = spaceParameters
         self.selectedItemsArray = selectedItemsArray
-
         
         super.init(nibName: nil, bundle: nil)
     }
     
-    var spaceParameters: SpaceListParameters
-    var selectedItemsArray: [String]
-
+  
+    
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
@@ -160,6 +178,7 @@ class HomeClosedView: UIViewController {
         
         true
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
@@ -175,12 +194,48 @@ class HomeClosedView: UIViewController {
         setupDefaults()
     }
     
+    private func createStackView(_ views: [UIView]) -> UIStackView {
+        
+        let stackView = UIStackView(arrangedSubviews: views)
+        
+            stackView.spacing = 4
+            stackView.backgroundColor = .white
+            stackView.axis = .horizontal
+            stackView.distribution = .fillProportionally
+        
+        return stackView
+    }
+    
+    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
+        
+        var stackViews = [UIStackView]()
+        
+        var from = 0
+        
+        if buttons.count%2 != 0 {
+            
+            stackViews.append(self.createStackView([buttons[from]]))
+            
+            from += 1
+        }
+        
+        for i in stride(from: from,
+                        to: buttons.count - 1,
+                        by: 2) {
+            
+            stackViews.append(self.createStackView([buttons[i],
+                                                    buttons[i+1]]))
+        }
+        
+        return stackViews
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         reduceDropDowns()
     }
     
     private func setupView() {
-        
+
         view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
@@ -189,8 +244,8 @@ class HomeClosedView: UIViewController {
         if self.seletedFilterItems.isEmpty {
             self.filterStackView.isHidden = true
         }
-        
-        filterButtons = createCapsuleButtons(seletedFilterItems)
+
+        setupSelectedButtons(filterStackView)
         
         for button in filterButtons {
             
@@ -202,35 +257,16 @@ class HomeClosedView: UIViewController {
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
         
-        filterStackView.addArrangedSubviews(filterButtons)
+        //filterStackView.addArrangedSubviews(filterButtons)
         tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    func setupSelectedButtons(_ stackView: UIStackView) {
         
-        let dropDownsY = CGFloat(100).generateSizeForScreen
+        filterButtons = createCapsuleButtons(seletedFilterItems,
+                                      ColorsBravve.capsuleButtonSelected)
         
-        let leftDropDownOrigin = CGPoint(x: view.frame.size.width * 0.2,
-                                         y: dropDownsY)
-        let rightDropDownOrigin = CGPoint(x: view.frame.size.width * 0.8,
-                                          y: dropDownsY)
-        
-        let leftHandler = {(action: UIAction) in
-            
-            self.customBarWithFilter.rightButton.isSelected = false
-            self.rightDropDown.frame.size = .zero
-        }
-        
-        let rightHandler = {(action: UIAction) in
-            
-            self.customBarWithFilter.leftButton.isSelected = false
-            self.leftDropDown.frame.size = .zero
-        }
-        
-        customBarWithFilter.leftButton.addAction(UIAction(handler: leftHandler), for: .touchUpInside)
-        customBarWithFilter.leftButton.addSubWindow(leftDropDown,
-                                                    origin:   leftDropDownOrigin)
-        
-        customBarWithFilter.rightButton.addAction(UIAction(handler: rightHandler), for: .touchUpInside)
-        customBarWithFilter.rightButton.addSubWindow(rightDropDown, .downLeft,
-                                                     origin: rightDropDownOrigin)
+        stackView.addArrangedSubviews(self.setupStackView(self.filterButtons))
     }
     
     
@@ -294,9 +330,10 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
             }
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeClosedTableViewCell
+                cell?.delegate = self
+
                 cell?.setup(cells[indexPath.row - 1], IndexPath(row: indexPath.row - 1,
                                                                 section: indexPath.section - 1))
-                cell?.delegate = self
                 
                 return cell ?? UITableViewCell()
             }

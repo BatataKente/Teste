@@ -21,6 +21,8 @@ class HomeClosedViewModel {
     
     var spaceParameters: SpaceListParameters
     
+    private let homeClosedView = HomeClosedView()
+    
     private let customBarWithFilter: CustomBarWithFilter
     
     func manageCustomBar() {

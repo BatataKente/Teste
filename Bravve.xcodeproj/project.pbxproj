@@ -88,6 +88,8 @@
 		2ECC1E5E28B7952500FB221D /* HistoryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E5D28B7952500FB221D /* HistoryDetailsViewModel.swift */; };
 		2ECC1E6428B8FD1F00FB221D /* HistoryDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E6328B8FD1F00FB221D /* HistoryDetailsCollectionViewCell.swift */; };
 		2ECC1E6628B8FD3E00FB221D /* BookingDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E6528B8FD3E00FB221D /* BookingDetailsCollectionViewCell.swift */; };
+		2ECC1E6928B94B5300FB221D /* FilterViewClosed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E6828B94B5200FB221D /* FilterViewClosed.swift */; };
+		2ECC1E6B28B94B7D00FB221D /* FilterClosedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC1E6A28B94B7D00FB221D /* FilterClosedViewModel.swift */; };
 		2ED5D10328940EC4001C11DC /* WorkPassBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */; };
 		2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */; };
 		2ED5D10728940F28001C11DC /* WorkPassBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */; };
@@ -284,6 +286,8 @@
 		2ECC1E5D28B7952500FB221D /* HistoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsViewModel.swift; sourceTree = "<group>"; };
 		2ECC1E6328B8FD1F00FB221D /* HistoryDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2ECC1E6528B8FD3E00FB221D /* BookingDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		2ECC1E6828B94B5200FB221D /* FilterViewClosed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewClosed.swift; sourceTree = "<group>"; };
+		2ECC1E6A28B94B7D00FB221D /* FilterClosedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterClosedViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10228940EC4001C11DC /* WorkPassBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBooking.swift; sourceTree = "<group>"; };
 		2ED5D10428940EFA001C11DC /* WorkPassBookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingViewModel.swift; sourceTree = "<group>"; };
 		2ED5D10628940F28001C11DC /* WorkPassBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkPassBookingView.swift; sourceTree = "<group>"; };
@@ -628,6 +632,15 @@
 			path = HistoryDetails;
 			sourceTree = "<group>";
 		};
+		2ECC1E6728B94B1900FB221D /* FilterClosed */ = {
+			isa = PBXGroup;
+			children = (
+				2ECC1E6828B94B5200FB221D /* FilterViewClosed.swift */,
+				2ECC1E6A28B94B7D00FB221D /* FilterClosedViewModel.swift */,
+			);
+			path = FilterClosed;
+			sourceTree = "<group>";
+		};
 		2ED5D0F628940E00001C11DC /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,9 +686,10 @@
 		C69616902881E64F00281633 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2ECC1E6728B94B1900FB221D /* FilterClosed */,
 				2E57CDB028A585AD004214A9 /* DetailsClosed */,
-				2EB18FBE28A1ACCA008A80BF /* Filter */,
 				C69616D92881E8E100281633 /* Home Closed */,
+				2EB18FBE28A1ACCA008A80BF /* Filter */,
 				C69616C92881E85800281633 /* Details Open */,
 				C69616C82881E83A00281633 /* Home Open */,
 			);
@@ -1236,6 +1250,7 @@
 				C69617AD2881EF2C00281633 /* EditProfileModel.swift in Sources */,
 				C696169E2881E70000281633 /* LoginView.swift in Sources */,
 				C69616AC2881E76C00281633 /* PasswordRecoveryEmailViewModel.swift in Sources */,
+				2ECC1E6928B94B5300FB221D /* FilterViewClosed.swift in Sources */,
 				2EB18FC228A1ACFB008A80BF /* FilterView.swift in Sources */,
 				14076BE228930BFB003EA2F1 /* UIButton+Extension.swift in Sources */,
 				14076BE528930CC7003EA2F1 /* UILabel+Extension.swift in Sources */,
@@ -1244,6 +1259,7 @@
 				C69617842881EE3400281633 /* CheckInViewModel.swift in Sources */,
 				2EB18FC428A1AD0C008A80BF /* FilterModel.swift in Sources */,
 				2EF23F4828931B760078B6B8 /* UIView+Extension.swift in Sources */,
+				2ECC1E6B28B94B7D00FB221D /* FilterClosedViewModel.swift in Sources */,
 				C696170D2881EA4F00281633 /* PasswordModel.swift in Sources */,
 				C69616D62881E8CC00281633 /* DetailsOpenView.swift in Sources */,
 				C69616CD2881E89200281633 /* HomeOpenView.swift in Sources */,
