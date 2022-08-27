@@ -9,13 +9,11 @@
 import Foundation
 import UIKit
 
-final class ReservationsThreeViewController: UIViewController {
+final class ReservationsThreeViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: - preferredStatusBarStyle
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
-        
-        
     }
     
     
@@ -27,6 +25,73 @@ final class ReservationsThreeViewController: UIViewController {
     
     //MARK: FinishButton
     let finishButton = UIButton()
+    
+    //MARK: alertLabels
+    
+    
+    
+    //MARK: - tip1
+    let tip1: UILabel = {
+       let label = UILabel()
+        label.isHidden = true
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.text = "Formato de número inválido"
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+   
+    //MARK: - tip2
+    let tip2: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.text = ""
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - tip3
+    let tip3: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.text = ""
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - tip4
+    let tip4: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.text = ""
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - tip5
+    let tip5: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.text = ""
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    //MARK: - tip6
+    let tip6: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.text = ""
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
 
        
@@ -196,10 +261,13 @@ final class ReservationsThreeViewController: UIViewController {
             view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
             view.delegate = self
             view.addTarget(self, action: #selector(numberTfEmpity), for: .editingChanged)
+            view.addTarget(self, action: #selector(withdrawNumberCardBoder), for: .editingDidEnd)
             view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
+    
+    
     
     //MARK: - ccValidateStackView
     private lazy var ccValidateStackView: UIStackView = {
@@ -243,6 +311,7 @@ final class ReservationsThreeViewController: UIViewController {
             view.tag = 3
             view.delegate = self
             view.addTarget(self, action: #selector(ccEmpity), for: .editingChanged)
+            view.addTarget(self, action: #selector(withdrawCcBoder), for: .editingDidEnd)
             view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
             view.translatesAutoresizingMaskIntoConstraints = false
             view.rightViewMode = .always
@@ -302,6 +371,7 @@ final class ReservationsThreeViewController: UIViewController {
             view.delegate = self
             view.tag = 5
             view.addTarget(self, action: #selector(sourceEmpity), for: .editingChanged)
+            view.addTarget(self, action: #selector(withdrawSourceBoder), for: .editingDidEnd)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
@@ -320,7 +390,7 @@ final class ReservationsThreeViewController: UIViewController {
     
     //MARK: - contryStackView
     private lazy var countryStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [countryLabel, countryField])
+        let stack = UIStackView(arrangedSubviews: [countryLabel2, countryLabel])
         
         let stackTop: CGFloat = 12
         let stackLeft: CGFloat = 16
@@ -346,35 +416,96 @@ final class ReservationsThreeViewController: UIViewController {
        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.textAlignment = .left
         label.text = "País"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    
+    //MARK: countryLabel2
+    private lazy var countryLabel2: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.textAlignment = .left
+        label.text = "País"
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
         
-    //MARK: - countryTextfield
-        private lazy var countryField: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-            view.isHidden = true
-            view.addTarget(self, action: #selector(countryEmpity), for: .editingChanged)
-            view.isUserInteractionEnabled = false
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
+    
+    //MARK: countryDropDown
+    private lazy var countryDropDown: UIScrollView = {
+        
+        let drop = UIScrollView()
+        
+        var buttons = [UIButton]()
+        let countrys = ["Brasil", "Áustria", "México"]
+        
+        for country in countrys {
+            
+            let button = UIButton()
+            button.setTitle(country, for: .normal)
+            button.setTitleColor(UIColor(named: ColorsBravve.black_black.rawValue),
+                                 for: .normal)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
+                                             size: CGFloat(14).generateSizeForScreen)
+            
+            let handler = {(action: UIAction) in
+                
+                self.countryLabel.text = button.currentTitle
+                self.countryLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+                self.countryDropDown.frame.size = .zero
+            }
+            button.addTarget(self, action: #selector(hiddenLabel), for: .touchUpInside)
+            button.titleLabel?.textAlignment = .left
+            button.addAction(UIAction(handler: handler), for: .touchUpInside)
+            buttons.append(button)
+            
+            
+        
+        }
+        drop.turnIntoAList(buttons)
+        drop.delegate = self
+        
+        return drop
+    }()
     
     
+    //MARK: - hiddenLabel
+    @objc func hiddenLabel() {
+        countryLabel2.isHidden = false
+        countryStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        
+    }
+    
+    @objc func withdrawCountryBorder() {
+        self.countryStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
+        
+    }
     
     
     //MARK: - accessoryButtonCountryArrow
         private lazy var accessoryButtonCountryArrow: UIButton = {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        view.addTarget(self, action: #selector(tapCountryDown), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-            
         }()
     
+    
+    @objc func tapCountryDown() {
+        
+        countryDropDown.showLikeAWindow(size: CGSize(width: countryStackView.frame.size.width,
+                                                      height: CGFloat(180).generateSizeForScreen),
+                                         origin: CGPoint(x: countryStackView.frame.maxX,
+                                                         y: countryStackView.frame.maxY),
+                                        .upLeft)
+        
+    }
     
  
     //MARK: - nameHolderStackView
@@ -400,6 +531,7 @@ final class ReservationsThreeViewController: UIViewController {
         return stack
     }()
     
+    
     //MARK: - nameHolderLabel
     private lazy var nameHolderLabel: UILabel = {
        let label = UILabel()
@@ -407,7 +539,6 @@ final class ReservationsThreeViewController: UIViewController {
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.text = "Nome impresso no cartão"
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -419,12 +550,11 @@ final class ReservationsThreeViewController: UIViewController {
             view.tag = 4
             view.isHidden = true
             view.addTarget(self, action: #selector(nameHolderEmpity), for: .editingChanged)
+            view.addTarget(self, action: #selector(withdrawNameHolderBoder), for: .editingDidEnd)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
     
-    
-
     //MARK: - cpfStackView
     private lazy var cpfStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [cpfLabel, cpfTextfield])
@@ -467,6 +597,7 @@ final class ReservationsThreeViewController: UIViewController {
             view.isHidden = true
             view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
             view.addTarget(self, action: #selector(cpfEmpity), for: .editingChanged)
+            view.addTarget(self, action: #selector(withdrawCpfBoder), for: .editingDidEnd)
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
@@ -480,14 +611,12 @@ final class ReservationsThreeViewController: UIViewController {
         setupView()
         setupConstrains()
         
+        
         let numberStackViewTap = UITapGestureRecognizer(target: self, action: #selector(numberStackViewTapped))
         numberCardStackView.addGestureRecognizer(numberStackViewTap)
         
         let ccStackViewTap = UITapGestureRecognizer(target: self, action: #selector(ccValidatestackViewTapped))
         ccValidateStackView.addGestureRecognizer(ccStackViewTap)
-        
-        let countryStackViewTap = UITapGestureRecognizer(target: self, action: #selector(countryStackViewTapped))
-        accessoryButtonCountryArrow.addGestureRecognizer(countryStackViewTap)
         
         let sourceSecutiryStackViewTap = UITapGestureRecognizer(target: self, action: #selector(sourceSecutirytackViewTapped))
         sourceSecurityStackView.addGestureRecognizer(sourceSecutiryStackViewTap)
@@ -498,7 +627,7 @@ final class ReservationsThreeViewController: UIViewController {
         let cpfStackViewTap = UITapGestureRecognizer(target: self, action: #selector(cpfStackViewTapped))
         cpfStackView.addGestureRecognizer(cpfStackViewTap)
         
-        
+    
     }
     
     //MARK: - SetupView
@@ -516,16 +645,25 @@ final class ReservationsThreeViewController: UIViewController {
                           cardCreditLabel,
                           ccValidateStackView,
                           sourceSecurityStackView,
-                          countryStackView,
-                          nameHolderStackView,
-                          cpfStackView,
                           accessoryButtonCcValidate,
                           accessoryButtonSourceSecurity,
+                          countryStackView,
                           countryImageFlag,
+                          countryDropDown,
+                          nameHolderStackView,
+                          cpfStackView,
                           accessoryButtonCountryArrow,
                           resumeButton,
                           finishButton
                          ])
+        
+        
+        view.addSubviews([tip1
+        
+        
+        
+        
+        ])
         
         
         finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
@@ -542,11 +680,16 @@ final class ReservationsThreeViewController: UIViewController {
         self.dismiss(animated: true)
         }
 
+    
     //MARK: numberTfEmpity
     @objc private func numberTfEmpity()  {
         if numberCardTextfield.text!.count >= 19 {
+            numberCardLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
             numberCardStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+            tip1.isHidden = true
         } else {
+            numberCardLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            tip1.isHidden = false
             numberCardStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
         }
     }
@@ -559,6 +702,10 @@ final class ReservationsThreeViewController: UIViewController {
         numberCardTextfield.becomeFirstResponder()
     }
     
+    @objc func withdrawNumberCardBoder() {
+        numberCardStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
+    }
+    
     
     //MARK: - ccEmpity
     @objc private func ccEmpity()  {
@@ -566,6 +713,7 @@ final class ReservationsThreeViewController: UIViewController {
             ccValidateStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
         } else {
             ccValidateStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
+            
         }
     }
     
@@ -576,6 +724,10 @@ final class ReservationsThreeViewController: UIViewController {
         ccValidateExpirationTextfield.isHidden = false
         ccValidateExpirationTextfield.becomeFirstResponder()
         
+    }
+    
+    @objc func withdrawCcBoder() {
+        ccValidateStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
     }
     
     @objc func tapCc() {
@@ -606,6 +758,9 @@ final class ReservationsThreeViewController: UIViewController {
         
     }
     
+    @objc func withdrawSourceBoder() {
+        sourceSecurityStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
+    }
     
     //MARK: - tapAcessorySource
     @objc private func tapAcessorySource() {
@@ -618,15 +773,11 @@ final class ReservationsThreeViewController: UIViewController {
                               on: self)
     }
 
-    //MARK: - countryEmpity
-    @objc private func countryEmpity()  {
-        countryStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
-        
-    }
+    
     
     //MARK: countryImageFlag
     private lazy var countryImageFlag: UIImageView = {
-       let view = UIImageView(image: UIImage(named: "book"))
+        let view = UIImageView(image: UIImage(named: IconsBravve.flag.rawValue))
         view.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 15, height: 15))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -636,17 +787,16 @@ final class ReservationsThreeViewController: UIViewController {
     //MARK: ccValidatestackViewTapped
     @objc func countryStackViewTapped() {
         countryLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
-           
-        countryField.isHidden = false
-        countryField.becomeFirstResponder()
-        
+
     }
     
 
     //MARK: - nameHolderEmpity
     @objc private func nameHolderEmpity()  {
+        countryStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
         if nameHolderTextfield.text!.count >= 6 {
             nameHolderStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+            
         } else {
             nameHolderStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
         }
@@ -658,6 +808,11 @@ final class ReservationsThreeViewController: UIViewController {
         
         nameHolderTextfield.isHidden = false
         nameHolderTextfield.becomeFirstResponder()
+    }
+    
+    
+    @objc func withdrawNameHolderBoder() {
+        nameHolderStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
     }
     
     
@@ -679,6 +834,10 @@ final class ReservationsThreeViewController: UIViewController {
         cpfTextfield.isHidden = false
         cpfTextfield.becomeFirstResponder()
         
+    }
+    
+    @objc func withdrawCpfBoder() {
+        cpfStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
     }
     
     
@@ -761,7 +920,7 @@ final class ReservationsThreeViewController: UIViewController {
                 
                 
                 //MARK: ccValidateExpirationTextField
-                ccValidateStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 15),
+                ccValidateStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 34),
                 ccValidateStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
                 ccValidateStackView.heightAnchor.constraint(equalToConstant: 60),
                 ccValidateStackView.widthAnchor.constraint(equalToConstant: 159),
@@ -769,7 +928,7 @@ final class ReservationsThreeViewController: UIViewController {
                 accessoryButtonCcValidate.centerYAnchor.constraint(equalTo: ccValidateStackView.centerYAnchor),
               
                 //MARK: sourceSecurityTextfield
-                sourceSecurityStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 15),
+                sourceSecurityStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 34),
                 sourceSecurityStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 sourceSecurityStackView.heightAnchor.constraint(equalToConstant: 60),
                 sourceSecurityStackView.widthAnchor.constraint(equalToConstant: 159),
@@ -811,7 +970,14 @@ final class ReservationsThreeViewController: UIViewController {
                 cpfStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
                 cpfStackView.heightAnchor.constraint(equalToConstant: 60),
                 
-
+                
+                
+                //MARK: - tip Constrains
+                tip1.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 6),
+                tip1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+                tip1.widthAnchor.constraint(equalToConstant: 180),
+                
+                
             ])
     
             //MARK: finishButton
@@ -846,6 +1012,13 @@ extension ReservationsThreeViewController: UITextFieldDelegate {
     }
 }
 
+extension UIStackView {
+    func setBottomBorderOnlyWithDefault(color: CGColor) {
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = CGColor(red: 26/255, green: 23/255, blue: 80/255, alpha: 1)
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
+}
 
 
 extension UIStackView {
@@ -870,6 +1043,15 @@ extension UIStackView {
     }
 }
 
+extension ReservationsThreeViewController : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view!.superview!.superclass! .isSubclass(of: UIButton.self) {
+            return false        }
+        return true
+    }
+}
+
+    
 
 
 

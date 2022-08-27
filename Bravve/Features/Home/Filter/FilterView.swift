@@ -189,7 +189,7 @@ final class FilterScreen: UIViewController {
         return capacityDropDown
     }()
     
-    // NÃO TEM LINE NO ENUM
+    
     
     //MARK: lines
     let lines: [UIImageView] = {
