@@ -44,6 +44,7 @@
 		2E57CDE728AEA53C004214A9 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE628AEA53C004214A9 /* CalendarView.swift */; };
 		2E57CDE928AEA56D004214A9 /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */; };
 		2E57CDEB28AEA598004214A9 /* CalendarWeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */; };
+		2E67921828BBB4DB00DC421D /* CheckOutCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67921728BBB4DB00DC421D /* CheckOutCustomCell.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -241,6 +242,7 @@
 		2E57CDE628AEA53C004214A9 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthView.swift; sourceTree = "<group>"; };
 		2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekDaysView.swift; sourceTree = "<group>"; };
+		2E67921728BBB4DB00DC421D /* CheckOutCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCustomCell.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1021,6 +1023,7 @@
 				C696178C2881EE6500281633 /* CheckOutViewModel.swift */,
 				C696178A2881EE5B00281633 /* CheckOutView.swift */,
 				C69617882881EE5000281633 /* CheckOutModel.swift */,
+				2E67921728BBB4DB00DC421D /* CheckOutCustomCell.swift */,
 			);
 			path = "Check Out";
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				C696173A2881EB4000281633 /* ActivitiesModel.swift in Sources */,
 				C696179D2881EECD00281633 /* BookingDetailsViewModel.swift in Sources */,
 				2EB18FB0289D87F2008A80BF /* SessionManager.swift in Sources */,
+				2E67921828BBB4DB00DC421D /* CheckOutCustomCell.swift in Sources */,
 				C69616E22881E91200281633 /* HomeClosedViewModel.swift in Sources */,
 				14CADA0328A52EF6002E9736 /* EndPointMockEnum.swift in Sources */,
 				2E57CDE728AEA53C004214A9 /* CalendarView.swift in Sources */,

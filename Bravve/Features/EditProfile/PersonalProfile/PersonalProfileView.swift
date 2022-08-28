@@ -268,15 +268,17 @@ class PersonalProfileView: UIViewController{
         
         view.addSubviews([tabBar, wayImage, profilePic, helloLabel, subtitleLabel, backView, infoLabel, subInfoLabel, separatorView, bravveInfoLabel, subBravveInfoLabel, infoImage, reservationLabel, nextPageButton, separatorView2, helpImage, helpLabel, nextPageButton2, separatorView3, policyImage, policyLabel, nextPageButton3, separatorView4, logoutImage, logoutLabel, nextPageButton4, separatorView5, smallView, numberLabel, creditLabel, smallView2, numberLabel2, creditLabel2])
         
-        nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
+        nextPageButton.addTarget(self, action: #selector(BookingHistory), for: .touchUpInside)
         nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
         nextPageButton3.addTarget(self, action: #selector(policyPage), for: .touchUpInside)
         nextPageButton4.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
         addConstraints()
     }
     
-    @objc func reservationPage(sender: UIButton){
-        //TODO: Needs a logic to pressents two states of the same view, one empty and one with at least onde reservation. If number of reservations equals zero, then presents the empty view, else, presents the table view with the reservations.
+    @objc func BookingHistory(sender: UIButton){
+        let vc = BookingHistoryView()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
         print("Do not have")
     }
     

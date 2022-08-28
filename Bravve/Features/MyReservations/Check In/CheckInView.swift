@@ -106,7 +106,7 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
     
     @objc private func action(){
         customAlertSuccess.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-in realizado com sucesso.\nSeja Bem-Vindo ao seu espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: {[weak self] _ in
-            let vc = CheckOutScreen()
+            let vc = CheckOutView()
             vc.modalPresentationStyle = .fullScreen
             self?.present(vc, animated: true)
         }), on: self)
