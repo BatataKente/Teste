@@ -1,27 +1,49 @@
-
+//
 //
 //  CheckOutScreen.swift
 //  Teste
 //
 //  Created by user217685 on 8/3/22.
 //
-
+//
 import UIKit
 
-class CheckOutScreen: UIViewController{
- 
-    private let customAlertOk: CustomAlert = CustomAlert()
-    private let customAlertCancel: CustomAlert = CustomAlert()
-    
-    //MARK: - Labels
+class CheckOutView: UIViewController {
     
     let customBar = UIView()
-    private let myTableView = UITableView()
+    
+    private let customAlertCancel: CustomAlert = CustomAlert()
+    private let customAlertOk: CustomAlert = CustomAlert()
+    private var space: SpaceDetail = SpaceDetail()
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
+    }()
+    
+    lazy var buttonMainDoor: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Abrir porta principal", for: .normal)
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var buttonOpenSpace: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Abrir porta do espaço", for: .normal)
+        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
+        return button
     }()
     
     lazy var lineView1:UIView = {
@@ -70,6 +92,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var descriptLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -80,20 +103,37 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
-    lazy var reserveImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: ImagesBravve.imageReservs_3.rawValue)
+    
+    private lazy var reserveCollection: UICollectionView = {
+        
+        let itemsize = 300
+        let layoutCollection = UICollectionViewFlowLayout()
+        layoutCollection.scrollDirection = .horizontal
+        layoutCollection.itemSize = CGSize(width: itemsize, height: itemsize)
+        layoutCollection.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
 
-        return image
-    }()
-    lazy var reserveImage2: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: ImagesBravve.imageReservs_4.rawValue)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layoutCollection )
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        collection.register(CheckOutCustomCell.self, forCellWithReuseIdentifier: "Cell")
 
-        return image
+        return collection
     }()
+    
+    private lazy var pageControl: UIPageControl = {
+        
+        let pageControl = UIPageControl()
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        
+        guard let pictures = space.pictures else { return pageControl }
+        pageControl.numberOfPages = pictures.count
+        pageControl.backgroundStyle = .prominent
+        pageControl.isEnabled = false
+        pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
+        return pageControl
+    }()
+    
     lazy var infoLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -104,6 +144,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var nameLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +155,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var detailLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -124,13 +166,15 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.calendarGray.rawValue)
-
+        
         return image
     }()
+    
     lazy var dayLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -141,6 +185,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var checkInLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -151,6 +196,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var checkOutLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -161,6 +207,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var diaryLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -171,6 +218,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var dayDiaryCheckInLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -181,6 +229,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
+    
     lazy var dayDiaryCheckOutLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -191,7 +240,7 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
-   
+    
     lazy var payFormLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +256,7 @@ class CheckOutScreen: UIViewController{
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.walletBlue.rawValue)
-
+        
         return image
     }()
     
@@ -215,7 +264,7 @@ class CheckOutScreen: UIViewController{
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.users.rawValue)
-
+        
         return image
     }()
     
@@ -223,7 +272,7 @@ class CheckOutScreen: UIViewController{
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.map.rawValue)
-
+        
         return image
     }()
     
@@ -231,7 +280,7 @@ class CheckOutScreen: UIViewController{
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
-
+        
         return image
     }()
     
@@ -239,7 +288,7 @@ class CheckOutScreen: UIViewController{
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-
+        
         return button
     }()
     
@@ -247,7 +296,7 @@ class CheckOutScreen: UIViewController{
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-
+        
         return button
     }()
     
@@ -255,7 +304,7 @@ class CheckOutScreen: UIViewController{
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "cellphone")
-
+        
         return image
     }()
     
@@ -263,7 +312,7 @@ class CheckOutScreen: UIViewController{
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.email.rawValue)
-
+        
         return image
     }()
     
@@ -327,7 +376,6 @@ class CheckOutScreen: UIViewController{
         lb.textAlignment = .left
         return lb
     }()
-    
     
     lazy var localizationLabel: UILabel = {
         let lb = UILabel()
@@ -435,61 +483,29 @@ class CheckOutScreen: UIViewController{
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let yourAttributes: [NSAttributedString.Key: Any] = [
-                      .font: UIFont.systemFont(ofSize: 12),
-                      .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
-                      .underlineStyle: NSUnderlineStyle.single.rawValue
-                  ]
-                     let attributeString = NSMutableAttributedString(
-                        string: "Ver Mais",
-                    attributes: yourAttributes)
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributeString = NSMutableAttributedString(
+            string: "Ver Mais",
+            attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .normal)
         return button
     }()
-    
-    @objc func showMorebutton(){
-        
-    }
     
     lazy var showMoreButton2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let yourAttributes: [NSAttributedString.Key: Any] = [
-                      .font: UIFont.systemFont(ofSize: 12),
-                      .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
-                      .underlineStyle: NSUnderlineStyle.single.rawValue
-                  ]
-                     let attributeString = NSMutableAttributedString(
-                        string: "Ver Mais",
-                    attributes: yourAttributes)
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributeString = NSMutableAttributedString(
+            string: "Ver Mais",
+            attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .normal)
-        return button
-    }()
-    
-    @objc func showMorebutton2(){
-        
-    }
-    
-    lazy var buttonMainDoor: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Abrir porta principal", for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
-        return button
-    }()
-
-    lazy var buttonOpenSpace: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Abrir porta do espaço", for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
         return button
     }()
     
@@ -503,31 +519,38 @@ class CheckOutScreen: UIViewController{
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 12
         button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
-       
+        
         button.addTarget(self, action: #selector(buttonCheckOut), for: .touchUpInside)
         
         return button
     }()
-
-
+    
+    private let viewInScroll: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isScrollEnabled = true
+        
+        return scroll
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        myTableView.delegate = self
-        myTableView.dataSource = self
-        myTableView.bounces = false
-        myTableView.translatesAutoresizingMaskIntoConstraints = false
-        myTableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        myTableView.separatorStyle = .none
-        myTableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
+        
+        reserveCollection.delegate = self
+        reserveCollection.dataSource = self
+        
         setupViews()
         setupDefaults()
         setupContraints()
-        
-       
     }
-    
     
     @objc func buttonMaindoorTap(){
         print("main door")
@@ -535,6 +558,36 @@ class CheckOutScreen: UIViewController{
     
     @objc func buttonOpenSpaceTap(){
         print("space door")
+    }
+    
+    func setupViews(){
+        view.addSubview(buttonMainDoor)
+        view.addSubview(buttonOpenSpace)
+        tabBar.selectedItem = tabBar.items?[1]
+        view.addSubview(customBar)
+        view.addSubview(tabBar)
+        view.addSubview(scrollView)
+        scrollView.addSubview(viewInScroll)
+        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, pageControl, infoLocalLabel,
+                          nameLocalLabel, detailLocalLabel, imageDetail, dayLabel, checkInLabel,
+                          checkOutLabel, diaryLabel, dayDiaryCheckInLabel, dayDiaryCheckOutLabel,
+                          lineView1, lineView2, imagePay, payFormLabel, creditCard, creditCardTextField,
+                          totalLabel, lineView3, localDetail, numberPeopleImage, numberPeopleLabel,
+                          localizationIconImage, localizationLabel, clockIconImage, clockLabel,
+                          showMoreButton1, buttonArrowIconImage1, lineView4, responsablePeople,
+                          responsableNameLabel, descriptionResponsableLabel, showMoreButton2,
+                          lineView5,contactsLabel, cellIconImage, emailIconImage, contactNumberLabel,
+                          contactEmailLabel, checkOutButton, buttonArrowIconImage2
+                         ])
+        
+    }
+    
+    @objc func showMorebutton(){
+        
+    }
+    
+    @objc func showMorebutton2(){
+        
     }
     
     @objc func buttonCheckOut(){
@@ -547,21 +600,9 @@ class CheckOutScreen: UIViewController{
         }), cancelAttributed: "Cancelar Check-out", cancelHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()
         }), on: self)
-
-    }
-
-    func setupViews(){
-        view.addSubview(buttonMainDoor)
-        view.addSubview(buttonOpenSpace)
-        view.addSubview(myTableView)
-        tabBar.selectedItem = tabBar.items?[1]
-        myTableView.addSubviews([titleLabel,descriptLabel,reserveImage,reserveImage2,infoLocalLabel,nameLocalLabel,detailLocalLabel,imageDetail,dayLabel,checkInLabel,checkOutLabel,diaryLabel,dayDiaryCheckInLabel,dayDiaryCheckOutLabel,lineView1,lineView2,imagePay,payFormLabel,creditCard,creditCardTextField,totalLabel,lineView3,localDetail,numberPeopleImage,numberPeopleLabel,localizationIconImage,localizationLabel,clockIconImage,clockLabel,showMoreButton1,buttonArrowIconImage1,lineView4,responsablePeople,responsableNameLabel,descriptionResponsableLabel,showMoreButton2,lineView5,contactsLabel,cellIconImage,emailIconImage,contactNumberLabel,contactEmailLabel,checkOutButton,buttonArrowIconImage2])
-        view.addSubview(customBar)
-        view.addSubview(tabBar)
         
-    
-
     }
+    
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Check out"){
             _ in
@@ -569,88 +610,91 @@ class CheckOutScreen: UIViewController{
             
         }
     }
+    
     func setupContraints(){
+        
+        scrollView.constraintOutsideTo(.top, customBar)
+        scrollView.constraintInsideTo(.leading, view)
+        scrollView.constraintInsideTo(.trailing, view)
+        scrollView.constraintOutsideTo(.bottom, buttonMainDoor)
+
+        viewInScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
+        viewInScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
+        viewInScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
+        viewInScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
+        viewInScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        
         NSLayoutConstraint.activate([
-            buttonMainDoor.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
-            buttonMainDoor.leadingAnchor.constraint(equalTo:view.leadingAnchor),
-            buttonMainDoor.widthAnchor.constraint(equalToConstant: 188),
-            buttonMainDoor.heightAnchor.constraint(equalToConstant: 52),
             
-            buttonOpenSpace.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
-            buttonOpenSpace.leadingAnchor.constraint(equalTo: buttonMainDoor.trailingAnchor),
-            buttonOpenSpace.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            buttonOpenSpace.widthAnchor.constraint(equalToConstant: 188),
-            buttonOpenSpace.heightAnchor.constraint(equalToConstant: 52),
+            titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor,constant: 4),
+            titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),
             
-            titleLabel.topAnchor.constraint(equalTo: myTableView.bottomAnchor,constant: 4),
-            titleLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 24),
             descriptLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 16),
-            descriptLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            descriptLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
+            reserveCollection.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
+            reserveCollection.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor),
+            reserveCollection.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor),
+            reserveCollection.heightAnchor.constraint(equalToConstant: 300),
             
-            reserveImage.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
-            reserveImage.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            reserveImage.widthAnchor.constraint(equalToConstant: 300),
-            reserveImage.heightAnchor.constraint(equalToConstant: 300),
+            pageControl.centerXAnchor.constraint(equalTo: reserveCollection.centerXAnchor),
+            pageControl.topAnchor.constraint(equalTo: reserveCollection.bottomAnchor, constant: 10),
+            pageControl.leadingAnchor.constraint(equalTo: reserveCollection.leadingAnchor),
+            pageControl.trailingAnchor.constraint(equalTo: reserveCollection.trailingAnchor),
             
-            
-            reserveImage2.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
-            reserveImage2.leadingAnchor.constraint(equalTo: reserveImage.trailingAnchor,constant: 9),
-            reserveImage2.widthAnchor.constraint(equalToConstant: 300),
-            reserveImage2.heightAnchor.constraint(equalToConstant: 300),
-            
-            infoLocalLabel.topAnchor.constraint(equalTo: reserveImage.bottomAnchor,constant: 52.5),
-            infoLocalLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            infoLocalLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor,constant: 52.5),
+            infoLocalLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             nameLocalLabel.topAnchor.constraint(equalTo: infoLocalLabel.bottomAnchor,constant: 7),
-            nameLocalLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            nameLocalLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             detailLocalLabel.topAnchor.constraint(equalTo: nameLocalLabel.bottomAnchor,constant: 32),
             detailLocalLabel.leadingAnchor.constraint(equalTo: imageDetail.trailingAnchor,constant: 9),
             
             
             dayLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
-            dayLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            dayLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             diaryLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor,constant: 11.5),
-            diaryLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-  
+            diaryLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            
             checkInLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
-            checkInLabel.leadingAnchor.constraint(equalTo: detailLocalLabel.trailingAnchor,constant: 1),
+            checkInLabel.leadingAnchor.constraint(equalTo: diaryLabel.trailingAnchor,constant: 1),
             
             dayDiaryCheckInLabel.topAnchor.constraint(equalTo: checkInLabel.bottomAnchor,constant: 12.5),
             dayDiaryCheckInLabel.trailingAnchor.constraint(equalTo: checkInLabel.trailingAnchor),
             
             checkOutLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
             checkOutLabel.leadingAnchor.constraint(equalTo: checkInLabel.trailingAnchor,constant: 22),
+            checkOutLabel.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             
             dayDiaryCheckOutLabel.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor,constant: 12.5),
-            dayDiaryCheckOutLabel.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
-
+            dayDiaryCheckOutLabel.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            
             payFormLabel.leadingAnchor.constraint(equalTo: imagePay.trailingAnchor,constant: 9),
             payFormLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 20.5),
             
-            imageDetail.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 25),
+            imageDetail.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
             imageDetail.centerYAnchor.constraint(equalTo: detailLocalLabel.centerYAnchor),
             
-            imagePay.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 25),
+            imagePay.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
             imagePay.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 21),
             
             creditCard.topAnchor.constraint(equalTo: imagePay.bottomAnchor,constant: 26),
-            creditCard.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            creditCard.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             creditCardTextField.topAnchor.constraint(equalTo: creditCard.bottomAnchor),
-            creditCardTextField.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            creditCardTextField.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            creditCardTextField.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            creditCardTextField.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             creditCardTextField.heightAnchor.constraint(equalToConstant: 67),
             
             totalLabel.topAnchor.constraint(equalTo: creditCardTextField.bottomAnchor,constant: 14),
-            totalLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            totalLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             localDetail.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 15),
-            localDetail.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            localDetail.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
-            numberPeopleImage.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 21.43),
+            numberPeopleImage.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 21.43),
             numberPeopleImage.topAnchor.constraint(equalTo: localDetail.bottomAnchor,constant: 12),
             
             localizationIconImage.topAnchor.constraint(equalTo: numberPeopleImage.bottomAnchor,constant: 20),
@@ -676,23 +720,23 @@ class CheckOutScreen: UIViewController{
             clockLabel.centerYAnchor.constraint(equalTo: clockIconImage.centerYAnchor),
             
             showMoreButton1.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 12),
-            showMoreButton1.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            showMoreButton1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             responsablePeople.topAnchor.constraint(equalTo: lineView3.bottomAnchor,constant: 15),
-            responsablePeople.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            responsablePeople.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             responsableNameLabel.topAnchor.constraint(equalTo: responsablePeople.bottomAnchor,constant: 8),
-            responsableNameLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            responsableNameLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             descriptionResponsableLabel.topAnchor.constraint(equalTo: responsableNameLabel.bottomAnchor,constant: 8),
-            descriptionResponsableLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            descriptionResponsableLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             descriptionResponsableLabel.widthAnchor.constraint(equalToConstant: 277),
             
             showMoreButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: 8),
-            showMoreButton2.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            showMoreButton2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             contactsLabel.topAnchor.constraint(equalTo: lineView4.bottomAnchor,constant: 15),
-            contactsLabel.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
+            contactsLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             cellIconImage.topAnchor.constraint(equalTo: contactsLabel.bottomAnchor,constant: 13),
             cellIconImage.centerXAnchor.constraint(equalTo: clockIconImage.centerXAnchor),
@@ -707,63 +751,84 @@ class CheckOutScreen: UIViewController{
             contactEmailLabel.leadingAnchor.constraint(equalTo: emailIconImage.trailingAnchor,constant: 13),
             
             checkOutButton.topAnchor.constraint(equalTo: emailIconImage.bottomAnchor,constant: 21.5),
-            checkOutButton.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            checkOutButton.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            checkOutButton.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            checkOutButton.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             checkOutButton.heightAnchor.constraint(equalToConstant: 52),
+            checkOutButton.bottomAnchor.constraint(equalTo: viewInScroll.bottomAnchor, constant: -40),
             
             lineView1.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 17),
-            lineView1.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView1.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            lineView1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lineView1.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView1.heightAnchor.constraint(equalToConstant: 0.5),
             
             lineView2.topAnchor.constraint(equalTo: totalLabel.bottomAnchor,constant: 17),
-            lineView2.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView2.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            lineView2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lineView2.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView2.heightAnchor.constraint(equalToConstant: 0.5),
-        
+            
             lineView3.topAnchor.constraint(equalTo: showMoreButton1.bottomAnchor,constant: 16),
-            lineView3.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView3.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            lineView3.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lineView3.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView3.heightAnchor.constraint(equalToConstant: 0.5),
             
-            lineView4.topAnchor.constraint(equalTo: showMoreButton2.bottomAnchor,constant: 16),
-            lineView4.leadingAnchor.constraint(equalTo: myTableView.leadingAnchor,constant: 20),
-            lineView4.trailingAnchor.constraint(equalTo: checkOutLabel.trailingAnchor),
+            lineView4.topAnchor.constraint(equalTo: showMoreButton2.bottomAnchor,constant: CGFloat(16).generateSizeForScreen),
+            lineView4.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lineView4.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView4.heightAnchor.constraint(equalToConstant: 0.5),
             
-            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
-            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            myTableView.bottomAnchor.constraint(equalTo: buttonOpenSpace.topAnchor),
-
+            buttonMainDoor.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            buttonMainDoor.leadingAnchor.constraint(equalTo:view.leadingAnchor),
+            buttonMainDoor.widthAnchor.constraint(equalToConstant: 188),
+            buttonMainDoor.heightAnchor.constraint(equalToConstant: 52),
+            
+            buttonOpenSpace.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            buttonOpenSpace.leadingAnchor.constraint(equalTo: buttonMainDoor.trailingAnchor),
+            buttonOpenSpace.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonOpenSpace.widthAnchor.constraint(equalToConstant: 188),
+            buttonOpenSpace.heightAnchor.constraint(equalToConstant: 52),
+            
             tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             
-         
+            
             
         ])
     }
-    
-
-
-   
-}
-extension CheckOutScreen: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        1479
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.selectionStyle = .none
-        return cell
-    }
-    
 }
 
-
+extension CheckOutView: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        guard let pictures = space.pictures else { return 0 }
+//
+//        return pictures.count
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CheckOutCustomCell
+        
+//        guard let pictures = space.pictures else { return UICollectionViewCell() }
+//        
+//        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
+//        
+//        cell?.imageView.sd_setImage(with: URL(string: picture))
+        
+        return cell ?? UICollectionViewCell()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
+        let index = scrollView.contentOffset.x / witdh
+        var roundedIndex = 0.0
+        if index < 0.2 {
+            roundedIndex = round(index)
+        } else {
+            roundedIndex = ceil(index)
+        }
+        
+        self.pageControl.currentPage = Int(roundedIndex)
+    }
+    
+}

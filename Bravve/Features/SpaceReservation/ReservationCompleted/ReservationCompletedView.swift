@@ -258,64 +258,64 @@ class ReservationCompletedView: UIViewController {
         placeDetailLabel.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
         placeDetailLabel.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
         
-        placeInfo1Label.topAnchor.constraint(equalTo: placeDetailLabel.bottomAnchor, constant: 20).isActive = true
-        placeInfo1Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo1Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-        line2View.topAnchor.constraint(equalTo: placeInfo1Label.bottomAnchor, constant: 8).isActive = true
-        line2View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-        line2View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-        line2View.heightAnchorInSuperview(1)
-        
-        placeInfo2Label.topAnchor.constraint(equalTo: placeInfo1Label.bottomAnchor, constant: 16).isActive = true
-        placeInfo2Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo2Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-        line3View.topAnchor.constraint(equalTo: placeInfo2Label.bottomAnchor, constant: 8).isActive = true
-        line3View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-        line3View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-        line3View.heightAnchorInSuperview(1)
-        
-        placeInfo3Label.topAnchor.constraint(equalTo: placeInfo2Label.bottomAnchor, constant: 16).isActive = true
-        placeInfo3Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo3Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-        line4View.topAnchor.constraint(equalTo: placeInfo3Label.bottomAnchor, constant: 8).isActive = true
-        line4View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-        line4View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-        line4View.heightAnchorInSuperview(1)
-        
-        placeInfo4Label.topAnchor.constraint(equalTo: placeInfo3Label.bottomAnchor, constant: 16).isActive = true
-        placeInfo4Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo4Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-        line5View.topAnchor.constraint(equalTo: placeInfo4Label.bottomAnchor, constant: 8).isActive = true
-        line5View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-        line5View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-        line5View.heightAnchorInSuperview(1)
-        
-        placeInfo5Label.topAnchor.constraint(equalTo: placeInfo4Label.bottomAnchor, constant: 16).isActive = true
-        placeInfo5Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo5Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-        line6View.topAnchor.constraint(equalTo: placeInfo5Label.bottomAnchor, constant: 8).isActive = true
-        line6View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-        line6View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-        line6View.heightAnchorInSuperview(1)
-     
-        placeInfo6Label.topAnchor.constraint(equalTo: placeInfo5Label.bottomAnchor, constant: 16).isActive = true
-        placeInfo6Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo6Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-        line7View.topAnchor.constraint(equalTo: placeInfo6Label.bottomAnchor, constant: 8).isActive = true
-        line7View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-        line7View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-        line7View.heightAnchorInSuperview(1)
-        
-        placeInfo7Label.topAnchor.constraint(equalTo: placeInfo6Label.bottomAnchor, constant: 16).isActive = true
-        placeInfo7Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-        placeInfo7Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        placeInfo7Label.bottomAnchor.constraint(equalTo: viewToScroll.bottomAnchor, constant: -50).isActive = true
+//        placeInfo1Label.topAnchor.constraint(equalTo: placeDetailLabel.bottomAnchor, constant: 20).isActive = true
+//        placeInfo1Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo1Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        
+//        line2View.topAnchor.constraint(equalTo: placeInfo1Label.bottomAnchor, constant: 8).isActive = true
+//        line2View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
+//        line2View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
+//        line2View.heightAnchorInSuperview(1)
+//        
+//        placeInfo2Label.topAnchor.constraint(equalTo: placeInfo1Label.bottomAnchor, constant: 16).isActive = true
+//        placeInfo2Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo2Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        
+//        line3View.topAnchor.constraint(equalTo: placeInfo2Label.bottomAnchor, constant: 8).isActive = true
+//        line3View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
+//        line3View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
+//        line3View.heightAnchorInSuperview(1)
+//        
+//        placeInfo3Label.topAnchor.constraint(equalTo: placeInfo2Label.bottomAnchor, constant: 16).isActive = true
+//        placeInfo3Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo3Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        
+//        line4View.topAnchor.constraint(equalTo: placeInfo3Label.bottomAnchor, constant: 8).isActive = true
+//        line4View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
+//        line4View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
+//        line4View.heightAnchorInSuperview(1)
+//        
+//        placeInfo4Label.topAnchor.constraint(equalTo: placeInfo3Label.bottomAnchor, constant: 16).isActive = true
+//        placeInfo4Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo4Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        
+//        line5View.topAnchor.constraint(equalTo: placeInfo4Label.bottomAnchor, constant: 8).isActive = true
+//        line5View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
+//        line5View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
+//        line5View.heightAnchorInSuperview(1)
+//        
+//        placeInfo5Label.topAnchor.constraint(equalTo: placeInfo4Label.bottomAnchor, constant: 16).isActive = true
+//        placeInfo5Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo5Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        
+//        line6View.topAnchor.constraint(equalTo: placeInfo5Label.bottomAnchor, constant: 8).isActive = true
+//        line6View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
+//        line6View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
+//        line6View.heightAnchorInSuperview(1)
+//     
+//        placeInfo6Label.topAnchor.constraint(equalTo: placeInfo5Label.bottomAnchor, constant: 16).isActive = true
+//        placeInfo6Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo6Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        
+//        line7View.topAnchor.constraint(equalTo: placeInfo6Label.bottomAnchor, constant: 8).isActive = true
+//        line7View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
+//        line7View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
+//        line7View.heightAnchorInSuperview(1)
+//        
+//        placeInfo7Label.topAnchor.constraint(equalTo: placeInfo6Label.bottomAnchor, constant: 16).isActive = true
+//        placeInfo7Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
+//        placeInfo7Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
+//        placeInfo7Label.bottomAnchor.constraint(equalTo: viewToScroll.bottomAnchor, constant: -50).isActive = true
         
     }
     //MARK: - viewElementsConstraints
