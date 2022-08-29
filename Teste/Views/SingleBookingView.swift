@@ -216,6 +216,15 @@ class SingleBookingView: UIViewController {
        
         let stackView = UIStackView(arrangedSubviews: [titleLabel, hourLabel])
         stackView.axis = .vertical
+        stackView.isLayoutMarginsRelativeArrangement = true
+        
+        let verticalMargins = CGFloat(10).generateSizeForScreen
+        let horizontalMargins = CGFloat(10).generateSizeForScreen
+        
+        stackView.layoutMargins = UIEdgeInsets(top: verticalMargins,
+                                               left: horizontalMargins,
+                                               bottom: verticalMargins,
+                                               right: horizontalMargins)
         
         let dropDownButton = UIButton()
         dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
