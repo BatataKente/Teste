@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol CancelReservationCellDelegate: AnyObject {
+protocol MyReservationsCustomCellDelegate: AnyObject {
     func presentViewController(_ viewController: UIViewController)
 }
 
-class CancelReservationCell: UITableViewCell {
+class MyReservationsCustomCell: UITableViewCell {
     
-    weak var delegate: CancelReservationCellDelegate?
+    weak var delegate: MyReservationsCustomCellDelegate?
     
     let cellView: UIView = {
         let view = UIView()
