@@ -2,7 +2,7 @@
 //  BookingDetailsCollectionViewCell.swift
 //  Bravve
 //
-//  Created by Evandro Rodrigo Minamoto on 26/08/22.
+//  Created by Evandro Rodrigo Minamoto on 28/08/22.
 //
 
 import UIKit
@@ -14,6 +14,7 @@ class BookingDetailsCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .darkGray
         imageView.layer.cornerRadius = 25
+        imageView.image = UIImage(named: ImagesBravve.example_1.rawValue)
         imageView.clipsToBounds = true
         
         return imageView
@@ -29,7 +30,7 @@ class BookingDetailsCollectionViewCell: UICollectionViewCell {
         
         let titleView = UIView()
         titleView.addSubview(titleLabel)
-        titleView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        titleView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
         titleLabel.constraintInsideTo(.top, titleView,
                                       CGFloat(2.5).generateSizeForScreen)
@@ -61,3 +62,4 @@ class BookingDetailsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
