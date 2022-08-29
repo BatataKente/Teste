@@ -19,7 +19,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let view = UIView()
         view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         return view
     }()
     
@@ -28,8 +28,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         label.text = "BOXOFFICE"
         label.backgroundColor = UIColor(named: "boxOffice")
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue,
-                            size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -39,8 +38,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "Numa esquina"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue,
-                            size: CGFloat(20).generateSizeForScreen)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,8 +47,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "charmosa, um hotel"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue,
-                            size: CGFloat(20).generateSizeForScreen)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,18 +64,17 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "Hotel Saint"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.bold.rawValue,
-                            size: CGFloat(20).generateSizeForScreen)
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let reservedLabel: UILabel = {
         let label = UILabel()
-        label.text = "RESERVA PASSADA"
-        label.backgroundColor = UIColor(named: ColorsBravve.hotel.rawValue)
+        label.text = "RESERVADO"
+        label.backgroundColor = UIColor(named: "reserved")
         label.textColor = .white
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -87,7 +83,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     let spaceSubtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "UM Coffee Co."
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -97,7 +93,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "São Paulo / Jardim Paulistano"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -106,7 +102,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "21/01/2022 - 22/01/2022"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -115,7 +111,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "9h às 18h"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -124,7 +120,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         let label = UILabel()
         label.text = "Espaço privativo"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -141,7 +137,6 @@ class BookingHistoryCustomCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(BookingHistoryCustomCell.self, action: #selector(actionArrowButton), for: .touchUpInside)
         return button
     }()
     
@@ -156,6 +151,8 @@ class BookingHistoryCustomCell: UITableViewCell {
         
         setupConstraints()
         
+        arrowButton.addTarget(self, action: #selector(actionArrowButton), for: .touchUpInside)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -163,7 +160,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     }
     
     @objc func actionArrowButton() {
-        self.delegate?.presentViewController(BookingDetailsView())
+        self.delegate?.presentViewController(HistoryDetailsView())
     }
     
     func setupConstraints() {
