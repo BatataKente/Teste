@@ -17,7 +17,7 @@ class ReservationCompletedView: UIViewController {
                                     "Espaço ao ar livre",
                                     "Estacionamento",
                                     "Bicicletário",
-                                    "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima", "Farmácia próxima"]
+                                    "Farmácia próxima"]
     
     //MARK: - variables to inherit values
     private var clientName = "Ana"
@@ -29,9 +29,9 @@ class ReservationCompletedView: UIViewController {
     
     //MARK: - scrollView
     private let scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
     }()
     
     //MARK: - labelsStack
@@ -61,7 +61,7 @@ class ReservationCompletedView: UIViewController {
     private lazy var titleLabel: UILabel = {
          let titleLabel = UILabel()
          titleLabel.font = UIFont(name: "KoHo-Bold", size: CGFloat(45).generateSizeForScreen)
-         titleLabel.textColor = .white
+        titleLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
          titleLabel.text = "Parabéns, \(clientName)!"
          titleLabel.numberOfLines = 0
          titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +72,7 @@ class ReservationCompletedView: UIViewController {
      private let subtitleLabel: UILabel = {
          let subtitleLabel = UILabel()
          subtitleLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(20).generateSizeForScreen)
-         subtitleLabel.textColor = .white
+         subtitleLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
          subtitleLabel.text = "Sua reserva foi realizada com \nsucesso!"
          subtitleLabel.numberOfLines = 0
          subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,7 @@ class ReservationCompletedView: UIViewController {
      private let info1Label: UILabel = {
          let info1Label = UILabel()
          info1Label.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(15).generateSizeForScreen)
-         info1Label.textColor = .white
+         info1Label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
          info1Label.text = "Agradecemos por fazer sua reserva e abaixo, estamos mostrando o novo saldo da sua carteira e alguns detalhes sobre a sua reserva."
          info1Label.numberOfLines = 0
          info1Label.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +94,7 @@ class ReservationCompletedView: UIViewController {
     private let locationDetailLabel: UILabel = {
         let locationDetailLabel = UILabel()
         locationDetailLabel.font = UIFont(name: "Ubuntu-Bold", size: CGFloat(20).generateSizeForScreen)
-        locationDetailLabel.textColor = .white
+        locationDetailLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
         locationDetailLabel.text = "Detalhe do local"
         locationDetailLabel.numberOfLines = 0
         locationDetailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -105,7 +105,7 @@ class ReservationCompletedView: UIViewController {
     private lazy var locationLabel: UILabel = {
         let locationLabel = UILabel()
         locationLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(12).generateSizeForScreen)
-        locationLabel.textColor = .white
+        locationLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
         locationLabel.text = "\(locationAddress)"
         locationLabel.numberOfLines = 0
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +116,7 @@ class ReservationCompletedView: UIViewController {
     private lazy var schedulingLabel: UILabel = {
         let schedulingLabel = UILabel()
         schedulingLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(12).generateSizeForScreen)
-        schedulingLabel.textColor = .white
+        schedulingLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
         schedulingLabel.text = "Sua reserva está marcada para \(schedulingData)"
         schedulingLabel.numberOfLines = 0
         schedulingLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -127,7 +127,7 @@ class ReservationCompletedView: UIViewController {
     private let placeDetailLabel: UILabel = {
         let placeDetailLabel = UILabel()
         placeDetailLabel.font = UIFont(name: "Ubuntu-Bold", size: CGFloat(20).generateSizeForScreen)
-        placeDetailLabel.textColor = .white
+        placeDetailLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
         placeDetailLabel.text = "Detalhe do espaço"
         placeDetailLabel.numberOfLines = 0
         placeDetailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -212,7 +212,7 @@ class ReservationCompletedView: UIViewController {
         createLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(12).generateSizeForScreen)
         createLabel.text = text
         createLabel.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
-        createLabel.textColor = .white
+        createLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
         return createLabel
     }
     
@@ -227,8 +227,8 @@ class ReservationCompletedView: UIViewController {
         logoIcon.widthAnchorInSuperview(CGFloat(198.05).generateSizeForScreen)
         
         waveIcon.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        waveIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(130).generateSizeForScreen).isActive = true
-        waveIcon.heightAnchor.constraint(equalToConstant: CGFloat(165.93).generateSizeForScreen).isActive = true
+        waveIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(143.05).generateSizeForScreen).isActive = true
+        waveIcon.heightAnchor.constraint(equalToConstant: CGFloat(199.37).generateSizeForScreen).isActive = true
         waveIcon.widthAnchor.constraint(equalToConstant: CGFloat(250.37).generateSizeForScreen).isActive = true
         
     }
@@ -248,81 +248,22 @@ class ReservationCompletedView: UIViewController {
         viewToScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
         
         locationLabel.topAnchor.constraint(equalTo: locationIcon.topAnchor).isActive = true
-        locationLabel.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor, constant: 17).isActive = true
+        locationLabel.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor, constant: CGFloat(17).generateSizeForScreen).isActive = true
         locationLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
         
         schedulingLabel.topAnchor.constraint(equalTo: schedulingIcon.topAnchor).isActive = true
-        schedulingLabel.leadingAnchor.constraint(equalTo: schedulingIcon.leadingAnchor, constant: 20).isActive = true
+        schedulingLabel.leadingAnchor.constraint(equalTo: schedulingIcon.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         schedulingLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
         
-        placeDetailLabel.topAnchor.constraint(equalTo: schedulingLabel.bottomAnchor, constant: 20).isActive = true
+        placeDetailLabel.topAnchor.constraint(equalTo: schedulingLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         placeDetailLabel.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
         placeDetailLabel.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-        
-//        placeInfo1Label.topAnchor.constraint(equalTo: placeDetailLabel.bottomAnchor, constant: 20).isActive = true
-//        placeInfo1Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo1Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        
-//        line2View.topAnchor.constraint(equalTo: placeInfo1Label.bottomAnchor, constant: 8).isActive = true
-//        line2View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-//        line2View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-//        line2View.heightAnchorInSuperview(1)
-//        
-//        placeInfo2Label.topAnchor.constraint(equalTo: placeInfo1Label.bottomAnchor, constant: 16).isActive = true
-//        placeInfo2Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo2Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        
-//        line3View.topAnchor.constraint(equalTo: placeInfo2Label.bottomAnchor, constant: 8).isActive = true
-//        line3View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-//        line3View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-//        line3View.heightAnchorInSuperview(1)
-//        
-//        placeInfo3Label.topAnchor.constraint(equalTo: placeInfo2Label.bottomAnchor, constant: 16).isActive = true
-//        placeInfo3Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo3Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        
-//        line4View.topAnchor.constraint(equalTo: placeInfo3Label.bottomAnchor, constant: 8).isActive = true
-//        line4View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-//        line4View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-//        line4View.heightAnchorInSuperview(1)
-//        
-//        placeInfo4Label.topAnchor.constraint(equalTo: placeInfo3Label.bottomAnchor, constant: 16).isActive = true
-//        placeInfo4Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo4Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        
-//        line5View.topAnchor.constraint(equalTo: placeInfo4Label.bottomAnchor, constant: 8).isActive = true
-//        line5View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-//        line5View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-//        line5View.heightAnchorInSuperview(1)
-//        
-//        placeInfo5Label.topAnchor.constraint(equalTo: placeInfo4Label.bottomAnchor, constant: 16).isActive = true
-//        placeInfo5Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo5Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        
-//        line6View.topAnchor.constraint(equalTo: placeInfo5Label.bottomAnchor, constant: 8).isActive = true
-//        line6View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-//        line6View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-//        line6View.heightAnchorInSuperview(1)
-//     
-//        placeInfo6Label.topAnchor.constraint(equalTo: placeInfo5Label.bottomAnchor, constant: 16).isActive = true
-//        placeInfo6Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo6Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        
-//        line7View.topAnchor.constraint(equalTo: placeInfo6Label.bottomAnchor, constant: 8).isActive = true
-//        line7View.leadingAnchor.constraint(equalTo: line1View.leadingAnchor).isActive = true
-//        line7View.trailingAnchor.constraint(equalTo: line1View.trailingAnchor).isActive = true
-//        line7View.heightAnchorInSuperview(1)
-//        
-//        placeInfo7Label.topAnchor.constraint(equalTo: placeInfo6Label.bottomAnchor, constant: 16).isActive = true
-//        placeInfo7Label.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
-//        placeInfo7Label.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
-//        placeInfo7Label.bottomAnchor.constraint(equalTo: viewToScroll.bottomAnchor, constant: -50).isActive = true
-        
+             
     }
     //MARK: - viewElementsConstraints
     private func viewElementsConstraints() {
         
-        titleLabel.topAnchor.constraint(equalTo: viewToScroll.topAnchor, constant: 0).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: viewToScroll.topAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: viewToScroll.leadingAnchor, constant: CGFloat(26).generateSizeForScreen).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: viewToScroll.trailingAnchor, constant: CGFloat(-26).generateSizeForScreen).isActive = true
         
