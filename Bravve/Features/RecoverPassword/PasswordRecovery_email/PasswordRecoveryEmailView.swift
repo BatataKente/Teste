@@ -43,6 +43,9 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(16).generateSizeForScreen)
         textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
         textField.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
+        textField.autocorrectionType = .no
+        textField.textContentType = .emailAddress
+        textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(changeText), for: .allEditingEvents)
         textField.isHidden = true
         return textField
