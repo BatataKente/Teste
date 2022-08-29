@@ -458,6 +458,13 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
                 self.countryLabel.text = button.currentTitle
                 self.countryLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
                 self.countryDropDown.frame.size = .zero
+                
+                if button.currentTitle == "Brasil"{
+                    self.countryImageFlag.image = UIImage(named: IconsBravve.flag.rawValue)
+                }else{
+                    self.countryImageFlag.image = UIImage(named: IconsBravve.map.rawValue)
+                                    
+                                }
             }
             button.addTarget(self, action: #selector(hiddenLabel), for: .touchUpInside)
             button.titleLabel?.textAlignment = .left
@@ -777,7 +784,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: countryImageFlag
     private lazy var countryImageFlag: UIImageView = {
-        let view = UIImageView(image: UIImage(named: IconsBravve.flag.rawValue))
+        let view = UIImageView(image: UIImage(named: ""))
         view.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 15, height: 15))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
