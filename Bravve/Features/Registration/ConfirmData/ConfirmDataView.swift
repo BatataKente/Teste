@@ -47,43 +47,35 @@ class ConfirmDataView: UIViewController {
             IconsBravve.padlockGray.rawValue,
             IconsBravve.pencilBlue.rawValue
         ])
+        // MARK: Alterações
         let fourDismissHandler = {(action: UIAction) in
-            if let passwordView = self.presentingViewController,
-               let emailView = passwordView.presentingViewController,
-               let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController{
-                
-                passwordView.view.isHidden = true
-                emailView.view.isHidden = true
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
-            }
+            
+            let nomeView = NomeView()
+            nomeView.modalPresentationStyle = .fullScreen
+            self.present(nomeView, animated: true)
         }
         
         let tripleDismissHandler = {(action: UIAction) in
-            if let emailView = self.presentingViewController,
-               let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController{
-                
-                emailView.view.isHidden = true
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
-            }
+            let phoneView = PhoneView()
+            phoneView.modalPresentationStyle = .fullScreen
+            self.present(phoneView, animated: true)
         }
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            if let phoneView = self.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
-                
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
-            }
+            let emailView = EmailView()
+            emailView.modalPresentationStyle = .fullScreen
+            self.present(emailView, animated: true)
+            
         }
         
         let dismissHandler = {(action: UIAction) in
             
-            self.dismiss(animated: false)
+            let passwordView = PasswordView(self.userToRegister)
+            passwordView.modalPresentationStyle = .fullScreen
+            self.present(passwordView, animated: true)
+            
+            
         }
         
         buttons[0].addAction(UIAction(handler: fourDismissHandler), for: .touchUpInside)

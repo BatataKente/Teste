@@ -8,7 +8,7 @@
 import Foundation
 
     var flag: Int = 0
-  
+    var flagReservation: Int = 0
 
 
 ///

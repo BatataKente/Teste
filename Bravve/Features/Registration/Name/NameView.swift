@@ -70,7 +70,7 @@ class NomeView: UIViewController {
         return customShaddow
     }()
     //MARK: viewElements
-    private lazy var viewElements: (rightStackView: UIStackView,
+     lazy var viewElements: (rightStackView: UIStackView,
                                     rightTextField: UITextField,
                                     rightLabel: UILabel,
                                     alertButton: UIButton) = {
@@ -145,9 +145,18 @@ class NomeView: UIViewController {
         setupTargets()
         setupConstraints()
         super.viewDidLoad()
-       
-        
+  
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if flag == 1{
+            self.stackViewTapped()
+            self.viewElements.rightTextField.becomeFirstResponder()
+            self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Name")
+        }
+    }
+    
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
@@ -157,6 +166,8 @@ class NomeView: UIViewController {
         
         true
     }
+    
+    
     //MARK: setupView
     private func setupView() {
         
@@ -244,16 +255,16 @@ class NomeView: UIViewController {
     
     //MARK: changeScreen
     @objc func changeScreen() {
-        
-//        userToRegister.name = viewElements.rightTextField.text ?? ""
         UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Name")
         
         if flag == 0{
         let phoneView = PhoneView(userToRegister)
         phoneView.modalPresentationStyle = .fullScreen
         present(phoneView, animated: false)
+        
         }else{
             self.dismiss(animated: true)
+            
         }
     }
     
