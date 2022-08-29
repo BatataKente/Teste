@@ -379,7 +379,7 @@ class OpenDetailsView: UIViewController {
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
-        scrollView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        
         let spaceCategoryNameLabel = UILabel()
         spaceCategoryNameLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         spaceCategoryNameLabel.font = UIFont(name: FontsBravve.light.rawValue,
@@ -407,9 +407,7 @@ class OpenDetailsView: UIViewController {
         sloganLabel.numberOfLines = 0
         
         let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        view.layer.cornerRadius = 12
-        
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         scrollView.addSubview(view)
         
         view.layer.shadowColor = UIColor.black.cgColor
@@ -421,7 +419,7 @@ class OpenDetailsView: UIViewController {
                                                    collectionViewLayout: collectionViewFlowLayout)
         
         photoCollectionView.register(OpenDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        photoCollectionView.setToDefaultBackgroundColor()
+        photoCollectionView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
