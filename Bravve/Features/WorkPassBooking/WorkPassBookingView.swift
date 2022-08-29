@@ -12,7 +12,7 @@ class WorkPassBookingView: UIViewController {
     
     var arrayFirstLabel = ["Cartão de Crédito","Foursys","Bravve"]
     var arraySecoundLabel = ["Conta pessoal","Workpass","Workpass"]
-    var arrayStackView = ["","666","666"]
+    var arrayStackView = ["","490","490"]
     private let space: SpaceDetail?
     
     private let spaceId: Int
