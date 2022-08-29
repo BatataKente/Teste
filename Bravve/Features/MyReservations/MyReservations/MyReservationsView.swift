@@ -1,5 +1,5 @@
 //
-//  CancelReservationView.swift
+//  MyReservations.swift
 //  Teste
 //
 //  Created by user208023 on 7/28/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CancelReservationView: UIViewController {
+class MyReservationsView: UIViewController {
     
     let customBar = UIView()
     
@@ -34,7 +34,7 @@ class CancelReservationView: UIViewController {
         myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.backgroundColor = UIColor(named: "background")
         
-        myTableView.register(CancelReservationCell.self, forCellReuseIdentifier: "Cell")
+        myTableView.register(MyReservationsCustomCell.self, forCellReuseIdentifier: "Cell")
         
         myTableView.rowHeight = CGFloat(538).generateSizeForScreen
         
@@ -73,14 +73,14 @@ class CancelReservationView: UIViewController {
     }
 }
 
-extension CancelReservationView: UITableViewDelegate, UITableViewDataSource {
+extension MyReservationsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CancelReservationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MyReservationsCustomCell
         cell?.delegate = self
         return cell ?? UITableViewCell()
     }
@@ -88,7 +88,7 @@ extension CancelReservationView: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension CancelReservationView: CancelReservationCellDelegate {
+extension MyReservationsView: MyReservationsCustomCellDelegate {
     
     func presentViewController(_ viewController: UIViewController) {
         viewController.modalPresentationStyle = .fullScreen
