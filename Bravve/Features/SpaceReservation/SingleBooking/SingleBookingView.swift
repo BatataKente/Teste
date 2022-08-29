@@ -30,7 +30,7 @@ class SingleBookingView: UIViewController {
     
     private let spaceId: Int
     
-    private var reservationId: String
+    private var reservationArray: [Reservations]
     
     private var userUUID: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return "User UUID unavailable"}
@@ -43,7 +43,7 @@ class SingleBookingView: UIViewController {
         
         self.spaceId = spaceId
         
-        self.reservationId = ""
+        self.reservationArray = []
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -368,11 +368,47 @@ extension SingleBookingView: CalendarViewProtocol {
                 
                 let trashHandler = {(action: UIAction) in
                     
-                    self.sessionManager.deleteData(id: self.reservationId, endpoint: .reservationsId) { (statusCode, error) in
-                        print(statusCode)
-                        timeStack.removeFromSuperview()
-                        hourInArray = []
-                        hourOutArray = []
+                    print("buttonTapped")
+                    
+                    guard let inHour = timeInStack.hourLabel.text else {
+                        print("Unable to find stack")
+                        return }
+                    
+                    var inDate: String {
+                        
+                        guard let month = Int(month) else { return "" }
+                        guard let day = Int(day) else { return "" }
+                        if (month < 10 && day < 10) {
+                            return "\(year)-0\(month)-0\(day)T\(inHour):00.000Z"
+                        } else if month < 10 {
+                            return "\(year)-0\(month)-\(day)T\(inHour):00.000Z"
+                        } else if day < 10 {
+                            return "\(year)-\(month)-0\(day)T\(inHour):00.000Z"
+                        } else {
+                            return "\(year)-\(month)-\(day)T\(inHour):00.000Z"
+                        }
+                    }
+                    
+                    for reservation in self.reservationArray {
+                        guard let reservationStartDt = reservation.start_dt else {
+                           print("Unable to unwrap start date")
+                            return }
+                        
+                        if reservationStartDt == inDate {
+                            
+                            guard let reservationId = reservation.id else {
+                                print("Unable to find id")
+                                return }
+                            self.sessionManager.deleteData(id: "\(reservationId)", endpoint: .reservationsId) { (statusCode, error) in
+                                
+                                timeStack.removeFromSuperview()
+                                hourInArray = []
+                                hourOutArray = []
+                        }
+                        } else {
+                            print("Reservation not found")
+                        }
+                    
                     }
                     
                 }
@@ -419,8 +455,8 @@ extension SingleBookingView: CalendarViewProtocol {
                         
                         self.sessionManager.postDataWithResponse(endpoint: .reservations, parameters: parameters) { (statusCode, error, reserve: Reservations?) in
                             print(reserve)
-                            guard let reserveID = reserve?.id else { return }
-                            self.reservationId = "\(reserveID)"
+                            guard let reserve = reserve else { return }
+                            self.reservationArray.append(reserve)
                             checkButton.isHidden = !checkButton.isHidden
                             trashButton.isHidden = !trashButton.isHidden
                             quitButton.isHidden = !quitButton.isHidden
