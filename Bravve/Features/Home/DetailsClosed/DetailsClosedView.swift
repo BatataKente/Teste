@@ -242,6 +242,7 @@ class DetailsClosedView: UIViewController {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
@@ -274,7 +275,6 @@ class DetailsClosedView: UIViewController {
         
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-        view.layer.cornerRadius = 12
         
         scrollView.addSubview(view)
         
@@ -287,7 +287,7 @@ class DetailsClosedView: UIViewController {
                                                    collectionViewLayout: collectionViewFlowLayout)
         
         photoCollectionView.register(DetailsClosedCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        photoCollectionView.setToDefaultBackgroundColor()
+        photoCollectionView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
@@ -375,7 +375,7 @@ class DetailsClosedView: UIViewController {
         sloganLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
         
         photoCollectionView.constraintOutsideTo(.top, sloganLabel, CGFloat(20).generateSizeForScreen)
-        photoCollectionView.constraintInsideTo(.leading, sloganLabel)
+        photoCollectionView.constraintInsideTo(.leading, view)
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
@@ -386,7 +386,7 @@ class DetailsClosedView: UIViewController {
         pageControl.constraintInsideTo(.trailing, photoCollectionView)
         
         nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(45).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, photoCollectionView)
+        nameLabel.constraintInsideTo(.leading, sloganLabel)
         
         label_1.constraintOutsideTo(.top, nameLabel, CGFloat(7.5).generateSizeForScreen)
         label_1.constraintInsideTo(.leading, nameLabel)
