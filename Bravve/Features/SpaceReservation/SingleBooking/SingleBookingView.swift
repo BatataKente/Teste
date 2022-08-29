@@ -10,10 +10,13 @@ import UIKit
 
 class SingleBookingView: UIViewController {
     
-    private let sessionManager = SessionManager()
+    struct TimeStack {
+        
+        let stack: UIStackView
+        let hourLabel: UILabel
+    }
     
-    private var hourInArray: [String] = []
-    private var hourOutArray: [String] = []
+    private let sessionManager = SessionManager()
     
     private var theme = MyTheme.light
     private var capacityNumber: Int {
@@ -27,10 +30,20 @@ class SingleBookingView: UIViewController {
     
     private let spaceId: Int
     
+    private var reservationId: String
+    
+    private var userUUID: String {
+        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return "User UUID unavailable"}
+        
+        return uuid
+    }
+    
     init(_ spaceDetails: SpaceDetail, spaceId: Int) {
         self.spaceDetails = spaceDetails
         
         self.spaceId = spaceId
+        
+        self.reservationId = ""
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -182,6 +195,65 @@ class SingleBookingView: UIViewController {
         
         self.present(reservation2View, animated: true)
     }
+    
+    private func createTimeStack(_ title: String?,_ checker: UIButton, hourArray: [String]) -> TimeStack {
+        
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        
+        let hourLabel = UILabel()
+       
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, hourLabel])
+        stackView.axis = .vertical
+        
+        let dropDownButton = UIButton()
+        dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+                                for: .normal)
+        
+        let stack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
+        
+        let handler = {(action: UIAction) in
+            
+            let dropDownButtonCenter = self.schedulesStack.convert(dropDownButton.center, from: dropDownButton.superview)
+    
+            var buttons = [UIButton]()
+    
+            for time in hourArray {
+    
+                let button = UIButton()
+                button.setTitle(time, for: .normal)
+                button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                     for: .normal)
+                
+                let handler = {(action: UIAction) in
+                    
+                    self.dropDown.frame.size = .zero
+                    hourLabel.text = time
+                }
+    
+                button.addAction(UIAction(handler: handler), for: .touchUpInside)
+    
+                buttons.append(button)
+            }
+            
+            if !hourArray.isEmpty && !checker.isHidden {
+                
+                self.dropDown.turnIntoAList(buttons)
+                
+                self.dropDown.showLikeAWindow(size: CGSize(width: dropDownButton.superview?.frame.size.width ?? 0,
+                                                           height: self.dropDownHeight),
+                                              origin: CGPoint(x: dropDownButton.superview?.frame.maxX ?? 0,
+                                                              y: self.schedulesStack.frame.minY + dropDownButtonCenter.y + dropDownButton.frame.height/2),
+                                              .downLeft)
+            }
+        }
+        
+        dropDownButton.addAction(UIAction(handler: handler),
+                                 for: .touchUpInside)
+
+        return TimeStack(stack: stack,
+                         hourLabel: hourLabel)
+    }
 }
 
 extension SingleBookingView: UIScrollViewDelegate {
@@ -196,61 +268,7 @@ extension SingleBookingView: UIScrollViewDelegate {
             }
         }
     }
-    
-    @objc func showDropDown(_ sender: UIButton) {
-        
-        let myButtonCenter = schedulesStack.convert(sender.center, from: sender.superview)
-        
-        var buttons = [UIButton]()
-        
-//        for time in self.availableTimes {
-//            
-//            let button = UIButton()
-//            button.setTitle(time, for: .normal)
-//            button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-//                                 for: .normal)
-//            
-//            let handler = {(action: UIAction) in
-//                
-//                if let timeStack = sender.superview as? UIStackView,
-//                   let stack = timeStack.arrangedSubviews[0] as? UIStackView,
-//                   let hourLabel = stack.arrangedSubviews[1] as? UILabel {
-//                    
-//                    self.dropDown.frame.size = .zero
-//                    hourLabel.text = time
-//                }
-//            }
-//            
-//            button.addAction(UIAction(handler: handler), for: .touchUpInside)
-//            
-//            buttons.append(button)
-//        }
-        
-        dropDown.turnIntoAList(buttons)
-        
-        dropDown.showLikeAWindow(size: CGSize(width: sender.superview?.frame.size.width ?? 0,
-                                                   height: dropDownHeight),
-                                      origin: CGPoint(x: sender.superview?.frame.maxX ?? 0,
-                                                      y: schedulesStack.frame.minY + myButtonCenter.y + sender.frame.height/2),
-                                      .downLeft)
-        
-        schedulesStack.bringSubviewToFront(dropDown)
-    }
 }
-
-//extension SingleBookingView: UIScrollViewDelegate {
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView){
-//
-//        for subview in scrollView.subviews {
-//
-//            if subview.frame.origin.x != 0 {
-//
-//                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-//            }
-//        }
-//    }
-//}
 
 extension SingleBookingView: CalendarViewProtocol {
     
@@ -261,10 +279,27 @@ extension SingleBookingView: CalendarViewProtocol {
         let dayLabel = UILabel()
         dayLabel.text = "\(day)/\(month)/\(year)"
         
-        let entireDayLabel = UILabel()
-        entireDayLabel.text = "Dia inteiro"
+        let entireDayButton = UIButton()
+        entireDayButton.setTitle("Dia inteiro", for: .normal)
+        entireDayButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                      for: .normal)
+        entireDayButton.setImage(UIImage(named: ButtonsBravve.toogleWhite.rawValue),
+                                for: .normal)
+        entireDayButton.setImage(UIImage(named: ButtonsBravve.toogleBlue.rawValue),
+                                for: .selected)
+
+        let handler = {(action: UIAction) in
+
+            entireDayButton.isSelected = !entireDayButton.isSelected
+        }
+
+        entireDayButton.addAction(UIAction(handler: handler),
+                                 for: .touchUpInside)
         
-        let dayLabelStack = UIStackView(arrangedSubviews: [dayLabel, entireDayLabel])
+        let dayLabelStack = UIStackView(arrangedSubviews: [dayLabel, entireDayButton])
+        
+        entireDayButton.widthAnchorInSuperview(CGFloat(100).generateSizeForScreen)
+        entireDayButton.constraintInsideTo(.height, dayLabelStack)
         
         let timeLabel = UILabel()
         timeLabel.text = "Horários"
@@ -274,8 +309,8 @@ extension SingleBookingView: CalendarViewProtocol {
         
         let addtimeButton = UIButton()
         
-        self.hourInArray = []
-        self.hourOutArray = []
+        var hourInArray: [String] = []
+        var hourOutArray: [String] = []
         
         let parameters = HoursParameters(space_id: self.spaceId, date: "\(year)-\(month)-\(day)", start_time: "08:00")
         
@@ -289,16 +324,16 @@ extension SingleBookingView: CalendarViewProtocol {
             
             for hour in hours {
                 
-                guard let hourFlag = hour.flag else { return }
-                guard let hourTime = hour.hour else { return }
+                guard let hourFlag = hour.flag else {return}
+                guard let hourTime = hour.hour else {return}
                 
                 if hourFlag {
                     
                     guard let timeInt = Int(hourTime.split(separator: ":")[0]) else { return }
                     
                     let timeOut = timeInt + 1
-                    self.hourOutArray.append("\(timeOut):00")
-                    self.hourInArray.append(hourTime)
+                    hourOutArray.append("\(timeOut):00")
+                    hourInArray.append(hourTime)
                 }
             }
             
@@ -306,148 +341,97 @@ extension SingleBookingView: CalendarViewProtocol {
             
             let handler = {(action: UIAction) in
                 
-                let timeInStack: UIStackView = {
-                                
-                                let inLabel = UILabel()
-                                inLabel.text = "Entrada"
-                                
-                                let hourLabel = UILabel()
-                               
-                                let stackView = UIStackView(arrangedSubviews: [inLabel, hourLabel])
-                                stackView.axis = .vertical
-                                
-                                let dropDownButton = UIButton()
-                                dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
-                                                        for: .normal)
-                                
-                                let timeInStack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
-                                
-                                let handler = {(action: UIAction) in
-                                    
-                                    let dropDownButtonCenter = self.schedulesStack.convert(dropDownButton.center, from: dropDownButton.superview)
-                            
-                                    var buttons = [UIButton]()
-                            
-                                    for time in self.hourInArray {
-                            
-                                        let button = UIButton()
-                                        button.setTitle(time, for: .normal)
-                                        button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                                                             for: .normal)
-                            
-                                        let handler = {(action: UIAction) in
-                                            
-                                            self.dropDown.frame.size = .zero
-                                            hourLabel.text = time
-                                        }
-                            
-                                        button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                            
-                                        buttons.append(button)
-                                    }
-                                    
-                                    if !self.hourInArray.isEmpty {
-                                        
-                                        self.dropDown.turnIntoAList(buttons)
-                                        
-                                        self.dropDown.showLikeAWindow(size: CGSize(width: dropDownButton.superview?.frame.size.width ?? 0,
-                                                                                   height: self.dropDownHeight),
-                                                                      origin: CGPoint(x: dropDownButton.superview?.frame.maxX ?? 0,
-                                                                                      y: self.schedulesStack.frame.minY + dropDownButtonCenter.y + dropDownButton.frame.height/2),
-                                                                      .downLeft)
-                                    }
-                                }
-                                
-                                
-                                dropDownButton.addAction(UIAction(handler: handler),
-                                                         for: .touchUpInside)
-             
-                                return timeInStack
-                            }()
-                
-                
-                let timeOutStack: UIStackView = {
-                                
-                                let inLabel = UILabel()
-                                inLabel.text = "Saída"
-                                
-                                let hourLabel = UILabel()
-                                
-                                let stackView = UIStackView(arrangedSubviews: [inLabel, hourLabel])
-                                stackView.axis = .vertical
-                                
-                                let dropDownButton = UIButton()
-                                dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
-                                                        for: .normal)
-                                
-                                let timeOutStack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
-                                
-                                let handler = {(action: UIAction) in
-                                    
-                                    let dropDownButtonCenter = self.schedulesStack.convert(dropDownButton.center, from: dropDownButton.superview)
-                            
-                                    var buttons = [UIButton]()
-                            
-                                    for time in self.hourOutArray {
-                            
-                                        let button = UIButton()
-                                        
-                                        button.setTitle(time, for: .normal)
-                                        
-                                        button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                                                             for: .normal)
-                            
-                                        let handler = {(action: UIAction) in
-                                            
-                                            self.dropDown.frame.size = .zero
-                                            hourLabel.text = time
-                                        }
-                            
-                                        button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                            
-                                        buttons.append(button)
-                                    }
-                            
-                                    if !self.hourInArray.isEmpty {
-                                        
-                                        self.dropDown.turnIntoAList(buttons)
-                                        
-                                        self.dropDown.showLikeAWindow(size: CGSize(width: dropDownButton.superview?.frame.size.width ?? 0,
-                                                                                   height: self.dropDownHeight),
-                                                                      origin: CGPoint(x: dropDownButton.superview?.frame.maxX ?? 0,
-                                                                                      y: self.schedulesStack.frame.minY + dropDownButtonCenter.y + dropDownButton.frame.height/2),
-                                                                      .downLeft)
-                                    }
-                                }
-                                
-                                
-                                dropDownButton.addAction(UIAction(handler: handler),
-                                                         for: .touchUpInside)
-                    
-                                return timeOutStack
-                            }()
-                
-                
                 let trashButton = UIButton()
-                trashButton.setImage(UIImage(named: ButtonsBravve.alert.rawValue),
+                trashButton.setImage(UIImage(named: ButtonsBravve.trash.rawValue),
                                         for: .normal)
+                trashButton.isHidden = true
                 
-                let timeStack = UIStackView(arrangedSubviews: [timeInStack, timeOutStack, trashButton])
+                let checkButton = UIButton()
+                checkButton.setImage(UIImage(named: "checkPink"),
+                                             for: .normal)
+                
+                let timeInStack = self.createTimeStack("Entrada", checkButton, hourArray: hourInArray)
+                
+                let timeOutStack = self.createTimeStack("Saída", checkButton, hourArray: hourOutArray)
+                
+                let quitButton = UIButton()
+                quitButton.setImage(UIImage(named: "xmarkPink"),
+                                            for: .normal)
+                
+                let timeStack = UIStackView(arrangedSubviews: [timeInStack.stack, timeOutStack.stack, trashButton, checkButton, quitButton])
                 timeStack.distribution = .fillProportionally
                 
-                timeInStack.widthAnchorInSuperview(self.timeStacksSize.width)
-                timeInStack.heightAnchorInSuperview(self.timeStacksSize.height)
-                timeOutStack.widthAnchorInSuperview(self.timeStacksSize.width)
-                timeOutStack.heightAnchorInSuperview(self.timeStacksSize.height)
+                timeInStack.stack.widthAnchorInSuperview(self.timeStacksSize.width)
+                timeInStack.stack.heightAnchorInSuperview(self.timeStacksSize.height)
+                timeOutStack.stack.widthAnchorInSuperview(self.timeStacksSize.width)
+                timeOutStack.stack.heightAnchorInSuperview(self.timeStacksSize.height)
                 
-                let handler = {(action: UIAction) in
+                let trashHandler = {(action: UIAction) in
                     
-                    timeStack.removeFromSuperview()
-                    self.hourInArray = []
-                    self.hourOutArray = []
+                    self.sessionManager.deleteData(id: self.reservationId, endpoint: .reservationsId) { (statusCode, error) in
+                        print(statusCode)
+                        timeStack.removeFromSuperview()
+                        hourInArray = []
+                        hourOutArray = []
+                    }
+                    
                 }
                 
-                trashButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+                let quitHandler = { (action: UIAction) in
+                    
+                    timeStack.removeFromSuperview()
+                    hourInArray = []
+                    hourOutArray = []
+                }
+                trashButton.addAction(UIAction(handler: trashHandler),
+                                      for: .touchUpInside)
+                quitButton.addAction(UIAction(handler: quitHandler),
+                                     for: .touchUpInside)
+                
+                let checkHandler = {(action: UIAction) in
+                    
+                    guard let inHour = timeInStack.hourLabel.text else { return }
+                    guard let outHour = timeOutStack.hourLabel.text else { return }
+                    
+                    if timeInStack.hourLabel.text != nil &&
+                       timeOutStack.hourLabel.text != nil {
+                        
+                        let inDate = "\(year)-\(month)-\(day)T\(inHour):00+0000"
+                        let outDate = "\(year)-\(month)-\(day)T\(outHour):00+0000"
+                        
+                        let dateFormatter = ISO8601DateFormatter()
+                        let inDateFormatted = dateFormatter.date(from: inDate)
+                        guard let date = inDateFormatted else {
+                            print("Invalid indate format")
+                            return
+                        }
+                        let timeInDate = dateFormatter.string(from: date)
+                        
+                        let outDateFormatted = dateFormatter.date(from: outDate)
+                        
+                        guard let outDateFormatted = outDateFormatted else {
+                            print("Invalid outdate format")
+                            return
+                        }
+                        let timeOutDate = dateFormatter.string(from: outDateFormatted)
+                        
+                        let parameters = ReservationParameters(uuid: self.userUUID, space_id: self.spaceId, reservation_type_id: 1, reservation_status_id: 1, space_contract_id: 2, rent_qty: 1, start_dt: timeInDate, end_dt: timeOutDate)
+                        
+                        self.sessionManager.postDataWithResponse(endpoint: .reservations, parameters: parameters) { (statusCode, error, reserve: Reservations?) in
+                            print(reserve)
+                            guard let reserveID = reserve?.id else { return }
+                            self.reservationId = "\(reserveID)"
+                            checkButton.isHidden = !checkButton.isHidden
+                            trashButton.isHidden = !trashButton.isHidden
+                            quitButton.isHidden = !quitButton.isHidden
+                        }
+                        
+                        
+                    }
+                }
+                
+                checkButton.addAction(UIAction(handler: checkHandler),
+                                      for: .touchUpInside)
                 
                 timesStack.addArrangedSubview(timeStack)
             }

@@ -316,8 +316,27 @@ class LoginView: UIViewController {
                     return
                 }
                 
-                    UserDefaults.standard.setValue(tokenResponse, forKey: "access_token")
+                UserDefaults.standard.setValue(tokenResponse, forKey: "access_token")
+                
+                self.sessionManager.getDataArray(endpoint: .users) { (statusCode, error, users: [User]?) in
+                    
+                    guard let users = users else {
+                        return
+                    }
+
+                    for user in users {
+                        
+                        guard let userEmail = user.email else { return }
+                        if userEmail == email {
+                            
+                            guard let userUUID = user.uuid else { return }
+                            UserDefaults.standard.setValue(userUUID, forKey: "userUUID")
+                        }
+                    }
                     self.present(vc, animated: false)
+                }
+                
+                
             }
         } else{
             loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
