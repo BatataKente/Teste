@@ -65,7 +65,7 @@ class PhoneView: UIViewController {
         return customShaddow
     }()
     //MARK: viewElements
-    private lazy var viewElements: (rightStackView: UIStackView,
+     lazy var viewElements: (rightStackView: UIStackView,
                                     leftStackView: UIStackView,
                                     rightTextField: UITextField,
                                     rightLabel: UILabel,
@@ -232,6 +232,15 @@ class PhoneView: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if flag == 1{
+            self.stackViewTapped()
+            self.viewElements.rightTextField.becomeFirstResponder()
+            self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Number")
+        }
+    }
+    
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
@@ -250,11 +259,15 @@ class PhoneView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            if let nomeView = self.presentingViewController,
-               let loginView = nomeView.presentingViewController {
-                
-                nomeView.view.isHidden = true
-                loginView.dismiss(animated: true)
+            if flag == 0{
+                if let nomeView = self.presentingViewController,
+                   let loginView = nomeView.presentingViewController {
+                    
+                    nomeView.view.isHidden = true
+                    loginView.dismiss(animated: true)
+                }
+            } else{
+                self.dismiss(animated: true)
             }
         }
         

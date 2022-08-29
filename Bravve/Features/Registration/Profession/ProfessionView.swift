@@ -12,7 +12,12 @@ class ProfessionView: UIViewController {
     let backButton = UIButton()
     let logoBravve = UIImageView()
     let backgroundImageView = UIImageView()
+    
+    let continueButton:UIButton = {
     let continueButton = UIButton()
+        continueButton.addTarget(self, action: #selector(continueToHobbies), for: .touchUpInside)
+        return continueButton
+    }()
     
     
     let selectAreaButton: UIButton = {
@@ -256,7 +261,7 @@ class ProfessionView: UIViewController {
         }
     
     @objc func continueToHobbies() {
-        let hobbiesView = HobbiesView ()
+        let hobbiesView = HobbiesView()
         hobbiesView.modalPresentationStyle = .fullScreen
         present(hobbiesView, animated: true, completion: nil)
     }

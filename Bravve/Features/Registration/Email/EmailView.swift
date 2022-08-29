@@ -12,7 +12,7 @@ import UIKit
 class EmailView: UIViewController {
     
     var userToRegister: UserParameters
-   
+    
     
     init(_ userToRegister: UserParameters = UserParameters(name: nil,
                                                            phone_number: nil,
@@ -23,7 +23,7 @@ class EmailView: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
     }
-   
+    
     //MARK: Elements
     override var prefersStatusBarHidden: Bool {
         
@@ -83,10 +83,10 @@ class EmailView: UIViewController {
         return customShaddow
     }()
     //MARK: viewElements
-    private lazy var viewElements: (rightStackView: UIStackView,
-                                    rightTextField: UITextField,
-                                    rightLabel: UILabel,
-                                    alertButton: UIButton) = {
+    lazy var viewElements: (rightStackView: UIStackView,
+                            rightTextField: UITextField,
+                            rightLabel: UILabel,
+                            alertButton: UIButton) = {
         
         let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
@@ -165,9 +165,16 @@ class EmailView: UIViewController {
         setupConstraints()
         
         super.viewDidLoad()
-        
-        
-        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if flag == 1{
+            self.stackViewTapped()
+            self.viewElements.rightTextField.becomeFirstResponder()
+            self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Mail")
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -186,13 +193,18 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            if let phoneView = self.presentingViewController,
-               let nomeView = phoneView.presentingViewController,
-               let loginView = nomeView.presentingViewController {
+            if flag == 0{
+                if let phoneView = self.presentingViewController,
+                   let nomeView = phoneView.presentingViewController,
+                   let loginView = nomeView.presentingViewController {
+                    
+                    phoneView.view.isHidden = true
+                    nomeView.view.isHidden = true
+                    loginView.dismiss(animated: true)
+                }
                 
-                phoneView.view.isHidden = true
-                nomeView.view.isHidden = true
-                loginView.dismiss(animated: true)
+            }else{
+                self.dismiss(animated: true)
             }
         }
         
@@ -269,13 +281,13 @@ class EmailView: UIViewController {
     //MARK: changeScreen
     @objc func changeScreen() {
         
-//        userToRegister.email = viewElements.rightTextField.text ?? ""
+        //        userToRegister.email = viewElements.rightTextField.text ?? ""
         UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Mail")
         
         if flag == 0{
-        let passwordView = PasswordView(userToRegister)
-        passwordView.modalPresentationStyle = .fullScreen
-        present(passwordView, animated: false)
+            let passwordView = PasswordView(userToRegister)
+            passwordView.modalPresentationStyle = .fullScreen
+            present(passwordView, animated: false)
         }else{
             self.dismiss(animated: true)
         }

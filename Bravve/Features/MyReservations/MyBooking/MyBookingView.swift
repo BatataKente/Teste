@@ -82,6 +82,10 @@ extension MyBookingView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MyBookingCustomCell
         cell?.delegate = self
+        if cell?.textLabel?.text != "" {
+            flagReservation = 1
+        }
+    
         return cell ?? UITableViewCell()
     }
     
