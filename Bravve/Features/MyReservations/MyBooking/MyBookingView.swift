@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyReservationsView: UIViewController {
+class MyBookingView: UIViewController {
     
     let customBar = UIView()
     
@@ -34,7 +34,7 @@ class MyReservationsView: UIViewController {
         myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.backgroundColor = UIColor(named: "background")
         
-        myTableView.register(MyReservationsCustomCell.self, forCellReuseIdentifier: "Cell")
+        myTableView.register(MyBookingCustomCell.self, forCellReuseIdentifier: "Cell")
         
         myTableView.rowHeight = CGFloat(538).generateSizeForScreen
         
@@ -73,14 +73,14 @@ class MyReservationsView: UIViewController {
     }
 }
 
-extension MyReservationsView: UITableViewDelegate, UITableViewDataSource {
+extension MyBookingView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MyReservationsCustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MyBookingCustomCell
         cell?.delegate = self
         return cell ?? UITableViewCell()
     }
@@ -88,7 +88,7 @@ extension MyReservationsView: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension MyReservationsView: MyReservationsCustomCellDelegate {
+extension MyBookingView: MyBookingCustomCellDelegate {
     
     func presentViewController(_ viewController: UIViewController) {
         viewController.modalPresentationStyle = .fullScreen
