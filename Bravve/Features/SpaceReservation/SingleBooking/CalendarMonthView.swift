@@ -38,13 +38,16 @@ class CalendarMonthView: UIView {
             
             currentMonthIndex += 1
             if currentMonthIndex > 11 {
+                
                 currentMonthIndex = 0
                 currentYear += 1
             }
-        } else {
+        }
+        else {
 
             currentMonthIndex -= 1
             if currentMonthIndex < 0 {
+                
                 currentMonthIndex = 11
                 currentYear -= 1
             }
@@ -56,23 +59,23 @@ class CalendarMonthView: UIView {
     func setupViews() {
         
         self.addSubview(lblName)
-        lblName.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        lblName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
-        lblName.widthAnchor.constraint(equalToConstant: 150).isActive=true
-        lblName.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
-        lblName.text="\(monthsArr[currentMonthIndex]) \(currentYear)"
+        lblName.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        lblName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        lblName.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        lblName.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        lblName.text = "\(monthsArr[currentMonthIndex]) \(currentYear)"
         
         self.addSubview(btnRight)
-        btnRight.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        btnRight.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        btnRight.widthAnchor.constraint(equalToConstant: 50).isActive=true
-        btnRight.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
+        btnRight.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        btnRight.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        btnRight.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        btnRight.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
         self.addSubview(btnLeft)
-        btnLeft.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        btnLeft.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        btnLeft.widthAnchor.constraint(equalToConstant: 50).isActive=true
-        btnLeft.heightAnchor.constraint(equalTo: heightAnchor).isActive=true
+        btnLeft.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        btnLeft.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        btnLeft.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        btnLeft.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
     
     let lblName: UILabel = {
@@ -89,10 +92,10 @@ class CalendarMonthView: UIView {
     
     let btnRight: UIButton = {
         
-        let btn=UIButton()
+        let btn = UIButton()
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
@@ -100,10 +103,10 @@ class CalendarMonthView: UIView {
     
     let btnLeft: UIButton = {
         
-        let btn=UIButton()
+        let btn = UIButton()
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         btn.setTitleColor(UIColor.lightGray, for: .disabled)

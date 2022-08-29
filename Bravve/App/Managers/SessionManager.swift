@@ -201,7 +201,7 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             print(url)
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
-//                print(response.debugDescription)
+                print(response.debugDescription)
                 if let data = response.value {
                     completionHandler(response.response?.statusCode, nil, data)
                 } else {
