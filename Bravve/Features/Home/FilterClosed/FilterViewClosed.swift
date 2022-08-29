@@ -146,7 +146,6 @@ final class FilterViewClosed: UIViewController {
     //MARK: capacityButton
     private lazy var capacityButton: UIButton = {
         let view = UIButton()
-//        view.setImage(UIImage(named: "arrowUp"), for: .selected)
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
         view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
         
@@ -185,8 +184,6 @@ final class FilterViewClosed: UIViewController {
         
         return capacityDropDown
     }()
-    
-    // NÃO TEM LINE NO ENUM
     
     //MARK: lines
     let lines: [UIImageView] = {
@@ -240,7 +237,6 @@ final class FilterViewClosed: UIViewController {
         return view
     }()
     
-    // COR DA LABEL
     //MARK: categoryLabel
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()
@@ -489,6 +485,7 @@ final class FilterViewClosed: UIViewController {
         }
         selectedItemsArray.append(contentsOf: selectedFacilitiesArray)
         print(selectedItemsArray)
+        print(selectedFacilitiesArray)
         
         spaceParameters.space_type_id = spaceTypeId
         spaceParameters.space_classification_id = spaceClassificationId

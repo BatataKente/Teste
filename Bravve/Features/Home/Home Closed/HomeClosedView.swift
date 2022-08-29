@@ -67,6 +67,7 @@ class HomeClosedView: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [filterStackView,
                                                        tableView])
         stackView.axis = .vertical
+        stackView.isHidden = false
         stackView.alignment = .leading
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 0,
@@ -163,12 +164,11 @@ class HomeClosedView: UIViewController {
         
         self.spaceParameters = spaceParameters
         self.selectedItemsArray = selectedItemsArray
+
         
         super.init(nibName: nil, bundle: nil)
     }
-    
-  
-    
+
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
@@ -188,7 +188,14 @@ class HomeClosedView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         seletedFilterItems = selectedItemsArray
-        
+        print("kaue \(spaceParameters.space_category_id)")
+        print("kaue \(spaceParameters.space_type_id)")
+        print("kaue \(spaceParameters.space_facilities_id)")
+        print("kaue \(spaceParameters.space_contract_Type)")
+        print("kaue \(spaceParameters.space_classification_id)")
+        print("kaue \(spaceParameters.space_noise_level_id)")
+        print("kaue \(spaceParameters.seats_qty)")
+        print("kaue \(seletedFilterItems)")
         setupView()
         setupConstraints()
         setupDefaults()
@@ -244,7 +251,7 @@ class HomeClosedView: UIViewController {
         if self.seletedFilterItems.isEmpty {
             self.filterStackView.isHidden = true
         }
-
+        
         setupSelectedButtons(filterStackView)
         
         for button in filterButtons {
@@ -257,7 +264,7 @@ class HomeClosedView: UIViewController {
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
         
-        //filterStackView.addArrangedSubviews(filterButtons)
+        
         tabBar.selectedItem = tabBar.items?[0]
     }
     

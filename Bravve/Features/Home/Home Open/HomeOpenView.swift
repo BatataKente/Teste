@@ -259,8 +259,7 @@ class HomeOpenView: UIViewController {
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
-        
-        //filterStackView.addArrangedSubviews(filterButtons)
+
         tabBar.selectedItem = tabBar.items?[0]
     }
     
