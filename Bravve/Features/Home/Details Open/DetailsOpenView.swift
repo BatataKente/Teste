@@ -33,7 +33,7 @@ class OpenDetailsView: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         setupView()
         setupDefaults()
         setupConstraints()
@@ -375,10 +375,11 @@ class OpenDetailsView: UIViewController {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
-        
+        scrollView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         let spaceCategoryNameLabel = UILabel()
         spaceCategoryNameLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         spaceCategoryNameLabel.font = UIFont(name: FontsBravve.light.rawValue,
@@ -406,7 +407,7 @@ class OpenDetailsView: UIViewController {
         sloganLabel.numberOfLines = 0
         
         let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         view.layer.cornerRadius = 12
         
         scrollView.addSubview(view)
@@ -508,7 +509,7 @@ class OpenDetailsView: UIViewController {
         sloganLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
         
         photoCollectionView.constraintOutsideTo(.top, sloganLabel, CGFloat(20).generateSizeForScreen)
-        photoCollectionView.constraintInsideTo(.leading, sloganLabel)
+        photoCollectionView.constraintInsideTo(.leading, view)
         photoCollectionView.constraintInsideTo(.trailing, view)
         photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
         
@@ -519,7 +520,7 @@ class OpenDetailsView: UIViewController {
         pageControl.constraintInsideTo(.trailing, photoCollectionView)
         
         nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(45).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, photoCollectionView)
+        nameLabel.constraintInsideTo(.leading, sloganLabel)
         
         label_1.constraintOutsideTo(.top, nameLabel, CGFloat(7.5).generateSizeForScreen)
         label_1.constraintInsideTo(.leading, nameLabel)
