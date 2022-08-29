@@ -149,7 +149,6 @@ final class FilterScreen: UIViewController {
     //MARK: capacityButton
     private lazy var capacityButton: UIButton = {
         let view = UIButton()
-//        view.setImage(UIImage(named: "arrowUp"), for: .selected)
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
         view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
         
@@ -188,8 +187,6 @@ final class FilterScreen: UIViewController {
         
         return capacityDropDown
     }()
-    
-    
     
     //MARK: lines
     let lines: [UIImageView] = {
@@ -243,7 +240,6 @@ final class FilterScreen: UIViewController {
         return view
     }()
     
-    // COR DA LABEL
     //MARK: categoryLabel
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()

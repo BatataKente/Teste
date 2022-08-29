@@ -33,8 +33,6 @@ class HomeClosedViewModel {
         let smallFont = UIFont(name: FontsBravve.light.rawValue,
                                size: CGFloat(11).generateSizeForScreen)
         
-        var parameters = SpaceListParameters()
-        
         sessionManager.getOpenDataArray (endpoint: .utilsStates){ (statusCode, error, states: [States]?) in
 
             guard let states = states else {
@@ -62,9 +60,9 @@ class HomeClosedViewModel {
                                                                      size: CGFloat(15).generateSizeForScreen)
                     self.delegate?.reduceDropDowns()
                     
-                    parameters.space_state_id = state.id
+                    self.spaceParameters.space_state_id = state.id
                     
-                    self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
+                    self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: self.spaceParameters) {(statusCode, error, spaces: [Space]?) in
                         
                         guard let spaces = spaces else {
                             print(statusCode as Any)
@@ -114,9 +112,9 @@ class HomeClosedViewModel {
                                 self.customBarWithFilter.cityChosedLabel.isHidden = false
                                 self.delegate?.reduceDropDowns()
                                 
-                                parameters.space_city_id = city.id
+                                self.spaceParameters.space_city_id = city.id
                                 
-                                self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
+                                self.sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: self.spaceParameters) {(statusCode, error, spaces: [Space]?) in
                                     
                                     guard let spaces = spaces else {
                                         print(statusCode as Any)
@@ -151,7 +149,7 @@ class HomeClosedViewModel {
             self.delegate?.setupLeftDropDown(stateButtons)
         }
         
-        sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: parameters) {(statusCode, error, spaces: [Space]?) in
+        sessionManager.postDataWithOpenArrayResponse(endpoint: .spacesList, parameters: spaceParameters) {(statusCode, error, spaces: [Space]?) in
             
             guard let spaces = spaces else {
                 print(statusCode as Any)
