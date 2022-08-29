@@ -200,7 +200,7 @@ class ReservationCompletedView: UIViewController {
     
     //MARK: - tapButtonReservation
     @objc func tapButtonReservation() {
-        let vc = MyReservationsView()
+        let vc = MyBookingView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

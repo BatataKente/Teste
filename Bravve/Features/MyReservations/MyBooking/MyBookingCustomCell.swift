@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol MyReservationsCustomCellDelegate: AnyObject {
+protocol MyBookingCustomCellDelegate: AnyObject {
     func presentViewController(_ viewController: UIViewController)
 }
 
-class MyReservationsCustomCell: UITableViewCell {
+class MyBookingCustomCell: UITableViewCell {
     
-    weak var delegate: MyReservationsCustomCellDelegate?
+    weak var delegate: MyBookingCustomCellDelegate?
     
     let cellView: UIView = {
         let view = UIView()
