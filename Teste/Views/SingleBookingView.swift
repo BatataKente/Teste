@@ -39,6 +39,7 @@ class SingleBookingView: UIViewController {
     }
     
     init(_ spaceDetails: SpaceDetail, spaceId: Int) {
+        
         self.spaceDetails = spaceDetails
         
         self.spaceId = spaceId
@@ -70,8 +71,10 @@ class SingleBookingView: UIViewController {
     private let daysChoiceLabel: UILabel = {
         
        let daysChoiceLabel = UILabel()
-        daysChoiceLabel.text = "Escolha dia e hora"
+        daysChoiceLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                      size: CGFloat(15).generateSizeForScreen)
         daysChoiceLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        daysChoiceLabel.text = "Escolha dia e hora"
         daysChoiceLabel.textAlignment = .left
         return daysChoiceLabel
     }()
@@ -79,8 +82,10 @@ class SingleBookingView: UIViewController {
     private lazy var capacityLabel: UILabel = {
         
        let capacityLabel = UILabel()
-        capacityLabel.text = "Capacidade: \(capacityNumber) pessoas"
+        capacityLabel.font = UIFont(name: FontsBravve.medium.rawValue,
+                                      size: CGFloat(15).generateSizeForScreen)
         capacityLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        capacityLabel.text = "Capacidade: \(capacityNumber) pessoas"
         capacityLabel.textAlignment = .left
         
         return capacityLabel
@@ -199,9 +204,15 @@ class SingleBookingView: UIViewController {
     private func createTimeStack(_ title: String?,_ checker: UIButton, hourArray: [String]) -> TimeStack {
         
         let titleLabel = UILabel()
+        titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                 size: CGFloat(11).generateSizeForScreen)
+        titleLabel.textColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         titleLabel.text = title
         
         let hourLabel = UILabel()
+        hourLabel.font = UIFont(name: FontsBravve.medium.rawValue,
+                                size: CGFloat(15).generateSizeForScreen)
+        hourLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
        
         let stackView = UIStackView(arrangedSubviews: [titleLabel, hourLabel])
         stackView.axis = .vertical
@@ -277,16 +288,31 @@ extension SingleBookingView: CalendarViewProtocol {
         self.dropDown.frame.size = .zero
         
         let dayLabel = UILabel()
+        dayLabel.font = UIFont(name: FontsBravve.medium.rawValue,
+                                size: CGFloat(16).generateSizeForScreen)
+        dayLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         dayLabel.text = "\(day)/\(month)/\(year)"
+        dayLabel.textAlignment = .left
+        
+        let entireDayLabel = UILabel()
+        entireDayLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                     size: CGFloat(15).generateSizeForScreen)
+        entireDayLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        entireDayLabel.text = "Dia inteiro"
+        entireDayLabel.textAlignment = .right
         
         let entireDayButton = UISwitch()
         entireDayButton.onTintColor = UIColor(named: ColorsBravve.blue.rawValue)
+        entireDayButton.transform = CGAffineTransform(scaleX: 0.7059, y: 0.645)
         
-        let dayLabelStack = UIStackView(arrangedSubviews: [dayLabel, entireDayButton])
-        dayLabelStack.distribution = .fillProportionally
-        dayLabelStack.backgroundColor = .red
+        let entireDayStack = UIStackView(arrangedSubviews: [dayLabel, entireDayButton, entireDayLabel])
+        
+        dayLabel.constraintInsideTo(.width, entireDayStack, multiplier: 0.65)
         
         let timeLabel = UILabel()
+        timeLabel.font = UIFont(name: FontsBravve.medium.rawValue,
+                                size: CGFloat(16).generateSizeForScreen)
+        timeLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         timeLabel.text = "Horários"
         
         let timesStack = UIStackView()
@@ -465,11 +491,10 @@ extension SingleBookingView: CalendarViewProtocol {
             addtimeButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                         for: .normal)
             
-            let chosedDayStack = UIStackView(arrangedSubviews: [dayLabelStack, timeLabel, timesStack, addtimeButton])
+            let chosedDayStack = UIStackView(arrangedSubviews: [entireDayStack, timeLabel, timesStack, addtimeButton])
             chosedDayStack.axis = .vertical
             
             self.schedulesStack.addArrangedSubview(chosedDayStack)
-
         }
     }
     
