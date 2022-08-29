@@ -22,6 +22,7 @@ class BookingHistoryView: UIViewController {
         return tabBar
     }()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +44,7 @@ class BookingHistoryView: UIViewController {
         
         view.addSubviews([topRightWay, bottomLeftWay, customBar, myTableView, tabBar])
         
-        tabBar.selectedItem = tabBar.items?[2]
+        tabBar.selectedItem = tabBar.items?[1]
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") { _ in
             
@@ -83,6 +84,8 @@ extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
         cell?.delegate = self
         return cell ?? UITableViewCell()
     }
+    
+    
 }
 
 extension BookingHistoryView: BookingHistoryCustomCellDelegate {
@@ -91,4 +94,6 @@ extension BookingHistoryView: BookingHistoryCustomCellDelegate {
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
     }
+    
+    
 }
