@@ -1,108 +1,43 @@
 //
 //  Reservas2.swift
-//  Teste
+//  Bravve
 //
 //  Created by user208023 on 8/4/22.
 //
 
 import UIKit
 
-class Reservas2: UIViewController {
+class Reservation2View: UIViewController {
     
-    private let navBarView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private lazy var tabBar = TabBarClosed(self)
     
-    private let navBarBackgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private let tableView = UITableView()
     
-    private let backBarButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let siteNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Nome do espaço"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let partnerNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Nome do local parceiro"
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var navBarLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [siteNameLabel, partnerNameLabel])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .center
-        return stackView
-    }()
-    
-    private let cardButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: IconsBravve.creditGray.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentMode = .scaleAspectFit
-        return button
-    }()
-    
-    private let calendarButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: IconsBravve.calendarGray.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentMode = .scaleAspectFit
-        return button
-    }()
-    
-    private let pencilButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: IconsBravve.pencilBlue.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentMode = .scaleAspectFit
-        return button
-    }()
-    
-    private let revisionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Revisão"
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(14).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let paymentButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: IconsBravve.creditGray.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentMode = .scaleAspectFit
-        return button
-    }()
-    
-    private lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [cardButton, calendarButton, pencilButton, revisionLabel, paymentButton])
-        stackView.distribution = .equalSpacing
-        stackView.spacing = CGFloat(7).generateSizeForScreen
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var  buttons: [UIButton] = {
+        
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.walletGray.rawValue, IconsBravve.calendarGray.rawValue, IconsBravve.pencilBlue.rawValue, IconsBravve.creditGray.rawValue])
+        
+        buttons[2].setTitle("Revisão", for: .normal)
+        
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let singleBooking = self.presentingViewController,
+               let workPassBooking = singleBooking.presentingViewController {
+                
+                singleBooking.view.isHidden = true
+                workPassBooking.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
+        
+        return buttons
     }()
     
     private let revisionTitleLabel: UILabel = {
@@ -360,35 +295,38 @@ class Reservas2: UIViewController {
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        navBarView.addSubviews([navBarBackgroundImageView, backBarButton, navBarLabelStackView])
-        view.addSubviews([navBarView, buttonStackView, revisionTitleLabel, locationDetailLabel, locationStackView, locationStackViewSeparator, summaryTitleLabel, dailyLabel, numberOfDaysLabel, hoursLabel, numberOfHoursLabel, editButton, summarySeparator, firstDateLabel, clockIcon, timeLabel, costLabel, clockIconReserv2, timeLabelReserv2, costLabelReserv2, dateSeparator, secondDateLabel, secondDateClockIcon, secondDateTimeLabel, secondDateCostLabel, confirmReservationButton])
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.bounces = false
+        tableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        view.addSubviews([tableView, confirmReservationButton, tabBar])
+        
+        tableView.addSubviews([revisionTitleLabel, locationDetailLabel, locationStackView, locationStackViewSeparator, summaryTitleLabel, dailyLabel, numberOfDaysLabel, hoursLabel, numberOfHoursLabel, editButton, summarySeparator, firstDateLabel, clockIcon, timeLabel, costLabel, clockIconReserv2, timeLabelReserv2, costLabelReserv2, dateSeparator, secondDateLabel, secondDateClockIcon, secondDateTimeLabel, secondDateCostLabel])
+        
+        tabBar.selectedItem = tabBar.items?[0]
+        
+        view.createReservationCustomBar (progressBarButtons: buttons) { _ in
+            self.dismiss(animated: true)
+        }
+        
+        
+        confirmReservationButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
         NSLayoutConstraint.activate([
-        
-            navBarView.topAnchor.constraint(equalTo: view.topAnchor),
-            navBarView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            navBarView.heightAnchor.constraint(equalToConstant: CGFloat(153).generateSizeForScreen),
             
-            navBarBackgroundImageView.topAnchor.constraint(equalTo: navBarView.topAnchor),
-            navBarBackgroundImageView.widthAnchor.constraint(equalTo: navBarView.widthAnchor),
-            navBarBackgroundImageView.heightAnchor.constraint(equalTo: navBarView.heightAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.bottomAnchor.constraint(equalTo: confirmReservationButton.topAnchor, constant: 0),
             
-            backBarButton.centerYAnchor.constraint(equalTo: navBarView.centerYAnchor),
-            backBarButton.leadingAnchor.constraint(equalTo: navBarView.leadingAnchor, constant: CGFloat(32).generateSizeForScreen),
-            backBarButton.heightAnchor.constraint(equalToConstant: CGFloat(14).generateSizeForScreen),
-            backBarButton.widthAnchor.constraint(equalToConstant: CGFloat(8.48).generateSizeForScreen),
-            
-            navBarLabelStackView.topAnchor.constraint(equalTo: backBarButton.bottomAnchor, constant: CGFloat(12).generateSizeForScreen),
-            navBarLabelStackView.centerXAnchor.constraint(equalTo: navBarView.centerXAnchor),
-            navBarLabelStackView.widthAnchor.constraint(equalToConstant: CGFloat(168).generateSizeForScreen),
-            navBarLabelStackView.heightAnchor.constraint(equalToConstant: CGFloat(40).generateSizeForScreen),
-            
-            buttonStackView.topAnchor.constraint(equalTo: navBarView.bottomAnchor, constant: CGFloat(22).generateSizeForScreen),
-            buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonStackView.widthAnchor.constraint(equalToConstant: CGFloat(191).generateSizeForScreen),
-            buttonStackView.heightAnchor.constraint(equalToConstant: CGFloat(27).generateSizeForScreen),
-            
-            revisionTitleLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: CGFloat(14).generateSizeForScreen),
+            revisionTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(216).generateSizeForScreen),
             revisionTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(17).generateSizeForScreen),
             
             locationDetailLabel.topAnchor.constraint(equalTo: revisionTitleLabel.bottomAnchor, constant: CGFloat(19).generateSizeForScreen),
@@ -485,17 +423,39 @@ class Reservas2: UIViewController {
             
             confirmReservationButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             confirmReservationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            confirmReservationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            confirmReservationButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07)
+            confirmReservationButton.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            confirmReservationButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen)
             
         ])
         
     }
     
+    @objc func confirmButtonTapped(){
+        let reserveViewController = ReservationsThreeViewController()
+        reserveViewController.modalPresentationStyle = .fullScreen
+        present(reserveViewController, animated: true)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
-
+    
+    
 }
+extension Reservation2View: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        1400
+    }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.selectionStyle = .none
+        return cell
+        
+    }
+}
