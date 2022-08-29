@@ -11,6 +11,8 @@ class PasswordRecoverySMSView: UIViewController {
     
     var alert = CustomAlert()
     
+    var counter = 30
+    
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
@@ -161,8 +163,9 @@ class PasswordRecoverySMSView: UIViewController {
         let borderBottom = UIView(frame: frame)
         borderBottom.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         button.addSubview(borderBottom)
+        button.isHidden = true
         button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
-        button.addTarget(PasswordRecoverySMSView.self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -212,6 +215,19 @@ class PasswordRecoverySMSView: UIViewController {
         filledCode()
     }
     
+    @objc func updateCounter() {
+        
+        if counter > 0 {
+            messageNotReceivedLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 14)
+            messageNotReceivedLabel.text = ("Não recebeu? Aguarde \(counter) segundos")
+            counter -= 1
+        }
+        else if counter == 0 {
+            messageNotReceivedLabel.isHidden = true
+            resendCodeButton.isHidden = false
+        }
+    }
+    
     override func viewDidLoad() {
         
         setupView()
@@ -224,6 +240,8 @@ class PasswordRecoverySMSView: UIViewController {
         self.code4TextField.delegate = self
         self.code5TextField.delegate = self
         self.code6TextField.delegate = self
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+
     }
     
     
