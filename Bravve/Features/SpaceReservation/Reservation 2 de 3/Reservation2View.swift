@@ -7,9 +7,11 @@
 
 import UIKit
 
-class Reservas2: UIViewController {
+class Reservation2View: UIViewController {
     
     private lazy var tabBar = TabBarClosed(self)
+    
+    private let tableView = UITableView()
     
     private lazy var  buttons: [UIButton] = {
         
@@ -293,14 +295,23 @@ class Reservas2: UIViewController {
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        view.addSubviews([ revisionTitleLabel, locationDetailLabel, locationStackView, locationStackViewSeparator, summaryTitleLabel, dailyLabel, numberOfDaysLabel, hoursLabel, numberOfHoursLabel, editButton, summarySeparator, firstDateLabel, clockIcon, timeLabel, costLabel, clockIconReserv2, timeLabelReserv2, costLabelReserv2, dateSeparator, secondDateLabel, secondDateClockIcon, secondDateTimeLabel, secondDateCostLabel, confirmReservationButton, tabBar])
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.bounces = false
+        tableView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        view.addSubviews([tableView, confirmReservationButton, tabBar])
+        
+        tableView.addSubviews([revisionTitleLabel, locationDetailLabel, locationStackView, locationStackViewSeparator, summaryTitleLabel, dailyLabel, numberOfDaysLabel, hoursLabel, numberOfHoursLabel, editButton, summarySeparator, firstDateLabel, clockIcon, timeLabel, costLabel, clockIconReserv2, timeLabelReserv2, costLabelReserv2, dateSeparator, secondDateLabel, secondDateClockIcon, secondDateTimeLabel, secondDateCostLabel])
         
         tabBar.selectedItem = tabBar.items?[0]
         
         view.createReservationCustomBar (progressBarButtons: buttons) { _ in
             self.dismiss(animated: true)
         }
-
+        
         
         confirmReservationButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         
@@ -309,6 +320,11 @@ class Reservas2: UIViewController {
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
         NSLayoutConstraint.activate([
+            
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.bottomAnchor.constraint(equalTo: confirmReservationButton.topAnchor, constant: 0),
             
             revisionTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(216).generateSizeForScreen),
             revisionTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(17).generateSizeForScreen),
@@ -423,7 +439,23 @@ class Reservas2: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
-
+    
+    
 }
+extension Reservation2View: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        1400
+    }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.selectionStyle = .none
+        return cell
+        
+    }
+}

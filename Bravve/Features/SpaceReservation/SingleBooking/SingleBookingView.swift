@@ -177,7 +177,7 @@ class SingleBookingView: UIViewController {
     
     @objc func nextTarget() {
         
-        let reservation2View = Reservas2()
+        let reservation2View = Reservation2View()
         reservation2View.modalPresentationStyle = .fullScreen
         
         self.present(reservation2View, animated: true)
