@@ -211,6 +211,8 @@ class BookingHistoryCustomCell: UITableViewCell {
         locationInfoStackView.constraintInsideTo(.height, cellView, multiplier: 0.16)
         
         arrowButton.constraintOutsideTo(.top, reservedLabel, 69)
-        arrowButton.constraintInsideTo(.trailing, reservedLabel, -10)
+        arrowButton.constraintInsideTo(.trailing, cellView, -27)
+        arrowButton.constraintInsideTo(.leading, cellView,253)
+        arrowButton.constraintInsideTo(.bottom, cellView,-18)
     }
 }
