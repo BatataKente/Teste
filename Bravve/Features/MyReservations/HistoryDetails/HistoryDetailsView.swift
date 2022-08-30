@@ -539,6 +539,11 @@ class HistoryDetailsView: UIViewController {
         return scroll
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)

@@ -288,6 +288,11 @@ class PasswordView: UIViewController{
         return view
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     //MARK: viewDidLoad
     override func viewDidLoad() {
         

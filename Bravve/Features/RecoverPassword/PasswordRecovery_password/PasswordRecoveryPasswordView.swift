@@ -84,6 +84,11 @@ class PasswordRecoveryPassword: UIViewController {
         return stackView
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

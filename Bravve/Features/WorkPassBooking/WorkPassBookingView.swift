@@ -118,10 +118,13 @@ class WorkPassBookingView: UIViewController {
         return stackView
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)

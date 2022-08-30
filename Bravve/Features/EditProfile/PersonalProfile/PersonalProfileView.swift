@@ -258,7 +258,10 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
-    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -92,6 +92,11 @@ class ActivitiesView: UIViewController {
     let sessionManager = SessionManager()
 //    let activitiesViewModel = ActivitiesViewModel()
        
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func viewDidLoad() {
 
         setupView()

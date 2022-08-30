@@ -24,16 +24,6 @@ class ConfirmDataView: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    
-    
-    
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        return true
-        
-    }
-    
     private let backgroundImage1 = UIImageView()
     
     private let backgroundImage2 = UIImageView()
@@ -186,6 +176,11 @@ class ConfirmDataView: UIViewController {
     }()
     
     private let buttonContinue = UIButton()
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
     
     //MARK: - viewDidLoad
     override func viewDidLoad() {

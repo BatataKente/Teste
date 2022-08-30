@@ -83,6 +83,11 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
         return view
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func loadView() {
         super.loadView()
     }

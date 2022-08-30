@@ -356,6 +356,11 @@ final class FilterViewClosed: UIViewController {
         return stackViews
     }
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     //MARK: - loadView
     override func loadView() {
         super.loadView()
