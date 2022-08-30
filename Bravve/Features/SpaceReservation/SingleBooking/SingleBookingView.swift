@@ -20,6 +20,13 @@ class SingleBookingView: UIViewController {
     private let spaceDetails: SpaceDetail
     
     private let spaceId: Int
+    private var spaceContractId: Int
+    
+    private var userUUID: String {
+        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return "User UUID unavailable"}
+        
+        return uuid
+    }
     
     private var reservationArray: [Reservations]
     
@@ -30,6 +37,8 @@ class SingleBookingView: UIViewController {
         self.spaceId = spaceId
         
         self.reservationArray = []
+        
+        self.spaceContractId = 2
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -136,6 +145,8 @@ class SingleBookingView: UIViewController {
         viewToScroll.addSubviews([calendarView, daysChoiceLabel, capacityLabel, lineView, schedulesStack, dropDown])
         self.nextButton.setToBottomButtonKeyboardDefault("Próxima Etapa", backgroundColor: .buttonPink)
         
+//        let nextTarget = singleBookingViewModel.nextTarget(vc: self)
+        
         nextButton.addTarget(nil, action: #selector(nextTarget),
                              for: .touchUpInside)
         
@@ -192,7 +203,12 @@ class SingleBookingView: UIViewController {
         let reservation2View = Reservation2View()
         reservation2View.modalPresentationStyle = .fullScreen
         
-        self.present(reservation2View, animated: true)
+        if spaceContractId == 3 {
+        
+            singleBookingViewModel.makeEntireDayCall(vc: self)
+        } else {
+            self.present(reservation2View, animated: true)
+        }
     }
 }
 
@@ -263,5 +279,9 @@ extension SingleBookingView: SingleBookingViewModelProtocol {
     func changeCollectionViewState() {
         
         calendarView.myCollectionView.isUserInteractionEnabled = !calendarView.myCollectionView.isUserInteractionEnabled
+    }
+    
+    func getSpaceContractId(spaceContractId: Int) {
+        self.spaceContractId = spaceContractId
     }
 }
