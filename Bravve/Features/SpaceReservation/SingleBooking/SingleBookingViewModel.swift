@@ -32,6 +32,12 @@ class SingleBookingViewModel {
         return uuid
     }
     
+    private var spaceContractId = 2
+    
+    private var month = ""
+    private var day = ""
+    private var year = ""
+    
     init(_ spaceId: Int,_ reservationArray: [Reservations]) {
         
         self.spaceId = spaceId
@@ -111,6 +117,10 @@ class SingleBookingViewModel {
                                       _ month: String,
                                       _ year: String) {
         
+        self.month = month
+        self.day = day
+        self.year = year
+        
         let dayLabel = UILabel()
         dayLabel.font = UIFont(name: FontsBravve.medium.rawValue,
                                 size: CGFloat(16).generateSizeForScreen)
@@ -146,6 +156,28 @@ class SingleBookingViewModel {
         
         var hourInArray: [String] = []
         var hourOutArray: [String] = []
+        
+        let entireDayButtonHandler = { (action: UIAction) in
+            if entireDayButton.isOn {
+                addtimeButton.isHidden = true
+                timeLabel.isHidden = true
+                timesStack.isHidden = true
+                self.spaceContractId = 3
+                self.delegate?.getSpaceContractId(spaceContractId: self.spaceContractId)
+                
+                print(self.spaceContractId)
+            } else {
+                addtimeButton.isHidden = false
+                timeLabel.isHidden = false
+                timesStack.isHidden = false
+                self.spaceContractId = 2
+                self.delegate?.getSpaceContractId(spaceContractId: self.spaceContractId)
+                print(self.spaceContractId)
+            }
+        }
+        
+        entireDayButton.addAction(UIAction(handler: entireDayButtonHandler), for: .valueChanged)
+        
         
         let parameters = HoursParameters(space_id: self.spaceId, date: "\(year)-\(month)-\(day)", start_time: "08:00")
         
@@ -211,20 +243,7 @@ class SingleBookingViewModel {
                         print("Unable to find stack")
                         return }
                     
-                    var inDate: String {
-                        
-                        guard let month = Int(month) else { return "" }
-                        guard let day = Int(day) else { return "" }
-                        if (month < 10 && day < 10) {
-                            return "\(year)-0\(month)-0\(day)T\(inHour):00.000Z"
-                        } else if month < 10 {
-                            return "\(year)-0\(month)-\(day)T\(inHour):00.000Z"
-                        } else if day < 10 {
-                            return "\(year)-\(month)-0\(day)T\(inHour):00.000Z"
-                        } else {
-                            return "\(year)-\(month)-\(day)T\(inHour):00.000Z"
-                        }
-                    }
+                    let inDate = self.convertHour(hour: inHour)
                     
                     for reservation in self.reservationArray {
                         guard let reservationStartDt = reservation.start_dt else {
@@ -269,37 +288,21 @@ class SingleBookingViewModel {
                     if timeInStack.hourLabel.text != nil &&
                        timeOutStack.hourLabel.text != nil {
                         
-                        let inDate = "\(year)-\(month)-\(day)T\(inHour):00+0000"
-                        let outDate = "\(year)-\(month)-\(day)T\(outHour):00+0000"
+                        let inDate = self.convertHour(hour: inHour)
+                        let outDate = self.convertHour(hour: outHour)
                         
-                        let dateFormatter = ISO8601DateFormatter()
-                        let inDateFormatted = dateFormatter.date(from: inDate)
-                        guard let date = inDateFormatted else {
-                            print("Invalid indate format")
-                            return
-                        }
-                        let timeInDate = dateFormatter.string(from: date)
-                        
-                        let outDateFormatted = dateFormatter.date(from: outDate)
-                        
-                        guard let outDateFormatted = outDateFormatted else {
-                            print("Invalid outdate format")
-                            return
-                        }
-                        let timeOutDate = dateFormatter.string(from: outDateFormatted)
-                        
-                        let parameters = ReservationParameters(uuid: self.userUUID, space_id: self.spaceId, reservation_type_id: 1, reservation_status_id: 1, space_contract_id: 2, rent_qty: 1, start_dt: timeInDate, end_dt: timeOutDate)
+                        let parameters = ReservationParameters(uuid: self.userUUID, space_id: self.spaceId, reservation_type_id: 1, reservation_status_id: 1, space_contract_id: self.spaceContractId, rent_qty: 1, start_dt: inDate, end_dt: outDate)
                         
                         self.sessionManager.postDataWithResponse(endpoint: .reservations, parameters: parameters) { (statusCode, error, reserve: Reservations?) in
-                            print(reserve)
                             guard let reserve = reserve else { return }
+                            guard let _ = reserve.id else {
+                                print(reserve.message as Any)
+                                return }
                             self.reservationArray.append(reserve)
                             checkButton.isHidden = !checkButton.isHidden
                             trashButton.isHidden = !trashButton.isHidden
                             quitButton.isHidden = !quitButton.isHidden
                         }
-                        
-                        
                     }
                 }
                 
@@ -321,6 +324,39 @@ class SingleBookingViewModel {
             stack.addArrangedSubview(chosedDayStack)
         }
     }
+    
+    func makeEntireDayCall(vc: UIViewController) {
+        
+        let reservation2View = Reservation2View()
+        reservation2View.modalPresentationStyle = .fullScreen
+        
+        let inDate = convertHour(hour: "08:00")
+        let outDate = convertHour(hour: "17:00")
+        
+        let parameters = ReservationParameters(uuid: self.userUUID, space_id: self.spaceId, reservation_type_id: 1, reservation_status_id: 1, space_contract_id: self.spaceContractId, rent_qty: 1, start_dt: inDate, end_dt: outDate)
+            
+        self.sessionManager.postDataWithResponse(endpoint: .reservations, parameters: parameters) { (statusCode, error, reserve: Reservations?) in
+            guard let reserve = reserve else { return }
+            guard let _ = reserve.id else {
+                    print(reserve.message as Any)
+                    return }
+            vc.present(reservation2View, animated: true)
+        }
+    }
+    
+    func convertHour(hour: String) -> String {
+        guard let month = Int(self.month) else { return "" }
+        guard let day = Int(self.day) else { return "" }
+        if (month < 10 && day < 10) {
+            return "\(year)-0\(month)-0\(day)T\(hour):00.000Z"
+        } else if month < 10 {
+            return "\(year)-0\(month)-\(day)T\(hour):00.000Z"
+        } else if day < 10 {
+            return "\(year)-\(month)-0\(day)T\(hour):00.000Z"
+        } else {
+            return "\(year)-\(month)-\(day)T\(hour):00.000Z"
+        }
+    }
 }
 
 protocol SingleBookingViewModelProtocol {
@@ -330,4 +366,6 @@ protocol SingleBookingViewModelProtocol {
     func setupDropDown(_ dropDownButton: UIButton,_ buttons: [UIButton])
     
     func changeCollectionViewState()
+    
+    func getSpaceContractId(spaceContractId: Int)
 }
