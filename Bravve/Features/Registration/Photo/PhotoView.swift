@@ -79,6 +79,10 @@ class FotoView: UIViewController {
     
     let sessionManager = SessionManager()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
     
     override func viewDidLoad() {
         

@@ -169,6 +169,11 @@ class ReservationCompletedView: UIViewController {
         return lineView
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     //MARK: - loadView
     override func viewDidLoad() {
         super.viewDidLoad()

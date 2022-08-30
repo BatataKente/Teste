@@ -195,6 +195,11 @@ class TokenView: UIViewController {
         return button
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func viewDidLoad() {
         
         setupView()

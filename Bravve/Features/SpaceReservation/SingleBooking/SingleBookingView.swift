@@ -126,9 +126,14 @@ class SingleBookingView: UIViewController {
     
     private let nextButton = UIButton()
     
-    override func viewDidLoad() {
+    override var prefersStatusBarHidden: Bool {
         
+        true
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = "My Calender"
         self.navigationController?.navigationBar.isTranslucent=false
         self.view.backgroundColor = Style.bgColor

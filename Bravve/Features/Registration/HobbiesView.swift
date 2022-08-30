@@ -83,6 +83,11 @@ class HobbiesView: UIViewController {
         return stackView
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func viewDidLoad() {
         
         setupView()

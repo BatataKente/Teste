@@ -609,7 +609,10 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
             return view
         }()
     
-   
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
    
     //MARK: - LoadView
     override func loadView() {

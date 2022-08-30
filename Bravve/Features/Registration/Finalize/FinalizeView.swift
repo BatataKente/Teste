@@ -63,6 +63,11 @@ class FinalizeView: UIViewController {
         return homeButton
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()

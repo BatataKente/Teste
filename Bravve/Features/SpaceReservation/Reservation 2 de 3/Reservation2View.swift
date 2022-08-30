@@ -289,6 +289,10 @@ class Reservation2View: UIViewController {
         return button
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

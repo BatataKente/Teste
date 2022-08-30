@@ -1117,6 +1117,10 @@ class HelpViewController: UIViewController {
         return stack
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
     
     //MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -1130,6 +1134,7 @@ class HelpViewController: UIViewController {
         setupDefaults()
         configConstraints()
     }
+    
     
     //MARK: - func setupDefaults
     private func setupDefaults(){
