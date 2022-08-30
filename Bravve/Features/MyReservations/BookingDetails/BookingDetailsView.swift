@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class BookingDetailsView: UIViewController {
     
@@ -33,18 +34,6 @@ class BookingDetailsView: UIViewController {
         button.addTarget(self, action: #selector(buttonCheckInTap), for: .touchUpInside)
         return button
     }()
-    
-//    lazy var buttonOpenSpace: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("Abrir porta do espaço", for: .normal)
-//        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-//        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-//        button.layer.borderWidth = 1
-//        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-//        button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
-//        return button
-//    }()
     
     lazy var lineView1:UIView = {
         let line = UIView()
@@ -156,6 +145,165 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
+    
+    
+    lazy var bookingDetailsDataStackView: UIStackView = {
+        
+        let data = UILabel()
+        data.text = "09/04/22"
+        data.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        data.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let bookingType = UILabel()
+        bookingType.text = "Diária"
+        bookingType.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        bookingType.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let stackView = UIStackView(arrangedSubviews: [data, bookingType])
+        stackView.alignment = .leading
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var checkOutStackView: UIStackView = {
+        
+        let checkOut = UILabel()
+        checkOut.text = "Check-out"
+        checkOut.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        checkOut.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let hour = UILabel()
+        hour.text = "20:00"
+        hour.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        hour.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let stackView = UIStackView(arrangedSubviews: [checkOut, hour])
+        stackView.alignment = .trailing
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var checkInStackView: UIStackView = {
+        
+        let checkIn = UILabel()
+        checkIn.text = "Check-in"
+        checkIn.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        checkIn.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let hour = UILabel()
+        hour.text = "09:00"
+        hour.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        hour.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let stackView = UIStackView(arrangedSubviews: [checkIn, hour])
+        stackView.alignment = .trailing
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var localDetailsStackView: UIStackView = {
+        
+        let textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        let title = UILabel()
+        title.textColor = textColor
+        title.text = "Detalhes do local"
+        title.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        title.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        var items = [UIStackView]()
+        var days = ["Segunda", "Terca", "Quarta", "Quinta", "Sexta"]
+        
+        items.append(createStackView("Ate 6 pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(createStackView("Av. Sao Joao, CJ. Boulevard, no 900, Sao Paulo. SP 06020-010, BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
+        items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+        
+        for i in 1...days.count-1 {
+            
+            items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         isHidden: true,
+                                         textColor: textColor))
+        }
+        
+        let buttons = createSeeButtonsStackView(3...items.count-1, items: items)
+        
+        let stackView = UIStackView(arrangedSubviews: [title] + items + [buttons])
+        stackView.alignment = .leading
+        stackView.axis = .vertical
+        stackView.spacing = CGFloat(10).generateSizeForScreen
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var responsableStackView: UIStackView = {
+        
+        let textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        let title = UILabel()
+        title.textColor = textColor
+        title.text = "Responsável"
+        title.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        title.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        
+        let responsableLabel = UILabel()
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+
+        let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
+
+        atritutedString1.append(atritutedString2)
+        responsableLabel.attributedText = atritutedString1
+        responsableLabel.numberOfLines = 0
+        
+        
+        let informations = UILabel()
+        informations.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp."
+        informations.numberOfLines = 0
+        informations.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
+        informations.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        let button = createSeeButton(smallText: informations.text ?? "", fullText: "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp. aaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaa", actionLabel: informations)
+   
+        let stackView = UIStackView(arrangedSubviews: [title, responsableLabel, informations, button] )
+        stackView.alignment = .leading
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var contactsStackView: UIStackView = {
+        
+        let textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        
+        let title = UILabel()
+        title.textColor = textColor
+        title.text = "Contatos"
+        title.font = UIFont(name: FontsBravve.medium.rawValue, size: 12)
+        title.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        
+        var contacts = [UIStackView]()
+        
+        contacts.append(createStackView("(11) 9999999", UIImage(named: "cellphone"), textColor: textColor))
+        contacts.append(createStackView("email", UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
+        
+        let stackView = UIStackView(arrangedSubviews: [title] + contacts)
+        stackView.alignment = .leading
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     lazy var detailLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -170,75 +318,9 @@ class BookingDetailsView: UIViewController {
     lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.calendarGray.rawValue)
+        image.image = UIImage(named: IconsBravve.calendar.rawValue)
         
         return image
-    }()
-    
-    lazy var dayLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09/04/22"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var checkInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-in"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var checkOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-Out"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var diaryLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Diária"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var dayDiaryCheckInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var dayDiaryCheckOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "20:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
     }()
     
     lazy var payFormLabel: UILabel = {
@@ -255,7 +337,7 @@ class BookingDetailsView: UIViewController {
     lazy var imagePay: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.walletBlue.rawValue)
+        image.image = UIImage(named: IconsBravve.receipt.rawValue)
         
         return image
     }()
@@ -264,54 +346,6 @@ class BookingDetailsView: UIViewController {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.users.rawValue)
-        
-        return image
-    }()
-    
-    lazy var localizationIconImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.map.rawValue)
-        
-        return image
-    }()
-    
-    lazy var clockIconImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
-        
-        return image
-    }()
-    
-    lazy var buttonArrowIconImage1: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-        
-        return button
-    }()
-    
-    lazy var buttonArrowIconImage2: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-        
-        return button
-    }()
-    
-    lazy var cellIconImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "cellphone")
-        
-        return image
-    }()
-    
-    lazy var emailIconImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.email.rawValue)
         
         return image
     }()
@@ -353,160 +387,6 @@ class BookingDetailsView: UIViewController {
         tf.backgroundColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
         tf.isUserInteractionEnabled = false
         return tf
-    }()
-    
-    lazy var localDetail: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Detalhes do local"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var numberPeopleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Até 6 pessoas"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var localizationLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Av. São Joâo, Cj. Boulevard, n°900, São Paulo. SP 06020-010, BR"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var clockLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        
-        let atritutedString1 = NSMutableAttributedString(string: "Segunda:", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
-        
-        atritutedString1.append(atritutedString2)
-        atritutedString2.append(atritutedString1)
-        lb.attributedText = atritutedString1
-        lb.numberOfLines = 0
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var responsablePeople: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Responsavél"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var responsableNameLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        
-        let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
-        
-        atritutedString1.append(atritutedString2)
-        atritutedString2.append(atritutedString1)
-        lb.attributedText = atritutedString1
-        lb.numberOfLines = 0
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var descriptionResponsableLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via whatsapp"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var contactsLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Contatos"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var contactNumberLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "(11) 99999-9999"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var contactEmailLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "giovanna@empresaexe.com.br"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
-    }()
-    
-    lazy var showMoreButton1: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        let attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .normal)
-        return button
-    }()
-    
-    lazy var showMoreButton2: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        let attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .normal)
-        return button
     }()
     
     lazy var cancelButton: UIButton = {
@@ -574,25 +454,168 @@ class BookingDetailsView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(viewInScroll)
         viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, pageControl, infoLocalLabel,
-                          nameLocalLabel, detailLocalLabel, imageDetail, dayLabel, checkInLabel,
-                          checkOutLabel, diaryLabel, dayDiaryCheckInLabel, dayDiaryCheckOutLabel,
-                          lineView1, lineView2, imagePay, payFormLabel, creditCard, creditCardTextField,
-                          totalLabel, lineView3, localDetail, numberPeopleImage, numberPeopleLabel,
-                          localizationIconImage, localizationLabel, clockIconImage, clockLabel,
-                          showMoreButton1, buttonArrowIconImage1, lineView4, responsablePeople,
-                          responsableNameLabel, descriptionResponsableLabel, showMoreButton2,
-                          lineView5,contactsLabel, cellIconImage, emailIconImage, contactNumberLabel,
-                          contactEmailLabel, cancelButton, buttonArrowIconImage2
+                          nameLocalLabel, detailLocalLabel, imageDetail, lineView1, lineView2, imagePay, payFormLabel,
+                          creditCard, creditCardTextField, totalLabel, lineView3, lineView4, bookingDetailsDataStackView,
+                          checkInStackView, checkOutStackView, lineView5, cancelButton, localDetailsStackView,
+                          responsableStackView, contactsStackView
                          ])
         
     }
     
-    @objc func showMorebutton(){
+    private func createStackView(_ text: String,
+                                 _ image: UIImage? = nil,
+                                 isHidden: Bool = false,
+                                 textColor: UIColor? = .white) -> UIStackView {
         
+        let stackView = UIStackView()
+        
+        if let image = image {
+            
+            let imageView = UIImageView()
+            imageView.contentMode = .center
+            imageView.image = image
+            
+            stackView.addArrangedSubview(imageView)
+            
+            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        }
+        
+        let label = UILabel()
+        label.text = text
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(12).generateSizeForScreen)
+        label.textColor = textColor
+        
+        stackView.spacing = CGFloat(10).generateSizeForScreen
+        stackView.isHidden = isHidden
+        
+        stackView.addArrangedSubview(label)
+        
+        return stackView
     }
     
-    @objc func showMorebutton2(){
+    private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
+                                           items: [UIStackView],
+                                           titleColor: ColorsBravve = .buttonPink,
+                                           downButtonImages: ButtonsBravve = .arrowDown,
+                                           upButtonImages: ButtonsBravve = .arrowUp) -> UIStackView {
+        let moreButton = UIButton()
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        var attributeString = NSMutableAttributedString(
+            string: "Ver Mais",
+            attributes: yourAttributes)
+        moreButton.setAttributedTitle(attributeString, for: .normal)
+        moreButton.setImage(UIImage(named: downButtonImages.rawValue),
+                            for: .normal)
+        moreButton.imageView?.contentMode = .scaleAspectFit
+        moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
         
+        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
+                                                 multiplier: 0.5)
+        moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        let lessButton = UIButton()
+        attributeString = NSMutableAttributedString(
+            string: "Ver Mais",
+            attributes: yourAttributes)
+        lessButton.setAttributedTitle(attributeString, for: .normal)
+        lessButton.setImage(UIImage(named: upButtonImages.rawValue),
+                            for: .normal)
+        lessButton.imageView?.contentMode = .scaleAspectFit
+        lessButton.isHidden = true
+        lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        
+        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
+                                                 multiplier: 0.5)
+        lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        let seeMoreHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                items[i].isHidden = false
+            }
+            moreButton.isHidden = true
+            lessButton.isHidden = false
+        }
+        
+        let seeLessHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                items[i].isHidden = true
+            }
+            moreButton.isHidden = false
+            lessButton.isHidden = true
+        }
+        
+        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
+        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
+        
+        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
+        
+        return stackView
+    }
+    
+    private func createSeeButton(smallText: String, fullText: String, actionLabel: UILabel) -> UIButton {
+        let button = UIButton()
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        var attributeString = NSMutableAttributedString(
+            string: "Ver Mais",
+            attributes: yourAttributes)
+        button.setAttributedTitle(attributeString, for: .normal)
+        attributeString = NSMutableAttributedString(
+            string: "Ver Menos",
+            attributes: yourAttributes)
+        button.setAttributedTitle(attributeString, for: .selected)
+        
+        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+                            for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+                            for: .selected)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
+        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        button.imageView?.constraintInsideTo(.height, button.titleLabel,
+                                                 multiplier: 0.5)
+        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        let handler = {(action: UIAction) in
+            button.isSelected = !button.isSelected
+            if button.isSelected {
+                actionLabel.text = fullText
+            } else {
+                actionLabel.text = smallText
+            }
+        }
+        button.addAction(UIAction(handler: handler), for: .touchUpInside)
+        return button
     }
     
     @objc func cancelBooking(){
@@ -652,26 +675,15 @@ class BookingDetailsView: UIViewController {
             detailLocalLabel.topAnchor.constraint(equalTo: nameLocalLabel.bottomAnchor,constant: 32),
             detailLocalLabel.leadingAnchor.constraint(equalTo: imageDetail.trailingAnchor,constant: 9),
             
-            
-            dayLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
-            dayLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            diaryLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor,constant: 11.5),
-            diaryLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            checkInLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
-            checkInLabel.leadingAnchor.constraint(equalTo: diaryLabel.trailingAnchor,constant: 1),
-            
-            dayDiaryCheckInLabel.topAnchor.constraint(equalTo: checkInLabel.bottomAnchor,constant: 12.5),
-            dayDiaryCheckInLabel.trailingAnchor.constraint(equalTo: checkInLabel.trailingAnchor),
-            
-            checkOutLabel.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor,constant: 27),
-            checkOutLabel.leadingAnchor.constraint(equalTo: checkInLabel.trailingAnchor,constant: 22),
-            checkOutLabel.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            
-            dayDiaryCheckOutLabel.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor,constant: 12.5),
-            dayDiaryCheckOutLabel.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            
+            bookingDetailsDataStackView.topAnchor.constraint(equalTo: detailLocalLabel.bottomAnchor, constant: CGFloat(27).generateSizeForScreen),
+            bookingDetailsDataStackView.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor, constant: CGFloat(20).generateSizeForScreen),
+
+            checkInStackView.topAnchor.constraint(equalTo: bookingDetailsDataStackView.topAnchor),
+            checkInStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-108).generateSizeForScreen),
+
+            checkOutStackView.topAnchor.constraint(equalTo: bookingDetailsDataStackView.topAnchor),
+            checkOutStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-24).generateSizeForScreen),
+                        
             payFormLabel.leadingAnchor.constraint(equalTo: imagePay.trailingAnchor,constant: 9),
             payFormLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 20.5),
             
@@ -692,72 +704,7 @@ class BookingDetailsView: UIViewController {
             totalLabel.topAnchor.constraint(equalTo: creditCardTextField.bottomAnchor,constant: 14),
             totalLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
-            localDetail.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 15),
-            localDetail.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            numberPeopleImage.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 21.43),
-            numberPeopleImage.topAnchor.constraint(equalTo: localDetail.bottomAnchor,constant: 12),
-            
-            localizationIconImage.topAnchor.constraint(equalTo: numberPeopleImage.bottomAnchor,constant: 20),
-            localizationIconImage.centerXAnchor.constraint(equalTo: numberPeopleImage.centerXAnchor),
-            
-            clockIconImage.topAnchor.constraint(equalTo: localizationIconImage.bottomAnchor,constant: 20),
-            clockIconImage.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
-            
-            buttonArrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
-            buttonArrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
-            
-            buttonArrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
-            buttonArrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
-            
-            numberPeopleLabel.centerYAnchor.constraint(equalTo: numberPeopleImage.centerYAnchor),
-            numberPeopleLabel.leadingAnchor.constraint(equalTo: numberPeopleImage.trailingAnchor,constant: 12.43),
-            
-            localizationLabel.centerYAnchor.constraint(equalTo: localizationIconImage.centerYAnchor),
-            localizationLabel.leadingAnchor.constraint(equalTo: numberPeopleLabel.leadingAnchor),
-            localizationLabel.widthAnchor.constraint(equalToConstant: 248),
-            
-            clockLabel.leadingAnchor.constraint(equalTo: numberPeopleLabel.leadingAnchor),
-            clockLabel.centerYAnchor.constraint(equalTo: clockIconImage.centerYAnchor),
-            
-            showMoreButton1.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 12),
-            showMoreButton1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            responsablePeople.topAnchor.constraint(equalTo: lineView3.bottomAnchor,constant: 15),
-            responsablePeople.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            responsableNameLabel.topAnchor.constraint(equalTo: responsablePeople.bottomAnchor,constant: 8),
-            responsableNameLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            descriptionResponsableLabel.topAnchor.constraint(equalTo: responsableNameLabel.bottomAnchor,constant: 8),
-            descriptionResponsableLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            descriptionResponsableLabel.widthAnchor.constraint(equalToConstant: 277),
-            
-            showMoreButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: 8),
-            showMoreButton2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            contactsLabel.topAnchor.constraint(equalTo: lineView4.bottomAnchor,constant: 15),
-            contactsLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
-            
-            cellIconImage.topAnchor.constraint(equalTo: contactsLabel.bottomAnchor,constant: 13),
-            cellIconImage.centerXAnchor.constraint(equalTo: clockIconImage.centerXAnchor),
-            
-            emailIconImage.topAnchor.constraint(equalTo: cellIconImage.bottomAnchor,constant: 19.25),
-            emailIconImage.centerXAnchor.constraint(equalTo: cellIconImage.centerXAnchor),
-            
-            contactNumberLabel.centerYAnchor.constraint(equalTo: cellIconImage.centerYAnchor),
-            contactNumberLabel.leadingAnchor.constraint(equalTo: cellIconImage.trailingAnchor,constant: 13),
-            
-            contactEmailLabel.centerYAnchor.constraint(equalTo: emailIconImage.centerYAnchor),
-            contactEmailLabel.leadingAnchor.constraint(equalTo: emailIconImage.trailingAnchor,constant: 13),
-            
-            cancelButton.topAnchor.constraint(equalTo: emailIconImage.bottomAnchor,constant: 21.5),
-            cancelButton.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
-            cancelButton.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            cancelButton.heightAnchor.constraint(equalToConstant: 52),
-            cancelButton.bottomAnchor.constraint(equalTo: viewInScroll.bottomAnchor, constant: -40),
-            
-            lineView1.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 17),
+            lineView1.topAnchor.constraint(equalTo: bookingDetailsDataStackView.bottomAnchor,constant: 17),
             lineView1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
             lineView1.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView1.heightAnchor.constraint(equalToConstant: 0.5),
@@ -767,15 +714,33 @@ class BookingDetailsView: UIViewController {
             lineView2.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView2.heightAnchor.constraint(equalToConstant: 0.5),
             
-            lineView3.topAnchor.constraint(equalTo: showMoreButton1.bottomAnchor,constant: 16),
+            localDetailsStackView.topAnchor.constraint(equalTo: lineView2.bottomAnchor, constant: 15),
+            localDetailsStackView.leadingAnchor.constraint(equalTo: lineView2.leadingAnchor),
+            localDetailsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-76).generateSizeForScreen),
+            
+            lineView3.topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor,constant: 16),
             lineView3.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
             lineView3.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView3.heightAnchor.constraint(equalToConstant: 0.5),
             
-            lineView4.topAnchor.constraint(equalTo: showMoreButton2.bottomAnchor,constant: CGFloat(16).generateSizeForScreen),
+            responsableStackView.topAnchor.constraint(equalTo: lineView3.bottomAnchor, constant: 15),
+            responsableStackView.leadingAnchor.constraint(equalTo: lineView3.leadingAnchor),
+            responsableStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-78).generateSizeForScreen),
+            
+            lineView4.topAnchor.constraint(equalTo: responsableStackView.bottomAnchor,constant: CGFloat(16).generateSizeForScreen),
             lineView4.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
             lineView4.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView4.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            contactsStackView.topAnchor.constraint(equalTo: lineView4.bottomAnchor, constant: 15),
+            contactsStackView.leadingAnchor.constraint(equalTo: lineView4.leadingAnchor),
+            contactsStackView.trailingAnchor.constraint(equalTo: lineView4.trailingAnchor),
+            
+            cancelButton.topAnchor.constraint(equalTo: contactsStackView.bottomAnchor,constant: 21.5),
+            cancelButton.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            cancelButton.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            cancelButton.heightAnchor.constraint(equalToConstant: 52),
+            cancelButton.bottomAnchor.constraint(equalTo: viewInScroll.bottomAnchor, constant: -40),
             
             checkIN.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
             checkIN.leadingAnchor.constraint(equalTo: view.leadingAnchor),
