@@ -40,7 +40,7 @@ class LoginView: UIViewController {
         return view
     }()
     
-
+    
     //MARK: - titleLabel
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
@@ -93,16 +93,16 @@ class LoginView: UIViewController {
         
         let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let stackHotizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
-
+        
         stack.spacing = CGFloat(5).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
         stack.layer.cornerRadius = 8
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
-                                                   left: stackHotizontalMargins,
-                                                   bottom: stackVerticalMargins,
-                                                   right: stackHotizontalMargins)
+                                           left: stackHotizontalMargins,
+                                           bottom: stackVerticalMargins,
+                                           right: stackHotizontalMargins)
         return stack
     }()
     
@@ -138,7 +138,7 @@ class LoginView: UIViewController {
     }()
     
     
-
+    
     //MARK: - passwordStackView
     private lazy var passwordStackView: UIStackView = {
         
@@ -162,12 +162,12 @@ class LoginView: UIViewController {
     //MARK: - passwordRecoveryButton
     private lazy var passwordRecoveryButton : UIButton = {
         let view = UIButton()
-      
+        
         let attributes: [NSAttributedString.Key : Any] = [
-        NSAttributedString.Key.underlineStyle: 1,
-        NSAttributedString.Key.font: UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen) as Any,
-        NSAttributedString.Key.foregroundColor: UIColor.cyan as Any]
-
+            NSAttributedString.Key.underlineStyle: 1,
+            NSAttributedString.Key.font: UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen) as Any,
+            NSAttributedString.Key.foregroundColor: UIColor.cyan as Any]
+        
         let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
         view.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
@@ -189,10 +189,10 @@ class LoginView: UIViewController {
                                           right: stackMargins)
         
         let attributesFont: [NSAttributedString.Key : Any] = [
-        
+            
             NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
             NSAttributedString.Key.foregroundColor: UIColor.white as Any]
-
+        
         let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
@@ -218,15 +218,15 @@ class LoginView: UIViewController {
         view.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         let stackMargins : CGFloat = CGFloat(20).generateSizeForScreen
         view.layoutMargins = UIEdgeInsets(top: stackMargins,
-                                                   left: stackMargins,
-                                                   bottom: stackMargins,
-                                                   right: stackMargins)
-
+                                          left: stackMargins,
+                                          bottom: stackMargins,
+                                          right: stackMargins)
+        
         let attributesFont: [NSAttributedString.Key : Any] = [
-
+            
             NSAttributedString.Key.font: UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(16).generateSizeForScreen) as Any,
             NSAttributedString.Key.foregroundColor: UIColor.white as Any]
-
+        
         let attributedString = NSMutableAttributedString(string: "Cadastre-se",
                                                          attributes: attributesFont)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString),
@@ -293,8 +293,10 @@ class LoginView: UIViewController {
             self.dismiss(animated: true)
         }
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
-
     //MARK: - loginButtonTapped
     @objc func loginButtonTapped(){
         let vc = HomeClosedView()
@@ -308,7 +310,7 @@ class LoginView: UIViewController {
             let parameters = LoginParameters(email: email, password: password)
             
             sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: parameters) { (statusCode, error, token: Token?) in
-               
+                
                 guard let tokenResponse = token?.token else {
                     
                     print(statusCode as Any)
@@ -323,7 +325,7 @@ class LoginView: UIViewController {
                     guard let users = users else {
                         return
                     }
-
+                    
                     for user in users {
                         
                         guard let userEmail = user.email else { return }
@@ -347,8 +349,8 @@ class LoginView: UIViewController {
                 eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
             }   else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
                 eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-                }
-                customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+            }
+            customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
                                   message: "Usuário e/ou senha incorretos",
                                   enterAttributed: "Tentar Novamente",
                                   on: self)
@@ -379,9 +381,9 @@ class LoginView: UIViewController {
         let layoutVerticalMargins = CGFloat(10).generateSizeForScreen
         let layoutHorizontalMargins = CGFloat(15).generateSizeForScreen
         loginStackView.layoutMargins = UIEdgeInsets(top: layoutVerticalMargins,
-                                                       left: layoutHorizontalMargins,
-                                                       bottom: layoutVerticalMargins,
-                                                       right: layoutHorizontalMargins)
+                                                    left: layoutHorizontalMargins,
+                                                    bottom: layoutVerticalMargins,
+                                                    right: layoutHorizontalMargins)
     }
     
     
@@ -452,13 +454,13 @@ class LoginView: UIViewController {
         subTitleLabel.constraintOutsideTo(.top, titleLabel, CGFloat(5).generateSizeForScreen)
         subTitleLabel.constraintInsideTo(.leading, titleLabel)
         subTitleLabel.constraintInsideTo(.trailing, titleLabel)
-    
+        
         
         
         loginStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
         loginStackView.constraintInsideTo(.leading, passwordStackView)
         loginStackView.constraintInsideTo(.trailing, passwordStackView)
-    
+        
         
         passwordStackView.constraintOutsideTo(.top, loginStackView, CGFloat(15).generateSizeForScreen)
         passwordStackView.constraintInsideTo(.leading, subTitleLabel)
@@ -496,9 +498,18 @@ extension LoginView: UITextFieldDelegate{
         
     }
     
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if loginTextField.isEditing == true {
+            return loginTextField.resignFirstResponder()
+            
+            
+        }
+        else{
+            return passwordTextField.resignFirstResponder()
+            
+        }
+    }
 }
-
 extension UIStackView {
     func setBottomBorderBlue(color: CGColor) {
         self.layer.masksToBounds = false
