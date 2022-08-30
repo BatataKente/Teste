@@ -137,6 +137,8 @@ class MyBookingCustomCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleToFill
+        
         return button
     }()
     
@@ -168,7 +170,8 @@ class MyBookingCustomCell: UITableViewCell {
         cellView.constraintInsideTo(.top, contentView)
         cellView.constraintInsideTo(.leading, contentView)
         cellView.constraintInsideTo(.trailing, contentView)
-        cellView.constraintInsideTo(.bottom, contentView, -26)
+        cellView.constraintInsideTo(.bottom, contentView, -19)
+        
         
         typeTagLabel.constraintInsideTo(.top, cellView)
         typeTagLabel.constraintInsideTo(.leading, cellView, 17)
@@ -210,9 +213,10 @@ class MyBookingCustomCell: UITableViewCell {
         locationInfoStackView.constraintInsideTo(.width, cellView, multiplier: 0.507)
         locationInfoStackView.constraintInsideTo(.height, cellView, multiplier: 0.16)
         
-        arrowButton.constraintOutsideTo(.top, reservedLabel, 69)
-        arrowButton.constraintInsideTo(.trailing, cellView, -27)
-        arrowButton.constraintInsideTo(.leading, cellView,253)
+        
+        
+        arrowButton.constraintOutsideTo(.top, reservedLabel, 65)
+        arrowButton.constraintInsideTo(.trailing, cellView, -25)
         arrowButton.constraintInsideTo(.bottom, cellView,-18)
     }
 }
