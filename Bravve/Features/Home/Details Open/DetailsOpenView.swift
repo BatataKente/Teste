@@ -88,70 +88,51 @@ class OpenDetailsView: UIViewController {
     
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            itens: [UIStackView],
-                                           titleColor: ColorsBravve = .buttonPink,
-                                           downButtonImages: ButtonsBravve,
-                                           upButtonImages: ButtonsBravve) -> UIStackView {
-        let moreButton = UIButton()
-        moreButton.setTitle("Ver Mais", for: .normal)
-        moreButton.setImage(UIImage(named: downButtonImages.rawValue),
+                                           titleColor: ColorsBravve = .buttonPink) -> UIButton {
+        let button = UIButton()
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        var attributeString = NSMutableAttributedString(
+            string: "Ver Mais",
+            attributes: yourAttributes)
+        button.setAttributedTitle(attributeString, for: .normal)
+        attributeString = NSMutableAttributedString(
+            string: "Ver Menos",
+            attributes: yourAttributes)
+        button.setAttributedTitle(attributeString, for: .selected)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                             for: .normal)
-        moreButton.imageView?.contentMode = .scaleAspectFit
-        moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+                            for: .selected)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
                                              size: CGFloat(12).generateSizeForScreen)
         
-        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
 
-        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
+        button.imageView?.constraintInsideTo(.height, button.titleLabel,
                                                  multiplier: 0.5)
-        moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
-        let lessButton = UIButton()
-        lessButton.setTitle("Ver Menos", for: .normal)
-        lessButton.setImage(UIImage(named: upButtonImages.rawValue),
-                            for: .normal)
-        lessButton.imageView?.contentMode = .scaleAspectFit
-        lessButton.isHidden = true
-        lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-        
-        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-
-        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
-                                                 multiplier: 0.5)
-        lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        
-        let seeMoreHandler = {(action: UIAction) in
+        let handler = {(action: UIAction) in
             
             for i in range {
-                
-                itens[i].isHidden = false
+
+                itens[i].isHidden = !itens[i].isHidden
             }
-            moreButton.isHidden = true
-            lessButton.isHidden = false
+            button.isSelected = !button.isSelected
         }
         
-        let seeLessHandler = {(action: UIAction) in
-            
-            for i in range {
-                
-                itens[i].isHidden = true
-            }
-            moreButton.isHidden = false
-            lessButton.isHidden = true
-        }
+        button.addAction(UIAction(handler: handler), for: .touchUpInside)
         
-        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
-        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
-        
-        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
-        
-        return stackView
+        return button
     }
     
     private lazy var localDetailsStackView: UIStackView = {
@@ -202,14 +183,12 @@ class OpenDetailsView: UIViewController {
                                          textColor: textColor))
         }
         
-        let buttons = createSeeButtonsStackView(3...itens.count-1,
-                                                itens: itens,
-                                                downButtonImages: .arrowDown,
-                                                upButtonImages: .arrowUp)
+        let button = createSeeButtonsStackView(3...itens.count-1,
+                                                itens: itens)
         
         let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
                                                 itens +
-                                                [buttons])
+                                                [button])
         localDetailsStackView.axis = .vertical
         localDetailsStackView.alignment = .leading
         localDetailsStackView.spacing = CGFloat(10).generateSizeForScreen
@@ -265,12 +244,10 @@ class OpenDetailsView: UIViewController {
                                              textColor: textColor))
             }
             
-            let buttons = createSeeButtonsStackView(6...itens.count-1,
+            let button = createSeeButtonsStackView(6...itens.count-1,
                                                     itens: itens,
-                                                    titleColor: .capsuleButtonSelected,
-                                                    downButtonImages: .arrowDown,
-                                                    upButtonImages: .arrowUp)
-            structureStackView.addArrangedSubviews([title] + itens + [buttons])
+                                                    titleColor: .capsuleButtonSelected)
+            structureStackView.addArrangedSubviews([title] + itens + [button])
         }
         
         structureStackView.axis = .vertical
@@ -331,12 +308,10 @@ class OpenDetailsView: UIViewController {
                                              isHidden: true))
             }
             
-            let buttons = createSeeButtonsStackView(6...itens.count-1,
-                                                    itens: itens,
-                                                    titleColor: .capsuleButtonSelected,
-                                                    downButtonImages: .arrowDown,
-                                                    upButtonImages: .arrowUp)
-            localFacilitiesStackView.addArrangedSubviews([title] + itens + [buttons])
+            let button = createSeeButtonsStackView(6...itens.count-1,
+                                                   itens: itens,
+                                                   titleColor: .capsuleButtonSelected)
+            localFacilitiesStackView.addArrangedSubviews([title] + itens + [button])
         }
         
         localFacilitiesStackView.axis = .vertical
