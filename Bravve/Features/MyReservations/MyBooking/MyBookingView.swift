@@ -69,7 +69,7 @@ class MyBookingView: UIViewController {
         myTableView.constraintOutsideTo(.top, customBar, CGFloat(13).generateSizeForScreen)
         myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        myTableView.constraintOutsideTo(.bottom, tabBar)
         
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
