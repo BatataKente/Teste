@@ -38,7 +38,7 @@ class ReservationCompletedView: UIViewController {
     private lazy var labelsStack: UIStackView = {
         var views: [UIView] = []
             for element in spaceDetailArray {
-                views.append(createLabel(placeHolderValue: element))
+                views.append(reservationCompletedViewModel.createLabel(placeHolderValue: element))
         }
         let labelsStack = UIStackView(arrangedSubviews:  views)
         labelsStack.axis = .vertical
@@ -174,7 +174,9 @@ class ReservationCompletedView: UIViewController {
         true
     }
     
-    //MARK: - loadView
+    private let reservationCompletedViewModel = ReservationCompletedViewModel()
+    
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
@@ -209,16 +211,6 @@ class ReservationCompletedView: UIViewController {
         let vc = MyBookingView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-    }
-    
-    //MARK: - createLabel
-    func createLabel(placeHolderValue text: String) -> UILabel {
-        let createLabel = UILabel()
-        createLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(12).generateSizeForScreen)
-        createLabel.text = text
-        createLabel.backgroundColor = UIColor(named: ColorsBravve.backgroundBravve.rawValue)
-        createLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-        return createLabel
     }
     
     //MARK: - Constraints
