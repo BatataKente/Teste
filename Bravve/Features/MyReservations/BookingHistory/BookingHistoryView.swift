@@ -15,7 +15,12 @@ class BookingHistoryView: UIViewController {
     
     let bottomLeftWay = UIImageView()
     
-    let myTableView = UITableView()
+    let myTableView: UITableView = {
+        
+        let myTableView = UITableView()
+        
+        return myTableView
+    }()
     
     private lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -69,7 +74,7 @@ class BookingHistoryView: UIViewController {
         myTableView.constraintOutsideTo(.top, customBar, CGFloat(13).generateSizeForScreen)
         myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
         myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        myTableView.constraintOutsideTo(.bottom, tabBar)
         
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
@@ -88,8 +93,6 @@ extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
         cell?.delegate = self
         return cell ?? UITableViewCell()
     }
-    
-    
 }
 
 extension BookingHistoryView: BookingHistoryCustomCellDelegate {
@@ -98,6 +101,4 @@ extension BookingHistoryView: BookingHistoryCustomCellDelegate {
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
     }
-    
-    
 }
