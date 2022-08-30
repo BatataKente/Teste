@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import SDWebImage
 
 class PersonalProfileView: UIViewController{
     
@@ -14,6 +15,16 @@ class PersonalProfileView: UIViewController{
                                                                    ButtonsBravve.calendarButtonGray.rawValue,
                                                                    ButtonsBravve.userLoginPink.rawValue
                                                                   ])
+    
+    private let sessionManager = SessionManager()
+    
+    var uuid: String {
+        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
+            print("Unable to get user uuid")
+            return ""
+        }
+        return uuid
+    }
     
     let wayImage: UIImageView = {
         let image = UIImageView()
@@ -25,7 +36,9 @@ class PersonalProfileView: UIViewController{
     let profilePic: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "photo")
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleToFill
+        image.clipsToBounds = true
+        
         return image
     }()
     
@@ -266,6 +279,8 @@ class PersonalProfileView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userData()
+        
         tabBar.selectedItem = tabBar.items?[2]
 
         view.backgroundColor = UIColor(named: "background")
@@ -279,10 +294,76 @@ class PersonalProfileView: UIViewController{
         addConstraints()
     }
     
+    func userData() {
+        
+        sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: User?) in
+
+            guard let user = user else {
+                print(user?.message as Any)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.subtitleLabel.text = user.email
+                
+                guard let userName = user.name else {return}
+                let firstName = String(userName.split(separator: " ")[0])
+                
+                self.helloLabel.text = "Olá, \(firstName)!"
+                
+            }
+        }
+        
+        sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
+            
+            guard let pictures = pictures else {
+                print(statusCode as Any)
+                return
+            }
+            
+            if !pictures.isEmpty {
+            
+            guard let pictureUuid = pictures[0].picture else {
+                print(pictures[0].message as Any)
+                return
+            }
+            
+            self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
+                
+                guard let pictureURL = pictureURL?.picture_url else {
+                    print(pictureURL?.message as Any)
+                    print(statusCode as Any)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.profilePic.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
+                }
+
+            }
+        }
+
+        }
+    }
+    
+    
+    
     @objc func reservationPage(){
-        let vc = BookingHistoryView()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+        //TODO: Needs a logic to pressents two states of the same view, one empty and one with at least onde reservation. If number of reservations equals zero, then presents the empty view, else, presents the table view with the reservations.
+        
+        if flagReservation == 1 {
+            
+            let lastReservations = MyBookingView()
+            lastReservations.modalPresentationStyle = .fullScreen
+            self.present(lastReservations, animated: true)
+            
+        }else {
+            let emptyReservations = EmptyReservation()
+            emptyReservations.modalPresentationStyle = .fullScreen
+            self.present(emptyReservations, animated: true)
+        }
     }
     
     @objc func helpPage(sender: UIButton){
@@ -309,13 +390,14 @@ class PersonalProfileView: UIViewController{
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
-        profilePic.widthAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
-        profilePic.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen).isActive = true
+        profilePic.widthAnchor.constraint(equalToConstant: CGFloat(121).generateSizeForScreen).isActive = true
         profilePic.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        profilePic.constraintInsideTo(.top, view.safeAreaLayoutGuide, 39)
+        profilePic.constraintInsideTo(.top, view.safeAreaLayoutGuide, CGFloat(39).generateSizeForScreen)
+        profilePic.sizeAnchorInSuperview(CGFloat(121).generateSizeForScreen)
+        profilePic.layer.cornerRadius = view.frame.size.height / 14
         
         helloLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        helloLabel.constraintOutsideTo(.top, profilePic, CGFloat(60).generateSizeForScreen)
+        helloLabel.constraintOutsideTo(.top, profilePic, CGFloat(9).generateSizeForScreen)
         
         subtitleLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
         subtitleLabel.constraintOutsideTo(.top, helloLabel, CGFloat(10).generateSizeForScreen)

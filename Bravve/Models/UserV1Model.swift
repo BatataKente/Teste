@@ -66,6 +66,11 @@ struct Pictures: Codable {
 
 }
 
+struct PictureURL: Codable {
+    var picture_url: String?
+    var message: String?
+}
+
 struct UploadPicture: Codable {
     var picture_uuid: String?
     var filename: String?
