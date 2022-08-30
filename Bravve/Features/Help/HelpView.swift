@@ -819,10 +819,10 @@ class HelpViewController: UIViewController {
         stack.axis = .vertical
         
         NSLayoutConstraint.activate([
-            answer6Label.topAnchor.constraint(equalTo: question6View.bottomAnchor, constant: -6),
+            answer6Label.topAnchor.constraint(equalTo: question6View.bottomAnchor, constant: -28),
             answer6Label.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 25),
             answer6Label.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: -29),
-            answer6Label.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -23),
+            answer6Label.heightAnchor.constraint(equalToConstant: 256),
         ])
         return stack
     }()
@@ -1151,10 +1151,10 @@ class HelpViewController: UIViewController {
         
         if gesture.didTapAttributedTextInLabel(label: answer2Label, inRange: tapRange) {
             guard let url = URL(string: "mailto:suporte@bravve.com.br") else {
-                    print("fail")
-                    return
-                }
-                UIApplication.shared.canOpenURL(url)
+                print("fail")
+                return
+            }
+            UIApplication.shared.canOpenURL(url)
         }
     }
     
@@ -1162,17 +1162,20 @@ class HelpViewController: UIViewController {
         let tapRange = (self.viewModel.returnHelp(number: 5).answer as NSString).range(of: "Clique aqui")
         
         if gesture.didTapAttributedTextInLabel(label: answer6Label, inRange: tapRange) {
-            print("Oi")
+            guard let url = URL(string: "https://www.bravve.com.br/contact") else {
+                print("fail")
+                return
+            }
+            UIApplication.shared.open(url)
         }
     }
     
     @objc func tapHereTwo(gesture: UITapGestureRecognizer) {
-        let tapRange = (self.viewModel.returnHelp(number: 8).answer as NSString).range(of: "clicar aqui")
-        
-        if gesture.didTapAttributedTextInLabel(label: answer9Label, inRange: tapRange) {
-                let url = URL(string: "https://www.bravve.com.br/contact")!
-                UIApplication.shared.open(url)
-            }
+        guard let url = URL(string: "https://www.bravve.com.br/contact") else {
+            print("fail")
+            return
+        }
+        UIApplication.shared.open(url)
     }
     
     @objc func tapEmailContact(gesture: UITapGestureRecognizer) {
@@ -1180,10 +1183,10 @@ class HelpViewController: UIViewController {
         
         if gesture.didTapAttributedTextInLabel(label: answer11Label, inRange: tapRange) {
             guard let url = URL(string: "mailto:suporte@bravve.com.br") else {
-                    print("fail")
-                    return
-                }
-                UIApplication.shared.canOpenURL(url)
+                print("fail")
+                return
+            }
+            UIApplication.shared.canOpenURL(url)
         }
     }
     
