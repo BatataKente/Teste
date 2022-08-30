@@ -25,7 +25,7 @@ class TabBarClosed: UITabBar, UITabBarDelegate {
                 actualView.present(homeOpenView, animated: true)
             
             case tabBar.items?[1]:
-            
+                
                 let homeOpenView = EmptyReservation()
 
                 homeOpenView.modalPresentationStyle = .fullScreen

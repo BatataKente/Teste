@@ -30,21 +30,21 @@ class BookingDetailsView: UIViewController {
         button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonCheckInTap), for: .touchUpInside)
         return button
     }()
     
-    lazy var buttonOpenSpace: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Abrir porta do espaço", for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
-        return button
-    }()
+//    lazy var buttonOpenSpace: UIButton = {
+//        let button = UIButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setTitle("Abrir porta do espaço", for: .normal)
+//        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
+//        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+//        button.layer.borderWidth = 1
+//        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+//        button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
+//        return button
+//    }()
     
     lazy var lineView1:UIView = {
         let line = UIView()
@@ -514,11 +514,9 @@ class BookingDetailsView: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Cancelar Reserva", for: .normal)
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-        button.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        button.layer.borderColor = UIColor(named: ColorsBravve.label.rawValue)?.cgColor
-        button.layer.borderWidth = 1
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         button.layer.cornerRadius = 12
-        button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
+        button.setTitleColor(UIColor(named: ColorsBravve.white_white.rawValue), for: .normal)
         
         button.addTarget(self, action: #selector(cancelBooking), for: .touchUpInside)
         
@@ -557,17 +555,19 @@ class BookingDetailsView: UIViewController {
         setupContraints()
     }
     
-    @objc func buttonMaindoorTap(){
-        print("main door")
+    @objc func buttonCheckInTap(){
+        customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Para realizar o Check-in, é necessário permissão de uso da câmera do celular.", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
+            let vc = CheckInQrCodeViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), cancelAttributed: "Negar", cancelHandler: UIAction(handler: { _ in
+            self.customAlertOk.dismissAlert()
+        }), on: self)
     }
     
-    @objc func buttonOpenSpaceTap(){
-        print("space door")
-    }
     
     func setupViews(){
         view.addSubview(checkIN)
-        view.addSubview(buttonOpenSpace)
         tabBar.selectedItem = tabBar.items?[1]
         view.addSubview(customBar)
         view.addSubview(tabBar)
@@ -596,14 +596,10 @@ class BookingDetailsView: UIViewController {
     }
     
     @objc func cancelBooking(){
-        cancelButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-        customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
-            self.customAlertOk.dismissAlert()
-//            self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
-//                print("ok")
-//            }), on: self)
+        customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
+            self.customAlertCancel.dismissAlert()
         }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
-            self.customAlertOk.dismissAlert()
+            self.customAlertCancel.dismissAlert()
         }), on: self)
         
     }

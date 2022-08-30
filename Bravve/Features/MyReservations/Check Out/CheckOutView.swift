@@ -600,7 +600,9 @@ class CheckOutView: UIViewController {
         customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Após realizar o check-out você não poderá mais abrir a porta do espaço.", enterAttributed: "Confirmar Check-out", enterHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()
             self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
-                print("ok")
+                let vc = HomeClosedView()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
             }), on: self)
         }), cancelAttributed: "Cancelar Check-out", cancelHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()

@@ -34,7 +34,7 @@ class WorkPassBookingView: UIViewController {
     private lazy var  buttons: [UIButton] = {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.walletBlue.rawValue, IconsBravve.calendarGray.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditGray.rawValue])
-          
+        buttons[0].setTitle("Carteira", for: .normal)
         return buttons
     }()
     
