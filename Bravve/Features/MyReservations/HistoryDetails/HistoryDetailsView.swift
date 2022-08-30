@@ -114,7 +114,7 @@ class HistoryDetailsView: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layoutCollection )
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        collection.register(BookingDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collection.register(HistoryDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
 
         return collection
     }()
@@ -804,7 +804,7 @@ extension HistoryDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? BookingDetailsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HistoryDetailsCollectionViewCell
         
 //        guard let pictures = space.pictures else { return UICollectionViewCell() }
 //

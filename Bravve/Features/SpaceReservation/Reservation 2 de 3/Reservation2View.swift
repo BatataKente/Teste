@@ -153,6 +153,7 @@ class Reservation2View: UIViewController {
         button.setImage(UIImage(named: IconsBravve.pencilBlue.rawValue), for: .normal)
         button.contentMode = .scaleAspectFit
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -432,6 +433,11 @@ class Reservation2View: UIViewController {
             
         ])
         
+    }
+    
+    @objc func editButtonTapped() {
+        
+        self.dismiss(animated: true)
     }
     
     @objc func confirmButtonTapped(){
