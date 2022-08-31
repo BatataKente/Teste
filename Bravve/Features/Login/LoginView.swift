@@ -15,7 +15,6 @@ class LoginView: UIViewController {
     }
     
     //MARK: - var and let
-    let sessionManager = SessionManager()
     
     let backButton = UIButton()
     
@@ -24,6 +23,8 @@ class LoginView: UIViewController {
     private let customAlert: CustomAlert = CustomAlert()
     
     private let alertCustom: CustomAlert = CustomAlert()
+    
+    private let emptyAlert: CustomAlert = CustomAlert()
     
     //MARK: - wayImage
     private lazy var wayImage = UIImageView()
@@ -251,6 +252,7 @@ class LoginView: UIViewController {
         super.viewDidLoad()
         setupView()
         setupLayoutConstraints()
+        viewModel.delegate = self
     }
     
     //MARK: - viewWillAppear
@@ -301,67 +303,14 @@ class LoginView: UIViewController {
     
     //MARK: - loginButtonTapped
     @objc func loginButtonTapped(){
-        let vc = HomeClosedView()
-        vc.modalPresentationStyle = .fullScreen
         
         guard let email = self.loginTextField.text else {return}
         guard let password = self.passwordTextField.text else {return}
         
         if self.viewModel.isValid(email: email, password: password) == true{
             
-            let parameters = LoginParameters(email: email, password: password)
+            self.viewModel.loginUser(email: email, password: password)
             
-            sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: parameters) { (statusCode, error, token: Token?) in
-                
-                guard let tokenResponse = token?.token else {
-                    
-                    print(statusCode as Any)
-                    
-                    guard let statusCode = statusCode else {
-                        return
-                    }
-                    
-                    if statusCode == 400 {
-                        
-                    guard let message = token?.message else { return }
-                    
-                    self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
-                                          message: message,
-                                          enterAttributed: "Tentar Novamente",
-                                          on: self)
-                    } else if statusCode == 404 {
-                        guard let message = token?.message else { return }
-                        
-                        self.alertCustom.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
-                                              message: message,
-                                              enterAttributed: "Tentar Novamente",
-                                              on: self)
-                    }
-                    return
-                }
-                
-                UserDefaults.standard.setValue(tokenResponse, forKey: "access_token")
-                
-                self.sessionManager.getDataArray(endpoint: .users) { (statusCode, error, users: [User]?) in
-                    
-                    guard let users = users else {
-                        return
-                    }
-                    
-                    for user in users {
-                        
-                        guard let userEmail = user.email else { return }
-                        if userEmail == email {
-                            
-                            guard let userUUID = user.uuid else { return }
-                            UserDefaults.standard.setValue(userUUID, forKey: "userUUID")
-                        }
-                    }
-                    self.present(vc, animated: false)
-                }
-                
-                
-            }
         } else{
             loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             passwordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
@@ -372,10 +321,10 @@ class LoginView: UIViewController {
             }   else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
                 eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
             }
-            customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
-                                  message: "Usuário e/ou senha incorretos",
-                                  enterAttributed: "Tentar Novamente",
-                                  on: self)
+            emptyAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                 message: "Usuário e/ou senha incorretos",
+                                 enterAttributed: "Tentar Novamente",
+                                 on: self)
         }
     }
     
@@ -551,5 +500,27 @@ extension UIStackView {
         self.layer.shadowOpacity = 1.0
         self.layer.shadowRadius = 0.03
         
+    }
+}
+
+extension LoginView: LoginViewModelProtocol {
+    func showCustomAlert(message: String) {
+        self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                   message: message,
+                                   enterAttributed: "Tentar Novamente",
+                                   on: self)
+    }
+    
+    func showAlertCustom(message: String) {
+        self.alertCustom.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                   message: message,
+                                   enterAttributed: "Tentar Novamente",
+                                   on: self)
+    }
+    
+    func presentNextScreen() {
+        let vc = HomeClosedView()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: false)
     }
 }
