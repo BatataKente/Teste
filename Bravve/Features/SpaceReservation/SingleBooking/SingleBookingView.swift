@@ -51,6 +51,13 @@ class SingleBookingView: UIViewController {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.walletGray.rawValue, IconsBravve.calendarBlue.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditGray.rawValue])
         
+        let handler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return buttons
     }()
     
