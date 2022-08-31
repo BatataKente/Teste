@@ -11,6 +11,10 @@ import UIKit
 
 final class ReservationsThreeViewController: UIViewController, UIScrollViewDelegate {
     
+    var alltxtFieldsReservation: [UITextField] = []
+    var currentTextFieldPositon: Int = 0
+
+    
     //MARK: - preferredStatusBarStyle
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -237,6 +241,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -288,6 +293,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -348,6 +354,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -407,6 +414,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -534,6 +542,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -581,6 +590,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = 8
+        stack.isUserInteractionEnabled = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -677,7 +687,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         
         
         finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
-        
+        allTextFieldReservation()
     }
     
     
@@ -719,7 +729,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - ccEmpity
     @objc private func ccEmpity()  {
-        if ccValidateExpirationTextfield.text!.count >= 4 {
+        if ccValidateExpirationTextfield.text!.count >= 3 {
             ccValidateStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
         } else {
             ccValidateStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
@@ -857,6 +867,38 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
             reservationcompletedview.modalPresentationStyle = .fullScreen
             present(reservationcompletedview, animated: true)
 
+    }
+    //MARK: - touchesBegan
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+
+    //MARK: - allTextFieldReservation
+    private func allTextFieldReservation() {
+        
+        
+        let allTextFields: [UITextField] = [
+        
+            numberCardTextfield, ccValidateExpirationTextfield,sourceSecurityTextfield, nameHolderTextfield, cpfTextfield
+            
+        ]
+        
+        let allStackView: [UIStackView] = [
+        
+            numberCardStackView, ccValidateStackView, sourceSecurityStackView, nameHolderStackView, cpfStackView
+        
+        ]
+        
+        alltxtFieldsReservation = allTextFields
+        
+        for tf in allTextFields {
+            
+            tf.delegate = self
+            
+        }
+        
     }
     
     
@@ -998,6 +1040,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     }
 
+
+
 extension ReservationsThreeViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -1015,11 +1059,31 @@ extension ReservationsThreeViewController: UITextFieldDelegate {
         case 4:
             textField?.text = textField?.text?.uppercased()
         case 5:
-            textField?.text = textField?.text?.formatMask(mask: "####")
+            textField?.text = textField?.text?.formatMask(mask: "###")
         default:
             break
         }
     }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        currentTextFieldPositon = alltxtFieldsReservation.firstIndex(of: textField) ?? 0
+
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        currentTextFieldPositon = currentTextFieldPositon + 1
+        if currentTextFieldPositon > alltxtFieldsReservation.count - 1 {
+            currentTextFieldPositon = 0
+        }
+        
+        
+        let newTextField = alltxtFieldsReservation[currentTextFieldPositon]
+        
+        newTextField.becomeFirstResponder()
+        return true
+    }
+    
 }
 
 extension UIStackView {
@@ -1060,6 +1124,8 @@ extension ReservationsThreeViewController : UIGestureRecognizerDelegate {
         return true
     }
 }
+
+
 
     
 
