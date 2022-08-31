@@ -527,7 +527,7 @@ class BookingDetailsView: UIViewController {
         
         let lessButton = UIButton()
         attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
+            string: "Ver Menos",
             attributes: yourAttributes)
         lessButton.setAttributedTitle(attributeString, for: .normal)
         lessButton.setImage(UIImage(named: upButtonImages.rawValue),
