@@ -28,6 +28,14 @@ class PasswordRecoveryPassword: UIViewController {
             IconsBravve.padlockBlue.rawValue
         ])
         buttons[1].setTitle("Recuperação de senha", for: .normal)
+        
+        let handler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return buttons
     }()
     
@@ -109,7 +117,6 @@ class PasswordRecoveryPassword: UIViewController {
         
         registerButton.addTarget(self, action: #selector(actionRegisterButton), for: .touchUpInside)
         
-        buttons[0].addTarget(self, action: #selector(actionButtonEmail), for: .touchUpInside)
         
     }
     
