@@ -97,75 +97,52 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         return label
     }()
     
-
-       
-        //MARK: - NavWallpapper
-        private lazy var navWalppapper: UIImageView = {
-            let view = UIImageView()
-            view.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.contentMode = .scaleToFill
-           return view
-        }()
     
-    
-    //MARK: - backButton
-            private lazy var backButton: UIButton = {
-               let button = UIButton()
-                button.setImage(UIImage(named: ButtonsBravve.backWhite.rawValue), for: .normal)
-                button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                return button
-            }()
+    //MARK: - Buttons
+    private lazy var  buttons: [UIButton] = {
         
-        //MARK: - NameSpace
-       private lazy var nameSpace: UILabel = {
-            let label = UILabel()
-            label.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-            label.text = "Nome do espaço"
-            label.textAlignment = .center
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-           return label
-        }()
+        let buttons = createProgressBarButtonsWithoutActions([IconsBravve.walletGray.rawValue, IconsBravve.calendarGray.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditBlue.rawValue])
         
-    //MARK: - NameLocalPartner
-       private lazy var nameLocalPartner: UILabel = {
-            let label = UILabel()
-           label.textAlignment = .center
-            label.text = "Nome do local parceiro"
-            label.font = UIFont(name: FontsBravve.regular.rawValue, size: 16)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-           return label
-        }()
-    
-    //MARK: - ProgressBarStackView
-    private lazy var progressBarStackView: (stack: UIStackView,
-                                            buttons: [UIButton]) = {
-
-        let buttons = createProgressBarButtons([IconsBravve.walletGray.rawValue, IconsBravve.calendarGray.rawValue, IconsBravve.pencilGray.rawValue, IconsBravve.creditBlue.rawValue])
+        buttons[3].setTitle("Pagamento", for: .normal)
         
-        buttons[3].setTitle("  Pagamento", for: .normal)
+        let tripleDismissHandler = {(action: UIAction) in
+            if let reservation2 = self.presentingViewController,
+               let singleBooking = reservation2.presentingViewController,
+               let workPassBooking = singleBooking.presentingViewController{
+                
+                reservation2.view.isHidden = true
+                singleBooking.view.isHidden = true
+                workPassBooking.dismiss(animated: false)
+            }
+        }
         
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.spacing = 8
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.axis = .horizontal
-        stackView.semanticContentAttribute = .unspecified
-        stackView.contentMode = .scaleToFill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return (stack: stackView,
-                buttons: buttons)
+        let doubleDismissHandler = {(action: UIAction) in
+            
+            if let singleBooking = self.presentingViewController,
+               let workPassBooking = singleBooking.presentingViewController {
+                
+                singleBooking.view.isHidden = true
+                workPassBooking.dismiss(animated: false)
+            }
+        }
+        
+        let dismissHandler = {(action: UIAction) in
+            
+            self.dismiss(animated: false)
+        }
+        
+        buttons[0].addAction(UIAction(handler: tripleDismissHandler), for: .touchUpInside)
+        buttons[1].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
+        buttons[2].addAction(UIAction(handler: dismissHandler), for: .touchUpInside)
+        
+        return buttons
     }()
         
-       
     
     //MARK: - paymentLabel
     private lazy var paymentLabel: UILabel = {
          let label = UILabel()
-        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.text = "Pagamento"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -176,7 +153,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - resumeLabel
     private lazy var resumeLabel: UILabel = {
          let label = UILabel()
-        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.text = "Resumo"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -213,7 +190,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - CardCreditLabel
         private lazy var cardCreditLabel: UILabel = {
              let label = UILabel()
-            label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+            label.textColor = UIColor(named: ColorsBravve.label.rawValue)
              label.text = "Cartão de Crédito"
             label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
              label.translatesAutoresizingMaskIntoConstraints = false
@@ -631,6 +608,10 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         setupView()
         setupConstrains()
         
+        view.createReservationCustomBar(progressBarButtons: buttons) { _ in
+            self.dismiss(animated: true)
+        }
+        
         
         let numberStackViewTap = UITapGestureRecognizer(target: self, action: #selector(numberStackViewTapped))
         numberCardStackView.addGestureRecognizer(numberStackViewTap)
@@ -652,11 +633,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - SetupView
     private func setupView() {
-        view.addSubviews([navWalppapper,
-                          backButton,
-                          nameSpace,
-                          nameLocalPartner,
-                          progressBarStackView.stack,
+        view.addSubviews([
                           paymentLabel,
                           lineImage,
                           resumeLabel,
@@ -907,39 +884,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         private func setupConstrains() {
             
             NSLayoutConstraint.activate([
-            
-                //MARK: navWallpapper
-                navWalppapper.topAnchor.constraint(equalTo: view.topAnchor),
-                navWalppapper.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                navWalppapper.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                navWalppapper.heightAnchor.constraint(equalToConstant: CGFloat(153).generateSizeForScreen),
-           
-                
-                
-                //MARK: backButton
-                backButton.centerYAnchor.constraint(equalTo:navWalppapper.centerYAnchor),
-                backButton.leadingAnchor.constraint(equalTo: navWalppapper.leadingAnchor, constant: CGFloat(32).generateSizeForScreen),
-                backButton.heightAnchor.constraint(equalToConstant: CGFloat(14).generateSizeForScreen),
-                backButton.widthAnchor.constraint(equalToConstant: CGFloat(8.48).generateSizeForScreen),
-
-
-                //MARK: nameSpace
-                nameSpace.bottomAnchor.constraint(equalTo: nameLocalPartner.topAnchor, constant: -4),
-                nameSpace.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(125).generateSizeForScreen),
-                nameSpace.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-125).generateSizeForScreen),
-                
-                //MARK: nameLocalPartner
-                nameLocalPartner.bottomAnchor.constraint(equalTo: navWalppapper.bottomAnchor, constant: -18),
-                nameLocalPartner.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(103.5).generateSizeForScreen),
-                nameLocalPartner.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-103.5).generateSizeForScreen),
-                
-                //MARK: progressBarStackView
-                progressBarStackView.stack.topAnchor.constraint(equalTo: navWalppapper.bottomAnchor),
-                progressBarStackView.stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                progressBarStackView.stack.heightAnchor.constraint(equalToConstant: CGFloat(67).generateSizeForScreen),
                 
                 //MARK: paymentLabel
-                paymentLabel.topAnchor.constraint(equalTo: progressBarStackView.stack.bottomAnchor, constant: 3),
+                paymentLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 216),
                 paymentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
                 
                 //MARK: lineImage
