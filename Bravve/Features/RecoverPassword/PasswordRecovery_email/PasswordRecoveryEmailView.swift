@@ -182,7 +182,7 @@ class PasswordRecoveryEmailView: UIViewController {
             passwordRecoveryEmailViewModel.refreshScreen()
             labelEmail_.textColor = UIColor.gray
             registerFailLabel.isHidden = true
-            customShaddow.backgroundColor = UIColor.gray
+            customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
             buttonContinue.addTarget(nil,action: #selector(actionButtonContinue),for: .touchUpInside)
             buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
