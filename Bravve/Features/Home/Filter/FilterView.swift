@@ -611,7 +611,6 @@ final class FilterScreen: UIViewController {
                 return
                 
             }
-            print(typesList)
             self.sortedFacilitiesArray = typesList
             
             for types in typesList {
@@ -685,7 +684,7 @@ final class FilterScreen: UIViewController {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = selectedTypesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedTypesArray = filteredArray
                 spaceTypeId = nil
@@ -696,19 +695,13 @@ final class FilterScreen: UIViewController {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 selectedTypesArray.append(button.titleLabel?.text ?? "")
                 for type in sortedTypesArray {
                     if button.titleLabel?.text == type.name {
                         spaceTypeId = type.id
                     }
                 }
-            } else {
-                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
-                let filteredArray = selectedTypesArray.filter {$0 != button.titleLabel?.text ?? ""}
-                selectedTypesArray = filteredArray
-                spaceTypeId = nil
             }
         }
     }
@@ -718,7 +711,7 @@ final class FilterScreen: UIViewController {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = selectedClassificationsArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedClassificationsArray = filteredArray
                 spaceClassificationId = nil
@@ -729,19 +722,13 @@ final class FilterScreen: UIViewController {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 selectedClassificationsArray.append(button.titleLabel?.text ?? "")
                 for classification in sortedClassificationsArray {
                     if button.titleLabel?.text == classification.name {
                         spaceClassificationId = classification.id
                     }
                 }
-            } else {
-                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
-                let filteredArray = selectedClassificationsArray.filter {$0 != button.titleLabel?.text ?? ""}
-                selectedClassificationsArray = filteredArray
-                spaceClassificationId = nil
             }
         }
     }
@@ -751,7 +738,7 @@ final class FilterScreen: UIViewController {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = selectedCategoriesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedCategoriesArray = filteredArray
                 spaceCategoryId = nil
@@ -762,19 +749,13 @@ final class FilterScreen: UIViewController {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 selectedCategoriesArray.append(button.titleLabel?.text ?? "")
                 for category in sortedCategoriesArray {
                     if button.titleLabel?.text == category.name {
                         spaceCategoryId = category.id
                     }
                 }
-            } else {
-                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
-                let filteredArray = selectedCategoriesArray.filter {$0 != button.titleLabel?.text ?? ""}
-                selectedCategoriesArray = filteredArray
-                spaceCategoryId = nil
             }
         }
     }
@@ -783,35 +764,42 @@ final class FilterScreen: UIViewController {
         if button.isSelected == true {
             button.isSelected.toggle()
             button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-            button.configuration?.attributedTitle?.foregroundColor = .black
+            button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
             let filteredArray = selectedFacilitiesArray.filter {$0 != button.titleLabel?.text ?? ""}
             selectedFacilitiesArray = filteredArray
             for facility in sortedFacilitiesArray {
-                if button.titleLabel?.text == facility.name {
+                if button.titleLabel?.text == facility.name{
                     let typeId = facility.id
                     let filteredIds = spaceFacilitiesId?.filter {$0 != typeId}
                     spaceFacilitiesId = filteredIds
                 }
             }
+            print("kaueteste \(sortedFacilitiesArray)")
         } else {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 selectedFacilitiesArray.append(button.titleLabel?.text ?? "")
                 for facility in sortedFacilitiesArray {
+                  
                     if button.titleLabel?.text == facility.name {
                         guard let facilityId = facility.id else {return}
+                        
+                        if spaceFacilitiesId == nil {
+                            spaceFacilitiesId = []
+                        }
                         spaceFacilitiesId?.append(facilityId)
                     }
                 }
+                
             } else {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 let filteredArray = selectedFacilitiesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedFacilitiesArray = filteredArray
                 for facility in sortedFacilitiesArray {
-                    if button.titleLabel?.text == facility.name {
+                    if button.titleLabel?.text == facility.name?.description {
                         let typeId = facility.id ?? 0
                         let filteredIds = spaceFacilitiesId?.filter {$0 != typeId}
                         spaceFacilitiesId = filteredIds
@@ -819,6 +807,8 @@ final class FilterScreen: UIViewController {
                 }
             }
         }
+        print("kaue \(selectedFacilitiesArray)")
+        print("kaue \(spaceFacilitiesId)")
     }
     
     @objc func selectNoise(button: UIButton) {
@@ -826,7 +816,7 @@ final class FilterScreen: UIViewController {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = selectedNoisesArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedNoisesArray = filteredArray
                 spaceNoiseId = nil
@@ -837,19 +827,13 @@ final class FilterScreen: UIViewController {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 selectedNoisesArray.append(button.titleLabel?.text ?? "")
                 for noise in sortedNoisesArray {
                     if button.titleLabel?.text == noise.name {
                         spaceNoiseId = noise.id
                     }
                 }
-            } else {
-                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
-                let filteredArray = selectedNoisesArray.filter {$0 != button.titleLabel?.text ?? ""}
-                selectedNoisesArray = filteredArray
-                spaceNoiseId = nil
             }
         }
     }
@@ -859,7 +843,7 @@ final class FilterScreen: UIViewController {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = selectedContractsArray.filter {$0 != button.titleLabel?.text ?? ""}
                 selectedContractsArray = filteredArray
                 spaceContractId = nil
@@ -870,20 +854,14 @@ final class FilterScreen: UIViewController {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 selectedContractsArray.append(button.titleLabel?.text ?? "")
                 for contract in sortedContractsArray {
                     if button.titleLabel?.text == contract.name {
                         spaceContractId = contract.id
                     }
                 }
-            } else {
-                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
-                let filteredArray = selectedContractsArray.filter {$0 != button.titleLabel?.text ?? ""}
-                selectedContractsArray = filteredArray
-                spaceContractId = nil
-            }
+            } 
         }
     }
     
