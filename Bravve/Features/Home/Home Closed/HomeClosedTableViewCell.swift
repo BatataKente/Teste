@@ -1,8 +1,8 @@
 //
-//  HomeClosedTableViewCell.swift
+//  HomeAbertaTableViewCell.swift
 //  Bravve
 //
-//  Created by Evandro Rodrigo Minamoto on 11/08/22.
+//  Created by Josicleison on 29/07/22.
 //
 
 import UIKit
@@ -10,21 +10,26 @@ import SDWebImage
 
 class HomeClosedTableViewCell: UITableViewCell {
     
+    struct ViewElements {
+        
+        let view: UIView,
+            titleLabel: UILabel,
+            titleLabelView: UIView,
+            descriptionLabel: UILabel,
+            photoView: UIImageView,
+            photoLabel: UILabel,
+            photoLabelView: UIView,
+            nameLabel: UILabel,
+            subNameLabel: UILabel,
+            priceLabel: UILabel,
+            detailsLabel: UILabel
+    }
+    
     var delegate: HomeClosedTableViewCellProtocol?
     
     var indexPath: IndexPath = IndexPath()
     
-    private lazy var viewElements: (view: UIView,
-                                    titleLabel: UILabel,
-                                    titleLabelView: UIView,
-                                    descriptionLabel: UILabel,
-                                    photoView: UIImageView,
-                                    photoLabel: UILabel,
-                                    photoLabelView: UIView,
-                                    nameLabel: UILabel,
-                                    subNameLabel: UILabel,
-                                    priceLabel: UILabel,
-                                    detailsLabel: UILabel) = {
+    private lazy var viewElements: ViewElements = {
         
         let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
         
@@ -73,6 +78,7 @@ class HomeClosedTableViewCell: UITableViewCell {
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
         nameLabel.textColor = textColor
+        nameLabel.numberOfLines = 0
         
         let subNameLabel = UILabel()
         subNameLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -82,7 +88,58 @@ class HomeClosedTableViewCell: UITableViewCell {
         let priceLabel = UILabel()
         priceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
         priceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                 size: CGFloat(12).generateSizeForScreen)
+                                 size: CGFloat(20).generateSizeForScreen)
+        
+        let hourPriceLabel = UILabel()
+        hourPriceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        hourPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                     size: CGFloat(20).generateSizeForScreen)
+        hourPriceLabel.text = "3,50"
+        
+        let priceView: UIView = {
+            
+            let priceTypeLabel = UILabel()
+            priceTypeLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+            priceTypeLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                         size: CGFloat(12).generateSizeForScreen)
+            priceTypeLabel.text = "R$"
+            
+            let hourLabel = UILabel()
+            hourLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+            hourLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                    size: CGFloat(12).generateSizeForScreen)
+            hourLabel.text = "/hora"
+            
+            let creditHourLabel = UILabel()
+            creditHourLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+            creditHourLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                          size: CGFloat(12).generateSizeForScreen)
+            creditHourLabel.text = "crédito/hora"
+            
+            let priceView = UIView()
+            priceView.addSubviews([priceTypeLabel, priceLabel, hourLabel, creditHourLabel, hourPriceLabel])
+            
+            priceLabel.constraintInsideTo(.top, priceView)
+            priceLabel.constraintOutsideTo(.leading, priceTypeLabel,
+                                           CGFloat(2.5).generateSizeForScreen)
+            priceLabel.constraintOutsideTo(.trailing, hourLabel,
+                                           CGFloat(2.5).generateSizeForScreen)
+            
+            priceTypeLabel.constraintInsideTo(.leading, priceView)
+            priceTypeLabel.constraintInsideTo(.bottom, priceLabel)
+            
+            hourLabel.constraintInsideTo(.bottom, priceLabel)
+            
+            creditHourLabel.constraintOutsideTo(.leading, hourPriceLabel,
+                                               CGFloat(2.5).generateSizeForScreen)
+            creditHourLabel.constraintInsideTo(.trailing, priceView)
+            creditHourLabel.constraintInsideTo(.bottom, priceView)
+            
+            hourPriceLabel.constraintInsideTo(.leading, priceView)
+            hourPriceLabel.constraintInsideTo(.bottom, priceView)
+            
+            return priceView
+        }()
         
         let detailsLabel = UILabel()
         detailsLabel.font = UIFont(name: FontsBravve.light.rawValue,
@@ -97,7 +154,7 @@ class HomeClosedTableViewCell: UITableViewCell {
                                 action: #selector(showDetails),
                                 for: .touchUpInside)
         
-        view.addSubviews([titleLabelView, descriptionLabel, detailsButton, photoView, photoLabelView, nameLabel, subNameLabel, priceLabel, detailsLabel])
+        view.addSubviews([titleLabelView, descriptionLabel, detailsButton, photoView, photoLabelView, nameLabel, subNameLabel, priceView, detailsLabel])
         
         titleLabelView.constraintInsideTo(.top, view)
         titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
@@ -132,9 +189,11 @@ class HomeClosedTableViewCell: UITableViewCell {
         
         nameLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
         nameLabel.constraintInsideTo(.leading, photoView)
+        nameLabel.constraintInsideTo(.width, view, multiplier: 0.5)
 
-        priceLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
-        priceLabel.constraintInsideTo(.trailing, photoView, CGFloat(20).generateSizeForScreen)
+        priceView.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
+        priceView.constraintInsideTo(.trailing, photoView, CGFloat(20).generateSizeForScreen)
+        priceView.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
 
         subNameLabel.constraintOutsideTo(.top, nameLabel, CGFloat(10).generateSizeForScreen)
         subNameLabel.constraintInsideTo(.leading, nameLabel)
@@ -146,20 +205,21 @@ class HomeClosedTableViewCell: UITableViewCell {
         detailsButton.constraintInsideTo(.trailing, view, CGFloat(30).generateSizeForScreen)
         detailsButton.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
         
-        return (view: view,
-                titleLabel: titleLabel,
-                titleLabelView: titleLabelView,
-                descriptionLabel: descriptionLabel,
-                photoView: photoView,
-                photoLabel: photoLabel,
-                photoLabelView: photoLabelView,
-                nameLabel: nameLabel,
-                subNameLabel: subNameLabel,
-                priceLabel: priceLabel,
-                detailsLabel: detailsLabel)
+        return ViewElements(view: view,
+                            titleLabel: titleLabel,
+                            titleLabelView: titleLabelView,
+                            descriptionLabel: descriptionLabel,
+                            photoView: photoView,
+                            photoLabel: photoLabel,
+                            photoLabelView: photoLabelView,
+                            nameLabel: nameLabel,
+                            subNameLabel: subNameLabel,
+                            priceLabel: priceLabel,
+                            detailsLabel: detailsLabel)
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
@@ -167,6 +227,7 @@ class HomeClosedTableViewCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -200,7 +261,7 @@ class HomeClosedTableViewCell: UITableViewCell {
         viewElements.photoView.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
         viewElements.nameLabel.text = space.local_name
         viewElements.subNameLabel.text = space.description
-        viewElements.priceLabel.text = "\(space.hourly_credits ?? "") crédito/hora"
+        viewElements.priceLabel.text = "\(space.hourly_credits ?? "")"
         viewElements.detailsLabel.text = "\(space.partner_site_address?.address?.city_name ?? "")/\(space.partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(space.seats_qty ?? 0) pessoas\n\(space.space_type?.name ?? "")"
         
         guard let allowWorkpass = space.allow_workpass else {
