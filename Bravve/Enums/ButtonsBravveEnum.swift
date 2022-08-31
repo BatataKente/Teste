@@ -20,6 +20,7 @@ public enum ButtonsBravve: String {
     case arrowPink = "arrowPink"
     case arrowProfile = "arrowProfile"
     case arrowUp = "arrowUp"
+    case arrowUpPink = "arrowUpPink"
     case backPink = "backPink"
     case backReserv = "backReserv"
     case backWhite = "backWhite"
@@ -45,4 +46,5 @@ public enum ButtonsBravve: String {
     case userLoginGray = "userLoginGray"
     case userLoginPink = "userLoginPink"
     case xmarkBlue = "xmarkBlue"
+    case xmarkPink = "xmarkPink"
 }
