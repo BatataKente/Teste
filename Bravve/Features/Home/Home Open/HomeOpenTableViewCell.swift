@@ -78,6 +78,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                 size: CGFloat(20).generateSizeForScreen)
         nameLabel.textColor = textColor
+        nameLabel.numberOfLines = 0
         
         let subNameLabel = UILabel()
         subNameLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -188,6 +189,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         nameLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
         nameLabel.constraintInsideTo(.leading, photoView)
+        nameLabel.constraintInsideTo(.width, view, multiplier: 0.5)
 
         priceView.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
         priceView.constraintInsideTo(.trailing, photoView, CGFloat(20).generateSizeForScreen)
