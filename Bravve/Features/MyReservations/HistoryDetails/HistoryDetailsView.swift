@@ -21,86 +21,65 @@ class HistoryDetailsView: UIViewController {
         return tabBar
     }()
     
-//    lazy var checkIN: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("Check-in", for: .normal)
-//        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-//        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-//        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-//        button.layer.borderWidth = 1
-//        button.addTarget(self, action: #selector(buttonMaindoorTap), for: .touchUpInside)
-//        return button
-//    }()
-    
-//    lazy var buttonOpenSpace: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("Abrir porta do espaço", for: .normal)
-//        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
-//        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-//        button.layer.borderWidth = 1
-//        button.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-//        button.addTarget(self, action: #selector(buttonOpenSpaceTap), for: .touchUpInside)
-//        return button
-//    }()
-    
     lazy var lineView1:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView2:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView3:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView4:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView5:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var titleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.numberOfLines = 1
-        lb.text = "BOXOFFICE"
-        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
-        lb.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.text = "BOXOFFICE"
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        label.textAlignment = .center
+        return label
     }()
     
     lazy var descriptLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Numa esquina\ncharmosa, um hotel"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.31
+        label.attributedText = NSMutableAttributedString(string: "Numa esquina charmosa, um hotel", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        label.textAlignment = .left
+        return label
     }()
     
     private lazy var reserveCollection: UICollectionView = {
@@ -134,128 +113,111 @@ class HistoryDetailsView: UIViewController {
     }()
     
     lazy var infoLocalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Home by Kamy"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Home by Kamy"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        return label
     }()
     
     lazy var nameLocalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "UM Coffe Co."
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "UM Coffe Co."
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var detailLocalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Detalhes da sua reserva"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Detalhes da sua reserva"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        return label
     }()
     
     lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.calendarGray.rawValue)
-        
+        image.image = UIImage(named: IconsBravve.calendar.rawValue)
         return image
     }()
     
     lazy var dayLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09/04/22"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "09/04/22"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var checkInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-in"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Check-in"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
-    
     lazy var checkOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-Out"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Check-Out"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var diaryLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Diária"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Diária"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var dayDiaryCheckInLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "09:00"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var dayDiaryCheckOutLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "20:00"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "20:00"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var payFormLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Forma de pagamento"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Forma de pagamento"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        return label
     }()
     
     lazy var imagePay: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.walletBlue.rawValue)
-        
+        image.image = UIImage(named: IconsBravve.receipt.rawValue)
         return image
     }()
     
@@ -263,7 +225,6 @@ class HistoryDetailsView: UIViewController {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.users.rawValue)
-        
         return image
     }()
     
@@ -271,7 +232,6 @@ class HistoryDetailsView: UIViewController {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.map.rawValue)
-        
         return image
     }()
     
@@ -279,31 +239,45 @@ class HistoryDetailsView: UIViewController {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
-        
         return image
     }()
     
-    lazy var buttonArrowIconImage1: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-        
-        return button
+    lazy var clockIconImage2: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
     }()
     
-    lazy var buttonArrowIconImage2: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-        
-        return button
+    lazy var clockIconImage3: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
+    }()
+    
+    lazy var clockIconImage4: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
+    }()
+    
+    lazy var clockIconImage5: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
     }()
     
     lazy var cellIconImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "cellphone")
-        
         return image
     }()
     
@@ -311,218 +285,340 @@ class HistoryDetailsView: UIViewController {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.email.rawValue)
-        
         return image
     }()
     
     lazy var creditCard: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Cartão de crédito"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Cartão de crédito"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var totalLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Total:", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: " R$ 560,87", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
-        lb.attributedText = atritutedString1
-        lb.numberOfLines = 0
-        lb.textAlignment = .left
-        return lb
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        return label
     }()
     
     lazy var creditCardTextField: UITextField = {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.text = "    **** **** **** 4679"
-        tf.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        tf.backgroundColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
-        tf.isUserInteractionEnabled = false
-        return tf
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = "    **** **** **** 4679"
+        textField.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
+        textField.backgroundColor = UIColor(named: ColorsBravve.backgroundCard.rawValue)
+        textField.layer.cornerRadius = 10
+        textField.clipsToBounds = false
+        textField.isUserInteractionEnabled = false
+        return textField
     }()
+    
     
     lazy var localDetail: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Detalhes do local"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Detalhes do local"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.textAlignment = .left
+        return label
     }()
     
+    
     lazy var numberPeopleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Até 6 pessoas"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Até 6 pessoas"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var localizationLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Av. São Joâo, Cj. Boulevard, n°900, São Paulo. SP 06020-010, BR"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Av. São Joâo, Cj. Boulevard, n°900, São Paulo. SP 06020-010, BR"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var clockLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Segunda:", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
-        lb.attributedText = atritutedString1
-        lb.numberOfLines = 0
-        lb.textAlignment = .left
-        return lb
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        return label
     }()
     
+    lazy var clockLabel2: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        
+        let atritutedString1 = NSMutableAttributedString(string: "Terça:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    
+    lazy var clockLabel3: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        
+        let atritutedString1 = NSMutableAttributedString(string: "Quarta:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    
+    lazy var clockLabel4: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        
+        let atritutedString1 = NSMutableAttributedString(string: "Quinta:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    
+    lazy var clockLabel5: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        
+        let atritutedString1 = NSMutableAttributedString(string: "Sexta:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    
+    
     lazy var responsablePeople: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Responsavél"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Responsável"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var responsableNameLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
-        lb.attributedText = atritutedString1
-        lb.numberOfLines = 0
-        lb.textAlignment = .left
-        return lb
+        label.attributedText = atritutedString1
+        label.numberOfLines = 0
+        return label
     }()
     
     lazy var descriptionResponsableLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via whatsapp"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp."
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.lineBreakMode = .byWordWrapping
+        return label
     }()
     
     lazy var contactsLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Contatos"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Contatos"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var contactNumberLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "(11) 99999-9999"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "(11) 99999-9999"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.textAlignment = .left
+        return label
     }()
     
     lazy var contactEmailLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "giovanna@empresaexe.com.br"
-        lb.numberOfLines = 0
-        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
-        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        lb.textAlignment = .left
-        return lb
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "giovanna@empresaexe.com.br"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
     }()
     
     lazy var showMoreButton1: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        let attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .normal)
+        button.setTitle("Ver Mais", for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
+                        for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                         size: CGFloat(12).generateSizeForScreen)
+        button.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Mais", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        button.setTitleColor(UIColor(named: ColorsBravve.pink_cyan.rawValue), for: .normal)
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        button.imageView?.constraintInsideTo(.height, button.titleLabel,
+                                             multiplier: 0.5)
+        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        return button
+    }()
+    
+    lazy var showLessButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Ver Menos", for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+                        for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                         size: CGFloat(12).generateSizeForScreen)
+        button.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Menos", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        button.setTitleColor(UIColor(named: ColorsBravve.pink_cyan.rawValue), for: .normal)
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        button.imageView?.constraintInsideTo(.height, button.titleLabel,
+                                             multiplier: 0.5)
+        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        button.isHidden = true
         return button
     }()
     
     lazy var showMoreButton2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        let attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .normal)
+        button.setTitle("Ver Mais", for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
+                        for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                         size: CGFloat(12).generateSizeForScreen)
+        button.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Mais", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        button.setTitleColor(UIColor(named: ColorsBravve.pink_cyan.rawValue), for: .normal)
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        button.imageView?.constraintInsideTo(.height, button.titleLabel,
+                                             multiplier: 0.5)
+        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
         return button
     }()
     
-//    lazy var cancelButton: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("Cancelar Reserva", for: .normal)
-//        button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
-//        button.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-//        button.layer.borderColor = UIColor(named: ColorsBravve.label.rawValue)?.cgColor
-//        button.layer.borderWidth = 1
-//        button.layer.cornerRadius = 12
-//        button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
-//
-//        button.addTarget(self, action: #selector(cancelBooking), for: .touchUpInside)
-//
-//        return button
-//    }()
+    lazy var showLessButton2: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Ver Menos", for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+                        for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                         size: CGFloat(12).generateSizeForScreen)
+        button.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Menos", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        button.setTitleColor(UIColor(named: ColorsBravve.pink_cyan.rawValue), for: .normal)
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        button.imageView?.constraintInsideTo(.height, button.titleLabel,
+                                             multiplier: 0.5)
+        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        button.isHidden = true
+        return button
+    }()
+    
+    private let readMoreLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(12).generateSizeForScreen)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Garanto que tem tudo para seu conforto e melhor rendimento em seu trabalho. Sou casada, tenho 3 filhos e 1 cachorro, moro em São Paulo por opção. Apaixonada pelo mundo corporativo, resolvi compartilhar um pouco do meu espaço com vocês."
+        label.isHidden = true
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
+    
     
     private let viewInScroll: UIView = {
         let view = UIView()
@@ -539,10 +635,60 @@ class HistoryDetailsView: UIViewController {
         return scroll
     }()
     
+    lazy var checkInRealizedLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Check-in realizado ás"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textAlignment = .left
+        return label
+    }()
+    lazy var checkOutRealizedLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Check-Out realizado ás"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textAlignment = .left
+        return label
+    }()
+    lazy var hourCheckIn: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "09:04"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textAlignment = .left
+        return label
+    }()
+    lazy var hourCheckOut: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "20:00"
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textAlignment = .left
+        return label
+    }()
+    lazy var lineView6:UIView = {
+        let line = UIView()
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+        line.translatesAutoresizingMaskIntoConstraints = false
+        return line
+    }()
+    
     override var prefersStatusBarHidden: Bool {
         
         true
     }
+    
+    var lineConstraint: NSLayoutConstraint?
+    var lineConstraint2: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -554,6 +700,14 @@ class HistoryDetailsView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
+        showMoreButton1.addTarget(nil, action: #selector(showMoreAction), for: .touchUpInside)
+        showLessButton.addTarget(nil, action: #selector(showLessAction), for: .touchUpInside)
+        
+        showMoreButton2.addTarget(nil, action: #selector(showMoreAction2), for: .touchUpInside)
+        showLessButton2.addTarget(nil, action: #selector(showLessAction2), for: .touchUpInside)
+        lineConstraint?.constant = 0
+        lineConstraint2?.constant = 0
+        
     }
     
     @objc func buttonMaindoorTap(){
@@ -565,47 +719,93 @@ class HistoryDetailsView: UIViewController {
     }
     
     func setupViews(){
-//        view.addSubview(checkIN)
-//        view.addSubview(buttonOpenSpace)
+        //        view.addSubview(checkIN)
+        //        view.addSubview(buttonOpenSpace)
         tabBar.selectedItem = tabBar.items?[1]
         view.addSubview(customBar)
         view.addSubview(tabBar)
         view.addSubview(scrollView)
         scrollView.addSubview(viewInScroll)
-        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, pageControl, infoLocalLabel,
-                          nameLocalLabel, detailLocalLabel, imageDetail, dayLabel, checkInLabel,
-                          checkOutLabel, diaryLabel, dayDiaryCheckInLabel, dayDiaryCheckOutLabel,
-                          lineView1, lineView2, imagePay, payFormLabel, creditCard, creditCardTextField,
-                          totalLabel, lineView3, localDetail, numberPeopleImage, numberPeopleLabel,
-                          localizationIconImage, localizationLabel, clockIconImage, clockLabel,
-                          showMoreButton1, buttonArrowIconImage1, lineView4, responsablePeople,
-                          responsableNameLabel, descriptionResponsableLabel, showMoreButton2,
-                          lineView5,contactsLabel, cellIconImage, emailIconImage, contactNumberLabel,
-                          contactEmailLabel, buttonArrowIconImage2
-                         ])
-        
+        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, infoLocalLabel,
+                                  nameLocalLabel, detailLocalLabel, imageDetail, dayLabel, checkInLabel,
+                                  checkOutLabel, diaryLabel, dayDiaryCheckInLabel, dayDiaryCheckOutLabel,
+                                  lineView1, lineView2, imagePay, payFormLabel, creditCard, creditCardTextField,
+                                  totalLabel, lineView3, localDetail, numberPeopleImage, numberPeopleLabel,
+                                  localizationIconImage, localizationLabel, clockIconImage,clockIconImage2,clockIconImage3,
+                                  clockIconImage4, clockIconImage5,clockLabel,clockLabel2,clockLabel3, clockLabel4, clockLabel5,
+                                  showMoreButton1, showLessButton, lineView4, responsablePeople,
+                                  responsableNameLabel, descriptionResponsableLabel, readMoreLabel,showMoreButton2, showLessButton2,
+                                  lineView5,contactsLabel, cellIconImage, emailIconImage, contactNumberLabel,
+                                  contactEmailLabel, pageControl, checkInRealizedLabel, checkOutRealizedLabel,
+                                  hourCheckIn, hourCheckOut, lineView6
+                                 ])
     }
     
-    @objc func showMorebutton(){
-        
+    
+    @objc func showMoreAction(){
+        self.showMoreButton1.isHidden = true
+        self.showLessButton.isHidden = false
+        self.clockLabel2.isHidden = false
+        self.clockLabel3.isHidden = false
+        self.clockLabel4.isHidden = false
+        self.clockLabel5.isHidden = false
+        self.clockIconImage2.isHidden = false
+        self.clockIconImage3.isHidden = false
+        self.clockIconImage4.isHidden = false
+        self.clockIconImage5.isHidden = false
+        self.lineConstraint?.constant = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+            
+        })
+        lineConstraint = lineView3.topAnchor.constraint(equalTo: showLessButton.bottomAnchor, constant: 12)
+        lineConstraint?.isActive = true
     }
     
-    @objc func showMorebutton2(){
-        
+    @objc func showLessAction(){
+        self.showMoreButton1.isHidden = false
+        self.showLessButton.isHidden = true
+        self.clockLabel2.isHidden = true
+        self.clockLabel3.isHidden = true
+        self.clockLabel4.isHidden = true
+        self.clockLabel5.isHidden = true
+        self.clockIconImage2.isHidden = true
+        self.clockIconImage3.isHidden = true
+        self.clockIconImage4.isHidden = true
+        self.clockIconImage5.isHidden = true
+        self.lineConstraint?.constant = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+            
+        })
+        lineConstraint = lineView3.topAnchor.constraint(equalTo: showLessButton.bottomAnchor, constant: -90)
+        lineConstraint?.isActive = true
     }
     
-//    @objc func cancelBooking(){
-//        cancelButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-//        customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
-//            self.customAlertOk.dismissAlert()
-////            self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
-////                print("ok")
-////            }), on: self)
-//        }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
-//            self.customAlertOk.dismissAlert()
-//        }), on: self)
-//
-//    }
+    @objc func showMoreAction2(){
+        self.showMoreButton2.isHidden = true
+        self.showLessButton2.isHidden = false
+        self.readMoreLabel.isHidden = false
+        lineConstraint2?.constant = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        lineConstraint2 = lineView4.topAnchor.constraint(equalTo: showLessButton2.bottomAnchor, constant: 12)
+        lineConstraint2?.isActive = true
+    }
+    
+    @objc func showLessAction2(){
+        self.showMoreButton2.isHidden = false
+        self.showLessButton2.isHidden = true
+        self.readMoreLabel.isHidden = true
+        self.lineConstraint2?.constant = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+            
+        })
+        lineConstraint2 = lineView4.topAnchor.constraint(equalTo: showLessButton2.bottomAnchor, constant: -90)
+        lineConstraint2?.isActive = true
+    }
     
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
@@ -630,11 +830,15 @@ class HistoryDetailsView: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor,constant: 4),
+            titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),
+            titleLabel.widthAnchor.constraint(equalToConstant: CGFloat(76).generateSizeForScreen),
+            titleLabel.heightAnchor.constraint(equalToConstant: CGFloat(23).generateSizeForScreen),
             
             descriptLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 16),
             descriptLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            descriptLabel.heightAnchor.constraint(equalToConstant: CGFloat(72).generateSizeForScreen),
+            descriptLabel.widthAnchor.constraint(equalToConstant: CGFloat(215).generateSizeForScreen),
             
             reserveCollection.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
             reserveCollection.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor),
@@ -676,13 +880,13 @@ class HistoryDetailsView: UIViewController {
             dayDiaryCheckOutLabel.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             
             payFormLabel.leadingAnchor.constraint(equalTo: imagePay.trailingAnchor,constant: 9),
-            payFormLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 20.5),
+            payFormLabel.topAnchor.constraint(equalTo: lineView6.bottomAnchor,constant: 20.5),
             
             imageDetail.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
             imageDetail.centerYAnchor.constraint(equalTo: detailLocalLabel.centerYAnchor),
             
             imagePay.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
-            imagePay.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 21),
+            imagePay.topAnchor.constraint(equalTo: lineView6.bottomAnchor,constant: 21),
             
             creditCard.topAnchor.constraint(equalTo: imagePay.bottomAnchor,constant: 26),
             creditCard.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
@@ -701,17 +905,40 @@ class HistoryDetailsView: UIViewController {
             numberPeopleImage.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 21.43),
             numberPeopleImage.topAnchor.constraint(equalTo: localDetail.bottomAnchor,constant: 12),
             
+            checkInRealizedLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor,constant: 59.5),
+            checkInRealizedLabel.leadingAnchor.constraint(equalTo: dayLabel.leadingAnchor),
+            
+            hourCheckIn.topAnchor.constraint(equalTo: checkInRealizedLabel.bottomAnchor,constant: 12),
+            hourCheckIn.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 113),
+            
+            checkOutRealizedLabel.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor,constant: 60.5),
+            checkOutRealizedLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 215),
+            
+            hourCheckOut.topAnchor.constraint(equalTo: checkOutRealizedLabel.bottomAnchor,constant: 12),
+            hourCheckOut.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor,constant: -24),
+            
+            lineView6.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 92),
+            lineView6.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lineView6.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            lineView6.heightAnchor.constraint(equalToConstant: 0.5),
+            
             localizationIconImage.topAnchor.constraint(equalTo: numberPeopleImage.bottomAnchor,constant: 20),
             localizationIconImage.centerXAnchor.constraint(equalTo: numberPeopleImage.centerXAnchor),
             
             clockIconImage.topAnchor.constraint(equalTo: localizationIconImage.bottomAnchor,constant: 20),
             clockIconImage.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
             
-            buttonArrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
-            buttonArrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
+            clockIconImage2.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 16),
+            clockIconImage2.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
             
-            buttonArrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
-            buttonArrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
+            clockIconImage3.topAnchor.constraint(equalTo: clockIconImage2.bottomAnchor,constant: 16),
+            clockIconImage3.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
+            
+            clockIconImage4.topAnchor.constraint(equalTo: clockIconImage3.bottomAnchor,constant: 16),
+            clockIconImage4.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
+            
+            clockIconImage5.topAnchor.constraint(equalTo: clockIconImage4.bottomAnchor,constant: 16),
+            clockIconImage5.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
             
             numberPeopleLabel.centerYAnchor.constraint(equalTo: numberPeopleImage.centerYAnchor),
             numberPeopleLabel.leadingAnchor.constraint(equalTo: numberPeopleImage.trailingAnchor,constant: 12.43),
@@ -720,11 +947,31 @@ class HistoryDetailsView: UIViewController {
             localizationLabel.leadingAnchor.constraint(equalTo: numberPeopleLabel.leadingAnchor),
             localizationLabel.widthAnchor.constraint(equalToConstant: 248),
             
-            clockLabel.leadingAnchor.constraint(equalTo: numberPeopleLabel.leadingAnchor),
+            clockLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor, constant: 50),
             clockLabel.centerYAnchor.constraint(equalTo: clockIconImage.centerYAnchor),
+            clockLabel.topAnchor.constraint(equalTo: localizationLabel.bottomAnchor, constant: 11),
             
-            showMoreButton1.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 12),
+            clockLabel2.topAnchor.constraint(equalTo: clockLabel.bottomAnchor, constant: 14.5),
+            clockLabel2.leadingAnchor.constraint(equalTo: clockLabel.leadingAnchor),
+            clockLabel2.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+            
+            clockLabel3.topAnchor.constraint(equalTo: clockLabel2.bottomAnchor, constant: 14.5),
+            clockLabel3.leadingAnchor.constraint(equalTo: clockLabel.leadingAnchor),
+            clockLabel3.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+            
+            clockLabel4.topAnchor.constraint(equalTo: clockLabel3.bottomAnchor, constant: 14.5),
+            clockLabel4.leadingAnchor.constraint(equalTo: clockLabel.leadingAnchor),
+            clockLabel4.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+            
+            clockLabel5.topAnchor.constraint(equalTo: clockLabel4.bottomAnchor, constant: 14.5),
+            clockLabel5.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor, constant: 50),
+            clockLabel5.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+            
+            showMoreButton1.topAnchor.constraint(equalTo: localizationLabel.bottomAnchor,constant: 37),
             showMoreButton1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            
+            showLessButton.topAnchor.constraint(equalTo: clockLabel5.bottomAnchor,constant: 17),
+            showLessButton.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             responsablePeople.topAnchor.constraint(equalTo: lineView3.bottomAnchor,constant: 15),
             responsablePeople.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
@@ -736,8 +983,15 @@ class HistoryDetailsView: UIViewController {
             descriptionResponsableLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             descriptionResponsableLabel.widthAnchor.constraint(equalToConstant: 277),
             
+            readMoreLabel.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor, constant: 2),
+            readMoreLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            readMoreLabel.widthAnchor.constraint(equalToConstant: 277),
+            
             showMoreButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: 8),
             showMoreButton2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            
+            showLessButton2.topAnchor.constraint(equalTo: readMoreLabel.bottomAnchor,constant: 8),
+            showLessButton2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             contactsLabel.topAnchor.constraint(equalTo: lineView4.bottomAnchor,constant: 15),
             contactsLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
@@ -781,10 +1035,15 @@ class HistoryDetailsView: UIViewController {
             lineView4.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             lineView4.heightAnchor.constraint(equalToConstant: 0.5),
             
-//            checkIN.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
-//            checkIN.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            checkIN.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            checkIN.heightAnchor.constraint(equalToConstant: 52),
+            pageControl.centerXAnchor.constraint(equalTo: reserveCollection.centerXAnchor),
+            pageControl.topAnchor.constraint(equalTo: reserveCollection.bottomAnchor, constant: 10),
+            pageControl.leadingAnchor.constraint(equalTo: reserveCollection.leadingAnchor),
+            pageControl.trailingAnchor.constraint(equalTo: reserveCollection.trailingAnchor),
+            
+            //            checkIN.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            //            checkIN.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            //            checkIN.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            //            checkIN.heightAnchor.constraint(equalToConstant: 52),
             
             tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),

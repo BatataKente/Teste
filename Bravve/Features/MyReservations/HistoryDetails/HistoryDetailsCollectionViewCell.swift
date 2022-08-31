@@ -15,7 +15,7 @@ class HistoryDetailsCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = .darkGray
         imageView.layer.cornerRadius = 25
         imageView.clipsToBounds = true
-        
+        imageView.image = UIImage(named: ImagesBravve.example_1.rawValue)
         return imageView
     }()
     
