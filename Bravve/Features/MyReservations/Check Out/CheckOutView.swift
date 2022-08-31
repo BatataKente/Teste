@@ -1,3 +1,4 @@
+
 //
 //
 //  CheckOutScreen.swift
@@ -48,35 +49,41 @@ class CheckOutView: UIViewController {
     
     lazy var lineView1:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView2:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView3:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView4:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+        line.translatesAutoresizingMaskIntoConstraints = false
+        return line
+    }()
+    lazy var lineView5:UIView = {
+        let line = UIView()
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var lineView5:UIView = {
+    lazy var lineView6:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
@@ -99,7 +106,7 @@ class CheckOutView: UIViewController {
         lb.text = "Numa esquina\ncharmosa, um hotel"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -127,7 +134,8 @@ class CheckOutView: UIViewController {
         
         guard let pictures = space.pictures else { return pageControl }
         pageControl.numberOfPages = pictures.count
-        pageControl.backgroundStyle = .prominent
+//        pageControl.backgroundStyle = .prominent
+        pageControl.backgroundColor = .black
         pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
@@ -140,7 +148,7 @@ class CheckOutView: UIViewController {
         lb.text = "Home by Kamy"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -162,7 +170,7 @@ class CheckOutView: UIViewController {
         lb.text = "Detalhes da sua reserva"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -170,7 +178,7 @@ class CheckOutView: UIViewController {
     lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.calendarGray.rawValue)
+        image.image = UIImage(named: IconsBravve.calendar.rawValue)
         
         return image
     }()
@@ -240,6 +248,49 @@ class CheckOutView: UIViewController {
         lb.textAlignment = .left
         return lb
     }()
+    lazy var checkInRealizedLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.text = "Check-in realizado ás"
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textAlignment = .left
+        return lb
+    }()
+    
+    lazy var checkOutRealizedLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.text = "Check-Out realizado ás"
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textAlignment = .left
+        return lb
+    }()
+    
+    lazy var hourCheckIn: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.text = "09:04"
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textAlignment = .left
+        return lb
+    }()
+    
+    lazy var hourCheckOut: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.text = "---"
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textAlignment = .left
+        return lb
+    }()
     
     lazy var payFormLabel: UILabel = {
         let lb = UILabel()
@@ -247,7 +298,7 @@ class CheckOutView: UIViewController {
         lb.text = "Forma de pagamento"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -255,7 +306,7 @@ class CheckOutView: UIViewController {
     lazy var imagePay: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.walletBlue.rawValue)
+        image.image = UIImage(named: IconsBravve.receipt.rawValue)
         
         return image
     }()
@@ -283,22 +334,36 @@ class CheckOutView: UIViewController {
         
         return image
     }()
-    
-    lazy var buttonArrowIconImage1: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-        
-        return button
+    lazy var clockIconImage2: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
+    }()
+    lazy var clockIconImage3: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
+    }()
+    lazy var clockIconImage4: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
+    }()
+    lazy var clockIconImage5: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: IconsBravve.clockReserv.rawValue)
+        image.isHidden = true
+        return image
     }()
     
-    lazy var buttonArrowIconImage2: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
-        
-        return button
-    }()
+  
     
     lazy var cellIconImage: UIImageView = {
         let image = UIImageView()
@@ -350,7 +415,7 @@ class CheckOutView: UIViewController {
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.text = "    **** **** **** 4679"
         tf.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        tf.backgroundColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
+        tf.backgroundColor = UIColor(named: ColorsBravve.backgroundCard.rawValue)
         tf.isUserInteractionEnabled = false
         return tf
     }()
@@ -405,11 +470,80 @@ class CheckOutView: UIViewController {
         lb.textAlignment = .left
         return lb
     }()
+    lazy var clockLabel2: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        lb.isHidden = true
+        
+        let atritutedString1 = NSMutableAttributedString(string: "Terça:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        lb.attributedText = atritutedString1
+        lb.numberOfLines = 0
+        lb.textAlignment = .left
+        return lb
+    }()
     
+    lazy var clockLabel3: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        lb.isHidden = true
+        let atritutedString1 = NSMutableAttributedString(string: "Quarta:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        lb.attributedText = atritutedString1
+        lb.numberOfLines = 0
+        lb.textAlignment = .left
+        return lb
+    }()
+    lazy var clockLabel4: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        lb.isHidden = true
+        let atritutedString1 = NSMutableAttributedString(string: "Quinta:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        lb.attributedText = atritutedString1
+        lb.numberOfLines = 0
+        lb.textAlignment = .left
+        return lb
+    }()
+    lazy var clockLabel5: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
+        lb.isHidden = true
+        let atritutedString1 = NSMutableAttributedString(string: "Sexta:", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " 08:00h - 17:00", attributes: attrs2 as [NSAttributedString.Key : Any])
+        
+        atritutedString1.append(atritutedString2)
+        atritutedString2.append(atritutedString1)
+        lb.attributedText = atritutedString1
+        lb.numberOfLines = 0
+        lb.textAlignment = .left
+        return lb
+    }()
     lazy var responsablePeople: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Responsavél"
+        lb.text = "Responsável"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -420,16 +554,19 @@ class CheckOutView: UIViewController {
     lazy var responsableNameLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        
+        lb.lineBreakMode = .byWordWrapping
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
-        let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atributedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atributedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
         
-        atritutedString1.append(atritutedString2)
-        atritutedString2.append(atritutedString1)
-        lb.attributedText = atritutedString1
+
+
+       
+        atributedString1.append(atributedString2)
+        atributedString2.append(atributedString1)
+        lb.attributedText = atributedString1
         lb.numberOfLines = 0
         lb.textAlignment = .left
         return lb
@@ -438,13 +575,37 @@ class CheckOutView: UIViewController {
     lazy var descriptionResponsableLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via whatsapp"
+        lb.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp."
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
         lb.textAlignment = .left
+       
         return lb
     }()
+    lazy var descriptionResponsableLabel2: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.text = " Garanto que tem tudo para seu conforto"
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textAlignment = .left
+        lb.isHidden = true
+        return lb
+    }()
+    lazy var descriptionResponsableLabel3: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.text = "e melhor rendimento em seu trabalho. Sou casada,\ntenho 3 filhos e 1 cachorro, moro em São Paulo por\nopção. Apaixonada pelo mundo corporativo, resolvi\ncompartilhar um pouco do meu espaço com vocês."
+        lb.numberOfLines = 0
+        lb.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        lb.textAlignment = .left
+        lb.isHidden = true
+        return lb
+    }()
+   
     
     lazy var contactsLabel: UILabel = {
         let lb = UILabel()
@@ -481,33 +642,96 @@ class CheckOutView: UIViewController {
     
     lazy var showMoreButton1: UIButton = {
         let button = UIButton()
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.translatesAutoresizingMaskIntoConstraints = false
         let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .font: UIFont(name: FontsBravve.light.rawValue, size: 12) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         let attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
+            string: "Ver Mais ",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
+                                for: .normal)
         return button
     }()
+    lazy var showLessButton1: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+      
+            
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: FontsBravve.light.rawValue, size: 12) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributeString = NSMutableAttributedString(
+            string: "Ver Menos ",
+            attributes: yourAttributes)
+        button.setAttributedTitle(attributeString, for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+                                for: .normal)
+        
+            button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 3.0)
+
+
+
+            button.isHidden = true
+            return button
+        }()
     
     lazy var showMoreButton2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .font: UIFont(name: FontsBravve.light.rawValue, size: 12) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         let attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
+            string: "Ver Mais ",
             attributes: yourAttributes)
+       
         button.setAttributedTitle(attributeString, for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
+                                for: .normal)
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 3.0)
         return button
     }()
+    lazy var showLessButton2: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+      
+            
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: FontsBravve.light.rawValue, size: 12) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributeString = NSMutableAttributedString(
+            string: "Ver Menos ",
+            attributes: yourAttributes)
+        button.setAttributedTitle(attributeString, for: .normal)
+        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+                                for: .normal)
+        
+            button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 3.0)
+
+
+
+            button.isHidden = true
+            return button
+        }()
     
     lazy var checkOutButton: UIButton = {
         let button = UIButton()
@@ -515,15 +739,11 @@ class CheckOutView: UIViewController {
         button.setTitle("Check-out", for: .normal)
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue, size: 16)
         button.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        button.layer.borderColor = UIColor(named: ColorsBravve.label.rawValue)?.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 12
-        button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
-        
         button.addTarget(self, action: #selector(buttonCheckOut), for: .touchUpInside)
         
         return button
     }()
+    
     
     private let viewInScroll: UIView = {
         let view = UIView()
@@ -539,11 +759,8 @@ class CheckOutView: UIViewController {
         
         return scroll
     }()
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
+    var lineConstraint: NSLayoutConstraint?
+    var lineConstraint2: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -555,6 +772,12 @@ class CheckOutView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
+        changeButtonColor()
+    
+        showLessButton1.addTarget(nil, action: #selector(showLessAction), for: .touchUpInside)
+        showMoreButton1.addTarget(nil, action: #selector(showMoreAction), for: .touchUpInside)
+        showLessButton2.addTarget(nil, action: #selector(showLessAction2), for: .touchUpInside)
+        showMoreButton2.addTarget(nil, action: #selector(showMoreAction2), for: .touchUpInside)
     }
     
     @objc func buttonMaindoorTap(){
@@ -565,6 +788,92 @@ class CheckOutView: UIViewController {
         print("space door")
     }
     
+    @objc func showLessAction(){
+        
+        
+        
+        self.showMoreButton1.isHidden = false
+        self.showLessButton1.isHidden = true
+        self.clockLabel2.isHidden = true
+        self.clockLabel3.isHidden = true
+        self.clockLabel4.isHidden = true
+        self.clockLabel5.isHidden = true
+        self.clockIconImage2.isHidden = true
+        self.clockIconImage3.isHidden = true
+        self.clockIconImage4.isHidden = true
+        self.clockIconImage5.isHidden = true
+
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()
+         self.lineConstraint?.constant = 0
+
+        })
+        lineConstraint = lineView3.topAnchor.constraint(equalTo:
+                                                            showLessButton1.bottomAnchor, constant: -90)
+        lineConstraint?.isActive = true
+        
+        }
+
+    @objc func showMoreAction(){
+        
+       
+        self.showMoreButton1.isHidden = true
+        self.showLessButton1.isHidden = false
+        self.clockLabel2.isHidden = false
+        self.clockLabel3.isHidden = false
+        self.clockLabel4.isHidden = false
+        self.clockLabel5.isHidden = false
+        self.clockIconImage2.isHidden = false
+        self.clockIconImage3.isHidden = false
+        self.clockIconImage4.isHidden = false
+        self.clockIconImage5.isHidden = false
+
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()
+         self.lineConstraint?.constant = 0
+
+        })
+        lineConstraint = lineView3.topAnchor.constraint(equalTo:
+                                                            showLessButton1.bottomAnchor, constant: 16)
+        lineConstraint?.isActive = true
+        
+        }
+    
+    @objc func showLessAction2(){
+        
+        self.descriptionResponsableLabel2.isHidden = true
+        self.descriptionResponsableLabel3.isHidden = true
+        self.showLessButton2.isHidden = true
+        self.showMoreButton2.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()
+         self.lineConstraint2?.constant = 0
+            
+        })
+        lineConstraint2 = lineView4.topAnchor.constraint(equalTo:
+                                                                showLessButton2.bottomAnchor, constant: -90)
+        lineConstraint2?.isActive = true
+        
+    }
+        
+    @objc func showMoreAction2(){
+            
+        self.showLessButton2.isHidden = false
+        self.showMoreButton2.isHidden = true
+            
+        self.descriptionResponsableLabel2.isHidden = false
+        self.descriptionResponsableLabel3.isHidden  = false
+        
+        self.lineConstraint2?.constant = 0
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()
+       
+             
+           })
+        lineConstraint2 = lineView4.topAnchor.constraint(equalTo:
+                                                                showLessButton2.bottomAnchor, constant: 16)
+        lineConstraint2?.isActive = true
+        
+    }
+        
+    
     func setupViews(){
         view.addSubview(buttonMainDoor)
         view.addSubview(buttonOpenSpace)
@@ -573,16 +882,16 @@ class CheckOutView: UIViewController {
         view.addSubview(tabBar)
         view.addSubview(scrollView)
         scrollView.addSubview(viewInScroll)
-        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, pageControl, infoLocalLabel,
+        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, infoLocalLabel,
                           nameLocalLabel, detailLocalLabel, imageDetail, dayLabel, checkInLabel,
                           checkOutLabel, diaryLabel, dayDiaryCheckInLabel, dayDiaryCheckOutLabel,
-                          lineView1, lineView2, imagePay, payFormLabel, creditCard, creditCardTextField,
+                          lineView1, lineView2,checkInRealizedLabel,checkOutRealizedLabel,hourCheckIn,hourCheckOut,lineView6,imagePay, payFormLabel, creditCard, creditCardTextField,
                           totalLabel, lineView3, localDetail, numberPeopleImage, numberPeopleLabel,
-                          localizationIconImage, localizationLabel, clockIconImage, clockLabel,
-                          showMoreButton1, buttonArrowIconImage1, lineView4, responsablePeople,
-                          responsableNameLabel, descriptionResponsableLabel, showMoreButton2,
+                          localizationIconImage, localizationLabel, clockIconImage, clockLabel,clockIconImage2,clockLabel2,clockIconImage3,clockLabel3,clockIconImage4,clockLabel4,clockIconImage5,clockLabel5,
+                          showMoreButton1,showLessButton1, lineView4, responsablePeople,
+                          responsableNameLabel, descriptionResponsableLabel,descriptionResponsableLabel2,descriptionResponsableLabel3, showMoreButton2,showLessButton2,
                           lineView5,contactsLabel, cellIconImage, emailIconImage, contactNumberLabel,
-                          contactEmailLabel, checkOutButton, buttonArrowIconImage2
+                          contactEmailLabel, checkOutButton,pageControl
                          ])
         
     }
@@ -595,17 +904,43 @@ class CheckOutView: UIViewController {
         
     }
     
+    func changeButtonColor (){
+
+        if checkOutButton.isSelected == true {
+
+            checkOutButton.layer.borderColor = UIColor(named: ColorsBravve.buttonPink.rawValue)?.cgColor
+            checkOutButton.layer.borderWidth = 1
+            checkOutButton.layer.cornerRadius = 12
+            checkOutButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
+        }else {
+
+            checkOutButton.layer.borderColor = UIColor(named: ColorsBravve.label.rawValue)?.cgColor
+            checkOutButton.layer.borderWidth = 1
+            checkOutButton.layer.cornerRadius = 12
+            checkOutButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
+
+
+        }
+
+
+    }
+    
     @objc func buttonCheckOut(){
         checkOutButton.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
+        checkOutButton.layer.borderColor = UIColor(named: ColorsBravve.buttonPink.rawValue)?.cgColor
+        
+       
         customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Após realizar o check-out você não poderá mais abrir a porta do espaço.", enterAttributed: "Confirmar Check-out", enterHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()
             self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
-                let vc = HomeClosedView()
+                let vc = HistoryDetailsView()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
             }), on: self)
         }), cancelAttributed: "Cancelar Check-out", cancelHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()
+            self.checkOutButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
+            self.checkOutButton.layer.borderColor = UIColor(named: ColorsBravve.label.rawValue)?.cgColor
         }), on: self)
         
     }
@@ -646,10 +981,10 @@ class CheckOutView: UIViewController {
             
             pageControl.centerXAnchor.constraint(equalTo: reserveCollection.centerXAnchor),
             pageControl.topAnchor.constraint(equalTo: reserveCollection.bottomAnchor, constant: 10),
-            pageControl.leadingAnchor.constraint(equalTo: reserveCollection.leadingAnchor),
-            pageControl.trailingAnchor.constraint(equalTo: reserveCollection.trailingAnchor),
+//            pageControl.leadingAnchor.constraint(equalTo: reserveCollection.leadingAnchor),
+//            pageControl.trailingAnchor.constraint(equalTo: reserveCollection.trailingAnchor),
             
-            infoLocalLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor,constant: 52.5),
+            infoLocalLabel.topAnchor.constraint(equalTo: reserveCollection.bottomAnchor,constant: 52.5),
             infoLocalLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             nameLocalLabel.topAnchor.constraint(equalTo: infoLocalLabel.bottomAnchor,constant: 7),
@@ -678,19 +1013,38 @@ class CheckOutView: UIViewController {
             dayDiaryCheckOutLabel.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor,constant: 12.5),
             dayDiaryCheckOutLabel.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             
+            
+            checkInRealizedLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor,constant: 59.5),
+            checkInRealizedLabel.leadingAnchor.constraint(equalTo: dayLabel.leadingAnchor),
+            
+            hourCheckIn.topAnchor.constraint(equalTo: checkInRealizedLabel.bottomAnchor,constant: 12),
+            hourCheckIn.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 113),
+            
+            checkOutRealizedLabel.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor,constant: 60.5),
+            checkOutRealizedLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 215),
+            
+            hourCheckOut.topAnchor.constraint(equalTo: checkOutRealizedLabel.bottomAnchor,constant: 12),
+            hourCheckOut.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor,constant: -24),
+            
+            lineView6.topAnchor.constraint(equalTo: diaryLabel.bottomAnchor,constant: 92),
+            lineView6.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lineView6.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            lineView6.heightAnchor.constraint(equalToConstant: 0.5),
+            
             payFormLabel.leadingAnchor.constraint(equalTo: imagePay.trailingAnchor,constant: 9),
-            payFormLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 20.5),
+            payFormLabel.topAnchor.constraint(equalTo: lineView6.bottomAnchor,constant: 20.5),
             
             imageDetail.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
             imageDetail.centerYAnchor.constraint(equalTo: detailLocalLabel.centerYAnchor),
             
-            imagePay.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
-            imagePay.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 21),
+//            imagePay.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
+            imagePay.topAnchor.constraint(equalTo: lineView6.bottomAnchor,constant: 18),
+            imagePay.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor,constant: -336),
             
             creditCard.topAnchor.constraint(equalTo: imagePay.bottomAnchor,constant: 26),
             creditCard.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
-            creditCardTextField.topAnchor.constraint(equalTo: creditCard.bottomAnchor),
+            creditCardTextField.topAnchor.constraint(equalTo: creditCard.bottomAnchor,constant: 5),
             creditCardTextField.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
             creditCardTextField.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
             creditCardTextField.heightAnchor.constraint(equalToConstant: 67),
@@ -709,12 +1063,20 @@ class CheckOutView: UIViewController {
             
             clockIconImage.topAnchor.constraint(equalTo: localizationIconImage.bottomAnchor,constant: 20),
             clockIconImage.centerXAnchor.constraint(equalTo: localizationIconImage.centerXAnchor),
+            clockIconImage.heightAnchor.constraint(equalToConstant: 12),
             
-            buttonArrowIconImage1.centerYAnchor.constraint(equalTo: showMoreButton1.centerYAnchor),
-            buttonArrowIconImage1.leadingAnchor.constraint(equalTo: showMoreButton1.trailingAnchor,constant: 5),
+            clockIconImage2.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 16),
+            clockIconImage2.centerXAnchor.constraint(equalTo: clockIconImage.centerXAnchor),
             
-            buttonArrowIconImage2.centerYAnchor.constraint(equalTo: showMoreButton2.centerYAnchor),
-            buttonArrowIconImage2.leadingAnchor.constraint(equalTo: showMoreButton2.trailingAnchor,constant: 5),
+            clockIconImage3.topAnchor.constraint(equalTo: clockIconImage2.bottomAnchor,constant: 16),
+            clockIconImage3.centerXAnchor.constraint(equalTo: clockIconImage2.centerXAnchor),
+            
+            clockIconImage4.topAnchor.constraint(equalTo: clockIconImage3.bottomAnchor,constant: 16),
+            clockIconImage4.centerXAnchor.constraint(equalTo: clockIconImage3.centerXAnchor),
+            
+            clockIconImage5.topAnchor.constraint(equalTo: clockIconImage4.bottomAnchor,constant: 16),
+            clockIconImage5.centerXAnchor.constraint(equalTo: clockIconImage4.centerXAnchor),
+        
             
             numberPeopleLabel.centerYAnchor.constraint(equalTo: numberPeopleImage.centerYAnchor),
             numberPeopleLabel.leadingAnchor.constraint(equalTo: numberPeopleImage.trailingAnchor,constant: 12.43),
@@ -723,11 +1085,33 @@ class CheckOutView: UIViewController {
             localizationLabel.leadingAnchor.constraint(equalTo: numberPeopleLabel.leadingAnchor),
             localizationLabel.widthAnchor.constraint(equalToConstant: 248),
             
-            clockLabel.leadingAnchor.constraint(equalTo: numberPeopleLabel.leadingAnchor),
+            clockLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 51),
+            clockLabel.topAnchor.constraint(equalTo: localizationLabel.bottomAnchor,constant: 14.5),
             clockLabel.centerYAnchor.constraint(equalTo: clockIconImage.centerYAnchor),
+            
+            clockLabel2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 50),
+            clockLabel2.topAnchor.constraint(equalTo: clockLabel.bottomAnchor,constant: 14.5),
+            clockLabel2.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+            
+            clockLabel3.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 50),
+            clockLabel3.topAnchor.constraint(equalTo: clockLabel2.bottomAnchor,constant: 14.5),
+            clockLabel3.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+            
+            clockLabel4.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 50),
+            clockLabel4.topAnchor.constraint(equalTo: clockLabel3.bottomAnchor,constant: 14.5),
+            clockLabel4.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+
+            clockLabel5.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 50),
+            clockLabel5.topAnchor.constraint(equalTo: clockLabel4.bottomAnchor,constant: 14.5),
+            clockLabel5.trailingAnchor.constraint(equalTo: clockLabel.trailingAnchor),
+
+            showLessButton1.topAnchor.constraint(equalTo: clockLabel5.bottomAnchor,constant: 17),
+            showLessButton1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            
             
             showMoreButton1.topAnchor.constraint(equalTo: clockIconImage.bottomAnchor,constant: 12),
             showMoreButton1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+           
             
             responsablePeople.topAnchor.constraint(equalTo: lineView3.bottomAnchor,constant: 15),
             responsablePeople.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
@@ -739,8 +1123,19 @@ class CheckOutView: UIViewController {
             descriptionResponsableLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             descriptionResponsableLabel.widthAnchor.constraint(equalToConstant: 277),
             
-            showMoreButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: 8),
+            descriptionResponsableLabel2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: -14),
+            descriptionResponsableLabel2.leadingAnchor.constraint(equalTo: descriptionResponsableLabel.trailingAnchor,constant:  -220),
+            descriptionResponsableLabel2.widthAnchor.constraint(equalToConstant: 277),
+            
+            descriptionResponsableLabel3.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor),
+            descriptionResponsableLabel3.leadingAnchor.constraint(equalTo: descriptionResponsableLabel.leadingAnchor),
+            descriptionResponsableLabel3.widthAnchor.constraint(equalToConstant: 277),
+            
+            showMoreButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel.bottomAnchor,constant: 16),
             showMoreButton2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            
+            showLessButton2.topAnchor.constraint(equalTo: descriptionResponsableLabel3.bottomAnchor,constant: 16),
+            showLessButton2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
             contactsLabel.topAnchor.constraint(equalTo: lineView4.bottomAnchor,constant: 15),
             contactsLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
@@ -817,9 +1212,9 @@ extension CheckOutView: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CheckOutCustomCell
         
 //        guard let pictures = space.pictures else { return UICollectionViewCell() }
-//        
+//
 //        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
-//        
+//
 //        cell?.imageView.sd_setImage(with: URL(string: picture))
         
         return cell ?? UICollectionViewCell()
@@ -839,3 +1234,4 @@ extension CheckOutView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
 }
+
