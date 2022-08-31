@@ -143,17 +143,17 @@ class MyBookingCustomCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.backgroundColor = UIColor(named: "background")
-        
-        cellView.addSubviews([typeTagLabel, topTitleLabel, bottomTitleLabel, spaceImage, spaceNameLabel, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
         
         contentView.addSubview(cellView)
         
+        cellView.addSubviews([typeTagLabel, topTitleLabel, bottomTitleLabel, spaceImage, spaceNameLabel, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
+        
         setupConstraints()
         
-        arrowButton.addTarget(self, action: #selector(actionArrowButton), for: .touchUpInside)
+        arrowButton.addTarget(self, action: #selector(actionArrowButton),
+                              for: .touchUpInside)
         
     }
     
@@ -167,57 +167,58 @@ class MyBookingCustomCell: UITableViewCell {
     
     func setupConstraints() {
         
-        cellView.constraintInsideTo(.top, contentView)
-        cellView.constraintInsideTo(.leading, contentView)
-        cellView.constraintInsideTo(.trailing, contentView)
-        cellView.constraintInsideTo(.bottom, contentView, -19)
-        
+        cellView.constraintInsideTo(.top, contentView,
+                                    CGFloat(20).generateSizeForScreen)
+        cellView.constraintInsideTo(.leading, contentView,
+                                    CGFloat(20).generateSizeForScreen)
+        cellView.constraintInsideTo(.trailing, contentView,
+                                    CGFloat(20).generateSizeForScreen)
+        cellView.constraintInsideTo(.bottom, contentView,
+                                    CGFloat(20).generateSizeForScreen)
         
         typeTagLabel.constraintInsideTo(.top, cellView)
-        typeTagLabel.constraintInsideTo(.leading, cellView, 17)
-        typeTagLabel.constraintInsideTo(.width, cellView, multiplier: 0.2267)
-        typeTagLabel.constraintInsideTo(.height, cellView, multiplier: 0.046)
+        typeTagLabel.constraintInsideTo(.leading, cellView,
+                                        CGFloat(17).generateSizeForScreen)
         
-        topTitleLabel.constraintOutsideTo(.top, typeTagLabel, 23)
-        topTitleLabel.constraintInsideTo(.leading, cellView, 17)
-        topTitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.6417)
-        topTitleLabel.constraintInsideTo(.height, cellView, multiplier: 0.06)
+        topTitleLabel.constraintOutsideTo(.top, typeTagLabel,
+                                          CGFloat(23).generateSizeForScreen)
+        topTitleLabel.constraintInsideTo(.leading, cellView,
+                                         CGFloat(17).generateSizeForScreen)
         
         bottomTitleLabel.constraintOutsideTo(.top, topTitleLabel)
         bottomTitleLabel.constraintInsideTo(.leading, topTitleLabel)
         bottomTitleLabel.constraintInsideTo(.width, topTitleLabel)
         bottomTitleLabel.constraintInsideTo(.height, topTitleLabel)
         
-        spaceImage.constraintOutsideTo(.top, bottomTitleLabel, 22)
+        spaceImage.constraintOutsideTo(.top, bottomTitleLabel,
+                                       CGFloat(22).generateSizeForScreen)
         spaceImage.constraintInsideTo(.leading, bottomTitleLabel)
         spaceImage.constraintInsideTo(.trailing, cellView)
         spaceImage.constraintInsideTo(.height, cellView, multiplier: 0.39)
         
-        spaceNameLabel.constraintOutsideTo(.top, spaceImage, 23)
+        spaceNameLabel.constraintOutsideTo(.top, spaceImage,
+                                           CGFloat(23).generateSizeForScreen)
         spaceNameLabel.constraintInsideTo(.leading, spaceImage)
-        spaceNameLabel.constraintInsideTo(.width, cellView, multiplier: 0.5)
-        spaceNameLabel.constraintInsideTo(.height, cellView, multiplier: 0.046)
         
-        reservedLabel.constraintOutsideTo(.top, spaceImage, 32)
-        reservedLabel.constraintInsideTo(.trailing, cellView, -26)
-        reservedLabel.constraintInsideTo(.width, cellView, multiplier: 0.241)
-        reservedLabel.constraintInsideTo(.height, cellView, multiplier: 0.0462)
+        reservedLabel.constraintOutsideTo(.top, spaceImage,
+                                          CGFloat(32).generateSizeForScreen)
+        reservedLabel.constraintInsideTo(.trailing, cellView,
+                                         CGFloat(26).generateSizeForScreen)
         
-        spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel, 8)
+        spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel,
+                                               CGFloat(8).generateSizeForScreen)
         spaceSubtitleLabel.constraintInsideTo(.leading, spaceNameLabel)
-        spaceSubtitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.358)
-        spaceSubtitleLabel.constraintInsideTo(.height, cellView, multiplier: 0.028)
         
-        locationInfoStackView.constraintOutsideTo(.top, spaceSubtitleLabel, 9)
+        locationInfoStackView.constraintOutsideTo(.top, spaceSubtitleLabel,
+                                                  CGFloat(9).generateSizeForScreen)
         locationInfoStackView.constraintInsideTo(.leading, spaceSubtitleLabel)
-        locationInfoStackView.constraintInsideTo(.width, cellView, multiplier: 0.507)
-        locationInfoStackView.constraintInsideTo(.height, cellView, multiplier: 0.16)
+        locationInfoStackView.constraintInsideTo(.bottom, cellView,
+                                                 CGFloat(23).generateSizeForScreen)
         
-        
-        
-        arrowButton.constraintOutsideTo(.top, reservedLabel, 65)
-        arrowButton.constraintInsideTo(.trailing, cellView, -25)
-        arrowButton.constraintInsideTo(.bottom, cellView,-18)
+        arrowButton.constraintInsideTo(.trailing, cellView,
+                                       CGFloat(25).generateSizeForScreen)
+        arrowButton.constraintInsideTo(.bottom, cellView,
+                                       CGFloat(18).generateSizeForScreen)
     }
 }
 
