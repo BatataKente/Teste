@@ -635,7 +635,7 @@ final class FilterViewClosed: UIViewController {
                 return
                 
             }
-            print(typesList)
+            print("kaj \(typesList)")
             self.sortedNoisesArray = typesList
             
             for types in typesList {

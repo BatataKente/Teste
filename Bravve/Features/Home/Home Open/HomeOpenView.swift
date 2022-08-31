@@ -188,7 +188,7 @@ class HomeOpenView: UIViewController {
         
         super.viewDidLoad()
         seletedFilterItems = selectedItemsArray
-   
+        
         setupView()
         setupConstraints()
         setupDefaults()

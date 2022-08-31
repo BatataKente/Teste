@@ -130,7 +130,7 @@ class HobbiesView: UIViewController {
             if button.isSelected == true {
                 button.isSelected.toggle()
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
                 arrayItems = filteredArray
             } else {
@@ -140,11 +140,11 @@ class HobbiesView: UIViewController {
             button.isSelected.toggle()
             if button.isSelected {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .white
+                button.configuration?.baseForegroundColor = .white
                 arrayItems.append(button.titleLabel?.text ?? "")
             } else {
                 button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-                button.configuration?.attributedTitle?.foregroundColor = .black
+                button.configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
                 let filteredArray = arrayItems.filter {$0 != button.titleLabel?.text ?? ""}
                 arrayItems = filteredArray
             }
