@@ -32,7 +32,7 @@ extension CGFloat {
             }
             else if (width <= 744) {
                 // iPhone(12proMax, 13proMax)
-                return self * 1.2
+                return self * 1
             }
         }
         else if (device == .pad) {
