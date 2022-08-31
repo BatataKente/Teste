@@ -368,7 +368,7 @@ class CheckOutView: UIViewController {
     lazy var cellIconImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "cellphone")
+        image.image = UIImage(named: IconsBravve.cellphone.rawValue)
         
         return image
     }()
@@ -673,7 +673,7 @@ class CheckOutView: UIViewController {
             string: "Ver Menos ",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .normal)
-        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+        button.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
                                 for: .normal)
         
             button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
@@ -720,7 +720,7 @@ class CheckOutView: UIViewController {
             string: "Ver Menos ",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .normal)
-        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+        button.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
                                 for: .normal)
         
             button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
