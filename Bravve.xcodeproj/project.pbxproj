@@ -45,6 +45,11 @@
 		2E57CDE928AEA56D004214A9 /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */; };
 		2E57CDEB28AEA598004214A9 /* CalendarWeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */; };
 		2E67921828BBB4DB00DC421D /* CheckOutCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67921728BBB4DB00DC421D /* CheckOutCustomCell.swift */; };
+		2E67921A28BF957800DC421D /* DataBookingReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67921928BF957800DC421D /* DataBookingReviewCustomCell.swift */; };
+		2E67921C28BF95E900DC421D /* SummaryBookingReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67921B28BF95E900DC421D /* SummaryBookingReviewCustomCell.swift */; };
+		2E67921E28BF966A00DC421D /* TotalPayableBookingReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67921D28BF966A00DC421D /* TotalPayableBookingReviewCustomCell.swift */; };
+		2E67922028BF970900DC421D /* LocationDetailsBookingReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67921F28BF970900DC421D /* LocationDetailsBookingReviewCustomCell.swift */; };
+		2E67922228BF978800DC421D /* VoucherBookingReviewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E67922128BF978800DC421D /* VoucherBookingReviewCustomCell.swift */; };
 		2EA90BB8289D1785003100FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA90BB7289D1785003100FE /* Assets.xcassets */; };
 		2EAEDEF52881DEA900C88374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF42881DEA900C88374 /* AppDelegate.swift */; };
 		2EAEDEF72881DEA900C88374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAEDEF62881DEA900C88374 /* SceneDelegate.swift */; };
@@ -243,6 +248,11 @@
 		2E57CDE828AEA56D004214A9 /* CalendarMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthView.swift; sourceTree = "<group>"; };
 		2E57CDEA28AEA598004214A9 /* CalendarWeekDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekDaysView.swift; sourceTree = "<group>"; };
 		2E67921728BBB4DB00DC421D /* CheckOutCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCustomCell.swift; sourceTree = "<group>"; };
+		2E67921928BF957800DC421D /* DataBookingReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBookingReviewCustomCell.swift; sourceTree = "<group>"; };
+		2E67921B28BF95E900DC421D /* SummaryBookingReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryBookingReviewCustomCell.swift; sourceTree = "<group>"; };
+		2E67921D28BF966A00DC421D /* TotalPayableBookingReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPayableBookingReviewCustomCell.swift; sourceTree = "<group>"; };
+		2E67921F28BF970900DC421D /* LocationDetailsBookingReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsBookingReviewCustomCell.swift; sourceTree = "<group>"; };
+		2E67922128BF978800DC421D /* VoucherBookingReviewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherBookingReviewCustomCell.swift; sourceTree = "<group>"; };
 		2EA90BB7289D1785003100FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EAEDEF12881DEA900C88374 /* Bravve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bravve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAEDEF42881DEA900C88374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -961,6 +971,11 @@
 				C696175C2881EC7700281633 /* Reservation2Model.swift */,
 				C69617602881EC9000281633 /* Reservation2ViewModel.swift */,
 				C696175E2881EC7F00281633 /* Reservation2View.swift */,
+				2E67921928BF957800DC421D /* DataBookingReviewCustomCell.swift */,
+				2E67921B28BF95E900DC421D /* SummaryBookingReviewCustomCell.swift */,
+				2E67921D28BF966A00DC421D /* TotalPayableBookingReviewCustomCell.swift */,
+				2E67921F28BF970900DC421D /* LocationDetailsBookingReviewCustomCell.swift */,
+				2E67922128BF978800DC421D /* VoucherBookingReviewCustomCell.swift */,
 			);
 			path = "Reservation 2 de 3";
 			sourceTree = "<group>";
@@ -1241,6 +1256,7 @@
 				2EB18FDB28A2F1B4008A80BF /* SubscriptionsV1Model.swift in Sources */,
 				2EB18FDD28A41F8B008A80BF /* CustomTextField.swift in Sources */,
 				C69617352881EB1F00281633 /* HobbiesViewModel.swift in Sources */,
+				2E67922228BF978800DC421D /* VoucherBookingReviewCustomCell.swift in Sources */,
 				2EB18FD128A2F13A008A80BF /* PartnersV1Model.swift in Sources */,
 				14076BDF28930B27003EA2F1 /* UIViewController+Extension.swift in Sources */,
 				2EB18FA2289D6C2E008A80BF /* APILoginMock.swift in Sources */,
@@ -1295,12 +1311,15 @@
 				1478A23B28996DC700B409E5 /* CGFloat+Extension.swift in Sources */,
 				C696179B2881EEC100281633 /* BookingDetailsModel.swift in Sources */,
 				C69616F42881E9C600281633 /* NameView.swift in Sources */,
+				2E67921C28BF95E900DC421D /* SummaryBookingReviewCustomCell.swift in Sources */,
 				2E57CDB428A585EC004214A9 /* DetailsClosedViewModel.swift in Sources */,
 				C69617662881ECAD00281633 /* Reservation3Model.swift in Sources */,
 				C69617542881EC4C00281633 /* SingleBookingModel.swift in Sources */,
 				2ED5D11328940FE3001C11DC /* HelpView.swift in Sources */,
 				C69616DE2881E90000281633 /* HomeClosedModel.swift in Sources */,
+				2E67921A28BF957800DC421D /* DataBookingReviewCustomCell.swift in Sources */,
 				2EB18FCB28A2D2E3008A80BF /* UtilsV1Model.swift in Sources */,
+				2E67922028BF970900DC421D /* LocationDetailsBookingReviewCustomCell.swift in Sources */,
 				2EB18FC728A2D220008A80BF /* Network.swift in Sources */,
 				C696171F2881EAB200281633 /* PhotoModel.swift in Sources */,
 				C69617AF2881EF3700281633 /* EditProfileView.swift in Sources */,
@@ -1338,6 +1357,7 @@
 				2ED5D10528940EFA001C11DC /* WorkPassBookingViewModel.swift in Sources */,
 				14BDBBEA28ABD71F004C32BF /* String+Extension.swift in Sources */,
 				C69616AA2881E76000281633 /* PasswordRecoveryEmailModel.swift in Sources */,
+				2E67921E28BF966A00DC421D /* TotalPayableBookingReviewCustomCell.swift in Sources */,
 				2ECC1E5E28B7952500FB221D /* HistoryDetailsViewModel.swift in Sources */,
 				C69617472881EB8700281633 /* FinalizeViewModel.swift in Sources */,
 				2EB18FB728A1810E008A80BF /* StageEnum.swift in Sources */,
