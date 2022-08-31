@@ -23,6 +23,8 @@ class LoginView: UIViewController {
     
     private let customAlert: CustomAlert = CustomAlert()
     
+    private let alertCustom: CustomAlert = CustomAlert()
+    
     //MARK: - wayImage
     private lazy var wayImage = UIImageView()
     
@@ -314,7 +316,27 @@ class LoginView: UIViewController {
                 guard let tokenResponse = token?.token else {
                     
                     print(statusCode as Any)
-                    print(token?.message as Any)
+                    
+                    guard let statusCode = statusCode else {
+                        return
+                    }
+                    
+                    if statusCode == 400 {
+                        
+                    guard let message = token?.message else { return }
+                    
+                    self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                          message: message,
+                                          enterAttributed: "Tentar Novamente",
+                                          on: self)
+                    } else if statusCode == 404 {
+                        guard let message = token?.message else { return }
+                        
+                        self.alertCustom.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                              message: message,
+                                              enterAttributed: "Tentar Novamente",
+                                              on: self)
+                    }
                     return
                 }
                 
