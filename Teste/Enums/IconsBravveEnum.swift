@@ -1,6 +1,6 @@
 //
 //  IconsBravveEnum.swift
-//  Teste
+//  Bravve
 //
 //  Created by Josicleison on 02/08/22.
 //
@@ -15,11 +15,13 @@ public enum IconsBravve: String {
     case activitiesBlue = "activitiesBlue"
     case activitiesGray = "activitiesGray"
     case book = "book"
+    case calendar = "calendar"
     case calendarBlue = "calendarBlue"
     case calendarGray = "calendarGray"
     case cellBlue = "cellBlue"
     case cellGray = "cellGray"
     case checkBlue = "checkBlue"
+    case checkPink = "checkPink"
     case clock = "clock"
     case clockReserv = "clockReserv"
     case creditBlue = "creditBlue"
@@ -32,6 +34,7 @@ public enum IconsBravve: String {
     case emailBlue = "emailBlue"
     case emailGray = "emailGray"
     case exitProfile = "exitProfile"
+    case flag = "flag"
     case hobbiesBlue = "hobbiesBlue"
     case hobbiesGray = "hobbiesGray"
     case info_circle = "info-circle"
@@ -48,6 +51,7 @@ public enum IconsBravve: String {
     case photoWhite = "photoWhite"
     case questionCircleBlue_1 = "questionCircleBlue"
     case questionCircleBlue_2 = "questionCircleBlue2"
+    case receipt = "receipt"
     case userBlue = "userBlue"
     case userGray = "userGray"
     case users = "users"

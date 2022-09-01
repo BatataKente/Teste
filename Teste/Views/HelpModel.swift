@@ -1,24 +1,15 @@
 //
-//  FAQCollectionCellViewModel.swift
-//  Teste
+//  AjudaModel.swift
+//  Bravve
 //
-//  Created by user217584 on 04/08/22.
+//  Created by Evandro Rodrigo Minamoto on 29/07/22.
 //
 
+import Foundation
 import UIKit
 
 struct HelpModel {
     
     let question: String
-    let answer: NSAttributedString
-    
-    init(question: String, answer: String){
-        self.question = question
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.39
-        self.answer = NSAttributedString(string: answer, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
-    }
+    let answer: String
 }
-
-
-

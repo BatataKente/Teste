@@ -9,15 +9,23 @@ import UIKit
 
 class HomeOpenView: UIViewController {
     
-    let sessionManager = SessionManager()
+    var spaceParameters: SpaceListParameters
     
-    private let cellIdentifier = "Cell"
+    var selectedItemsArray: [String]
+    
+    let sessionManager = SessionManager()
     
     private var seletedFilterItems: [String] = []
     
     private var cells: [Space] = []
     
+    private var filterButtons = [UIButton]()
+    
+    private let cellIdentifier = "Cell"
+    
     private let titleLabel = UILabel()
+    
+    private let customBar = UIView()
     
     private lazy var filterStackView: UIStackView = {
         
@@ -68,8 +76,6 @@ class HomeOpenView: UIViewController {
         return stackView
     }()
     
-    private var filterButtons = [UIButton]()
-    
     private lazy var tabBar = BravveTabBar(self,
                                            itemImagesNames: [ButtonsBravve.locationPink.rawValue,
                                                              ButtonsBravve.exitGray.rawValue
@@ -115,8 +121,6 @@ class HomeOpenView: UIViewController {
         let homeOpenViewModel = HomeOpenViewModel(customBarWithFilter, spaceParameters)
         return homeOpenViewModel
     }()
-    
-    private let customBar = UIView()
     
     private lazy var customBarWithFilter: CustomBarWithFilter = {
         
@@ -164,12 +168,14 @@ class HomeOpenView: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    var spaceParameters: SpaceListParameters
-    var selectedItemsArray: [String]
-
     required init?(coder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -241,8 +247,7 @@ class HomeOpenView: UIViewController {
         if self.seletedFilterItems.isEmpty {
             self.filterStackView.isHidden = true
         }
-        
-        //filterButtons = createCapsuleButtons(seletedFilterItems)
+
         setupSelectedButtons(filterStackView)
         
         for button in filterButtons {
@@ -254,8 +259,7 @@ class HomeOpenView: UIViewController {
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
-        
-        //filterStackView.addArrangedSubviews(filterButtons)
+
         tabBar.selectedItem = tabBar.items?[0]
     }
     
@@ -265,11 +269,6 @@ class HomeOpenView: UIViewController {
                                       ColorsBravve.capsuleButtonSelected)
         
         stackView.addArrangedSubviews(self.setupStackView(self.filterButtons))
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
     }
     
     private func setupDefaults() {
@@ -375,9 +374,9 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
                     print(error?.localizedDescription as Any)
                     return
                 }
-                let detalhesAbertoView = OpenDetailsView(space)
-                detalhesAbertoView.modalPresentationStyle = .fullScreen
-                self.present(detalhesAbertoView, animated: false)
+                let openDetailsView = OpenDetailsView(space)
+                openDetailsView.modalPresentationStyle = .fullScreen
+                self.present(openDetailsView, animated: false)
             }
         }
 }
