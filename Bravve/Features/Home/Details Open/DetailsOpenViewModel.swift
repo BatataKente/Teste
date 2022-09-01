@@ -16,17 +16,6 @@ class DetailsOpenViewModel {
         
         let stackView = UIStackView()
         
-        if let image = image {
-            
-            let imageView = UIImageView()
-            imageView.contentMode = .center
-            imageView.image = image
-            
-            stackView.addArrangedSubview(imageView)
-            
-            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        }
-        
         let label = UILabel()
         label.text = text
         label.numberOfLines = 0
@@ -34,22 +23,50 @@ class DetailsOpenViewModel {
                             size: CGFloat(12).generateSizeForScreen)
         label.textColor = textColor
         
-        stackView.spacing = CGFloat(10).generateSizeForScreen
-        stackView.isHidden = isHidden
         
-        stackView.addArrangedSubview(label)
+        if let image = image {
+            
+            let imageView = UIImageView()
+            imageView.contentMode = .center
+            imageView.image = image
+            
+            stackView.addArrangedSubviews([imageView, label])
+            stackView.spacing = CGFloat(10).generateSizeForScreen
+            stackView.isHidden = isHidden
+            
+            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        } else {
+            
+            let line = UIView()
+            line.backgroundColor = textColor
+            
+            stackView.addArrangedSubviews([label, line])
+            stackView.axis = .vertical
+            stackView.isHidden = isHidden
+            stackView.spacing = CGFloat(10).generateSizeForScreen
+            
+            line.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen).isActive = true
+            line.widthAnchor.constraint(equalToConstant: CGFloat(280).generateSizeForScreen).isActive = true
+            
+        }
         
         return stackView
+        
+        
+        
     }
     
     func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                    itens: [UIStackView],
-                                   titleColor: ColorsBravve = .buttonPink) -> UIButton {
+                                   titleColor: ColorsBravve = .pink_cyan,
+                                   arrowDownImage: UIImage?,
+                                   arrowUpImage: UIImage?) -> UIButton{
+        
         let button = UIButton()
         let yourAttributes: [NSAttributedString.Key: Any] = [
             
             .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .foregroundColor: UIColor(named: titleColor.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         var attributeString = NSMutableAttributedString(
@@ -60,9 +77,9 @@ class DetailsOpenViewModel {
             string: "Ver Menos",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .selected)
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+        button.setImage(arrowDownImage,
                             for: .normal)
-        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+        button.setImage(arrowUpImage,
                             for: .selected)
         button.imageView?.contentMode = .scaleAspectFit
         button.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
@@ -103,5 +120,87 @@ class DetailsOpenViewModel {
         label.textColor = textColor
         
         return label
+    }
+    
+    func sortBusinessHours(businessHours: inout [SpaceBusinessHours]) {
+        businessHours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
+            
+            guard let lhsWeekDay = lhs.week_day else { return false }
+            guard let rhsWeekDay = rhs.week_day else { return false }
+            return lhsWeekDay < rhsWeekDay
+        }
+    }
+    
+    func createBusinessHoursArray(businessHours: [SpaceBusinessHours]) -> [String] {
+        
+        var textArray: [String] = []
+        
+        for business_hour in businessHours {
+
+            if business_hour.flag_closed_day != nil {
+                if !business_hour.flag_closed_day! {
+                    textArray.append("\(business_hour.day_name ?? ""): \(business_hour.start_time ?? "")h - \(business_hour.end_time ?? "")h")
+                }
+            }
+        }
+       
+        return textArray
+    }
+    
+    func createFacilitiesArray(facilities: [SpaceFacility]?) -> [String] {
+        
+        var textArray: [String] = []
+        
+        guard let facilities = facilities else {
+            return []
+        }
+
+        for facility in facilities {
+            guard let facilityName = facility.name else { return [] }
+            textArray.append(facilityName)
+        }
+       
+        return textArray
+    }
+    
+    func createItensStackView(itens: inout [UIStackView], texts: [String], textColor: UIColor, seats_qty: Int, street: String, neighborhood: String, streetNumber: Int, cityName: String, stateName: String, postalCode: String) {
+        itens.append(createStackView("Até \(seats_qty) pessoas",
+                                     UIImage(named: IconsBravve.users.rawValue),
+                                     textColor: textColor))
+        itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
+                                     UIImage(named: IconsBravve.map.rawValue),
+                                     textColor: textColor))
+        itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                     textColor: textColor))
+        for i in 1...texts.count-1 {
+            
+            itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         isHidden: true,
+                                         textColor: textColor))
+        }
+    }
+    
+    func addItemsInStructureStackView(texts: [String], itens: inout [UIStackView], structureStackView: UIStackView, textColor: UIColor?, title: UILabel, seeMoreColor: ColorsBravve, arrowUpImage: UIImage?, arrowDownImage: UIImage?) {
+        
+        if texts.count < 7 {
+            for text in texts {
+                itens.append(createStackView(text, textColor: textColor))
+                
+            }
+            structureStackView.addArrangedSubviews([title] + itens)
+        } else {
+            for i in 0...5 {
+                
+                itens.append(createStackView(texts[i], textColor: textColor))
+            }
+            
+            for i in 6...texts.count - 1 {
+                
+                itens.append(createStackView(texts[i], isHidden: true, textColor: textColor))
+            }
+            
+            let button = createSeeButtonsStackView(6...itens.count-1, itens: itens, titleColor: seeMoreColor, arrowDownImage: arrowDownImage, arrowUpImage: arrowUpImage)
+            structureStackView.addArrangedSubviews([title] + itens + [button])
+        }
     }
 }

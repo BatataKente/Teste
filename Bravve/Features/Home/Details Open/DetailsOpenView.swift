@@ -10,8 +10,6 @@ import SDWebImage
 
 class OpenDetailsView: UIViewController {
     
-    let sessionManager = SessionManager()
-    
     private var space: SpaceDetail
     
     private let customBar = UIView()
@@ -28,47 +26,17 @@ class OpenDetailsView: UIViewController {
         title.text = "Detalhes do local"
         
         guard var business_hours = space.space_business_hours else { return UIStackView() }
-        business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
-            
-            guard let lhsWeekDay = lhs.week_day else { return false }
-            guard let rhsWeekDay = rhs.week_day else { return false }
-            return lhsWeekDay < rhsWeekDay
-        }
         
-        var texts:[String] {
-            var textArray: [String] = []
-            
-            for business_hour in business_hours {
-
-                if business_hour.flag_closed_day != nil {
-                    if !business_hour.flag_closed_day! {
-                        textArray.append("\(business_hour.day_name ?? ""): \(business_hour.start_time ?? "")h - \(business_hour.end_time ?? "")h")
-                    }
-                }
-            }
-           
-            return textArray
-        }
+        detailsOpenViewModel.sortBusinessHours(businessHours: &business_hours)
+        
+        var texts:[String] = detailsOpenViewModel.createBusinessHoursArray(businessHours: business_hours)
    
         var itens = [UIStackView]()
         
-        itens.append(detailsOpenViewModel.createStackView("Até \(space.seats_qty ?? 0) pessoas",
-                                     UIImage(named: IconsBravve.users.rawValue),
-                                     textColor: textColor))
-        itens.append(detailsOpenViewModel.createStackView("\(space.partner_site_address?.address?.street ?? ""), \(space.partner_site_address?.address?.neighborhood ?? ""), nº\(space.partner_site_address?.address?.street_number ?? 0), \(space.partner_site_address?.address?.city_name ?? ""). \(space.partner_site_address?.address?.state_name ?? "") \(space.partner_site_address?.address?.postal_code ?? ""), BR",
-                                     UIImage(named: IconsBravve.map.rawValue),
-                                     textColor: textColor))
-        itens.append(detailsOpenViewModel.createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                     textColor: textColor))
-        for i in 1...texts.count-1 {
-            
-            itens.append(detailsOpenViewModel.createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         isHidden: true,
-                                         textColor: textColor))
-        }
+        detailsOpenViewModel.createItensStackView(itens: &itens, texts: texts, textColor: textColor ?? UIColor(), seats_qty: space.seats_qty ?? 0, street: space.partner_site_address?.address?.street ?? "", neighborhood: space.partner_site_address?.address?.neighborhood ?? "", streetNumber: space.partner_site_address?.address?.street_number ?? 0, cityName: space.partner_site_address?.address?.city_name ?? "", stateName: space.partner_site_address?.address?.state_name ?? "", postalCode: space.partner_site_address?.address?.postal_code ?? "")
         
         let button = detailsOpenViewModel.createSeeButtonsStackView(3...itens.count-1,
-                                                                    itens: itens)
+                                                                    itens: itens, arrowDownImage: UIImage(named: ButtonsBravve.arrowDownPink.rawValue), arrowUpImage: UIImage(named: ButtonsBravve.arrowUpPink.rawValue))
         
         let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
                                                 itens +
@@ -88,57 +56,22 @@ class OpenDetailsView: UIViewController {
         
         let title = UILabel()
         title.text = "Estrutura"
-        title.font = UIFont(name: FontsBravve.medium.rawValue,
+        title.font = UIFont(name: FontsBravve.koho.rawValue,
                             size: 15)
         title.textColor = textColor
         
-        var texts:[String] {
-            
-            var facilitiesArray: [String] = []
-            
-            guard let facilities = space.space_facilities else { return [] }
-            for facility in facilities {
-                guard let facilityName = facility.name else { return [] }
-                facilitiesArray.append(facilityName)
-            }
-            
-            return facilitiesArray
-        }
+        var texts:[String] = detailsOpenViewModel.createFacilitiesArray(facilities: space.space_facilities)
 
         var itens = [UIStackView]()
         
         let structureStackView = UIStackView()
         
-        if texts.count < 7 {
-            for text in texts {
-                itens.append(detailsOpenViewModel.createStackView(text,
-                                                                  textColor:  textColor))
-            }
-            structureStackView.addArrangedSubviews([title] + itens)
-        } else {
-            for i in 0...5 {
-                
-                itens.append(detailsOpenViewModel.createStackView(texts[i],
-                                                                  textColor: textColor))
-            }
-            
-            for i in 6...texts.count - 1 {
-                
-                itens.append(detailsOpenViewModel.createStackView(texts[i],
-                                                                  isHidden: true,
-                                                                  textColor: textColor))
-            }
-            
-            let button = detailsOpenViewModel.createSeeButtonsStackView(6...itens.count-1,
-                                                                        itens: itens,
-                                                                        titleColor: .capsuleButtonSelected)
-            structureStackView.addArrangedSubviews([title] + itens + [button])
-        }
-        
+        detailsOpenViewModel.addItemsInStructureStackView(texts: texts, itens: &itens, structureStackView: structureStackView, textColor: textColor, title: title, seeMoreColor: .blue, arrowUpImage: UIImage(named: ButtonsBravve.arrowUp.rawValue), arrowDownImage: UIImage(named: ButtonsBravve.arrowDownBlue.rawValue))
+
         structureStackView.axis = .vertical
+        structureStackView.alignment = .leading
         structureStackView.spacing = CGFloat(10).generateSizeForScreen
         structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
-        structureStackView.alignment = .leading
         structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         structureStackView.isLayoutMarginsRelativeArrangement = true
         structureStackView.layoutMargins = UIEdgeInsets(top: margins,
@@ -155,54 +88,22 @@ class OpenDetailsView: UIViewController {
         
         let title = UILabel()
         title.text = "Facilities do local"
-        title.font = UIFont(name: FontsBravve.medium.rawValue,
+        title.font = UIFont(name: FontsBravve.koho.rawValue,
                             size: 15)
         title.textColor = .white
         
-        var texts:[String] {
-            
-            var facilitiesArray: [String] = []
-            
-            guard let facilities = space.space_facilities else { return [] }
-            for facility in facilities {
-                guard let facilityName = facility.name else { return [] }
-                facilitiesArray.append(facilityName)
-            }
-            
-            return facilitiesArray
-        }
+        var texts:[String] = detailsOpenViewModel.createFacilitiesArray(facilities: space.space_facilities)
 
         var itens = [UIStackView]()
         
         let localFacilitiesStackView = UIStackView()
         
-        if texts.count < 7 {
-            for text in texts {
-                itens.append(detailsOpenViewModel.createStackView(text))
-            }
-            localFacilitiesStackView.addArrangedSubviews([title] + itens)
-        } else {
-            for i in 0...5 {
-                
-                itens.append(detailsOpenViewModel.createStackView(texts[i]))
-            }
-            
-            for i in 6...texts.count - 1 {
-                
-                itens.append(detailsOpenViewModel.createStackView(texts[i],
-                                                                  isHidden: true))
-            }
-            
-            let button = detailsOpenViewModel.createSeeButtonsStackView(6...itens.count-1,
-                                                                        itens: itens,
-                                                                        titleColor: .capsuleButtonSelected)
-            localFacilitiesStackView.addArrangedSubviews([title] + itens + [button])
-        }
+        detailsOpenViewModel.addItemsInStructureStackView(texts: texts, itens: &itens, structureStackView: localFacilitiesStackView, textColor: UIColor(named: ColorsBravve.white_white.rawValue), title: title, seeMoreColor: .white_white, arrowUpImage: UIImage(named: ButtonsBravve.arrowUpWhite.rawValue), arrowDownImage: UIImage(named: ButtonsBravve.arrowDownWhite.rawValue))
         
         localFacilitiesStackView.axis = .vertical
+        localFacilitiesStackView.alignment = .leading
         localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
         localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
-        localFacilitiesStackView.alignment = .leading
         localFacilitiesStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
         localFacilitiesStackView.isLayoutMarginsRelativeArrangement = true
         localFacilitiesStackView.layoutMargins = UIEdgeInsets(top: margins,
