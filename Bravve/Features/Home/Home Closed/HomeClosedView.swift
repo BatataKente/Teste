@@ -126,7 +126,7 @@ class HomeClosedView: UIViewController {
         
         let customBarWithFilter = customBar.setToDefaultCustomBarWithFilter() {_ in
             
-            let filterView = FilterViewClosed()
+            let filterView = FilterViewClosed(self.spaceParameters, self.selectedItemsArray)
             filterView.modalPresentationStyle = .fullScreen
             self.present(filterView, animated: true)
         }
