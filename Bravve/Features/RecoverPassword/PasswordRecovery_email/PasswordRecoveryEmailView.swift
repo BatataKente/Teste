@@ -44,6 +44,7 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.textColor = UIColor(named: ColorsBravve.label.rawValue)
         textField.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(changeText), for: .allEditingEvents)
