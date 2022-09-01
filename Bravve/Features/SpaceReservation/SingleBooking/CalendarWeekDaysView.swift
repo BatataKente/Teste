@@ -27,11 +27,12 @@ class CalendarWeekdaysView: UIView {
         
         let daysArr = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
         for i in 0..<7 {
-            let lbl=UILabel()
-            lbl.text=daysArr[i]
-            lbl.textAlignment = .center
-            lbl.textColor = Style.weekdaysLblColor
-            myStackView.addArrangedSubview(lbl)
+            
+            let label = UILabel()
+            label.text = daysArr[i]
+            label.textAlignment = .center
+            label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            myStackView.addArrangedSubview(label)
         }
     }
     

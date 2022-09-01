@@ -10,8 +10,6 @@ import UIKit
 
 class SingleBookingView: UIViewController {
     
-    private var theme = MyTheme.light
-    
     private var capacityNumber: Int {
         guard let seats_qty = spaceDetails.seats_qty else { return 0 }
         return seats_qty
@@ -102,7 +100,7 @@ class SingleBookingView: UIViewController {
     
     private lazy var calendarView: CalendarView = {
         
-        let calendarView = CalendarView(theme: MyTheme.dark)
+        let calendarView = CalendarView()
         calendarView.delegate = self
         
         return calendarView
@@ -146,7 +144,7 @@ class SingleBookingView: UIViewController {
         self.title = "My Calender"
         singleBookingViewModel.delegate = self
         self.navigationController?.navigationBar.isTranslucent=false
-        self.view.backgroundColor = Style.bgColor
+        self.view.setToDefaultBackgroundColor()
         view.addSubviews([bodyScrollView, nextButton])
         bodyScrollView.addSubview(viewToScroll)
         viewToScroll.addSubviews([calendarView, daysChoiceLabel, capacityLabel, lineView, schedulesStack, dropDown])

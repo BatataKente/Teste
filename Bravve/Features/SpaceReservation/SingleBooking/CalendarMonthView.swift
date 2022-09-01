@@ -80,21 +80,22 @@ class CalendarMonthView: UIView {
     
     let lblName: UILabel = {
         
-        let lbl = UILabel()
-        lbl.text = "Default Month Year text"
-        lbl.textColor = Style.monthViewLblColor
-        lbl.textAlignment = .center
-        lbl.font = UIFont.boldSystemFont(ofSize: 16)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel()
+        label.text = "Default Month Year text"
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
         
-        return lbl
+        return label
     }()
     
     let btnRight: UIButton = {
         
         let btn = UIButton()
         btn.setTitle(">", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+        btn.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                          for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
@@ -105,7 +106,8 @@ class CalendarMonthView: UIView {
         
         let btn = UIButton()
         btn.setTitle("<", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+        btn.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                          for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(nil,
                       action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
