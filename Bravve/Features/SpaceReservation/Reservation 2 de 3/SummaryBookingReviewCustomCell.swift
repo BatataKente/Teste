@@ -8,7 +8,14 @@
 import Foundation
 import UIKit
 
+// MARK: DelegateProtocol
+protocol SummaryBookingProtocol {
+    func setButtonTapped (sender:UIButton)
+}
+
 final class SummaryBookingReviewCustomCell: UITableViewCell {
+    
+    var sumaryProtocol:SummaryBookingProtocol?
     
     static let reuseIdSummary: String = "sumaryBookingReviewCell"
     
@@ -78,7 +85,7 @@ final class SummaryBookingReviewCustomCell: UITableViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: IconsBravve.pencilBlue.rawValue), for: .normal)
-        button.addTarget(self, action: #selector(self.toEdit), for: .touchUpInside)
+        button.addTarget(self, action: #selector(toEdit), for: .touchUpInside)
         return button
     }()
     
@@ -112,7 +119,8 @@ final class SummaryBookingReviewCustomCell: UITableViewCell {
     
     //MARK: - Func toEdit
     @objc func toEdit (sender:UIButton) {
-        print("OI")
+        sumaryProtocol?.setButtonTapped(sender: sender)
+        
     }
     
     //MARK: - func configConstraints
@@ -155,5 +163,6 @@ final class SummaryBookingReviewCustomCell: UITableViewCell {
         ])
     }
 }
+
 
 
