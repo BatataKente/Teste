@@ -459,6 +459,17 @@ class LoginView: UIViewController {
         registerButton.constraintInsideTo(.trailing, enterButton)
         registerButton.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == loginTextField{
+            passwordTextField.isHidden = false
+            passwordIsTapped()
+            passwordTextField.becomeFirstResponder()
+        }
+        else {
+            passwordTextField.resignFirstResponder()
+        }
+        return true
+}
 }
 
 
@@ -469,18 +480,9 @@ extension LoginView: UITextFieldDelegate{
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if loginTextField.isEditing == true {
-            return loginTextField.resignFirstResponder()
-            
-            
-        }
-        else{
-            return passwordTextField.resignFirstResponder()
-            
-        }
-    }
 }
+    
+    
 extension UIStackView {
     func setBottomBorderBlue(color: CGColor) {
         self.layer.masksToBounds = false
