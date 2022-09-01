@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+
 class WorkPassCell: UITableViewCell {
     
     
@@ -157,3 +158,4 @@ class WorkPassCell: UITableViewCell {
 protocol WorkPassCellProtocol {
     func setButtonTapped (sender:UIButton)
 }
+

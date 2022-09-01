@@ -622,7 +622,10 @@ class BookingDetailsView: UIViewController {
         customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
             self.customAlertCancel.dismissAlert()
         }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
+            let vc = BookingHistoryView()
+            vc.modalPresentationStyle = .fullScreen
             self.customAlertCancel.dismissAlert()
+            self.present(vc, animated: true)
         }), on: self)
         
     }

@@ -125,7 +125,12 @@ class PasswordRecoveryPassword: UIViewController {
         way.setWayToDefault(.wayPassword)
 
         view.createRegisterCustomBar(.backPink, progressBarButtons: buttons) { _ in
-            self.dismiss(animated: true)
+            if let passwordEmail = self.presentingViewController,
+               let loginView = passwordEmail.presentingViewController {
+                
+                passwordEmail.view.isHidden = true
+                loginView.dismiss(animated: true)
+            }
         }
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }

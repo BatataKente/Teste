@@ -93,9 +93,9 @@ class WorkPassBookingView: UIViewController {
     lazy var pinkButton : UIButton = {
         let button = UIButton()
         button.setTitle("Proxima Etapa", for: .normal)
-        button.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        button.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
-        button.addTarget(self, action: #selector(nextStageButtonTapped), for: .touchUpInside)
+        
         return button
     }()
     
@@ -223,8 +223,9 @@ extension WorkPassBookingView:WorkPassCellProtocol{
             }
         }
         sender.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
-        
+        self.pinkButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        self.pinkButton.addTarget(self, action: #selector(nextStageButtonTapped), for: .touchUpInside)
     }
-    
-    
+
 }
+
