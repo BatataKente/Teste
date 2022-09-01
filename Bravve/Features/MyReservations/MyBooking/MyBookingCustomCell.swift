@@ -8,6 +8,7 @@
 import UIKit
 
 protocol MyBookingCustomCellDelegate: AnyObject {
+    
     func presentViewController(_ viewController: UIViewController)
 }
 
@@ -15,128 +16,130 @@ class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
     
-    let cellView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = CGFloat(12).generateSizeForScreen
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
-        return view
+    private let cellView: UIView = {
+        
+        let cellView = UIView()
+        cellView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
+        cellView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
+        
+        return cellView
     }()
     
-    let typeTagLabel: UILabel = {
-        let label = UILabel()
-        label.text = "BOXOFFICE"
-        label.backgroundColor = UIColor(named: "boxOffice")
-        label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let typeTagLabel: UILabel = {
+        
+        let typeTagLabel = UILabel()
+        typeTagLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        typeTagLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        typeTagLabel.textAlignment = .center
+        
+        return typeTagLabel
     }()
     
-    let topTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Numa esquina"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let topTitleLabel: UILabel = {
+        
+        let topTitleLabel = UILabel()
+        topTitleLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        topTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
+        
+        return topTitleLabel
     }()
     
-    let bottomTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "charmosa, um hotel"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let bottomTitleLabel: UILabel = {
+        
+        let bottomTitleLabel = UILabel()
+        bottomTitleLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        bottomTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
+        
+        return bottomTitleLabel
     }()
     
-    let spaceImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "imageReservs")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+    private let spaceImage: UIImageView = {
+        
+        let spaceImage = UIImageView()
+        spaceImage.contentMode = .scaleAspectFill
+        
+        return spaceImage
     }()
     
     let spaceNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Hotel Saint"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        
+        let spaceNameLabel = UILabel()
+        spaceNameLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        spaceNameLabel.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
+        
+        return spaceNameLabel
     }()
     
-    let reservedLabel: UILabel = {
-        let label = UILabel()
-        label.text = "RESERVADO"
-        label.backgroundColor = UIColor(named: "reserved")
-        label.textColor = .white
-        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let reservedLabel: UILabel = {
+        
+        let reservedLabel = UILabel()
+        reservedLabel.backgroundColor = UIColor(named: "reserved")
+        reservedLabel.textColor = .white
+        reservedLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        reservedLabel.textAlignment = .center
+        
+        return reservedLabel
     }()
     
-    let spaceSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "UM Coffee Co."
-        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let spaceSubtitleLabel: UILabel = {
+        
+        let spaceSubtitleLabel = UILabel()
+        spaceSubtitleLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        spaceSubtitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
+        
+        return spaceSubtitleLabel
     }()
     
-    let locationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "São Paulo / Jardim Paulistano"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let locationLabel: UILabel = {
+        
+        let locationLabel = UILabel()
+        locationLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        locationLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        
+        return locationLabel
     }()
     
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "21/01/2022 - 22/01/2022"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let dateLabel: UILabel = {
+        
+        let dateLabel = UILabel()
+        dateLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        dateLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        
+        return dateLabel
     }()
     
-    let hourLabel: UILabel = {
-        let label = UILabel()
-        label.text = "9h às 18h"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let hourLabel: UILabel = {
+        
+        let hourLabel = UILabel()
+        hourLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
+        hourLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        
+        return hourLabel
     }()
     
-    let spaceTypeLabel: UILabel = {
+    private let spaceTypeLabel: UILabel = {
+        
         let label = UILabel()
         label.text = "Espaço privativo"
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
-    lazy var locationInfoStackView: UIStackView = {
+    private lazy var locationInfoStackView: UIStackView = {
+        
         let stackView = UIStackView(arrangedSubviews: [locationLabel, dateLabel, hourLabel, spaceTypeLabel])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         return stackView
     }()
     
-    let arrowButton: UIButton = {
+    private let arrowButton: UIButton = {
+        
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleToFill
         
         return button
@@ -154,18 +157,34 @@ class MyBookingCustomCell: UITableViewCell {
         
         arrowButton.addTarget(self, action: #selector(actionArrowButton),
                               for: .touchUpInside)
-        
     }
     
     required init?(coder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupCell() {
+        
+        typeTagLabel.text = "BOXOFFICE"
+        typeTagLabel.backgroundColor = UIColor(named: "boxOffice")
+        topTitleLabel.text = "Numa esquina"
+        bottomTitleLabel.text = "charmosa, um hotel"
+        spaceImage.image = UIImage(named: "imageReservs")
+        spaceNameLabel.text = "Hotel Saint"
+        reservedLabel.text = "RESERVADO"
+        spaceSubtitleLabel.text = "UM Coffee Co."
+        locationLabel.text = "São Paulo / Jardim Paulistano"
+        dateLabel.text = "21/01/2022 - 22/01/2022"
+        hourLabel.text = "9h às 18h"
+    }
+    
     @objc func actionArrowButton() {
+        
         self.delegate?.presentViewController(BookingDetailsView())
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         
         cellView.constraintInsideTo(.top, contentView,
                                     CGFloat(20).generateSizeForScreen)

@@ -32,10 +32,7 @@ class MyBookingView: UIViewController {
         return tabBar
     }()
     
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
+    override var prefersStatusBarHidden: Bool {true}
 
     override func viewDidLoad() {
         
@@ -90,8 +87,10 @@ extension MyBookingView: UITableViewDelegate, UITableViewDataSource {
         
         cell?.backgroundColor = .clear
         cell?.delegate = self
+        cell?.setupCell()
         
         if cell?.textLabel?.text != "" {
+            
             flagReservation = 1
         }
     
