@@ -16,6 +16,13 @@ class HelpViewController: UIViewController {
         return tabBar
     }()
     
+    private lazy var leroLeroView: UIView = {
+        
+        let leroLeroView = UIView()
+        leroLeroView.backgroundColor = .red
+        return leroLeroView
+    }()
+    
     private lazy var headerView: UIView = {
         
         let headerView = UIView()
@@ -105,7 +112,9 @@ class HelpViewController: UIViewController {
         configConstraints()
     }
     
-    private func createQuestionView(question: String, answer: NSAttributedString, hideAnswerLabel: Bool = true) -> UIView {
+    private func createQuestionView(question: String,
+                                    answer: String,
+                                    hideAnswerLabel: Bool = true) -> UIView {
         
         let questionLabel = UILabel()
         questionLabel.text = question
@@ -115,11 +124,22 @@ class HelpViewController: UIViewController {
         questionLabel.textAlignment = .left
         questionLabel.numberOfLines = 0
         
+        
+        
         let answerLabel = UILabel()
-        answerLabel.attributedText = answer
+        answerLabel.isUserInteractionEnabled = true
+        answerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                action: #selector(labelGesture(gesture:))))
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            
+            .font: UIFont(name: FontsBravve.regular.rawValue, size: 15) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.label.rawValue) as Any
+        ]
+        let attributeAnswer = NSMutableAttributedString(string: answer,
+                                                        attributes: yourAttributes)
+        
+        answerLabel.attributedText = attributeAnswer
         answerLabel.lineBreakMode = .byWordWrapping
-        answerLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        answerLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         answerLabel.textAlignment = .left
         answerLabel.numberOfLines = 0
         answerLabel.isHidden = hideAnswerLabel
@@ -148,10 +168,10 @@ class HelpViewController: UIViewController {
             
             answerButton.setImage(UIImage(named: ButtonsBravve.mostButton.rawValue),
                                   for: .normal)
-            answerConstraint.constant = CGFloat(-10).generateSizeForScreen
         }
         else {
             
+            answerConstraint.constant = CGFloat(-10).generateSizeForScreen
             answerButton.setImage(UIImage(named: ButtonsBravve.lessButton.rawValue),
                                   for: .normal)
         }
@@ -201,9 +221,48 @@ class HelpViewController: UIViewController {
         return questionView
     }
     
+    @objc func labelGesture(gesture: UITapGestureRecognizer) {
+        
+        guard let label = gesture.view as? UILabel else {return}
+        
+        print(calculateMaxLines(label))
+    }
+    
+    func calculateWordLine(_ label: UILabel) -> Int {
+        
+        let maxSize = CGSize(width: label.frame.size.width,
+                             height: CGFloat(Float.infinity))
+        let charSize = label.font.lineHeight
+        let text = (label.text ?? "") as NSString
+        
+        let textSize = text.boundingRect(with: maxSize,
+                                         options: .usesLineFragmentOrigin,
+                                         attributes: [NSAttributedString.Key.font: label.font as Any],
+                                         context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        
+        return linesRoundedUp
+    }
+    
+    func calculateMaxLines(_ label: UILabel) -> Int {
+        
+        let maxSize = CGSize(width: label.frame.size.width,
+                             height: CGFloat(Float.infinity))
+        let charSize = label.font.lineHeight
+        let text = (label.text ?? "") as NSString
+        let textSize = text.boundingRect(with: maxSize,
+                                         options: .usesLineFragmentOrigin,
+                                         attributes: [NSAttributedString.Key.font: label.font as Any],
+                                         context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        
+        return linesRoundedUp
+    }
+    
     private func setupDefaults() {
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes") {_ in
+            
             let navBar = PersonalProfileView()
             navBar.modalPresentationStyle = .fullScreen
             self.present(navBar, animated: false)
@@ -250,5 +309,37 @@ class HelpViewController: UIViewController {
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+    }
+}
+//MARK: - Extension UITapGestureRecognizer
+
+extension UITapGestureRecognizer {
+    
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        
+        // Find the tapped character location and compare it to the specified range
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        
+        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+        
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        return NSLocationInRange(indexOfCharacter, targetRange)
     }
 }

@@ -91,6 +91,7 @@ class OpenDetailsView: UIViewController {
                                            titleColor: ColorsBravve = .buttonPink,
                                            downButtonImages: ButtonsBravve,
                                            upButtonImages: ButtonsBravve) -> UIStackView {
+        
         let moreButton = UIButton()
         moreButton.setTitle("Ver Mais", for: .normal)
         moreButton.setImage(UIImage(named: downButtonImages.rawValue),
