@@ -171,7 +171,7 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         switch indexPath.row {
         case 0:
             guard let cellLocation = tableview.dequeueReusableCell(withIdentifier: LocationDetailsBookingReviewCustomCell.reuseIdLocation, for: indexPath) as?
@@ -184,6 +184,7 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
                     SummaryBookingReviewCustomCell else {
                 return UITableViewCell()
             }
+            cellSummary.sumaryProtocol = self
             return cellSummary
         case 2:
             guard let cellDataDayFirst = tableview.dequeueReusableCell(withIdentifier: DataBookingDayFirstCell.reuseIdDataBookingDayFirst, for: indexPath) as?
@@ -219,4 +220,9 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
 
 
 }
+}
+extension Reservation2View:SummaryBookingProtocol{
+    func setButtonTapped(sender: UIButton) {
+        self.dismiss(animated: true)
+    }
 }
