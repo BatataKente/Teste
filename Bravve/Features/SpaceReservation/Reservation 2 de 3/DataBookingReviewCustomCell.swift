@@ -20,7 +20,7 @@ class DataBookingDayFirstCell: UITableViewCell {
     
     //MARK: - firstHourImage
     lazy var firstHourImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.clock.rawValue)
         image.contentMode = .scaleToFill
@@ -77,7 +77,7 @@ class DataBookingDayFirstCell: UITableViewCell {
     
     //MARK: - secondHourImage
     lazy var secondHourImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.clock.rawValue)
         image.contentMode = .scaleToFill
@@ -134,9 +134,9 @@ class DataBookingDayFirstCell: UITableViewCell {
     
     //MARK: - amountImage
     lazy var amountImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: IconsBravve.questionCircleBlue_1.rawValue)
+        image.image = UIImage(named: IconsBravve.dolar.rawValue)
         image.contentMode = .scaleToFill
         return image
     }()
@@ -220,6 +220,8 @@ class DataBookingDayFirstCell: UITableViewCell {
             
             firstHourImage.centerYAnchor.constraint(equalTo: firstPriceLabel.centerYAnchor),
             firstHourImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
+            firstHourImage.heightAnchor.constraint(equalToConstant: 10),
+            firstHourImage.widthAnchor.constraint(equalToConstant: 10),
             
             secondPriceLabel.topAnchor.constraint(equalTo: firstPriceLabel.bottomAnchor, constant: 19),
             secondPriceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
@@ -235,6 +237,8 @@ class DataBookingDayFirstCell: UITableViewCell {
             
             secondHourImage.centerYAnchor.constraint(equalTo: secondPriceLabel.centerYAnchor),
             secondHourImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
+            secondHourImage.heightAnchor.constraint(equalToConstant: 10),
+            secondHourImage.widthAnchor.constraint(equalToConstant: 10),
             
             amountLabel.topAnchor.constraint(equalTo: secondPriceLabel.bottomAnchor, constant: 19),
             amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
@@ -245,6 +249,8 @@ class DataBookingDayFirstCell: UITableViewCell {
             
             amountImage.centerYAnchor.constraint(equalTo: amountLabel.centerYAnchor),
             amountImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
+            amountImage.heightAnchor.constraint(equalToConstant: 10),
+            amountImage.widthAnchor.constraint(equalToConstant: 10),
             
             bottomLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             bottomLine.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -271,7 +277,7 @@ class DataBookingDaySecondCell: UITableViewCell {
         //MARK: - cashImage
         lazy var cashImage: UIImageView = {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: IconsBravve.clock.rawValue)
+            imageView.image = UIImage(named: IconsBravve.dolar.rawValue)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             return imageView
         }()
@@ -327,7 +333,7 @@ class DataBookingDaySecondCell: UITableViewCell {
             label.textColor = UIColor(named: ColorsBravve.label.rawValue)
             label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
             label.numberOfLines = 1
-            label.text = "200,00"
+            label.text = "R$ 200,00"
             
             return label
         }()
@@ -349,7 +355,7 @@ class DataBookingDaySecondCell: UITableViewCell {
             label.textColor = UIColor(named: ColorsBravve.label.rawValue)
             label.font = UIFont(name: FontsBravve.bold.rawValue, size: 13)
             label.numberOfLines = 1
-            label.text = "200,00"
+            label.text = "R$ 200,00"
             
             return label
         }()
@@ -381,47 +387,43 @@ class DataBookingDaySecondCell: UITableViewCell {
             
             NSLayoutConstraint.activate([
                 
-                
                 dayLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 19),
                 dayLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
                 
-                hourImage.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 21),
+                hourImage.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
                 hourImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
-
-                cashImage.topAnchor.constraint(equalTo: hourImage.bottomAnchor, constant: 24),
+                hourImage.heightAnchor.constraint(equalToConstant: 10),
+                hourImage.widthAnchor.constraint(equalToConstant: 10),
+                
+                cashImage.centerYAnchor.constraint(equalTo: totalValueLabel.centerYAnchor),
                 cashImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
-                cashImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -13),
-
-                checkInHour.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 53),
-                checkInHour.trailingAnchor.constraint(equalTo: tracerLabel.leadingAnchor, constant: -16),
+                cashImage.heightAnchor.constraint(equalToConstant: 10),
+                cashImage.widthAnchor.constraint(equalToConstant: 10),
                 
-                tracerLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 53),
-                tracerLabel.leadingAnchor.constraint(equalTo: checkInHour.trailingAnchor,constant: 8),
-                tracerLabel.trailingAnchor.constraint(equalTo: checkOutHour.leadingAnchor,constant: -16),
+                firstHourValue.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 19),
+                firstHourValue.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
                 
-                checkOutHour.centerYAnchor.constraint(equalTo: checkInHour.centerYAnchor),
-                checkOutHour.leadingAnchor.constraint(equalTo: tracerLabel.trailingAnchor,constant: 16),
-                checkOutHour.trailingAnchor.constraint(equalTo: firstHourValue.leadingAnchor, constant: -16),
-
-                firstHourValue.centerYAnchor.constraint(equalTo: checkInHour.centerYAnchor),
-                firstHourValue.leadingAnchor.constraint(equalTo: checkOutHour.trailingAnchor, constant: 21),
-                firstHourValue.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
-               
-                totalLabel.topAnchor.constraint(equalTo: checkOutHour.bottomAnchor, constant: 19),
-                totalLabel.centerXAnchor.constraint(equalTo: checkOutHour.centerXAnchor),
-                totalLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -13),
-
+                checkOutHour.trailingAnchor.constraint(equalTo: firstHourValue.leadingAnchor, constant: -24),
+                checkOutHour.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
+                
+                tracerLabel.trailingAnchor.constraint(equalTo: checkOutHour.leadingAnchor, constant: -19),
+                tracerLabel.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
+                
+                checkInHour.trailingAnchor.constraint(equalTo: tracerLabel.leadingAnchor, constant: -8),
+                checkInHour.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
+                
                 totalValueLabel.topAnchor.constraint(equalTo: firstHourValue.bottomAnchor, constant: 19),
-                totalValueLabel.centerXAnchor.constraint(equalTo: firstHourValue.centerXAnchor),
-                totalValueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -13),
-                totalValueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
-            
+                totalValueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
+                totalValueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -19),
+                
+                totalLabel.trailingAnchor.constraint(equalTo: totalValueLabel.leadingAnchor, constant: -34),
+                totalLabel.centerYAnchor.constraint(equalTo: totalValueLabel.centerYAnchor),
                 
                 //MARK: - bottomLine Constraints
                 bottomLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                 bottomLine.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                 bottomLine.heightAnchor.constraint(equalToConstant: 0.3),
-                bottomLine.widthAnchor.constraint(equalToConstant: 334)
+                bottomLine.widthAnchor.constraint(equalToConstant: 334),
 
             ])
         }
@@ -443,7 +445,7 @@ class DataBookingDayThirdCell: UITableViewCell {
         //MARK: - cashImage
         lazy var cashImage: UIImageView = {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: IconsBravve.clock.rawValue)
+            imageView.image = UIImage(named: IconsBravve.dolar.rawValue)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             return imageView
         }()
@@ -499,7 +501,7 @@ class DataBookingDayThirdCell: UITableViewCell {
             label.textColor = UIColor(named: ColorsBravve.label.rawValue)
             label.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
             label.numberOfLines = 1
-            label.text = "200,00"
+            label.text = "R$ 200,00"
             
             return label
         }()
@@ -521,7 +523,7 @@ class DataBookingDayThirdCell: UITableViewCell {
             label.textColor = UIColor(named: ColorsBravve.label.rawValue)
             label.font = UIFont(name: FontsBravve.bold.rawValue, size: 13)
             label.numberOfLines = 1
-            label.text = "200,00"
+            label.text = "R$ 200,00"
             
             return label
         }()
@@ -553,46 +555,43 @@ class DataBookingDayThirdCell: UITableViewCell {
             
             NSLayoutConstraint.activate([
                 
-                
                 dayLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 19),
                 dayLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
                 
-                hourImage.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 21),
+                hourImage.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
                 hourImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
-
-                cashImage.topAnchor.constraint(equalTo: hourImage.bottomAnchor, constant: 24),
+                hourImage.heightAnchor.constraint(equalToConstant: 10),
+                hourImage.widthAnchor.constraint(equalToConstant: 10),
+                
+                cashImage.centerYAnchor.constraint(equalTo: totalValueLabel.centerYAnchor),
                 cashImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
-                cashImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -13),
-
-                checkInHour.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 53),
-                checkInHour.trailingAnchor.constraint(equalTo: tracerLabel.leadingAnchor, constant: -16),
+                cashImage.heightAnchor.constraint(equalToConstant: 10),
+                cashImage.widthAnchor.constraint(equalToConstant: 10),
                 
-                tracerLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 53),
-                tracerLabel.leadingAnchor.constraint(equalTo: checkInHour.trailingAnchor,constant: 8),
-                tracerLabel.trailingAnchor.constraint(equalTo: checkOutHour.leadingAnchor,constant: -16),
+                firstHourValue.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 19),
+                firstHourValue.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
                 
-                checkOutHour.centerYAnchor.constraint(equalTo: checkInHour.centerYAnchor),
-                checkOutHour.leadingAnchor.constraint(equalTo: tracerLabel.trailingAnchor,constant: 16),
-                checkOutHour.trailingAnchor.constraint(equalTo: firstHourValue.leadingAnchor, constant: -16),
-
-                firstHourValue.centerYAnchor.constraint(equalTo: checkInHour.centerYAnchor),
-                firstHourValue.leadingAnchor.constraint(equalTo: checkOutHour.trailingAnchor, constant: 21),
-                firstHourValue.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
-               
-                totalLabel.topAnchor.constraint(equalTo: checkOutHour.bottomAnchor, constant: 19),
-                totalLabel.centerXAnchor.constraint(equalTo: checkOutHour.centerXAnchor),
-                totalLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -13),
-
+                checkOutHour.trailingAnchor.constraint(equalTo: firstHourValue.leadingAnchor, constant: -24),
+                checkOutHour.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
+                
+                tracerLabel.trailingAnchor.constraint(equalTo: checkOutHour.leadingAnchor, constant: -19),
+                tracerLabel.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
+                
+                checkInHour.trailingAnchor.constraint(equalTo: tracerLabel.leadingAnchor, constant: -8),
+                checkInHour.centerYAnchor.constraint(equalTo: firstHourValue.centerYAnchor),
+                
                 totalValueLabel.topAnchor.constraint(equalTo: firstHourValue.bottomAnchor, constant: 19),
-                totalValueLabel.centerXAnchor.constraint(equalTo: firstHourValue.centerXAnchor),
-                totalValueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -13),
-                totalValueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32),
-           
+                totalValueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
+                totalValueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -19),
+                
+                totalLabel.trailingAnchor.constraint(equalTo: totalValueLabel.leadingAnchor, constant: -34),
+                totalLabel.centerYAnchor.constraint(equalTo: totalValueLabel.centerYAnchor),
+                
                 //MARK: - bottomLine Constraints
                 bottomLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                 bottomLine.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                 bottomLine.heightAnchor.constraint(equalToConstant: 0.3),
-                bottomLine.widthAnchor.constraint(equalToConstant: 334)
+                bottomLine.widthAnchor.constraint(equalToConstant: 334),
 
             ])
         }
