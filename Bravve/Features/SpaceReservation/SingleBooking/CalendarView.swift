@@ -7,48 +7,10 @@
 
 import UIKit
 
-enum MyTheme {
-    case light
-    case dark
-}
-
 struct Colors {
     
     static var darkGray = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
     static var darkRed = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-}
-
-struct Style {
-    
-    static var bgColor = UIColor.black
-    static var monthViewLblColor = UIColor.black
-    static var monthViewBtnRightColor = UIColor.black
-    static var monthViewBtnLeftColor = UIColor.black
-    static var activeCellLblColor = UIColor.white
-    static var activeCellLblColorHighlighted = UIColor.black
-    static var weekdaysLblColor = UIColor.black
-    
-    static func themeDark(){
-        
-        bgColor = Colors.darkGray
-        monthViewLblColor = UIColor.white
-        monthViewBtnRightColor = UIColor.white
-        monthViewBtnLeftColor = UIColor.white
-        activeCellLblColor = UIColor.white
-        activeCellLblColorHighlighted = UIColor.black
-        weekdaysLblColor = UIColor.white
-    }
-    
-    static func themeLight(){
-        
-        bgColor = UIColor.white
-        monthViewLblColor = UIColor.black
-        monthViewBtnRightColor = UIColor.black
-        monthViewBtnLeftColor = UIColor.black
-        activeCellLblColor = UIColor.black
-        activeCellLblColorHighlighted = UIColor.white
-        weekdaysLblColor = UIColor.black
-    }
 }
 
 class CalendarView: UIView {
@@ -96,6 +58,7 @@ class CalendarView: UIView {
     }()
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         
         initializeView()
@@ -106,31 +69,19 @@ class CalendarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(theme: MyTheme) {
-        self.init()
-        
-        if theme == .dark {
-            
-            Style.themeDark()
-        }
-        else {
-            
-            Style.themeLight()
-        }
-        
-        initializeView()
-    }
-    
     func changeTheme() {
         
         myCollectionView.reloadData()
         
-        monthView.lblName.textColor = Style.monthViewLblColor
-        monthView.btnRight.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
-        monthView.btnLeft.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+        monthView.lblName.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        monthView.btnRight.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                         for: .normal)
+        monthView.btnLeft.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
+                                        for: .normal)
         
         for i in 0..<7 {
-            (weekdaysView.myStackView.subviews[i] as! UILabel).textColor = Style.weekdaysLblColor
+            
+            (weekdaysView.myStackView.subviews[i] as! UILabel).textColor = UIColor(named: ColorsBravve.label.rawValue)
         }
     }
     
@@ -139,7 +90,7 @@ class CalendarView: UIView {
         currentMonthIndex = Calendar.current.component(.month, from: Date())
         currentYear = Calendar.current.component(.year, from: Date())
         todaysDate = Calendar.current.component(.day, from: Date())
-        firstWeekDayOfMonth=getFirstWeekDay()
+        firstWeekDayOfMonth = getFirstWeekDay()
         
         //for leap years, make february month of 29 days
         if currentMonthIndex == 2 && currentYear % 4 == 0 {
@@ -191,7 +142,7 @@ class CalendarView: UIView {
         
         if cell.backgroundColor == .clear {
             
-            cell.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+            cell.backgroundColor = UIColor(named: ColorsBravve.blue_cyan.rawValue)
             cell.label.textColor = .white
             delegate?.chosedDays(cell.label.text ?? "",
                                  "\(currentMonthIndex)",
@@ -202,7 +153,7 @@ class CalendarView: UIView {
         else {
             
             cell.backgroundColor = .clear
-            cell.label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+            cell.label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
             delegate?.unchoseDays(cell.label.text ?? "",
                                   "\(currentMonthIndex)",
                                   "\(currentYear)")
@@ -255,7 +206,7 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
                 cell?.isUserInteractionEnabled = true
                 // trocar para cor do bravve
                 
-                cell?.label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+                cell?.label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
                 
                 for day in seletedDays {
                     
