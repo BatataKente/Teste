@@ -37,35 +37,35 @@ class BookingDetailsView: UIViewController {
     
     lazy var lineView1:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView2:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView3:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView4:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
     lazy var lineView5:UIView = {
         let line = UIView()
-        line.backgroundColor = .lightGray
+        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
@@ -88,7 +88,7 @@ class BookingDetailsView: UIViewController {
         lb.text = "Numa esquina\ncharmosa, um hotel"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -129,7 +129,7 @@ class BookingDetailsView: UIViewController {
         lb.text = "Home by Kamy"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -271,7 +271,7 @@ class BookingDetailsView: UIViewController {
         informations.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
         informations.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let button = createSeeButton(smallText: informations.text ?? "", fullText: "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp. aaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaa", actionLabel: informations)
+        let button = createSeeButton(smallText: informations.text ?? "", fullText: "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp. aaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaa, cade a API? Tem que fazer a tratativa para que o fullText receba da API e o corte um trecho para a smallText.", actionLabel: informations)
    
         let stackView = UIStackView(arrangedSubviews: [title, responsableLabel, informations, button] )
         stackView.alignment = .leading
@@ -293,7 +293,7 @@ class BookingDetailsView: UIViewController {
         
         var contacts = [UIStackView]()
         
-        contacts.append(createStackView("(11) 9999999", UIImage(named: "cellphone"), textColor: textColor))
+        contacts.append(createStackView("(11) 99999-9999", UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
         contacts.append(createStackView("email", UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
         
         let stackView = UIStackView(arrangedSubviews: [title] + contacts)
@@ -310,7 +310,7 @@ class BookingDetailsView: UIViewController {
         lb.text = "Detalhes da sua reserva"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -329,7 +329,7 @@ class BookingDetailsView: UIViewController {
         lb.text = "Forma de pagamento"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
+        lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
         return lb
     }()
@@ -384,7 +384,7 @@ class BookingDetailsView: UIViewController {
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.text = "    **** **** **** 4679"
         tf.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        tf.backgroundColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)
+        tf.backgroundColor = UIColor(named: ColorsBravve.backgroundCard.rawValue)
         tf.isUserInteractionEnabled = false
         return tf
     }()
@@ -425,7 +425,7 @@ class BookingDetailsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         
         reserveCollection.delegate = self
         reserveCollection.dataSource = self
@@ -498,36 +498,37 @@ class BookingDetailsView: UIViewController {
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            items: [UIStackView],
                                            titleColor: ColorsBravve = .buttonPink,
-                                           downButtonImages: ButtonsBravve = .arrowDown,
-                                           upButtonImages: ButtonsBravve = .arrowUp) -> UIStackView {
+                                           downButtonImages: ButtonsBravve = .arrowDownPink,
+                                           upButtonImages: ButtonsBravve = .arrowUpPink) -> UIStackView {
+
         let moreButton = UIButton()
         let yourAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         var attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
+            string: "Ver Mais ",
             attributes: yourAttributes)
         moreButton.setAttributedTitle(attributeString, for: .normal)
         moreButton.setImage(UIImage(named: downButtonImages.rawValue),
                             for: .normal)
         moreButton.imageView?.contentMode = .scaleAspectFit
         moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+        moreButton.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
                                              size: CGFloat(12).generateSizeForScreen)
-        
+
         moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        
+
         moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
                                                  multiplier: 0.5)
-        moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        
+        moreButton.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
+
         let lessButton = UIButton()
         attributeString = NSMutableAttributedString(
-            string: "Ver Menos",
+            string: "Ver Menos ",
             attributes: yourAttributes)
         lessButton.setAttributedTitle(attributeString, for: .normal)
         lessButton.setImage(UIImage(named: upButtonImages.rawValue),
@@ -535,42 +536,42 @@ class BookingDetailsView: UIViewController {
         lessButton.imageView?.contentMode = .scaleAspectFit
         lessButton.isHidden = true
         lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+        lessButton.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
                                              size: CGFloat(12).generateSizeForScreen)
-        
+
         lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        
+
         lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
                                                  multiplier: 0.5)
-        lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        lessButton.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
         
         let seeMoreHandler = {(action: UIAction) in
-            
+
             for i in range {
-                
+
                 items[i].isHidden = false
             }
             moreButton.isHidden = true
             lessButton.isHidden = false
         }
-        
+
         let seeLessHandler = {(action: UIAction) in
-            
+
             for i in range {
-                
+
                 items[i].isHidden = true
             }
             moreButton.isHidden = false
             lessButton.isHidden = true
         }
-        
+
         moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
         lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
-        
+
         let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
-        
+
         return stackView
     }
     
@@ -578,25 +579,25 @@ class BookingDetailsView: UIViewController {
         let button = UIButton()
         let yourAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) as Any,
+            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         var attributeString = NSMutableAttributedString(
-            string: "Ver Mais",
+            string: "Ver Mais ",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .normal)
         attributeString = NSMutableAttributedString(
-            string: "Ver Menos",
+            string: "Ver Menos ",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .selected)
         
-        button.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
+        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
                             for: .normal)
-        button.setImage(UIImage(named: ButtonsBravve.arrowUp.rawValue),
+        button.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
                             for: .selected)
         button.imageView?.contentMode = .scaleAspectFit
         button.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+        button.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
                                              size: CGFloat(12).generateSizeForScreen)
         
         button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
@@ -605,7 +606,7 @@ class BookingDetailsView: UIViewController {
         
         button.imageView?.constraintInsideTo(.height, button.titleLabel,
                                                  multiplier: 0.5)
-        button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        button.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
         let handler = {(action: UIAction) in
             button.isSelected = !button.isSelected
             if button.isSelected {
