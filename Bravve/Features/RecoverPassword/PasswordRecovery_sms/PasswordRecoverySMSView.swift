@@ -258,7 +258,14 @@ class PasswordRecoverySMSView: UIViewController {
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         view.createRegisterCustomBar(.backPink) { _ in
-            self.dismiss(animated: true)
+            if let passwordPassword = self.presentingViewController,
+               let passwordEmail = passwordPassword.presentingViewController,
+               let loginView = passwordEmail.presentingViewController {
+                
+                passwordPassword.view.isHidden = true
+                passwordEmail.view.isHidden = true
+                loginView.dismiss(animated: true)
+            }
         }
         
     }

@@ -351,19 +351,11 @@ class PersonalProfileView: UIViewController{
     
     
     @objc func reservationPage(){
-        //TODO: Needs a logic to pressents two states of the same view, one empty and one with at least onde reservation. If number of reservations equals zero, then presents the empty view, else, presents the table view with the reservations.
         
-        if flagReservation == 1 {
-            
-            let lastReservations = MyBookingView()
+            let lastReservations = BookingHistoryView()
             lastReservations.modalPresentationStyle = .fullScreen
             self.present(lastReservations, animated: true)
-            
-        }else {
-            let emptyReservations = EmptyReservation()
-            emptyReservations.modalPresentationStyle = .fullScreen
-            self.present(emptyReservations, animated: true)
-        }
+        
     }
     
     @objc func helpPage(sender: UIButton){
