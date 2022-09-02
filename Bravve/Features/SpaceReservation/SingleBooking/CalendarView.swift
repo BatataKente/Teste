@@ -73,7 +73,7 @@ class CalendarView: UIView {
         
         myCollectionView.reloadData()
         
-        monthView.lblName.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        monthView.lblName.textColor = UIColor(named: ColorsBravve.calendarLabel.rawValue)
         monthView.btnRight.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                          for: .normal)
         monthView.btnLeft.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
@@ -153,7 +153,7 @@ class CalendarView: UIView {
         else {
             
             cell.backgroundColor = .clear
-            cell.label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+            cell.label.textColor = UIColor(named: ColorsBravve.calendarLabel.rawValue)
             delegate?.unchoseDays(cell.label.text ?? "",
                                   "\(currentMonthIndex)",
                                   "\(currentYear)")
@@ -199,14 +199,14 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
             if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
                
                 cell?.isUserInteractionEnabled = false
-                cell?.label.textColor = UIColor.lightGray
+                cell?.label.textColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
             }
             else {
                 
                 cell?.isUserInteractionEnabled = true
                 // trocar para cor do bravve
                 
-                cell?.label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+                cell?.label.textColor = UIColor(named: ColorsBravve.calendarLabel.rawValue)
                 
                 for day in seletedDays {
                     
@@ -278,8 +278,8 @@ class DateCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "00"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = Colors.darkGray
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 14)
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

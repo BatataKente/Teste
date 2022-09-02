@@ -21,6 +21,7 @@ public enum ColorsBravve: String {
     case blackWhiteAlert = "blackWhiteAlert"
     case blue = "blueBravve"
     case blue_cyan = "blue_cyan"
+    case calendarLabel = "calendarLabel"
     case cyan_black = "cyan_black"
     case boxOffice = "boxOffice"
     case borderAccounts = "borderAccounts"
