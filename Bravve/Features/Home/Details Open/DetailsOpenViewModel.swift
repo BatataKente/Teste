@@ -114,7 +114,7 @@ class DetailsOpenViewModel {
                      textColor: UIColor? = UIColor(named: ColorsBravve.progressBarLabel.rawValue)) -> UILabel {
         
         let label = UILabel()
-        label.text = text
+        label.text = text ?? " "
         label.font = font
         label.numberOfLines = 0
         label.textColor = textColor

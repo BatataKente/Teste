@@ -265,6 +265,8 @@ class OpenDetailsView: UIViewController {
                                     CGFloat(5).generateSizeForScreen)
         creditDayLabel.constraintInsideTo(.bottom, dailyLabel)
         
+        creditDayLabel.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        
         tagsStackView.constraintOutsideTo(.top, creditDayLabel,
                                           CGFloat(20).generateSizeForScreen)
         tagsStackView.constraintInsideTo(.leading, localLabel)

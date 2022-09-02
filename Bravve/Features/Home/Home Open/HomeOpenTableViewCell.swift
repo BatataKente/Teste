@@ -261,7 +261,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         viewElements.photoView.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
         viewElements.nameLabel.text = space.local_name
         viewElements.subNameLabel.text = space.description
-        viewElements.priceLabel.text = "\(space.hourly_credits ?? "")"
+        viewElements.priceLabel.text = "\(space.hourly_credits ?? " ")"
         viewElements.detailsLabel.text = "\(space.partner_site_address?.address?.city_name ?? "")/\(space.partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(space.seats_qty ?? 0) pessoas\n\(space.space_type?.name ?? "")"
         
         guard let allowWorkpass = space.allow_workpass else {
