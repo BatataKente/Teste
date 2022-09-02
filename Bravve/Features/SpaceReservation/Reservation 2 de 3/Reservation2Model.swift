@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct ReservationDate {
+    var day: String
+    var hours: [Hour]
+}
+
+struct Hour {
+    var start_dt: String
+    var end_dt: String
+    var hour_price: String
+}
