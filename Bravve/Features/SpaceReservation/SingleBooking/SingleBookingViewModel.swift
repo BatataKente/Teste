@@ -15,7 +15,7 @@ class SingleBookingViewModel {
     
     var delegate: SingleBookingViewModelProtocol?
     
-    private let timeStacksSize = CGSize(width: CGFloat(120).generateSizeForScreen,
+    private let timeStacksSize = CGSize(width: CGFloat(121).generateSizeForScreen,
                                         height: CGFloat(60).generateSizeForScreen)
     
     private let sessionManager = SessionManager()
@@ -51,7 +51,7 @@ class SingleBookingViewModel {
         let titleLabel = UILabel()
         titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(11).generateSizeForScreen)
-        titleLabel.textColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+        titleLabel.textColor = UIColor(named: ColorsBravve.profileLabel.rawValue)
         titleLabel.text = title
         
         let hourLabel = UILabel()
@@ -61,8 +61,11 @@ class SingleBookingViewModel {
        
         let stackView = UIStackView(arrangedSubviews: [titleLabel, hourLabel])
         stackView.axis = .vertical
-        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.clipsToBounds = true
+        stackView.layer.cornerRadius = 8
         
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         let verticalMargins = CGFloat(10).generateSizeForScreen
         let horizontalMargins = CGFloat(10).generateSizeForScreen
         
@@ -74,9 +77,17 @@ class SingleBookingViewModel {
         let dropDownButton = UIButton()
         dropDownButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                                 for: .normal)
+        dropDownButton.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         
         let stack = UIStackView(arrangedSubviews: [stackView, dropDownButton])
-        
+        stack.isLayoutMarginsRelativeArrangement = true
+       
+
+        stack.layoutMargins = UIEdgeInsets(top: verticalMargins,
+                                               left: horizontalMargins,
+                                               bottom: verticalMargins,
+                                               right: horizontalMargins)
+//        stack.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         let handler = {(action: UIAction) in
     
             var buttons = [UIButton]()
@@ -87,7 +98,7 @@ class SingleBookingViewModel {
                 button.setTitle(time, for: .normal)
                 button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                      for: .normal)
-                
+                button.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
                 let handler = {(action: UIAction) in
                     
                     self.delegate?.reduceDropDown()
@@ -144,8 +155,8 @@ class SingleBookingViewModel {
         dayLabel.constraintInsideTo(.width, entireDayStack, multiplier: 0.65)
         
         let timeLabel = UILabel()
-        timeLabel.font = UIFont(name: FontsBravve.medium.rawValue,
-                                size: CGFloat(16).generateSizeForScreen)
+        timeLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                size: CGFloat(14).generateSizeForScreen)
         timeLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         timeLabel.text = "Horários"
         
@@ -317,7 +328,7 @@ class SingleBookingViewModel {
             addtimeButton.setTitle("+ Adicionar horário", for: .normal)
             addtimeButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                         for: .normal)
-            
+            addtimeButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 16)
             let chosedDayStack = UIStackView(arrangedSubviews: [entireDayStack, timeLabel, timesStack, addtimeButton])
             chosedDayStack.axis = .vertical
             

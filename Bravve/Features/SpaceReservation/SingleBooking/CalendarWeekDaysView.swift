@@ -31,7 +31,8 @@ class CalendarWeekdaysView: UIView {
             let label = UILabel()
             label.text = daysArr[i]
             label.textAlignment = .center
-            label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+            label.font = UIFont(name: FontsBravve.medium.rawValue, size: 14)
+            label.textColor = UIColor(named: ColorsBravve.calendarLabel.rawValue)
             myStackView.addArrangedSubview(label)
         }
     }
