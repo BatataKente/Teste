@@ -434,6 +434,7 @@ final class FilterScreen: UIViewController {
     
     //MARK: - clearTap
     @objc private func clearTap() {
+        
         for button in typesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -443,6 +444,7 @@ final class FilterScreen: UIViewController {
                 selectedTypesArray = []
                 selectedItemsArray = []
         }
+        
         for button in classificationButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -452,6 +454,7 @@ final class FilterScreen: UIViewController {
                 selectedClassificationsArray = []
                 selectedItemsArray = []
         }
+        
         for button in categoriesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -461,6 +464,7 @@ final class FilterScreen: UIViewController {
                 selectedCategoriesArray = []
                 selectedItemsArray = []
         }
+        
         for button in facilitiesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -470,6 +474,7 @@ final class FilterScreen: UIViewController {
                 selectedFacilitiesArray = []
                 selectedItemsArray = []
         }
+        
         for button in noisesButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -479,6 +484,7 @@ final class FilterScreen: UIViewController {
                 selectedNoisesArray = []
                 selectedItemsArray = []
         }
+        
         for button in contractsButtons {
             if button.isSelected == true {
                 button.isSelected.toggle()
@@ -490,6 +496,12 @@ final class FilterScreen: UIViewController {
         }
         
         numberLabel.text = nil
+        spaceNoiseId = nil
+        spaceContractId = nil
+        spaceTypeId = nil
+        spaceClassificationId = nil
+        spaceCategoryId = nil
+        spaceFacilitiesId = nil
     }
     
     @objc private func filterButtonTapped(){
