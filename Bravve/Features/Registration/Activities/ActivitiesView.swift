@@ -90,7 +90,9 @@ class ActivitiesView: UIViewController {
     var arrayItems: [String] = []
     var interestArray: [String] = []
     let sessionManager = SessionManager()
-//    let activitiesViewModel = ActivitiesViewModel()
+    
+    let activitiesViewModel = ActivitiesViewModel()
+    
        
     override var prefersStatusBarHidden: Bool {
         
@@ -103,9 +105,15 @@ class ActivitiesView: UIViewController {
         setupDefaults()
         setupConstraints()
         activeButton()
-        interestActivities()
+        activitiesViewModel.interestActivities()
+
+        activitiesViewModel.activitiesDelegate = self
+
+      
     }
     
+    /// This function adds select action on capsuleButton and limits to three selected buttons.
+    /// - Parameter button: capsuleButtons
     @objc func buttonTapped(button: UIButton) {
         if arrayItems.count >= 3 {
             if button.isSelected == true {
@@ -133,53 +141,14 @@ class ActivitiesView: UIViewController {
         print(arrayItems)
     }
     
+    /// This function adds target and backgroundColor in continueButton.
     func activeButton() {
 
         continueButton.addTarget(nil, action: #selector(continueButtonTapped), for: .touchUpInside)
         continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
     
-    private func createStackView(_ views: [UIView]) -> UIStackView {
-            
-        let stackView = UIStackView(arrangedSubviews: views)
-        stackView.spacing = 4
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        
-        return stackView
-    }
-    
-    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
-            
-        var stackViews = [UIStackView]()
-        
-        var from = 0
-        
-        if buttons.count%2 != 0 {
-            
-            buttons[from].addTarget(self, action: #selector(self.buttonTapped),
-                                    for: .touchUpInside)
-            stackViews.append(self.createStackView([buttons[from]]))
-            
-            from += 1
-        }
-        
-        for i in stride(from: from,
-                        to: buttons.count - 1,
-                        by: 2) {
-                
-            buttons[i].addTarget(self, action: #selector(self.buttonTapped),
-                                 for: .touchUpInside)
-            buttons[i+1].addTarget(self, action: #selector(self.buttonTapped),
-                                   for: .touchUpInside)
-            
-            stackViews.append(self.createStackView([buttons[i],
-                                                    buttons[i+1]]))
-        }
-        
-        return stackViews
-        }
-    
+    /// This function adds action in continueButton.
     @objc func continueButtonTapped() {
         let vc = FinalizeView()
         vc.modalPresentationStyle = .fullScreen
@@ -191,26 +160,7 @@ class ActivitiesView: UIViewController {
         print("Pulando tela")
     }
     
-    func interestActivities() {
-        sessionManager.getDataArray(endpoint: .usersInterests) { (statusCode, error, interestActivities: [Interests]?) in
-            guard let interestActivities = interestActivities else {
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-            }
-            for interestActivity in interestActivities {
-                guard let activityName = interestActivity.name else { return }
-                self.interestArray.append(activityName)
-                print(self.interestArray)
-            }
-            self.interestsButtons = self.createCapsuleButtons(self.interestArray, ColorsBravve.capsuleButton)
-            for InterestButton in self.interestsButtons {
-                InterestButton.addTarget(self, action: #selector(self.buttonTapped), for: .touchUpInside)
-            }
-            self.interestsStackView.addArrangedSubviews(self.setupStackView(self.interestsButtons))
-        }
-    }
-    
+    /// This function adds view elements and actions.
     func setupView() {
             
         view.addSubviews([backgroundImage, registerButton, progressBarStackView, infoLabel, interestsStackView, continueButton])
@@ -247,12 +197,16 @@ class ActivitiesView: UIViewController {
         
     }
     
+    
+    /// This function defines background image and continueButton constraints
     func setupDefaults() {
         
         continueButton.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault(.wayActivities)
     }
     
+    
+    /// This function gathers other functions related to constraints
     func setupConstraints() {
         
         setInfoLabelConstraints()
@@ -260,6 +214,7 @@ class ActivitiesView: UIViewController {
     }
     
     
+    /// This function defines the constraints of the Label
     private func setInfoLabelConstraints() {
         let constraint = [
             infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(236).generateSizeForScreen),
@@ -271,6 +226,7 @@ class ActivitiesView: UIViewController {
         }
     }
     
+    /// This function defines the constraints of the StackView
     private func setHobbiesStackConstraints() {
         let constraint = [
             interestsStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
@@ -283,3 +239,17 @@ class ActivitiesView: UIViewController {
 
 }
 
+extension ActivitiesView: ActivitiesViewModelProtocol {
+    func setupActivities() {
+        
+        self.interestsButtons = self.createCapsuleButtons(self.activitiesViewModel.interestArray, ColorsBravve.capsuleButton)
+        for InterestButton in self.interestsButtons {
+            InterestButton.addTarget(self, action: #selector(self.buttonTapped), for: .touchUpInside)
+        }
+        self.interestsStackView.addArrangedSubviews(self.activitiesViewModel.setupStackView(self.interestsButtons))
+    }
+    func setupButton(button: UIButton) {
+        button.addTarget(self, action: #selector(self.buttonTapped), for: .touchUpInside)
+        
+    }
+}
