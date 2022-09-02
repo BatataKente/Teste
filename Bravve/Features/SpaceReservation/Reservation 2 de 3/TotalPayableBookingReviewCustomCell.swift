@@ -98,4 +98,8 @@ class TotalPayableBookingReviewCustomCell: UITableViewCell {
         ])
         
     }
+    
+    func setupCell(total: String?) {
+        totalLabel.text = total
+    }
 }

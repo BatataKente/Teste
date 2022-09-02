@@ -88,10 +88,6 @@ class Reservation2View: UIViewController {
         
         tableview.register(DataBookingDayFirstCell.self, forCellReuseIdentifier: DataBookingDayFirstCell.reuseIdDataBookingDayFirst)
         
-        tableview.register(DataBookingDaySecondCell.self, forCellReuseIdentifier: DataBookingDaySecondCell.reuseIdDataBookingDaySecond)
-        
-        tableview.register(DataBookingDayThirdCell.self, forCellReuseIdentifier: DataBookingDayThirdCell.reuseIdDataBookingDayThird)
-        
         tableview.register(TotalPayableBookingReviewCustomCell.self, forCellReuseIdentifier: TotalPayableBookingReviewCustomCell.reuseIdPayable)
         tableview.delegate = self
         tableview.dataSource = self
@@ -147,13 +143,13 @@ class Reservation2View: UIViewController {
         present(reserveViewController, animated: true)
     }
     
+    let dates: [ReservationDate] = [ReservationDate(day: "21-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "09:00", hour_price: "40,00"), Hour(start_dt: "14:00", end_dt: "15:00", hour_price: "40,00")]), ReservationDate(day: "22-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "19:00", hour_price: "200,00")]), ReservationDate(day: "23-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "19:00", hour_price: "200,00")]), ReservationDate(day: "24-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "09:00", hour_price: "40,00"), Hour(start_dt: "14:00", end_dt: "15:00", hour_price: "80,00")])]
+    
 }
 
 
 //MARK: - config tableView
 extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
-
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return UITableView.automaticDimension
@@ -166,7 +162,7 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3 + dates.count
     
     }
 
@@ -186,40 +182,37 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
             }
             cellSummary.sumaryProtocol = self
             return cellSummary
-        case 2:
+        case 2...dates.count + 1:
             guard let cellDataDayFirst = tableview.dequeueReusableCell(withIdentifier: DataBookingDayFirstCell.reuseIdDataBookingDayFirst, for: indexPath) as?
                     DataBookingDayFirstCell else {
                 return UITableViewCell()
             }
+            
+            cellDataDayFirst.setupCell(dates[indexPath.row - 2])
             return cellDataDayFirst
-        case 3:
-            guard let cellDataDaySecond = tableview.dequeueReusableCell(withIdentifier: DataBookingDaySecondCell.reuseIdDataBookingDaySecond, for: indexPath) as?
-                    DataBookingDaySecondCell else {
-                return UITableViewCell()
-            }
-            return cellDataDaySecond
-        case 4:
-            guard let cellDataDaySecond = tableview.dequeueReusableCell(withIdentifier: DataBookingDayThirdCell.reuseIdDataBookingDayThird, for: indexPath) as?
-                    DataBookingDayThirdCell else {
-                return UITableViewCell()
-            }
-            return cellDataDaySecond
+
         default:
             guard let cellValueTotal = tableview.dequeueReusableCell(withIdentifier: TotalPayableBookingReviewCustomCell.reuseIdPayable, for: indexPath) as?
                     TotalPayableBookingReviewCustomCell else {
                 return UITableViewCell()
             }
+            let totalValueString = setupTotalValue(dates: dates)
+            cellValueTotal.setupCell(total: totalValueString)
             return cellValueTotal
         }
-        
-        
-        
-    
-        
-
-
-
 }
+    func setupTotalValue(dates: [ReservationDate]) -> String {
+        var totalPrice = 0.0
+        for date in dates {
+            
+            for hour in date.hours {
+                let hourPrice = Double(hour.hour_price.replacingOccurrences(of: ",", with: "."))
+                totalPrice += hourPrice ?? 0.0
+            }
+        }
+        let amountString = String(format: "R$ %.2f", totalPrice).replacingOccurrences(of: ".", with: ",")
+        return amountString
+    }
 }
 extension Reservation2View:SummaryBookingProtocol{
     func setButtonTapped(sender: UIButton) {
