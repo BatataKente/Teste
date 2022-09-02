@@ -320,49 +320,13 @@ final class FilterScreen: UIViewController {
         view.axis = .vertical
         return view
     }()
-    
-    //MARK: - createStackView
-    private func createStackView(_ views: [UIView]) -> UIStackView {
-        
-        let stackView = UIStackView(arrangedSubviews: views)
-        
-            stackView.spacing = 4
-        stackView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
-        
-        return stackView
-    }
-    
-    //MARK: - setupStackView
-    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
-        
-        var stackViews = [UIStackView]()
-        
-        var from = 0
-        
-        if buttons.count%2 != 0 {
-            
-            stackViews.append(self.createStackView([buttons[from]]))
-            
-            from += 1
-        }
-        
-        for i in stride(from: from,
-                        to: buttons.count - 1,
-                        by: 2) {
-            
-            stackViews.append(self.createStackView([buttons[i],
-                                                    buttons[i+1]]))
-        }
-        
-        return stackViews
-    }
-    
+ 
     override var prefersStatusBarHidden: Bool {
         
         true
     }
+    
+    let filterViewModel = FilterViewModel()
     
     //MARK: - loadView
     override func loadView() {
@@ -587,7 +551,7 @@ final class FilterScreen: UIViewController {
                     self.selectedTypesArray.append(button.titleLabel?.text ?? "")
                 }
             }
-            stackView.addArrangedSubviews(self.setupStackView(self.typesButtons))
+            stackView.addArrangedSubviews(self.filterViewModel.setupStackView(self.typesButtons))
         }
     }
     
@@ -625,7 +589,7 @@ final class FilterScreen: UIViewController {
                     self.selectedClassificationsArray.append(button.titleLabel?.text ?? "")
                 }
             }
-            stackView.addArrangedSubviews(self.setupStackView(self.classificationButtons))
+            stackView.addArrangedSubviews(self.filterViewModel.setupStackView(self.classificationButtons))
         }
     }
     
@@ -664,7 +628,7 @@ final class FilterScreen: UIViewController {
                     self.selectedCategoriesArray.append(button.titleLabel?.text ?? "")
                 }
             }
-            stackView.addArrangedSubviews(self.setupStackView(self.categoriesButtons))
+            stackView.addArrangedSubviews(self.filterViewModel.setupStackView(self.categoriesButtons))
         }
     }
     
@@ -707,7 +671,7 @@ final class FilterScreen: UIViewController {
                     }
                 }
             }
-            stackView.addArrangedSubviews(self.setupStackView(self.facilitiesButtons))
+            stackView.addArrangedSubviews(self.filterViewModel.setupStackView(self.facilitiesButtons))
         }
     }
     
@@ -745,7 +709,7 @@ final class FilterScreen: UIViewController {
                     self.selectedNoisesArray.append(button.titleLabel?.text ?? "")
                 }
             }
-            stackView.addArrangedSubviews(self.setupStackView(self.noisesButtons))
+            stackView.addArrangedSubviews(self.filterViewModel.setupStackView(self.noisesButtons))
         }
     }
     
@@ -783,7 +747,7 @@ final class FilterScreen: UIViewController {
                     button.configuration?.baseForegroundColor = .white
                 }
             }
-            stackView.addArrangedSubviews(self.setupStackView(self.contractsButtons))
+            stackView.addArrangedSubviews(self.filterViewModel.setupStackView(self.contractsButtons))
         }
     }
     
