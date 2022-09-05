@@ -747,8 +747,10 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     @objc private func ccEmpity()  {
         
         if ccValidateExpirationTextfield.text!.count >= 3 {
+            ccValidateLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
             ccValidateStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
         } else {
+            ccValidateLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             ccValidateStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
             
         }
@@ -783,11 +785,11 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     @objc private func sourceEmpity()  {
         
         if sourceSecurityTextfield.text!.count >= 3 {
-            
+            sourceSecurityLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
             sourceSecurityStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
         }
         else {
-            
+            sourceSecurityLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             sourceSecurityStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
         }
     }
@@ -840,12 +842,12 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         
         countryStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
         if nameHolderTextfield.text!.count >= 6 {
-            
+            nameHolderLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
             nameHolderStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
             
         }
         else {
-            
+            nameHolderLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             nameHolderStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
         }
     }
@@ -871,12 +873,12 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     @objc private func cpfEmpity()  {
         
         if cpfTextfield.text!.count >= 14 {
-            
+            cpfLabel.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
             cpfStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
             finishButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         }
         else {
-            
+            cpfLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             cpfStackView.setBottomBorderOnlyWithRed(color: UIColor.red.cgColor)
             finishButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         }
@@ -977,7 +979,7 @@ extension ReservationsThreeViewController: UITextFieldDelegate {
             
         case 5:
             
-            textField?.text = textField?.text?.formatMask(mask: "###")
+            textField?.text = textField?.text?.formatMask(mask: "####")
             
         default:
             
