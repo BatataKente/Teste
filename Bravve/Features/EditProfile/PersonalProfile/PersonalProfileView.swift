@@ -16,15 +16,6 @@ class PersonalProfileView: UIViewController{
                                                                    ButtonsBravve.userLoginPink.rawValue
                                                                   ])
     
-    private let sessionManager = SessionManager()
-    
-    var uuid: String {
-        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
-            print("Unable to get user uuid")
-            return ""
-        }
-        return uuid
-    }
     
     let wayImage: UIImageView = {
         let image = UIImageView()
@@ -276,11 +267,12 @@ class PersonalProfileView: UIViewController{
         true
     }
     
+    private let personalProfileViewModel = PersonalProfileViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        userData()
-        
+        personalProfileViewModel.delegate = self  
+        personalProfileViewModel.userData()
         tabBar.selectedItem = tabBar.items?[2]
 
         view.backgroundColor = UIColor(named: "background")
@@ -292,61 +284,7 @@ class PersonalProfileView: UIViewController{
         nextPageButton3.addTarget(self, action: #selector(policyPage), for: .touchUpInside)
         nextPageButton4.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
         addConstraints()
-    }
-    
-    func userData() {
-        
-        sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: User?) in
-
-            guard let user = user else {
-                print(user?.message as Any)
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.subtitleLabel.text = user.email
-                
-                guard let userName = user.name else {return}
-                let firstName = String(userName.split(separator: " ")[0])
-                
-                self.helloLabel.text = "Olá, \(firstName)!"
-                
-            }
-        }
-        
-        sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
-            
-            guard let pictures = pictures else {
-                print(statusCode as Any)
-                return
-            }
-            
-            if !pictures.isEmpty {
-            
-            guard let pictureUuid = pictures[0].picture else {
-                print(pictures[0].message as Any)
-                return
-            }
-            
-            self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
-                
-                guard let pictureURL = pictureURL?.picture_url else {
-                    print(pictureURL?.message as Any)
-                    print(statusCode as Any)
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.profilePic.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
-                }
-
-            }
-        }
-
-        }
-    }
+          }
     
     
     
@@ -523,4 +461,19 @@ class PersonalProfileView: UIViewController{
         creditLabel2.constraintInsideTo(.top, smallView2, CGFloat(6.69).generateSizeForScreen)
         creditLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
     }
+}
+extension PersonalProfileView: PersonalProfileViewModelProtocol {
+    func setupPic(URL: URL?, placeholderImage: UIImage?) {
+        self.profilePic.sd_setImage(with: URL, placeholderImage: placeholderImage)
+        
+    }
+    
+    func setupLabels(email: String?, firstName: String) {
+        self.helloLabel.text = "Olá, \(firstName)!"
+        self.subtitleLabel.text = email
+
+        
+    }
+    
+    
 }
