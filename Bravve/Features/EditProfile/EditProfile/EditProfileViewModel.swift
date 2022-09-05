@@ -1,5 +1,5 @@
 //
-//  PerfilEdicaoViewModel.swift
+//  EditProfileViewModel.swift
 //  Bravve
 //
 //  Created by user218260 on 7/15/22.
@@ -21,7 +21,12 @@ class EditProfileViewModel {
     
     var delegate: EditProfileViewModelProtocol?
     
-    //MARK: - createLabel
+    /// create a Label with default of editing profile View
+    /// - Parameters:
+    ///   - text: the text of label
+    ///   - color: the collor of text(default is Collorsbravve.label.rawValue)
+    ///   - font: font(default: FontsBravve.medium.rawValue)
+    /// - Returns: the label
     func createLabel(_ text: String,
                      color: ColorsBravve = .label,
                      _ font: UIFont? = UIFont(name: FontsBravve.medium.rawValue,
@@ -37,6 +42,10 @@ class EditProfileViewModel {
         return label
     }
     
+    /// Setup Super Stack with default of editing profile View
+    /// - Parameters:
+    ///   - stack: the stack
+    ///   - alignment: the alignment(default is UIKit default stackView alignment)
     func setupStack(_ stack: UIStackView, alignment: UIStackView.Alignment? = nil) {
         
         stack.axis = .vertical
@@ -44,12 +53,19 @@ class EditProfileViewModel {
         if let alignment = alignment {stack.alignment = alignment}
     }
     
-    //MARK: - createFieldStackView
-    func createFieldStackView(labelText: String,
-                              textFieldText: String,
-                              textFieldTextColor: UIColor? = UIColor(named: ColorsBravve.label.rawValue),
-                              isSecureTextEntry: Bool = false,
-                              buttonImage: UIImage? = nil) -> UIStackView {
+    /// Creates a stackView in default of EditProfileView, with a textField, margins and label
+    /// - Parameters:
+    ///   - labelText: The label of stack
+    ///   - textFieldText: the text of text field, if initialize with a text by default
+    ///   - textFieldTextColor: the textFieldTextColor
+    ///   - isSecureTextEntry: if text field initialize  with secure entry
+    ///   - buttonImage: the button Image(if not have, the button also wont be created)
+    /// - Returns: The stackView
+    func createStackView(labelText: String,
+                         textFieldText: String,
+                         textFieldTextColor: UIColor? = UIColor(named: ColorsBravve.label.rawValue),
+                         isSecureTextEntry: Bool = false,
+                         buttonImage: UIImage? = nil) -> UIStackView {
         
         let verticalMargins = CGFloat(12).generateSizeForScreen
         let horizontalMargins = CGFloat(17).generateSizeForScreen
@@ -112,14 +128,16 @@ class EditProfileViewModel {
                 button.addAction(UIAction(handler: secureTextEntryHandler), for: .touchUpInside)
             }
             
-            button.constraintInsideTo(.centerY, stackView)
-            button.constraintInsideTo(.trailing, stackView, CGFloat(15).generateSizeForScreen)
+            constraint(the: button, to: stackView, by: [.centerY])
+            constraint(the: button, to: stackView, by: [.trailing], CGFloat(-15).generateSizeForScreen)
         }
         
         return stackView
     }
     
-    //MARK: - setupStackView
+    /// This function create stackViews with buttons, but organize two buttons in every stack created, and one if number of buttons is odd
+    /// - Parameter buttons: buttons
+    /// - Returns: array of stackView
     func createStackViews(_ buttons: [UIButton]) -> [UIStackView] {
         
         let createStackView = {(_ views: [UIView]) -> UIStackView in
@@ -156,6 +174,49 @@ class EditProfileViewModel {
         return stackViews
     }
     
+    /// This functions create and add to superview of a view one or multipleconstraints
+    /// - Parameters:
+    ///   - item: the view
+    ///   - to: an element to conect constraints
+    ///   - itemAttribute: attribute of view to connect constraints(will be the same of element by default)
+    ///   - attributes: the atributes of item to connect constraints
+    ///   - relation: relation, the default is .equal
+    ///   - multiplier: multiplier, the default is 1
+    ///   - constant: constant, the default is 0
+    func constraint(the item: UIView,
+                    to: Any?,
+                    _ itemAttribute: NSLayoutConstraint.Attribute? = nil,
+                    by attributes: [NSLayoutConstraint.Attribute],
+                    relation: NSLayoutConstraint.Relation? = nil,
+                    multiplier: CGFloat? = nil,
+                    _ constant: CGFloat? = nil) {
+        
+        item.translatesAutoresizingMaskIntoConstraints = false
+        
+        for attribute in attributes {
+            
+            item.superview?.addConstraint(NSLayoutConstraint(item: item,
+                                                             attribute: attribute,
+                                                             relatedBy: relation ?? .equal,
+                                                             toItem: to,
+                                                             attribute: itemAttribute ?? attribute,
+                                                             multiplier: multiplier ?? 1,
+                                                             constant: constant ?? 0))
+        }
+    }
+    
+    /// This function remove masks of a view and subviews from it
+    /// - Parameter view: the view to remove masks
+    func removeMasks(of view: UIView) {
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
     func setupHobbies() {
         
         delegate?.setHobbiesStack(exampleApiArray_1)
@@ -166,4 +227,3 @@ class EditProfileViewModel {
         delegate?.setMattersStack(exampleApiArray_2)
     }
 }
- 
