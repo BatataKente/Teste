@@ -19,6 +19,7 @@ class EmptyReservation: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Nada por aqui, ainda!"
+        label.textAlignment = .center
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         return label
@@ -111,8 +112,8 @@ class EmptyReservation: UIViewController {
         
         let constraint = [
             label.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(343).generateSizeForScreen),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(114.5).generateSizeForScreen),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-110.5).generateSizeForScreen),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
         ]
         constraint.forEach { item in
             item.isActive = true
