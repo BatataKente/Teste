@@ -13,7 +13,7 @@ class HobbiesView: UIViewController {
     
     let sessionManager = SessionManager()
     
-    var aPIHobbiesArray: [String] = []
+    let hobbiesViewModel = HobbiesViewModel()
 
     let backgroundImage = UIImageView()
     
@@ -94,37 +94,15 @@ class HobbiesView: UIViewController {
         setupDefaults()
         setupConstraints()
         activeButton()
-        setupHobbiesArray()
-    }
-    
-    func setupHobbiesArray() {
-
-        sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbiesList: [Hobbies]? ) in
-
-            guard let hobbiesList = hobbiesList else {
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-                
-            }
-            
-            for hobbies in hobbiesList {
-                
-                guard let hobbiesName = hobbies.name else { return }
-                self.aPIHobbiesArray.append(hobbiesName)
-            }
-            self.hobbiesButtons = self.createCapsuleButtons(self.aPIHobbiesArray, ColorsBravve.capsuleButton)
-            
-            for hobbiesButton in self.hobbiesButtons {
-                hobbiesButton.addTarget(self, action: #selector(self.chooseHobbie), for: .touchUpInside)
-            }
-            
-            self.hobbiesStackView.addArrangedSubviews(self.setupStackView(self.hobbiesButtons))
-        }
+        hobbiesViewModel.hobbiesDelegate = self
+        hobbiesViewModel.setupHobbiesArray()
+        
     }
     
     var arrayItems: [String] = []
     
+    /// This function adds select action on capsuleButton and limits to three selected buttons
+    /// - Parameter button: capsuleButton
     @objc func chooseHobbie(button: UIButton) {
         if arrayItems.count >= 3 {
             if button.isSelected == true {
@@ -151,60 +129,23 @@ class HobbiesView: UIViewController {
         }
     }
     
+    /// This function adds target and backgroundColor in continueButton
     func activeButton() {
         
         continueButton.addTarget(nil, action: #selector(continueButtonTapped), for: .touchUpInside)
         continueButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
     }
     
+    
+    /// This function adds action in continueButton
     @objc func continueButtonTapped() {
         let vc = ActivitiesView()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     
-    private func createStackView(_ views: [UIView]) -> UIStackView {
-            
-        let stackView = UIStackView(arrangedSubviews: views)
-        stackView.spacing = 4
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        
-        return stackView
-    }
     
-    func setupStackView(_ buttons: [UIButton]) -> [UIStackView] {
-            
-        var stackViews = [UIStackView]()
-        
-        var from = 0
-        
-        if buttons.count%2 != 0 {
-            
-            buttons[from].addTarget(self, action: #selector(self.chooseHobbie),
-                                    for: .touchUpInside)
-            stackViews.append(self.createStackView([buttons[from]]))
-            
-            from += 1
-        }
-        
-        for i in stride(from: from,
-                        to: buttons.count - 1,
-                        by: 2) {
-                
-            buttons[i].addTarget(self, action: #selector(self.chooseHobbie),
-                                 for: .touchUpInside)
-            buttons[i+1].addTarget(self, action: #selector(self.chooseHobbie),
-                                   for: .touchUpInside)
-            
-            stackViews.append(self.createStackView([buttons[i],
-                                                    buttons[i+1]]))
-        }
-        
-        return stackViews
-        }
-
-
+    /// This function adds view elements and actions
     func setupView() {
         
         view.addSubviews([backgroundImage, progressBarStackView, infoLabel, hobbiesStackView, continueButton])
@@ -239,12 +180,14 @@ class HobbiesView: UIViewController {
         }
     }
     
+    /// This function defines background image and continueButton constraints
     func setupDefaults() {
         
         continueButton.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault(.wayName)
     }
     
+    /// This function gathers other functions related to constraints
     func setupConstraints() {
         
         setInfoLabelConstraints()
@@ -252,6 +195,7 @@ class HobbiesView: UIViewController {
     }
     
     
+    /// This function defines the constraints of the Label
     private func setInfoLabelConstraints() {
         let constraint = [
             infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(236).generateSizeForScreen),
@@ -263,6 +207,7 @@ class HobbiesView: UIViewController {
         }
     }
     
+    /// This function defines the constraints of the StackView
     private func setHobbiesStackConstraints() {
         let constraint = [
             hobbiesStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
@@ -275,3 +220,20 @@ class HobbiesView: UIViewController {
     
 }
 
+extension HobbiesView: HobbiesViewModelProtocol {
+    
+    func setupHobbies() {
+        self.hobbiesButtons = self.createCapsuleButtons(self.hobbiesViewModel.aPIHobbiesArray, ColorsBravve.capsuleButton)
+        
+        for hobbiesButton in self.hobbiesButtons {
+            hobbiesButton.addTarget(self, action: #selector(self.chooseHobbie), for: .touchUpInside)
+        }
+        
+        self.hobbiesStackView.addArrangedSubviews(self.hobbiesViewModel.setupStackView(self.hobbiesButtons))
+    }
+
+    func setupButton(button: UIButton) {
+        button.addTarget(self, action: #selector(self.chooseHobbie),  for: .touchUpInside)
+    }
+
+}
