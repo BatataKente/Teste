@@ -168,6 +168,50 @@ class HomeOpenViewModel {
             }
         }
     }
+    
+    /// This functions create and add to superview of a view one or multipleconstraints
+    /// - Parameters:
+    ///   - item: the view
+    ///   - to: an element to conect constraints
+    ///   - itemAttribute: attribute of view to connect constraints(will be the same of element by default)
+    ///   - attributes: the atributes of item to connect constraints
+    ///   - relation: relation, the default is .equal
+    ///   - multiplier: multiplier, the default is 1
+    ///   - constant: constant, the default is 0
+    func constraint(the item: UIView,
+                    to: Any?,
+                    _ itemAttribute: NSLayoutConstraint.Attribute? = nil,
+                    by attributes: [NSLayoutConstraint.Attribute],
+                    relation: NSLayoutConstraint.Relation? = nil,
+                    multiplier: CGFloat? = nil,
+                    _ constant: CGFloat? = nil) {
+        
+        item.translatesAutoresizingMaskIntoConstraints = false
+        
+        for attribute in attributes {
+            
+            item.superview?.addConstraint(NSLayoutConstraint(item: item,
+                                                             attribute: attribute,
+                                                             relatedBy: relation ?? .equal,
+                                                             toItem: to,
+                                                             attribute: itemAttribute ?? attribute,
+                                                             multiplier: multiplier ?? 1,
+                                                             constant: constant ?? 0))
+        }
+    }
+    
+    /// This function remove masks of a view and subviews from it
+    /// - Parameter view: the view to remove masks
+    func removeMasks(of view: UIView) {
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+
 }
 
 protocol HomeOpenViewModelProtocol {
