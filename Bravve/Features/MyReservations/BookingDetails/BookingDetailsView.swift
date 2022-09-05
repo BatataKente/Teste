@@ -628,7 +628,7 @@ class BookingDetailsView: UIViewController {
             self.customAlertCancel.dismissAlert()
             self.present(vc, animated: true)
         }), on: self)
-        
+        flagReservation = 2
     }
     
     private func setupDefaults(){
