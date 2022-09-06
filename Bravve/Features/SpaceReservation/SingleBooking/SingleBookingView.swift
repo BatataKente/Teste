@@ -175,48 +175,69 @@ class SingleBookingView: UIViewController {
             self.dismiss(animated: true)
         }
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
-        nextButton.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        nextButton.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        nextButton.constraintOutsideTo(.bottom, tabBar)
-        nextButton.heightAnchorInSuperview(CGFloat(52).generateSizeForScreen)
-        
-        calendarView.constraintInsideTo(.top, viewToScroll, 44)
-        calendarView.constraintInsideTo(.leading, viewToScroll, 40)
-        calendarView.constraintInsideTo(.trailing, viewToScroll, 40)
-        calendarView.heightAnchorInSuperview(338)
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        daysChoiceLabel.translatesAutoresizingMaskIntoConstraints = false
+        capacityLabel.translatesAutoresizingMaskIntoConstraints = false
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        schedulesStack.translatesAutoresizingMaskIntoConstraints = false
 
-        bodyScrollView.constraintInsideTo(.top, view, 220)
-        bodyScrollView.constraintInsideTo(.leading, view)
-        bodyScrollView.constraintInsideTo(.trailing, view)
-        bodyScrollView.constraintOutsideTo(.bottom, nextButton)
+        bodyScrollView.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        viewToScroll.translatesAutoresizingMaskIntoConstraints = false
         
-        viewToScroll.constraintInsideTo(.top, bodyScrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.leading, bodyScrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.trailing, bodyScrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.bottom, bodyScrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.width, bodyScrollView.frameLayoutGuide)
-    
-        daysChoiceLabel.constraintInsideTo(.top, viewToScroll)
-        daysChoiceLabel.constraintInsideTo(.leading, viewToScroll, 20)
-        daysChoiceLabel.constraintInsideTo(.trailing, viewToScroll, 20)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         
-        capacityLabel.constraintOutsideTo(.top, calendarView, 54)
-        capacityLabel.constraintInsideTo(.leading, daysChoiceLabel)
-        capacityLabel.constraintInsideTo(.trailing, daysChoiceLabel)
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen).isActive = true
+        
+        calendarView.topAnchor.constraint(equalTo: viewToScroll.topAnchor,
+                                          constant: CGFloat(44).generateSizeForScreen).isActive = true
+        calendarView.leadingAnchor.constraint(equalTo: viewToScroll.leadingAnchor,
+                                              constant: CGFloat(40).generateSizeForScreen).isActive = true
+        calendarView.trailingAnchor.constraint(equalTo: viewToScroll.trailingAnchor,
+                                               constant: CGFloat(-40).generateSizeForScreen).isActive = true
+        calendarView.heightAnchor.constraint(equalToConstant: CGFloat(338).generateSizeForScreen).isActive = true
 
-        lineView.constraintOutsideTo(.top, capacityLabel, 24)
-        lineView.constraintInsideTo(.leading, daysChoiceLabel)
-        lineView.constraintInsideTo(.trailing, daysChoiceLabel)
-        lineView.heightAnchorInSuperview(1)
+        bodyScrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(220).generateSizeForScreen).isActive = true
+        bodyScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bodyScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bodyScrollView.bottomAnchor.constraint(equalTo: nextButton.topAnchor).isActive = true
         
-        schedulesStack.constraintOutsideTo(.top, lineView, 24)
-        schedulesStack.constraintInsideTo(.leading, lineView)
-        schedulesStack.constraintInsideTo(.trailing, lineView)
-        schedulesStack.constraintInsideTo(.bottom, viewToScroll, dropDownHeight)
+        viewToScroll.topAnchor.constraint(equalTo: bodyScrollView.contentLayoutGuide.topAnchor).isActive = true
+        viewToScroll.leadingAnchor.constraint(equalTo: bodyScrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        viewToScroll.trailingAnchor.constraint(equalTo: bodyScrollView.contentLayoutGuide.trailingAnchor).isActive = true
+        viewToScroll.bottomAnchor.constraint(equalTo: bodyScrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        viewToScroll.widthAnchor.constraint(equalTo: bodyScrollView.frameLayoutGuide.widthAnchor).isActive = true
+
+        daysChoiceLabel.topAnchor.constraint(equalTo: viewToScroll.topAnchor).isActive = true
+        daysChoiceLabel.leadingAnchor.constraint(equalTo: viewToScroll.leadingAnchor,
+                                                 constant: CGFloat(20).generateSizeForScreen).isActive = true
+        daysChoiceLabel.trailingAnchor.constraint(equalTo: viewToScroll.trailingAnchor,
+                                                  constant: CGFloat(-20).generateSizeForScreen).isActive = true
+
+        capacityLabel.topAnchor.constraint(equalTo: calendarView.bottomAnchor,
+                                           constant: CGFloat(54).generateSizeForScreen).isActive = true
+        capacityLabel.leadingAnchor.constraint(equalTo: daysChoiceLabel.leadingAnchor).isActive = true
+        capacityLabel.trailingAnchor.constraint(equalTo: daysChoiceLabel.trailingAnchor).isActive = true
+
+        lineView.topAnchor.constraint(equalTo: capacityLabel.bottomAnchor,
+                                           constant: CGFloat(24).generateSizeForScreen).isActive = true
+        lineView.leadingAnchor.constraint(equalTo: daysChoiceLabel.leadingAnchor).isActive = true
+        lineView.trailingAnchor.constraint(equalTo: daysChoiceLabel.trailingAnchor).isActive = true
+        lineView.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen).isActive = true
+
+        schedulesStack.topAnchor.constraint(equalTo: lineView.bottomAnchor,
+                                            constant: CGFloat(24).generateSizeForScreen).isActive = true
+        schedulesStack.leadingAnchor.constraint(equalTo: lineView.leadingAnchor).isActive = true
+        schedulesStack.trailingAnchor.constraint(equalTo: lineView.trailingAnchor).isActive = true
+        schedulesStack.bottomAnchor.constraint(equalTo: viewToScroll.bottomAnchor,
+                                               constant: -dropDownHeight).isActive = true
     }
     
     override func viewWillLayoutSubviews() {
