@@ -136,4 +136,8 @@ final class LocationDetailsBookingReviewCustomCell: UITableViewCell{
         
     }
     
+    func setupCell(spaceDetail: SpaceDetail?) {
+        locationLabel.text = "\(spaceDetail?.partner_site_address?.address?.street ?? ""), \(spaceDetail?.partner_site_address?.address?.neighborhood ?? ""), nº\(spaceDetail?.partner_site_address?.address?.street_number ?? 0), \(spaceDetail?.partner_site_address?.address?.city_name ?? ""), \(spaceDetail?.partner_site_address?.address?.state_name ?? ""), \(spaceDetail?.partner_site_address?.address?.postal_code ?? ""), BR."
+    }
+    
 }
