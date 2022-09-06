@@ -150,14 +150,20 @@ class OpenDetailsView: UIViewController {
         titleLabelView.addSubview(spaceCategoryNameLabel)
         titleLabelView.backgroundColor = titleLabelView.getTitleLabelBackgroundColor(space.space_category?.name?.uppercased() ?? "")
         
-        spaceCategoryNameLabel.constraintInsideTo(.top, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        spaceCategoryNameLabel.constraintInsideTo(.leading, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        spaceCategoryNameLabel.constraintInsideTo(.trailing, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
+        spaceCategoryNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        spaceCategoryNameLabel.topAnchor.constraint(equalTo: titleLabelView.topAnchor, constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        spaceCategoryNameLabel.leadingAnchor.constraint(equalTo: titleLabelView.leadingAnchor, constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        spaceCategoryNameLabel.trailingAnchor.constraint(equalTo: titleLabelView.trailingAnchor, constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+        spaceCategoryNameLabel.bottomAnchor.constraint(equalTo: titleLabelView.bottomAnchor, constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+//        spaceCategoryNameLabel.constraintInsideTo(.top, titleLabelView,
+//                                      CGFloat(2.5).generateSizeForScreen)
+//        spaceCategoryNameLabel.constraintInsideTo(.leading, titleLabelView,
+//                                      CGFloat(2.5).generateSizeForScreen)
+//        spaceCategoryNameLabel.constraintInsideTo(.trailing, titleLabelView,
+//                                      CGFloat(2.5).generateSizeForScreen)
+//        spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
+//                                      CGFloat(2.5).generateSizeForScreen)
         
         let sloganLabel = detailsOpenViewModel.createLabel(space.slogan,
                                                            UIFont(name: FontsBravve.regular.rawValue,
@@ -221,90 +227,103 @@ class OpenDetailsView: UIViewController {
         
         view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, localLabel, descriptionLabel, hourlyLabel, creditHourLabel, dailyLabel, creditDayLabel, briefingLabel, nameLabel, officeLabel, localDetailsStackView, structureStackView, localFacilitiesStackView])
         
-        view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        view.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabelView.constraintInsideTo(.top, view)
-        titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        sloganLabel.constraintOutsideTo(.top, spaceCategoryNameLabel, CGFloat(20).generateSizeForScreen)
-        sloganLabel.constraintInsideTo(.leading, spaceCategoryNameLabel)
-        sloganLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
+        view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor).isActive = true
         
-        photoCollectionView.constraintOutsideTo(.top, sloganLabel, CGFloat(20).generateSizeForScreen)
-        photoCollectionView.constraintInsideTo(.leading, view)
-        photoCollectionView.constraintInsideTo(.trailing, view)
-        photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
+        titleLabelView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                constant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        pageControl.constraintInsideTo(.centerX, photoCollectionView)
-        pageControl.constraintOutsideTo(.top, photoCollectionView,
-                                        CGFloat(10).generateSizeForScreen)
-        pageControl.constraintInsideTo(.leading, photoCollectionView)
-        pageControl.constraintInsideTo(.trailing, photoCollectionView)
+        sloganLabel.topAnchor.constraint(equalTo: spaceCategoryNameLabel.bottomAnchor,
+                                         constant: CGFloat(20).generateSizeForScreen).isActive = true
+        sloganLabel.leadingAnchor.constraint(equalTo: spaceCategoryNameLabel.leadingAnchor).isActive = true
+        sloganLabel.widthAnchor.constraint(equalToConstant: CGFloat(215).generateSizeForScreen).isActive = true
         
-        localLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(45).generateSizeForScreen)
-        localLabel.constraintInsideTo(.leading, sloganLabel)
+        photoCollectionView.topAnchor.constraint(equalTo: sloganLabel.bottomAnchor,
+                                                 constant: CGFloat(20).generateSizeForScreen).isActive = true
+        photoCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        photoCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        photoCollectionView.heightAnchor.constraint(equalToConstant: collectionViewFlowLayout.itemSize.height).isActive = true
         
-        descriptionLabel.constraintOutsideTo(.top, localLabel, CGFloat(7.5).generateSizeForScreen)
-        descriptionLabel.constraintInsideTo(.leading, localLabel)
+        pageControl.centerXAnchor.constraint(equalTo: photoCollectionView.centerXAnchor).isActive = true
+        pageControl.topAnchor.constraint(equalTo: photoCollectionView.bottomAnchor,
+                                         constant: CGFloat(10).generateSizeForScreen).isActive = true
+        pageControl.leadingAnchor.constraint(equalTo: photoCollectionView.leadingAnchor).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: photoCollectionView.trailingAnchor).isActive = true
         
-        hourlyLabel.constraintInsideTo(.centerY, localLabel)
-        hourlyLabel.constraintOutsideTo(.trailing, creditHourLabel, CGFloat(5).generateSizeForScreen)
+        localLabel.topAnchor.constraint(equalTo: photoCollectionView.bottomAnchor,
+                                        constant: CGFloat(45).generateSizeForScreen).isActive = true
+        localLabel.leadingAnchor.constraint(equalTo: sloganLabel.leadingAnchor).isActive = true
         
-        creditHourLabel.constraintInsideTo(.bottom, hourlyLabel)
-        creditHourLabel.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        descriptionLabel.topAnchor.constraint(equalTo: localLabel.bottomAnchor,
+                                        constant: CGFloat(7.5).generateSizeForScreen).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         
-        dailyLabel.constraintOutsideTo(.top, hourlyLabel,
-                                    CGFloat(5).generateSizeForScreen)
-        dailyLabel.constraintInsideTo(.leading, hourlyLabel)
+        hourlyLabel.centerYAnchor.constraint(equalTo: localLabel.centerYAnchor).isActive = true
+        hourlyLabel.trailingAnchor.constraint(equalTo: creditHourLabel.leadingAnchor,
+                                              constant: CGFloat(-5).generateSizeForScreen).isActive = true
         
-        creditDayLabel.constraintOutsideTo(.leading, dailyLabel,
-                                    CGFloat(5).generateSizeForScreen)
-        creditDayLabel.constraintInsideTo(.bottom, dailyLabel)
+        creditHourLabel.bottomAnchor.constraint(equalTo: hourlyLabel.bottomAnchor).isActive = true
+        creditHourLabel.trailingAnchor.constraint(equalTo: photoCollectionView.trailingAnchor,
+                                                  constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
-        creditDayLabel.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        dailyLabel.topAnchor.constraint(equalTo: hourlyLabel.bottomAnchor,
+                                        constant: CGFloat(5).generateSizeForScreen).isActive = true
+        dailyLabel.leadingAnchor.constraint(equalTo: hourlyLabel.leadingAnchor).isActive = true
         
-        tagsStackView.constraintOutsideTo(.top, creditDayLabel,
-                                          CGFloat(20).generateSizeForScreen)
-        tagsStackView.constraintInsideTo(.leading, localLabel)
-        tagsStackView.constraintInsideTo(.trailing, creditHourLabel)
+        creditDayLabel.leadingAnchor.constraint(equalTo: dailyLabel.trailingAnchor,
+                                                constant: CGFloat(5).generateSizeForScreen).isActive = true
+        creditDayLabel.trailingAnchor.constraint(equalTo: photoCollectionView.trailingAnchor,
+                                                 constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        creditDayLabel.bottomAnchor.constraint(equalTo: dailyLabel.bottomAnchor).isActive = true
         
-        briefingLabel.constraintOutsideTo(.top, tagsStackView,
-                                    CGFloat(20).generateSizeForScreen)
-        briefingLabel.constraintInsideTo(.leading, tagsStackView)
-        briefingLabel.constraintInsideTo(.trailing, tagsStackView)
+        tagsStackView.topAnchor.constraint(equalTo: creditDayLabel.bottomAnchor,
+                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
+        tagsStackView.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
+        tagsStackView.trailingAnchor.constraint(equalTo: creditHourLabel.trailingAnchor).isActive = true
         
-        nameLabel.constraintOutsideTo(.top, briefingLabel,
-                                    CGFloat(20).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, briefingLabel)
-        nameLabel.constraintInsideTo(.trailing, briefingLabel)
+        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor,
+                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
+        briefingLabel.leadingAnchor.constraint(equalTo: tagsStackView.leadingAnchor).isActive = true
+        briefingLabel.trailingAnchor.constraint(equalTo: tagsStackView.trailingAnchor).isActive = true
         
-        officeLabel.constraintOutsideTo(.top, nameLabel)
-        officeLabel.constraintInsideTo(.leading, nameLabel)
-        officeLabel.constraintInsideTo(.trailing, nameLabel)
+        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor,
+                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: briefingLabel.leadingAnchor).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: briefingLabel.trailingAnchor).isActive = true
         
-        localDetailsStackView.constraintOutsideTo(.top, officeLabel,
-                                                  CGFloat(20).generateSizeForScreen)
-        localDetailsStackView.constraintInsideTo(.leading, officeLabel)
-        localDetailsStackView.constraintInsideTo(.trailing, officeLabel)
+        officeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        officeLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
+        officeLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
         
-        structureStackView.constraintOutsideTo(.top, localDetailsStackView,
-                                               CGFloat(20).generateSizeForScreen)
-        structureStackView.constraintInsideTo(.leading, localFacilitiesStackView)
-        structureStackView.constraintInsideTo(.trailing, localFacilitiesStackView)
+        localDetailsStackView.topAnchor.constraint(equalTo: officeLabel.bottomAnchor,
+                                                   constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localDetailsStackView.leadingAnchor.constraint(equalTo: officeLabel.leadingAnchor).isActive = true
+        localDetailsStackView.trailingAnchor.constraint(equalTo: officeLabel.trailingAnchor).isActive = true
         
-        localFacilitiesStackView.constraintOutsideTo(.top, structureStackView,
-                                                     CGFloat(20).generateSizeForScreen)
-        localFacilitiesStackView.constraintInsideTo(.leading, view,
-                                                    CGFloat(20).generateSizeForScreen)
-        localFacilitiesStackView.constraintInsideTo(.trailing, view,
-                                                    CGFloat(20).generateSizeForScreen)
+        structureStackView.topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor,
+                                                constant: CGFloat(20).generateSizeForScreen).isActive = true
+        structureStackView.leadingAnchor.constraint(equalTo: localFacilitiesStackView.leadingAnchor).isActive = true
+        structureStackView.trailingAnchor.constraint(equalTo: localFacilitiesStackView.trailingAnchor).isActive = true
         
-        localFacilitiesStackView.constraintInsideTo(.bottom, view,
-                                                    CGFloat(20).generateSizeForScreen)
+        localFacilitiesStackView.topAnchor.constraint(equalTo: structureStackView.bottomAnchor,
+                                                      constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                          constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                           constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                                         constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
         return scrollView
     }()
@@ -373,14 +392,19 @@ class OpenDetailsView: UIViewController {
     
     private func setupConstraints() {
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        scrollView.constraintOutsideTo(.bottom, reserveButton)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        customBar.translatesAutoresizingMaskIntoConstraints = false
+        reserveButton.translatesAutoresizingMaskIntoConstraints = false
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
+        
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
 
