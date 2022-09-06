@@ -194,32 +194,34 @@ class NomeView: UIViewController {
     //MARK: setupConstraints
     private func setupConstraints() {
         
-        infoLabel.constraintInsideTo(.top,
-                                     view,
-                                     CGFloat(250).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.leading,
-                                     view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.trailing,
-                                     view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        registerStackView.constraintOutsideTo(.top,
-                                              infoLabel,
-                                              CGFloat(60).generateSizeForScreen)
-        registerStackView.constraintInsideTo(.leading, infoLabel)
-        registerStackView.constraintInsideTo(.trailing, infoLabel)
-        registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        infoLabel.topAnchor.constraint(equalTo: view.topAnchor,
+                                       constant: CGFloat(250).generateSizeForScreen).isActive = true
+        infoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                           constant: CGFloat(40).generateSizeForScreen).isActive = true
+        infoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                            constant: CGFloat(-40).generateSizeForScreen).isActive = true
         
-        registerFailLabel.constraintOutsideTo(.top, registerStackView,
-                                              CGFloat(5).generateSizeForScreen)
-        registerFailLabel.constraintInsideTo(.leading, registerStackView,
-                                             CGFloat(15).generateSizeForScreen)
+        registerStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor,
+                                               constant: CGFloat(60).generateSizeForScreen).isActive = true
+        registerStackView.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor).isActive = true
+        registerStackView.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor).isActive = true
+        registerStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
         
-        customShaddow.constraintInsideTo(.top, registerStackView)
-        customShaddow.constraintInsideTo(.leading, registerStackView)
-        customShaddow.constraintInsideTo(.trailing, registerStackView)
-        customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
+        registerFailLabel.topAnchor.constraint(equalTo: registerStackView.bottomAnchor,
+                                               constant: CGFloat(5).generateSizeForScreen).isActive = true
+        registerFailLabel.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor,
+                                                   constant: CGFloat(15).generateSizeForScreen).isActive = true
+        
+        customShaddow.topAnchor.constraint(equalTo: registerStackView.topAnchor).isActive = true
+        customShaddow.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor).isActive = true
+        customShaddow.trailingAnchor.constraint(equalTo: registerStackView.trailingAnchor).isActive = true
+        customShaddow.bottomAnchor.constraint(equalTo: registerStackView.bottomAnchor,
+                                              constant: Ride.up.rawValue).isActive = true
     }
     //MARK: setupTarget
     private func setupTargets() {
