@@ -188,13 +188,13 @@ class HomeClosedView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         seletedFilterItems = selectedItemsArray
-        print("kaue \(spaceParameters.space_category_id)")
-        print("kaue \(spaceParameters.space_type_id)")
-        print("kaue \(spaceParameters.space_facilities_id)")
-        print("kaue \(spaceParameters.space_contract_Type)")
-        print("kaue \(spaceParameters.space_classification_id)")
-        print("kaue \(spaceParameters.space_noise_level_id)")
-        print("kaue \(spaceParameters.seats_qty)")
+        print("kaue \(spaceParameters.space_category_id ?? 0)")
+        print("kaue \(spaceParameters.space_type_id ?? 0)")
+        print("kaue \(spaceParameters.space_facilities_id ?? [])")
+        print("kaue \(spaceParameters.space_contract_Type ?? 0)")
+        print("kaue \(spaceParameters.space_classification_id ?? 0)")
+        print("kaue \(spaceParameters.space_noise_level_id ?? 0)")
+        print("kaue \(spaceParameters.seats_qty ?? 0)")
         print("kaue \(seletedFilterItems)")
         setupView()
         setupConstraints()
@@ -288,26 +288,31 @@ class HomeClosedView: UIViewController {
     
     private func setupConstraints() {
         
-        stackView.constraintOutsideTo(.top, customBar)
-        stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        stackView.constraintOutsideTo(.bottom, tabBar)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        tableView.widthAnchorInSuperview(view.frame.size.width)
+        stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        tableView.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
         
-        coverView.constraintInsideTo(.top, view)
-        coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        coverView.constraintInsideTo(.bottom, view)
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.08)
-        imageView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.6634)
+        coverView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        coverView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        coverView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
+        imageView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6634).isActive = true
     }
 }
 
