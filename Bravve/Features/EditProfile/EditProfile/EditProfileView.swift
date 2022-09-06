@@ -237,6 +237,7 @@ class EditProfileView: UIViewController {
         view.setToDefaultBackgroundColor()
         view.addSubviews([way, photoView, editButton, tabBar, saveButton, viewElements.scroll])
         
+        editProfileViewModel.removeMasks(of: view)
         editProfileViewModel.delegate = self
         
         editProfileViewModel.setupHobbies()

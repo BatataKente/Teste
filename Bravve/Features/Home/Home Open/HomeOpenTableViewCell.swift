@@ -135,6 +135,13 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         let spacing = CGFloat(20).generateSizeForScreen
         
+        spaceCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
         titleLabelView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         titleLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: spacing).isActive = true
         

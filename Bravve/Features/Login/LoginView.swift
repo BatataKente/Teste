@@ -238,8 +238,7 @@ class LoginView: UIViewController {
         let handler = {(action: UIAction) in
             
             let nomeView = NomeView()
-            nomeView.modalPresentationStyle = .fullScreen
-            self.present(nomeView, animated: true)
+            self.navigationController?.pushViewController(nomeView, animated: true)
         }
         
         view.addAction(UIAction(handler: handler), for: .touchUpInside)
@@ -250,6 +249,7 @@ class LoginView: UIViewController {
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationSetup()
         setupView()
         setupLayoutConstraints()
         viewModel.delegate = self
@@ -261,7 +261,11 @@ class LoginView: UIViewController {
         flag = 0
     }
     
+    //MARK: - Navigation Setup
     
+    private func navigationSetup(){
+        self.navigationController?.navigationBar.isHidden = true
+    }
     
     
     //MARK: - setupView
@@ -294,7 +298,7 @@ class LoginView: UIViewController {
         
         backButton.setToBackButtonDefault {_ in
             
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -403,8 +407,7 @@ class LoginView: UIViewController {
     //MARK: - forgotPasswordButtonTapped
     @objc func forgotPasswordButtonTapped(){
         let vc = PasswordRecoveryEmailView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -521,8 +524,8 @@ extension LoginView: LoginViewModelProtocol {
     }
     
     func presentNextScreen() {
-        let vc = HomeClosedView()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: false)
+        let homeClosedViewController = HomeClosedView()
+        let closedNavigationController = UINavigationController(rootViewController: homeClosedViewController)
+        self.navigationController?.pushViewController(closedNavigationController, animated: true)
     }
 }
