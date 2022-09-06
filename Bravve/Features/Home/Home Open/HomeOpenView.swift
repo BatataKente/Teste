@@ -39,9 +39,9 @@ class HomeOpenView: UIViewController {
         view.axis = .vertical
         view.isLayoutMarginsRelativeArrangement = true
         view.layoutMargins = UIEdgeInsets(top: margins,
-                                         left: margins,
-                                         bottom: margins,
-                                         right: margins)
+                                          left: margins,
+                                          bottom: margins,
+                                          right: margins)
         return view
     }()
     
@@ -99,16 +99,16 @@ class HomeOpenView: UIViewController {
     }()
     
     private lazy var leftDropDown: UIScrollView = {
-
+        
         let leftDropDown = UIScrollView()
         leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         leftDropDown.delegate = self
-
+        
         return leftDropDown
     }()
     
     private lazy var rightDropDown: UIScrollView = {
-
+        
         let rightDropDown = UIScrollView()
         rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
@@ -178,12 +178,8 @@ class HomeOpenView: UIViewController {
         true
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        super.viewDidDisappear(animated)
-        tabBar.selectedItem = tabBar.items?[0]
-    }
-    
+
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -194,15 +190,69 @@ class HomeOpenView: UIViewController {
         setupDefaults()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        navigationSetup()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
+    }
+    
+    //MARK: - Navigation Methods
+    
+    private func navigationSetup(){
+        //The view that covers the statusBar
+        let navigationStatusBarView = UIView()
+        navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
+        navigationStatusBarView.backgroundColor = UIColor(named: "blueBravve")
+        self.view.addSubview(navigationStatusBarView)
+        
+        NSLayoutConstraint.activate([
+            navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        //Center View
+        let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        let centerImageView = UIImageView(image: logo)
+        self.navigationItem.titleView = centerImageView
+        
+        //Bar Button Items Left and Right
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(self.searchBarButtonTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(self.menuBarButtonTapped))
+        self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
+    }
+    
+    @objc func searchBarButtonTapped(){
+        let logo = UIImage(named: ImagesBravve.example_1.rawValue)
+        let centerImageView = UIImageView(image: logo)
+        centerImageView.contentMode = .scaleToFill
+        self.navigationItem.titleView = centerImageView
+        
+        self.navigationItem.leftBarButtonItems = [UIBarButtonItem(systemItem: UIBarButtonItem.SystemItem.fixedSpace, primaryAction: nil, menu: nil)]
+        print("search")
+    }
+    
+    @objc func menuBarButtonTapped(){
+        let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        let centerImageView = UIImageView(image: logo)
+        self.navigationItem.titleView = centerImageView
+        print("menu")
+    }
+    
     //MARK: - createStackView
     private func createStackView(_ views: [UIView]) -> UIStackView {
         
         let stackView = UIStackView(arrangedSubviews: views)
         
-            stackView.spacing = 4
-            stackView.backgroundColor = .white
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
+        stackView.spacing = 4
+        stackView.backgroundColor = .white
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
         
         return stackView
     }
@@ -238,8 +288,8 @@ class HomeOpenView: UIViewController {
     }
     
     private func setupView() {
-
-        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
+        
+        view.addSubviews([stackView, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -247,7 +297,7 @@ class HomeOpenView: UIViewController {
         if self.seletedFilterItems.isEmpty {
             self.filterStackView.isHidden = true
         }
-
+        
         setupSelectedButtons(filterStackView)
         
         for button in filterButtons {
@@ -259,20 +309,20 @@ class HomeOpenView: UIViewController {
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
-
+        
         tabBar.selectedItem = tabBar.items?[0]
     }
     
     func setupSelectedButtons(_ stackView: UIStackView) {
         
         filterButtons = createCapsuleButtons(seletedFilterItems,
-                                      ColorsBravve.capsuleButtonSelected)
+                                             ColorsBravve.capsuleButtonSelected)
         
         stackView.addArrangedSubviews(self.setupStackView(self.filterButtons))
     }
     
     private func setupDefaults() {
-
+        
         view.setToDefaultBackgroundColor()
         
         homeOpenViewModel.delegate = self
@@ -281,19 +331,34 @@ class HomeOpenView: UIViewController {
     
     private func setupConstraints() {
         
-        homeOpenViewModel.removeMasks(of: view)
+//        homeOpenViewModel.removeMasks(of: view)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
-        homeOpenViewModel.constraint(the: stackView, to: view, by: [.leading, .trailing])
+        stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        homeOpenViewModel.constraint(the: stackView, to: view, by: [.leading, .trailing])
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
         
         tableView.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
         
-        homeOpenViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
+//        homeOpenViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        homeOpenViewModel.constraint(the: coverView, to: view, by: [.leading, .trailing, .top, .bottom])
+//        homeOpenViewModel.constraint(the: coverView, to: view, by: [.leading, .trailing, .top, .bottom])
+        coverView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        coverView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        coverView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        homeOpenViewModel.constraint(the: imageView, to: view.safeAreaLayoutGuide, by: [.centerX, .centerY])
+//        homeOpenViewModel.constraint(the: imageView, to: view.safeAreaLayoutGuide, by: [.centerX, .centerY])
+        imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         imageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
         imageView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6634).isActive = true
     }
@@ -360,20 +425,20 @@ extension HomeOpenView: UIScrollViewDelegate {
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ indexPath: IndexPath) {
-            
-            guard let spaceId = cells[indexPath.row].id else { return }
-            
-            sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
-                guard let space = space else {
-                    print(statusCode as Any)
-                    print(error?.localizedDescription as Any)
-                    return
-                }
-                let openDetailsView = OpenDetailsView(space)
-                openDetailsView.modalPresentationStyle = .fullScreen
-                self.present(openDetailsView, animated: false)
+        
+        guard let spaceId = cells[indexPath.row].id else { return }
+        
+        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
+            guard let space = space else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
             }
+            let openDetailsView = OpenDetailsView(space)
+            self.navigationController?.pushViewController(openDetailsView, animated: true)
+            
         }
+    }
 }
 
 extension HomeOpenView: HomeOpenViewModelProtocol {
@@ -407,4 +472,3 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         rightDropDown.turnIntoAList(buttons)
     }
 }
-

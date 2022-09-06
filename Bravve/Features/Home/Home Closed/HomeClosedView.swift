@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomeClosedView: UIViewController {
     
@@ -197,8 +198,40 @@ class HomeClosedView: UIViewController {
         print("kaue \(spaceParameters.seats_qty)")
         print("kaue \(seletedFilterItems)")
         setupView()
+        navigationSetup()
         setupConstraints()
         setupDefaults()
+    }
+    
+    //MARK: - Navigation Methods
+    
+    private func navigationSetup(){
+        let navigationStatusBarView = UIView()
+        navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
+        navigationStatusBarView.backgroundColor = UIColor(named: "blueBravve")
+        self.view.addSubview(navigationStatusBarView)
+        
+        NSLayoutConstraint.activate([
+            navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
+        let iv = UIImageView(image: logo)
+        self.navigationItem.titleView = iv
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(leftBarButtonTapped))
+        self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
+    }
+    
+    @objc func rightBarButtonTapped(){
+        print("search")
+    }
+    
+    @objc func leftBarButtonTapped(){
+        print("menu")
     }
     
     private func createStackView(_ views: [UIView]) -> UIStackView {
@@ -243,7 +276,7 @@ class HomeClosedView: UIViewController {
     
     private func setupView() {
 
-        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
+        view.addSubviews([stackView, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -288,7 +321,8 @@ class HomeClosedView: UIViewController {
     
     private func setupConstraints() {
         
-        stackView.constraintOutsideTo(.top, customBar)
+//        stackView.constraintOutsideTo(.top, customBar)
+        stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
         stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         stackView.constraintOutsideTo(.bottom, tabBar)
@@ -376,8 +410,7 @@ extension HomeClosedView: HomeClosedTableViewCellProtocol {
                 return
             }
             let detailsClosedView = DetailsClosedView(space, spaceId: spaceId)
-            detailsClosedView.modalPresentationStyle = .fullScreen
-            self.present(detailsClosedView, animated: false)
+            self.navigationController?.pushViewController(detailsClosedView, animated: true)
         }
     }
 }

@@ -13,12 +13,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-            guard let windowScene = (scene as? UIWindowScene) else {return}
-            let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = HomeOpenView()
-            window.makeKeyAndVisible()
-            self.window = window
-        }
+        guard let windowScene = (scene as? UIWindowScene) else {return}
+        let window = UIWindow(windowScene: windowScene)
+        let rootViewController = HomeOpenView()
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.backgroundColor = UIColor(named: "blueBravve")
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+        self.window = window
+  
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
