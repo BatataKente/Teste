@@ -13,16 +13,16 @@ class HomeOpenTableViewCell: UITableViewCell {
     struct ViewElements {
         
         let view: UIView,
-            titleLabel: UILabel,
+            spaceCategoryLabel: UILabel,
             titleLabelView: UIView,
-            descriptionLabel: UILabel,
+            sloganLabel: UILabel,
             photoView: UIImageView,
             photoLabel: UILabel,
             photoLabelView: UIView,
-            nameLabel: UILabel,
-            subNameLabel: UILabel,
-            priceLabel: UILabel,
-            detailsLabel: UILabel
+            localNameLabel: UILabel,
+            descriptionLabel: UILabel,
+            hourlyCreditsLabel: UILabel,
+            addressLabel: UILabel
     }
     
     var delegate: HomeOpenTableViewCellProtocol?
@@ -31,22 +31,16 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     private lazy var viewElements: ViewElements = {
         
-        let textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
-        
-        let titleLabel = UILabel()
-        titleLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        titleLabel.font = UIFont(name: FontsBravve.light.rawValue,
-                                 size: CGFloat(13).generateSizeForScreen)
+        let spaceCategoryLabel = createLabel(color: .blue,
+                                     UIFont(name: FontsBravve.light.rawValue,
+                                            size: CGFloat(13).generateSizeForScreen))
         
         let titleLabelView = UIView()
-        titleLabelView.addSubview(titleLabel)
+        titleLabelView.addSubview(spaceCategoryLabel)
         titleLabelView.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         
-        let descriptionLabel = UILabel()
-        descriptionLabel.textColor = textColor
-        descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                       size: CGFloat(20).generateSizeForScreen)
-        descriptionLabel.numberOfLines = 0
+        let sloganLabel = createLabel(UIFont(name: FontsBravve.regular.rawValue,
+                                                  size: CGFloat(20).generateSizeForScreen))
         
         let view = UIView()
         view.setToDefaultBackgroundColor()
@@ -63,89 +57,75 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
-        let photoLabel = UILabel()
-        photoLabel.textColor = .white
-        photoLabel.font = UIFont(name: FontsBravve.light.rawValue,
-                                 size: CGFloat(13).generateSizeForScreen)
-        photoLabel.text = "WORKPASS"
+        let photoLabel = createLabel(text: "WORKPASS",
+                                     color: .textField,
+                                     UIFont(name: FontsBravve.light.rawValue,
+                                            size: CGFloat(13).generateSizeForScreen))
         
         let photoLabelView = UIView()
         photoLabelView.addSubview(photoLabel)
         photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         photoLabelView.isHidden = true
         
-        let nameLabel = UILabel()
-        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                size: CGFloat(20).generateSizeForScreen)
-        nameLabel.textColor = textColor
-        nameLabel.numberOfLines = 0
+        let localNameLabel = createLabel()
         
-        let subNameLabel = UILabel()
-        subNameLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        subNameLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                size: CGFloat(12).generateSizeForScreen)
+        let descriptionLabel = createLabel(color: .label,
+                                       UIFont(name: FontsBravve.regular.rawValue,
+                                              size: CGFloat(12).generateSizeForScreen))
         
-        let priceLabel = UILabel()
-        priceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-        priceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                 size: CGFloat(20).generateSizeForScreen)
+        let hourlyCreditsLabel = createLabel(color: .pink_white)
         
-        let hourPriceLabel = UILabel()
-        hourPriceLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-        hourPriceLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                     size: CGFloat(20).generateSizeForScreen)
-        hourPriceLabel.text = "3,50"
+        let hourPriceLabel = createLabel(text: "3,50",color: .pink_white)
         
         let priceView: UIView = {
             
-            let priceTypeLabel = UILabel()
-            priceTypeLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-            priceTypeLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                         size: CGFloat(12).generateSizeForScreen)
-            priceTypeLabel.text = "R$"
+            let priceTypeLabel = createLabel(text: "R$",
+                                             color: .pink_white,
+                                             UIFont(name: FontsBravve.bold.rawValue,
+                                                                          size: CGFloat(12).generateSizeForScreen))
             
-            let hourLabel = UILabel()
-            hourLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-            hourLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                    size: CGFloat(12).generateSizeForScreen)
-            hourLabel.text = "/hora"
+            let hourLabel = createLabel(text: "/hora",
+                                        color: .pink_white,
+                                        UIFont(name: FontsBravve.bold.rawValue,
+                                                                     size: CGFloat(12).generateSizeForScreen))
             
-            let creditHourLabel = UILabel()
-            creditHourLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-            creditHourLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                          size: CGFloat(12).generateSizeForScreen)
-            creditHourLabel.text = "crédito/hora"
+            let creditHourLabel = createLabel(text: "crédito/hora",
+                                              color: .pink_white,
+                                              UIFont(name: FontsBravve.bold.rawValue,
+                                                                           size: CGFloat(12).generateSizeForScreen))
             
             let priceView = UIView()
-            priceView.addSubviews([priceTypeLabel, priceLabel, hourLabel, creditHourLabel, hourPriceLabel])
+            priceView.addSubviews([priceTypeLabel, hourlyCreditsLabel, hourLabel, creditHourLabel, hourPriceLabel])
             
-            priceLabel.constraintInsideTo(.top, priceView)
-            priceLabel.constraintOutsideTo(.leading, priceTypeLabel,
-                                           CGFloat(2.5).generateSizeForScreen)
-            priceLabel.constraintOutsideTo(.trailing, hourLabel,
-                                           CGFloat(2.5).generateSizeForScreen)
+            for subview in priceView.subviews {
+                
+                subview.translatesAutoresizingMaskIntoConstraints = false
+            }
             
-            priceTypeLabel.constraintInsideTo(.leading, priceView)
-            priceTypeLabel.constraintInsideTo(.bottom, priceLabel)
+            hourlyCreditsLabel.topAnchor.constraint(equalTo: priceView.topAnchor).isActive = true
+            hourlyCreditsLabel.leadingAnchor.constraint(equalTo: priceTypeLabel.trailingAnchor,
+                                                constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+            hourlyCreditsLabel.trailingAnchor.constraint(equalTo: hourLabel.leadingAnchor,
+                                                 constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
             
-            hourLabel.constraintInsideTo(.bottom, priceLabel)
+            priceTypeLabel.leadingAnchor.constraint(equalTo: priceView.leadingAnchor).isActive = true
+            priceTypeLabel.bottomAnchor.constraint(equalTo: hourlyCreditsLabel.bottomAnchor).isActive = true
             
-            creditHourLabel.constraintOutsideTo(.leading, hourPriceLabel,
-                                               CGFloat(2.5).generateSizeForScreen)
-            creditHourLabel.constraintInsideTo(.trailing, priceView)
-            creditHourLabel.constraintInsideTo(.bottom, priceView)
+            hourLabel.bottomAnchor.constraint(equalTo: hourlyCreditsLabel.bottomAnchor).isActive = true
             
-            hourPriceLabel.constraintInsideTo(.leading, priceView)
-            hourPriceLabel.constraintInsideTo(.bottom, priceView)
+            creditHourLabel.leadingAnchor.constraint(equalTo: hourPriceLabel.trailingAnchor,
+                                                     constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+            creditHourLabel.trailingAnchor.constraint(equalTo: priceView.trailingAnchor).isActive = true
+            creditHourLabel.bottomAnchor.constraint(equalTo: priceView.bottomAnchor).isActive = true
+            
+            hourPriceLabel.leadingAnchor.constraint(equalTo: priceView.leadingAnchor).isActive = true
+            hourPriceLabel.bottomAnchor.constraint(equalTo: priceView.bottomAnchor).isActive = true
             
             return priceView
         }()
         
-        let detailsLabel = UILabel()
-        detailsLabel.font = UIFont(name: FontsBravve.light.rawValue,
-                                   size: CGFloat(13).generateSizeForScreen)
-        detailsLabel.textColor = textColor
-        detailsLabel.numberOfLines = 0
+        let addressLabel = createLabel(UIFont(name: FontsBravve.light.rawValue,
+                                              size: CGFloat(13).generateSizeForScreen))
         
         let detailsButton = UIButton()
         detailsButton.setImage(UIImage(named: "arrowPink"), for: .normal)
@@ -154,68 +134,86 @@ class HomeOpenTableViewCell: UITableViewCell {
                                 action: #selector(showDetails),
                                 for: .touchUpInside)
         
-        view.addSubviews([titleLabelView, descriptionLabel, detailsButton, photoView, photoLabelView, nameLabel, subNameLabel, priceView, detailsLabel])
+        view.addSubviews([titleLabelView, sloganLabel, detailsButton, photoView, photoLabelView, localNameLabel, descriptionLabel, priceView, addressLabel])
         
-        titleLabelView.constraintInsideTo(.top, view)
-        titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.top, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.leading, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.trailing, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.bottom, titleLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-
-        descriptionLabel.constraintOutsideTo(.top, titleLabelView, CGFloat(20).generateSizeForScreen)
-        descriptionLabel.constraintInsideTo(.leading, titleLabelView)
-        descriptionLabel.constraintInsideTo(.width, view, multiplier: 0.6)
+        let spacing = CGFloat(20).generateSizeForScreen
         
-        photoView.constraintOutsideTo(.top, descriptionLabel, CGFloat(20).generateSizeForScreen)
-        photoView.constraintInsideTo(.leading, descriptionLabel)
-        photoView.constraintInsideTo(.trailing, view)
-        photoView.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
+        spaceCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        photoLabelView.constraintInsideTo(.top, photoView, CGFloat(25).generateSizeForScreen)
-        photoLabelView.constraintInsideTo(.leading, photoView, CGFloat(25).generateSizeForScreen)
-        photoLabel.constraintInsideTo(.top, photoLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        photoLabel.constraintInsideTo(.leading, photoLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        photoLabel.constraintInsideTo(.trailing, photoLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
-        photoLabel.constraintInsideTo(.bottom, photoLabelView,
-                                      CGFloat(2.5).generateSizeForScreen)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        nameLabel.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, photoView)
-        nameLabel.constraintInsideTo(.width, view, multiplier: 0.5)
+        titleLabelView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: spacing).isActive = true
+        
+        spaceCategoryLabel.topAnchor.constraint(equalTo: titleLabelView.topAnchor,
+                                        constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        spaceCategoryLabel.leadingAnchor.constraint(equalTo: titleLabelView.leadingAnchor,
+                                            constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        spaceCategoryLabel.trailingAnchor.constraint(equalTo: titleLabelView.trailingAnchor,
+                                             constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+        spaceCategoryLabel.bottomAnchor.constraint(equalTo: titleLabelView.bottomAnchor,
+                                           constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
 
-        priceView.constraintOutsideTo(.top, photoView, CGFloat(20).generateSizeForScreen)
-        priceView.constraintInsideTo(.trailing, photoView, CGFloat(20).generateSizeForScreen)
-        priceView.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
-
-        subNameLabel.constraintOutsideTo(.top, nameLabel, CGFloat(10).generateSizeForScreen)
-        subNameLabel.constraintInsideTo(.leading, nameLabel)
-
-        detailsLabel.constraintOutsideTo(.top, subNameLabel, CGFloat(20).generateSizeForScreen)
-        detailsLabel.constraintInsideTo(.leading, nameLabel)
-        detailsLabel.constraintInsideTo(.bottom, view, CGFloat(30).generateSizeForScreen)
-
-        detailsButton.constraintInsideTo(.trailing, view, CGFloat(30).generateSizeForScreen)
-        detailsButton.constraintInsideTo(.bottom, view, CGFloat(20).generateSizeForScreen)
+        sloganLabel.topAnchor.constraint(equalTo: titleLabelView.bottomAnchor, constant: spacing).isActive = true
+        sloganLabel.leadingAnchor.constraint(equalTo: titleLabelView.leadingAnchor).isActive = true
+        sloganLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
+        
+        photoView.topAnchor.constraint(equalTo: sloganLabel.bottomAnchor, constant: spacing).isActive = true
+        photoView.leadingAnchor.constraint(equalTo: sloganLabel.leadingAnchor).isActive = true
+        photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        photoView.heightAnchor.constraint(equalToConstant: CGFloat(200).generateSizeForScreen).isActive = true
+        
+        photoLabelView.topAnchor.constraint(equalTo: photoView.topAnchor,
+                                            constant: CGFloat(25).generateSizeForScreen).isActive = true
+        photoLabelView.leadingAnchor.constraint(equalTo: photoView.leadingAnchor,
+                                                constant: CGFloat(25).generateSizeForScreen).isActive = true
+        
+        photoLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        photoLabel.topAnchor.constraint(equalTo: photoLabelView.topAnchor,
+                                        constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        photoLabel.leadingAnchor.constraint(equalTo: photoLabelView.leadingAnchor,
+                                            constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        photoLabel.trailingAnchor.constraint(equalTo: photoLabelView.trailingAnchor,
+                                             constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+        photoLabel.bottomAnchor.constraint(equalTo: photoLabelView.bottomAnchor,
+                                           constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+        
+        localNameLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: spacing).isActive = true
+        localNameLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor).isActive = true
+        localNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        
+        priceView.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: spacing).isActive = true
+        priceView.trailingAnchor.constraint(equalTo: photoView.trailingAnchor,
+                                            constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        priceView.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen).isActive = true
+        
+        descriptionLabel.topAnchor.constraint(equalTo: localNameLabel.bottomAnchor, constant: spacing/2).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: localNameLabel.leadingAnchor).isActive = true
+        
+        addressLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: spacing).isActive = true
+        addressLabel.leadingAnchor.constraint(equalTo: localNameLabel.leadingAnchor).isActive = true
+        
+        detailsButton.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: spacing*2).isActive = true
+        detailsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                constant: CGFloat(-30).generateSizeForScreen).isActive = true
+        detailsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                              constant: CGFloat(-30).generateSizeForScreen).isActive = true
         
         return ViewElements(view: view,
-                            titleLabel: titleLabel,
+                            spaceCategoryLabel: spaceCategoryLabel,
                             titleLabelView: titleLabelView,
-                            descriptionLabel: descriptionLabel,
+                            sloganLabel: sloganLabel,
                             photoView: photoView,
                             photoLabel: photoLabel,
                             photoLabelView: photoLabelView,
-                            nameLabel: nameLabel,
-                            subNameLabel: subNameLabel,
-                            priceLabel: priceLabel,
-                            detailsLabel: detailsLabel)
+                            localNameLabel: localNameLabel,
+                            descriptionLabel: descriptionLabel,
+                            hourlyCreditsLabel: hourlyCreditsLabel,
+                            addressLabel: addressLabel)
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -239,50 +237,74 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     func setupConstraints() {
         
-        viewElements.view.constraintInsideTo(.top, contentView.safeAreaLayoutGuide, CGFloat(10).generateSizeForScreen)
-        viewElements.view.constraintInsideTo(.leading, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        viewElements.view.constraintInsideTo(.trailing, contentView.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        viewElements.view.constraintInsideTo(.bottom, contentView.safeAreaLayoutGuide, CGFloat(10).generateSizeForScreen)
+        viewElements.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewElements.view.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: CGFloat(10).generateSizeForScreen).isActive = true
+        viewElements.view.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        viewElements.view.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        viewElements.view.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-10).generateSizeForScreen).isActive = true
     }
     
     func setup(_ space: Space,_ indexPath: IndexPath) {
         
-        viewElements.descriptionLabel.text = space.slogan
+        viewElements.sloganLabel.text = space.slogan
         
-        guard let pictures = space.space_pictures else { return }
+        guard let pictures = space.space_pictures else {return}
         
         var picture = ""
         
         if pictures.count != 0 {
-            guard let pictureSelected = pictures[0].url else { return }
+            guard let pictureSelected = pictures[0].url else {return}
             picture = pictureSelected
         }
         
-        viewElements.photoView.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
-        viewElements.nameLabel.text = space.local_name
-        viewElements.subNameLabel.text = space.description
-        viewElements.priceLabel.text = "\(space.hourly_credits ?? " ")"
-        viewElements.detailsLabel.text = "\(space.partner_site_address?.address?.city_name ?? "")/\(space.partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(space.seats_qty ?? 0) pessoas\n\(space.space_type?.name ?? "")"
+        viewElements.photoView.sd_setImage(with: URL(string: picture),
+                                           placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+        viewElements.localNameLabel.text = space.local_name
+        viewElements.descriptionLabel.text = space.description
+        viewElements.hourlyCreditsLabel.text = "\(space.hourly_credits ?? " ")"
+        viewElements.addressLabel.text = "\(space.partner_site_address?.address?.city_name ?? "")/\(space.partner_site_address?.address?.neighborhood ?? "")\nCapacidade: \(space.seats_qty ?? 0) pessoas\n\(space.space_type?.name ?? "")"
         
-        guard let allowWorkpass = space.allow_workpass else {
-            return
-        }
+        guard let allowWorkpass = space.allow_workpass else {return}
         
-        guard let space_category = space.space_category?.name?.uppercased() else {
-            return
-        }
+        guard let space_category = space.space_category?.name?.uppercased() else {return}
         
-        viewElements.titleLabel.text = space_category
+        viewElements.spaceCategoryLabel.text = space_category
         viewElements.titleLabelView.backgroundColor = getTitleLabelBackgroundColor(space_category)
         
         
         if allowWorkpass {
+            
             viewElements.photoLabelView.isHidden = false
-        } else {
+        }
+        else {
+            
             viewElements.photoLabelView.isHidden = true
         }
         
         self.indexPath = indexPath
+    }
+    
+    /// create a Label with default of editing profile View
+    /// - Parameters:
+    ///   - text: the text of label
+    ///   - color: the collor of text(default is Collorsbravve.label.rawValue)
+    ///   - font: font(default: FontsBravve.medium.rawValue)
+    /// - Returns: the label
+    private func createLabel(text: String? = nil,
+                             color: ColorsBravve = .progressBarLabel,
+                             _ font: UIFont? = UIFont(name: FontsBravve.bold.rawValue,
+                                                      size: CGFloat(20).generateSizeForScreen)) -> UILabel {
+        
+        let label = UILabel()
+        
+        label.text = text ?? ""
+        label.textColor = UIColor(named: color.rawValue)
+        label.textAlignment = .left
+        label.font = font
+        label.numberOfLines = 0
+        
+        return label
     }
     
     @objc func showDetails() {
