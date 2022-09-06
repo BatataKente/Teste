@@ -435,6 +435,7 @@ class BookingDetailsView: UIViewController {
         setupContraints()
     }
     
+    /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
     @objc func buttonCheckInTap(){
         customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Para realizar o Check-in, é necessário permissão de uso da câmera do celular.", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
             let vc = CheckInQrCodeViewController()
@@ -446,6 +447,7 @@ class BookingDetailsView: UIViewController {
     }
     
     
+    /// This function adds view elements
     func setupViews(){
         view.addSubview(checkIN)
         tabBar.selectedItem = tabBar.items?[1]
@@ -462,6 +464,13 @@ class BookingDetailsView: UIViewController {
         
     }
     
+    /// This function creates StackView for Location Details, where each StackView has a description image and a text with the details
+    /// - Parameters:
+    ///   - text: text description
+    ///   - image: image description
+    ///   - isHidden: StackView with image and text
+    ///   - textColor:Label's color
+    /// - Returns: This funtion returns StackViews with images and text with local details
     private func createStackView(_ text: String,
                                  _ image: UIImage? = nil,
                                  isHidden: Bool = false,
@@ -495,6 +504,14 @@ class BookingDetailsView: UIViewController {
         return stackView
     }
     
+    /// This function creates the action of the see more and see less button, displaying from the data that comes from the API, the days and hours of operation of the place
+    /// - Parameters:
+    ///   - range: The range is the days and hours of operation of the place
+    ///   - items: StackView
+    ///   - titleColor: button's color
+    ///   - downButtonImages: the arrow corresponding to the action of the button (down arrow)
+    ///   - upButtonImages: the arrow corresponding to the action of the button (up arrow)
+    /// - Returns: This function returns the action on the button and displays the data, days and hours of operation of the place or not
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            items: [UIStackView],
                                            titleColor: ColorsBravve = .buttonPink,
@@ -575,6 +592,12 @@ class BookingDetailsView: UIViewController {
         return stackView
     }
     
+    /// This function creates the action of the see more and see less button, modifying the way of displaying the text that comes from the API
+    /// - Parameters:
+    ///   - smallText: compressed form of the text coming from the API
+    ///   - fullText: full form of the text coming from the API
+    ///   - actionLabel: Toggles between smallText and full depending on the action the button currently has
+    /// - Returns: The button that is modified to see more or less and the text that obeys the command of the button
     private func createSeeButton(smallText: String, fullText: String, actionLabel: UILabel) -> UIButton {
         let button = UIButton()
         let yourAttributes: [NSAttributedString.Key: Any] = [
@@ -619,6 +642,7 @@ class BookingDetailsView: UIViewController {
         return button
     }
     
+    /// This function handles the cancelbooking button alert. The message, buttons and their actions
     @objc func cancelBooking(){
         customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
             self.customAlertCancel.dismissAlert()
@@ -631,6 +655,7 @@ class BookingDetailsView: UIViewController {
         flagReservation = 2
     }
     
+    /// This function deals with the customBar, its title, its back button and the action it has
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
             _ in
@@ -639,6 +664,7 @@ class BookingDetailsView: UIViewController {
         }
     }
     
+    /// This function has all the constraints of the BookingDetails view elements
     func setupContraints(){
         
         scrollView.constraintOutsideTo(.top, customBar)
