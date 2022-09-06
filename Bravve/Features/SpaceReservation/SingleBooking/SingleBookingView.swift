@@ -128,7 +128,21 @@ class SingleBookingView: UIViewController {
         return dropDown
     }()
     
-    private let nextButton = UIButton()
+    private let nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.setTitle("Próxima Etapa", for: .normal)
+        nextButton.setTitleColor(UIColor(named: "white"), for: .normal)
+        nextButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        nextButton.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
+        return nextButton
+    }()
+    
+    
+    private lazy var tabBar = TabBarClosed(self, itemImagesNames: [
+        ButtonsBravve.locationGray.rawValue,
+        ButtonsBravve.calendarButtonPink.rawValue,
+        ButtonsBravve.userLoginGray.rawValue
+    ])
     
     override var prefersStatusBarHidden: Bool {
         
@@ -136,7 +150,7 @@ class SingleBookingView: UIViewController {
     }
     
     private lazy var singleBookingViewModel = SingleBookingViewModel(spaceId,
-                                                                     reservationArray)
+                                                                     reservationArray, spaceDetail: spaceDetails)
     
     override func viewDidLoad() {
         
@@ -145,12 +159,11 @@ class SingleBookingView: UIViewController {
         singleBookingViewModel.delegate = self
         self.navigationController?.navigationBar.isTranslucent=false
         self.view.setToDefaultBackgroundColor()
-        view.addSubviews([bodyScrollView, nextButton])
+        view.addSubviews([bodyScrollView, tabBar, nextButton])
         bodyScrollView.addSubview(viewToScroll)
         viewToScroll.addSubviews([calendarView, daysChoiceLabel, capacityLabel, lineView, schedulesStack, dropDown])
-        self.nextButton.setToBottomButtonKeyboardDefault("Próxima Etapa", backgroundColor: .buttonPink)
         
-//        let nextTarget = singleBookingViewModel.nextTarget(vc: self)
+        tabBar.selectedItem = tabBar.items?[0]
         
         nextButton.addTarget(nil, action: #selector(nextTarget),
                              for: .touchUpInside)
@@ -161,6 +174,15 @@ class SingleBookingView: UIViewController {
             
             self.dismiss(animated: true)
         }
+        
+        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        
+        nextButton.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
+        nextButton.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
+        nextButton.constraintOutsideTo(.bottom, tabBar)
+        nextButton.heightAnchorInSuperview(CGFloat(52).generateSizeForScreen)
         
         calendarView.constraintInsideTo(.top, viewToScroll, 44)
         calendarView.constraintInsideTo(.leading, viewToScroll, 40)
@@ -208,12 +230,7 @@ class SingleBookingView: UIViewController {
         let reservation2View = Reservation2View()
         reservation2View.modalPresentationStyle = .fullScreen
         
-        if spaceContractId == 3 {
-        
-            singleBookingViewModel.makeEntireDayCall(vc: self)
-        } else {
             self.present(reservation2View, animated: true)
-        }
     }
 }
 
