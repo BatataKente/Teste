@@ -198,43 +198,26 @@ class ActivitiesView: UIViewController {
     }
     
     
-    /// This function defines background image and continueButton constraints
+    /// This function adds background image and continueButton in view
     func setupDefaults() {
         
         continueButton.setToBottomButtonKeyboardDefault()
         backgroundImage.setWayToDefault(.wayActivities)
     }
     
-    
-    /// This function gathers other functions related to constraints
+    /// This function adds constraints in the view elements
     func setupConstraints() {
         
-        setInfoLabelConstraints()
-        setHobbiesStackConstraints()
-    }
-    
-    
-    /// This function defines the constraints of the Label
-    private func setInfoLabelConstraints() {
-        let constraint = [
+        NSLayoutConstraint.activate([
+        
             infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(236).generateSizeForScreen),
             infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22.5).generateSizeForScreen),
             infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22.5).generateSizeForScreen),
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
-    }
-    
-    /// This function defines the constraints of the StackView
-    private func setHobbiesStackConstraints() {
-        let constraint = [
+        
             interestsStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(55).generateSizeForScreen),
-            interestsStackView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
-        ]
-        constraint.forEach { item in
-            item.isActive = true
-        }
+            interestsStackView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            
+        ])
     }
 
 }

@@ -209,6 +209,8 @@ class EditProfileViewModel {
     /// - Parameter view: the view to remove masks
     func removeMasks(of view: UIView) {
         
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         for subview in view.subviews {
             
             subview.translatesAutoresizingMaskIntoConstraints = false

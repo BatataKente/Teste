@@ -143,7 +143,7 @@ class Reservation2View: UIViewController {
         present(reserveViewController, animated: true)
     }
     
-    let dates: [ReservationDate] = [ReservationDate(day: "21-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "09:00", hour_price: "40,00"), Hour(start_dt: "14:00", end_dt: "15:00", hour_price: "40,00")]), ReservationDate(day: "22-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "19:00", hour_price: "200,00")]), ReservationDate(day: "23-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "19:00", hour_price: "200,00")]), ReservationDate(day: "24-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "09:00", hour_price: "40,00"), Hour(start_dt: "14:00", end_dt: "15:00", hour_price: "80,00")])]
+    let dates = ReservationList.reservationList
     
 }
 
