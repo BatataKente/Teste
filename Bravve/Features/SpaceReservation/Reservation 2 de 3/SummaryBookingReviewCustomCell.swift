@@ -51,7 +51,22 @@ final class SummaryBookingReviewCustomCell: UITableViewCell {
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
         label.numberOfLines = 1
-        label.text = "02 diárias"
+        var totalDays: String {
+            var totalDays = 0
+            for reservation in ReservationList.reservationList {
+                if reservation.isEntireDay {
+                    totalDays += 1
+                }
+            }
+            
+            if totalDays < 2 {
+                return "\(totalDays) diária"
+            } else {
+                return "\(totalDays) diárias"
+            }
+        }
+        
+        label.text = totalDays
         
         return label
     }()
@@ -75,7 +90,26 @@ final class SummaryBookingReviewCustomCell: UITableViewCell {
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.font = UIFont(name: FontsBravve.light.rawValue, size: 16)
         label.numberOfLines = 1
-        label.text = "02 horas"
+        
+        var totalHours: String {
+            var totalHours = 0
+            for reservation in ReservationList.reservationList {
+                if !reservation.isEntireDay {
+                    for hour in reservation.hours {
+                        guard let inHour = Int(hour.start_dt.split(separator: ":")[0]) else { return ""}
+                        guard let outHour = Int(hour.end_dt.split(separator: ":")[0]) else { return ""}
+                        let totalReservationHour = outHour - inHour
+                        totalHours += totalReservationHour
+                    }
+                }
+            }
+            if totalHours < 2 {
+                return "\(totalHours) hora"
+            } else {
+                return "\(totalHours) horas"
+            }
+        }
+        label.text = totalHours
         
         return label
     }()
