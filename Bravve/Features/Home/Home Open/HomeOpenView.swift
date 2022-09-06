@@ -281,26 +281,36 @@ class HomeOpenView: UIViewController {
     
     private func setupConstraints() {
         
-        stackView.constraintOutsideTo(.top, customBar)
-        stackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        stackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        stackView.constraintOutsideTo(.bottom, tabBar)
+//        homeOpenViewModel.removeMasks(of: view)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        tableView.widthAnchorInSuperview(view.frame.size.width)
+        stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+//        homeOpenViewModel.constraint(the: stackView, to: view, by: [.leading, .trailing])
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        tableView.widthAnchor.constraint(equalToConstant: view.frame.size.width).isActive = true
         
-        coverView.constraintInsideTo(.top, view)
-        coverView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        coverView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        coverView.constraintInsideTo(.bottom, view)
+//        homeOpenViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.height, view.safeAreaLayoutGuide, multiplier: 0.08)
-        imageView.constraintInsideTo(.width, view.safeAreaLayoutGuide, multiplier: 0.6634)
+//        homeOpenViewModel.constraint(the: coverView, to: view, by: [.leading, .trailing, .top, .bottom])
+        coverView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        coverView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        coverView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+//        homeOpenViewModel.constraint(the: imageView, to: view.safeAreaLayoutGuide, by: [.centerX, .centerY])
+        imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
+        imageView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.6634).isActive = true
     }
 }
 
