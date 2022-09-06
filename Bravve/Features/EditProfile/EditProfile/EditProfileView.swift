@@ -237,7 +237,6 @@ class EditProfileView: UIViewController {
         view.setToDefaultBackgroundColor()
         view.addSubviews([way, photoView, editButton, tabBar, saveButton, viewElements.scroll])
         
-        editProfileViewModel.removeMasks(of: view)
         editProfileViewModel.delegate = self
         
         editProfileViewModel.setupHobbies()
@@ -251,7 +250,16 @@ class EditProfileView: UIViewController {
     
     func setupConstraints() {
         
-        editProfileViewModel.constraint(the: way, to: view, by: [.top, .trailing])
+//        editProfileViewModel.removeMasks(of: view)
+        
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+//        editProfileViewModel.constraint(the: way, to: view, by: [.top, .trailing])
+        way.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        way.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         way.heightAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
         way.widthAnchor.constraint(equalToConstant: CGFloat(144).generateSizeForScreen).isActive = true
         
@@ -264,7 +272,11 @@ class EditProfileView: UIViewController {
         
         editButton.heightAnchor.constraint(equalToConstant: CGFloat(32).generateSizeForScreen).isActive = true
         editButton.widthAnchor.constraint(equalTo: editButton.heightAnchor).isActive = true
-        editProfileViewModel.constraint(the: editButton, to: photoView, by: [.centerX, .centerY], view.frame.size.height/15)
+//        editProfileViewModel.constraint(the: editButton, to: photoView, by: [.centerX, .centerY], view.frame.size.height/15)
+        editButton.centerXAnchor.constraint(equalTo: photoView.centerXAnchor,
+                                            constant: view.frame.size.height/15).isActive = true
+        editButton.centerYAnchor.constraint(equalTo: photoView.centerYAnchor,
+                                            constant: view.frame.size.height/15).isActive = true
         
         viewElements.scroll.topAnchor.constraint(equalTo: photoView.bottomAnchor,
                                                  constant: CGFloat(30).generateSizeForScreen).isActive = true
@@ -272,7 +284,10 @@ class EditProfileView: UIViewController {
         viewElements.scroll.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         viewElements.scroll.bottomAnchor.constraint(equalTo: saveButton.topAnchor).isActive = true
         
-        editProfileViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
+//        editProfileViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     override var prefersStatusBarHidden: Bool {true}
