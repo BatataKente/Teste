@@ -35,6 +35,7 @@ class PasswordRecoveryEmailView: UIViewController {
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -49,6 +50,7 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(changeText), for: .allEditingEvents)
         textField.isHidden = true
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -57,6 +59,7 @@ class PasswordRecoveryEmailView: UIViewController {
         label.text = "E-mail"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -71,6 +74,7 @@ class PasswordRecoveryEmailView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .equalCentering
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -79,6 +83,7 @@ class PasswordRecoveryEmailView: UIViewController {
         customShaddow.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         customShaddow.layer.cornerRadius = 8
         customShaddow.isHidden = true
+        customShaddow.translatesAutoresizingMaskIntoConstraints = false
         return customShaddow
     }()
     
@@ -87,6 +92,7 @@ class PasswordRecoveryEmailView: UIViewController {
         registerFailLabel.text = "Formato de e-mail inválido"
             registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,size: CGFloat(11).generateSizeForScreen)
             registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        registerFailLabel.translatesAutoresizingMaskIntoConstraints = false
             return registerFailLabel
         }()
     
@@ -121,23 +127,26 @@ class PasswordRecoveryEmailView: UIViewController {
     
     private func addConstraints() {
         
-        label.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
-        label.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
-        label.constraintInsideTo(.top, view, CGFloat(250).generateSizeForScreen)
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(23).generateSizeForScreen),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-23).generateSizeForScreen),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(235).generateSizeForScreen),
+            
+            stackViewEmail.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            stackViewEmail.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            stackViewEmail.topAnchor.constraint(equalTo: label.bottomAnchor, constant: CGFloat(70).generateSizeForScreen),
+            stackViewEmail.heightAnchor.constraint(equalToConstant: CGFloat(65).generateSizeForScreen),
+            
+            registerFailLabel.topAnchor.constraint(equalTo: stackViewEmail.bottomAnchor, constant: CGFloat(5).generateSizeForScreen),
+            registerFailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(25).generateSizeForScreen),
+            
+            customShaddow.topAnchor.constraint(equalTo: stackViewEmail.topAnchor),
+            customShaddow.leadingAnchor.constraint(equalTo: stackViewEmail.leadingAnchor),
+            customShaddow.trailingAnchor.constraint(equalTo: stackViewEmail.trailingAnchor),
+            customShaddow.bottomAnchor.constraint(equalTo: stackViewEmail.bottomAnchor,
+                                                  constant: Ride.up.rawValue)
         
-        stackViewEmail.constraintOutsideTo(.top, label, CGFloat(69).generateSizeForScreen)
-        stackViewEmail.constraintInsideTo(.leading, label)
-        stackViewEmail.constraintInsideTo(.trailing, label)
-        stackViewEmail.heightAnchorInSuperview( CGFloat(65).generateSizeForScreen)
-        
-        registerFailLabel.constraintOutsideTo(.top, stackViewEmail,CGFloat(5).generateSizeForScreen)
-        registerFailLabel.constraintInsideTo(.leading, stackViewEmail,CGFloat(15).generateSizeForScreen)
-        
-        customShaddow.constraintInsideTo(.top, stackViewEmail)
-        customShaddow.constraintInsideTo(.leading, stackViewEmail)
-        customShaddow.constraintInsideTo(.trailing, stackViewEmail)
-        customShaddow.constraintTo(.bottom, stackViewEmail, CGFloat(1).generateSizeForScreen)
-        
+        ])
         
     }
     
