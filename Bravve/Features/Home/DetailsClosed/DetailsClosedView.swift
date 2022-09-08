@@ -266,12 +266,9 @@ class DetailsClosedView: UIViewController {
         spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
                                                   CGFloat(2.5).generateSizeForScreen)
         
-        let sloganLabel = UILabel()
-        sloganLabel.text = space.slogan
-        sloganLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                  size: CGFloat(20).generateSizeForScreen)
-        sloganLabel.textColor = textColor
-        sloganLabel.numberOfLines = 0
+        let sloganLabel = createLabel(space.slogan,
+                                      UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(20).generateSizeForScreen))
         
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
@@ -291,41 +288,24 @@ class DetailsClosedView: UIViewController {
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        let localLabel = UILabel()
-        localLabel.text = space.local_name
-        localLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                size: CGFloat(20).generateSizeForScreen)
-        localLabel.textColor = textColor
+        let localLabel = createLabel(space.local_name,
+                                     UIFont(name: FontsBravve.bold.rawValue,
+                                            size: CGFloat(20).generateSizeForScreen))
         
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = space.description
-        descriptionLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        descriptionLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                              size: 12)
+        let descriptionLabel = createLabel(space.description,
+                                           textColor: UIColor(named: ColorsBravve.label.rawValue))
         
-        let hourlyLabel = UILabel()
-        hourlyLabel.text = space.hourly_credits
-        hourlyLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(30).generateSizeForScreen)
-        hourlyLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        let hourlyLabel = createLabel(space.hourly_credits,
+                                      UIFont(name: FontsBravve.bold.rawValue,
+                                             size: CGFloat(30).generateSizeForScreen),
+                                      textColor: UIColor(named: ColorsBravve.pink_white.rawValue))
         
-        let creditHourLabel = UILabel()
-        creditHourLabel.text = "crédito/hora"
-        creditHourLabel.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-        creditHourLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let creditHourLabel = createLabel("crédito/hora",
+                                          textColor: UIColor(named: ColorsBravve.pink_white.rawValue))
         
-        let dailyLabel = UILabel()
-        dailyLabel.text = space.daily_credits
-        dailyLabel.textColor = textColor
-        dailyLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(20).generateSizeForScreen)
+        let dailyLabel = createLabel(space.daily_credits)
         
-        let creditDayLabel = UILabel()
-        creditDayLabel.text = "crédito/dia"
-        creditDayLabel.textColor = textColor
-        creditDayLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let creditDayLabel = createLabel("crédito/dia")
         
         let buttons = createCapsuleButtons([space.space_classification?.name ?? "", space.space_type?.name ?? "", space.space_noise_level?.name ?? ""],
                                            .capsuleButton,
@@ -334,30 +314,18 @@ class DetailsClosedView: UIViewController {
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = 5
         
-        let briefingLabel = UILabel()
-        briefingLabel.text = """
+        let briefingLabel = createLabel("""
         Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
         
         Um refúgio paulistano na esquina da Gabriel Monteiro da Silva com a Juquiá,  o paraíso do design. Com uma pegada cultural, o Kamy propicia a seus frequentadores encontrar exposições de diferentes artistas no seu espaço.
         
         Trabalho + Café + Cultura, precisa de mais? Então reserve =).
-        """
-        briefingLabel.textColor = black_White
-        briefingLabel.numberOfLines = 0
-        briefingLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        """,
+                                        textColor: black_White)
         
-        let nameLabel = UILabel()
-        nameLabel.text = "Giovanna"
-        nameLabel.textColor = textColor
-        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let nameLabel = createLabel("Giovanna")
         
-        let officeLabel = UILabel()
-        officeLabel.text = "Community Manager"
-        officeLabel.textColor = textColor
-        officeLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let officeLabel = createLabel("Community Manager")
         
         view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, localLabel, descriptionLabel, hourlyLabel, creditHourLabel, dailyLabel, creditDayLabel, briefingLabel, nameLabel, officeLabel, localDetailsStackView, structureStackView, localFacilitiesStackView])
         
@@ -521,6 +489,20 @@ class DetailsClosedView: UIViewController {
         stackView.addArrangedSubview(label)
         
         return stackView
+    }
+    
+    func createLabel(_ text: String?,
+                     _ font: UIFont? = UIFont(name: FontsBravve.bold.rawValue,
+                                              size: CGFloat(12).generateSizeForScreen),
+                     textColor: UIColor? = UIColor(named: ColorsBravve.progressBarLabel.rawValue)) -> UILabel {
+        
+        let label = UILabel()
+        label.text = text ?? " "
+        label.font = font
+        label.numberOfLines = 0
+        label.textColor = textColor
+        
+        return label
     }
     
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
