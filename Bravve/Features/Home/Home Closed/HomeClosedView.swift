@@ -189,14 +189,7 @@ class HomeClosedView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         seletedFilterItems = selectedItemsArray
-        print("kaue \(spaceParameters.space_category_id ?? 0)")
-        print("kaue \(spaceParameters.space_type_id ?? 0)")
-        print("kaue \(spaceParameters.space_facilities_id ?? [])")
-        print("kaue \(spaceParameters.space_contract_Type ?? 0)")
-        print("kaue \(spaceParameters.space_classification_id ?? 0)")
-        print("kaue \(spaceParameters.space_noise_level_id ?? 0)")
-        print("kaue \(spaceParameters.seats_qty ?? 0)")
-        print("kaue \(seletedFilterItems)")
+  
         setupView()
         navigationSetup()
         setupConstraints()

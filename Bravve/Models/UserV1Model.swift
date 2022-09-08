@@ -97,17 +97,17 @@ struct UserParameters: Codable {
 }
 
 struct UpdateUserParameters: Codable {
-    var name: String
-    var phone_number: String
-    var email: String
-    var is_active: Bool
-    var is_superuser: Bool
-    var occupation: Occupations
-    var work_model: WorkModels
-    var hobbies: [Hobbies]
-    var interests: [Interests]
+    
+    var name: String?
+    var phone_number: String?
+    var email: String?
+    var is_active: Bool?
+    var is_superuser: Bool?
+    var occupation: Occupations?
+    var work_model: WorkModels?
+    var hobbies: [Hobbies]?
+    var interests: [Interests]?
     var message: String?
-
 }
 
 struct UpdatePasswordParameters: Codable {

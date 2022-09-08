@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EditProfileView: UIViewController {
     
     struct ViewElements {
         
-        let scroll: UIScrollView, hobbiesStack: UIStackView, mattersStack: UIStackView
+        let scroll: UIScrollView,
+            personalDataStack: UIStackView,
+            aboutWorkStack: UIStackView,
+            hobbiesStack: UIStackView,
+            mattersStack: UIStackView
     }
     
     private let way: UIImageView = {
@@ -71,24 +76,7 @@ class EditProfileView: UIViewController {
         
         let personalDataStack: UIStackView = {
             
-            let numberStack = editProfileViewModel.createStackView(labelText: "Número",
-                                              textFieldText: "+55 11 95585-1111",
-                                              textFieldTextColor: .gray)
-            
-            let emailStack = editProfileViewModel.createStackView(labelText: "Email",
-                                             textFieldText: "ana.maria@teste.com.br",
-                                             textFieldTextColor: .gray)
-            
-            let nameStack = editProfileViewModel.createStackView(labelText: "Nome Completo",
-                                            textFieldText: "Ana Maria Silva",
-                                            buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
-            
-            let passwordStack = editProfileViewModel.createStackView(labelText: "Senha",
-                                                textFieldText: "1234567",
-                                                isSecureTextEntry: true,
-                                                buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
-            
-            let personalDataStack = UIStackView(arrangedSubviews: [numberStack, emailStack, nameStack, passwordStack])
+            let personalDataStack = UIStackView()
             editProfileViewModel.setupStack(personalDataStack)
             
             return personalDataStack
@@ -98,15 +86,16 @@ class EditProfileView: UIViewController {
         
         let aboutWorkStack: UIStackView = {
             
-            let officeStack = editProfileViewModel.createStackView(labelText: "Área",
-                                              textFieldText: "Marketing",
-                                              buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
+//            let officeStack = editProfileViewModel.createStackView(labelText: "Área",
+//                                              textFieldText: "Marketing",
+//                                              buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
+//
+//            let workRegimeStack = editProfileViewModel.createStackView(labelText: "Regime de trabalho",
+//                                              textFieldText: "Pessoa Juridica",
+//                                              buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
             
-            let workRegimeStack = editProfileViewModel.createStackView(labelText: "Regime de trabalho",
-                                              textFieldText: "Pessoa Juridica",
-                                              buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
-            
-            let aboutWorkStack = UIStackView(arrangedSubviews: [officeStack, workRegimeStack])
+//            let aboutWorkStack = UIStackView(arrangedSubviews: [officeStack, workRegimeStack])
+            let aboutWorkStack = UIStackView()
             editProfileViewModel.setupStack(aboutWorkStack)
             
             return aboutWorkStack
@@ -207,12 +196,15 @@ class EditProfileView: UIViewController {
         
         let scrollView = UIScrollView()
         scrollView.addSubview(viewToScroll)
+        scrollView.delegate = self
         
         editProfileViewModel.constraint(the: viewToScroll, to: scrollView.contentLayoutGuide,
                                         by: [.top, .leading, .trailing, .bottom])
         viewToScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
         
         return ViewElements(scroll: scrollView,
+                            personalDataStack: personalDataStack,
+                            aboutWorkStack: aboutWorkStack,
                             hobbiesStack: hobbiesStack,
                             mattersStack: mattersStack)
     }()
@@ -237,11 +229,8 @@ class EditProfileView: UIViewController {
         view.setToDefaultBackgroundColor()
         view.addSubviews([way, photoView, editButton, tabBar, saveButton, viewElements.scroll])
         
-        editProfileViewModel.removeMasks(of: view)
         editProfileViewModel.delegate = self
-        
-        editProfileViewModel.setupHobbies()
-        editProfileViewModel.setupMatters()
+        editProfileViewModel.refreshUserData()
     }
     
     func setupDefaults() {
@@ -251,16 +240,8 @@ class EditProfileView: UIViewController {
     
     func setupConstraints() {
         
-//        editProfileViewModel.removeMasks(of: view)
-        
-        for subview in view.subviews {
-            
-            subview.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-//        editProfileViewModel.constraint(the: way, to: view, by: [.top, .trailing])
-        way.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        way.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        editProfileViewModel.removeMasks(of: view)
+        editProfileViewModel.constraint(the: way, to: view, by: [.top, .trailing])
         way.heightAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
         way.widthAnchor.constraint(equalToConstant: CGFloat(144).generateSizeForScreen).isActive = true
         
@@ -273,11 +254,7 @@ class EditProfileView: UIViewController {
         
         editButton.heightAnchor.constraint(equalToConstant: CGFloat(32).generateSizeForScreen).isActive = true
         editButton.widthAnchor.constraint(equalTo: editButton.heightAnchor).isActive = true
-//        editProfileViewModel.constraint(the: editButton, to: photoView, by: [.centerX, .centerY], view.frame.size.height/15)
-        editButton.centerXAnchor.constraint(equalTo: photoView.centerXAnchor,
-                                            constant: view.frame.size.height/15).isActive = true
-        editButton.centerYAnchor.constraint(equalTo: photoView.centerYAnchor,
-                                            constant: view.frame.size.height/15).isActive = true
+        editProfileViewModel.constraint(the: editButton, to: photoView, by: [.centerX, .centerY], view.frame.size.height/15)
         
         viewElements.scroll.topAnchor.constraint(equalTo: photoView.bottomAnchor,
                                                  constant: CGFloat(30).generateSizeForScreen).isActive = true
@@ -285,10 +262,7 @@ class EditProfileView: UIViewController {
         viewElements.scroll.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         viewElements.scroll.bottomAnchor.constraint(equalTo: saveButton.topAnchor).isActive = true
         
-//        editProfileViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
-        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        editProfileViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
     }
     
     override var prefersStatusBarHidden: Bool {true}
@@ -298,13 +272,39 @@ extension EditProfileView: EditProfileViewModelProtocol {
     
     func setHobbiesStack(_ hobbies: [String]) {
         
-        let hobbiesStacks = editProfileViewModel.createStackViews(createCapsuleButtons(hobbies))
+        let hobbiesStacks = editProfileViewModel.createStackViews(createCapsuleButtons(hobbies, .capsuleButton))
         viewElements.hobbiesStack.addArrangedSubviews(hobbiesStacks)
     }
     
-    func setMattersStack(_ matters: [String]) {
+    func setInterestsStack(_ matters: [String]) {
         
-        let mattersStacks = editProfileViewModel.createStackViews(createCapsuleButtons(matters))
+        let mattersStacks = editProfileViewModel.createStackViews(createCapsuleButtons(matters, .capsuleButton))
         viewElements.mattersStack.addArrangedSubviews(mattersStacks)
+    }
+    
+    func setImage(URL: URL?, placeholderImage: UIImage?) {
+        
+        photoView.sd_setImage(with: URL, placeholderImage: placeholderImage)
+    }
+    
+    func setStacks(personalDataStacks: [UIStackView], aboutWorkStacks: [UIStackView]) {
+        
+        viewElements.personalDataStack.addArrangedSubviews(personalDataStacks)
+        
+        viewElements.aboutWorkStack.addArrangedSubviews(aboutWorkStacks)
+    }
+}
+
+extension EditProfileView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
 }

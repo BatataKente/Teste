@@ -571,6 +571,10 @@ extension UIView {
         case "COOLWORKING": return UIColor(named: ColorsBravve.coolWorking.rawValue) ?? .black
         case "HOTEL": return UIColor(named: ColorsBravve.hotel.rawValue) ?? .black
         case "BOXOFFICE": return UIColor(named: ColorsBravve.boxOffice.rawValue) ?? .black
+        case "Reservado": return UIColor(red: 0.467, green: 0.718, blue: 0.341, alpha: 0.22)
+        case "Cancelado": return UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+        case "Concluída": return UIColor(red: 0.629, green: 0.629, blue: 0.629, alpha: 0.22)
+        case "Aguardando aprovação": return UIColor(red: 0.984, green: 0.856, blue: 0.18, alpha: 0.22)
         default: return .white
         }
     }
