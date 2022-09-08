@@ -114,7 +114,7 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
             let vc = CheckOutView()
             vc.modalPresentationStyle = .fullScreen
             self?.present(vc, animated: true)
-            flagReservation = 3
+            Flags.shared.flagReservation = 3
         }), on: self)
     }
     

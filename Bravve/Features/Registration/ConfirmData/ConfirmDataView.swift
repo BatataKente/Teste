@@ -221,7 +221,7 @@ class ConfirmDataView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        flag = 1
+        Flags.shared.flag = 1
         
         let data = UserDefaults.standard
         

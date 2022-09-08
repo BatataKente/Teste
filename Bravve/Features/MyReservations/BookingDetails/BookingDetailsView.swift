@@ -652,7 +652,7 @@ class BookingDetailsView: UIViewController {
             self.customAlertCancel.dismissAlert()
             self.present(vc, animated: true)
         }), on: self)
-        flagReservation = 2
+        Flags.shared.flagReservation = 2
     }
     
     /// This function deals with the customBar, its title, its back button and the action it has

@@ -6,9 +6,17 @@
 //
 
 import Foundation
-
-    var flag: Int = 0
-    var flagReservation: Int = 0
+struct Flags {
+    
+    static var shared = Flags()
+    var flag: Int
+    var flagReservation: Int
+    
+     init() {
+        self.flagReservation = 0
+        self.flag = 0
+    }
+}
 
 
 ///

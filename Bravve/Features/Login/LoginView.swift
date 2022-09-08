@@ -271,8 +271,7 @@ class LoginView: UIViewController {
     //MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationSetup(hidden: true)
-        flag = 0
+        Flags.shared.flag = 0
     }
     
     override func viewWillDisappear(_ animated: Bool) {
