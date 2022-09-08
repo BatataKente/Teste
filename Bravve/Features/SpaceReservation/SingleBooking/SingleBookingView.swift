@@ -250,6 +250,7 @@ class SingleBookingView: UIViewController {
         
         let reservation2View = Reservation2View()
         reservation2View.modalPresentationStyle = .fullScreen
+        reservation2View.spaceDetail = self.spaceDetails
         
             self.present(reservation2View, animated: true)
     }
