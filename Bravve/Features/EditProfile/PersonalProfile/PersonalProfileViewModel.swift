@@ -7,9 +7,10 @@
 
 import UIKit
 
+//MARK: - Protocol
 protocol PersonalProfileViewModelProtocol {
     
-   func setupLabels(email: String?, firstName: String)
+    func setupLabels(email: String?, firstName: String)
     
     func setupPic(URL: URL?, placeholderImage: UIImage?)
 }
@@ -21,13 +22,15 @@ class PersonalProfileViewModel {
     private let sessionManager = SessionManager()
     
     var uuid: String {
+        
         guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
+            
             print("Unable to get user uuid")
             return ""
         }
         return uuid
     }
-    
+    //MARK: - userData
     func userData() {
         
         sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: User?) in
@@ -41,7 +44,6 @@ class PersonalProfileViewModel {
             
             DispatchQueue.main.async {
                 
-                
                 guard let userName = user.name else {return}
                 let firstName = String(userName.split(separator: " ")[0])
                 
@@ -53,6 +55,7 @@ class PersonalProfileViewModel {
             
                 guard let pictures = pictures else {
                     print(statusCode as Any)
+                    
                 return
             }
             
@@ -60,26 +63,26 @@ class PersonalProfileViewModel {
             
                 guard let pictureUuid = pictures[0].picture else {
                     print(pictures[0].message as Any)
+                    
                 return
             }
             
                 self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
                 
                 guard let pictureURL = pictureURL?.picture_url else {
+                    
                     print(pictureURL?.message as Any)
                     print(statusCode as Any)
+                    
                     return
                 }
                 
                 DispatchQueue.main.async {
-//                    self.profilePic.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
-                    self.delegate?.setupPic(URL: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
-                }
 
+                    self.delegate?.setupPic(URL: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
+                    }
+                }
             }
         }
     }
-}
-   
-    
 }
