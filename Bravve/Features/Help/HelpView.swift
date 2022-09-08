@@ -11,7 +11,6 @@ import UIKit
 class HelpViewController: UIViewController {
     
     private var viewModel: HelpViewModel = HelpViewModel()
-    private let customBar = UIView()
     var iconClick: Bool = true
     var arrayBool: [Bool] = [false, true, true, true, true, true, true, true, true, true, true]
     var arrayImageButton: [String] = [ButtonsBravve.lessButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue]
@@ -22,6 +21,7 @@ class HelpViewController: UIViewController {
     
     private lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
     
@@ -1125,67 +1125,53 @@ class HelpViewController: UIViewController {
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.scrollView.delegate = self
         view.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        view.addSubviews([scrollView, customBar, tabBar])
+        view.addSubviews([scrollView, tabBar])
         tabBar.selectedItem = tabBar.items?[2]
         self.arrayAnswer = [answer1Label, answer2Label, answer3Label, answer4Label, answer5Label, answer6Label, answer7Label, answer8Label, answer9Label, answer10Label, answer11Label]
         self.arrayButtons =  [showAnswer1Button, showAnswer2Button, showAnswer3Button, showAnswer4Button, showAnswer5Button, showAnswer6Button, showAnswer7Button, showAnswer8Button, showAnswer9Button, showAnswer10Button, showAnswer11Button]
         self.arrayStackViews = [questionAnswer1StackView, questionAnswer2StackView, questionAnswer3StackView, questionAnswer4StackView, questionAnswer5StackView, questionAnswer6StackView, questionAnswer7StackView, questionAnswer8StackView, questionAnswer9StackView, questionAnswer10StackView, questionAnswer11StackView]
-       
         configConstraints()
         navigationSetup()
     }
     
+    //MARK: - Navigation Setup
+        private func navigationSetup(){
+            let navigationStatusBarView = UIView()
+            navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
+            navigationStatusBarView.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+            self.view.addSubview(navigationStatusBarView)
+             
+            NSLayoutConstraint.activate([
+                navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
+            ])
+            
+            let label = UILabel()
+            label.text = "Dúvidas frequentes"
+            label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
+            label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            let titleView = UIView()
+            titleView.translatesAutoresizingMaskIntoConstraints = false
+            titleView.addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: titleView.centerYAnchor)
+            ])
+            
+            self.navigationItem.titleView = titleView
+            
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.backWhite.rawValue), style: .plain, target: self, action: #selector(menuBarButtonTapped))
+            self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
+        }
     
-    private func navigationSetup(){
-        let look = UINavigationBarAppearance()
-        look.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-        self.navigationController?.navigationBar.scrollEdgeAppearance = look
-        let navigationStatusBarView = UIView()
-        navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
-        navigationStatusBarView.backgroundColor = UIColor(named: "blueBravve")
-        self.view.addSubview(navigationStatusBarView)
-         
-        NSLayoutConstraint.activate([
-            navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.scrollView.topAnchor),
-            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
-        ])
-        
-        let label = UILabel()
-        label.text = "Dúvidas Frequentes"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let titleView = UIView()
-        titleView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: titleView.centerYAnchor)
-        ])
-    
-        
-        self.navigationItem.titleView = titleView
-        
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.backWhite.rawValue), style: .plain, target: self, action: #selector(menuBarButtonTapped))
-        self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
-    }
-  
-    
-    @objc func menuBarButtonTapped(){
-        self.navigationController?.popViewController(animated: true)
-    
-    
-    }
-    
-    //MARK: - func setupDefaults
-    
-    
+        @objc func menuBarButtonTapped(){
+            self.navigationController?.popViewController(animated: true)
+        }
+
     //MARK: - Tap Functions
     
     @objc func tapEmailSupport(gesture: UITapGestureRecognizer) {
@@ -1345,18 +1331,16 @@ class HelpViewController: UIViewController {
     //MARK: - func configConstraints
     private func configConstraints() {
         
-        
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, tabBar)
-        
-        uiView.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        uiView.constraintInsideTo(.width, scrollView.frameLayoutGuide)
-        
         NSLayoutConstraint.activate([
+            
+            self.scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            
+            self.uiView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.uiView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+            self.uiView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 27),
+            self.uiView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -50),
             
             self.headerView.topAnchor.constraint(equalTo: self.uiView.topAnchor),
             self.headerView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor),
@@ -1454,18 +1438,13 @@ class HelpViewController: UIViewController {
             self.questionAnswer11StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer11StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
             self.questionAnswer11StackView.bottomAnchor.constraint(equalTo: uiView.bottomAnchor, constant: -10),
+            
+            self.tabBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.tabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.tabBar.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            
         ])
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
-    }
-}
-
-extension HelpViewController: UIScrollViewDelegate{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.navigationController?.navigationBar.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
     }
 }
 //MARK: - Extension UITapGestureRecognizer
