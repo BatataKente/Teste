@@ -10,14 +10,14 @@ import UIKit
 protocol EditProfileViewModelProtocol {
     
     func setHobbiesStack(_ hobbies: [String])
-    func setMattersStack(_ matters: [String])
+    func setInterestsStack(_ interests: [String])
+    func setImage(URL: URL?, placeholderImage: UIImage?)
+    func setStacks(personalDataStacks: [UIStackView], aboutWorkStacks: [UIStackView])
 }
 
 class EditProfileViewModel {
     
-    private let exampleApiArray_1: [String] = ["a","bola","casa","dedo","elefante","faca","g","h","i","jaca","k","l","marmanjo","ouro","panaca","q"]
-    
-    private let exampleApiArray_2: [String] = ["a","b","cabelo","dado","esfaqueado","f","gol","h","i","j","k","lero","manga","o","p","queijo"]
+    private var user: UpdateUserParameters = UpdateUserParameters(name: nil, phone_number: nil, email: nil, is_active: nil, is_superuser: nil, occupation: nil, work_model: nil, hobbies: nil, interests: nil, message: nil)
     
     var delegate: EditProfileViewModelProtocol?
     
@@ -27,6 +27,197 @@ class EditProfileViewModel {
     ///   - color: the collor of text(default is Collorsbravve.label.rawValue)
     ///   - font: font(default: FontsBravve.medium.rawValue)
     /// - Returns: the label
+    private let sessionManager = SessionManager()
+    
+    var password: String {
+        guard let uuid = UserDefaults.standard.string(forKey: "userPassword") else {
+            print("Unable to get user password")
+            return ""
+        }
+        return uuid
+    }
+    
+    var uuid: String {
+        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
+            print("Unable to get user uuid")
+            return ""
+        }
+        return uuid
+    }
+    
+    func refreshUserData() {
+        
+        sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbies: [Hobbies]? ) in
+
+            guard let hobbies = hobbies else {
+                
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+                
+            }
+            
+            print(hobbies)
+            
+            var hobbiesNames: [String] = []
+            
+            for hobby in hobbies {
+                
+                guard let hobby = hobby.name else {return}
+                hobbiesNames.append(hobby)
+            }
+            
+            self.delegate?.setHobbiesStack(hobbiesNames)
+        }
+        
+        sessionManager.getDataArray(endpoint: .usersInterests) { (statusCode, error, interests: [Interests]? ) in
+
+            guard let interests = interests else {
+                
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            print(interests)
+            
+            var interestsNames: [String] = []
+            
+            for interest in interests {
+                
+                guard let interest = interest.name else {return}
+                interestsNames.append(interest)
+            }
+            
+            self.delegate?.setInterestsStack(interestsNames)
+        }
+        
+        sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: UpdateUserParameters?) in
+
+            guard let user = user else {
+                print(user?.message as Any)
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                
+                var personalDataStacks: [UIStackView] = []
+                var aboutWorkStacks: [UIStackView] = []
+                
+                if let phone_number = user.phone_number {
+                    let numberStack = self.createStackView(labelText: "Número",
+                                                           textFieldText: phone_number,
+                                                           textFieldTextColor: .gray)
+                    personalDataStacks.append(numberStack)
+                }
+                
+                if let email = user.email {
+                    
+                    let emailStack = self.createStackView(labelText: "Email",
+                                                          textFieldText: email,
+                                                          textFieldTextColor: .gray)
+                    personalDataStacks.append(emailStack)
+                }
+                
+                if let name = user.name {
+                    
+                    let nameStack = self.createStackView(labelText: "Nome Completo",
+                                                         textFieldText: name,
+                                                         buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue),
+                                                         textFieldTag: 0)
+                    personalDataStacks.append(nameStack)
+                }
+                
+                let passwordStack = self.createStackView(labelText: "Senha",
+                                                         textFieldText: self.password,
+                                                         isSecureTextEntry: true,
+                                                         buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue),
+                                                         textFieldTag: 1)
+                personalDataStacks.append(passwordStack)
+                
+                if let workModelName = user.work_model?.name {
+                    
+                    let officeStack = self.createStackView(labelText: "Área",
+                                                           textFieldText: workModelName,
+                                                           buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue),
+                                                           textFieldTag: 2)
+                    aboutWorkStacks.append(officeStack)
+                }
+                
+                if let occupationName = user.occupation?.name {
+                    
+                    let workRegimeStack = self.createStackView(labelText: "Regime de trabalho",
+                                                               textFieldText: occupationName,
+                                                               buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue),
+                                                               textFieldTag: 3)
+                    aboutWorkStacks.append(workRegimeStack)
+                }
+                
+                self.user = user
+                self.delegate?.setStacks(personalDataStacks: personalDataStacks,
+                                         aboutWorkStacks: aboutWorkStacks)
+            }
+        }
+        
+        sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
+            
+                    guard let pictures = pictures else {
+                        print(statusCode as Any)
+                    return
+                }
+                
+                if !pictures.isEmpty {
+                
+                    guard let pictureUuid = pictures[0].picture else {
+                        print(pictures[0].message as Any)
+                    return
+                }
+                
+                    self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
+                    
+                    guard let pictureURL = pictureURL?.picture_url else {
+                        print(pictureURL?.message as Any)
+                        print(statusCode as Any)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.delegate?.setImage(URL: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
+                    }
+                }
+            }
+        }
+    }
+    
+    private func memorizeData(name: String? = nil,
+//                              password: String? = nil,
+                              workModelName: String? = nil,
+                              occupationName: String? = nil) {
+        
+        var parameter = user
+        
+        if let name = name {parameter.name = name}
+//            if let password = password {user.password = password}
+        if let workModelName = workModelName {parameter.work_model?.name = workModelName}
+        if let occupationName = occupationName {parameter.occupation?.name = occupationName}
+        
+        sessionManager.putDataWithResponse(uuid: uuid,
+                                           endpoint: .usersUuid,
+                                           parameters: parameter) { (statusCode, error, user: UpdateUserParameters?) in
+            
+            guard let user = user else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            self.user = user
+        }
+    }
+        
     func createLabel(_ text: String,
                      color: ColorsBravve = .label,
                      _ font: UIFont? = UIFont(name: FontsBravve.medium.rawValue,
@@ -65,7 +256,8 @@ class EditProfileViewModel {
                          textFieldText: String,
                          textFieldTextColor: UIColor? = UIColor(named: ColorsBravve.label.rawValue),
                          isSecureTextEntry: Bool = false,
-                         buttonImage: UIImage? = nil) -> UIStackView {
+                         buttonImage: UIImage? = nil,
+                         textFieldTag: Int? = nil) -> UIStackView {
         
         let verticalMargins = CGFloat(12).generateSizeForScreen
         let horizontalMargins = CGFloat(17).generateSizeForScreen
@@ -83,6 +275,7 @@ class EditProfileViewModel {
         textField.font = UIFont(name: FontsBravve.medium.rawValue,
                                 size: CGFloat(15).generateSizeForScreen)
         textField.isSecureTextEntry = isSecureTextEntry
+        if let textFieldTag = textFieldTag {textField.tag = textFieldTag}
         
         let stackView = UIStackView(arrangedSubviews: [label, textField])
         stackView.axis = .vertical
@@ -113,6 +306,11 @@ class EditProfileViewModel {
                 else {
                     
                     stackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
+                    
+                    if textField.tag == 0 {self.memorizeData(name: textField.text)}
+//                    else if textField.tag == 1 {self.memorizeData(name: textField.text)}
+                    else if textField.tag == 2 {self.memorizeData(workModelName: textField.text)}
+                    else if textField.tag == 3 {self.memorizeData(occupationName: textField.text)}
                 }
             }
             
@@ -214,15 +412,4 @@ class EditProfileViewModel {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-    
-    func setupHobbies() {
-        
-        delegate?.setHobbiesStack(exampleApiArray_1)
-    }
-    
-    func setupMatters() {
-        
-        delegate?.setMattersStack(exampleApiArray_2)
-    }
 }
- 

@@ -332,6 +332,7 @@ class LoginView: UIViewController {
         if self.viewModel.isValid(email: email, password: password) == true{
             
             self.viewModel.loginUser(email: email, password: password)
+            UserDefaults.standard.setValue(password, forKey: "userPassword")
             
         } else{
             loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
@@ -525,7 +526,7 @@ extension UIStackView {
     }
 }
 
-extension LoginView: LoginViewModelProtocol {
+extension LoginView: LoginViewModelProtocol {    
     func showCustomAlert(message: String) {
         self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
                                    message: message,

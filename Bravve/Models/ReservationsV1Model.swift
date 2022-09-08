@@ -31,11 +31,15 @@ struct Reservations: Codable {
     var checkout_ts: String?
     var payment_type_id: Int?
     var payment_type_name: String?
-    var payment_amount: Double?
+    var payment_amount: String?
     var space_contact: SpaceContact?
     var picture: [SpacePicture]?
     var space_address: SpaceAddress?
     var message: String?
+}
+
+struct ReservationsListaParameter: Codable {
+    var queryType: String
 }
 
 struct SpaceAddress: Codable {
@@ -43,7 +47,7 @@ struct SpaceAddress: Codable {
     var street_number: Int?
     var neighborhood: String?
     var complement: String?
-    var postal_code: Int?
+    var postal_code: String?
     var state_name: String?
     var city_name: String?
     var message: String?

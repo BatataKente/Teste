@@ -9,6 +9,8 @@ import UIKit
 
 class MyBookingView: UIViewController {
     
+    private let sessionManager = SessionManager()
+    
     private let customBar = UIView()
     
     private let topRightWay = UIImageView()
@@ -32,10 +34,26 @@ class MyBookingView: UIViewController {
         return tabBar
     }()
     
+//    private func getReservations() {
+//        
+//        sessionManager.getDataArray(endpoint: .reservationsOpen){ (statusCode, error, openReservations: [Reservations]?) in
+//
+//            guard let openReservations = openReservations else {
+//                print(statusCode as Any)
+//                print(error?.localizedDescription as Any)
+//                return
+//            }
+//            
+//                self.reservations = openReservations
+//            
+//        }
+//        print("kaue3 \(reservations)")
+//    }
+    
     override var prefersStatusBarHidden: Bool {true}
 
     override func viewDidLoad() {
-        
+        print("kaue2 \(UserReservations.reservations)")
         super.viewDidLoad()
         
         view.setToDefaultBackgroundColor()
@@ -77,7 +95,7 @@ extension MyBookingView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return UserReservations.reservations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,7 +105,9 @@ extension MyBookingView: UITableViewDelegate, UITableViewDataSource {
         
         cell?.backgroundColor = .clear
         cell?.delegate = self
-        cell?.setupCell()
+        
+        cell?.setupCell(reservation: UserReservations.reservations[indexPath.row])
+    
         
         if cell?.textLabel?.text != "" {
             

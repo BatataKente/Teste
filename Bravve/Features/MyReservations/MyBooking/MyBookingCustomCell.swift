@@ -11,7 +11,7 @@ protocol MyBookingCustomCellDelegate: AnyObject {
     
     func presentViewController(_ viewController: UIViewController)
 }
-
+    
 class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
@@ -164,15 +164,15 @@ class MyBookingCustomCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell() {
+    func setupCell(reservation: Reservations) {
         
-        typeTagLabel.text = "BOXOFFICE"
-        typeTagLabel.backgroundColor = UIColor(named: "boxOffice")
-        topTitleLabel.text = "Numa esquina"
+        typeTagLabel.text = reservation.space_category?.name?.uppercased()
+        typeTagLabel.backgroundColor = getTitleLabelBackgroundColor(reservation.space_category?.name?.uppercased() ?? "")
+        //opTitleLabel.text = "Numa esquina" (A label está dividida e será necessário mexer na tela)
         bottomTitleLabel.text = "charmosa, um hotel"
         spaceImage.image = UIImage(named: "imageReservs")
         spaceNameLabel.text = "Hotel Saint"
-        reservedLabel.text = "RESERVADO"
+        reservedLabel.text = reservation.reservation_status_name
         spaceSubtitleLabel.text = "UM Coffee Co."
         locationLabel.text = "São Paulo / Jardim Paulistano"
         dateLabel.text = "21/01/2022 - 22/01/2022"
