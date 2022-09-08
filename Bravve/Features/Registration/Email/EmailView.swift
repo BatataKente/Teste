@@ -43,18 +43,11 @@ class EmailView: UIViewController {
                                                               IconsBravve.pencilGray.rawValue])
         
         let doubleDismissHandler = {(action: UIAction) in
-            
-            if let phoneView = self.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
-                
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
-            }
+            self.popToViewController(numberOfViewsToBack: 2)
         }
         
         let dismissHandler = {(action: UIAction) in
-            
-            self.dismiss(animated: false)
+            self.popToViewController(numberOfViewsToBack: 1)
         }
         
         buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
@@ -181,7 +174,12 @@ class EmailView: UIViewController {
         
         fatalError("init(coder:) has not been implemented")
     }
+    //MARK: - Navigation Setup
     
+    private func popToViewController(numberOfViewsToBack: Int){
+        guard let navigationViewControllers = self.navigationController?.viewControllers else {return}
+        self.navigationController?.popToViewController(navigationViewControllers[navigationViewControllers.count - (1 + numberOfViewsToBack)], animated: true)
+    }
     
     //MARK: setupView
     private func setupView() {
@@ -194,17 +192,10 @@ class EmailView: UIViewController {
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
             if flag == 0{
-                if let phoneView = self.presentingViewController,
-                   let nomeView = phoneView.presentingViewController,
-                   let loginView = nomeView.presentingViewController {
-                    
-                    phoneView.view.isHidden = true
-                    nomeView.view.isHidden = true
-                    loginView.dismiss(animated: true)
-                }
+                self.popToViewController(numberOfViewsToBack: 3)
                 
             }else{
-                self.dismiss(animated: true)
+                self.popToViewController(numberOfViewsToBack: 1)
             }
         }
         

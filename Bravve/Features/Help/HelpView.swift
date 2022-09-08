@@ -1125,24 +1125,66 @@ class HelpViewController: UIViewController {
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.scrollView.delegate = self
         view.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
         view.addSubviews([scrollView, customBar, tabBar])
         tabBar.selectedItem = tabBar.items?[2]
         self.arrayAnswer = [answer1Label, answer2Label, answer3Label, answer4Label, answer5Label, answer6Label, answer7Label, answer8Label, answer9Label, answer10Label, answer11Label]
         self.arrayButtons =  [showAnswer1Button, showAnswer2Button, showAnswer3Button, showAnswer4Button, showAnswer5Button, showAnswer6Button, showAnswer7Button, showAnswer8Button, showAnswer9Button, showAnswer10Button, showAnswer11Button]
         self.arrayStackViews = [questionAnswer1StackView, questionAnswer2StackView, questionAnswer3StackView, questionAnswer4StackView, questionAnswer5StackView, questionAnswer6StackView, questionAnswer7StackView, questionAnswer8StackView, questionAnswer9StackView, questionAnswer10StackView, questionAnswer11StackView]
-        setupDefaults()
+       
         configConstraints()
+        navigationSetup()
     }
     
+    
+    private func navigationSetup(){
+        let look = UINavigationBarAppearance()
+        look.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        self.navigationController?.navigationBar.scrollEdgeAppearance = look
+        let navigationStatusBarView = UIView()
+        navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
+        navigationStatusBarView.backgroundColor = UIColor(named: "blueBravve")
+        self.view.addSubview(navigationStatusBarView)
+         
+        NSLayoutConstraint.activate([
+            navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
+        ])
+        
+        let label = UILabel()
+        label.text = "Dúvidas Frequentes"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
+        label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let titleView = UIView()
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        titleView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: titleView.centerYAnchor)
+        ])
+    
+        
+        self.navigationItem.titleView = titleView
+        
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.backWhite.rawValue), style: .plain, target: self, action: #selector(menuBarButtonTapped))
+        self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
+    }
+  
+    
+    @objc func menuBarButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    
+    
+    }
     
     //MARK: - func setupDefaults
-    private func setupDefaults(){
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes"){
-            _ in
-            self.dismiss(animated: true)
-        }
-    }
+    
     
     //MARK: - Tap Functions
     
@@ -1303,7 +1345,7 @@ class HelpViewController: UIViewController {
     //MARK: - func configConstraints
     private func configConstraints() {
         
-        scrollView.constraintOutsideTo(.top, customBar)
+        
         scrollView.constraintInsideTo(.leading, view)
         scrollView.constraintInsideTo(.trailing, view)
         scrollView.constraintOutsideTo(.bottom, tabBar)
@@ -1418,6 +1460,12 @@ class HelpViewController: UIViewController {
         tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
         tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
         
+    }
+}
+
+extension HelpViewController: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.navigationController?.navigationBar.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
     }
 }
 //MARK: - Extension UITapGestureRecognizer

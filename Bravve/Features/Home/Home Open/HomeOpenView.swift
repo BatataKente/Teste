@@ -174,30 +174,28 @@ class HomeOpenView: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        
         true
     }
     
 
     //MARK: - View Lifecycle
+    
+    override func loadView() {
+        super.loadView()
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         seletedFilterItems = selectedItemsArray
-        
         setupView()
         setupConstraints()
         setupDefaults()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = false
-        navigationSetup()
-    }
+ 
     
     override func viewDidDisappear(_ animated: Bool) {
-        
+        navigationSetup()
         super.viewDidDisappear(animated)
         tabBar.selectedItem = tabBar.items?[0]
     }
@@ -214,7 +212,8 @@ class HomeOpenView: UIViewController {
         NSLayoutConstraint.activate([
             navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
             navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 50)
+            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.stackView.topAnchor),
+            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
         ])
         //Center View
         let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
@@ -243,6 +242,7 @@ class HomeOpenView: UIViewController {
         self.navigationItem.titleView = centerImageView
         print("menu")
     }
+
     
     //MARK: - createStackView
     private func createStackView(_ views: [UIView]) -> UIStackView {
@@ -337,7 +337,8 @@ class HomeOpenView: UIViewController {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        stackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        // scrollView.topAnchor.contraint(equalTo: self.view.contentLayoutGuide.topAchor),
+        
 //        homeOpenViewModel.constraint(the: stackView, to: view, by: [.leading, .trailing])
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -442,6 +443,11 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
 }
 
 extension HomeOpenView: HomeOpenViewModelProtocol {
+    func showNavigation() {
+        self.navigationController?.navigationBar.isHidden = false
+        navigationSetup()
+    }
+    
     
     func setSpaces(_ spaces: [Space]) {
         
@@ -450,7 +456,6 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
     }
     
     func setCoverView(_ alpha: CGFloat) {
-        
         self.coverView.alpha = alpha
         self.imageView.alpha = alpha
     }

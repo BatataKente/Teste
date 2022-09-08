@@ -371,7 +371,8 @@ class OpenDetailsView: UIViewController {
         NSLayoutConstraint.activate([
             navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
             navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 50)
+            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
         ])
         
         let label = UILabel()

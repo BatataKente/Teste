@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PhoneView: UIViewController {
     
@@ -36,14 +37,15 @@ class PhoneView: UIViewController {
                                                               IconsBravve.pencilGray.rawValue])
         
         let handler = {(action: UIAction) in
-            
-            self.dismiss(animated: false)
+            self.popViewController()
         }
         
         buttons[0].addAction(UIAction(handler: handler), for: .touchUpInside)
         
         return buttons
     }()
+    
+  
     //MARK: Elements
     private let infoLabel: UILabel = {
         
@@ -249,6 +251,11 @@ class PhoneView: UIViewController {
         
         true
     }
+    //MARK: - Navigation Setup
+    
+    private func popViewController(){
+        self.navigationController?.popViewController(animated: true)
+    }
     //MARK: setupView
     private func setupView() {
         
@@ -260,14 +267,11 @@ class PhoneView: UIViewController {
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
             if flag == 0{
-                if let nomeView = self.presentingViewController,
-                   let loginView = nomeView.presentingViewController {
-                    
-                    nomeView.view.isHidden = true
-                    loginView.dismiss(animated: true)
-                }
+                guard let navVC = self.navigationController?.viewControllers else {return}
+                print("lucas", navVC)
+                self.navigationController?.popToViewController(navVC[navVC.count - 3], animated: true)
             } else{
-                self.dismiss(animated: true)
+                self.popViewController()
             }
         }
         
@@ -374,12 +378,9 @@ class PhoneView: UIViewController {
         
         if flag == 0{
         let emailView = EmailView(userToRegister)
-        emailView.modalPresentationStyle = .fullScreen
-        present(emailView, animated: false)
+            self.navigationController?.pushViewController(emailView, animated: true)
         } else{
-            
-            
-            self.dismiss(animated: true)
+            self.popViewController()
         }
     }
     //MARK: changeText

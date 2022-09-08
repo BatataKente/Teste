@@ -214,7 +214,8 @@ class HomeClosedView: UIViewController {
         NSLayoutConstraint.activate([
             navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
             navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 50)
+            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.stackView.topAnchor),
+            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
@@ -326,7 +327,7 @@ class HomeClosedView: UIViewController {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true

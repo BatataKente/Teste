@@ -36,7 +36,7 @@ class HomeOpenViewModel {
         var parameters = spaceParameters
         
         sessionManager.getOpenDataArray (endpoint: .utilsStates){ (statusCode, error, states: [States]?) in
-
+            
             guard let states = states else {
                 print(statusCode as Any)
                 print(error?.localizedDescription as Any)
@@ -45,16 +45,16 @@ class HomeOpenViewModel {
             }
             
             var stateButtons = [UIButton]()
-
+            
             for state in states {
-
+                
                 let stateButton = UIButton()
                 stateButton.setTitle(state.code, for: .normal)
                 stateButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                                     for: .normal)
+                                          for: .normal)
                 stateButton.titleLabel?.font = font
                 let stateHandler = {(action: UIAction) in
-
+                    
                     self.customBarWithFilter.stateLabel.font = smallFont
                     self.customBarWithFilter.stateChosedLabel.text = stateButton.currentTitle
                     self.customBarWithFilter.cityChosedLabel.isHidden = true
@@ -76,8 +76,9 @@ class HomeOpenViewModel {
                         
                         UIView.animate(withDuration: 0.6,
                                        delay: 0.3) {
-
+                            
                             self.delegate?.setCoverView(0)
+                            self.delegate?.showNavigation()
                         }
                     }
                     
@@ -96,13 +97,13 @@ class HomeOpenViewModel {
                         var cityButtons = [UIButton]()
                         
                         for city in cities {
-
+                            
                             let cityButton = UIButton()
                             cityButton.setTitle(city.name, for: .normal)
                             cityButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                                                 for: .normal)
+                                                     for: .normal)
                             cityButton.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
-                                                             size: CGFloat(15).generateSizeForScreen)
+                                                                 size: CGFloat(15).generateSizeForScreen)
                             
                             self.customBarWithFilter.leftButton.isEnabled = true
                             self.customBarWithFilter.rightButton.isEnabled = true
@@ -128,8 +129,9 @@ class HomeOpenViewModel {
                                     
                                     UIView.animate(withDuration: 0.6,
                                                    delay: 0.3) {
-
+                                        
                                         self.delegate?.setCoverView(0)
+                                        self.delegate?.showNavigation()
                                     }
                                 }
                             }
@@ -163,8 +165,9 @@ class HomeOpenViewModel {
             
             UIView.animate(withDuration: 0.6,
                            delay: 0.3) {
-
+                
                 self.delegate?.setCoverView(0)
+                self.delegate?.showNavigation()
             }
         }
     }
@@ -209,7 +212,7 @@ class HomeOpenViewModel {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-
+    
 }
 
 protocol HomeOpenViewModelProtocol {
@@ -223,4 +226,6 @@ protocol HomeOpenViewModelProtocol {
     func setupLeftDropDown(_ buttons: [UIButton])
     
     func setupRightDropDown(_ buttons: [UIButton])
+    
+    func showNavigation()
 }
