@@ -649,7 +649,7 @@ class HistoryDetailsView: UIViewController {
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
             _ in
-            if flagReservation == 4 {
+            if Flags.shared.flagReservation == 4 {
                 let vc = HomeClosedView()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)

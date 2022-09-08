@@ -732,7 +732,7 @@ class CheckOutView: UIViewController {
                 let vc = HistoryDetailsView()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
-                flagReservation = 4
+                Flags.shared.flagReservation = 4
             }), on: self)
         }), cancelAttributed: "Cancelar Check-out", cancelHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()
@@ -745,7 +745,7 @@ class CheckOutView: UIViewController {
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Check out"){
             _ in
-            if flagReservation == 3 {
+            if Flags.shared.flagReservation == 3 {
                 let vc = HomeClosedView()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)

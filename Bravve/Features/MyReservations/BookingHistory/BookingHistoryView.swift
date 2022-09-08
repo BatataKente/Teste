@@ -56,7 +56,7 @@ class BookingHistoryView: UIViewController {
         tabBar.selectedItem = tabBar.items?[1]
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") { _ in
-            if flagReservation == 2 {
+            if Flags.shared.flagReservation == 2 {
                 let vc = HomeClosedView()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)

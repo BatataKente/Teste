@@ -272,7 +272,7 @@ class LoginView: UIViewController {
     //MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        flag = 0
+        Flags.shared.flag = 0
     }
     
     //MARK: - setupView

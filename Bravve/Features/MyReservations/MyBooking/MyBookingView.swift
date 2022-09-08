@@ -91,7 +91,7 @@ extension MyBookingView: UITableViewDelegate, UITableViewDataSource {
         
         if cell?.textLabel?.text != "" {
             
-            flagReservation = 1
+            Flags.shared.flagReservation = 1
         }
     
         return cell ?? UITableViewCell()

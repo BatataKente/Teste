@@ -234,7 +234,7 @@ class PhoneView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if flag == 1{
+        if Flags.shared.flag == 1{
             self.stackViewTapped()
             self.viewElements.rightTextField.becomeFirstResponder()
             self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Number")
@@ -259,7 +259,7 @@ class PhoneView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            if flag == 0{
+            if Flags.shared.flag == 0{
                 if let nomeView = self.presentingViewController,
                    let loginView = nomeView.presentingViewController {
                     
@@ -372,7 +372,7 @@ class PhoneView: UIViewController {
 //        userToRegister.phone_number = viewElements.rightTextField.text ?? ""
         UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Number")
         
-        if flag == 0{
+        if Flags.shared.flag == 0{
         let emailView = EmailView(userToRegister)
         emailView.modalPresentationStyle = .fullScreen
         present(emailView, animated: false)
