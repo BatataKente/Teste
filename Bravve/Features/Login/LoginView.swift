@@ -263,7 +263,6 @@ class LoginView: UIViewController {
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationSetup()
         setupView()
         setupLayoutConstraints()
         viewModel.delegate = self
@@ -272,13 +271,19 @@ class LoginView: UIViewController {
     //MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationSetup(hidden: true)
         flag = 0
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationSetup(hidden: false)
     }
     
     //MARK: - Navigation Setup
     
-    private func navigationSetup(){
-        self.navigationController?.navigationBar.isHidden = true
+    private func navigationSetup(hidden: Bool){
+        self.navigationController?.navigationBar.isHidden = hidden
     }
     
     
@@ -538,7 +543,6 @@ extension LoginView: LoginViewModelProtocol {
     
     func presentNextScreen() {
         let homeClosedViewController = HomeClosedView()
-        let closedNavigationController = UINavigationController(rootViewController: homeClosedViewController)
-        self.navigationController?.pushViewController(closedNavigationController, animated: true)
+        self.navigationController?.pushViewController(homeClosedViewController, animated: true)
     }
 }

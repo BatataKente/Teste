@@ -139,7 +139,7 @@ class NomeView: UIViewController {
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
-        
+       
         setupView()
         setupDefaults()
         setupTargets()
@@ -150,6 +150,7 @@ class NomeView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationSetup()
         if flag == 1{
             self.stackViewTapped()
             self.viewElements.rightTextField.becomeFirstResponder()
@@ -167,6 +168,9 @@ class NomeView: UIViewController {
         true
     }
     
+    private func navigationSetup(){
+        self.navigationController?.navigationBar.isHidden = true
+    }
     
     //MARK: setupView
     private func setupView() {

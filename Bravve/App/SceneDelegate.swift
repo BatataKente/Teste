@@ -17,8 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let rootViewController = HomeOpenView()
         let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.navigationBar.backgroundColor = UIColor(named: "blueBravve")
+//        let look = UINavigationBarAppearance()
+//        look.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+//        navigationController.navigationBar.standardAppearance = look
+//        navigationController.navigationBar.scrollEdgeAppearance = look
+        navigationController.navigationBar.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
