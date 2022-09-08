@@ -150,7 +150,7 @@ class NomeView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if flag == 1{
+        if Flags.shared.flag == 1{
             self.stackViewTapped()
             self.viewElements.rightTextField.becomeFirstResponder()
             self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Name")
@@ -259,7 +259,7 @@ class NomeView: UIViewController {
     @objc func changeScreen() {
         UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Name")
         
-        if flag == 0{
+        if Flags.shared.flag == 0{
         let phoneView = PhoneView(userToRegister)
         phoneView.modalPresentationStyle = .fullScreen
         present(phoneView, animated: false)

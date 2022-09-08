@@ -170,7 +170,7 @@ class EmailView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if flag == 1{
+        if Flags.shared.flag == 1{
             self.stackViewTapped()
             self.viewElements.rightTextField.becomeFirstResponder()
             self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Mail")
@@ -193,7 +193,7 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            if flag == 0{
+            if Flags.shared.flag == 0{
                 if let phoneView = self.presentingViewController,
                    let nomeView = phoneView.presentingViewController,
                    let loginView = nomeView.presentingViewController {
@@ -286,7 +286,7 @@ class EmailView: UIViewController {
         //        userToRegister.email = viewElements.rightTextField.text ?? ""
         UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Mail")
         
-        if flag == 0{
+        if Flags.shared.flag == 0{
             let passwordView = PasswordView(userToRegister)
             passwordView.modalPresentationStyle = .fullScreen
             present(passwordView, animated: false)
