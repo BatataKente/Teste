@@ -16,7 +16,7 @@ class PersonalProfileView: UIViewController{
                                                                    ButtonsBravve.userLoginPink.rawValue
                                                                   ])
     
-    
+    //MARK: - wayImage
     let wayImage: UIImageView = {
         let image = UIImageView()
         image.setWayToDefault(.wayPassword)
@@ -24,6 +24,7 @@ class PersonalProfileView: UIViewController{
         return image
     }()
     
+    //MARK: - profilePic
     let profilePic: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "photo")
@@ -33,6 +34,7 @@ class PersonalProfileView: UIViewController{
         return image
     }()
     
+    //MARK: - helloLabel
     let helloLabel: UILabel = {
         let label = UILabel()
         label.text = "Olá, Ana!"
@@ -41,6 +43,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - subtitleLabel
     let subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "ana.maria@teste.com.br"
@@ -50,6 +53,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - backView
     var backView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "background")
@@ -60,6 +64,7 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - infoLabel
     let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "Foursys"
@@ -68,6 +73,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - subInfoLabel
     let subInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "Conta corporativa"
@@ -76,6 +82,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - separatorView
     var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "background")
@@ -84,6 +91,7 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - bravveInfoLabel
     let bravveInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "Bravve"
@@ -92,6 +100,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - subBravveInfoLabel
     let subBravveInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "Conta corporativa"
@@ -100,12 +109,14 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - infoImage
     let infoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "info-circle")
         return image
     }()
     
+    //MARK: - reservationLabel
     let reservationLabel: UILabel = {
         let label = UILabel()
         label.text = "Histórico de reservas"
@@ -114,12 +125,14 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - nextPageButton
     let nextPageButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowProfile"), for: .normal)
         return button
     }()
 
+    //MARK: - separatorView2
     var separatorView2: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
@@ -128,12 +141,14 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - helpImage
     let helpImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "info-circle")
         return image
     }()
     
+    //MARK: - helpLabel
     let helpLabel: UILabel = {
         let label = UILabel()
         label.text = "Ajuda"
@@ -142,12 +157,14 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - nextPageButton2
     let nextPageButton2: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowProfile"), for: .normal)
         return button
     }()
     
+    //MARK: - separatorView3
     var separatorView3: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
@@ -156,12 +173,14 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - policyImage
     let policyImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "book")
         return image
     }()
     
+    //MARK: - policyLabel
     let policyLabel: UILabel = {
         let label = UILabel()
         label.text = "Política e Termos de uso"
@@ -170,12 +189,14 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - nextPageButton3
     let nextPageButton3: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowProfile"), for: .normal)
         return button
     }()
     
+    //MARK: - separatorView4
     var separatorView4: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
@@ -184,12 +205,14 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - logoutImage
     let logoutImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "exitProfile")
         return image
     }()
     
+    //MARK: - logoutLabel
     let logoutLabel: UILabel = {
         let label = UILabel()
         label.text = "Sair"
@@ -198,12 +221,14 @@ class PersonalProfileView: UIViewController{
         return label
     }()
 
+    //MARK: - nextPageButton4
     let nextPageButton4: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowProfile"), for: .normal)
         return button
     }()
     
+    //MARK: - separatorView5
     var separatorView5: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
@@ -212,6 +237,7 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - smallview
     var smallView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
@@ -222,6 +248,7 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - numberLabel
     var numberLabel: UILabel = {
         let label = UILabel()
         label.text = "112"
@@ -230,6 +257,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - creditLabel
     var creditLabel: UILabel = {
         let label = UILabel()
         label.text = "créditos"
@@ -237,6 +265,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - smallView2
     var smallView2: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "Background")
@@ -247,6 +276,7 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
+    //MARK: - numberLabel2
     var numberLabel2: UILabel = {
         let label = UILabel()
         label.text = "312"
@@ -255,6 +285,7 @@ class PersonalProfileView: UIViewController{
         return label
     }()
     
+    //MARK: - creditLabel2
     var creditLabel2: UILabel = {
         let label = UILabel()
         label.text = "créditos"
@@ -267,8 +298,10 @@ class PersonalProfileView: UIViewController{
         true
     }
     
+    //MARK: - personalProfileViewModel
     private let personalProfileViewModel = PersonalProfileViewModel()
     
+    //MARK: - loadView
     override func viewDidLoad() {
         super.viewDidLoad()
         personalProfileViewModel.delegate = self  
@@ -277,7 +310,39 @@ class PersonalProfileView: UIViewController{
 
         view.backgroundColor = UIColor(named: "background")
         
-        view.addSubviews([tabBar, wayImage, profilePic, helloLabel, subtitleLabel, backView, infoLabel, subInfoLabel, separatorView, bravveInfoLabel, subBravveInfoLabel, infoImage, reservationLabel, nextPageButton, separatorView2, helpImage, helpLabel, nextPageButton2, separatorView3, policyImage, policyLabel, nextPageButton3, separatorView4, logoutImage, logoutLabel, nextPageButton4, separatorView5, smallView, numberLabel, creditLabel, smallView2, numberLabel2, creditLabel2])
+        view.addSubviews([tabBar,
+                          wayImage,
+                          profilePic,
+                          helloLabel,
+                          subtitleLabel,
+                          backView,
+                          infoLabel,
+                          subInfoLabel,
+                          separatorView,
+                          bravveInfoLabel,
+                          subBravveInfoLabel,
+                          infoImage,
+                          reservationLabel,
+                          nextPageButton,
+                          separatorView2,
+                          helpImage,
+                          helpLabel,
+                          nextPageButton2,
+                          separatorView3,
+                          policyImage,
+                          policyLabel,
+                          nextPageButton3,
+                          separatorView4,
+                          logoutImage,
+                          logoutLabel,
+                          nextPageButton4,
+                          separatorView5,
+                          smallView,
+                          numberLabel,
+                          creditLabel,
+                          smallView2,
+                          numberLabel2,
+                          creditLabel2])
         
         nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
         nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
@@ -286,8 +351,9 @@ class PersonalProfileView: UIViewController{
         addConstraints()
           }
     
+    //MARK: - ACTIONS AND METHODS
     
-    
+    //MARK: - reservationPage
     @objc func reservationPage(){
         
             let lastReservations = BookingHistoryView()
@@ -296,24 +362,28 @@ class PersonalProfileView: UIViewController{
         
     }
     
+    //MARK: - helpPage
     @objc func helpPage(sender: UIButton){
         let vc = HelpViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
+    //MARK: - policyPage
     @objc func policyPage(sender: UIButton){
         let vc = TermsAndConditionViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
+    //MARK: - goOutPage
     @objc func goOutPage(sender: UIButton){
         let vc = HomeOpenView()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
+    //MARK: - addConstraints
     func addConstraints(){
         
         tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
@@ -462,18 +532,22 @@ class PersonalProfileView: UIViewController{
         creditLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
     }
 }
+
+//MARK: - PersonalProfileView
 extension PersonalProfileView: PersonalProfileViewModelProtocol {
+    
+    //MARK: - setupPic
     func setupPic(URL: URL?, placeholderImage: UIImage?) {
+        
         self.profilePic.sd_setImage(with: URL, placeholderImage: placeholderImage)
         
     }
     
+    //MARK: - setupLabels
     func setupLabels(email: String?, firstName: String) {
+        
         self.helloLabel.text = "Olá, \(firstName)!"
         self.subtitleLabel.text = email
-
         
     }
-    
-    
 }

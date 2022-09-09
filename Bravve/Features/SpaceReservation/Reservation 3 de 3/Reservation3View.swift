@@ -25,7 +25,34 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private let viewModel = ReservationsViewModel()
     
     //MARK: FinishButton
-    private let finishButton = UIButton()
+    private let finishButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return button
+    }()
+    
+    
+    
+    //MARK: - scrollView
+    private lazy var scrollView: UIScrollView = {
+       let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isScrollEnabled = true
+        scroll.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        return scroll
+        
+        
+    }()
+    
+    
+    //MARK: - viewToScroll
+    private lazy var viewToScroll: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     //MARK: alertLabels
     
@@ -132,12 +159,36 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     }()
     
     //MARK: - resumeLabel
+    private lazy var paymentLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.text = "Pagamento"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
+    }()
+    
+    //MARK: - resumeLabel
     private lazy var resumeLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.text = "Resumo"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
+    }()
+    
+    
+    //MARK: - resumeLabel
+    private lazy var cardCreditLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.text = "Cartão de Crédito"
         label.font = UIFont(name: FontsBravve.bold.rawValue,
                             size: CGFloat(15).generateSizeForScreen)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
         
     }()
@@ -146,6 +197,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private lazy var resumeButton: UIButton = {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -153,14 +205,16 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private lazy var lineImage: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     //MARK: - imageBack Resume
     lazy var imageBack: UIImageView = {
-        let tableview = UIImageView()
-        tableview.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-        return tableview
+        let image = UIImageView()
+        image.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
     
     //MARK: - numberCardStackView
@@ -182,6 +236,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -198,7 +253,6 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - numberCardTextField
     private lazy var numberCardTextfield: UITextField = {
         let view = UITextField()
-        view.becomeFirstResponder()
         view.isHidden = true
         view.tag = 1
         view.keyboardType = .namePhonePad
@@ -232,6 +286,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -289,6 +344,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -324,6 +380,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         let image = UIImage(named: IconsBravve.questionCircleBlue_1.rawValue)
         view.setImage(image, for: .normal)
         view.addTarget(self, action: #selector(tapAcessorySource), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -347,6 +404,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -403,7 +461,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
                     
                 }
             }
-            button.addTarget(self, action: #selector(hiddenLabel), for: .touchUpInside)
+            button.addTarget(self, action: #selector(hiddenCountryLabel), for: .touchUpInside)
             button.titleLabel?.textAlignment = .left
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
             buttons.append(button)
@@ -413,22 +471,11 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         }
         drop.turnIntoAList(buttons)
         drop.delegate = self
-        
         return drop
     }()
     
     
-    //MARK: - hiddenLabel
-    @objc func hiddenLabel() {
-        countryLabel2.isHidden = false
-        countryStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
-        
-    }
     
-    @objc func withdrawCountryBorder() {
-        self.countryStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
-        
-    }
     
     
     //MARK: - accessoryButtonCountryArrow
@@ -436,19 +483,11 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
         view.addTarget(self, action: #selector(tapCountryDown), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     
-    @objc func tapCountryDown() {
-        
-        countryDropDown.showLikeAWindow(size: CGSize(width: countryStackView.frame.size.width,
-                                                     height: CGFloat(180).generateSizeForScreen),
-                                        origin: CGPoint(x: countryStackView.frame.maxX,
-                                                        y: countryStackView.frame.maxY),
-                                        .downLeft)
-        
-    }
     
     
     //MARK: - nameHolderStackView
@@ -470,6 +509,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -516,6 +556,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -547,111 +588,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         true
     }
     
-    private lazy var scrollView: UIScrollView = {
-        
-        let paymentLabel = UILabel()
-        paymentLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        paymentLabel.text = "Pagamento"
-        paymentLabel.textAlignment = .left
-        paymentLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                   size: CGFloat(15).generateSizeForScreen)
-        
-        let cardCreditLabel = UILabel()
-        cardCreditLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        cardCreditLabel.text = "Cartão de Crédito"
-        cardCreditLabel.textAlignment = .left
-        cardCreditLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                      size: CGFloat(15).generateSizeForScreen)
-        
-        let viewToScroll = UIView()
-        
-        viewToScroll.addSubviews([paymentLabel, resumeLabel, resumeButton, lineImage, cardCreditLabel, numberCardStackView, ccValidateStackView, sourceSecurityStackView, countryStackView, nameHolderStackView, cpfStackView, accessoryButtonSourceSecurity, accessoryButtonCcValidate, accessoryButtonCountryArrow, countryImageFlag, countryDropDown])
-        
-        let spacing = CGFloat(15).generateSizeForScreen
-        
-        paymentLabel.constraintInsideTo(.top, viewToScroll)
-        paymentLabel.constraintInsideTo(.leading, viewToScroll,
-                                        CGFloat(20).generateSizeForScreen)
-        paymentLabel.constraintInsideTo(.trailing, viewToScroll,
-                                        CGFloat(20).generateSizeForScreen)
-        
-        resumeLabel.constraintOutsideTo(.top, paymentLabel, spacing)
-        resumeLabel.constraintInsideTo(.leading, paymentLabel)
-        
-        resumeButton.constraintOutsideTo(.leading, resumeLabel,
-                                         CGFloat(5).generateSizeForScreen)
-        resumeButton.constraintInsideTo(.centerY, resumeLabel)
-        
-        lineImage.constraintOutsideTo(.top, resumeLabel,
-                                      CGFloat(5).generateSizeForScreen)
-        lineImage.constraintInsideTo(.leading, paymentLabel)
-        lineImage.constraintInsideTo(.trailing, paymentLabel)
-        lineImage.heightAnchorInSuperview(CGFloat(1).generateSizeForScreen)
-        
-        cardCreditLabel.constraintOutsideTo(.top, lineImage, spacing)
-        cardCreditLabel.constraintInsideTo(.leading, paymentLabel)
-        cardCreditLabel.constraintInsideTo(.trailing, paymentLabel)
-        
-        numberCardStackView.constraintOutsideTo(.top, cardCreditLabel, spacing)
-        numberCardStackView.constraintInsideTo(.leading, paymentLabel)
-        numberCardStackView.constraintInsideTo(.trailing, paymentLabel)
-        numberCardStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-        
-        ccValidateStackView.constraintOutsideTo(.top, numberCardStackView, spacing)
-        ccValidateStackView.constraintInsideTo(.leading, paymentLabel)
-        ccValidateStackView.constraintInsideTo(.bottom, sourceSecurityStackView)
-        ccValidateStackView.constraintInsideTo(.width, numberCardStackView, multiplier: 0.475)
-        ccValidateStackView.constraintInsideTo(.height, numberCardStackView)
-        
-        accessoryButtonCcValidate.constraintInsideTo(.trailing, ccValidateStackView,
-                                                     CGFloat(15).generateSizeForScreen)
-        accessoryButtonCcValidate.constraintInsideTo(.centerY, ccValidateStackView)
-        
-        sourceSecurityStackView.constraintInsideTo(.top, ccValidateStackView)
-        sourceSecurityStackView.constraintInsideTo(.trailing, paymentLabel)
-        sourceSecurityStackView.constraintInsideTo(.width, ccValidateStackView)
-        sourceSecurityStackView.constraintInsideTo(.height, numberCardStackView)
-        
-        accessoryButtonSourceSecurity.constraintInsideTo(.trailing, sourceSecurityStackView,
-                                                         CGFloat(15).generateSizeForScreen)
-        accessoryButtonSourceSecurity.constraintInsideTo(.centerY, sourceSecurityStackView)
-        
-        countryStackView.constraintOutsideTo(.top, sourceSecurityStackView, spacing)
-        countryStackView.constraintInsideTo(.leading, paymentLabel)
-        countryStackView.constraintInsideTo(.trailing, paymentLabel)
-        countryStackView.constraintInsideTo(.height, numberCardStackView)
-        
-        accessoryButtonCountryArrow.constraintInsideTo(.trailing, countryStackView,
-                                                       CGFloat(15).generateSizeForScreen)
-        accessoryButtonCountryArrow.constraintInsideTo(.centerY, countryStackView)
-        
-        countryImageFlag.constraintOutsideTo(.trailing, accessoryButtonCountryArrow, spacing)
-        countryImageFlag.constraintInsideTo(.centerY, countryStackView)
-        
-        nameHolderStackView.constraintOutsideTo(.top, countryStackView, spacing)
-        nameHolderStackView.constraintInsideTo(.leading, paymentLabel)
-        nameHolderStackView.constraintInsideTo(.trailing, paymentLabel)
-        nameHolderStackView.constraintInsideTo(.height, numberCardStackView)
-        
-        cpfStackView.constraintOutsideTo(.top, nameHolderStackView, spacing)
-        cpfStackView.constraintInsideTo(.leading, paymentLabel)
-        cpfStackView.constraintInsideTo(.trailing, paymentLabel)
-        cpfStackView.constraintInsideTo(.bottom, viewToScroll,
-                                        CGFloat(50).generateSizeForScreen)
-        cpfStackView.constraintInsideTo(.height, numberCardStackView)
-        
-        let scrollView = UIScrollView()
-        
-        scrollView.addSubview(viewToScroll)
-        
-        viewToScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
-        
-        return scrollView
-    }()
+    
     
     //MARK: - LoadView
     override func loadView() {
@@ -659,6 +596,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         setupView()
         setupConstrains()
+        setupKeyboardEXpand()
         
         view.createReservationCustomBar(progressBarButtons: buttons) {_ in
             
@@ -686,12 +624,69 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - SetupView
     private func setupView() {
         
-        view.addSubviews([scrollView, finishButton, tip1])
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(viewToScroll)
+        
+        
+        viewToScroll.addSubviews([
+            paymentLabel,
+            resumeLabel,
+            lineImage,
+            cardCreditLabel,
+            imageBack,
+            numberCardStackView,
+            ccValidateStackView,
+            sourceSecurityStackView,
+            accessoryButtonCcValidate,
+            accessoryButtonSourceSecurity,
+            countryStackView,
+            countryImageFlag,
+            countryDropDown,
+            nameHolderStackView,
+            cpfStackView,
+            accessoryButtonCountryArrow,
+            resumeButton,
+            finishButton
+        ])
+        
+        
         
         finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         
-        let nextResponder = view.viewWithTag(1)
-        nextResponder?.becomeFirstResponder()
+        
+    }
+    
+    //MARK: - setupKeyboardEXpand
+    private func setupKeyboardEXpand() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardApear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisapear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: - var control to func keyboard Expand
+    var isExpand = false
+    
+    //MARK: - keyboardApear
+    @objc func keyboardApear() {
+        
+        if !isExpand {
+            self.scrollView.contentSize = CGSize(width: view.frame.width,
+                                                 height: self.scrollView.frame.height + 200)
+        }
+        
+        
+    }
+    
+    //MARK: - keyboardDisapear
+    @objc func keyboardDisapear() {
+        
+        if !isExpand {
+            self.scrollView.contentSize = CGSize(width: view.frame.width,
+                                                 height: self.scrollView.frame.height - 200)
+            self.isExpand = false
+        }
         
         
     }
@@ -699,15 +694,117 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - SetupConstrains
     private func setupConstrains() {
         
-        scrollView.constraintInsideTo(.top, view, CGFloat(223).generateSizeForScreen)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, finishButton)
+        
+        NSLayoutConstraint.activate([
+            
+            
+            //MARK: - scrollView
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            viewToScroll.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            viewToScroll.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            viewToScroll.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            viewToScroll.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            viewToScroll.widthAnchor.constraint(equalTo: view.widthAnchor),
+            viewToScroll.heightAnchor.constraint(equalToConstant: 460),
+            
+            //MARK: paymentLabel
+            paymentLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 5),
+            paymentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+            
+            //MARK: resumeLabel
+            resumeLabel.topAnchor.constraint(equalTo: paymentLabel.bottomAnchor, constant: 16),
+            resumeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+            
+            //MARK: lineImage
+            lineImage.bottomAnchor.constraint(equalTo: resumeLabel.bottomAnchor, constant: 8),
+            lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+            lineImage.heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: cardCreditLabel
+            cardCreditLabel.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 16),
+            cardCreditLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            //MARK: imageBack
+            imageBack.topAnchor.constraint(equalTo: cardCreditLabel.bottomAnchor, constant: 8),
+            imageBack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+            imageBack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            imageBack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            
+            
+            
+            //MARK: numberCardStackView
+            numberCardStackView.topAnchor.constraint(equalTo: cardCreditLabel.bottomAnchor, constant: 15),
+            numberCardStackView.centerXAnchor.constraint(equalTo: imageBack.centerXAnchor),
+            numberCardStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+            numberCardStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
+            numberCardStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            
+            //MARK: ccValidateExpirationTextField
+            ccValidateStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 15),
+            ccValidateStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+            ccValidateStackView.widthAnchor.constraint(equalToConstant: 159),
+            ccValidateStackView.heightAnchor.constraint(equalToConstant: 60),
+            accessoryButtonCcValidate.trailingAnchor.constraint(equalTo: ccValidateStackView.trailingAnchor, constant:  -13),
+            accessoryButtonCcValidate.centerYAnchor.constraint(equalTo: ccValidateStackView.centerYAnchor),
+            
+            //MARK: sourceSecurityTextfield
+            sourceSecurityStackView.topAnchor.constraint(equalTo: numberCardStackView.bottomAnchor, constant: 15),
+            sourceSecurityStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
+            sourceSecurityStackView.widthAnchor.constraint(equalToConstant: 159),
+            sourceSecurityStackView.heightAnchor.constraint(equalToConstant: 60),
+            accessoryButtonSourceSecurity.trailingAnchor.constraint(equalTo: sourceSecurityStackView.trailingAnchor, constant:  -13),
+            accessoryButtonSourceSecurity.centerYAnchor.constraint(equalTo: sourceSecurityStackView.centerYAnchor),
+            
+            //MARK: countryField
+            countryStackView.topAnchor.constraint(equalTo: ccValidateStackView.bottomAnchor, constant: 15),
+            countryStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+            countryStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
+            countryStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            countryImageFlag.trailingAnchor.constraint(equalTo: accessoryButtonCountryArrow.leadingAnchor, constant:  -16),
+            countryImageFlag.centerYAnchor.constraint(equalTo: countryStackView.centerYAnchor),
+            
+            //MARK: acessoryButtonContryArrow
+            accessoryButtonCountryArrow.trailingAnchor.constraint(equalTo: countryStackView.trailingAnchor,constant: -12.36),
+            accessoryButtonCountryArrow.centerYAnchor.constraint(equalTo: countryStackView.centerYAnchor),
+            accessoryButtonCountryArrow.widthAnchor.constraint(equalToConstant: 13.3),
+            accessoryButtonCountryArrow.heightAnchor.constraint(equalToConstant: 7.66),
+            
+            //MARK: resumeButton
+            resumeButton.leadingAnchor.constraint(equalTo: resumeLabel.trailingAnchor,constant: 6),
+            resumeButton.centerYAnchor.constraint(equalTo: resumeLabel.centerYAnchor),
+            
+            
+            //MARK: nameHolderTextfield
+            nameHolderStackView.topAnchor.constraint(equalTo: countryStackView.bottomAnchor, constant: 15),
+            nameHolderStackView.centerXAnchor.constraint(equalTo: imageBack.centerXAnchor),
+            nameHolderStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+            nameHolderStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
+            nameHolderStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            //MARK: cpfTextfield
+            cpfStackView.topAnchor.constraint(equalTo: nameHolderStackView.bottomAnchor, constant: 15),
+            cpfStackView.centerXAnchor.constraint(equalTo: imageBack.centerXAnchor),
+            cpfStackView.leadingAnchor.constraint(equalTo: imageBack.leadingAnchor),
+            cpfStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
+            cpfStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            finishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
         
         //MARK: finishButton
         finishButton.setToBottomButtonKeyboardDefault()
-        finishButton.setTitle("Finalizar", for: .normal)
-    }
+        finishButton.setTitle("Finalizar", for: .normal
+                              
+                              
+        )}
     
     //MARK: actions and methods
     
@@ -826,9 +923,32 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         
         let view = UIImageView(image: UIImage(named: ""))
         view.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 15, height: 15))
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    
+    //MARK: - hiddenCountryLabel
+    @objc func hiddenCountryLabel() {
+        countryLabel2.isHidden = false
+        countryStackView.setBottomBorderOnlyWithBlue(color: UIColor.blue.cgColor)
+        
+    }
+    
+    @objc func withdrawCountryBorder() {
+        self.countryStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
+        
+    }
+    
+    @objc func tapCountryDown() {
+        
+        countryDropDown.showLikeAWindow(size: CGSize(width: countryStackView.frame.size.width,
+                                                     height: 180),
+                                        origin: CGPoint(x: countryStackView.frame.maxX,
+                                                        y: countryStackView.frame.maxY),
+                                        .upLeft)
+        
+    }
     
     //MARK: ccValidatestackViewTapped
     @objc func countryStackViewTapped() {

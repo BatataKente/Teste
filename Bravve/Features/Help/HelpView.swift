@@ -19,6 +19,7 @@ class HelpViewController: UIViewController {
     var arrayButtons: [UIButton] = []
     var arrayStackViews: [UIStackView] = []
     
+    //MARK: - tabBar
     private lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
         tabBar.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +66,9 @@ class HelpViewController: UIViewController {
     //MARK: - ScrollView
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: view.bounds)
+        scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.isScrollEnabled = true
+        scroll.showsVerticalScrollIndicator = false
         scroll.addSubviews([uiView, headerView, questionAnswer1StackView, questionAnswer2StackView, questionAnswer3StackView, questionAnswer4StackView, questionAnswer5StackView, questionAnswer6StackView, questionAnswer7StackView, questionAnswer8StackView, questionAnswer9StackView, questionAnswer10StackView, questionAnswer11StackView])
         return scroll
     }()
@@ -1132,46 +1135,17 @@ class HelpViewController: UIViewController {
         self.arrayButtons =  [showAnswer1Button, showAnswer2Button, showAnswer3Button, showAnswer4Button, showAnswer5Button, showAnswer6Button, showAnswer7Button, showAnswer8Button, showAnswer9Button, showAnswer10Button, showAnswer11Button]
         self.arrayStackViews = [questionAnswer1StackView, questionAnswer2StackView, questionAnswer3StackView, questionAnswer4StackView, questionAnswer5StackView, questionAnswer6StackView, questionAnswer7StackView, questionAnswer8StackView, questionAnswer9StackView, questionAnswer10StackView, questionAnswer11StackView]
         configConstraints()
-        navigationSetup()
     }
     
-    //MARK: - Navigation Setup
-        private func navigationSetup(){
-            let navigationStatusBarView = UIView()
-            navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
-            navigationStatusBarView.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
-            self.view.addSubview(navigationStatusBarView)
-             
-            NSLayoutConstraint.activate([
-                navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
-            ])
-            
-            let label = UILabel()
-            label.text = "Dúvidas frequentes"
-            label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-            label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            let titleView = UIView()
-            titleView.translatesAutoresizingMaskIntoConstraints = false
-            titleView.addSubview(label)
-            
-            NSLayoutConstraint.activate([
-                label.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-                label.centerYAnchor.constraint(equalTo: titleView.centerYAnchor)
-            ])
-            
-            self.navigationItem.titleView = titleView
-            
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.backWhite.rawValue), style: .plain, target: self, action: #selector(menuBarButtonTapped))
-            self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
-        }
     
-        @objc func menuBarButtonTapped(){
-            self.navigationController?.popViewController(animated: true)
+    //MARK: - func setupDefaults
+    private func setupDefaults(){
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Dúvidas frequentes"){
+            _ in
+            self.dismiss(animated: true)
         }
-
+    }
+    
     //MARK: - Tap Functions
     
     @objc func tapEmailSupport(gesture: UITapGestureRecognizer) {
@@ -1335,110 +1309,111 @@ class HelpViewController: UIViewController {
             
             self.scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            self.scrollView.topAnchor.constraint(equalTo: self.customBar.topAnchor),
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            
+
             self.uiView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
             self.uiView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
-            self.uiView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 27),
+            self.uiView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 73),
             self.uiView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -50),
-            
+
             self.headerView.topAnchor.constraint(equalTo: self.uiView.topAnchor),
             self.headerView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor),
             self.headerView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor),
             self.headerView.heightAnchor.constraint(equalToConstant: CGFloat(222).generateSizeForScreen),
-            
+
             self.vectorHelpImageView.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor),
             self.vectorHelpImageView.trailingAnchor.constraint(equalTo: self.headerView.trailingAnchor),
             self.vectorHelpImageView.bottomAnchor.constraint(equalTo: self.headerView.bottomAnchor),
             self.vectorHelpImageView.heightAnchor.constraint(equalToConstant: CGFloat(38).generateSizeForScreen),
-            
+
             self.wayHelpImageView.topAnchor.constraint(equalTo: self.headerView.topAnchor),
             self.wayHelpImageView.trailingAnchor.constraint(equalTo: self.headerView.trailingAnchor),
             self.wayHelpImageView.bottomAnchor.constraint(equalTo: self.headerView.bottomAnchor),
             self.wayHelpImageView.widthAnchor.constraint(equalToConstant: CGFloat(156.77).generateSizeForScreen),
-            
+
             self.FAQViewLabel.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant: CGFloat(80).generateSizeForScreen),
             self.FAQViewLabel.trailingAnchor.constraint(equalTo: self.headerView.trailingAnchor, constant: CGFloat(-140.99).generateSizeForScreen),
             self.FAQViewLabel.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor, constant: CGFloat(32.99).generateSizeForScreen),
-            
+
             self.question1View.topAnchor.constraint(equalTo: self.vectorHelpImageView.bottomAnchor, constant: 20),
             self.question1View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question1View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer1StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer1StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question2View.topAnchor.constraint(equalTo: self.questionAnswer1StackView.bottomAnchor, constant: 10),
             self.question2View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question2View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer2StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer2StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question3View.topAnchor.constraint(equalTo: self.questionAnswer2StackView.bottomAnchor, constant: 10),
             self.question3View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question3View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer3StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer3StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question4View.topAnchor.constraint(equalTo: self.questionAnswer3StackView.bottomAnchor, constant: 10),
             self.question4View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question4View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer4StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer4StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question5View.topAnchor.constraint(equalTo: self.questionAnswer4StackView.bottomAnchor, constant: 10),
             self.question5View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question5View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer5StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer5StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question6View.topAnchor.constraint(equalTo: self.questionAnswer5StackView.bottomAnchor, constant: 10),
             self.question6View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question6View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer6StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer6StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question7View.topAnchor.constraint(equalTo: self.questionAnswer6StackView.bottomAnchor, constant: 10),
             self.question7View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question7View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer7StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer7StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question8View.topAnchor.constraint(equalTo: self.questionAnswer7StackView.bottomAnchor, constant: 10),
             self.question8View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question8View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer8StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer8StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question9View.topAnchor.constraint(equalTo: self.questionAnswer8StackView.bottomAnchor, constant: 10),
             self.question9View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question9View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer9StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer9StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question10View.topAnchor.constraint(equalTo: self.questionAnswer9StackView.bottomAnchor, constant: 10),
             self.question10View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question10View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer10StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer10StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.question11View.topAnchor.constraint(equalTo: self.questionAnswer10StackView.bottomAnchor, constant: 10),
             self.question11View.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.question11View.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
-            
+
             self.questionAnswer11StackView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor, constant: 40),
             self.questionAnswer11StackView.trailingAnchor.constraint(equalTo: self.uiView.trailingAnchor, constant: -40),
             self.questionAnswer11StackView.bottomAnchor.constraint(equalTo: uiView.bottomAnchor, constant: -10),
-            
+
             self.tabBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tabBar.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
