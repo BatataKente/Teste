@@ -8,4 +8,5 @@
 
 struct UserReservations {
     static var reservations: [Reservations] = []
+    static var reservationID: Int? = nil
 }

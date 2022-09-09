@@ -54,7 +54,6 @@ class HomeOpenTableViewCell: UITableViewCell {
         let photoView = UIImageView()
         photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 12
-        
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         let photoLabel = createLabel(text: "WORKPASS",

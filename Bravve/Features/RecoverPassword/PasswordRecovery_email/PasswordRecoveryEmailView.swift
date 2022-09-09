@@ -18,6 +18,8 @@ class PasswordRecoveryEmailView: UIViewController {
         
     }
     
+    private let customAlert = CustomAlert()
+    
     private let backgroundImage = UIImageView()
     
     private lazy var buttons: [UIButton] = {
@@ -48,7 +50,7 @@ class PasswordRecoveryEmailView: UIViewController {
         textField.autocapitalizationType = .none
         textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
-        textField.addTarget(self, action: #selector(changeText), for: .allEditingEvents)
+        textField.addTarget(nil, action: #selector(changeText), for: .allEditingEvents)
         textField.isHidden = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -115,7 +117,7 @@ class PasswordRecoveryEmailView: UIViewController {
         defaults()
         addConstraints()
         addTargets()
-        
+        passwordRecoveryEmailViewModel.delegate = self
     }
     
     private func defaults() {
@@ -171,19 +173,10 @@ class PasswordRecoveryEmailView: UIViewController {
     
     
     @objc func actionButtonContinue() {
-        let vc = PasswordRecoveryPassword()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-    
-    func freezeButton_() {
-        
-        buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
-        buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
+        passwordRecoveryEmailViewModel.makeAPICall(email: textFieldEmail.text ?? "")
+//        goToNextScreen()
     }
 
-    
-    
     //MARK: changeText
     @objc func changeText(_ sender: UITextField) {
         
@@ -206,4 +199,51 @@ class PasswordRecoveryEmailView: UIViewController {
             buttonContinue.backgroundColor = UIColor(named: ColorsBravve.reservedCancel.rawValue)
         }
     }
+}
+
+extension PasswordRecoveryEmailView: PasswordRecoveryEmailViewProtocol {
+    
+    func setIshidden(alertButton: Bool, registerFailLabel: Bool, rightTextField: Bool, ways: [Bool]) {
+        
+    }
+    
+    func setFont(font: UIFont) {
+        
+    }
+    
+    func setColors(textColor: UIColor?, customShaddowbackgroundColor: UIColor?) {
+        
+    }
+    
+    func setText(rightLabel: String, rightTextField: String, infoLabel: String, registerFailLabel: String) {
+        
+    }
+    
+    func freezeButton() {
+        func freezeButton_() {
+            
+            buttonContinue.removeTarget(nil, action: #selector(actionButtonContinue), for: .touchUpInside)
+            buttonContinue.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
+        }
+    }
+    
+    func setKeyboardType(keyboardType: UIKeyboardType) {
+        
+    }
+    
+    func goToNextScreen() {
+        
+        let vc = PasswordRecoveryPassword()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    func showAlert(message: String) {
+        self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
+                                   message: message,
+                                   enterAttributed: "Tentar Novamente",
+                                   on: self)
+    }
+    
+    
 }

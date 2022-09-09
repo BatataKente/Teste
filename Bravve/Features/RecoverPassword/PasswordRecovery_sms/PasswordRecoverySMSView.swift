@@ -13,6 +13,12 @@ class PasswordRecoverySMSView: UIViewController {
     
     var counter = 30
     
+    var password = ""
+    
+    var code = ""
+    
+    let passwordRecoverySMSViewModel = PasswordRecoverySMSViewModel()
+    
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
@@ -165,13 +171,17 @@ class PasswordRecoverySMSView: UIViewController {
         button.addSubview(borderBottom)
         button.isHidden = true
         button.setTitleColor(UIColor(named: ColorsBravve.blue.rawValue), for: .normal)
-        button.addTarget(self, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(resendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
     
     func filledCode() {
         
         if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
+            
+            if let code1 = code1TextField.text, let code2 = code2TextField.text, let code3 = code3TextField.text, let code4 = code4TextField.text, let code5 = code5TextField.text, let code6 = code6TextField.text {
+                self.code = "\(code1)\(code2)\(code3)\(code4)\(code5)\(code6)"
+            }
             
             continueButton.addTarget(nil,
                                      action: #selector(continueButtonTapped),
@@ -190,11 +200,8 @@ class PasswordRecoverySMSView: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-        alert.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Senha alterada com sucesso!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
-            let vc = LoginView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }), on: self)
+        
+        passwordRecoverySMSViewModel.makeAPICall(password: password, code: code)
     }
     
     @objc func resendCodeButtonTapped() {
@@ -239,6 +246,8 @@ class PasswordRecoverySMSView: UIViewController {
         setupDefaults()
         setupConstraints()
         
+        passwordRecoverySMSViewModel.delegate = self
+        
         self.code1TextField.delegate = self
         self.code2TextField.delegate = self
         self.code3TextField.delegate = self
@@ -246,7 +255,6 @@ class PasswordRecoverySMSView: UIViewController {
         self.code5TextField.delegate = self
         self.code6TextField.delegate = self
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-
     }
     
     
@@ -417,5 +425,18 @@ extension PasswordRecoverySMSView: UITextFieldDelegate {
             break
         }
     }
+    
+}
+
+extension PasswordRecoverySMSView: PasswordRecoverySMSViewModelProtocol {
+    
+    func showAlert() {
+                alert.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Senha alterada com sucesso!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+                    let vc = LoginView()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
+                }), on: self)
+    }
+    
     
 }

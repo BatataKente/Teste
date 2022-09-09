@@ -9,6 +9,8 @@ import UIKit
 
 class PasswordRecoveryEmailViewModel {
     
+    let sessionManager = SessionManager()
+    
     var delegate: PasswordRecoveryEmailViewProtocol?
     
     func makeEmailScreen() {
@@ -55,10 +57,30 @@ class PasswordRecoveryEmailViewModel {
         delegate?.setColors(textColor: UIColor(named: ColorsBravve.textFieldLabel.rawValue),
                             customShaddowbackgroundColor: UIColor(named: ColorsBravve.blue_cyan.rawValue))
     }
+    
+    func makeAPICall(email: String) {
+        
+        let parameters = ForgotPasswordParameters(phone_number: "+5511999999999", email: email)
+        sessionManager.postDataWithResponse(endpoint: .authForgotPassword, parameters: parameters) { (statusCode, error, message: AlertMessage?) in
+            guard let statusCode = statusCode else {
+                print("Unable to unwrap status code")
+                return
+            }
+            
+            if statusCode == 204 {
+                self.delegate?.goToNextScreen()
+            } else {
+                guard let message = message?.message else {
+                    return
+                }
+                self.delegate?.showAlert(message: message)
+            }
+        }
+    }
 }
 
 protocol PasswordRecoveryEmailViewProtocol {
-    
+
     func setIshidden(alertButton: Bool,
                      registerFailLabel: Bool,
                      rightTextField: Bool,
@@ -77,5 +99,10 @@ protocol PasswordRecoveryEmailViewProtocol {
     func freezeButton()
     
     func setKeyboardType(keyboardType: UIKeyboardType)
+    
+    func goToNextScreen()
+    
+    func showAlert(message: String)
+    
 }
 

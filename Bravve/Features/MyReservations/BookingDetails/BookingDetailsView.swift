@@ -433,6 +433,7 @@ class BookingDetailsView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
+        print("kaue \(UserReservations.reservationID)")
     }
     
     /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
