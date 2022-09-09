@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct AlertMessage: Codable {
-    var message: String?
-}
+//struct AlertMessage: Codable {
+//    var message: String?
+//}
