@@ -281,10 +281,11 @@ class HomeClosedView: UIViewController {
     
     private func setupConstraints() {
         
-        for subview in view.subviews {
-            
-            subview.translatesAutoresizingMaskIntoConstraints = false
-        }
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        customBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
