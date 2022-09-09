@@ -52,8 +52,6 @@ class DetailsOpenViewModel {
         
         return stackView
         
-        
-        
     }
     
     func createSeeButtonsStackView(_ range: ClosedRange<Int>,
@@ -127,6 +125,9 @@ class DetailsOpenViewModel {
             
             guard let lhsWeekDay = lhs.week_day else { return false }
             guard let rhsWeekDay = rhs.week_day else { return false }
+            
+            print(lhs)
+            print(rhs)
             return lhsWeekDay < rhsWeekDay
         }
     }
@@ -170,13 +171,16 @@ class DetailsOpenViewModel {
         itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
                                      UIImage(named: IconsBravve.map.rawValue),
                                      textColor: textColor))
+        if !texts.isEmpty {
         itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
                                      textColor: textColor))
+        
         for i in 1...texts.count-1 {
             
             itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
                                          textColor: textColor))
+            }
         }
     }
     
