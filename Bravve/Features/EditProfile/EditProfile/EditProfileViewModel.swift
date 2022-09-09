@@ -9,15 +9,19 @@ import UIKit
 
 protocol EditProfileViewModelProtocol {
     
-    func setHobbiesStack(_ hobbies: [String])
-    func setInterestsStack(_ interests: [String])
+    func setHobbiesStack(_ hobbies: [Hobbies], userHobbies: [String])
+    func setInterestsStack(_ interests: [Interests], userInterests: [String])
     func setImage(URL: URL?, placeholderImage: UIImage?)
     func setStacks(personalDataStacks: [UIStackView], aboutWorkStacks: [UIStackView])
+    func unfreezeButton()
+    func freezeButton()
 }
 
 class EditProfileViewModel {
     
-    private var user: UpdateUserParameters = UpdateUserParameters(name: nil, phone_number: nil, email: nil, is_active: nil, is_superuser: nil, occupation: nil, work_model: nil, hobbies: nil, interests: nil, message: nil)
+    var user: UpdateUserParameters = UpdateUserParameters(name: nil, phone_number: nil, email: nil, is_active: nil, is_superuser: nil, occupation: nil, work_model: nil, hobbies: nil, interests: nil, message: nil)
+    
+    var photo: URL?
     
     var delegate: EditProfileViewModelProtocol?
     
@@ -29,7 +33,7 @@ class EditProfileViewModel {
     /// - Returns: the label
     private let sessionManager = SessionManager()
     
-    var password: String {
+    private var password: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userPassword") else {
             print("Unable to get user password")
             return ""
@@ -37,7 +41,7 @@ class EditProfileViewModel {
         return uuid
     }
     
-    var uuid: String {
+    private var uuid: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
             print("Unable to get user uuid")
             return ""
@@ -45,51 +49,126 @@ class EditProfileViewModel {
         return uuid
     }
     
-    func refreshUserData() {
+    func convertHobbiesToString(_ hobbies: [Hobbies]?) -> [String] {
         
-        sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbies: [Hobbies]? ) in
+        var hobbiesNames: [String] = []
+        
+        guard let hobbies = hobbies else {return []}
 
-            guard let hobbies = hobbies else {
-                
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-                
-            }
+        for hobby in hobbies {
             
-            print(hobbies)
-            
-            var hobbiesNames: [String] = []
-            
-            for hobby in hobbies {
-                
-                guard let hobby = hobby.name else {return}
-                hobbiesNames.append(hobby)
-            }
-            
-            self.delegate?.setHobbiesStack(hobbiesNames)
+            guard let hobby = hobby.name else {return []}
+            hobbiesNames.append(hobby)
         }
         
-        sessionManager.getDataArray(endpoint: .usersInterests) { (statusCode, error, interests: [Interests]? ) in
+        return hobbiesNames
+    }
+    
+    func convertInterestsToString(_ interests: [Interests]?) -> [String] {
+        
+        var interestsNames: [String] = []
+        
+        guard let interests = interests else {return []}
+        for interest in interests {
+            
+            guard let interest = interest.name else {return []}
+            interestsNames.append(interest)
+        }
+        
+        return interestsNames
+    }
+    
+    func setupHobbiesButtons(_ hobbies: [Hobbies],_ buttons: [UIButton]) -> [UIButton] {
+        
+        for i in 0...buttons.count-1 {
 
-            guard let interests = interests else {
-                
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
+            let handler = {(action: UIAction) in
+
+                if !buttons[i].isSelected {
+
+                    self.delegate?.unfreezeButton()
+                    self.user.hobbies?.append(hobbies[i])
+
+                    buttons[i].configuration?.baseForegroundColor = .white
+                    buttons[i].configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                }
+                else {
+
+                    self.user.hobbies = self.user.hobbies?.filter{$0.name != hobbies[i].name}
+
+                    buttons[i].configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
+                    buttons[i].configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                }
+
+                buttons[i].isSelected = !buttons[i].isSelected
             }
-            
-            print(interests)
-            
-            var interestsNames: [String] = []
-            
-            for interest in interests {
-                
-                guard let interest = interest.name else {return}
-                interestsNames.append(interest)
+
+            buttons[i].addAction(UIAction(handler: handler), for: .touchUpInside)
+        }
+        
+        return buttons
+    }
+    
+    func setupInterestsButtons(_ interests: [Interests],_ buttons: [UIButton]) -> [UIButton] {
+        
+        for i in 0...buttons.count-1 {
+
+            let handler = {(action: UIAction) in
+
+                if !buttons[i].isSelected {
+
+                    self.user.interests?.append(interests[i])
+
+                    buttons[i].configuration?.baseForegroundColor = .white
+                    buttons[i].configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                }
+                else {
+
+                    self.user.interests = self.user.interests?.filter{$0.name != interests[i].name}
+
+                    buttons[i].configuration?.baseForegroundColor = UIColor(named: ColorsBravve.textField.rawValue)
+                    buttons[i].configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
+                }
+                self.delegate?.unfreezeButton()
+                buttons[i].isSelected = !buttons[i].isSelected
             }
+
+            buttons[i].addAction(UIAction(handler: handler), for: .touchUpInside)
+        }
+        
+        return buttons
+    }
+    
+    func refreshUserData() {
+        
+        sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
             
-            self.delegate?.setInterestsStack(interestsNames)
+                    guard let pictures = pictures else {
+                        print(statusCode as Any)
+                    return
+                }
+                
+                if !pictures.isEmpty {
+                
+                    guard let pictureUuid = pictures[0].picture else {
+                        print(pictures[0].message as Any)
+                    return
+                }
+                
+                    self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
+                    
+                    guard let pictureURL = pictureURL?.picture_url else {
+                        print(pictureURL?.message as Any)
+                        print(statusCode as Any)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.delegate?.setImage(URL: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
+                    }
+                }
+            }
         }
         
         sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: UpdateUserParameters?) in
@@ -137,84 +216,69 @@ class EditProfileViewModel {
                                                          textFieldTag: 1)
                 personalDataStacks.append(passwordStack)
                 
-                if let workModelName = user.work_model?.name {
-                    
+                if let occupationName = user.occupation?.name {
+
                     let officeStack = self.createStackView(labelText: "Área",
-                                                           textFieldText: workModelName,
+                                                           textFieldText: occupationName,
                                                            buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue),
                                                            textFieldTag: 2)
                     aboutWorkStacks.append(officeStack)
                 }
                 
-                if let occupationName = user.occupation?.name {
-                    
+                if let workModelName = user.work_model?.name {
+
                     let workRegimeStack = self.createStackView(labelText: "Regime de trabalho",
-                                                               textFieldText: occupationName,
+                                                               textFieldText: workModelName,
                                                                buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue),
                                                                textFieldTag: 3)
                     aboutWorkStacks.append(workRegimeStack)
                 }
                 
-                self.user = user
                 self.delegate?.setStacks(personalDataStacks: personalDataStacks,
                                          aboutWorkStacks: aboutWorkStacks)
-            }
-        }
-        
-        sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
-            
-                    guard let pictures = pictures else {
+                
+                self.sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbies: [Hobbies]? ) in
+
+                    guard let hobbies = hobbies else {
+                        
                         print(statusCode as Any)
-                    return
-                }
-                
-                if !pictures.isEmpty {
-                
-                    guard let pictureUuid = pictures[0].picture else {
-                        print(pictures[0].message as Any)
-                    return
-                }
-                
-                    self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
-                    
-                    guard let pictureURL = pictureURL?.picture_url else {
-                        print(pictureURL?.message as Any)
-                        print(statusCode as Any)
+                        print(error?.localizedDescription as Any)
                         return
                     }
                     
-                    DispatchQueue.main.async {
-                        
-                        self.delegate?.setImage(URL: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
-                    }
+                    self.delegate?.setHobbiesStack(hobbies,
+                                                   userHobbies: self.convertHobbiesToString(user.hobbies))
                 }
+                
+                self.sessionManager.getDataArray(endpoint: .usersInterests) { (statusCode, error, interests: [Interests]? ) in
+
+                    guard let interests = interests else {
+                        
+                        print(statusCode as Any)
+                        print(error?.localizedDescription as Any)
+                        return
+                    }
+                    
+                    self.delegate?.setInterestsStack(interests,
+                                                     userInterests: self.convertInterestsToString(user.interests))
+                }
+                
+                self.user = user
             }
         }
     }
     
-    private func memorizeData(name: String? = nil,
-//                              password: String? = nil,
-                              workModelName: String? = nil,
-                              occupationName: String? = nil) {
-        
-        var parameter = user
-        
-        if let name = name {parameter.name = name}
-//            if let password = password {user.password = password}
-        if let workModelName = workModelName {parameter.work_model?.name = workModelName}
-        if let occupationName = occupationName {parameter.occupation?.name = occupationName}
+    func putUser() {
         
         sessionManager.putDataWithResponse(uuid: uuid,
                                            endpoint: .usersUuid,
-                                           parameters: parameter) { (statusCode, error, user: UpdateUserParameters?) in
+                                           parameters: user) { (statusCode, error, user: UpdateUserParameters?) in
             
-            guard let user = user else {
+            guard let _ = user else {
                 print(statusCode as Any)
                 print(error?.localizedDescription as Any)
                 return
             }
-            
-            self.user = user
         }
     }
         
@@ -297,21 +361,23 @@ class EditProfileViewModel {
             
             let handler = {(action: UIAction) in
                 
-                textField.isEnabled = !textField.isEnabled
-                
-                if textField.isEnabled {
+                if !textField.isEnabled {
                     
                     stackView.setBottomBorderBlue(color: UIColor.blue.cgColor)
+                    
+                    self.delegate?.unfreezeButton()
                 }
                 else {
                     
-                    stackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
+                    if label.text == "Nome Completo" {self.user.name = textField.text}
+//                    else if label.text == "Senha" {self.user.name = textField.text}
+                    else if label.text == "Área" {self.user.occupation?.name = textField.text}
+                    else if label.text == "Regime de trabalho" {self.user.work_model?.name = textField.text}
                     
-                    if textField.tag == 0 {self.memorizeData(name: textField.text)}
-//                    else if textField.tag == 1 {self.memorizeData(name: textField.text)}
-                    else if textField.tag == 2 {self.memorizeData(workModelName: textField.text)}
-                    else if textField.tag == 3 {self.memorizeData(occupationName: textField.text)}
+                    stackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
                 }
+                
+                textField.isEnabled = !textField.isEnabled
             }
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
@@ -333,6 +399,51 @@ class EditProfileViewModel {
         return stackView
     }
     
+    func selectButtons(stacks: [UIStackView],_ items: [String], selectedItems: [String]) {
+        
+        for i in 0...items.count-1 {
+
+            for interest in selectedItems {
+
+                if interest == items[i] {
+
+                    for stack in stacks {
+
+                        for arrangedSubview in stack.arrangedSubviews {
+
+                            guard let button = arrangedSubview as? UIButton else {return}
+
+                            if button.configuration?.title == interest {
+
+                                button.isSelected = true
+                                button.configuration?.baseForegroundColor = .white
+                                button.configuration?.background.backgroundColor = UIColor(named: ColorsBravve.capsuleButtonSelected.rawValue)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func putPhoto() -> Bool {
+        
+        guard let photo = photo else {return false}
+
+        sessionManager.uploadPictureWithResponse(uuid: uuid,
+                                                 endpoint: .usersPictures,
+                                                 picture_url: photo) { (statusCode, error, updatedPicture: UploadPicture?) in
+
+            guard let _ = updatedPicture else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            return
+        }
+        return true
+    }
+    
     /// This function create stackViews with buttons, but organize two buttons in every stack created, and one if number of buttons is odd
     /// - Parameter buttons: buttons
     /// - Returns: array of stackView
@@ -342,8 +453,7 @@ class EditProfileViewModel {
             
             let stackView = UIStackView(arrangedSubviews: views)
             
-            stackView.spacing = 4
-            stackView.backgroundColor = .white
+            stackView.spacing = CGFloat(4).generateSizeForScreen
             stackView.axis = .horizontal
             stackView.distribution = .fillProportionally
             
@@ -352,21 +462,37 @@ class EditProfileViewModel {
         
         var stackViews = [UIStackView]()
         
-        var from = 0
+        let by = 3
         
-        if buttons.count%2 != 0 {
+        if buttons.isEmpty {return stackViews}
+        else if buttons.count < by {
             
-            stackViews.append(createStackView([buttons[from]]))
+            stackViews.append(createStackView(buttons))
             
-            from += 1
+            return stackViews
         }
         
-        for i in stride(from: from,
+        var buttonsSample: [UIButton] = []
+        
+        for i in 0...buttons.count%by {
+
+            buttonsSample.append(buttons[i])
+        }
+        
+        stackViews.append(createStackView(buttonsSample))
+        
+        for i in stride(from: buttons.count%by,
                         to: buttons.count - 1,
-                        by: 2) {
+                        by: by) {
             
-            stackViews.append(createStackView([buttons[i],
-                                               buttons[i+1]]))
+            var buttonsSample: [UIButton] = []
+            
+            for j in 0...by-1 {
+                
+                buttonsSample.append(buttons[i+j])
+            }
+            
+            stackViews.append(createStackView(buttonsSample))
         }
         
         return stackViews
