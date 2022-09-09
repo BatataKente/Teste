@@ -10,6 +10,12 @@ import SDWebImage
 
 class EditProfileView: UIViewController {
     
+    private lazy var tabBar = TabBarClosed(self)
+    
+    private let saveButton = UIButton()
+    
+    let editProfileViewModel = EditProfileViewModel()
+    
     struct ViewElements {
         
         let scroll: UIScrollView,
@@ -37,13 +43,33 @@ class EditProfileView: UIViewController {
         return photoView
     }()
     
-    private let editButton: UIButton = {
+    private lazy var editButton: UIButton = {
         
         let editButton = UIButton()
         editButton.setImage(UIImage(named: IconsBravve.photoBlue.rawValue),
                             for: .normal)
         
+        let handler = {(action: UIAction) in
+            
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                
+                self.present(self.imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        editButton.addAction(UIAction(handler: handler), for: .touchUpInside)
+        
         return editButton
+    }()
+    
+    private lazy var imagePicker: UIImagePickerController = {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary;
+        imagePicker.allowsEditing = true
+        
+        return imagePicker
     }()
     
     private lazy var viewElements: ViewElements = {
@@ -86,15 +112,6 @@ class EditProfileView: UIViewController {
         
         let aboutWorkStack: UIStackView = {
             
-//            let officeStack = editProfileViewModel.createStackView(labelText: "Área",
-//                                              textFieldText: "Marketing",
-//                                              buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
-//
-//            let workRegimeStack = editProfileViewModel.createStackView(labelText: "Regime de trabalho",
-//                                              textFieldText: "Pessoa Juridica",
-//                                              buttonImage: UIImage(named: IconsBravve.edit_blue.rawValue))
-            
-//            let aboutWorkStack = UIStackView(arrangedSubviews: [officeStack, workRegimeStack])
             let aboutWorkStack = UIStackView()
             editProfileViewModel.setupStack(aboutWorkStack)
             
@@ -209,12 +226,6 @@ class EditProfileView: UIViewController {
                             mattersStack: mattersStack)
     }()
     
-    private lazy var tabBar = TabBarClosed(self)
-    
-    private let saveButton = UIButton()
-    
-    let editProfileViewModel = EditProfileViewModel()
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -265,21 +276,45 @@ class EditProfileView: UIViewController {
         editProfileViewModel.constraint(the: tabBar, to: view.safeAreaLayoutGuide, by: [.leading, .trailing, .bottom])
     }
     
+    @objc func saveTarget() {
+        
+        freezeButton()
+        
+        editProfileViewModel.putUser()
+        if editProfileViewModel.putPhoto() {
+            
+            print("Prosseguir")
+            return
+        }
+    }
+    
     override var prefersStatusBarHidden: Bool {true}
 }
 
 extension EditProfileView: EditProfileViewModelProtocol {
     
-    func setHobbiesStack(_ hobbies: [String]) {
+    func setHobbiesStack(_ hobbies: [Hobbies], userHobbies: [String]) {
         
-        let hobbiesStacks = editProfileViewModel.createStackViews(createCapsuleButtons(hobbies, .capsuleButton))
+        let buttons = editProfileViewModel.setupHobbiesButtons(hobbies,
+                                                        createCapsuleButtons(editProfileViewModel.convertHobbiesToString(hobbies), .capsuleButton))
+        
+        let hobbiesStacks = editProfileViewModel.createStackViews(buttons)
+        editProfileViewModel.selectButtons(stacks: hobbiesStacks,
+                                           editProfileViewModel.convertHobbiesToString(hobbies),
+                                           selectedItems: userHobbies)
         viewElements.hobbiesStack.addArrangedSubviews(hobbiesStacks)
     }
     
-    func setInterestsStack(_ matters: [String]) {
+    func setInterestsStack(_ interests: [Interests], userInterests: [String]) {
         
-        let mattersStacks = editProfileViewModel.createStackViews(createCapsuleButtons(matters, .capsuleButton))
-        viewElements.mattersStack.addArrangedSubviews(mattersStacks)
+        let buttons = editProfileViewModel.setupInterestsButtons(interests,
+                                                                 createCapsuleButtons(editProfileViewModel.convertInterestsToString(interests), .capsuleButton))
+        
+        let interestStacks = editProfileViewModel.createStackViews(buttons)
+        editProfileViewModel.selectButtons(stacks: interestStacks,
+                                           editProfileViewModel.convertInterestsToString(interests),
+                                           selectedItems: userInterests)
+        viewElements.mattersStack.addArrangedSubviews(interestStacks)
     }
     
     func setImage(URL: URL?, placeholderImage: UIImage?) {
@@ -293,6 +328,18 @@ extension EditProfileView: EditProfileViewModelProtocol {
         
         viewElements.aboutWorkStack.addArrangedSubviews(aboutWorkStacks)
     }
+    
+    func unfreezeButton() {
+        
+        saveButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        saveButton.addTarget(nil, action: #selector(saveTarget), for: .touchUpInside)
+    }
+    
+    func freezeButton() {
+        
+        saveButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
+        saveButton.removeTarget(nil, action: #selector(saveTarget), for: .touchUpInside)
+    }
 }
 
 extension EditProfileView: UIScrollViewDelegate {
@@ -305,6 +352,23 @@ extension EditProfileView: UIScrollViewDelegate {
                 
                 subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
             }
+        }
+    }
+}
+
+extension EditProfileView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            DispatchQueue.main.async {self.photoView.image = pickedImage}
+            
+            guard let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL else {return}
+            
+            editProfileViewModel.photo = imageURL
+            unfreezeButton()
+            dismiss(animated: true)
         }
     }
 }
