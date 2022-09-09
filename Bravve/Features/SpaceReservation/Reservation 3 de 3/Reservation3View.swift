@@ -25,7 +25,34 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private let viewModel = ReservationsViewModel()
     
     //MARK: FinishButton
-    private let finishButton = UIButton()
+    private let finishButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return button
+    }()
+    
+    
+    
+    //MARK: - scrollView
+    private lazy var scrollView: UIScrollView = {
+       let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.isScrollEnabled = true
+        scroll.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        return scroll
+        
+        
+    }()
+    
+    
+    //MARK: - viewToScroll
+    private lazy var viewToScroll: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     //MARK: alertLabels
     
@@ -226,7 +253,6 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - numberCardTextField
     private lazy var numberCardTextfield: UITextField = {
         let view = UITextField()
-        view.becomeFirstResponder()
         view.isHidden = true
         view.tag = 1
         view.keyboardType = .namePhonePad
@@ -570,6 +596,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         setupView()
         setupConstrains()
+        setupKeyboardEXpand()
         
         view.createReservationCustomBar(progressBarButtons: buttons) {_ in
             
@@ -598,7 +625,11 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private func setupView() {
         
         
-        view.addSubviews([
+        view.addSubview(scrollView)
+        scrollView.addSubview(viewToScroll)
+        
+        
+        viewToScroll.addSubviews([
             paymentLabel,
             resumeLabel,
             lineImage,
@@ -623,8 +654,39 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         
         finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         
-        let nextResponder = view.viewWithTag(1)
-        nextResponder?.becomeFirstResponder()
+        
+    }
+    
+    //MARK: - setupKeyboardEXpand
+    private func setupKeyboardEXpand() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardApear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisapear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //MARK: - var control to func keyboard Expand
+    var isExpand = false
+    
+    //MARK: - keyboardApear
+    @objc func keyboardApear() {
+        
+        if !isExpand {
+            self.scrollView.contentSize = CGSize(width: view.frame.width,
+                                                 height: self.scrollView.frame.height + 200)
+        }
+        
+        
+    }
+    
+    //MARK: - keyboardDisapear
+    @objc func keyboardDisapear() {
+        
+        if !isExpand {
+            self.scrollView.contentSize = CGSize(width: view.frame.width,
+                                                 height: self.scrollView.frame.height - 200)
+            self.isExpand = false
+        }
         
         
     }
@@ -636,8 +698,21 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         NSLayoutConstraint.activate([
             
             
+            //MARK: - scrollView
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            viewToScroll.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            viewToScroll.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            viewToScroll.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            viewToScroll.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            viewToScroll.widthAnchor.constraint(equalTo: view.widthAnchor),
+            viewToScroll.heightAnchor.constraint(equalToConstant: 460),
+            
             //MARK: paymentLabel
-            paymentLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 220),
+            paymentLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 5),
             paymentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
             
             //MARK: resumeLabel
@@ -721,7 +796,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
             cpfStackView.trailingAnchor.constraint(equalTo: imageBack.trailingAnchor),
             cpfStackView.heightAnchor.constraint(equalToConstant: 60),
             
-            
+            finishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         //MARK: finishButton
