@@ -116,8 +116,6 @@ class PasswordRecoveryPassword: UIViewController {
         confirmPasswordTextFieldClass.textField.addTarget(self, action: #selector(confirmPasswordTextFieldDidChange(_:)), for: .editingChanged)
         
         registerButton.addTarget(self, action: #selector(actionRegisterButton), for: .touchUpInside)
-        
-        
     }
     
     /// Set the default layout of the top elements and the bottom button of the view
