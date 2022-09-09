@@ -34,6 +34,7 @@ class TermsAndConditionViewController: UIViewController {
     
     private lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
     
@@ -55,6 +56,7 @@ class TermsAndConditionViewController: UIViewController {
         myTableView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
         myTableView.register(TermsAndConditionCell.self, forCellReuseIdentifier: "Cell")
         myTableView.separatorStyle = .none
+        myTableView.showsVerticalScrollIndicator = false
         myTableView.layer.cornerRadius = CGFloat(16).generateSizeForScreen
         tabBar.selectedItem = tabBar.items?[2]
         view.addSubviews([shadowView,wayImage1,wayImage2, customBar, myTableView,tabBar])
@@ -67,30 +69,28 @@ class TermsAndConditionViewController: UIViewController {
     }
     
     private func setConstraints() {
-        
-        myTableView.constraintOutsideTo(.top, customBar, CGFloat(26).generateSizeForScreen)
-        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
-        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-35).generateSizeForScreen)
-        myTableView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide, CGFloat(-59).generateSizeForScreen)
-        myTableView.heightAnchor.constraint(equalToConstant: CGFloat(1092).generateSizeForScreen).isActive = true
-        myTableView.widthAnchor.constraint(equalToConstant: CGFloat(324).generateSizeForScreen).isActive = true
-        
-        shadowView.constraintOutsideTo(.top, customBar, CGFloat(26).generateSizeForScreen)
-        shadowView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(35).generateSizeForScreen)
-        shadowView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-35).generateSizeForScreen)
-        shadowView.constraintInsideTo(.bottom, view.safeAreaLayoutGuide, CGFloat(-59).generateSizeForScreen)
-        
-        
-        wayImage1.constraintInsideTo(.top, view.safeAreaLayoutGuide)
-        wayImage1.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        
-        wayImage2.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        wayImage2.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
+
+        NSLayoutConstraint.activate([
+            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: CGFloat(26).generateSizeForScreen),
+            myTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(26).generateSizeForScreen),
+            myTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),
+            myTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            shadowView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: CGFloat(26).generateSizeForScreen),
+            shadowView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(35).generateSizeForScreen),
+            shadowView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-35).generateSizeForScreen),
+            shadowView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: CGFloat(-59).generateSizeForScreen),
+            
+            wayImage1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            wayImage1.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            wayImage2.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            wayImage2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 }
 
@@ -105,5 +105,7 @@ extension TermsAndConditionViewController: UITableViewDelegate, UITableViewDataS
         return cell ?? UITableViewCell()
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
