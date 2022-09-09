@@ -17,6 +17,7 @@ class PasswordRecoveryPassword: UIViewController {
     var containsSpecialCharacters = false
     var containsNumericCharacters = false
     var invalidCharacters = true
+    var email: String?
     
     private let way = UIImageView()
     

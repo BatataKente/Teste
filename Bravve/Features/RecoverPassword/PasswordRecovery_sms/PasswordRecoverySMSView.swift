@@ -17,6 +17,8 @@ class PasswordRecoverySMSView: UIViewController {
     
     var code = ""
     
+    var email: String?
+    
     let passwordRecoverySMSViewModel = PasswordRecoverySMSViewModel()
     
     let backgroundImage = UIImageView()
@@ -201,7 +203,13 @@ class PasswordRecoverySMSView: UIViewController {
     
     @objc func continueButtonTapped() {
         
-        passwordRecoverySMSViewModel.makeAPICall(password: password, code: code)
+        guard let email = email else {
+            print("Unable to unwrap email.")
+            return
+        }
+
+        
+        passwordRecoverySMSViewModel.makeAPICall(password: password, code: code, email: email)
     }
     
     @objc func resendCodeButtonTapped() {

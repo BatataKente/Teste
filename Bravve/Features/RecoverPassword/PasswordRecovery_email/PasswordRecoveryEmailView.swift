@@ -235,6 +235,7 @@ extension PasswordRecoveryEmailView: PasswordRecoveryEmailViewProtocol {
         
         let vc = PasswordRecoveryPassword()
         vc.modalPresentationStyle = .fullScreen
+        vc.email = textFieldEmail.text
         present(vc, animated: true)
     }
     
