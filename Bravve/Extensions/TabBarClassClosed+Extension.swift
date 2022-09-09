@@ -25,7 +25,9 @@ class TabBarClosed: UITabBar, UITabBarDelegate {
                 actualView.present(homeOpenView, animated: true)
             
             case tabBar.items?[1]:
+            Flags.shared.flagReservation = UserReservations.reservations.count
             if Flags.shared.flagReservation == 0 {
+                
                 let homeOpenView = EmptyReservation()
                 homeOpenView.modalPresentationStyle = .fullScreen
                 actualView.present(homeOpenView, animated: true)

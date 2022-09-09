@@ -406,6 +406,8 @@ class NetworkManager {
             
         case .reservationsHours: urlEndpoint = EndPoints.reservationsHours.rawValue
         case .reservations: urlEndpoint = EndPoints.reservations.rawValue
+        case .reservationsOpen: urlEndpoint = EndPoints.reservationsOpen.rawValue
+        case .reservationshistory: urlEndpoint = EndPoints.reservationshistory.rawValue
         case .reservationsId: urlEndpoint = EndPoints.reservations.rawValue + "\(id)"
         case .reservationsCancellations: urlEndpoint = EndPoints.reservationsCancellations.rawValue
         case .reservationsCheckins: urlEndpoint = EndPoints.reservationsCheckins.rawValue
