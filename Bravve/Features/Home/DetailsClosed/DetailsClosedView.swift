@@ -73,23 +73,36 @@ class DetailsClosedView: UIViewController {
         itens.append(createStackView("\(space.partner_site_address?.address?.street ?? ""), \(space.partner_site_address?.address?.neighborhood ?? ""), nº\(space.partner_site_address?.address?.street_number ?? 0), \(space.partner_site_address?.address?.city_name ?? ""). \(space.partner_site_address?.address?.state_name ?? "") \(space.partner_site_address?.address?.postal_code ?? ""), BR",
                                      UIImage(named: IconsBravve.map.rawValue),
                                      textColor: textColor))
-        itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                     textColor: textColor))
-        for i in 1...texts.count-1 {
-            
-            itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         isHidden: true,
+        
+        let localDetailsStackView = UIStackView()
+        
+        if texts != [] {
+            itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          textColor: textColor))
+            for i in 1...texts.count-1 {
+                
+                itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+            }
+            
+            let buttons = createSeeButtonsStackView(3...itens.count-1,
+                                                    itens: itens,
+                                                    downButtonImages: .arrowDown,
+                                                    upButtonImages: .arrowUp)
+
+            localDetailsStackView.addArrangedSubviews([title] +
+                                                      itens +
+                                                      [buttons])
+        } else {
+            
+            localDetailsStackView.addArrangedSubviews([title] +
+                                                      itens
+            )
         }
         
-        let buttons = createSeeButtonsStackView(3...itens.count-1,
-                                                itens: itens,
-                                                downButtonImages: .arrowDown,
-                                                upButtonImages: .arrowUp)
         
-        let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
-                                                itens +
-                                                [buttons])
+        
         localDetailsStackView.axis = .vertical
         localDetailsStackView.alignment = .leading
         localDetailsStackView.spacing = CGFloat(10).generateSizeForScreen
