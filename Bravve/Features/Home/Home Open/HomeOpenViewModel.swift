@@ -50,7 +50,6 @@ class HomeOpenViewModel {
 
                 let stateButton = UIButton()
                 stateButton.setTitle(state.code, for: .normal)
-                print("######",state.code)
                 stateButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                      for: .normal)
                 stateButton.titleLabel?.font = font
