@@ -92,6 +92,7 @@ class WorkPassBookingView: UIViewController {
     //MARK: Buttons
     lazy var pinkButton : UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Proxima Etapa", for: .normal)
         button.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         button.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
@@ -145,7 +146,7 @@ class WorkPassBookingView: UIViewController {
         guard let space = space else {
             return
         }
-
+        
         let reserveViewController = SingleBookingView(space, spaceId: spaceId)
         reserveViewController.modalPresentationStyle = .fullScreen
         present(reserveViewController, animated: true)
@@ -153,19 +154,21 @@ class WorkPassBookingView: UIViewController {
     
     //MARK: Constraints
     private func setupConstraints() {
-        
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
-        
-        pinkButton.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        pinkButton.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        pinkButton.constraintOutsideTo(.bottom, tabBar)
-        pinkButton.heightAnchorInSuperview(CGFloat(52).generateSizeForScreen)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             
+            tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            pinkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pinkButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pinkButton.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            pinkButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen),
             
             tableView.topAnchor.constraint(equalTo: locationStackView.bottomAnchor, constant: CGFloat(22).generateSizeForScreen),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -189,7 +192,7 @@ class WorkPassBookingView: UIViewController {
 //MARK: Extension
 extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
     
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrayFirstLabel.count
@@ -203,12 +206,12 @@ extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
         cell.firstLabel.text = arrayFirstLabel[indexPath.row]
         cell.secondLabel.text = arraySecoundLabel[indexPath.row]
         if arrayStackView[indexPath.row] != ""{
-        cell.creditsStackView.isLayoutMarginsRelativeArrangement = true
-        cell.pinkCreditsLabel.text = arrayStackView[indexPath.row]
-        cell.creditsLabel.text = "créditos"
+            cell.creditsStackView.isLayoutMarginsRelativeArrangement = true
+            cell.pinkCreditsLabel.text = arrayStackView[indexPath.row]
+            cell.creditsLabel.text = "créditos"
         }
         
-
+        
         return cell
     }
 }
@@ -216,16 +219,16 @@ extension WorkPassBookingView:WorkPassCellProtocol{
     func setButtonTapped(sender:UIButton) {
         let tableView = self.tableView
         for cell in tableView.visibleCells{
-         if  let cell = cell as? WorkPassCell{
-             if cell.circleButton != sender {
-                 cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
-             }
+            if  let cell = cell as? WorkPassCell{
+                if cell.circleButton != sender {
+                    cell.circleButton.setImage(UIImage(named: ButtonsBravve.circle.rawValue), for: .normal)
+                }
             }
         }
         sender.setImage(UIImage(named: ButtonsBravve.circleSelected.rawValue), for: .normal)
         self.pinkButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         self.pinkButton.addTarget(self, action: #selector(nextStageButtonTapped), for: .touchUpInside)
     }
-
+    
 }
 
