@@ -118,39 +118,37 @@ class WorkPassCell: UITableViewCell {
     }
     //MARK: Constraints
     private func setupConstraints() {
-        
-        cellView.constraintInsideTo(.top, contentView)
-        cellView.constraintInsideTo(.leading, contentView)
-        cellView.constraintInsideTo(.trailing, contentView)
-        cellView.constraintInsideTo(.bottom, contentView, CGFloat(-26).generateSizeForScreen)
-        cellView.heightAnchorInSuperview(CGFloat(68).generateSizeForScreen)
-        
-        
-        
-        lineView.constraintInsideTo(.leading, contentView,CGFloat(19).generateSizeForScreen)
-        lineView.constraintInsideTo(.trailing, contentView,CGFloat(22).generateSizeForScreen)
-        lineView.constraintInsideTo(.bottom, contentView)
-        lineView.heightAnchorInSuperview(CGFloat(1).generateSizeForScreen)
-        
-        
-        firstLabel.constraintInsideTo(.top, cellView, CGFloat(9).generateSizeForScreen)
-        firstLabel.constraintInsideTo(.leading, cellView,CGFloat(19).generateSizeForScreen)
-        firstLabel.constraintOutsideTo(.bottom, secondLabel, CGFloat(9).generateSizeForScreen)
-        
-        secondLabel.constraintOutsideTo(.top, firstLabel, CGFloat(9).generateSizeForScreen)
-        secondLabel.constraintInsideTo(.leading, cellView,CGFloat(19).generateSizeForScreen)
-        secondLabel.constraintInsideTo(.bottom, cellView, CGFloat(9).generateSizeForScreen)
-        
-        // creditsStackView.constraintInsideTo(.top, cellView, CGFloat(8).generateSizeForScreen)
-        creditsStackView.constraintOutsideTo(.trailing, circleButton,CGFloat(-17).generateSizeForScreen)
-        // creditsStackView.constraintInsideTo(.bottom, cellView, CGFloat(18).generateSizeForScreen)
-        creditsStackView.constraintInsideTo(.centerY, cellView)
-        
-        circleButton.constraintInsideTo(.top, cellView, CGFloat(9).generateSizeForScreen)
-        circleButton.constraintInsideTo(.trailing, cellView,CGFloat(-23).generateSizeForScreen)
-        circleButton.constraintInsideTo(.centerY, cellView)
-        
-        
+        NSLayoutConstraint.activate([
+            
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellView.heightAnchor.constraint(equalToConstant: CGFloat(68).generateSizeForScreen),
+            
+            lineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant:CGFloat(19).generateSizeForScreen),
+            lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant:CGFloat(-22).generateSizeForScreen),
+            lineView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen),
+            
+            firstLabel.topAnchor.constraint(equalTo: cellView.topAnchor,constant:CGFloat(9).generateSizeForScreen),
+            firstLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor,constant:CGFloat(19).generateSizeForScreen),
+            firstLabel.bottomAnchor.constraint(equalTo: secondLabel.topAnchor,constant:CGFloat(9).generateSizeForScreen),
+            
+            secondLabel.topAnchor.constraint(equalTo: firstLabel.bottomAnchor,constant:CGFloat(-9).generateSizeForScreen),
+            secondLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor,constant:CGFloat(19).generateSizeForScreen),
+            secondLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor,constant:CGFloat(9).generateSizeForScreen),
+            
+            creditsStackView.trailingAnchor.constraint(equalTo: circleButton.leadingAnchor,constant:CGFloat(-17).generateSizeForScreen),
+            creditsStackView.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
+            
+            circleButton.topAnchor.constraint(equalTo: cellView.topAnchor,constant:CGFloat(9).generateSizeForScreen),
+            circleButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor,constant:CGFloat(-23).generateSizeForScreen),
+            circleButton.centerYAnchor.constraint(equalTo: cellView.centerYAnchor),
+            
+        ])
+
+
     }
     
 }
