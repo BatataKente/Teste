@@ -30,17 +30,23 @@ class OpenDetailsView: UIViewController {
         detailsOpenViewModel.sortBusinessHours(businessHours: &business_hours)
         
         var texts:[String] = detailsOpenViewModel.createBusinessHoursArray(businessHours: business_hours)
+        
    
         var itens = [UIStackView]()
+        let localDetailsStackView = UIStackView(arrangedSubviews: [title])
         
         detailsOpenViewModel.createItensStackView(itens: &itens, texts: texts, textColor: textColor ?? UIColor(), seats_qty: space.seats_qty ?? 0, street: space.partner_site_address?.address?.street ?? "", neighborhood: space.partner_site_address?.address?.neighborhood ?? "", streetNumber: space.partner_site_address?.address?.street_number ?? 0, cityName: space.partner_site_address?.address?.city_name ?? "", stateName: space.partner_site_address?.address?.state_name ?? "", postalCode: space.partner_site_address?.address?.postal_code ?? "")
         
+        if !texts.isEmpty {
         let button = detailsOpenViewModel.createSeeButtonsStackView(3...itens.count-1,
                                                                     itens: itens, arrowDownImage: UIImage(named: ButtonsBravve.arrowDownPink.rawValue), arrowUpImage: UIImage(named: ButtonsBravve.arrowUpPink.rawValue))
+            
         
-        let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
-                                                itens +
-                                                [button])
+            localDetailsStackView.addArrangedSubviews(itens + [button])
+        }else {
+            localDetailsStackView.addArrangedSubviews(itens)
+        }
+        
         localDetailsStackView.axis = .vertical
         localDetailsStackView.alignment = .leading
         localDetailsStackView.spacing = CGFloat(10).generateSizeForScreen
