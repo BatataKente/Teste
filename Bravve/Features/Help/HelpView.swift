@@ -11,6 +11,7 @@ import UIKit
 class HelpViewController: UIViewController {
     
     private var viewModel: HelpViewModel = HelpViewModel()
+    private let customBar = UIView()
     var iconClick: Bool = true
     var arrayBool: [Bool] = [false, true, true, true, true, true, true, true, true, true, true]
     var arrayImageButton: [String] = [ButtonsBravve.lessButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue, ButtonsBravve.mostButton.rawValue]
@@ -1129,11 +1130,12 @@ class HelpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.capsuleButton.rawValue)
-        view.addSubviews([scrollView, tabBar])
+        view.addSubviews([scrollView, customBar, tabBar])
         tabBar.selectedItem = tabBar.items?[2]
         self.arrayAnswer = [answer1Label, answer2Label, answer3Label, answer4Label, answer5Label, answer6Label, answer7Label, answer8Label, answer9Label, answer10Label, answer11Label]
         self.arrayButtons =  [showAnswer1Button, showAnswer2Button, showAnswer3Button, showAnswer4Button, showAnswer5Button, showAnswer6Button, showAnswer7Button, showAnswer8Button, showAnswer9Button, showAnswer10Button, showAnswer11Button]
         self.arrayStackViews = [questionAnswer1StackView, questionAnswer2StackView, questionAnswer3StackView, questionAnswer4StackView, questionAnswer5StackView, questionAnswer6StackView, questionAnswer7StackView, questionAnswer8StackView, questionAnswer9StackView, questionAnswer10StackView, questionAnswer11StackView]
+        setupDefaults()
         configConstraints()
     }
     
@@ -1306,7 +1308,6 @@ class HelpViewController: UIViewController {
     private func configConstraints() {
         
         NSLayoutConstraint.activate([
-            
             self.scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             self.scrollView.topAnchor.constraint(equalTo: self.customBar.topAnchor),
@@ -1417,7 +1418,6 @@ class HelpViewController: UIViewController {
             self.tabBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tabBar.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            
         ])
         
     }
