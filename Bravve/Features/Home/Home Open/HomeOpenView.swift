@@ -282,10 +282,11 @@ class HomeOpenView: UIViewController {
     private func setupConstraints() {
         
 //        homeOpenViewModel.removeMasks(of: view)
-        for subview in view.subviews {
-            
-            subview.translatesAutoresizingMaskIntoConstraints = false
-        }
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        customBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
 //        homeOpenViewModel.constraint(the: stackView, to: view, by: [.leading, .trailing])
