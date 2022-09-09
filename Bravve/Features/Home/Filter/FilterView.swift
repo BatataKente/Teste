@@ -848,7 +848,7 @@ final class FilterScreen: UIViewController {
                     spaceFacilitiesId = filteredIds
                 }
             }
-            print("kaueteste \(sortedFacilitiesArray)")
+    
         } else {
             button.isSelected.toggle()
             if button.isSelected {

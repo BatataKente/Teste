@@ -12,6 +12,8 @@ class LoginViewModel{
     
     let sessionManager = SessionManager()
     
+    private var reservations: [Reservations] = []
+    
     let customAlert = CustomAlert()
     let alertCustom = CustomAlert()
     
@@ -71,10 +73,24 @@ class LoginViewModel{
                         UserDefaults.standard.setValue(userUUID, forKey: "userUUID")
                     }
                 }
-                self.delegate?.presentNextScreen()
+                
+                self.sessionManager.getDataArray(endpoint: .reservationsOpen){ (statusCode, error, openReservations: [Reservations]?) in
+
+                    guard let openReservations = openReservations else {
+                        print(statusCode as Any)
+                        print(error?.localizedDescription as Any)
+                        return
+                    }
+                    
+                    UserReservations.reservations = openReservations
+                   
+                    self.delegate?.presentNextScreen()
+                }
+                
             }
         }
     }
+    
 }
 
 protocol LoginViewModelProtocol {

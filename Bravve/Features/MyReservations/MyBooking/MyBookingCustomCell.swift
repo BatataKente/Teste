@@ -6,15 +6,19 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol MyBookingCustomCellDelegate: AnyObject {
     
     func presentViewController(_ viewController: UIViewController)
 }
-
+    
 class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
+    let bookingDetailsView = BookingDetailsView()
+    
+    var reservationID: Int? = nil
     
     private let cellView: UIView = {
         
@@ -40,6 +44,7 @@ class MyBookingCustomCell: UITableViewCell {
         let topTitleLabel = UILabel()
         topTitleLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         topTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
+        topTitleLabel.numberOfLines = 0
         
         return topTitleLabel
     }()
@@ -56,7 +61,9 @@ class MyBookingCustomCell: UITableViewCell {
     private let spaceImage: UIImageView = {
         
         let spaceImage = UIImageView()
-        spaceImage.contentMode = .scaleAspectFill
+        spaceImage.clipsToBounds = true
+        spaceImage.layer.cornerRadius = 12
+        spaceImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         return spaceImage
     }()
@@ -73,14 +80,22 @@ class MyBookingCustomCell: UITableViewCell {
     private let reservedLabel: UILabel = {
         
         let reservedLabel = UILabel()
-        reservedLabel.backgroundColor = UIColor(named: "reserved")
         reservedLabel.textColor = .white
-        reservedLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        reservedLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                 size: CGFloat(13).generateSizeForScreen)
         reservedLabel.textAlignment = .center
         
         return reservedLabel
     }()
     
+    private let reservedLabelView: UIView = {
+        
+        let reservedLabelView = UIView()
+        reservedLabelView.backgroundColor = UIColor(named: ColorsBravve.reserved.rawValue)
+        return reservedLabelView
+    }()
+    
+  
     private let spaceSubtitleLabel: UILabel = {
         
         let spaceSubtitleLabel = UILabel()
@@ -131,6 +146,8 @@ class MyBookingCustomCell: UITableViewCell {
         
         let stackView = UIStackView(arrangedSubviews: [locationLabel, dateLabel, hourLabel, spaceTypeLabel])
         stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.setCustomSpacing(8, after: hourLabel)
         stackView.distribution = .fillEqually
         
         return stackView
@@ -151,7 +168,8 @@ class MyBookingCustomCell: UITableViewCell {
         
         contentView.addSubview(cellView)
         
-        cellView.addSubviews([typeTagLabel, topTitleLabel, bottomTitleLabel, spaceImage, spaceNameLabel, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
+        reservedLabelView.addSubview(reservedLabel)
+        cellView.addSubviews([typeTagLabel, topTitleLabel, spaceImage, spaceNameLabel, reservedLabelView, spaceSubtitleLabel, locationInfoStackView, arrowButton])
         
         setupConstraints()
         
@@ -164,19 +182,51 @@ class MyBookingCustomCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell() {
+    func setupCell(reservation: Reservations) {
         
-        typeTagLabel.text = "BOXOFFICE"
-        typeTagLabel.backgroundColor = UIColor(named: "boxOffice")
-        topTitleLabel.text = "Numa esquina"
-        bottomTitleLabel.text = "charmosa, um hotel"
-        spaceImage.image = UIImage(named: "imageReservs")
-        spaceNameLabel.text = "Hotel Saint"
-        reservedLabel.text = "RESERVADO"
-        spaceSubtitleLabel.text = "UM Coffee Co."
-        locationLabel.text = "São Paulo / Jardim Paulistano"
-        dateLabel.text = "21/01/2022 - 22/01/2022"
-        hourLabel.text = "9h às 18h"
+        guard let city = (reservation.space_address?.city_name) else { return }
+        guard let neighborhood = (reservation.space_address?.neighborhood) else { return }
+        
+        guard let pictures = reservation.picture else { return }
+        
+        var picture = ""
+        	
+        if pictures.count != 0 {
+            guard let pictureSelected = pictures[0].url else { return }
+            picture = pictureSelected
+        }
+        
+        guard let reservationStartDt = reservation.start_dt else { return }
+        guard let reservationEndDt = reservation.end_dt else { return }
+        
+        let separatedStartDate = reservationStartDt.components(separatedBy: "T")
+        let separatedEndDate = reservationEndDt.components(separatedBy: "T")
+        
+        let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
+        let formatEndDate = separatedEndDate[0].components(separatedBy: "-")
+        
+        let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
+        let endDate = "\(formatEndDate[2])/\(formatEndDate[1])/\(formatEndDate[0])"
+        
+        let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
+        let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
+        
+        let startHour = "\(separatedStartHour[0])"
+        let endHour = "\(separatedEndHour[0])"
+        
+        typeTagLabel.text = reservation.space_category?.name?.uppercased()
+        typeTagLabel.backgroundColor = getTitleLabelBackgroundColor(reservation.space_category?.name?.uppercased() ?? "")
+        topTitleLabel.text = reservation.slogan
+        spaceImage.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+        spaceNameLabel.text = reservation.local_name
+        reservedLabel.text = reservation.reservation_status_name?.uppercased()
+        reservedLabelView.backgroundColor = getTitleLabelBackgroundColor(reservation.reservation_status_name?.uppercased() ?? "")
+        spaceSubtitleLabel.text = reservation.description
+        locationLabel.text = "\(city) / \(neighborhood)"
+        dateLabel.text = "\(startDate) - \(endDate)"
+        hourLabel.text = "\(startHour)h às \(endHour)h"
+        spaceTypeLabel.text = reservation.space_type?.name
+        UserReservations.reservationID = reservation.space_id
     }
     
     @objc func actionArrowButton() {
@@ -200,29 +250,35 @@ class MyBookingCustomCell: UITableViewCell {
                                         CGFloat(17).generateSizeForScreen)
         
         topTitleLabel.constraintOutsideTo(.top, typeTagLabel,
-                                          CGFloat(23).generateSizeForScreen)
+                                          CGFloat(19).generateSizeForScreen)
         topTitleLabel.constraintInsideTo(.leading, cellView,
                                          CGFloat(17).generateSizeForScreen)
+        topTitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.6)
         
-        bottomTitleLabel.constraintOutsideTo(.top, topTitleLabel)
-        bottomTitleLabel.constraintInsideTo(.leading, topTitleLabel)
-        bottomTitleLabel.constraintInsideTo(.width, topTitleLabel)
-        bottomTitleLabel.constraintInsideTo(.height, topTitleLabel)
-        
-        spaceImage.constraintOutsideTo(.top, bottomTitleLabel,
+        spaceImage.constraintOutsideTo(.top, topTitleLabel,
                                        CGFloat(22).generateSizeForScreen)
-        spaceImage.constraintInsideTo(.leading, bottomTitleLabel)
+        spaceImage.constraintInsideTo(.leading, topTitleLabel)
         spaceImage.constraintInsideTo(.trailing, cellView)
         spaceImage.constraintInsideTo(.height, cellView, multiplier: 0.39)
+        spaceImage.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
         
         spaceNameLabel.constraintOutsideTo(.top, spaceImage,
                                            CGFloat(23).generateSizeForScreen)
         spaceNameLabel.constraintInsideTo(.leading, spaceImage)
         
-        reservedLabel.constraintOutsideTo(.top, spaceImage,
-                                          CGFloat(32).generateSizeForScreen)
-        reservedLabel.constraintInsideTo(.trailing, cellView,
+        reservedLabelView.constraintOutsideTo(.top, spaceImage,
+                                          CGFloat(28).generateSizeForScreen)
+        reservedLabelView.constraintInsideTo(.trailing, cellView,
                                          CGFloat(26).generateSizeForScreen)
+        
+        reservedLabel.constraintInsideTo(.top, reservedLabelView,
+                                          CGFloat(2.5).generateSizeForScreen)
+        reservedLabel.constraintInsideTo(.trailing, reservedLabelView,
+                                         CGFloat(2.5).generateSizeForScreen)
+        reservedLabel.constraintInsideTo(.bottom, reservedLabelView,
+                                         CGFloat(2.5).generateSizeForScreen)
+        reservedLabel.constraintInsideTo(.leading, reservedLabelView,
+                                         CGFloat(2.5).generateSizeForScreen)
         
         spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel,
                                                CGFloat(8).generateSizeForScreen)
