@@ -600,6 +600,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         setupView()
         setupConstrains()
         setupKeyboardEXpand()
+        hideKeyboardWhenTappedAround()
         
         viewModel.delegate = self
         
@@ -1051,11 +1052,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     
     
-    //MARK: - touchesBegan
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true)
-    }
+
     
     //MARK: - textFieldShouldReturn
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -1165,23 +1162,6 @@ extension UIStackView {
     }
 }
 
-extension ReservationsThreeViewController : UIGestureRecognizerDelegate {
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
-        //        if let _ = touch.view?.superview?.superclass?.isSubclass(of: UIButton.self) {
-        //
-        //            return false
-        //        }
-        
-        if touch.view!.superview!.superclass! .isSubclass(of: UIButton.self) {
-            
-            return false
-        }
-        return true
-    }
-}
-
 
 extension ReservationsThreeViewController: ReservationsViewModelProtocol {
     func showAlertError(message: String) {
@@ -1194,9 +1174,18 @@ extension ReservationsThreeViewController: ReservationsViewModelProtocol {
         reservationcompletedview.modalPresentationStyle = .fullScreen
         present(reservationcompletedview, animated: true)
     }
+
+}
+
+//MARK: - hideKeyboardWhenTappedAround
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
     
-    
-    
-    
-    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

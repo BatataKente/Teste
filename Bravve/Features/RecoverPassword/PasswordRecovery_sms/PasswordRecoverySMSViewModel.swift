@@ -18,18 +18,18 @@ class PasswordRecoverySMSViewModel {
     
     var delegate: PasswordRecoverySMSViewModelProtocol?
     
-    func makeAPICall(password: String, code: String) {
+    func makeAPICall(password: String, code: String, email: String) {
         
-        let parameters = ConfirmForgotPasswordParameters(new_password: password, code: code)
+        let parameters = ConfirmForgotPasswordParameters(email: email, new_password: password, code: code)
         
-        sessionManager.postDataWithoutResponse(endpoint: .confirmForgotPassword, parameters: parameters) { statusCode, error in
+        sessionManager.postOpenDataWithoutResponse(endpoint: .confirmForgotPassword, parameters: parameters) { statusCode, error in
             
             guard let statusCode = statusCode else {
                 print("Unable to unwrap status code")
                 return
             }
             
-            if statusCode == 204 {
+            if statusCode == 200 {
                 
                 self.delegate?.showAlert()
             } else {
