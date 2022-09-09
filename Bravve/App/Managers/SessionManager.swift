@@ -279,13 +279,13 @@ class SessionManager {
             }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-//                print(response.debugDescription)
+                print(response.debugDescription)
                 if let statusCode = response.response?.statusCode {
                     completionHandler(statusCode, response.error)
                 } else {

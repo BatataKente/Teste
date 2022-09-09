@@ -202,6 +202,7 @@ extension PasswordRecoveryPassword: UITextFieldDelegate {
         if registerButton.backgroundColor == UIColor(named: ColorsBravve.buttonPink.rawValue) {
             let vc = PasswordRecoverySMSView()
             vc.password = passwordTextFieldClass.textField.text ?? ""
+            vc.email = email
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
