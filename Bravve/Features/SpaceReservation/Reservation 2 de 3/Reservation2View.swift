@@ -137,8 +137,11 @@ class Reservation2View: UIViewController {
     
     //MARK: - confirmButtonTapped
     @objc func confirmButtonTapped(){
+        
         let reserveViewController = ReservationsThreeViewController()
         reserveViewController.modalPresentationStyle = .fullScreen
+        
+        reserveViewController.spaceDetail = spaceDetail
         present(reserveViewController, animated: true)
     }
     

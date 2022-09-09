@@ -21,15 +21,18 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - var and let
     private let alertCc = CustomAlert()
     private let alertSource = CustomAlert()
+    private let alert404 = CustomAlert()
     private let bravveIcon = UIImageView()
     private let viewModel = ReservationsViewModel()
+    
+    var spaceDetail: SpaceDetail?
     
     //MARK: FinishButton
     private let finishButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        
+        button.addTarget(nil, action: #selector(finishButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -598,10 +601,12 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         setupConstrains()
         setupKeyboardEXpand()
         
-        view.createReservationCustomBar(progressBarButtons: buttons) {_ in
-            
+        viewModel.delegate = self
+        
+        view.createReservationCustomBarAPI(spaceName: spaceDetail?.space_name, localName: spaceDetail?.local_name, imageURL: spaceDetail?.pictures?[0].url) { _ in
             self.dismiss(animated: true)
         }
+    
         
         let numberStackViewTap = UITapGestureRecognizer(target: self, action: #selector(numberStackViewTapped))
         numberCardStackView.addGestureRecognizer(numberStackViewTap)
@@ -647,12 +652,12 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
             cpfStackView,
             accessoryButtonCountryArrow,
             resumeButton,
-            finishButton
+            
         ])
         
+        view.addSubview(finishButton)
         
         
-        finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         
         
     }
@@ -1019,14 +1024,32 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         cpfStackView.setBottomBorderOnlyWithDefault(color: UIColor.black.cgColor)
     }
     
+
     
     //MARK: - finishButtonTapped
     @objc func finishButtonTapped() {
+        print("finishButtonTapped")
+        var totalAmount: Double = 0.0
         
-        let reservationcompletedview = ReservationCompletedView()
-        reservationcompletedview.modalPresentationStyle = .fullScreen
-        present(reservationcompletedview, animated: true)
+        var arrayReservations: [Int]  = []
+        
+        
+        for reservation in ReservationList.reservationList{
+            
+            for hour in reservation.hours {
+                arrayReservations.append(hour.reservationId)
+                let hourPrice = Double(hour.hour_price.replacingOccurrences(of: ",", with: "."))
+                totalAmount += hourPrice ?? 0.0
+            }
+            
+        }
+        
+        viewModel.makeApiCall(reservations: arrayReservations, cardNumber: numberCardTextfield.text ?? "", cardExpiration: ccValidateExpirationTextfield.text ?? "", cardSecurityCode: sourceSecurityTextfield.text ?? "", holderName: nameHolderTextfield.text ?? "", holderDocument: cpfTextfield.text ?? "", chargedAmount: totalAmount, countryCode: "+55")
+        
+        
     }
+    
+    
     
     //MARK: - touchesBegan
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -1157,4 +1180,23 @@ extension ReservationsThreeViewController : UIGestureRecognizerDelegate {
         }
         return true
     }
+}
+
+
+extension ReservationsThreeViewController: ReservationsViewModelProtocol {
+    func showAlertError(message: String) {
+        alert404.showAlert(message: message, enterAttributed: "Tentar Novamente", on: self)
+    }
+    
+    func goToNextScreen() {
+       
+        let reservationcompletedview = ReservationCompletedView()
+        reservationcompletedview.modalPresentationStyle = .fullScreen
+        present(reservationcompletedview, animated: true)
+    }
+    
+    
+    
+    
+    
 }
