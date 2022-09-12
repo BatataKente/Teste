@@ -69,29 +69,28 @@ class TermsAndConditionViewController: UIViewController {
     }
     
     private func setConstraints() {
+        
+        for subview in view.subviews {
             
-            for subview in view.subviews {
-                
-                subview.translatesAutoresizingMaskIntoConstraints = false
-            }
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
             
-            NSLayoutConstraint.activate([
+            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: 26),
+            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35),
+            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35),
+            myTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -59),
+            myTableView.widthAnchor.constraint(equalToConstant: 324),
+            myTableView.heightAnchor.constraint(equalToConstant: 1092),
             
-            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: CGFloat(26).generateSizeForScreen),
-            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(35).generateSizeForScreen),
-            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-35).generateSizeForScreen),
-            myTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-59).generateSizeForScreen),
-            myTableView.heightAnchor.constraint(equalToConstant: CGFloat(1092).generateSizeForScreen),
-            myTableView.widthAnchor.constraint(equalToConstant: CGFloat(324).generateSizeForScreen),
+            shadowView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: 26),
+            shadowView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35),
+            shadowView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35),
+            shadowView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -59),
             
-            shadowView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: CGFloat(26).generateSizeForScreen),
-            shadowView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(35).generateSizeForScreen),
-            shadowView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-35).generateSizeForScreen),
-            shadowView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-59).generateSizeForScreen),
-            
-            wayImage1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            wayImage1.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: 26),
             wayImage1.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            
             
             wayImage2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             wayImage2.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -99,8 +98,9 @@ class TermsAndConditionViewController: UIViewController {
             tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            ])
-        }
+            
+        ])
+    }
 }
 
 extension TermsAndConditionViewController: UITableViewDelegate, UITableViewDataSource {
