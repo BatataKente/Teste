@@ -11,9 +11,25 @@ import UIKit
 
 class EmailView: UIViewController {
     
+    
+    //MARK: prefersStatusBarHidden
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
+    //MARK: - var and let
     var userToRegister: UserParameters
+    private let emailViewModel = EmailViewModel()
     
     
+    //MARK: - ways
+    private let ways = [UIImageView(), UIImageView(), UIImageView()]
+    
+    //MARK: - registerButton
+    private let registerButton = UIButton()
+    
+    //MARK: - init
     init(_ userToRegister: UserParameters = UserParameters(name: nil,
                                                            phone_number: nil,
                                                            email: nil,
@@ -24,16 +40,8 @@ class EmailView: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    //MARK: Elements
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
     
-    private let ways = [UIImageView(), UIImageView(), UIImageView()]
-    
-    private let registerButton = UIButton()
-    
+    //MARK: - buttons - ProgressBar
     private lazy var buttons: [UIButton] = {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
@@ -63,25 +71,29 @@ class EmailView: UIViewController {
         return buttons
     }()
     
+    
+    //MARK: - infoLabel
     private let infoLabel: UILabel = {
         
-        let infoLabel = UILabel()
-        infoLabel.font = UIFont(name: FontsBravve.light.rawValue,
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.light.rawValue,
                                 size: CGFloat(16).generateSizeForScreen)
-        infoLabel.numberOfLines = 0
-        infoLabel.textAlignment = .center
-        
-        return infoLabel
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
+    //MARK: - customShaddow
     private let customShaddow: UIView = {
-        
-        let customShaddow = UIView()
-        customShaddow.layer.cornerRadius = 8
-        customShaddow.isHidden = true
-        
-        return customShaddow
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
+    
+    
     //MARK: viewElements
     lazy var viewElements: (rightStackView: UIStackView,
                             rightTextField: UITextField,
@@ -131,48 +143,46 @@ class EmailView: UIViewController {
                 rightLabel: rightLabel,
                 alertButton: alertButton)
     }()
+    
     //MARK: StackView
     private lazy var registerStackView: UIStackView = {
         
-        let registerStackView = UIStackView(arrangedSubviews: [viewElements.rightStackView])
-        registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
-        registerStackView.layer.borderWidth = 1
-        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        registerStackView.layer.cornerRadius = 8
-        registerStackView.spacing = CGFloat(30).generateSizeForScreen
-        
-        return registerStackView
+        let stack = UIStackView(arrangedSubviews: [viewElements.rightStackView])
+        stack.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        stack.layer.cornerRadius = 8
+        stack.spacing = CGFloat(30).generateSizeForScreen
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
+    //MARK: - registerFailLabel
     private let registerFailLabel: UILabel = {
         
-        let registerFailLabel = UILabel()
-        registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
                                         size: CGFloat(11).generateSizeForScreen)
-        registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-        
-        return registerFailLabel
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private let emailViewModel = EmailViewModel()
+    
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         setupView()
         setupDefaults()
-        setupTargets()
         setupConstraints()
         
-        super.viewDidLoad()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if Flags.shared.flag == 1{
             self.stackViewTapped()
-            self.viewElements.rightTextField.becomeFirstResponder()
             self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Mail")
         }
     }
@@ -208,8 +218,19 @@ class EmailView: UIViewController {
             }
         }
         
+        let registerStackTapped = UITapGestureRecognizer(target: self,
+                                                      action: #selector(rightStackViewTap))
+        registerStackView.addGestureRecognizer(registerStackTapped)
+        
         view.setToDefaultBackgroundColor()
     }
+    
+    
+    @objc func rightStackViewTap() {
+        stackViewTapped()
+    }
+    
+    
     //MARK: setupDefaults
     private func setupDefaults() {
         
@@ -221,51 +242,46 @@ class EmailView: UIViewController {
     //MARK: setupConstraints
     private func setupConstraints() {
         
-        for subview in view.subviews {
+        
+        NSLayoutConstraint.activate([
+    
             
-            subview.translatesAutoresizingMaskIntoConstraints = false
-        }
+            infoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 224),
+            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            
+            registerStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 65),
+            registerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            registerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            
+            
+            registerFailLabel.topAnchor.constraint(equalTo: registerStackView.bottomAnchor, constant: 5),
+            registerFailLabel.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor, constant: 15),
+            
+            
+            customShaddow.topAnchor.constraint(equalTo: registerStackView.topAnchor),
+            customShaddow.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor),
+            customShaddow.trailingAnchor.constraint(equalTo: registerStackView.trailingAnchor),
+            customShaddow.bottomAnchor.constraint(equalTo: registerStackView.bottomAnchor, constant: Ride.up.rawValue),
         
-        infoLabel.topAnchor.constraint(equalTo: view.topAnchor,
-                                       constant: CGFloat(250).generateSizeForScreen).isActive = true
-        infoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                           constant: CGFloat(40).generateSizeForScreen).isActive = true
-        infoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                            constant: CGFloat(-40).generateSizeForScreen).isActive = true
-        
-        registerStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor,
-                                               constant: CGFloat(60).generateSizeForScreen).isActive = true
-        registerStackView.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor).isActive = true
-        registerStackView.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor).isActive = true
-        registerStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
-        
-        registerFailLabel.topAnchor.constraint(equalTo: registerStackView.bottomAnchor,
-                                               constant: CGFloat(5).generateSizeForScreen).isActive = true
-        registerFailLabel.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor,
-                                                   constant: CGFloat(15).generateSizeForScreen).isActive = true
-        
-        customShaddow.topAnchor.constraint(equalTo: registerStackView.topAnchor).isActive = true
-        customShaddow.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor).isActive = true
-        customShaddow.trailingAnchor.constraint(equalTo: registerStackView.trailingAnchor).isActive = true
-        customShaddow.bottomAnchor.constraint(equalTo: registerStackView.bottomAnchor,
-                                              constant: Ride.up.rawValue).isActive = true
+        ])
+            
+    
     }
-    //MARK: setupTargets
-    private func setupTargets() {
-        
-        let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
-        registerStackView.addGestureRecognizer(stackViewTap)
-    }
+
     //MARK: stackViewTapped
     @objc func stackViewTapped() {
+        viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        viewElements.rightTextField.becomeFirstResponder()
+        viewElements.rightTextField.isHidden = false
         
         let stackVerticalMargins: CGFloat = CGFloat(10).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
-        
+
         viewElements.rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
-                                                                 left: stackHorizontalMargins,
-                                                                 bottom: stackVerticalMargins,
-                                                                 right: stackHorizontalMargins)
+                                                                left: stackHorizontalMargins,
+                                                                bottom: stackVerticalMargins,
+                                                                right: stackHorizontalMargins)
         
         viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                               size: CGFloat(10).generateSizeForScreen)
