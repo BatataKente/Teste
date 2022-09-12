@@ -876,7 +876,7 @@ final class FilterViewClosed: UIViewController {
                     spaceFacilitiesId = filteredIds
                 }
             }
-            print("kaueteste \(sortedFacilitiesArray)")
+          
         } else {
             button.isSelected.toggle()
             if button.isSelected {

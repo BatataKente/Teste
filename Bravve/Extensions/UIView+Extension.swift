@@ -571,6 +571,24 @@ extension UIView {
         case "COOLWORKING": return UIColor(named: ColorsBravve.coolWorking.rawValue) ?? .black
         case "HOTEL": return UIColor(named: ColorsBravve.hotel.rawValue) ?? .black
         case "BOXOFFICE": return UIColor(named: ColorsBravve.boxOffice.rawValue) ?? .black
+        case "PENDENTE": return UIColor(named: ColorsBravve.reserved.rawValue) ?? .black
+        case "COMPLETA": return UIColor(red: 0.435, green: 0.455, blue: 0.475, alpha: 1)
+        //case "Reservado": return UIColor(red: 0.267, green: 0.043, blue: 0.831, alpha: 1)
+        case "Cancelada": return UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+        case "Concluída": return UIColor(red: 0.629, green: 0.629, blue: 0.629, alpha: 0.22)
+        case "Aguardando aprovação": return UIColor(red: 0.984, green: 0.856, blue: 0.18, alpha: 0.22)
+        default: return .white
+        }
+    }
+}
+
+extension UIView {
+    func getTitleLabelTextColor(_ text: String) -> UIColor {
+        switch text {
+        case "Reservado": return UIColor(red: 0.467, green: 0.718, blue: 0.341, alpha: 1)
+        case "Cancelada": return UIColor(red: 1, green: 0.417, blue: 0.417, alpha: 1)
+        case "Concluída": return UIColor(red: 0.429, green: 0.429, blue: 0.429, alpha: 1)
+        case "Aguardando aprovação": return UIColor(red: 0.842, green: 0.713, blue: 0.035, alpha: 1)
         default: return .white
         }
     }

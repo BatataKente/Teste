@@ -16,6 +16,7 @@ class BookingDetailsView: UIViewController {
     private let customAlertCancel: CustomAlert = CustomAlert()
     private let customAlertOk: CustomAlert = CustomAlert()
     private var space: SpaceDetail = SpaceDetail()
+    public var currentReservation: Reservations?
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -74,7 +75,7 @@ class BookingDetailsView: UIViewController {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 1
-        lb.text = "BOXOFFICE"
+        lb.text = " "
         lb.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
         lb.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
         lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
@@ -85,7 +86,7 @@ class BookingDetailsView: UIViewController {
     lazy var descriptLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Numa esquina\ncharmosa, um hotel"
+        lb.text = " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
         lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
@@ -126,7 +127,7 @@ class BookingDetailsView: UIViewController {
     lazy var infoLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Home by Kamy"
+        lb.text = " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
         lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
@@ -137,7 +138,7 @@ class BookingDetailsView: UIViewController {
     lazy var nameLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "UM Coffe Co."
+        lb.text = " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -145,26 +146,38 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
+    lazy var bdStackDataLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = " "
+        lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        return lb
+    }()
     
+    lazy var bdStackViewBookingTypeLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = " "
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        return lb
+    }()
     
     lazy var bookingDetailsDataStackView: UIStackView = {
-        
-        let data = UILabel()
-        data.text = "09/04/22"
-        data.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
-        data.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        
-        let bookingType = UILabel()
-        bookingType.text = "Diária"
-        bookingType.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        bookingType.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        
-        let stackView = UIStackView(arrangedSubviews: [data, bookingType])
+
+        let stackView = UIStackView(arrangedSubviews: [bdStackDataLabel, bdStackViewBookingTypeLabel])
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    lazy var checkOutStackViewHourLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = " "
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        return lb
     }()
     
     lazy var checkOutStackView: UIStackView = {
@@ -174,17 +187,20 @@ class BookingDetailsView: UIViewController {
         checkOut.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
         checkOut.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let hour = UILabel()
-        hour.text = "20:00"
-        hour.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        hour.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        
-        let stackView = UIStackView(arrangedSubviews: [checkOut, hour])
+        let stackView = UIStackView(arrangedSubviews: [checkOut, checkOutStackViewHourLabel])
         stackView.alignment = .trailing
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    lazy var checkInStackViewHourLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = " "
+        lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        return lb
     }()
     
     lazy var checkInStackView: UIStackView = {
@@ -194,12 +210,7 @@ class BookingDetailsView: UIViewController {
         checkIn.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
         checkIn.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let hour = UILabel()
-        hour.text = "09:00"
-        hour.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        hour.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        
-        let stackView = UIStackView(arrangedSubviews: [checkIn, hour])
+        let stackView = UIStackView(arrangedSubviews: [checkIn, checkInStackViewHourLabel])
         stackView.alignment = .trailing
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -433,8 +444,62 @@ class BookingDetailsView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
+        getReservation()
+        print("kaue \(currentReservation)")
+        print("kaue \(currentReservation?.id)")
     }
     
+    
+    func getReservation() {
+        
+        for reservation in UserReservations.reservations {
+            if reservation.id == UserReservations.reservationID {
+                currentReservation = reservation
+            }
+        }
+        
+        guard let city = (currentReservation?.space_address?.city_name) else { return }
+        guard let neighborhood = (currentReservation?.space_address?.neighborhood) else { return }
+       
+        guard let reservationStartDt = currentReservation?.start_dt else { return }
+        guard let reservationEndDt = currentReservation?.end_dt else { return }
+        
+        let separatedStartDate = reservationStartDt.components(separatedBy: "T")
+        let separatedEndDate = reservationEndDt.components(separatedBy: "T")
+        
+        let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
+        let formatEndDate = separatedEndDate[0].components(separatedBy: "-")
+        
+        let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
+        let endDate = "\(formatEndDate[2])/\(formatEndDate[1])/\(formatEndDate[0])"
+        
+        let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
+        let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
+        
+        let startHour = "\(separatedStartHour[0]):\(separatedStartHour[1])"
+        let endHour = "\(separatedEndHour[0]):\(separatedEndHour[1])"
+        
+        titleLabel.text = currentReservation?.space_category?.name?.uppercased() ?? ""
+        //titleLabel.backgroundColor = getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
+        descriptLabel.text = currentReservation?.slogan
+        infoLocalLabel.text = currentReservation?.local_name
+        nameLocalLabel.text = currentReservation?.description
+        bdStackDataLabel.text = startDate
+        //stackBookingTypeLabel.text = currentReservation.  AINDA NÃO ENCONTRADA RESPOSTA DA API - Talvez tenha que fazer uma trataiva pelo id do tipo.
+        checkInStackViewHourLabel.text = startHour
+        checkOutStackViewHourLabel.text = endHour
+        localDetailsStackView
+//        responsableStackView(textColor, responsableLabel,informations button)
+//        contactsStackView(title, contacts )
+//        payFormLabel
+//        creditCard
+//        totalLabel
+//        creditCardTextField
+        
+        
+    }
+    
+    /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
     @objc func buttonCheckInTap(){
         customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Para realizar o Check-in, é necessário permissão de uso da câmera do celular.", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
             let vc = CheckInQrCodeViewController()
@@ -446,6 +511,7 @@ class BookingDetailsView: UIViewController {
     }
     
     
+    /// This function adds view elements
     func setupViews(){
         view.addSubview(checkIN)
         tabBar.selectedItem = tabBar.items?[1]
@@ -462,6 +528,13 @@ class BookingDetailsView: UIViewController {
         
     }
     
+    /// This function creates StackView for Location Details, where each StackView has a description image and a text with the details
+    /// - Parameters:
+    ///   - text: text description
+    ///   - image: image description
+    ///   - isHidden: StackView with image and text
+    ///   - textColor:Label's color
+    /// - Returns: This funtion returns StackViews with images and text with local details
     private func createStackView(_ text: String,
                                  _ image: UIImage? = nil,
                                  isHidden: Bool = false,
@@ -495,6 +568,14 @@ class BookingDetailsView: UIViewController {
         return stackView
     }
     
+    /// This function creates the action of the see more and see less button, displaying from the data that comes from the API, the days and hours of operation of the place
+    /// - Parameters:
+    ///   - range: The range is the days and hours of operation of the place
+    ///   - items: StackView
+    ///   - titleColor: button's color
+    ///   - downButtonImages: the arrow corresponding to the action of the button (down arrow)
+    ///   - upButtonImages: the arrow corresponding to the action of the button (up arrow)
+    /// - Returns: This function returns the action on the button and displays the data, days and hours of operation of the place or not
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
                                            items: [UIStackView],
                                            titleColor: ColorsBravve = .buttonPink,
@@ -575,6 +656,12 @@ class BookingDetailsView: UIViewController {
         return stackView
     }
     
+    /// This function creates the action of the see more and see less button, modifying the way of displaying the text that comes from the API
+    /// - Parameters:
+    ///   - smallText: compressed form of the text coming from the API
+    ///   - fullText: full form of the text coming from the API
+    ///   - actionLabel: Toggles between smallText and full depending on the action the button currently has
+    /// - Returns: The button that is modified to see more or less and the text that obeys the command of the button
     private func createSeeButton(smallText: String, fullText: String, actionLabel: UILabel) -> UIButton {
         let button = UIButton()
         let yourAttributes: [NSAttributedString.Key: Any] = [
@@ -619,6 +706,7 @@ class BookingDetailsView: UIViewController {
         return button
     }
     
+    /// This function handles the cancelbooking button alert. The message, buttons and their actions
     @objc func cancelBooking(){
         customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
             self.customAlertCancel.dismissAlert()
@@ -628,9 +716,10 @@ class BookingDetailsView: UIViewController {
             self.customAlertCancel.dismissAlert()
             self.present(vc, animated: true)
         }), on: self)
-        
+        Flags.shared.flagReservation = 2
     }
     
+    /// This function deals with the customBar, its title, its back button and the action it has
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
             _ in
@@ -639,6 +728,7 @@ class BookingDetailsView: UIViewController {
         }
     }
     
+    /// This function has all the constraints of the BookingDetails view elements
     func setupContraints(){
         
         scrollView.constraintOutsideTo(.top, customBar)
@@ -656,9 +746,10 @@ class BookingDetailsView: UIViewController {
             
             titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor,constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),
-            
+                        
             descriptLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 16),
             descriptLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
+            descriptLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             
             reserveCollection.topAnchor.constraint(equalTo: descriptLabel.bottomAnchor,constant: 16),
             reserveCollection.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor),
@@ -762,20 +853,21 @@ class BookingDetailsView: UIViewController {
 extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        guard let pictures = space.pictures else { return 0 }
-//
-//        return pictures.count
-        return 3
+        guard let pictures = currentReservation?.picture else { return 0 }
+
+        return pictures.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? BookingDetailsCollectionViewCell
         
-//        guard let pictures = space.pictures else { return UICollectionViewCell() }
-//
-//        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
-//
-//        cell?.imageView.sd_setImage(with: URL(string: picture))
+
+        
+        guard let pictures = currentReservation?.picture else { return UICollectionViewCell() }
+        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
+        
+
+        cell?.imageView.sd_setImage(with: URL(string: picture))
         
         return cell ?? UICollectionViewCell()
     }

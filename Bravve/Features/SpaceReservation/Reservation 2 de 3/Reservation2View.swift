@@ -18,6 +18,8 @@ class Reservation2View: UIViewController {
     
     //MARK: - var and let
     private lazy var tabBar = TabBarClosed(self)
+    
+    var spaceDetail: SpaceDetail?
 
     
     //MARK: - tableview
@@ -99,14 +101,11 @@ class Reservation2View: UIViewController {
         setupConstrains()
         tabBar.selectedItem = tabBar.items?[0]
         
-        view.createReservationCustomBar (progressBarButtons: buttons) { _ in
+        view.createReservationCustomBarAPI(spaceName: spaceDetail?.space_name, localName: spaceDetail?.local_name, imageURL: spaceDetail?.pictures?[0].url, progressBarButtons: buttons) { _ in
             self.dismiss(animated: true)
         }
         
-        
         confirmReservationButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-        
-
     }
     
     private func setupConstrains() {
@@ -138,12 +137,15 @@ class Reservation2View: UIViewController {
     
     //MARK: - confirmButtonTapped
     @objc func confirmButtonTapped(){
+        
         let reserveViewController = ReservationsThreeViewController()
         reserveViewController.modalPresentationStyle = .fullScreen
+        
+        reserveViewController.spaceDetail = spaceDetail
         present(reserveViewController, animated: true)
     }
     
-    let dates: [ReservationDate] = [ReservationDate(day: "21-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "09:00", hour_price: "40,00"), Hour(start_dt: "14:00", end_dt: "15:00", hour_price: "40,00")]), ReservationDate(day: "22-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "19:00", hour_price: "200,00")]), ReservationDate(day: "23-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "19:00", hour_price: "200,00")]), ReservationDate(day: "24-01-2022", hours: [Hour(start_dt: "08:00", end_dt: "09:00", hour_price: "40,00"), Hour(start_dt: "14:00", end_dt: "15:00", hour_price: "80,00")])]
+    let dates = ReservationList.reservationList
     
 }
 
@@ -162,7 +164,12 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if !dates.isEmpty {
         return 3 + dates.count
+        } else {
+            return 2
+        }
     
     }
 
@@ -174,6 +181,7 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
                     LocationDetailsBookingReviewCustomCell else {
                 return UITableViewCell()
             }
+            cellLocation.setupCell(spaceDetail: spaceDetail)
             return cellLocation
         case 1:
             guard let cellSummary = tableview.dequeueReusableCell(withIdentifier: SummaryBookingReviewCustomCell.reuseIdSummary, for: indexPath) as?
