@@ -12,7 +12,8 @@ extension UIImageView {
     
 /// This function puts the ways in the default position and size. Ways are background images that are common in this app
 /// - Parameter imageName: The image name which is the enum that has the images identified in the assets
-    func setWayToDefault(_ imageName: ImagesBravve) {
+    func setWayToDefault(_ imageName: ImagesBravve,
+                         constant: CGFloat? = nil) {
         
         self.image = UIImage(named: imageName.rawValue)
         
@@ -110,7 +111,13 @@ extension UIImageView {
             
             case ImagesBravve.wayReserv_2:
             
-                self.constraintInsideTo(.top, superview, CGFloat(20).generateSizeForScreen)
+                if let constant = constant {
+                    self.constraintInsideTo(.top, superview, constant)
+                }
+                else {
+                    
+                    self.constraintInsideTo(.top, superview, CGFloat(20).generateSizeForScreen)
+                }
                 self.constraintInsideTo(.trailing, superview?.safeAreaLayoutGuide)
                 self.heightAnchorInSuperview(CGFloat(150).generateSizeForScreen)
                 self.widthAnchorInSuperview(CGFloat(144).generateSizeForScreen)

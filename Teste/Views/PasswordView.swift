@@ -9,57 +9,47 @@ import UIKit
 
 class PasswordView: UIViewController{
     
-    init(_ userToRegister: UserParameters = UserParameters(name: "",
-                                                           phone_number: "",
-                                                           email: "",
-                                                           password: "")) {
+    var userToRegister: UserParameters
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: nil,
+                                                           phone_number: nil,
+                                                           email: nil,
+                                                           password: nil)) {
         
         self.userToRegister = userToRegister
+        print(userToRegister)
         
         super.init(nibName: nil, bundle: nil)
     }
     
-    var userToRegister: UserParameters
     
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    let backWay: UIImageView = {
-        
-        let image = UIImageView()
-        image.setWayToDefault(.wayPassword)
-        return image
-    }()
-    
+    //MARK: - progressBarButtonsAndHandlers
     lazy var progressBarButtons: [UIButton] = {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
-                                                IconsBravve.cellGray.rawValue,
-                                                IconsBravve.emailGray.rawValue,
-                                                IconsBravve.padlockBlue.rawValue,
-                                                IconsBravve.pencilGray.rawValue])
+                                                              IconsBravve.cellGray.rawValue,
+                                                              IconsBravve.emailGray.rawValue,
+                                                              IconsBravve.padlockBlue.rawValue,
+                                                              IconsBravve.pencilGray.rawValue])
         
         let tripleDismissHandler = {(action: UIAction) in
-            
-            if let passwordView = self.presentingViewController,
-               let emailView = passwordView.presentingViewController,
-               let phoneView = emailView.presentingViewController {
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController{
                 
-                passwordView.view.isHidden = true
                 emailView.view.isHidden = true
-                phoneView.dismiss(animated: false)
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
             }
         }
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            if let passwordView = self.presentingViewController,
-               let phoneView = passwordView.presentingViewController {
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
                 
-                passwordView.view.isHidden = true
-                phoneView.dismiss(animated: false)
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
             }
         }
         
@@ -74,29 +64,15 @@ class PasswordView: UIViewController{
         
         return buttons
     }()
+    //MARK: - Elements
     
-    let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Agora escolha uma senha de sua preferência."
-        label.numberOfLines = 0
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.textAlignment = .center
-        return label
-    }()
     
-    let passwordTFLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Senha"
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
-        label.adjustsFontSizeToFitWidth = true
-        label.adjustsFontForContentSizeCategory = true
-        label.minimumScaleFactor = 0.5
-        return label
-    }()
     
+    
+    //MARK: - passwordTextField
     let passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         textField.isSecureTextEntry = true
         textField.isHidden = true
         return textField
@@ -104,11 +80,12 @@ class PasswordView: UIViewController{
     
     let stackMargins: CGFloat = 12
     
+    //MARK: passwordStackView
     lazy var passwordStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [passwordTFLabel, passwordTextField])
         stackView.spacing = 6
         stackView.axis = .vertical
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
@@ -120,7 +97,7 @@ class PasswordView: UIViewController{
         
         return stackView
     }()
-    
+    //MARK: Buttons
     let hidePasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
@@ -134,29 +111,21 @@ class PasswordView: UIViewController{
         return button
     }()
     
-    let confirmPasswordTFLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Repetir senha"
-        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
-        label.adjustsFontSizeToFitWidth = true
-        label.adjustsFontForContentSizeCategory = true
-        label.minimumScaleFactor = 0.5
-        return label
-    }()
     
+    //MARK: - confirmPasswordTextField
     let confirmPasswordTextField: UITextField = {
         let textField = UITextField()
+        textField.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         textField.isHidden = true
         textField.isSecureTextEntry = true
         return textField
     }()
-    
+    //MARK: confirmStackView
     lazy var confirmStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [confirmPasswordTFLabel, confirmPasswordTextField])
         stackView.spacing = 6
         stackView.axis = .vertical
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.layer.borderWidth = 1
         stackView.layer.cornerRadius = 8
@@ -168,7 +137,7 @@ class PasswordView: UIViewController{
         
         return stackView
     }()
-    
+    //MARK: - hideConfirmsPasswordButtons
     let hideConfirmPasswordButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
@@ -181,11 +150,79 @@ class PasswordView: UIViewController{
         button.isHidden = true
         return button
     }()
+    //MARK: UIImageViews
+    let backWay: UIImageView = {
+        
+        let image = UIImageView()
+        image.setWayToDefault(.wayPassword)
+        return image
+    }()
     
     let numberCharEllipse: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
+    }()
+    
+    let upperCaseEllipse: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        return image
+    }()
+    
+    let lowerCaseEllipse: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        return image
+    }()
+    
+    let numberEllipse: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        return image
+    }()
+    
+    let specialCharEllipse: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        return image
+    }()
+    
+    let samePasswordEllipse: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
+        return image
+    }()
+    //MARK: UILabels
+    let confirmPasswordTFLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Repetir senha"
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+        label.minimumScaleFactor = 0.5
+        return label
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Agora escolha uma senha de sua preferência."
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let passwordTFLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Senha"
+        label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+        label.minimumScaleFactor = 0.5
+        return label
     }()
     
     let numberCharLabel: UILabel = {
@@ -195,23 +232,11 @@ class PasswordView: UIViewController{
         return label
     }()
     
-    let upperCaseEllipse: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-        return image
-    }()
-    
     let upperCaseLabel: UILabel = {
         let label = UILabel()
         label.text = "1 letra maiúscula"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
-    }()
-    
-    let lowerCaseEllipse: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-        return image
     }()
     
     let lowerCaseLabel: UILabel = {
@@ -221,36 +246,18 @@ class PasswordView: UIViewController{
         return label
     }()
     
-    let numberEllipse: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-        return image
-    }()
-    
     let numberLabel: UILabel = {
         let label = UILabel()
         label.text = "1 digito numérico"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
     }()
-    
-    let specialCharEllipse: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-        return image
-    }()
-    
+     
     let specialCharLabel: UILabel = {
         let label = UILabel()
         label.text = "1 caractere especial"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
-    }()
-    
-    let samePasswordEllipse: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
-        return image
     }()
     
     let samePasswordLabel: UILabel = {
@@ -262,9 +269,10 @@ class PasswordView: UIViewController{
     
     let continueButton = UIButton()
     
+    //MARK: UIViews
     let backView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.blue_cyan.rawValue)
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
         view.isHidden = true
@@ -273,13 +281,19 @@ class PasswordView: UIViewController{
     
     let backViewConfirm: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.blue.rawValue)
+        view.backgroundColor = UIColor(named: ColorsBravve.blue_cyan.rawValue)
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
         view.isHidden = true
         return view
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -290,15 +304,15 @@ class PasswordView: UIViewController{
         
         view.createRegisterCustomBar(progressBarButtons: progressBarButtons) {_ in
             
-            if let passwordView = self.presentingViewController,
-               let emailView = passwordView.presentingViewController,
+            if let emailView = self.presentingViewController ,
                let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+               let nomeView = phoneView.presentingViewController,
+               let loginView = nomeView.presentingViewController {
                 
-                passwordView.view.isHidden = true
                 emailView.view.isHidden = true
                 phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+                nomeView.view.isHidden = true
+                loginView.dismiss(animated: true)
             }
         }
         
@@ -312,7 +326,16 @@ class PasswordView: UIViewController{
         
         hideWrongPasswordButton.addTarget(self, action: #selector(hideWrongPassword), for: .touchUpInside)
         hideWrongConfirmPasswordButton.addTarget(self, action: #selector(hideWrongConfirmPassword), for: .touchUpInside)
+        
+        
     }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Constraints
     
     func addConstraints(){
         
@@ -414,7 +437,7 @@ class PasswordView: UIViewController{
         hideWrongConfirmPasswordButton.constraintInsideTo(.width, hideWrongPasswordButton)
         hideWrongConfirmPasswordButton.constraintInsideTo(.centerY, confirmStackView)
         hideWrongConfirmPasswordButton.constraintInsideTo(.trailing, confirmStackView)
-
+        
     }
     
     

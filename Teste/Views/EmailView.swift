@@ -7,35 +7,24 @@
 
 import UIKit
 
+
+
 class EmailView: UIViewController {
     
-    init(_ userToRegister: UserParameters = UserParameters(name: "",
-                                                           phone_number: "",
-                                                           email: "",
-                                                           password: "")) {
+    var userToRegister: UserParameters
+    
+    
+    init(_ userToRegister: UserParameters = UserParameters(name: nil,
+                                                           phone_number: nil,
+                                                           email: nil,
+                                                           password: nil)) {
         
         self.userToRegister = userToRegister
         
         super.init(nibName: nil, bundle: nil)
     }
     
-    var userToRegister: UserParameters
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        
-        setupView()
-        setupDefaults()
-        setupTargets()
-        setupConstraints()
-        
-        super.viewDidLoad()
-    }
-    
+    //MARK: Elements
     override var prefersStatusBarHidden: Bool {
         
         true
@@ -54,18 +43,11 @@ class EmailView: UIViewController {
                                                               IconsBravve.pencilGray.rawValue])
         
         let doubleDismissHandler = {(action: UIAction) in
-            
-            if let emailView = self.presentingViewController,
-               let phoneView = emailView.presentingViewController {
-                
-                emailView.view.isHidden = true
-                phoneView.dismiss(animated: false)
-            }
+            self.popToViewController(numberOfViewsToBack: 2)
         }
         
         let dismissHandler = {(action: UIAction) in
-            
-            self.dismiss(animated: false)
+            self.popToViewController(numberOfViewsToBack: 1)
         }
         
         buttons[0].addAction(UIAction(handler: doubleDismissHandler), for: .touchUpInside)
@@ -93,11 +75,11 @@ class EmailView: UIViewController {
         
         return customShaddow
     }()
-    
-    private lazy var viewElements: (rightStackView: UIStackView,
-                                    rightTextField: UITextField,
-                                    rightLabel: UILabel,
-                                    alertButton: UIButton) = {
+    //MARK: viewElements
+    lazy var viewElements: (rightStackView: UIStackView,
+                            rightTextField: UITextField,
+                            rightLabel: UILabel,
+                            alertButton: UIButton) = {
         
         let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
@@ -109,7 +91,7 @@ class EmailView: UIViewController {
         let rightTextField = UITextField()
         rightTextField.font = font
         rightTextField.becomeFirstResponder()
-        
+        rightTextField.autocapitalizationType = UITextAutocapitalizationType.none
         let stackView = UIStackView(arrangedSubviews: [rightLabel,
                                                        rightTextField])
         stackView.spacing = 10
@@ -142,16 +124,16 @@ class EmailView: UIViewController {
                 rightLabel: rightLabel,
                 alertButton: alertButton)
     }()
-    
+    //MARK: StackView
     private lazy var registerStackView: UIStackView = {
         
         let registerStackView = UIStackView(arrangedSubviews: [viewElements.rightStackView])
         registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
         registerStackView.layer.borderWidth = 1
-        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.labelLogin.rawValue)?.cgColor
+        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         registerStackView.layer.cornerRadius = 8
         registerStackView.spacing = CGFloat(30).generateSizeForScreen
-
+        
         return registerStackView
     }()
     
@@ -167,6 +149,39 @@ class EmailView: UIViewController {
     
     private let emailViewModel = EmailViewModel()
     
+    //MARK: viewDidLoad
+    override func viewDidLoad() {
+        
+        setupView()
+        setupDefaults()
+        setupTargets()
+        setupConstraints()
+        
+        super.viewDidLoad()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if Flags.shared.flag == 1{
+            self.stackViewTapped()
+            self.viewElements.rightTextField.becomeFirstResponder()
+            self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Mail")
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    //MARK: - Navigation Setup
+    
+    private func popToViewController(numberOfViewsToBack: Int){
+        guard let navigationViewControllers = self.navigationController?.viewControllers else {return}
+        self.navigationController?.popToViewController(navigationViewControllers[navigationViewControllers.count - (1 + numberOfViewsToBack)], animated: true)
+    }
+    
+    //MARK: setupView
     private func setupView() {
         
         emailViewModel.delegate = self
@@ -176,19 +191,24 @@ class EmailView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            if let emailView = self.presentingViewController,
-               let phoneView = emailView.presentingViewController,
-               let nomeView = phoneView.presentingViewController {
+            if Flags.shared.flag == 0{
+                if let phoneView = self.presentingViewController,
+                   let nomeView = phoneView.presentingViewController,
+                   let loginView = nomeView.presentingViewController {
+                    
+                    phoneView.view.isHidden = true
+                    nomeView.view.isHidden = true
+                    loginView.dismiss(animated: true)
+                }
                 
-                emailView.view.isHidden = true
-                phoneView.view.isHidden = true
-                nomeView.dismiss(animated: false)
+            }else{
+                self.popToViewController(numberOfViewsToBack: 1)
             }
         }
         
         view.setToDefaultBackgroundColor()
     }
-    
+    //MARK: setupDefaults
     private func setupDefaults() {
         
         registerButton.setToBottomButtonKeyboardDefault()
@@ -196,52 +216,54 @@ class EmailView: UIViewController {
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
     }
-    
+    //MARK: setupConstraints
     private func setupConstraints() {
         
-        infoLabel.constraintInsideTo(.top,
-                                     view,
-                                     CGFloat(250).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.leading,
-                                     view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.trailing,
-                                     view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        registerStackView.constraintOutsideTo(.top,
-                                              infoLabel,
-                                              CGFloat(60).generateSizeForScreen)
-        registerStackView.constraintInsideTo(.leading, infoLabel)
-        registerStackView.constraintInsideTo(.trailing, infoLabel)
-        registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        infoLabel.topAnchor.constraint(equalTo: view.topAnchor,
+                                       constant: CGFloat(250).generateSizeForScreen).isActive = true
+        infoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                           constant: CGFloat(40).generateSizeForScreen).isActive = true
+        infoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                            constant: CGFloat(-40).generateSizeForScreen).isActive = true
         
-        registerFailLabel.constraintOutsideTo(.top, registerStackView,
-                                              CGFloat(5).generateSizeForScreen)
-        registerFailLabel.constraintInsideTo(.leading, registerStackView,
-                                             CGFloat(15).generateSizeForScreen)
+        registerStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor,
+                                               constant: CGFloat(60).generateSizeForScreen).isActive = true
+        registerStackView.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor).isActive = true
+        registerStackView.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor).isActive = true
+        registerStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen).isActive = true
         
-        customShaddow.constraintInsideTo(.top, registerStackView)
-        customShaddow.constraintInsideTo(.leading, registerStackView)
-        customShaddow.constraintInsideTo(.trailing, registerStackView)
-        customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
+        registerFailLabel.topAnchor.constraint(equalTo: registerStackView.bottomAnchor,
+                                               constant: CGFloat(5).generateSizeForScreen).isActive = true
+        registerFailLabel.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor,
+                                                   constant: CGFloat(15).generateSizeForScreen).isActive = true
+        
+        customShaddow.topAnchor.constraint(equalTo: registerStackView.topAnchor).isActive = true
+        customShaddow.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor).isActive = true
+        customShaddow.trailingAnchor.constraint(equalTo: registerStackView.trailingAnchor).isActive = true
+        customShaddow.bottomAnchor.constraint(equalTo: registerStackView.bottomAnchor,
+                                              constant: Ride.up.rawValue).isActive = true
     }
-    
+    //MARK: setupTargets
     private func setupTargets() {
         
         let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
         registerStackView.addGestureRecognizer(stackViewTap)
     }
-    
+    //MARK: stackViewTapped
     @objc func stackViewTapped() {
         
         let stackVerticalMargins: CGFloat = CGFloat(10).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
         
         viewElements.rightStackView.layoutMargins = UIEdgeInsets(top: stackVerticalMargins,
-                                                                left: stackHorizontalMargins,
-                                                                bottom: stackVerticalMargins,
-                                                                right: stackHorizontalMargins)
+                                                                 left: stackHorizontalMargins,
+                                                                 bottom: stackVerticalMargins,
+                                                                 right: stackHorizontalMargins)
         
         viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                               size: CGFloat(10).generateSizeForScreen)
@@ -256,16 +278,21 @@ class EmailView: UIViewController {
                                               action: #selector(changeText),
                                               for: .editingChanged)
     }
-        
+    //MARK: changeScreen
     @objc func changeScreen() {
         
-        userToRegister.email = viewElements.rightTextField.text ?? ""
+        //        userToRegister.email = viewElements.rightTextField.text ?? ""
+        UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Mail")
         
-        let passwordView = PasswordView(userToRegister)
-        passwordView.modalPresentationStyle = .fullScreen
-        present(passwordView, animated: false)
+        if Flags.shared.flag == 0{
+            let passwordView = PasswordView(userToRegister)
+            passwordView.modalPresentationStyle = .fullScreen
+            present(passwordView, animated: false)
+        }else{
+            self.dismiss(animated: true)
+        }
     }
-    
+    //MARK: changeText
     @objc func changeText(_ sender: UITextField) {
         
         if validateEmail(sender.text ?? "") {
@@ -288,7 +315,7 @@ class EmailView: UIViewController {
         }
     }
 }
-
+//MARK: Extension
 extension EmailView: EmailViewModelProtocol {
     
     func setIshidden(alertButton: Bool,
@@ -326,7 +353,7 @@ extension EmailView: EmailViewModelProtocol {
         viewElements.rightLabel.text = rightLabel
         viewElements.rightTextField.text = rightTextField
         self.registerFailLabel.text = registerFailLabel
-
+        
         self.infoLabel.text = infoLabel
     }
     

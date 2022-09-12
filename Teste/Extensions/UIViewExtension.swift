@@ -650,3 +650,51 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    
+    func shape(height: CGFloat? = nil, width: CGFloat? = nil, size: CGFloat? = nil) {
+        
+        if let size = size {
+            
+            self.heightAnchor.constraint(equalToConstant: size).isActive = true
+            self.widthAnchor.constraint(equalToConstant: size).isActive = true
+        }
+        else if let height = height,
+                let width = width {
+            
+            self.heightAnchor.constraint(equalToConstant: height).isActive = true
+            self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        else if let height = height {
+            
+            self.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        else if let width = width {
+            
+            self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+    }
+    
+    func constraint(the item: Any? = nil,
+                    to: Any?,
+                    _ itemAttribute: NSLayoutConstraint.Attribute? = nil,
+                    by attributes: [NSLayoutConstraint.Attribute],
+                    relation: NSLayoutConstraint.Relation? = nil,
+                    multiplier: CGFloat? = nil,
+                    _ constant: CGFloat? = nil) {
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        for attribute in attributes {
+            
+            self.superview?.addConstraint(NSLayoutConstraint(item: item ?? self,
+                                                             attribute: attribute,
+                                                             relatedBy: relation ?? .equal,
+                                                             toItem: to,
+                                                             attribute: itemAttribute ?? attribute,
+                                                             multiplier: multiplier ?? 1,
+                                                             constant: constant ?? 0))
+        }
+    }
+}

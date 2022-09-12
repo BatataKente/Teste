@@ -18,7 +18,7 @@ extension UIViewController {
 /// - Returns: A button for each title
     func createCapsuleButtons(_ buttonTitles: [String],
                                    _ backgroundColor: ColorsBravve = .capsuleButtonSelected,
-                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.textFieldBorder.rawValue)) -> [UIButton] {
+                                   strokeColor: UIColor? = UIColor(named: ColorsBravve.capsuleButtonsBorder.rawValue)) -> [UIButton] {
         
         var buttons: [UIButton] = []
         
@@ -64,123 +64,6 @@ extension UIViewController {
             
             let button = UIButton()
             
-            switch name{
-                
-                case IconsBravve.activitiesGray.rawValue:
-                
-                let handler = {(action: UIAction) in
-                    
-                    let activitiesView = ActivitiesView()
-                    activitiesView.modalPresentationStyle = .fullScreen
-                    self.present(activitiesView,
-                                 animated: false)
-                }
-
-                button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.calendarGray.rawValue: break
-                
-                case IconsBravve.cellGray.rawValue:
-                    
-                    let handler = {(action: UIAction) in
-                        
-                        let nomeView = NomeView()
-                        nomeView.modalPresentationStyle = .fullScreen
-                        self.present(nomeView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.creditGray.rawValue: break
-                
-                case IconsBravve.emailGray.rawValue:
-                    
-                    let handler = {(action: UIAction) in
-                        
-                        let nomeView = NomeView()
-                        nomeView.modalPresentationStyle = .fullScreen
-                        self.present(nomeView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.hobbiesGray.rawValue:
-                
-                let handler = {(action: UIAction) in
-                    
-                    let hobbiesView = HobbiesView()
-                    hobbiesView.modalPresentationStyle = .fullScreen
-                    self.present(hobbiesView,
-                                 animated: false)
-                }
-
-                button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.noteGray.rawValue:
-                
-                let handler = {(action: UIAction) in
-                    
-                    let professionView = ProfessionView()
-                    professionView.modalPresentationStyle = .fullScreen
-                    self.present(professionView,
-                                 animated: false)
-                }
-
-                button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.padlockGray.rawValue:
-                
-                let handler = {(action: UIAction) in
-                    
-                    let passwordView = PasswordView()
-                    passwordView.modalPresentationStyle = .fullScreen
-                    self.present(passwordView,
-                                 animated: false)
-                }
-
-                button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.pencilGray.rawValue:
-                
-                let handler = {(action: UIAction) in
-                    
-                    let confirmDataView = ConfirmDataView()
-                    confirmDataView.modalPresentationStyle = .fullScreen
-                    self.present(confirmDataView,
-                                 animated: false)
-                }
-
-                button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                case IconsBravve.photoGray.rawValue:
-            
-                    let handler = {(action: UIAction) in
-                        
-                        let fotoView = FotoView()
-                        fotoView.modalPresentationStyle = .fullScreen
-                        self.present(fotoView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                    
-                case IconsBravve.userGray.rawValue:
-                    
-                    let handler = {(action: UIAction) in
-                        
-                        let nomeView = NomeView()
-                        nomeView.modalPresentationStyle = .fullScreen
-                        self.present(nomeView,
-                                     animated: false)
-                    }
-
-                    button.addAction(UIAction(handler: handler), for: .touchUpInside)
-                
-                default: break
-            }
-            
             button.setToProgressBarButtonDefault(name)
             
             buttons.append(button)
@@ -198,7 +81,7 @@ extension UIViewController {
 /// - Returns: True if is a valid number, or false if not
     func validateCellPhone(_ phone: String) -> Bool {
         
-        let phoneRegEx = "\\([0-9]{2}+\\)[0-9]{5}+-[0-9]{4}||[0-9]{11}"
+        let phoneRegEx = "\\([0-9]{2}+\\)[0-9]{4,5}+-[0-9]{4}||[0-9]{10,11}"
 
         let phonePred = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
         
@@ -286,7 +169,7 @@ extension UIViewController {
 /// - Returns: True if is a valid name, or false if not
     func validateName(_ name: String) -> Bool {
         
-        let nameRegEx = "(?<! )[A-ZÀ-Ú]+[-a-zà-ú']+ [A-ZÀ-Ú]+[-a-zà-ú']{2,26}"
+        let nameRegEx = "^[a-zA-Zá-üÁ-Ü]{2,8}+(([',. -][a-zA-Zá-üÁ-Ü])?[a-zA-Zá-üÁ-Ü]*)*$"
 
         let namePred = NSPredicate(format:"SELF MATCHES %@", nameRegEx)
         

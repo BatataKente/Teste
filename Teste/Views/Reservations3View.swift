@@ -11,7 +11,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     private var alltxtFieldsReservation: [UITextField] = []
     private var currentTextFieldPositon: Int = 0
-
+    
     
     //MARK: - preferredStatusBarStyle
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -31,9 +31,10 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - tip1
     let tip1: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.isHidden = true
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(11).generateSizeForScreen)
         label.text = "Formato de número inválido"
         label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         return label
@@ -41,8 +42,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - tip2
     let tip2: UILabel = {
-       let label = UILabel()
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(11).generateSizeForScreen)
         label.text = ""
         label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         return label
@@ -50,8 +52,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - tip3
     let tip3: UILabel = {
-       let label = UILabel()
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(11).generateSizeForScreen)
         label.text = ""
         label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         return label
@@ -59,8 +62,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - tip4
     let tip4: UILabel = {
-       let label = UILabel()
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(11).generateSizeForScreen)
         label.text = ""
         label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         return label
@@ -68,8 +72,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - tip5
     let tip5: UILabel = {
-       let label = UILabel()
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(11).generateSizeForScreen)
         label.text = ""
         label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         return label
@@ -78,8 +83,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - tip6
     let tip6: UILabel = {
-       let label = UILabel()
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(11).generateSizeForScreen)
         label.text = ""
         label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
         return label
@@ -127,13 +133,14 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - resumeLabel
     private lazy var resumeLabel: UILabel = {
-         let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.text = "Resumo"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
+        label.font = UIFont(name: FontsBravve.bold.rawValue,
+                            size: CGFloat(15).generateSizeForScreen)
         return label
         
-     }()
+    }()
     
     //MARK: - resumeButton
     private lazy var resumeButton: UIButton = {
@@ -144,7 +151,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - lineImage
     private lazy var lineImage: UIImageView = {
-       let view = UIImageView()
+        let view = UIImageView()
         view.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         return view
     }()
@@ -160,48 +167,49 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private lazy var numberCardStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [numberCardLabel, numberCardTextfield])
         
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
+        let stackTopMargin = CGFloat(12).generateSizeForScreen
+        let stackMargins = CGFloat(16).generateSizeForScreen
+        
+        stack.layoutMargins = UIEdgeInsets(top: stackTopMargin,
+                                           left: stackMargins,
+                                           bottom: stackMargins,
+                                           right: stackMargins)
+        stack.spacing = CGFloat(2).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
+        stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
         return stack
     }()
     
     //MARK: - numberCardLabel
     private lazy var numberCardLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(15).generateSizeForScreen)
         label.text = "Número do cartão"
         return label
     }()
-        
+    
     //MARK: - numberCardTextField
-        private lazy var numberCardTextfield: UITextField = {
-            let view = UITextField()
-            view.becomeFirstResponder()
-            view.isHidden = true
-            view.tag = 1
-            view.layer.cornerRadius = 8
-            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-            view.delegate = self
-            view.addTarget(self, action: #selector(numberTfEmpity), for: .editingChanged)
-            view.addTarget(self, action: #selector(withdrawNumberCardBoder), for: .editingDidEnd)
-            view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-            return view
-        }()
+    private lazy var numberCardTextfield: UITextField = {
+        let view = UITextField()
+        view.becomeFirstResponder()
+        view.isHidden = true
+        view.tag = 1
+        view.keyboardType = .namePhonePad
+        view.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        view.delegate = self
+        view.addTarget(self, action: #selector(numberTfEmpity), for: .editingChanged)
+        view.addTarget(self, action: #selector(withdrawNumberCardBoder), for: .editingDidEnd)
+        view.layoutMargins = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        return view
+    }()
     
     
     
@@ -209,30 +217,30 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     private lazy var ccValidateStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [ccValidateLabel, ccValidateExpirationTextfield,accessoryButtonCcValidate])
         
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
+        let stackTopMargin = CGFloat(12).generateSizeForScreen
+        let stackMargins = CGFloat(16).generateSizeForScreen
+        
+        stack.layoutMargins = UIEdgeInsets(top: stackTopMargin,
+                                           left: stackMargins,
+                                           bottom: stackMargins,
+                                           right: stackMargins)
+        stack.spacing = CGFloat(2).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
+        stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
         return stack
     }()
     
     //MARK: - numberCardLabel
     private lazy var ccValidateLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        label.font = UIFont(name: FontsBravve.regular.rawValue,
+                            size: CGFloat(15).generateSizeForScreen)
         label.text = "Validade"
         return label
     }()
@@ -240,10 +248,11 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - ccValidateExpirationTextfield
     private lazy var ccValidateExpirationTextfield: UITextField = {
         let view = UITextField()
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         view.isHidden = true
         view.tag = 3
+        view.keyboardType = .namePhonePad
         view.delegate = self
         view.addTarget(self, action: #selector(ccEmpity), for: .editingChanged)
         view.addTarget(self, action: #selector(withdrawCcBoder), for: .editingDidEnd)
@@ -253,40 +262,39 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     }()
     
     //MARK: - accessoryButtonCcValidate
-        private lazy var accessoryButtonCcValidate: UIButton = {
+    private lazy var accessoryButtonCcValidate: UIButton = {
         let view = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
         let image = UIImage(named: IconsBravve.questionCircleBlue_1.rawValue)
         view.setImage(image, for: .normal)
-            view.addTarget(self, action: #selector(tapCc), for: .touchUpInside)
+        view.addTarget(self, action: #selector(tapCc), for: .touchUpInside)
         return view
-        }()
+    }()
     
     //MARK: - sourceSecutiryStackView
     private lazy var sourceSecurityStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [sourceSecurityLabel, sourceSecurityTextfield])
         
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
+        let stackTopMargin = CGFloat(12).generateSizeForScreen
+        let stackMargins = CGFloat(16).generateSizeForScreen
+        
+        stack.layoutMargins = UIEdgeInsets(top: stackTopMargin,
+                                           left: stackMargins,
+                                           bottom: stackMargins,
+                                           right: stackMargins)
+        stack.spacing = CGFloat(2).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
+        stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
         return stack
     }()
     
     //MARK: - sourceSecurityLabel
     private lazy var sourceSecurityLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.text = "CVV"
@@ -294,50 +302,50 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     }()
     
     //MARK: - sourceSecurityTextfield
-        private lazy var sourceSecurityTextfield: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-            view.isHidden = true
-            view.delegate = self
-            view.tag = 5
-            view.addTarget(self, action: #selector(sourceEmpity), for: .editingChanged)
-            view.addTarget(self, action: #selector(withdrawSourceBoder), for: .editingDidEnd)
-            return view
-        }()
+    private lazy var sourceSecurityTextfield: UITextField = {
+        let view = UITextField()
+        view.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        view.isHidden = true
+        view.delegate = self
+        view.tag = 5
+        view.keyboardType = .namePhonePad
+        view.addTarget(self, action: #selector(sourceEmpity), for: .editingChanged)
+        view.addTarget(self, action: #selector(withdrawSourceBoder), for: .editingDidEnd)
+        return view
+    }()
     
     
     
     //MARK: - accessoryButtonSourceSecurity
-        private lazy var accessoryButtonSourceSecurity: UIButton = {
-            
+    private lazy var accessoryButtonSourceSecurity: UIButton = {
+        
         let view = UIButton()
         let image = UIImage(named: IconsBravve.questionCircleBlue_1.rawValue)
         view.setImage(image, for: .normal)
         view.addTarget(self, action: #selector(tapAcessorySource), for: .touchUpInside)
         return view
-        }()
+    }()
     
     //MARK: - contryStackView
     private lazy var countryStackView: UIStackView = {
         
         let stack = UIStackView(arrangedSubviews: [countryLabel2, countryLabel])
         
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
+        let stackTopMargin = CGFloat(12).generateSizeForScreen
+        let stackMargins = CGFloat(16).generateSizeForScreen
+        
+        stack.layoutMargins = UIEdgeInsets(top: stackTopMargin,
+                                           left: stackMargins,
+                                           bottom: stackMargins,
+                                           right: stackMargins)
+        stack.spacing = CGFloat(2).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
+        stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
         return stack
     }()
@@ -345,7 +353,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: countryLabel
     private lazy var countryLabel: UILabel = {
         
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.textAlignment = .left
@@ -364,7 +372,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         label.isHidden = true
         return label
     }()
-        
+    
     //MARK: countryDropDown
     private lazy var countryDropDown: UIScrollView = {
         
@@ -392,8 +400,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
                     self.countryImageFlag.image = UIImage(named: IconsBravve.flag.rawValue)
                 }else{
                     self.countryImageFlag.image = UIImage(named: IconsBravve.map.rawValue)
-                                    
-                                }
+                    
+                }
             }
             button.addTarget(self, action: #selector(hiddenLabel), for: .touchUpInside)
             button.titleLabel?.textAlignment = .left
@@ -401,7 +409,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
             buttons.append(button)
             
             
-        
+            
         }
         drop.turnIntoAList(buttons)
         drop.delegate = self
@@ -424,44 +432,43 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     
     //MARK: - accessoryButtonCountryArrow
-        private lazy var accessoryButtonCountryArrow: UIButton = {
+    private lazy var accessoryButtonCountryArrow: UIButton = {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
         view.addTarget(self, action: #selector(tapCountryDown), for: .touchUpInside)
         return view
-        }()
+    }()
     
     
     @objc func tapCountryDown() {
         
         countryDropDown.showLikeAWindow(size: CGSize(width: countryStackView.frame.size.width,
-                                                      height: CGFloat(180).generateSizeForScreen),
-                                         origin: CGPoint(x: countryStackView.frame.maxX,
-                                                         y: countryStackView.frame.maxY),
+                                                     height: CGFloat(180).generateSizeForScreen),
+                                        origin: CGPoint(x: countryStackView.frame.maxX,
+                                                        y: countryStackView.frame.maxY),
                                         .downLeft)
         
     }
     
- 
+    
     //MARK: - nameHolderStackView
     private lazy var nameHolderStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [nameHolderLabel, nameHolderTextfield])
         
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
+        let stackTopMargin = CGFloat(12).generateSizeForScreen
+        let stackMargins = CGFloat(16).generateSizeForScreen
+        
+        stack.layoutMargins = UIEdgeInsets(top: stackTopMargin,
+                                           left: stackMargins,
+                                           bottom: stackMargins,
+                                           right: stackMargins)
+        stack.spacing = CGFloat(2).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
+        stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
         return stack
     }()
@@ -469,7 +476,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     
     //MARK: - nameHolderLabel
     private lazy var nameHolderLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.text = "Nome impresso no cartão"
@@ -477,84 +484,90 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     }()
     
     //MARK: - nameHolderTextfield
-        private lazy var nameHolderTextfield: UITextField = {
-            let view = UITextField()
-            view.layer.cornerRadius = 8
-            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-            view.tag = 4
-            view.isHidden = true
-            view.addTarget(self, action: #selector(nameHolderEmpity), for: .editingChanged)
-            view.addTarget(self, action: #selector(withdrawNameHolderBoder), for: .editingDidEnd)
-            return view
-        }()
+    private lazy var nameHolderTextfield: UITextField = {
+        let view = UITextField()
+        view.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        view.tag = 4
+        view.keyboardType = .namePhonePad
+        view.delegate = self
+        view.isHidden = true
+        view.addTarget(self, action: #selector(nameHolderEmpity), for: .editingChanged)
+        view.addTarget(self, action: #selector(withdrawNameHolderBoder), for: .editingDidEnd)
+        return view
+    }()
     
     //MARK: - cpfStackView
     private lazy var cpfStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [cpfLabel, cpfTextfield])
         
-        let stackTop: CGFloat = 12
-        let stackLeft: CGFloat = 16
-        let stackRight: CGFloat = 16
-        let stackBottom: CGFloat = 16
-        stack.layoutMargins = UIEdgeInsets(top: stackTop,
-                                           left: stackLeft,
-                                           bottom: stackRight,
-                                           right: stackBottom)
-        stack.spacing = 2
+        let stackTopMargin = CGFloat(12).generateSizeForScreen
+        let stackMargins = CGFloat(16).generateSizeForScreen
+        
+        stack.layoutMargins = UIEdgeInsets(top: stackTopMargin,
+                                           left: stackMargins,
+                                           bottom: stackMargins,
+                                           right: stackMargins)
+        stack.spacing = CGFloat(2).generateSizeForScreen
         stack.axis = .vertical
         stack.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         stack.layer.borderWidth = 1
         stack.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layer.cornerRadius = 8
+        stack.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         stack.isUserInteractionEnabled = true
         return stack
     }()
     
     //MARK: cpfLabel
     private lazy var cpfLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         label.text = "CPF"
         return label
     }()
-        
+    
     //MARK: cpfTextfield
-        private lazy var cpfTextfield: UITextField = {
-            let view = UITextField()
-            view.tag = 2
-            view.delegate = self
-            view.layer.cornerRadius = 8
-            view.isHidden = true
-            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-            view.addTarget(self, action: #selector(cpfEmpity), for: .editingChanged)
-            view.addTarget(self, action: #selector(withdrawCpfBoder), for: .editingDidEnd)
-            return view
-        }()
+    private lazy var cpfTextfield: UITextField = {
+        let view = UITextField()
+        view.tag = 2
+        view.delegate = self
+        view.layer.cornerRadius = CGFloat(8).generateSizeForScreen
+        view.isHidden = true
+        view.keyboardType = .namePhonePad
+        view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
+        view.addTarget(self, action: #selector(cpfEmpity), for: .editingChanged)
+        view.addTarget(self, action: #selector(withdrawCpfBoder), for: .editingDidEnd)
+        return view
+    }()
     
     override var prefersStatusBarHidden: Bool {
         
         true
     }
-   
+    
     private lazy var scrollView: UIScrollView = {
         
         let paymentLabel = UILabel()
         paymentLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         paymentLabel.text = "Pagamento"
         paymentLabel.textAlignment = .left
-        paymentLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        paymentLabel.font = UIFont(name: FontsBravve.regular.rawValue,
+                                   size: CGFloat(15).generateSizeForScreen)
         
         let cardCreditLabel = UILabel()
         cardCreditLabel.textColor = UIColor(named: ColorsBravve.label.rawValue)
         cardCreditLabel.text = "Cartão de Crédito"
         cardCreditLabel.textAlignment = .left
-        cardCreditLabel.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
+        cardCreditLabel.font = UIFont(name: FontsBravve.bold.rawValue,
+                                      size: CGFloat(15).generateSizeForScreen)
         
         let viewToScroll = UIView()
         
         viewToScroll.addSubviews([paymentLabel, resumeLabel, resumeButton, lineImage, cardCreditLabel, numberCardStackView, ccValidateStackView, sourceSecurityStackView, countryStackView, nameHolderStackView, cpfStackView, accessoryButtonSourceSecurity, accessoryButtonCcValidate, accessoryButtonCountryArrow, countryImageFlag, countryDropDown])
+        
+        let spacing = CGFloat(15).generateSizeForScreen
         
         paymentLabel.constraintInsideTo(.top, viewToScroll)
         paymentLabel.constraintInsideTo(.leading, viewToScroll,
@@ -562,8 +575,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         paymentLabel.constraintInsideTo(.trailing, viewToScroll,
                                         CGFloat(20).generateSizeForScreen)
         
-        resumeLabel.constraintOutsideTo(.top, paymentLabel,
-                                        CGFloat(15).generateSizeForScreen)
+        resumeLabel.constraintOutsideTo(.top, paymentLabel, spacing)
         resumeLabel.constraintInsideTo(.leading, paymentLabel)
         
         resumeButton.constraintOutsideTo(.leading, resumeLabel,
@@ -576,19 +588,16 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         lineImage.constraintInsideTo(.trailing, paymentLabel)
         lineImage.heightAnchorInSuperview(CGFloat(1).generateSizeForScreen)
         
-        cardCreditLabel.constraintOutsideTo(.top, lineImage,
-                                            CGFloat(15).generateSizeForScreen)
+        cardCreditLabel.constraintOutsideTo(.top, lineImage, spacing)
         cardCreditLabel.constraintInsideTo(.leading, paymentLabel)
         cardCreditLabel.constraintInsideTo(.trailing, paymentLabel)
         
-        numberCardStackView.constraintOutsideTo(.top, cardCreditLabel,
-                                                CGFloat(15).generateSizeForScreen)
+        numberCardStackView.constraintOutsideTo(.top, cardCreditLabel, spacing)
         numberCardStackView.constraintInsideTo(.leading, paymentLabel)
         numberCardStackView.constraintInsideTo(.trailing, paymentLabel)
         numberCardStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
-        ccValidateStackView.constraintOutsideTo(.top, numberCardStackView,
-                                                CGFloat(15).generateSizeForScreen)
+        ccValidateStackView.constraintOutsideTo(.top, numberCardStackView, spacing)
         ccValidateStackView.constraintInsideTo(.leading, paymentLabel)
         ccValidateStackView.constraintInsideTo(.bottom, sourceSecurityStackView)
         ccValidateStackView.constraintInsideTo(.width, numberCardStackView, multiplier: 0.475)
@@ -607,8 +616,7 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
                                                          CGFloat(15).generateSizeForScreen)
         accessoryButtonSourceSecurity.constraintInsideTo(.centerY, sourceSecurityStackView)
         
-        countryStackView.constraintOutsideTo(.top, sourceSecurityStackView,
-                                             CGFloat(15).generateSizeForScreen)
+        countryStackView.constraintOutsideTo(.top, sourceSecurityStackView, spacing)
         countryStackView.constraintInsideTo(.leading, paymentLabel)
         countryStackView.constraintInsideTo(.trailing, paymentLabel)
         countryStackView.constraintInsideTo(.height, numberCardStackView)
@@ -617,18 +625,15 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
                                                        CGFloat(15).generateSizeForScreen)
         accessoryButtonCountryArrow.constraintInsideTo(.centerY, countryStackView)
         
-        countryImageFlag.constraintOutsideTo(.trailing, accessoryButtonCountryArrow,
-                                             CGFloat(15).generateSizeForScreen)
+        countryImageFlag.constraintOutsideTo(.trailing, accessoryButtonCountryArrow, spacing)
         countryImageFlag.constraintInsideTo(.centerY, countryStackView)
         
-        nameHolderStackView.constraintOutsideTo(.top, countryStackView,
-                                                CGFloat(15).generateSizeForScreen)
+        nameHolderStackView.constraintOutsideTo(.top, countryStackView, spacing)
         nameHolderStackView.constraintInsideTo(.leading, paymentLabel)
         nameHolderStackView.constraintInsideTo(.trailing, paymentLabel)
         nameHolderStackView.constraintInsideTo(.height, numberCardStackView)
         
-        cpfStackView.constraintOutsideTo(.top, nameHolderStackView,
-                                         CGFloat(15).generateSizeForScreen)
+        cpfStackView.constraintOutsideTo(.top, nameHolderStackView, spacing)
         cpfStackView.constraintInsideTo(.leading, paymentLabel)
         cpfStackView.constraintInsideTo(.trailing, paymentLabel)
         cpfStackView.constraintInsideTo(.bottom, viewToScroll,
@@ -675,40 +680,33 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         let cpfStackViewTap = UITapGestureRecognizer(target: self, action: #selector(cpfStackViewTapped))
         cpfStackView.addGestureRecognizer(cpfStackViewTap)
         
-    
+        
     }
     
     //MARK: - SetupView
     private func setupView() {
         
-        view.addSubviews([scrollView, finishButton])
-        
-        view.addSubview(scrollView)
-        
-        view.addSubviews([tip1
-        
-        
-        
-        
-        ])
-        
+        view.addSubviews([scrollView, finishButton, tip1])
         
         finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
-        allTextFieldReservation()
+        
+        let nextResponder = view.viewWithTag(1)
+        nextResponder?.becomeFirstResponder()
+        
+        
     }
     
     //MARK: - SetupConstrains
     private func setupConstrains() {
         
-        scrollView.constraintInsideTo(.top, view, CGFloat(216).generateSizeForScreen)
+        scrollView.constraintInsideTo(.top, view, CGFloat(223).generateSizeForScreen)
         scrollView.constraintInsideTo(.leading, view)
         scrollView.constraintInsideTo(.trailing, view)
         scrollView.constraintOutsideTo(.bottom, finishButton)
-
+        
         //MARK: finishButton
         finishButton.setToBottomButtonKeyboardDefault()
         finishButton.setTitle("Finalizar", for: .normal)
-      
     }
     
     //MARK: actions and methods
@@ -735,7 +733,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - numberStackViewTapped
     @objc func numberStackViewTapped() {
         
-        numberCardLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        numberCardLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                      size: CGFloat(11).generateSizeForScreen)
         numberCardTextfield.isHidden = false
         numberCardTextfield.becomeFirstResponder()
     }
@@ -758,7 +757,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - ccValidatestackViewTapped
     @objc func ccValidatestackViewTapped() {
         
-        ccValidateLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        ccValidateLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                      size: CGFloat(11).generateSizeForScreen)
         ccValidateExpirationTextfield.isHidden = false
         ccValidateExpirationTextfield.becomeFirstResponder()
     }
@@ -795,7 +795,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: - sourceSecutiryStackViewTapped
     @objc func sourceSecutirytackViewTapped() {
         
-        sourceSecurityLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        sourceSecurityLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                          size: CGFloat(11).generateSizeForScreen)
         
         sourceSecurityTextfield.isHidden = false
         sourceSecurityTextfield.becomeFirstResponder()
@@ -830,7 +831,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: ccValidatestackViewTapped
     @objc func countryStackViewTapped() {
         
-        countryLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        countryLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                   size: CGFloat(11).generateSizeForScreen)
     }
     
     //MARK: - nameHolderEmpity
@@ -851,7 +853,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: nameHoldertackViewTapped
     @objc func nameHolderStackViewTapped() {
         
-        nameHolderLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        nameHolderLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                                      size: CGFloat(11).generateSizeForScreen)
         
         nameHolderTextfield.isHidden = false
         nameHolderTextfield.becomeFirstResponder()
@@ -882,8 +885,9 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     //MARK: cpfStackViewTapped
     @objc func cpfStackViewTapped() {
         
-        cpfLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
-           
+        cpfLabel.font = UIFont(name: FontsBravve.light.rawValue,
+                               size: CGFloat(11).generateSizeForScreen)
+        
         cpfTextfield.isHidden = false
         cpfTextfield.becomeFirstResponder()
     }
@@ -898,8 +902,8 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
     @objc func finishButtonTapped() {
         
         let reservationcompletedview = ReservationCompletedView()
-            reservationcompletedview.modalPresentationStyle = .fullScreen
-            present(reservationcompletedview, animated: true)
+        reservationcompletedview.modalPresentationStyle = .fullScreen
+        present(reservationcompletedview, animated: true)
     }
     
     //MARK: - touchesBegan
@@ -907,30 +911,42 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         
         self.view.endEditing(true)
     }
-
-    //MARK: - allTextFieldReservation
-    private func allTextFieldReservation() {
+    
+    //MARK: - textFieldShouldReturn
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        let allTextFields: [UITextField] = [
-        
-            numberCardTextfield, ccValidateExpirationTextfield,sourceSecurityTextfield, nameHolderTextfield, cpfTextfield
-            
-        ]
-        
-        let allStackView: [UIStackView] = [
-        
-            numberCardStackView, ccValidateStackView, sourceSecurityStackView, nameHolderStackView, cpfStackView
-        
-        ]
-        
-        alltxtFieldsReservation = allTextFields
-        
-        for tf in allTextFields {
-            
-            tf.delegate = self
+        if textField == numberCardTextfield {
+            ccValidateExpirationTextfield.becomeFirstResponder()
+            ccValidateExpirationTextfield.isHidden = false
+        }else {
+            ccValidateExpirationTextfield.resignFirstResponder()
         }
+        if textField == ccValidateExpirationTextfield {
+            sourceSecurityTextfield.becomeFirstResponder()
+            sourceSecurityTextfield.isHidden = false
+        }else {
+            sourceSecurityTextfield.resignFirstResponder()
+        }
+        if textField == sourceSecurityTextfield {
+            nameHolderTextfield.becomeFirstResponder()
+            nameHolderTextfield.isHidden = false
+        }else {
+            nameHolderTextfield.resignFirstResponder()
+        }
+        if textField == nameHolderTextfield {
+            cpfTextfield.becomeFirstResponder()
+            cpfTextfield.isHidden = false
+        }else {
+            cpfTextfield.resignFirstResponder()
+        }
+        return true
+        
     }
+    
 }
+
+
+
 
 extension ReservationsThreeViewController: UITextFieldDelegate {
     
@@ -943,53 +959,33 @@ extension ReservationsThreeViewController: UITextFieldDelegate {
         
         switch textField?.tag{
             
-            case 1:
+        case 1:
             
-                textField?.text = textField?.text?.formatMask(mask: "####.####.####.####")
+            textField?.text = textField?.text?.formatMask(mask: "####.####.####.####")
             
-            case 2:
+        case 2:
             
-                textField?.text = textField?.text?.formatMask(mask: "###.###.###-##")
+            textField?.text = textField?.text?.formatMask(mask: "###.###.###-##")
             
-            case 3:
+        case 3:
             
-                textField?.text = textField?.text?.formatMask(mask: "##/##")
+            textField?.text = textField?.text?.formatMask(mask: "##/##")
             
-            case 4:
+        case 4:
             
-                textField?.text = textField?.text?.uppercased()
+            textField?.text = textField?.text?.uppercased()
             
-            case 5:
+        case 5:
             
-                textField?.text = textField?.text?.formatMask(mask: "###")
+            textField?.text = textField?.text?.formatMask(mask: "###")
             
-            default:
+        default:
             
-                break
+            break
         }
-    }
-    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        currentTextFieldPositon = alltxtFieldsReservation.firstIndex(of: textField) ?? 0
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        currentTextFieldPositon = currentTextFieldPositon + 1
-        
-        if currentTextFieldPositon > alltxtFieldsReservation.count - 1 {
-            
-            currentTextFieldPositon = 0
-        }
-        
-        let newTextField = alltxtFieldsReservation[currentTextFieldPositon]
-        
-        newTextField.becomeFirstResponder()
-        return true
     }
 }
+
 
 extension UIStackView {
     func setBottomBorderOnlyWithDefault(color: CGColor) {
@@ -1028,13 +1024,13 @@ extension ReservationsThreeViewController : UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
-//        if let _ = touch.view?.superview?.superclass?.isSubclass(of: UIButton.self) {
-//
-//            return false
-//        }
+        //        if let _ = touch.view?.superview?.superclass?.isSubclass(of: UIButton.self) {
+        //
+        //            return false
+        //        }
         
         if touch.view!.superview!.superclass! .isSubclass(of: UIButton.self) {
-
+            
             return false
         }
         return true
