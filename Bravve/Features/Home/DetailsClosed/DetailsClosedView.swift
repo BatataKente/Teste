@@ -73,23 +73,36 @@ class DetailsClosedView: UIViewController {
         itens.append(createStackView("\(space.partner_site_address?.address?.street ?? ""), \(space.partner_site_address?.address?.neighborhood ?? ""), nº\(space.partner_site_address?.address?.street_number ?? 0), \(space.partner_site_address?.address?.city_name ?? ""). \(space.partner_site_address?.address?.state_name ?? "") \(space.partner_site_address?.address?.postal_code ?? ""), BR",
                                      UIImage(named: IconsBravve.map.rawValue),
                                      textColor: textColor))
-        itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                     textColor: textColor))
-        for i in 1...texts.count-1 {
-            
-            itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         isHidden: true,
+        
+        let localDetailsStackView = UIStackView()
+        
+        if texts != [] {
+            itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          textColor: textColor))
+            for i in 1...texts.count-1 {
+                
+                itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+            }
+            
+            let buttons = createSeeButtonsStackView(3...itens.count-1,
+                                                    itens: itens,
+                                                    downButtonImages: .arrowDown,
+                                                    upButtonImages: .arrowUp)
+
+            localDetailsStackView.addArrangedSubviews([title] +
+                                                      itens +
+                                                      [buttons])
+        } else {
+            
+            localDetailsStackView.addArrangedSubviews([title] +
+                                                      itens
+            )
         }
         
-        let buttons = createSeeButtonsStackView(3...itens.count-1,
-                                                itens: itens,
-                                                downButtonImages: .arrowDown,
-                                                upButtonImages: .arrowUp)
         
-        let localDetailsStackView = UIStackView(arrangedSubviews: [title] +
-                                                itens +
-                                                [buttons])
+        
         localDetailsStackView.axis = .vertical
         localDetailsStackView.alignment = .leading
         localDetailsStackView.spacing = CGFloat(10).generateSizeForScreen
@@ -266,12 +279,9 @@ class DetailsClosedView: UIViewController {
         spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
                                                   CGFloat(2.5).generateSizeForScreen)
         
-        let sloganLabel = UILabel()
-        sloganLabel.text = space.slogan
-        sloganLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                  size: CGFloat(20).generateSizeForScreen)
-        sloganLabel.textColor = textColor
-        sloganLabel.numberOfLines = 0
+        let sloganLabel = createLabel(space.slogan,
+                                      UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(20).generateSizeForScreen))
         
         let view = UIView()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
@@ -291,41 +301,24 @@ class DetailsClosedView: UIViewController {
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        let nameLabel = UILabel()
-        nameLabel.text = space.local_name
-        nameLabel.font = UIFont(name: FontsBravve.bold.rawValue,
-                                size: CGFloat(20).generateSizeForScreen)
-        nameLabel.textColor = textColor
+        let localLabel = createLabel(space.local_name,
+                                     UIFont(name: FontsBravve.bold.rawValue,
+                                            size: CGFloat(20).generateSizeForScreen))
         
-        let label_1 = UILabel()
-        label_1.text = space.description
-        label_1.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        label_1.font = UIFont(name: FontsBravve.regular.rawValue,
-                              size: 12)
+        let descriptionLabel = createLabel(space.description,
+                                           textColor: UIColor(named: ColorsBravve.label.rawValue))
         
-        let label_2 = UILabel()
-        label_2.text = space.hourly_credits
-        label_2.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(30).generateSizeForScreen)
-        label_2.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
+        let hourlyLabel = createLabel(space.hourly_credits,
+                                      UIFont(name: FontsBravve.bold.rawValue,
+                                             size: CGFloat(30).generateSizeForScreen),
+                                      textColor: UIColor(named: ColorsBravve.pink_white.rawValue))
         
-        let label_3 = UILabel()
-        label_3.text = "crédito/hora"
-        label_3.textColor = UIColor(named: ColorsBravve.pink_white.rawValue)
-        label_3.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let creditHourLabel = createLabel("crédito/hora",
+                                          textColor: UIColor(named: ColorsBravve.pink_white.rawValue))
         
-        let label_4 = UILabel()
-        label_4.text = space.daily_credits
-        label_4.textColor = textColor
-        label_4.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(20).generateSizeForScreen)
+        let dailyLabel = createLabel(space.daily_credits)
         
-        let label_5 = UILabel()
-        label_5.text = "crédito/dia"
-        label_5.textColor = textColor
-        label_5.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let creditDayLabel = createLabel("crédito/dia")
         
         let buttons = createCapsuleButtons([space.space_classification?.name ?? "", space.space_type?.name ?? "", space.space_noise_level?.name ?? ""],
                                            .capsuleButton,
@@ -334,115 +327,118 @@ class DetailsClosedView: UIViewController {
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = 5
         
-        let label_6 = UILabel()
-        label_6.text = """
+        let briefingLabel = createLabel("""
         Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
         
         Um refúgio paulistano na esquina da Gabriel Monteiro da Silva com a Juquiá,  o paraíso do design. Com uma pegada cultural, o Kamy propicia a seus frequentadores encontrar exposições de diferentes artistas no seu espaço.
         
         Trabalho + Café + Cultura, precisa de mais? Então reserve =).
-        """
-        label_6.textColor = black_White
-        label_6.numberOfLines = 0
-        label_6.font = UIFont(name: FontsBravve.regular.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        """,
+                                        textColor: black_White)
         
-        let label_7 = UILabel()
-        label_7.text = "Giovanna"
-        label_7.textColor = textColor
-        label_7.font = UIFont(name: FontsBravve.bold.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let nameLabel = createLabel("Giovanna")
         
-        let label_8 = UILabel()
-        label_8.text = "Community Manager"
-        label_8.textColor = textColor
-        label_8.font = UIFont(name: FontsBravve.regular.rawValue,
-                              size: CGFloat(12).generateSizeForScreen)
+        let officeLabel = createLabel("Community Manager")
         
-        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, nameLabel, label_1, label_2, label_3, label_4, label_5, label_6, label_7, label_8, localDetailsStackView, structureStackView, localFacilitiesStackView])
+        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, localLabel, descriptionLabel, hourlyLabel, creditHourLabel, dailyLabel, creditDayLabel, briefingLabel, nameLabel, officeLabel, localDetailsStackView, structureStackView, localFacilitiesStackView])
         
-        view.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        view.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        view.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabelView.constraintInsideTo(.top, view)
-        titleLabelView.constraintInsideTo(.leading, view, CGFloat(20).generateSizeForScreen)
+        for subview in view.subviews {
+            
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        sloganLabel.constraintOutsideTo(.top, spaceCategoryNameLabel, CGFloat(20).generateSizeForScreen)
-        sloganLabel.constraintInsideTo(.leading, spaceCategoryNameLabel)
-        sloganLabel.widthAnchorInSuperview(CGFloat(215).generateSizeForScreen)
+        view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor).isActive = true
         
-        photoCollectionView.constraintOutsideTo(.top, sloganLabel, CGFloat(20).generateSizeForScreen)
-        photoCollectionView.constraintInsideTo(.leading, view)
-        photoCollectionView.constraintInsideTo(.trailing, view)
-        photoCollectionView.heightAnchorInSuperview(collectionViewFlowLayout.itemSize.height)
+        titleLabelView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                constant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        pageControl.constraintInsideTo(.centerX, photoCollectionView)
-        pageControl.constraintOutsideTo(.top, photoCollectionView,
-                                        CGFloat(10).generateSizeForScreen)
-        pageControl.constraintInsideTo(.leading, photoCollectionView)
-        pageControl.constraintInsideTo(.trailing, photoCollectionView)
+        sloganLabel.topAnchor.constraint(equalTo: spaceCategoryNameLabel.bottomAnchor,
+                                         constant: CGFloat(20).generateSizeForScreen).isActive = true
+        sloganLabel.leadingAnchor.constraint(equalTo: spaceCategoryNameLabel.leadingAnchor).isActive = true
+        sloganLabel.widthAnchor.constraint(equalToConstant: CGFloat(215).generateSizeForScreen).isActive = true
         
-        nameLabel.constraintOutsideTo(.top,  photoCollectionView, CGFloat(45).generateSizeForScreen)
-        nameLabel.constraintInsideTo(.leading, sloganLabel)
+        photoCollectionView.topAnchor.constraint(equalTo: sloganLabel.bottomAnchor,
+                                                 constant: CGFloat(20).generateSizeForScreen).isActive = true
+        photoCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        photoCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        photoCollectionView.heightAnchor.constraint(equalToConstant: collectionViewFlowLayout.itemSize.height).isActive = true
         
-        label_1.constraintOutsideTo(.top, nameLabel, CGFloat(7.5).generateSizeForScreen)
-        label_1.constraintInsideTo(.leading, nameLabel)
+        pageControl.centerXAnchor.constraint(equalTo: photoCollectionView.centerXAnchor).isActive = true
+        pageControl.topAnchor.constraint(equalTo: photoCollectionView.bottomAnchor,
+                                         constant: CGFloat(10).generateSizeForScreen).isActive = true
+        pageControl.leadingAnchor.constraint(equalTo: photoCollectionView.leadingAnchor).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: photoCollectionView.trailingAnchor).isActive = true
         
-        label_2.constraintInsideTo(.centerY, nameLabel)
-        label_2.constraintOutsideTo(.trailing, label_3, CGFloat(5).generateSizeForScreen)
+        localLabel.topAnchor.constraint(equalTo: photoCollectionView.bottomAnchor,
+                                        constant: CGFloat(45).generateSizeForScreen).isActive = true
+        localLabel.leadingAnchor.constraint(equalTo: sloganLabel.leadingAnchor).isActive = true
         
-        label_3.constraintInsideTo(.bottom, label_2)
-        label_3.constraintInsideTo(.trailing, photoCollectionView, CGFloat(20).generateSizeForScreen)
+        descriptionLabel.topAnchor.constraint(equalTo: localLabel.bottomAnchor,
+                                        constant: CGFloat(7.5).generateSizeForScreen).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         
-        label_4.constraintOutsideTo(.top, label_2,
-                                    CGFloat(5).generateSizeForScreen)
-        label_4.constraintInsideTo(.leading, label_2)
+        hourlyLabel.centerYAnchor.constraint(equalTo: localLabel.centerYAnchor).isActive = true
+        hourlyLabel.trailingAnchor.constraint(equalTo: creditHourLabel.leadingAnchor,
+                                              constant: CGFloat(-5).generateSizeForScreen).isActive = true
         
-        label_5.constraintOutsideTo(.leading, label_4,
-                                    CGFloat(5).generateSizeForScreen)
-        label_5.constraintInsideTo(.bottom, label_4)
+        creditHourLabel.bottomAnchor.constraint(equalTo: hourlyLabel.bottomAnchor).isActive = true
+        creditHourLabel.trailingAnchor.constraint(equalTo: photoCollectionView.trailingAnchor,
+                                                  constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
-        tagsStackView.constraintOutsideTo(.top, label_5,
-                                          CGFloat(20).generateSizeForScreen)
-        tagsStackView.constraintInsideTo(.leading, nameLabel)
-        tagsStackView.constraintInsideTo(.trailing, label_3)
+        dailyLabel.topAnchor.constraint(equalTo: hourlyLabel.bottomAnchor,
+                                        constant: CGFloat(5).generateSizeForScreen).isActive = true
+        dailyLabel.leadingAnchor.constraint(equalTo: hourlyLabel.leadingAnchor).isActive = true
         
-        label_6.constraintOutsideTo(.top, tagsStackView,
-                                    CGFloat(20).generateSizeForScreen)
-        label_6.constraintInsideTo(.leading, tagsStackView)
-        label_6.constraintInsideTo(.trailing, tagsStackView)
+        creditDayLabel.leadingAnchor.constraint(equalTo: dailyLabel.trailingAnchor,
+                                                constant: CGFloat(5).generateSizeForScreen).isActive = true
+        creditDayLabel.trailingAnchor.constraint(equalTo: photoCollectionView.trailingAnchor,
+                                                 constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        creditDayLabel.bottomAnchor.constraint(equalTo: dailyLabel.bottomAnchor).isActive = true
         
-        label_7.constraintOutsideTo(.top, label_6,
-                                    CGFloat(20).generateSizeForScreen)
-        label_7.constraintInsideTo(.leading, label_6)
-        label_7.constraintInsideTo(.trailing, label_6)
+        tagsStackView.topAnchor.constraint(equalTo: creditDayLabel.bottomAnchor,
+                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
+        tagsStackView.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
+        tagsStackView.trailingAnchor.constraint(equalTo: creditHourLabel.trailingAnchor).isActive = true
         
-        label_8.constraintOutsideTo(.top, label_7)
-        label_8.constraintInsideTo(.leading, label_7)
-        label_8.constraintInsideTo(.trailing, label_7)
+        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor,
+                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
+        briefingLabel.leadingAnchor.constraint(equalTo: tagsStackView.leadingAnchor).isActive = true
+        briefingLabel.trailingAnchor.constraint(equalTo: tagsStackView.trailingAnchor).isActive = true
         
-        localDetailsStackView.constraintOutsideTo(.top, label_8,
-                                                  CGFloat(20).generateSizeForScreen)
-        localDetailsStackView.constraintInsideTo(.leading, label_8)
-        localDetailsStackView.constraintInsideTo(.trailing, label_8)
+        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor,
+                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: briefingLabel.leadingAnchor).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: briefingLabel.trailingAnchor).isActive = true
         
-        structureStackView.constraintOutsideTo(.top, localDetailsStackView,
-                                               CGFloat(20).generateSizeForScreen)
-        structureStackView.constraintInsideTo(.leading, localFacilitiesStackView)
-        structureStackView.constraintInsideTo(.trailing, localFacilitiesStackView)
+        officeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        officeLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
+        officeLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
         
-        localFacilitiesStackView.constraintOutsideTo(.top, structureStackView,
-                                                     CGFloat(20).generateSizeForScreen)
-        localFacilitiesStackView.constraintInsideTo(.leading, view,
-                                                    CGFloat(20).generateSizeForScreen)
-        localFacilitiesStackView.constraintInsideTo(.trailing, view,
-                                                    CGFloat(20).generateSizeForScreen)
+        localDetailsStackView.topAnchor.constraint(equalTo: officeLabel.bottomAnchor,
+                                                   constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localDetailsStackView.leadingAnchor.constraint(equalTo: officeLabel.leadingAnchor).isActive = true
+        localDetailsStackView.trailingAnchor.constraint(equalTo: officeLabel.trailingAnchor).isActive = true
         
-        localFacilitiesStackView.constraintInsideTo(.bottom, view,
-                                                    CGFloat(20).generateSizeForScreen)
+        structureStackView.topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor,
+                                                constant: CGFloat(20).generateSizeForScreen).isActive = true
+        structureStackView.leadingAnchor.constraint(equalTo: localFacilitiesStackView.leadingAnchor).isActive = true
+        structureStackView.trailingAnchor.constraint(equalTo: localFacilitiesStackView.trailingAnchor).isActive = true
+        
+        localFacilitiesStackView.topAnchor.constraint(equalTo: structureStackView.bottomAnchor,
+                                                      constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                          constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                           constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                                         constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
         return scrollView
     }()
@@ -506,6 +502,20 @@ class DetailsClosedView: UIViewController {
         stackView.addArrangedSubview(label)
         
         return stackView
+    }
+    
+    func createLabel(_ text: String?,
+                     _ font: UIFont? = UIFont(name: FontsBravve.bold.rawValue,
+                                              size: CGFloat(12).generateSizeForScreen),
+                     textColor: UIColor? = UIColor(named: ColorsBravve.progressBarLabel.rawValue)) -> UILabel {
+        
+        let label = UILabel()
+        label.text = text ?? " "
+        label.font = font
+        label.numberOfLines = 0
+        label.textColor = textColor
+        
+        return label
     }
     
     private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
@@ -605,14 +615,19 @@ class DetailsClosedView: UIViewController {
     
     private func setupConstraints() {
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        scrollView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        scrollView.constraintOutsideTo(.bottom, reserveButton)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        customBar.translatesAutoresizingMaskIntoConstraints = false
+        reserveButton.translatesAutoresizingMaskIntoConstraints = false
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
+        
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
 

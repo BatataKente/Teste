@@ -265,3 +265,19 @@ extension UIViewController {
         }
     }
 }
+
+/// Function
+/// close iOS Keyboard by touching anywhere using Swift
+
+//MARK: - hideKeyboardWhenTappedAround
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}

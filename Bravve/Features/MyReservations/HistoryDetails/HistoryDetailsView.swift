@@ -453,7 +453,7 @@ class HistoryDetailsView: UIViewController {
         super.viewDidLoad()
         viewInScroll.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-
+        
         reserveCollection.delegate = self
         reserveCollection.dataSource = self
         
@@ -649,25 +649,29 @@ class HistoryDetailsView: UIViewController {
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
             _ in
-            self.dismiss(animated: true)
-            
+            if Flags.shared.flagReservation == 4 {
+                let vc = HomeClosedView()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }else{
+                self.dismiss(animated: true)
+            }
         }
     }
     
     func setupContraints(){
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, tabBar)
-        
-        viewInScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
-        
         NSLayoutConstraint.activate([
+            
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            
+            viewInScroll.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            viewInScroll.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            viewInScroll.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            viewInScroll.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),

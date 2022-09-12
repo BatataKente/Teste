@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+
+struct AlertMessage: Codable {
+    
+    var message: String
+    
+    
+    
+}

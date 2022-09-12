@@ -83,6 +83,7 @@ class ConfirmDataView: UIViewController {
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -136,6 +137,7 @@ class ConfirmDataView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -150,6 +152,7 @@ class ConfirmDataView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -164,6 +167,7 @@ class ConfirmDataView: UIViewController {
         stackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 20)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -172,6 +176,7 @@ class ConfirmDataView: UIViewController {
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 12
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -216,7 +221,7 @@ class ConfirmDataView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        flag = 1
+        Flags.shared.flag = 1
         
         let data = UserDefaults.standard
         
@@ -233,6 +238,7 @@ class ConfirmDataView: UIViewController {
     func myButton() -> UIButton {
         let button = UIButton()
         button.setImage(UIImage(named: IconsBravve.edit_blue.rawValue), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
     
@@ -246,22 +252,26 @@ class ConfirmDataView: UIViewController {
     //MARK: - addConstraints
     private func addConstraints() {
         
-        label.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(22).generateSizeForScreen)
-        label.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-22).generateSizeForScreen)
-        label.constraintInsideTo(.top, view, CGFloat(240).generateSizeForScreen)
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(22).generateSizeForScreen),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(224).generateSizeForScreen),
+            
+            stackViewName.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            stackViewCell.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            stackViewEmail.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            
+            editButtonName.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen),
+            editButtonCell.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen),
+            editButtonEmail.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen),
+            
+            stackViewLabels.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            stackViewLabels.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            stackViewLabels.topAnchor.constraint(equalTo: label.bottomAnchor, constant: CGFloat(40).generateSizeForScreen)
         
-        stackViewName.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-        stackViewCell.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-        stackViewEmail.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        ])
         
-        editButtonName.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        editButtonCell.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        editButtonEmail.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        
-        stackViewLabels.constraintInsideTo(.leading, label)
-        stackViewLabels.constraintInsideTo(.trailing, label)
-        stackViewLabels.constraintOutsideTo(.top, label, CGFloat(60).generateSizeForScreen)
-        
+
     }
     //MARK: - addTargets
     private func addTargets() {

@@ -40,6 +40,7 @@ class LoginView: UIViewController {
         let view = UIImageView()
         view.image = UIImage(named: ImagesBravve.logoWhite.rawValue)
         view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -52,6 +53,7 @@ class LoginView: UIViewController {
         view.textColor = .white
         view.numberOfLines = 0
         view.text = "Bem vindo(a) à Bravve "
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -62,6 +64,7 @@ class LoginView: UIViewController {
         view.textColor = .white
         view.text = "O futuro do trabalho é hibrído, remoto,\nconectado e humano!"
         view.numberOfLines = 4
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -72,6 +75,7 @@ class LoginView: UIViewController {
         view.font = UIFont(name: FontsBravve.light.rawValue,
                            size: CGFloat(15).generateSizeForScreen)
         view.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -86,6 +90,7 @@ class LoginView: UIViewController {
         view.autocapitalizationType = .none
         view.autocorrectionType = .no
         view.addTarget(self, action: #selector(loginEmpty), for: .editingChanged)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -106,6 +111,7 @@ class LoginView: UIViewController {
                                            left: stackHotizontalMargins,
                                            bottom: stackVerticalMargins,
                                            right: stackHotizontalMargins)
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -116,6 +122,7 @@ class LoginView: UIViewController {
         view.font = UIFont(name: FontsBravve.light.rawValue,
                            size: CGFloat(15).generateSizeForScreen)
         view.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -128,6 +135,7 @@ class LoginView: UIViewController {
         view.delegate = self
         view.isSecureTextEntry = true
         view.addTarget(self, action: #selector(passwordEmpty), for: .editingChanged)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -135,8 +143,10 @@ class LoginView: UIViewController {
     private lazy var eyeButton: UIButton = {
         let view = UIButton(type: .custom)
         view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        view.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -158,6 +168,7 @@ class LoginView: UIViewController {
                                                        left: stackHotizontalMargins,
                                                        bottom: stackVerticalMargins,
                                                        right: stackHotizontalMargins)
+        passwordStackView.translatesAutoresizingMaskIntoConstraints = false
         
         return passwordStackView
     }()
@@ -174,6 +185,7 @@ class LoginView: UIViewController {
         let attributedString = NSMutableAttributedString(string: "Esqueci minha senha", attributes: attributes)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
         view.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -199,6 +211,7 @@ class LoginView: UIViewController {
         let attributedString = NSMutableAttributedString(string: "Entrar", attributes: attributesFont)
         view.setAttributedTitle(NSAttributedString(attributedString: attributedString), for: .normal)
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -209,6 +222,7 @@ class LoginView: UIViewController {
         view.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
         view.text = "Novo por aqui?"
         view.textColor = UIColor.white
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -224,6 +238,7 @@ class LoginView: UIViewController {
                                           left: stackMargins,
                                           bottom: stackMargins,
                                           right: stackMargins)
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         let attributesFont: [NSAttributedString.Key : Any] = [
             
@@ -258,11 +273,8 @@ class LoginView: UIViewController {
     //MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        flag = 0
+        Flags.shared.flag = 0
     }
-    
-    
-    
     
     //MARK: - setupView
     func setupView() {
@@ -310,6 +322,7 @@ class LoginView: UIViewController {
         if self.viewModel.isValid(email: email, password: password) == true{
             
             self.viewModel.loginUser(email: email, password: password)
+            UserDefaults.standard.setValue(password, forKey: "userPassword")
             
         } else{
             loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
@@ -390,14 +403,7 @@ class LoginView: UIViewController {
     //MARK: - tapEyeButton
     @objc func tapEyeButton () {
         eyeButton.isSelected.toggle()
-        
-        if eyeButton.isSelected {
-            passwordTextField.isSecureTextEntry = true
-            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-        } else {
-            passwordTextField.isSecureTextEntry  = false
-            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        }
+        passwordTextField.isSecureTextEntry.toggle()
     }
     
     //MARK: - forgotPasswordButtonTapped
@@ -411,54 +417,53 @@ class LoginView: UIViewController {
     //MARK: - setupLayoutConstraint
     private func setupLayoutConstraints() {
         
-        logoImage.constraintOutsideTo(.top, backButton, 30)
-        logoImage.constraintInsideTo(.leading, view.safeAreaLayoutGuide,
-                                     CGFloat(20).generateSizeForScreen)
-        logoImage.constraintOutsideTo(.width, logoImage, multiplier: 4)
-        logoImage.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
-        
-        titleLabel.constraintOutsideTo(.top, logoImage, CGFloat(20).generateSizeForScreen)
-        titleLabel.constraintInsideTo(.leading, logoImage)
-        titleLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide,
-                                      CGFloat(20).generateSizeForScreen)
-        
-        subTitleLabel.constraintOutsideTo(.top, titleLabel, CGFloat(5).generateSizeForScreen)
-        subTitleLabel.constraintInsideTo(.leading, titleLabel)
-        subTitleLabel.constraintInsideTo(.trailing, titleLabel)
-        
-        
-        
-        loginStackView.constraintOutsideTo(.top, subTitleLabel, CGFloat(20).generateSizeForScreen)
-        loginStackView.constraintInsideTo(.leading, passwordStackView)
-        loginStackView.constraintInsideTo(.trailing, passwordStackView)
-        
-        
-        passwordStackView.constraintOutsideTo(.top, loginStackView, CGFloat(15).generateSizeForScreen)
-        passwordStackView.constraintInsideTo(.leading, subTitleLabel)
-        passwordStackView.constraintInsideTo(.trailing, subTitleLabel)
-        
-        eyeButton.heightAnchorInSuperview(CGFloat(15).generateSizeForScreen)
-        eyeButton.constraintInsideTo(.centerY, passwordStackView)
-        eyeButton.constraintInsideTo(.trailing, passwordStackView,
-                                     CGFloat(15).generateSizeForScreen)
-        
-        enterButton.constraintOutsideTo(.top, passwordRecoveryButton, CGFloat(20).generateSizeForScreen)
-        enterButton.constraintInsideTo(.leading, passwordStackView)
-        enterButton.constraintInsideTo(.trailing, passwordStackView)
-        enterButton.constraintInsideTo(.height, registerButton)
-        
-        passwordRecoveryButton.constraintOutsideTo(.top, passwordStackView, CGFloat(20).generateSizeForScreen)
-        passwordRecoveryButton.constraintInsideTo(.leading, passwordStackView, 6)
-        
-        newLabel.constraintOutsideTo(.top, enterButton,
-                                     CGFloat(50).generateSizeForScreenByHeight)
-        newLabel.constraintInsideTo(.leading, enterButton)
-        
-        registerButton.constraintOutsideTo(.top, newLabel, CGFloat(10).generateSizeForScreen)
-        registerButton.constraintInsideTo(.leading, enterButton)
-        registerButton.constraintInsideTo(.trailing, enterButton)
-        registerButton.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
+        NSLayoutConstraint.activate([
+            
+           logoImage.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 30),
+           logoImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 110),
+           logoImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen),
+           logoImage.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+           
+           titleLabel.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 20),
+           titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 30),
+           
+           subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+           subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           
+           loginStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 20),
+           loginStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           loginStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           
+           passwordStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 15),
+           passwordStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           
+           eyeButton.heightAnchor.constraint(equalToConstant: 15),
+           eyeButton.centerYAnchor.constraint(equalTo: passwordStackView.centerYAnchor),
+           eyeButton.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor, constant: -15),
+           
+           passwordRecoveryButton.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor, constant: 20),
+           passwordRecoveryButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           
+           enterButton.topAnchor.constraint(equalTo: passwordRecoveryButton.bottomAnchor, constant: 20),
+           enterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           enterButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           enterButton.heightAnchor.constraint(equalToConstant: 50),
+           
+           
+           newLabel.topAnchor.constraint(equalTo: enterButton.bottomAnchor, constant: 50),
+           newLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           
+           registerButton.topAnchor.constraint(equalTo: newLabel.bottomAnchor, constant: 10),
+           registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+           registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           registerButton.heightAnchor.constraint(equalToConstant: 50)
+
+        ])
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == loginTextField{
             passwordTextField.isHidden = false
@@ -505,7 +510,7 @@ extension UIStackView {
     }
 }
 
-extension LoginView: LoginViewModelProtocol {
+extension LoginView: LoginViewModelProtocol {    
     func showCustomAlert(message: String) {
         self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
                                    message: message,

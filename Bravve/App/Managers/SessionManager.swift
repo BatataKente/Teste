@@ -28,18 +28,18 @@ class SessionManager {
     ///   - payment_type_id: Optional argument to pass the payment_type_id to the API endpoint
     ///   - endpoint: The API endpoint as a member of the Endpoint Enum
     ///   - completionHandler: Completion handler to use the result of the API call
-    func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?, [T]?) -> Void) {
+    func getDataArray<T: Codable>(id: String = "", phoneNumber: String = "", uuid: String = "", picture: String = "", picture_uuid: String = "", payment_type_id: String = "", queryType: String = "", endpoint: EndPoints, completionHandler: @escaping (Int?, Error?, [T]?) -> Void) {
         
         guard let accessToken = accessToken else { return }
         
         guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
         
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)"
+            "Authorization": "\(accessToken)"
         ]
         
         AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
-//            print(response.debugDescription)
+            //print(response.debugDescription)
             if let data = response.value {
                 completionHandler(response.response?.statusCode, nil, data)
             } else {
@@ -167,7 +167,7 @@ class SessionManager {
         guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [T].self) { response in
-            print(" KaueTeste \(response.debugDescription)")
+     
             if let data = response.value {
                 completionHandler(response.response?.statusCode, response.error, data)
             } else {
@@ -279,13 +279,13 @@ class SessionManager {
             }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-//                print(response.debugDescription)
+                print(response.debugDescription)
                 if let statusCode = response.response?.statusCode {
                     completionHandler(statusCode, response.error)
                 } else {
@@ -450,6 +450,8 @@ class SessionManager {
             
         case .reservationsHours: urlEndpoint = EndPoints.reservationsHours.rawValue
         case .reservations: urlEndpoint = EndPoints.reservations.rawValue
+        case .reservationsOpen: urlEndpoint = EndPoints.reservationsOpen.rawValue
+        case .reservationshistory: urlEndpoint = EndPoints.reservationshistory.rawValue
         case .reservationsId: urlEndpoint = EndPoints.reservations.rawValue + "\(id)"
         case .reservationsCancellations: urlEndpoint = EndPoints.reservationsCancellations.rawValue
         case .reservationsCheckins: urlEndpoint = EndPoints.reservationsCheckins.rawValue

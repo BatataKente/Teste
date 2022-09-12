@@ -9,9 +9,16 @@ import UIKit
 
 class PhoneView: UIViewController {
     
+    
+    //MARK: - var and let
     var userToRegister: UserParameters
     
+    private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
+    private let registerButton = UIButton()
+    
+    
+    //MARK: - init
     init(_ userToRegister: UserParameters = UserParameters(name: nil,
                                                            phone_number: nil,
                                                            email: nil,
@@ -21,12 +28,10 @@ class PhoneView: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
     }
-   
     
-    private let ways = [UIImageView(), UIImageView(), UIImageView()]
     
-    private let registerButton = UIButton()
     
+    //MARK: - progressBar
     private lazy var buttons: [UIButton] = {
         
         let buttons = createProgressBarButtonsWithoutActions([IconsBravve.userGray.rawValue,
@@ -46,38 +51,37 @@ class PhoneView: UIViewController {
     }()
     //MARK: Elements
     private let infoLabel: UILabel = {
-        
-        let infoLabel = UILabel()
-        infoLabel.font = UIFont(name: FontsBravve.light.rawValue,
-                                size: CGFloat(16).generateSizeForScreen)
-        infoLabel.numberOfLines = 0
-        infoLabel.textAlignment = .center
-        
-        return infoLabel
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.light.rawValue,size: 16)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
+    
+    //MARK: - customShaddow
     private let customShaddow: UIView = {
-        
-        let customShaddow = UIView()
-        customShaddow.layer.cornerRadius = 8
-        customShaddow.isHidden = true
-        
-        return customShaddow
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     //MARK: viewElements
-     lazy var viewElements: (rightStackView: UIStackView,
-                                    leftStackView: UIStackView,
-                                    rightTextField: UITextField,
-                                    rightLabel: UILabel,
-                                    alertButton: UIButton,
-                                    ddiChoseLabel: UILabel,
-                                    ddisLabel: UILabel,
-                                    ddisButton: UIButton) = {
+    lazy var viewElements: (rightStackView: UIStackView,
+                            leftStackView: UIStackView,
+                            rightTextField: UITextField,
+                            rightLabel: UILabel,
+                            alertButton: UIButton,
+                            ddiChoseLabel: UILabel,
+                            ddisLabel: UILabel,
+                            ddisButton: UIButton) = {
         
-        let stackVerticalMargins: CGFloat = CGFloat(20).generateSizeForScreen
-        let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
-        let font = UIFont(name: FontsBravve.medium.rawValue,
-                          size: CGFloat(15).generateSizeForScreen)
+        let stackVerticalMargins: CGFloat = 20
+        let stackHorizontalMargins: CGFloat = 15
+        let font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
+        
         
         let ddisLabel = UILabel()
         ddisLabel.text = "DDI"
@@ -100,6 +104,8 @@ class PhoneView: UIViewController {
                                                    right: 0)
         
         let ddisButton = UIButton()
+        ddisButton.translatesAutoresizingMaskIntoConstraints = false
+        
         
         let handler = {(action: UIAction) in
             
@@ -113,8 +119,11 @@ class PhoneView: UIViewController {
         
         ddisButton.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue),
                             for: .normal)
+        ddisButton.translatesAutoresizingMaskIntoConstraints = false
+        
         
         let rightLabel = UILabel()
+        
         
         let rightTextField = UITextField()
         rightTextField.font = font
@@ -156,7 +165,9 @@ class PhoneView: UIViewController {
                 ddisLabel: ddisLabel,
                 ddisButton: ddisButton)
     }()
-    //MARK: dropDown
+    
+    
+    //MARK: ddisDropDown
     private lazy var ddisDropDown: UIScrollView = {
         
         let ddisDropDown = UIScrollView()
@@ -168,8 +179,7 @@ class PhoneView: UIViewController {
             button.setTitle(ddi, for: .normal)
             button.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
                                  for: .normal)
-            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
-                                             size: CGFloat(15).generateSizeForScreen)
+            button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
             
             let handler = {(action: UIAction) in
                 
@@ -178,8 +188,7 @@ class PhoneView: UIViewController {
             }
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
-            button.titleLabel?.constraintInsideTo(.leading, button,
-                                                  CGFloat(15).generateSizeForScreen)
+            button.titleLabel?.constraintInsideTo(.leading, button, 15)
             
             ddis.append(button)
         }
@@ -188,32 +197,35 @@ class PhoneView: UIViewController {
         
         return ddisDropDown
     }()
-    //MARK: StackView
+    
+    
+    //MARK: registerStackView
     private lazy var registerStackView: UIStackView = {
         
-        let registerStackView = UIStackView(arrangedSubviews: [viewElements.leftStackView,
-                                                               viewElements.rightStackView])
-        registerStackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
-        registerStackView.layer.borderWidth = 1
-        registerStackView.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
-        registerStackView.layer.cornerRadius = 8
-        registerStackView.spacing = CGFloat(30).generateSizeForScreen
-        
-        return registerStackView
+        let stack = UIStackView(arrangedSubviews: [viewElements.leftStackView,
+                                                   viewElements.rightStackView])
+        stack.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
+        stack.layer.borderWidth = 1
+        stack.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
+        stack.layer.cornerRadius = 8
+        stack.spacing = 30
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
+    //MARK: - registerFailLabel
     private let registerFailLabel: UILabel = {
-        
-        let registerFailLabel = UILabel()
-        registerFailLabel.font = UIFont(name: FontsBravve.regular.rawValue,
-                                        size: CGFloat(11).generateSizeForScreen)
-        registerFailLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
-        
-        return registerFailLabel
+        let label = UILabel()
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
+        label.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
+    
+    
     //MARK: touchesBegan
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        view.endEditing(true)
         ddisDropDown.frame.size = .zero
     }
     
@@ -224,17 +236,20 @@ class PhoneView: UIViewController {
         
         setupView()
         setupDefaults()
-        setupTargets()
         setupConstraints()
         
         super.viewDidLoad()
         
         
+        let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
+        registerStackView.addGestureRecognizer(stackViewTap)
+        
     }
     
+    //MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if flag == 1{
+        if Flags.shared.flag == 1{
             self.stackViewTapped()
             self.viewElements.rightTextField.becomeFirstResponder()
             self.viewElements.rightTextField.text = UserDefaults.standard.string(forKey: "Number")
@@ -259,7 +274,7 @@ class PhoneView: UIViewController {
         
         view.createRegisterCustomBar(progressBarButtons: buttons) {_ in
             
-            if flag == 0{
+            if Flags.shared.flag == 0{
                 if let nomeView = self.presentingViewController,
                    let loginView = nomeView.presentingViewController {
                     
@@ -281,52 +296,54 @@ class PhoneView: UIViewController {
         ways[0].setWayToDefault(.wayEmail)
         ways[1].setWayToDefault(.wayCell)
     }
+    
+    
     //MARK: setupConstraints
     private func setupConstraints() {
         
-        infoLabel.constraintInsideTo(.top,
-                                     view,
-                                     CGFloat(250).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.leading,
-                                     view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.trailing,
-                                     view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
+        ways[0].translatesAutoresizingMaskIntoConstraints = false
+        ways[1].translatesAutoresizingMaskIntoConstraints = false
+        ways[2].translatesAutoresizingMaskIntoConstraints = false
         
-        registerStackView.constraintOutsideTo(.top,
-                                              infoLabel,
-                                              CGFloat(60).generateSizeForScreen)
-        registerStackView.constraintInsideTo(.leading, infoLabel)
-        registerStackView.constraintInsideTo(.trailing, infoLabel)
-        registerStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
         
-        viewElements.ddisButton.constraintInsideTo(.centerY, registerStackView)
-        viewElements.ddisButton.constraintInsideTo(.leading, registerStackView, CGFloat(50).generateSizeForScreen)
+        NSLayoutConstraint.activate([
+            
+            infoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 250),
+            infoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            infoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -40),
+            
+            registerStackView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor,constant: 60),
+            registerStackView.leadingAnchor.constraint(equalTo: infoLabel.leadingAnchor),
+            registerStackView.trailingAnchor.constraint(equalTo: infoLabel.trailingAnchor),
+            registerStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            viewElements.ddisButton.centerYAnchor.constraint(equalTo: registerStackView.centerYAnchor),
+            viewElements.ddisButton.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor, constant: 50),
+            
+            registerFailLabel.topAnchor.constraint(equalTo: registerStackView.bottomAnchor, constant: 5),
+            registerFailLabel.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor, constant: 15),
+            
+            customShaddow.topAnchor.constraint(equalTo: registerStackView.topAnchor),
+            customShaddow.leadingAnchor.constraint(equalTo: registerStackView.leadingAnchor),
+            customShaddow.trailingAnchor.constraint(equalTo: registerStackView.trailingAnchor),
+            customShaddow.bottomAnchor.constraint(equalTo: registerStackView.bottomAnchor,
+                                                  constant: Ride.up.rawValue),
+            
+            viewElements.leftStackView.widthAnchor.constraint(equalToConstant: 50),
+            viewElements.ddisButton.widthAnchor.constraint(equalToConstant: 50),
+            
+        ])
         
-        registerFailLabel.constraintOutsideTo(.top, registerStackView,
-                                              CGFloat(5).generateSizeForScreen)
-        registerFailLabel.constraintInsideTo(.leading, registerStackView,
-                                             CGFloat(15).generateSizeForScreen)
         
-        customShaddow.constraintInsideTo(.top, registerStackView)
-        customShaddow.constraintInsideTo(.leading, registerStackView)
-        customShaddow.constraintInsideTo(.trailing, registerStackView)
-        customShaddow.constraintTo(.bottom, registerStackView, Ride.up.rawValue)
-        
-        viewElements.leftStackView.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
-        viewElements.ddisButton.widthAnchorInSuperview(30)
-    }
-    //MARK: setupTargets
-    private func setupTargets() {
-        
-        let stackViewTap = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
-        registerStackView.addGestureRecognizer(stackViewTap)
     }
     
     
     //MARK: stackViewTapped
     @objc func stackViewTapped() {
+        viewElements.rightLabel.font = UIFont(name: FontsBravve.light.rawValue, size: 11)
+        viewElements.rightTextField.becomeFirstResponder()
+        viewElements.rightTextField.isHidden = false
+        
         
         let stackVerticalMargins: CGFloat = CGFloat(10).generateSizeForScreen
         let stackHorizontalMargins: CGFloat = CGFloat(15).generateSizeForScreen
@@ -362,13 +379,13 @@ class PhoneView: UIViewController {
     //MARK: changeScreen
     @objc func changeScreen() {
         
-//        userToRegister.phone_number = viewElements.rightTextField.text ?? ""
+        //        userToRegister.phone_number = viewElements.rightTextField.text ?? ""
         UserDefaults.standard.set(viewElements.rightTextField.text, forKey: "Number")
         
-        if flag == 0{
-        let emailView = EmailView(userToRegister)
-        emailView.modalPresentationStyle = .fullScreen
-        present(emailView, animated: false)
+        if Flags.shared.flag == 0{
+            let emailView = EmailView(userToRegister)
+            emailView.modalPresentationStyle = .fullScreen
+            present(emailView, animated: false)
         } else{
             
             
@@ -475,3 +492,4 @@ extension PhoneView: UIScrollViewDelegate {
         }
     }
 }
+

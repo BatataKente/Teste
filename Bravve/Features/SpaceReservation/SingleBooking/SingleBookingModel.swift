@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct ReservationList {
+    
+    static var reservationList: [ReservationDate] = []
+}

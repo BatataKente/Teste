@@ -13,6 +13,7 @@ struct ForgotPasswordParameters: Codable {
 }
 
 struct ConfirmForgotPasswordParameters: Codable {
+    var email: String
     var new_password: String
     var code: String
 }

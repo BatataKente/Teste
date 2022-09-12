@@ -24,6 +24,7 @@ class BookingHistoryView: UIViewController {
     
     private lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
     
@@ -56,8 +57,13 @@ class BookingHistoryView: UIViewController {
         tabBar.selectedItem = tabBar.items?[1]
         
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") { _ in
-            
+            if Flags.shared.flagReservation == 2 {
+                let vc = HomeClosedView()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }else{
             self.dismiss(animated: true)
+            }
         }
         
         setConstraints()
@@ -71,14 +77,16 @@ class BookingHistoryView: UIViewController {
     }
     
     func setConstraints() {
-        myTableView.constraintOutsideTo(.top, customBar, CGFloat(13).generateSizeForScreen)
-        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        myTableView.constraintOutsideTo(.bottom, tabBar)
-        
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        NSLayoutConstraint.activate([
+            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: CGFloat(13).generateSizeForScreen),
+            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  CGFloat(20).generateSizeForScreen),
+            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            myTableView.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 }
 
@@ -91,6 +99,7 @@ extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BookingHistoryCustomCell
         cell?.delegate = self
+        cell?.selectionStyle = .none
         return cell ?? UITableViewCell()
     }
 }
