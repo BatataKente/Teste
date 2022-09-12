@@ -332,10 +332,11 @@ class HomeOpenView: UIViewController {
     private func setupConstraints() {
         
 //        homeOpenViewModel.removeMasks(of: view)
-        for subview in view.subviews {
-            
-            subview.translatesAutoresizingMaskIntoConstraints = false
-        }
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        customBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         // scrollView.topAnchor.contraint(equalTo: self.view.contentLayoutGuide.topAchor),
         

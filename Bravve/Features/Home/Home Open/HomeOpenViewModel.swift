@@ -148,8 +148,11 @@ class HomeOpenViewModel {
                 stateButton.addAction(UIAction(handler: stateHandler), for: .touchUpInside)
                 stateButton.titleLabel?.constraintInsideTo(.leading, stateButton,
                                                            CGFloat(15).generateSizeForScreen)
+                
                 stateButtons.append(stateButton)
             }
+            
+            
             self.delegate?.setupLeftDropDown(stateButtons)
         }
         
