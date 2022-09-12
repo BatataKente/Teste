@@ -9,6 +9,61 @@ import UIKit
     
 //Extensions related to creation of view elements on UIViewController
 extension UIViewController {
+    
+/// This function create stackViews with buttons, but organize a custom number of buttons(by) in every stack created
+/// - Parameters:
+///   - buttons: the buttons
+///   - by: number of buttons by line(must be > 0)
+/// - Returns: array of stackView
+func createStackViews(_ buttons: [UIButton], by: Int = 3) -> [UIStackView] {
+
+    let createStackView = {(_ views: [UIView]) -> UIStackView in
+
+        let stackView = UIStackView(arrangedSubviews: views)
+
+        stackView.spacing = 4
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+
+        return stackView
+    }
+
+    var stackViews = [UIStackView]()
+    
+    if by == 0 {return stackViews}
+    if buttons.isEmpty {return stackViews}
+    if buttons.count < by {
+
+        stackViews.append(createStackView(buttons))
+
+        return stackViews
+    }
+
+    var buttonsSample: [UIButton] = []
+
+    for i in 0...buttons.count%by {
+
+        buttonsSample.append(buttons[i])
+    }
+
+    stackViews.append(createStackView(buttonsSample))
+
+    for i in stride(from: buttons.count%by,
+                    to: buttons.count - 1,
+                    by: by) {
+
+        var buttonsSample: [UIButton] = []
+
+        for j in 0...by-1 {
+
+            buttonsSample.append(buttons[i+j])
+        }
+
+        stackViews.append(createStackView(buttonsSample))
+    }
+
+    return stackViews
+}
 
 /// This is a function created with the aim of generating buttons in the capsule configuration
 /// - Parameters:
