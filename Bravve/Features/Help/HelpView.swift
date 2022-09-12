@@ -1310,13 +1310,13 @@ class HelpViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            self.scrollView.topAnchor.constraint(equalTo: self.customBar.topAnchor),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.scrollView.topAnchor.constraint(equalTo: self.customBar.bottomAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.tabBar.topAnchor),
 
             self.uiView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
             self.uiView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
-            self.uiView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 73),
-            self.uiView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -50),
+            self.uiView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            self.uiView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
 
             self.headerView.topAnchor.constraint(equalTo: self.uiView.topAnchor),
             self.headerView.leadingAnchor.constraint(equalTo: self.uiView.leadingAnchor),

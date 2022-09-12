@@ -1171,21 +1171,11 @@ extension ReservationsThreeViewController: ReservationsViewModelProtocol {
     func goToNextScreen() {
        
         let reservationcompletedview = ReservationCompletedView()
+        reservationcompletedview.spaceDetails = spaceDetail
         reservationcompletedview.modalPresentationStyle = .fullScreen
         present(reservationcompletedview, animated: true)
     }
 
 }
 
-//MARK: - hideKeyboardWhenTappedAround
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
+

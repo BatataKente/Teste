@@ -9,6 +9,12 @@ import UIKit
 
 class PasswordRecoveryPassword: UIViewController {
     
+    //MARK: - prefersStatusBarHidden
+    override var prefersStatusBarHidden: Bool {
+        true
+    }
+    
+    //MARK: - var and let
     var passwordEyeSlash = false
     var confirmPasswordEyeSlash = false
     var containsUppercased = false
@@ -23,6 +29,8 @@ class PasswordRecoveryPassword: UIViewController {
     
     let registerButton = UIButton()
     
+    
+    //MARK: - buttons
     private lazy var buttons: [UIButton] = {
         let buttons =  createProgressBarButtonsWithoutActions([
             IconsBravve.emailGray.rawValue,
@@ -40,6 +48,8 @@ class PasswordRecoveryPassword: UIViewController {
         return buttons
     }()
     
+    
+    //MARK: - sectionLabel
     private let sectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Digite e confirme sua nova senha!"
@@ -50,7 +60,27 @@ class PasswordRecoveryPassword: UIViewController {
         return label
     }()
     
+    //MARK: - leftStackView
+    private lazy var leftStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [passswordCharactersStackView, capitalizedLetterStackView, regularCharactersStackView])
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
+    //MARK: - rightStackView
+    private lazy var rightStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [numericCharactersStackView, specialCharactersStackView, samePasswordStackView])
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    //MARK: - textFieldsClass
     let passwordTextFieldClass = CustomTextField(placeHolderText: "Senha", buttonImageName: ButtonsBravve.eyeClose.rawValue)
     private lazy var passwordStackView = passwordTextFieldClass.createStackView()
     
@@ -66,15 +96,7 @@ class PasswordRecoveryPassword: UIViewController {
     let regularCharactersBulletPoint = CustomBulletPoint(labelText: "1 letra minúscula")
     private lazy var regularCharactersStackView = regularCharactersBulletPoint.createBulletPointStackView()
     
-    private lazy var leftStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [passswordCharactersStackView, capitalizedLetterStackView, regularCharactersStackView])
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
+
     let numericCharactersBulletPoint = CustomBulletPoint(labelText: "1 dígito numérico")
     private lazy var numericCharactersStackView = numericCharactersBulletPoint.createBulletPointStackView()
     
@@ -84,29 +106,28 @@ class PasswordRecoveryPassword: UIViewController {
     let samePasswordBulletPoint = CustomBulletPoint(labelText: "Senhas coincidem")
     private lazy var samePasswordStackView = samePasswordBulletPoint.createBulletPointStackView()
     
-    private lazy var rightStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [numericCharactersStackView, specialCharactersStackView, samePasswordStackView])
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
     
+    
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.setToDefaultBackgroundColor()
         
-        view.addSubviews([way, sectionLabel, passwordTextFieldClass.shadow, passwordStackView, confirmPasswordTextFieldClass.shadow, confirmPasswordStackView, leftStackView, rightStackView, registerButton])
+        view.addSubviews([way,
+                          sectionLabel,
+                          passwordTextFieldClass.shadow,
+                          passwordStackView,
+                          confirmPasswordTextFieldClass.shadow,
+                          confirmPasswordStackView,
+                          leftStackView,
+                          rightStackView,
+                          registerButton])
         
         setupDefaults()
         setupConstraints()
+        hideKeyboardWhenTappedAround()
         
         
         passwordTextFieldClass.textField.delegate = self
@@ -134,47 +155,61 @@ class PasswordRecoveryPassword: UIViewController {
         registerButton.setToBottomButtonKeyboardDefault("Continuar")
     }
     
+
     
-    /// Set the constraints of the view
+    //MARK: - setupConstraints
     private func setupConstraints() {
         
-        sectionLabel.constraintInsideTo(.top, view, CGFloat(250).generateSizeForScreen)
-        sectionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        sectionLabel.constraintInsideTo(.width, view.safeAreaLayoutGuide, CGFloat(331).generateSizeForScreen)
+        passwordStackView.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextFieldClass.shadow.translatesAutoresizingMaskIntoConstraints = false
+        confirmPasswordStackView.translatesAutoresizingMaskIntoConstraints = false
+        confirmPasswordTextFieldClass.shadow.translatesAutoresizingMaskIntoConstraints = false
         
-        passwordStackView.constraintOutsideTo(.top, sectionLabel, CGFloat(15).generateSizeForScreen)
-        passwordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        passwordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
-        passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+        NSLayoutConstraint.activate([
         
-        passwordTextFieldClass.shadow.constraintInsideTo(.top, passwordStackView)
-        passwordTextFieldClass.shadow.constraintInsideTo(.leading, passwordStackView)
-        passwordTextFieldClass.shadow.constraintInsideTo(.trailing, passwordStackView)
-        passwordTextFieldClass.shadow.constraintTo(.bottom, passwordStackView, CGFloat(1).generateSizeForScreen)
+            sectionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 221),
+            sectionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            sectionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            
+            passwordStackView.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor, constant: 15),
+            passwordStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            passwordStackView.heightAnchor.constraint(equalToConstant: 60),
         
-        passwordTextFieldClass.textField.widthAnchor.constraint(equalTo: passwordStackView.widthAnchor, multiplier: 0.8).isActive = true
-
-        confirmPasswordStackView.constraintOutsideTo(.top, passwordStackView, CGFloat(10).generateSizeForScreen)
-        confirmPasswordStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        confirmPasswordStackView.widthAnchorInSuperview(CGFloat(331).generateSizeForScreen)
-        confirmPasswordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
+            passwordTextFieldClass.shadow.topAnchor.constraint(equalTo: passwordStackView.topAnchor),
+            passwordTextFieldClass.shadow.leadingAnchor.constraint(equalTo: passwordStackView.leadingAnchor),
+            passwordTextFieldClass.shadow.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor),
+            passwordTextFieldClass.shadow.bottomAnchor.constraint(equalTo: passwordStackView.bottomAnchor),
+            
+            passwordTextFieldClass.textField.widthAnchor.constraint(equalTo: passwordStackView.widthAnchor, multiplier: 0.8),
+            
+            
+            confirmPasswordStackView.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor, constant: 10),
+            confirmPasswordStackView.leadingAnchor.constraint(equalTo: passwordStackView.leadingAnchor),
+            confirmPasswordStackView.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor),
+            confirmPasswordStackView.heightAnchor.constraint(equalToConstant: 60),
+            
+            
+            confirmPasswordTextFieldClass.shadow.topAnchor.constraint(equalTo: confirmPasswordStackView.topAnchor),
+            confirmPasswordTextFieldClass.shadow.leadingAnchor.constraint(equalTo: confirmPasswordStackView.leadingAnchor),
+            confirmPasswordTextFieldClass.shadow.trailingAnchor.constraint(equalTo: confirmPasswordStackView.trailingAnchor),
+            confirmPasswordTextFieldClass.shadow.bottomAnchor.constraint(equalTo: confirmPasswordStackView.bottomAnchor),
+            
+            
+            confirmPasswordTextFieldClass.textField.widthAnchor.constraint(equalTo: confirmPasswordStackView.widthAnchor, multiplier: 0.8),
+            
+            
+            leftStackView.topAnchor.constraint(equalTo: confirmPasswordStackView.bottomAnchor, constant: 10),
+            leftStackView.leadingAnchor.constraint(equalTo: confirmPasswordStackView.leadingAnchor),
+            leftStackView.heightAnchor.constraint(equalToConstant: 40),
+            
+            rightStackView.topAnchor.constraint(equalTo: confirmPasswordStackView.bottomAnchor, constant: 10),
+            rightStackView.trailingAnchor.constraint(equalTo: confirmPasswordStackView.trailingAnchor),
+            rightStackView.heightAnchor.constraint(equalToConstant: 40),
+            
+        ])
         
-        confirmPasswordTextFieldClass.shadow.constraintInsideTo(.top, confirmPasswordStackView)
-        confirmPasswordTextFieldClass.shadow.constraintInsideTo(.leading, confirmPasswordStackView)
-        confirmPasswordTextFieldClass.shadow.constraintInsideTo(.trailing, confirmPasswordStackView)
-        confirmPasswordTextFieldClass.shadow.constraintTo(.bottom, confirmPasswordStackView, CGFloat(1).generateSizeForScreen)
 
-        confirmPasswordTextFieldClass.textField.widthAnchor.constraint(equalTo: confirmPasswordStackView.widthAnchor, multiplier: 0.8).isActive = true
-
-        leftStackView.constraintOutsideTo(.top, confirmPasswordStackView, CGFloat(10).generateSizeForScreen)
-        leftStackView.constraintInsideTo(.leading, confirmPasswordStackView)
-        leftStackView.widthAnchorInSuperview(CGFloat(150).generateSizeForScreen)
-        leftStackView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
-
-        rightStackView.constraintOutsideTo(.top, confirmPasswordStackView, CGFloat(10).generateSizeForScreen)
-        rightStackView.constraintInsideTo(.trailing, confirmPasswordStackView)
-        rightStackView.widthAnchorInSuperview(CGFloat(100).generateSizeForScreen)
-        rightStackView.heightAnchorInSuperview(CGFloat(40).generateSizeForScreen)
         
     }
 }
