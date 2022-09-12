@@ -102,7 +102,6 @@ class EditProfileViewModel {
 
                 buttons[i].isSelected = !buttons[i].isSelected
             }
-
             buttons[i].addAction(UIAction(handler: handler), for: .touchUpInside)
         }
         
@@ -445,15 +444,17 @@ class EditProfileViewModel {
     }
     
     /// This function create stackViews with buttons, but organize two buttons in every stack created, and one if number of buttons is odd
-    /// - Parameter buttons: buttons
+    /// - Parameters:
+    ///   - buttons: the buttons
+    ///   - by: number of buttons by line
     /// - Returns: array of stackView
-    func createStackViews(_ buttons: [UIButton]) -> [UIStackView] {
+    func createStackViews(_ buttons: [UIButton], by: Int = 3) -> [UIStackView] {
         
         let createStackView = {(_ views: [UIView]) -> UIStackView in
             
             let stackView = UIStackView(arrangedSubviews: views)
             
-            stackView.spacing = CGFloat(4).generateSizeForScreen
+            stackView.spacing = 4
             stackView.axis = .horizontal
             stackView.distribution = .fillProportionally
             
@@ -461,8 +462,6 @@ class EditProfileViewModel {
         }
         
         var stackViews = [UIStackView]()
-        
-        let by = 3
         
         if buttons.isEmpty {return stackViews}
         else if buttons.count < by {
