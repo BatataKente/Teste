@@ -10,19 +10,19 @@ import UIKit
 
 class ReservationCompletedView: UIViewController {
     
+    var spaceDetails: SpaceDetail?
+    
     //MARK: - text array
-    private var spaceDetailArray = ["Aceita animais de estimação",
-                                    "Impressoras empresariais",
-                                    "Cafeteria",
-                                    "Espaço ao ar livre",
-                                    "Estacionamento",
-                                    "Bicicletário",
-                                    "Farmácia próxima"]
+    private var spaceDetailArray: [String] {
+        reservationCompletedViewModel.getSpaceFacilities(spaceDetails: spaceDetails)
+    }
     
     //MARK: - variables to inherit values
     private var clientName = "Ana"
     private var locationAddress = "Av. São João, Cj. Boulevard, nº900, Sâo Paulo. SP 06020-010, BR"
-    private var schedulingData = "Segunda: 08:00h - 17:00h"
+    private var schedulingData: [String] {
+        reservationCompletedViewModel.getReservationArray()
+    }
     
     //MARK: - buttonReservation
     private let buttonReservation = UIButton()
@@ -106,7 +106,7 @@ class ReservationCompletedView: UIViewController {
         let locationLabel = UILabel()
         locationLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(12).generateSizeForScreen)
         locationLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-        locationLabel.text = "\(locationAddress)"
+        locationLabel.text = "\(spaceDetails?.partner_site_address?.address?.street ?? ""), \(spaceDetails?.partner_site_address?.address?.neighborhood ?? ""), nº\(spaceDetails?.partner_site_address?.address?.street_number ?? 0), \(spaceDetails?.partner_site_address?.address?.city_name ?? ""). \(spaceDetails?.partner_site_address?.address?.state_name ?? "") \(spaceDetails?.partner_site_address?.address?.postal_code ?? ""), BR"
         locationLabel.numberOfLines = 0
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         return locationLabel
@@ -117,10 +117,32 @@ class ReservationCompletedView: UIViewController {
         let schedulingLabel = UILabel()
         schedulingLabel.font = UIFont(name: "Ubuntu-Regular", size: CGFloat(12).generateSizeForScreen)
         schedulingLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-        schedulingLabel.text = "Sua reserva está marcada para \(schedulingData)"
+        schedulingLabel.text = "Sua reserva está marcada para "
         schedulingLabel.numberOfLines = 0
         schedulingLabel.translatesAutoresizingMaskIntoConstraints = false
         return schedulingLabel
+    }()
+    
+    private lazy var datesStack: UIStackView = {
+        var views: [UIView] = []
+            for element in schedulingData {
+                views.append(reservationCompletedViewModel.createLabel(placeHolderValue: element))
+        }
+        let dateStack = UIStackView(arrangedSubviews:  views)
+        dateStack.axis = .vertical
+        dateStack.distribution = .fillEqually
+        dateStack.spacing = 1
+        dateStack.alignment = .leading
+        return dateStack
+    }()
+    
+    private lazy var schedulingStack: UIStackView = {
+        let schedulingStack = UIStackView(arrangedSubviews: [schedulingIcon, schedulingLabel, datesStack])
+        schedulingStack.distribution = .fill
+        schedulingStack.alignment = .top
+        schedulingStack.spacing = 5
+        schedulingStack.translatesAutoresizingMaskIntoConstraints = false
+        return schedulingStack
     }()
     
     //MARK: - placeDetailLabel
@@ -190,16 +212,19 @@ class ReservationCompletedView: UIViewController {
                                   info1Label,
                                   locationDetailLabel,
                                   locationLabel,
-                                  schedulingLabel,
+                                  schedulingStack,
                                   placeDetailLabel,
                                   lineView,
                                   locationIcon,
-                                  schedulingIcon,
                                   labelsStack])
         self.buttonReservation.setToBottomButtonKeyboardDefault("Ir para Minhas Reservas", backgroundColor: .buttonPink)
         iconsConstraints()
         viewsConstraints()
         viewElementsConstraints()
+        
+        reservationCompletedViewModel.delegate = self
+        
+        reservationCompletedViewModel.getUserName()
         
         buttonReservation.addTarget(self, action: #selector(tapButtonReservation), for: .touchUpInside)
     }
@@ -208,9 +233,8 @@ class ReservationCompletedView: UIViewController {
     //MARK: - tapButtonReservation
     @objc func tapButtonReservation() {
         Flags.shared.flagReservation = 1
-        let vc = MyBookingView()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        reservationCompletedViewModel.updateReservationList()
+        
     }
     
     //MARK: - Constraints
@@ -248,9 +272,9 @@ class ReservationCompletedView: UIViewController {
         locationLabel.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor, constant: CGFloat(17).generateSizeForScreen).isActive = true
         locationLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
         
-        schedulingLabel.topAnchor.constraint(equalTo: schedulingIcon.topAnchor).isActive = true
-        schedulingLabel.leadingAnchor.constraint(equalTo: schedulingIcon.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
-        schedulingLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
+        schedulingStack.topAnchor.constraint(equalTo: locationIcon.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        schedulingStack.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor).isActive = true
+        schedulingStack.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
         
         placeDetailLabel.topAnchor.constraint(equalTo: schedulingLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         placeDetailLabel.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
@@ -286,18 +310,18 @@ class ReservationCompletedView: UIViewController {
         locationIcon.heightAnchor.constraint(equalToConstant: CGFloat(14).generateSizeForScreen).isActive = true
         locationIcon.widthAnchor.constraint(equalToConstant: CGFloat(10.49).generateSizeForScreen).isActive = true
         
-        schedulingIcon.topAnchor.constraint(equalTo: locationIcon.bottomAnchor, constant: CGFloat(34).generateSizeForScreen).isActive = true
-        schedulingIcon.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor).isActive = true
         schedulingIcon.heightAnchor.constraint(equalToConstant: CGFloat(14).generateSizeForScreen).isActive = true
         schedulingIcon.widthAnchor.constraint(equalToConstant: CGFloat(14).generateSizeForScreen).isActive = true
         
         locationLabel.topAnchor.constraint(equalTo: locationIcon.topAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor, constant: CGFloat(17).generateSizeForScreen).isActive = true
         locationLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
+ 
+        schedulingStack.topAnchor.constraint(equalTo: locationIcon.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        schedulingStack.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor).isActive = true
+        schedulingStack.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor, constant: CGFloat(-26).generateSizeForScreen).isActive = true
         
-        schedulingLabel.topAnchor.constraint(equalTo: schedulingIcon.topAnchor).isActive = true
-        schedulingLabel.leadingAnchor.constraint(equalTo: schedulingIcon.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
-        schedulingLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor).isActive = true
+        datesStack.widthAnchor.constraint(equalTo: schedulingStack.widthAnchor, multiplier: 0.4).isActive = true
         
         placeDetailLabel.topAnchor.constraint(equalTo: schedulingLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         placeDetailLabel.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
@@ -309,4 +333,16 @@ class ReservationCompletedView: UIViewController {
         labelsStack.bottomAnchor.constraint(equalTo: viewToScroll.bottomAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
     }
     
+}
+
+extension ReservationCompletedView: ReservationCompletedViewModelProtocol {
+    func changeUserNameTo(_ name: String) {
+        titleLabel.text = "Parabéns, \(name)!"
+    }
+    
+    func goToNextScreen() {
+        let vc = MyBookingView()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
 }

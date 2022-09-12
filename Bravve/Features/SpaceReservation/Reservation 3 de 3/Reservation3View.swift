@@ -1171,6 +1171,7 @@ extension ReservationsThreeViewController: ReservationsViewModelProtocol {
     func goToNextScreen() {
        
         let reservationcompletedview = ReservationCompletedView()
+        reservationcompletedview.spaceDetails = spaceDetail
         reservationcompletedview.modalPresentationStyle = .fullScreen
         present(reservationcompletedview, animated: true)
     }
