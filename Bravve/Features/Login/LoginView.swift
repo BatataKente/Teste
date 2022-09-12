@@ -143,6 +143,7 @@ class LoginView: UIViewController {
     private lazy var eyeButton: UIButton = {
         let view = UIButton(type: .custom)
         view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        view.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -402,14 +403,7 @@ class LoginView: UIViewController {
     //MARK: - tapEyeButton
     @objc func tapEyeButton () {
         eyeButton.isSelected.toggle()
-        
-        if eyeButton.isSelected {
-            passwordTextField.isSecureTextEntry = true
-            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-        } else {
-            passwordTextField.isSecureTextEntry  = false
-            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        }
+        passwordTextField.isSecureTextEntry.toggle()
     }
     
     //MARK: - forgotPasswordButtonTapped
