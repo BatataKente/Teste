@@ -298,7 +298,7 @@ extension EditProfileView: EditProfileViewModelProtocol {
         let buttons = editProfileViewModel.setupHobbiesButtons(hobbies,
                                                         createCapsuleButtons(editProfileViewModel.convertHobbiesToString(hobbies), .capsuleButton))
         
-        let hobbiesStacks = editProfileViewModel.createStackViews(buttons)
+        let hobbiesStacks = createStackViews(buttons)
         editProfileViewModel.selectButtons(stacks: hobbiesStacks,
                                            editProfileViewModel.convertHobbiesToString(hobbies),
                                            selectedItems: userHobbies)
@@ -310,7 +310,7 @@ extension EditProfileView: EditProfileViewModelProtocol {
         let buttons = editProfileViewModel.setupInterestsButtons(interests,
                                                                  createCapsuleButtons(editProfileViewModel.convertInterestsToString(interests), .capsuleButton))
         
-        let interestStacks = editProfileViewModel.createStackViews(buttons)
+        let interestStacks = createStackViews(buttons)
         editProfileViewModel.selectButtons(stacks: interestStacks,
                                            editProfileViewModel.convertInterestsToString(interests),
                                            selectedItems: userInterests)

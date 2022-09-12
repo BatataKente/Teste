@@ -369,7 +369,11 @@ class EditProfileViewModel {
                 else {
                     
                     if label.text == "Nome Completo" {self.user.name = textField.text}
-//                    else if label.text == "Senha" {self.user.name = textField.text}
+//                    else if label.text == "Senha" {
+//
+//                        let passwordRecoverySMSView = PasswordRecoverySMSView()
+//                        self.delegate?.presentOthesScreen(passwordRecoverySMSView)
+//                    }
                     else if label.text == "Área" {self.user.occupation?.name = textField.text}
                     else if label.text == "Regime de trabalho" {self.user.work_model?.name = textField.text}
                     
@@ -441,60 +445,6 @@ class EditProfileViewModel {
             return
         }
         return true
-    }
-    
-    /// This function create stackViews with buttons, but organize two buttons in every stack created, and one if number of buttons is odd
-    /// - Parameters:
-    ///   - buttons: the buttons
-    ///   - by: number of buttons by line
-    /// - Returns: array of stackView
-    func createStackViews(_ buttons: [UIButton], by: Int = 3) -> [UIStackView] {
-        
-        let createStackView = {(_ views: [UIView]) -> UIStackView in
-            
-            let stackView = UIStackView(arrangedSubviews: views)
-            
-            stackView.spacing = 4
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
-            
-            return stackView
-        }
-        
-        var stackViews = [UIStackView]()
-        
-        if buttons.isEmpty {return stackViews}
-        else if buttons.count < by {
-            
-            stackViews.append(createStackView(buttons))
-            
-            return stackViews
-        }
-        
-        var buttonsSample: [UIButton] = []
-        
-        for i in 0...buttons.count%by {
-
-            buttonsSample.append(buttons[i])
-        }
-        
-        stackViews.append(createStackView(buttonsSample))
-        
-        for i in stride(from: buttons.count%by,
-                        to: buttons.count - 1,
-                        by: by) {
-            
-            var buttonsSample: [UIButton] = []
-            
-            for j in 0...by-1 {
-                
-                buttonsSample.append(buttons[i+j])
-            }
-            
-            stackViews.append(createStackView(buttonsSample))
-        }
-        
-        return stackViews
     }
     
     /// This functions create and add to superview of a view one or multipleconstraints
