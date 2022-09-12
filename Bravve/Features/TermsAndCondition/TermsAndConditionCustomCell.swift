@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class TermsAndConditionCell: UITableViewCell{
-
+    
     let termsLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -37,11 +37,14 @@ class TermsAndConditionCell: UITableViewCell{
     }
     
     func addConstraints(){
+        
         NSLayoutConstraint.activate ([
-        termsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(17).generateSizeForScreen),
-        termsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(17).generateSizeForScreen),
-        termsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: CGFloat(-5).generateSizeForScreen),
-        termsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: CGFloat(-72).generateSizeForScreen)
+            
+            termsLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17),
+            termsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
+            termsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            termsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -72),
+            
         ])
     }
 }
