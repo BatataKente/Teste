@@ -16,9 +16,8 @@ protocol MyBookingCustomCellDelegate: AnyObject {
 class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
-    let bookingDetailsView = BookingDetailsView()
-    
-    var reservationID: Int? = nil
+
+    private var currentReservationId: Int? = nil
     
     private let cellView: UIView = {
         
@@ -226,11 +225,13 @@ class MyBookingCustomCell: UITableViewCell {
         dateLabel.text = "\(startDate) - \(endDate)"
         hourLabel.text = "\(startHour)h às \(endHour)h"
         spaceTypeLabel.text = reservation.space_type?.name
-        UserReservations.reservationID = reservation.space_id
+       
+        self.currentReservationId = reservation.id
     }
     
     @objc func actionArrowButton() {
         
+        UserReservations.reservationID = currentReservationId
         self.delegate?.presentViewController(BookingDetailsView())
     }
     
