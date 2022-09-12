@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct CheckInResponseMessage: Codable {
+    var message: String?
+}

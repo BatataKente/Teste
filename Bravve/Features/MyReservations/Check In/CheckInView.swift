@@ -13,8 +13,11 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
-    private let customAlertFail: CustomAlert = CustomAlert()
+    private let customAlertCantScan: CustomAlert = CustomAlert()
     private let customAlertSuccess: CustomAlert = CustomAlert()
+    private let customAlertFail: CustomAlert = CustomAlert()
+    private let checkInViewModel = CheckInViewModel()
+    
     
     private lazy var backButton: UIButton = {
         let view = UIButton()
@@ -97,6 +100,8 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
         setupViews()
         setupConstraints()
         addViewTarget()
+        
+        checkInViewModel.delegate = self
     }
     
     private func setupViews(){
@@ -110,12 +115,7 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
     }
     
     @objc private func action(){
-        customAlertSuccess.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-in realizado com sucesso.\nSeja Bem-Vindo ao seu espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: {[weak self] _ in
-            let vc = CheckOutView()
-            vc.modalPresentationStyle = .fullScreen
-            self?.present(vc, animated: true)
-            Flags.shared.flagReservation = 3
-        }), on: self)
+        checkInViewModel.makeCheckin()
     }
     
     private func setupConstraints(){
@@ -162,9 +162,27 @@ class CheckInQrCodeViewController: UIViewController, AVCaptureMetadataOutputObje
     }
     
     @objc func cantScanButtonTapped(){
-        customAlertFail.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Por favor entre em contato com o Community Manager ou outro responsável pelo espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+        customAlertCantScan.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Por favor entre em contato com o Community Manager ou outro responsável pelo espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
             self.dismiss(animated: true)
         }), on: self)
     }
+    
+}
+
+extension CheckInQrCodeViewController: CheckInViewModelProtocol {
+    
+    func showCheckinAlert() {
+        customAlertSuccess.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-in realizado com sucesso.\nSeja Bem-Vindo ao seu espaço.", enterAttributed: "Ok", enterHandler: UIAction(handler: {[weak self] _ in
+            let vc = CheckOutView()
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
+            Flags.shared.flagReservation = 3
+        }), on: self)
+    }
+    
+    func showCheckinAlertFail(message: String) {
+        customAlertFail.showAlert(message: message, enterAttributed: "OK", on: self)
+    }
+    
     
 }
