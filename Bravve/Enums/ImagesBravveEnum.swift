@@ -11,7 +11,6 @@
  */
 
 public enum ImagesBravve: String {
-
     
     case example_1 = "Example1"
     case example_2 = "Example2"
@@ -20,6 +19,7 @@ public enum ImagesBravve: String {
     case homeOpen_2 = "homeOpen2"
     case homeOpen_3 = "homeOpen3"
     case homeOpen_4 = "homeOpen4"
+    case imageNotFound = "imageNotFound"
     case imageReservs_1 = "imageReservs"
     case imageReservs_2 = "imageReservs2"
     case imageReservs_3 = "imageReservs3"

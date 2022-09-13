@@ -132,8 +132,21 @@ class WorkPassBookingView: UIViewController {
         tableView.dataSource = self
         tabBar.selectedItem = tabBar.items?[0]
         
-        view.createReservationCustomBarAPI(spaceName: space?.space_name, localName: space?.local_name, imageURL: space?.pictures?[0].url, progressBarButtons: buttons) { _ in
-            self.dismiss(animated: true)
+        if let pictures = space?.pictures {
+            
+            if pictures.count == 0 {
+                
+                view.createReservationCustomBarAPI(spaceName: space?.space_name, localName: space?.local_name, imageURL: "", progressBarButtons: buttons) { _ in
+                    
+                    self.dismiss(animated: true)
+                }
+            }
+            else {
+                
+                view.createReservationCustomBarAPI(spaceName: space?.space_name, localName: space?.local_name, imageURL: pictures[0].url, progressBarButtons: buttons) { _ in
+                    self.dismiss(animated: true)
+                }
+            }
         }
         
         setupConstraints()
