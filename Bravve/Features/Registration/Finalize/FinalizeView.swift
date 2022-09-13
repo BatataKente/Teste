@@ -76,7 +76,8 @@ class FinalizeView: UIViewController {
         
         homeButton.addTarget(self, action: #selector(actionHomeButton), for: .touchUpInside)
     }
-        
+    
+    /// This function handles the display of view elements
     private func addSubViews() {
         view.addSubview(imageLogo)
         view.addSubview(titleLabel)
@@ -85,6 +86,7 @@ class FinalizeView: UIViewController {
         view.addSubview(homeButton)
     }
     
+    /// This function handles the constraints of view elements
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
@@ -116,6 +118,7 @@ class FinalizeView: UIViewController {
         ])
     }
     
+    /// This function deals with the action of the button that directs the user to the initial screen already logged in after the registration is performed
     @objc func actionHomeButton() {
         let vc = HomeClosedView()
         vc.modalPresentationStyle = .fullScreen
