@@ -7,6 +7,16 @@
 
 import UIKit
 
+protocol HomeOpenViewModelProtocol {
+    
+    func presentOtherView(_ viewController: UIViewController)
+    func setSpaces(_ spaces: [Space])
+    func setCoverView(_ alpha: CGFloat)
+    func reduceDropDowns()
+    func setupLeftDropDown(_ buttons: [UIButton])
+    func setupRightDropDown(_ buttons: [UIButton])
+}
+
 class HomeOpenViewModel {
     
     init(_ customBarWithFilter: CustomBarWithFilter, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)) {
@@ -25,6 +35,24 @@ class HomeOpenViewModel {
     
     private let customBarWithFilter: CustomBarWithFilter
     
+    func loadChosedPlace(_ id: Int?) {
+        
+        guard let id = id else {return}
+        sessionManager.getOpenData(id: "\(id)", endpoint: .spacesId) {(statusCode, error, space: SpaceDetail?) in
+            
+            guard let space = space else {
+                
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            let openDetailsView = OpenDetailsView(space)
+            openDetailsView.modalPresentationStyle = .fullScreen
+            self.delegate?.presentOtherView(openDetailsView)
+        }
+    }
+    
     func manageCustomBar() {
         
         let font = UIFont(name: FontsBravve.medium.rawValue,
@@ -36,7 +64,7 @@ class HomeOpenViewModel {
         var parameters = spaceParameters
         
         sessionManager.getOpenDataArray (endpoint: .utilsStates){ (statusCode, error, states: [States]?) in
-            
+
             guard let states = states else {
                 print(statusCode as Any)
                 print(error?.localizedDescription as Any)
@@ -45,16 +73,16 @@ class HomeOpenViewModel {
             }
             
             var stateButtons = [UIButton]()
-            
+
             for state in states {
-                
+
                 let stateButton = UIButton()
                 stateButton.setTitle(state.code, for: .normal)
                 stateButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                                          for: .normal)
+                                     for: .normal)
                 stateButton.titleLabel?.font = font
                 let stateHandler = {(action: UIAction) in
-                    
+
                     self.customBarWithFilter.stateLabel.font = smallFont
                     self.customBarWithFilter.stateChosedLabel.text = stateButton.currentTitle
                     self.customBarWithFilter.cityChosedLabel.isHidden = true
@@ -76,9 +104,8 @@ class HomeOpenViewModel {
                         
                         UIView.animate(withDuration: 0.6,
                                        delay: 0.3) {
-                            
+
                             self.delegate?.setCoverView(0)
-                            self.delegate?.showNavigation()
                         }
                     }
                     
@@ -97,13 +124,13 @@ class HomeOpenViewModel {
                         var cityButtons = [UIButton]()
                         
                         for city in cities {
-                            
+
                             let cityButton = UIButton()
                             cityButton.setTitle(city.name, for: .normal)
                             cityButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue),
-                                                     for: .normal)
+                                                 for: .normal)
                             cityButton.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue,
-                                                                 size: CGFloat(15).generateSizeForScreen)
+                                                             size: CGFloat(15).generateSizeForScreen)
                             
                             self.customBarWithFilter.leftButton.isEnabled = true
                             self.customBarWithFilter.rightButton.isEnabled = true
@@ -168,7 +195,7 @@ class HomeOpenViewModel {
             
             UIView.animate(withDuration: 0.6,
                            delay: 0.3) {
-                
+
                 self.delegate?.setCoverView(0)
                 self.delegate?.showNavigation()
             }

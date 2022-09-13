@@ -143,6 +143,7 @@ class LoginView: UIViewController {
     private lazy var eyeButton: UIButton = {
         let view = UIButton(type: .custom)
         view.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        view.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         view.frame = CGRect(x:0, y:0, width: CGFloat(20).generateSizeForScreen, height:CGFloat(16).generateSizeForScreen)
         view.addTarget(self, action: #selector(tapEyeButton), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -337,13 +338,10 @@ class LoginView: UIViewController {
         } else{
             loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             passwordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .selected)
             loginEmpty()
             passwordEmpty()
-            if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeOpen.rawValue){
-                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
-            }   else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
-                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-            }
             emptyAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
                                  message: "Usuário e/ou senha incorretos",
                                  enterAttributed: "Tentar Novamente",
@@ -353,6 +351,8 @@ class LoginView: UIViewController {
     
     //MARK: - loginStackViewTapped
     @objc func loginStackViewTapped() {
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         loginIsTapped()
     }
     
@@ -398,6 +398,8 @@ class LoginView: UIViewController {
     
     //MARK: - passwordStackViewTapped
     @objc func passwordStackViewTapped() {
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         passwordIsTapped()
     }
     
@@ -413,14 +415,7 @@ class LoginView: UIViewController {
     //MARK: - tapEyeButton
     @objc func tapEyeButton () {
         eyeButton.isSelected.toggle()
-        
-        if eyeButton.isSelected {
-            passwordTextField.isSecureTextEntry = true
-            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
-        } else {
-            passwordTextField.isSecureTextEntry  = false
-            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .normal)
-        }
+        passwordTextField.isSecureTextEntry.toggle()
     }
     
     //MARK: - forgotPasswordButtonTapped
@@ -455,6 +450,8 @@ class LoginView: UIViewController {
            passwordStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 15),
            passwordStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
            passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           
+           passwordTextField.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor, constant: -45),
            
            eyeButton.heightAnchor.constraint(equalToConstant: 15),
            eyeButton.centerYAnchor.constraint(equalTo: passwordStackView.centerYAnchor),

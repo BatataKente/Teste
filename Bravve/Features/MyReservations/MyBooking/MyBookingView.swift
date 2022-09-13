@@ -20,6 +20,7 @@ class MyBookingView: UIViewController {
     private lazy var myTableView: UITableView = {
         
         let myTableView = UITableView()
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.backgroundColor = .clear
@@ -31,6 +32,7 @@ class MyBookingView: UIViewController {
     private lazy var tabBar: TabBarClosed = {
         
         let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
 
@@ -81,14 +83,16 @@ class MyBookingView: UIViewController {
     
     func setConstraints() {
         
-        myTableView.constraintOutsideTo(.top, customBar)
-        myTableView.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        myTableView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        myTableView.constraintOutsideTo(.bottom, tabBar)
-        
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
+        NSLayoutConstraint.activate([
+            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
+            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            myTableView.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
+            
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 }
 

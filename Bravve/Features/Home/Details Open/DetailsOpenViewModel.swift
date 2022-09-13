@@ -12,15 +12,16 @@ class DetailsOpenViewModel {
     func createStackView(_ text: String,
                          _ image: UIImage? = nil,
                          isHidden: Bool = false,
-                         textColor: UIColor? = .white) -> UIStackView {
+                         textColor: UIColor? = .white,
+                         font: UIFont? = UIFont(name: FontsBravve.regular.rawValue,
+                                                size: CGFloat(12).generateSizeForScreen)) -> UIStackView {
         
         let stackView = UIStackView()
         
         let label = UILabel()
         label.text = text
         label.numberOfLines = 0
-        label.font = UIFont(name: FontsBravve.regular.rawValue,
-                            size: CGFloat(12).generateSizeForScreen)
+        label.font = font
         label.textColor = textColor
         
         
@@ -43,7 +44,7 @@ class DetailsOpenViewModel {
             stackView.addArrangedSubviews([label, line])
             stackView.axis = .vertical
             stackView.isHidden = isHidden
-            stackView.spacing = CGFloat(10).generateSizeForScreen
+            stackView.spacing = CGFloat(8).generateSizeForScreen
             
             line.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen).isActive = true
             line.widthAnchor.constraint(equalToConstant: CGFloat(280).generateSizeForScreen).isActive = true
@@ -107,7 +108,7 @@ class DetailsOpenViewModel {
     }
     
     func createLabel(_ text: String?,
-                     _ font: UIFont? = UIFont(name: FontsBravve.bold.rawValue,
+                     _ font: UIFont? = UIFont(name: FontsBravve.regular.rawValue,
                                               size: CGFloat(12).generateSizeForScreen),
                      textColor: UIColor? = UIColor(named: ColorsBravve.progressBarLabel.rawValue)) -> UILabel {
         
@@ -188,19 +189,19 @@ class DetailsOpenViewModel {
         
         if texts.count < 7 {
             for text in texts {
-                itens.append(createStackView(text, textColor: textColor))
+                itens.append(createStackView(text, textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
                 
             }
             structureStackView.addArrangedSubviews([title] + itens)
         } else {
             for i in 0...5 {
                 
-                itens.append(createStackView(texts[i], textColor: textColor))
+                itens.append(createStackView(texts[i], textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
             }
             
             for i in 6...texts.count - 1 {
                 
-                itens.append(createStackView(texts[i], isHidden: true, textColor: textColor))
+                itens.append(createStackView(texts[i], isHidden: true, textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
             }
             
             let button = createSeeButtonsStackView(6...itens.count-1, itens: itens, titleColor: seeMoreColor, arrowDownImage: arrowDownImage, arrowUpImage: arrowUpImage)

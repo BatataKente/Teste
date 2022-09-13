@@ -63,11 +63,11 @@ class OpenDetailsView: UIViewController {
         let title = UILabel()
         title.text = "Estrutura"
         title.font = UIFont(name: FontsBravve.koho.rawValue,
-                            size: 15)
+                            size: 24)
         title.textColor = textColor
         
         var texts:[String] = detailsOpenViewModel.createFacilitiesArray(facilities: space.space_facilities)
-
+        
         var itens = [UIStackView]()
         
         let structureStackView = UIStackView()
@@ -95,7 +95,7 @@ class OpenDetailsView: UIViewController {
         let title = UILabel()
         title.text = "Facilities do local"
         title.font = UIFont(name: FontsBravve.koho.rawValue,
-                            size: 15)
+                            size: 24)
         title.textColor = .white
         
         var texts:[String] = detailsOpenViewModel.createFacilitiesArray(facilities: space.space_facilities)
@@ -298,13 +298,12 @@ class OpenDetailsView: UIViewController {
         tagsStackView.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         tagsStackView.trailingAnchor.constraint(equalTo: creditHourLabel.trailingAnchor).isActive = true
         
-        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor,
-                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
+        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor).isActive = true
         briefingLabel.leadingAnchor.constraint(equalTo: tagsStackView.leadingAnchor).isActive = true
-        briefingLabel.trailingAnchor.constraint(equalTo: tagsStackView.trailingAnchor).isActive = true
+        briefingLabel.widthAnchor.constraint(equalToConstant: CGFloat(322).generateSizeForScreen).isActive = true
+        briefingLabel.heightAnchor.constraint(equalToConstant: CGFloat(234).generateSizeForScreen).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor,
-                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: briefingLabel.leadingAnchor).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: briefingLabel.trailingAnchor).isActive = true
         
@@ -321,15 +320,15 @@ class OpenDetailsView: UIViewController {
                                                 constant: CGFloat(20).generateSizeForScreen).isActive = true
         structureStackView.leadingAnchor.constraint(equalTo: localFacilitiesStackView.leadingAnchor).isActive = true
         structureStackView.trailingAnchor.constraint(equalTo: localFacilitiesStackView.trailingAnchor).isActive = true
+        structureStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
         
         localFacilitiesStackView.topAnchor.constraint(equalTo: structureStackView.bottomAnchor,
-                                                      constant: CGFloat(20).generateSizeForScreen).isActive = true
+                                                      constant: CGFloat(16).generateSizeForScreen).isActive = true
         localFacilitiesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                          constant: CGFloat(20).generateSizeForScreen).isActive = true
-        localFacilitiesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                           constant: CGFloat(-20).generateSizeForScreen).isActive = true
+                                                          constant: CGFloat(19).generateSizeForScreen).isActive = true
         localFacilitiesStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                                         constant: CGFloat(-20).generateSizeForScreen).isActive = true
+                                                         constant: CGFloat(-50).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
         
         return scrollView
     }()

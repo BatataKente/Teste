@@ -202,7 +202,7 @@ extension UIView {
             return
         }
 
-        imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: ImagesBravve.imageReservsNav.rawValue))
+        imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: ImagesBravve.imageNotFound.rawValue))
         
         self.addSubviews([imageView, backButton, titleLabel, subTitleLabel])
         

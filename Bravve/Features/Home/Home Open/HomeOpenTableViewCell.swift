@@ -17,8 +17,6 @@ class HomeOpenTableViewCell: UITableViewCell {
             titleLabelView: UIView,
             sloganLabel: UILabel,
             photoView: UIImageView,
-            photoLabel: UILabel,
-            photoLabelView: UIView,
             localNameLabel: UILabel,
             descriptionLabel: UILabel,
             hourlyCreditsLabel: UILabel,
@@ -27,7 +25,7 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     var delegate: HomeOpenTableViewCellProtocol?
     
-    var indexPath: IndexPath = IndexPath()
+    var id:Int? = nil
     
     private lazy var viewElements: ViewElements = {
         
@@ -55,16 +53,6 @@ class HomeOpenTableViewCell: UITableViewCell {
         photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 12
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        
-        let photoLabel = createLabel(text: "WORKPASS",
-                                     color: .textField,
-                                     UIFont(name: FontsBravve.light.rawValue,
-                                            size: CGFloat(13).generateSizeForScreen))
-        
-        let photoLabelView = UIView()
-        photoLabelView.addSubview(photoLabel)
-        photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        photoLabelView.isHidden = true
         
         let localNameLabel = createLabel()
         
@@ -96,7 +84,10 @@ class HomeOpenTableViewCell: UITableViewCell {
             let priceView = UIView()
             priceView.addSubviews([priceTypeLabel, hourlyCreditsLabel, hourLabel, creditHourLabel, hourPriceLabel])
             
-            removeMasks(of: priceView)
+            for subview in priceView.subviews {
+                
+                subview.translatesAutoresizingMaskIntoConstraints = false
+            }
             
             hourlyCreditsLabel.topAnchor.constraint(equalTo: priceView.topAnchor).isActive = true
             hourlyCreditsLabel.leadingAnchor.constraint(equalTo: priceTypeLabel.trailingAnchor,
@@ -130,7 +121,7 @@ class HomeOpenTableViewCell: UITableViewCell {
                                 action: #selector(showDetails),
                                 for: .touchUpInside)
         
-        view.addSubviews([titleLabelView, sloganLabel, detailsButton, photoView, photoLabelView, localNameLabel, descriptionLabel, priceView, addressLabel])
+        view.addSubviews([titleLabelView, sloganLabel, detailsButton, photoView, localNameLabel, descriptionLabel, priceView, addressLabel])
         
         let spacing = CGFloat(20).generateSizeForScreen
         
@@ -143,8 +134,6 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         titleLabelView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         titleLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: spacing).isActive = true
-        
-        spaceCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
         spaceCategoryLabel.topAnchor.constraint(equalTo: titleLabelView.topAnchor,
                                         constant: CGFloat(2.5).generateSizeForScreen).isActive = true
@@ -163,22 +152,6 @@ class HomeOpenTableViewCell: UITableViewCell {
         photoView.leadingAnchor.constraint(equalTo: sloganLabel.leadingAnchor).isActive = true
         photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         photoView.heightAnchor.constraint(equalToConstant: CGFloat(200).generateSizeForScreen).isActive = true
-        
-        photoLabelView.topAnchor.constraint(equalTo: photoView.topAnchor,
-                                            constant: CGFloat(25).generateSizeForScreen).isActive = true
-        photoLabelView.leadingAnchor.constraint(equalTo: photoView.leadingAnchor,
-                                                constant: CGFloat(25).generateSizeForScreen).isActive = true
-        
-        photoLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        photoLabel.topAnchor.constraint(equalTo: photoLabelView.topAnchor,
-                                        constant: CGFloat(2.5).generateSizeForScreen).isActive = true
-        photoLabel.leadingAnchor.constraint(equalTo: photoLabelView.leadingAnchor,
-                                            constant: CGFloat(2.5).generateSizeForScreen).isActive = true
-        photoLabel.trailingAnchor.constraint(equalTo: photoLabelView.trailingAnchor,
-                                             constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
-        photoLabel.bottomAnchor.constraint(equalTo: photoLabelView.bottomAnchor,
-                                           constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
         
         localNameLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: spacing).isActive = true
         localNameLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor).isActive = true
@@ -206,8 +179,6 @@ class HomeOpenTableViewCell: UITableViewCell {
                             titleLabelView: titleLabelView,
                             sloganLabel: sloganLabel,
                             photoView: photoView,
-                            photoLabel: photoLabel,
-                            photoLabelView: photoLabelView,
                             localNameLabel: localNameLabel,
                             descriptionLabel: descriptionLabel,
                             hourlyCreditsLabel: hourlyCreditsLabel,
@@ -235,7 +206,7 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     func setupConstraints() {
         
-        removeMasks(of: viewElements.view)
+        viewElements.view.translatesAutoresizingMaskIntoConstraints = false
         
         viewElements.view.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: CGFloat(10).generateSizeForScreen).isActive = true
         viewElements.view.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
@@ -243,9 +214,10 @@ class HomeOpenTableViewCell: UITableViewCell {
         viewElements.view.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-10).generateSizeForScreen).isActive = true
     }
     
-    func setup(_ space: Space,_ indexPath: IndexPath) {
+    func setup(_ space: Space) {
         
         viewElements.sloganLabel.text = space.slogan
+        id = space.id
         
         guard let pictures = space.space_pictures else {return}
         
@@ -257,7 +229,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         }
         
         viewElements.photoView.sd_setImage(with: URL(string: picture),
-                                           placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+                                           placeholderImage: UIImage(named: ImagesBravve.imageNotFound.rawValue))
         viewElements.localNameLabel.text = space.local_name
         viewElements.descriptionLabel.text = space.description
         viewElements.hourlyCreditsLabel.text = "\(space.hourly_credits ?? " ")"
@@ -273,14 +245,8 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         if allowWorkpass {
             
-            viewElements.photoLabelView.isHidden = false
+            createWorkPassLabel(viewElements.view, at: viewElements.photoView)
         }
-        else {
-            
-            viewElements.photoLabelView.isHidden = true
-        }
-        
-        self.indexPath = indexPath
     }
     
     /// create a Label with default of editing profile View
@@ -305,25 +271,44 @@ class HomeOpenTableViewCell: UITableViewCell {
         return label
     }
     
-    /// This function remove masks of a view and subviews from it
-    /// - Parameter view: the view to remove masks
-    private func removeMasks(of view: UIView) {
+    func createWorkPassLabel(_ superview: UIView, at view: UIView) {
         
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let photoLabel = createLabel(text: "WORKPASS",
+                                     color: .textField,
+                                     UIFont(name: FontsBravve.light.rawValue,
+                                            size: CGFloat(13).generateSizeForScreen))
         
-        for subview in view.subviews {
-            
-            subview.translatesAutoresizingMaskIntoConstraints = false
-        }
+        let photoLabelView = UIView()
+        photoLabelView.addSubview(photoLabel)
+        photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
+        superview.addSubview(photoLabelView)
+        
+        photoLabelView.translatesAutoresizingMaskIntoConstraints = false
+        photoLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        photoLabelView.topAnchor.constraint(equalTo: view.topAnchor,
+                                            constant: CGFloat(25).generateSizeForScreen).isActive = true
+        photoLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                constant: CGFloat(25).generateSizeForScreen).isActive = true
+        
+        photoLabel.topAnchor.constraint(equalTo: photoLabelView.topAnchor,
+                                        constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        photoLabel.leadingAnchor.constraint(equalTo: photoLabelView.leadingAnchor,
+                                            constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        photoLabel.trailingAnchor.constraint(equalTo: photoLabelView.trailingAnchor,
+                                             constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+        photoLabel.bottomAnchor.constraint(equalTo: photoLabelView.bottomAnchor,
+                                           constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
     }
     
     @objc func showDetails() {
         
-        delegate?.chosePlace(indexPath)
+        delegate?.chosePlace(id)
     }
 }
 
 protocol HomeOpenTableViewCellProtocol {
     
-    func chosePlace(_ indexPath: IndexPath)
+    func chosePlace(_ id: Int?)
 }

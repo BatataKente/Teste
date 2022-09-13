@@ -397,8 +397,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
-                cell?.setup(cells[indexPath.row - 1], IndexPath(row: indexPath.row - 1,
-                                                                section: indexPath.section - 1))
+                cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }
@@ -426,20 +425,9 @@ extension HomeOpenView: UIScrollViewDelegate {
 
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
-    func chosePlace(_ indexPath: IndexPath) {
+    func chosePlace(_ id: Int?) {
         
-        guard let spaceId = cells[indexPath.row].id else { return }
-        
-        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
-            guard let space = space else {
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-            }
-            let openDetailsView = OpenDetailsView(space)
-            self.navigationController?.pushViewController(openDetailsView, animated: true)
-            
-        }
+        homeOpenViewModel.loadChosedPlace(id)
     }
 }
 
@@ -449,6 +437,11 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
         navigationSetup()
     }
     
+    
+    func presentOtherView(_ viewController: UIViewController) {
+        
+        present(viewController, animated: false)
+    }
     
     func setSpaces(_ spaces: [Space]) {
         

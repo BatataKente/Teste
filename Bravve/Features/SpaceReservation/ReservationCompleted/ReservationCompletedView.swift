@@ -242,10 +242,12 @@ class ReservationCompletedView: UIViewController {
     //MARK: - iconsConstraints
     private func iconsConstraints() {
         
-        logoIcon.constraintInsideTo(.top, view, CGFloat(56).generateSizeForScreen)
-        logoIcon.constraintInsideTo(.leading, view, CGFloat(26).generateSizeForScreen)
-        logoIcon.heightAnchorInSuperview(CGFloat(50).generateSizeForScreen)
-        logoIcon.widthAnchorInSuperview(CGFloat(198.05).generateSizeForScreen)
+        logoIcon.translatesAutoresizingMaskIntoConstraints = false
+        
+        logoIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(56).generateSizeForScreen).isActive = true
+        logoIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(26).generateSizeForScreen).isActive = true
+        logoIcon.heightAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen).isActive = true
+        logoIcon.widthAnchor.constraint(equalToConstant: CGFloat(198.05).generateSizeForScreen).isActive = true
         
         waveIcon.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         waveIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(143.05).generateSizeForScreen).isActive = true
@@ -257,16 +259,20 @@ class ReservationCompletedView: UIViewController {
     //MARK: - viewsConstraints
     private func viewsConstraints() {
         
-        scrollView.constraintOutsideTo(.top, waveIcon)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, buttonReservation, CGFloat(2).generateSizeForScreen)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        viewToScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        viewToScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
+        scrollView.topAnchor.constraint(equalTo: waveIcon.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: buttonReservation.topAnchor, constant: CGFloat(2).generateSizeForScreen).isActive = true
+        
+        viewToScroll.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewToScroll.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+        viewToScroll.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        viewToScroll.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+        viewToScroll.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        viewToScroll.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor).isActive = true
         
         locationLabel.topAnchor.constraint(equalTo: locationIcon.topAnchor).isActive = true
         locationLabel.leadingAnchor.constraint(equalTo: locationIcon.leadingAnchor, constant: CGFloat(17).generateSizeForScreen).isActive = true
@@ -327,10 +333,13 @@ class ReservationCompletedView: UIViewController {
         placeDetailLabel.leadingAnchor.constraint(equalTo: locationDetailLabel.leadingAnchor).isActive = true
         placeDetailLabel.trailingAnchor.constraint(equalTo: locationDetailLabel.trailingAnchor).isActive = true
         
-        labelsStack.constraintOutsideTo(.top, placeDetailLabel, CGFloat(13).generateSizeForScreen)
-        labelsStack.constraintInsideTo(.leading, placeDetailLabel)
-        labelsStack.constraintInsideTo(.trailing, placeDetailLabel)
+        labelsStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        labelsStack.topAnchor.constraint(equalTo: placeDetailLabel.bottomAnchor, constant: CGFloat(13).generateSizeForScreen).isActive = true
+        labelsStack.leadingAnchor.constraint(equalTo: placeDetailLabel.leadingAnchor).isActive = true
+        labelsStack.trailingAnchor.constraint(equalTo: placeDetailLabel.trailingAnchor).isActive = true
         labelsStack.bottomAnchor.constraint(equalTo: viewToScroll.bottomAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        
     }
     
 }
