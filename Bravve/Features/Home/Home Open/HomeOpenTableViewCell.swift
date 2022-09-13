@@ -259,7 +259,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         }
         
         viewElements.photoView.sd_setImage(with: URL(string: picture),
-                                           placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+                                           placeholderImage: UIImage(named: ImagesBravve.imageNotFound.rawValue))
         viewElements.localNameLabel.text = space.local_name
         viewElements.descriptionLabel.text = space.description
         viewElements.hourlyCreditsLabel.text = "\(space.hourly_credits ?? " ")"
