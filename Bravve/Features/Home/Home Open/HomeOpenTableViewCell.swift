@@ -27,7 +27,7 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     var delegate: HomeOpenTableViewCellProtocol?
     
-    var indexPath: IndexPath = IndexPath()
+    var id:Int? = nil
     
     private lazy var viewElements: ViewElements = {
         
@@ -244,9 +244,10 @@ class HomeOpenTableViewCell: UITableViewCell {
         viewElements.view.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-10).generateSizeForScreen).isActive = true
     }
     
-    func setup(_ space: Space,_ indexPath: IndexPath) {
+    func setup(_ space: Space) {
         
         viewElements.sloganLabel.text = space.slogan
+        id = space.id
         
         guard let pictures = space.space_pictures else {return}
         
@@ -280,8 +281,6 @@ class HomeOpenTableViewCell: UITableViewCell {
             
             viewElements.photoLabelView.isHidden = true
         }
-        
-        self.indexPath = indexPath
     }
     
     /// create a Label with default of editing profile View
@@ -308,11 +307,11 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     @objc func showDetails() {
         
-        delegate?.chosePlace(indexPath)
+        delegate?.chosePlace(id)
     }
 }
 
 protocol HomeOpenTableViewCellProtocol {
     
-    func chosePlace(_ indexPath: IndexPath)
+    func chosePlace(_ id: Int?)
 }
