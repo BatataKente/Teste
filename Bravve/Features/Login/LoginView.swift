@@ -441,6 +441,8 @@ class LoginView: UIViewController {
            passwordStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
            passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
            
+           passwordTextField.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor, constant: -45),
+           
            eyeButton.heightAnchor.constraint(equalToConstant: 15),
            eyeButton.centerYAnchor.constraint(equalTo: passwordStackView.centerYAnchor),
            eyeButton.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor, constant: -15),
