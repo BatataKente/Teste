@@ -10,9 +10,7 @@ import UIKit
 
 class WorkPassBookingView: UIViewController {
     
-    var arrayFirstLabel = ["Cartão de Crédito","Foursys","Bravve"]
-    var arraySecoundLabel = ["Conta pessoal","Workpass","Workpass"]
-    var arrayStackView = ["","490","490"]
+    private let viewModel = WorkpassViewModel()
     private let space: SpaceDetail?
     
     private let spaceId: Int
@@ -195,19 +193,19 @@ extension WorkPassBookingView: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrayFirstLabel.count
+        return viewModel.numberRows(spacedetail: space)
+       
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WorkPassCell", for: indexPath) as? WorkPassCell else { return UITableViewCell() }
-        cell.delegate = self
-        
-        cell.firstLabel.text = arrayFirstLabel[indexPath.row]
-        cell.secondLabel.text = arraySecoundLabel[indexPath.row]
-        if arrayStackView[indexPath.row] != ""{
+        cell.delegate = self        
+        cell.firstLabel.text = viewModel.arrayFirstLabel[indexPath.row]
+        cell.secondLabel.text = viewModel.arraySecoundLabel[indexPath.row]
+        if viewModel.arrayStackView[indexPath.row] != ""{
             cell.creditsStackView.isLayoutMarginsRelativeArrangement = true
-            cell.pinkCreditsLabel.text = arrayStackView[indexPath.row]
+            cell.pinkCreditsLabel.text = viewModel.arrayStackView[indexPath.row]
             cell.creditsLabel.text = "créditos"
         }
         
