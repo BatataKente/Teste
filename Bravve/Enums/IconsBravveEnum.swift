@@ -37,7 +37,7 @@ public enum IconsBravve: String {
     case emailGray = "emailGray"
     case exitProfile = "exitProfile"
     case flag = "flag"
-    case historyCheck = "historyCheck"
+    case historyClock = "historyClock"
     case hobbiesBlue = "hobbiesBlue"
     case hobbiesGray = "hobbiesGray"
     case info_circle = "info-circle"
