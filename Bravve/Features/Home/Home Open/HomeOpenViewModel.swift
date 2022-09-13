@@ -15,6 +15,7 @@ protocol HomeOpenViewModelProtocol {
     func reduceDropDowns()
     func setupLeftDropDown(_ buttons: [UIButton])
     func setupRightDropDown(_ buttons: [UIButton])
+    func showNavigation()
 }
 
 class HomeOpenViewModel {
@@ -245,17 +246,4 @@ class HomeOpenViewModel {
     
 }
 
-protocol HomeOpenViewModelProtocol {
-    
-    func setSpaces(_ spaces: [Space])
-    
-    func setCoverView(_ alpha: CGFloat)
-    
-    func reduceDropDowns()
-    
-    func setupLeftDropDown(_ buttons: [UIButton])
-    
-    func setupRightDropDown(_ buttons: [UIButton])
-    
-    func showNavigation()
-}
+
