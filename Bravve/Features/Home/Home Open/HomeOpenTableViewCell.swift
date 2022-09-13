@@ -17,8 +17,6 @@ class HomeOpenTableViewCell: UITableViewCell {
             titleLabelView: UIView,
             sloganLabel: UILabel,
             photoView: UIImageView,
-            photoLabel: UILabel,
-            photoLabelView: UIView,
             localNameLabel: UILabel,
             descriptionLabel: UILabel,
             hourlyCreditsLabel: UILabel,
@@ -55,16 +53,6 @@ class HomeOpenTableViewCell: UITableViewCell {
         photoView.clipsToBounds = true
         photoView.layer.cornerRadius = 12
         photoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        
-        let photoLabel = createLabel(text: "WORKPASS",
-                                     color: .textField,
-                                     UIFont(name: FontsBravve.light.rawValue,
-                                            size: CGFloat(13).generateSizeForScreen))
-        
-        let photoLabelView = UIView()
-        photoLabelView.addSubview(photoLabel)
-        photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        photoLabelView.isHidden = true
         
         let localNameLabel = createLabel()
         
@@ -133,7 +121,7 @@ class HomeOpenTableViewCell: UITableViewCell {
                                 action: #selector(showDetails),
                                 for: .touchUpInside)
         
-        view.addSubviews([titleLabelView, sloganLabel, detailsButton, photoView, photoLabelView, localNameLabel, descriptionLabel, priceView, addressLabel])
+        view.addSubviews([titleLabelView, sloganLabel, detailsButton, photoView, localNameLabel, descriptionLabel, priceView, addressLabel])
         
         let spacing = CGFloat(20).generateSizeForScreen
         
@@ -165,22 +153,6 @@ class HomeOpenTableViewCell: UITableViewCell {
         photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         photoView.heightAnchor.constraint(equalToConstant: CGFloat(200).generateSizeForScreen).isActive = true
         
-        photoLabelView.topAnchor.constraint(equalTo: photoView.topAnchor,
-                                            constant: CGFloat(25).generateSizeForScreen).isActive = true
-        photoLabelView.leadingAnchor.constraint(equalTo: photoView.leadingAnchor,
-                                                constant: CGFloat(25).generateSizeForScreen).isActive = true
-        
-        photoLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        photoLabel.topAnchor.constraint(equalTo: photoLabelView.topAnchor,
-                                        constant: CGFloat(2.5).generateSizeForScreen).isActive = true
-        photoLabel.leadingAnchor.constraint(equalTo: photoLabelView.leadingAnchor,
-                                            constant: CGFloat(2.5).generateSizeForScreen).isActive = true
-        photoLabel.trailingAnchor.constraint(equalTo: photoLabelView.trailingAnchor,
-                                             constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
-        photoLabel.bottomAnchor.constraint(equalTo: photoLabelView.bottomAnchor,
-                                           constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
-        
         localNameLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: spacing).isActive = true
         localNameLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor).isActive = true
         localNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
@@ -207,8 +179,6 @@ class HomeOpenTableViewCell: UITableViewCell {
                             titleLabelView: titleLabelView,
                             sloganLabel: sloganLabel,
                             photoView: photoView,
-                            photoLabel: photoLabel,
-                            photoLabelView: photoLabelView,
                             localNameLabel: localNameLabel,
                             descriptionLabel: descriptionLabel,
                             hourlyCreditsLabel: hourlyCreditsLabel,
@@ -275,11 +245,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         if allowWorkpass {
             
-            viewElements.photoLabelView.isHidden = false
-        }
-        else {
-            
-            viewElements.photoLabelView.isHidden = true
+            createWorkPassLabel(viewElements.view, at: viewElements.photoView)
         }
     }
     
@@ -303,6 +269,37 @@ class HomeOpenTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         
         return label
+    }
+    
+    func createWorkPassLabel(_ superview: UIView, at view: UIView) {
+        
+        let photoLabel = createLabel(text: "WORKPASS",
+                                     color: .textField,
+                                     UIFont(name: FontsBravve.light.rawValue,
+                                            size: CGFloat(13).generateSizeForScreen))
+        
+        let photoLabelView = UIView()
+        photoLabelView.addSubview(photoLabel)
+        photoLabelView.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
+        superview.addSubview(photoLabelView)
+        
+        photoLabelView.translatesAutoresizingMaskIntoConstraints = false
+        photoLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        photoLabelView.topAnchor.constraint(equalTo: view.topAnchor,
+                                            constant: CGFloat(25).generateSizeForScreen).isActive = true
+        photoLabelView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                constant: CGFloat(25).generateSizeForScreen).isActive = true
+        
+        photoLabel.topAnchor.constraint(equalTo: photoLabelView.topAnchor,
+                                        constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        photoLabel.leadingAnchor.constraint(equalTo: photoLabelView.leadingAnchor,
+                                            constant: CGFloat(2.5).generateSizeForScreen).isActive = true
+        photoLabel.trailingAnchor.constraint(equalTo: photoLabelView.trailingAnchor,
+                                             constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
+        photoLabel.bottomAnchor.constraint(equalTo: photoLabelView.bottomAnchor,
+                                           constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
     }
     
     @objc func showDetails() {
