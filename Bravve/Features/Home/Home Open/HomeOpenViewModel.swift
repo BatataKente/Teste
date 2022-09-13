@@ -7,6 +7,16 @@
 
 import UIKit
 
+protocol HomeOpenViewModelProtocol {
+    
+    func presentOtherView(_ viewController: UIViewController)
+    func setSpaces(_ spaces: [Space])
+    func setCoverView(_ alpha: CGFloat)
+    func reduceDropDowns()
+    func setupLeftDropDown(_ buttons: [UIButton])
+    func setupRightDropDown(_ buttons: [UIButton])
+}
+
 class HomeOpenViewModel {
     
     init(_ customBarWithFilter: CustomBarWithFilter, _ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil)) {
@@ -24,6 +34,24 @@ class HomeOpenViewModel {
     private let homeOpenView = HomeOpenView()
     
     private let customBarWithFilter: CustomBarWithFilter
+    
+    func loadChosedPlace(_ id: Int?) {
+        
+        guard let id = id else {return}
+        sessionManager.getOpenData(id: "\(id)", endpoint: .spacesId) {(statusCode, error, space: SpaceDetail?) in
+            
+            guard let space = space else {
+                
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            let openDetailsView = OpenDetailsView(space)
+            openDetailsView.modalPresentationStyle = .fullScreen
+            self.delegate?.presentOtherView(openDetailsView)
+        }
+    }
     
     func manageCustomBar() {
         
@@ -213,17 +241,4 @@ class HomeOpenViewModel {
         }
     }
 
-}
-
-protocol HomeOpenViewModelProtocol {
-    
-    func setSpaces(_ spaces: [Space])
-    
-    func setCoverView(_ alpha: CGFloat)
-    
-    func reduceDropDowns()
-    
-    func setupLeftDropDown(_ buttons: [UIButton])
-    
-    func setupRightDropDown(_ buttons: [UIButton])
 }
