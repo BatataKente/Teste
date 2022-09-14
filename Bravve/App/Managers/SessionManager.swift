@@ -91,11 +91,11 @@ class SessionManager {
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             AF.request(url, headers: headers).responseDecodable(of: T.self) { response in
-//                print(response.debugDescription)
+               print(response.debugDescription)
                 if let data = response.value {
                     completionHandler(response.response?.statusCode, nil, data)
                 } else {
@@ -136,7 +136,7 @@ class SessionManager {
             }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
@@ -195,7 +195,7 @@ class SessionManager {
             }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
@@ -243,7 +243,7 @@ class SessionManager {
             }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }
@@ -362,7 +362,7 @@ class SessionManager {
             }
             
             let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(accessToken)"
+                "Authorization": "\(accessToken)"
             ]
             
             guard let url = self.getURL(endpoint: endpoint, id: id, phoneNumber: phoneNumber, uuid: uuid, picture: picture, picture_uuid: picture_uuid, payment_type_id: payment_type_id) else { return }

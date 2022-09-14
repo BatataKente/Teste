@@ -105,7 +105,11 @@ class Reservation2View: UIViewController {
         setupConstrains()
         tabBar.selectedItem = tabBar.items?[0]
         
-        view.createReservationCustomBarAPI(spaceName: spaceDetail?.space_name, localName: spaceDetail?.local_name, imageURL: spaceDetail?.pictures?[0].url, progressBarButtons: buttons) { _ in
+        view.createReservationCustomBar(spaceName: spaceDetail?.space_name,
+                                        localName: spaceDetail?.local_name,
+                                        spacePictures: spaceDetail?.pictures,
+                                        progressBarButtons: buttons) {_ in
+            
             self.dismiss(animated: true)
         }
         

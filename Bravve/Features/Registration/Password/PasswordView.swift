@@ -83,6 +83,7 @@ class PasswordView: UIViewController{
     //MARK: passwordStackView
     lazy var passwordStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [passwordTFLabel, passwordTextField])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 6
         stackView.axis = .vertical
         stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
@@ -100,12 +101,14 @@ class PasswordView: UIViewController{
     //MARK: Buttons
     let hidePasswordButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
         return button
     }()
     
     let hideWrongPasswordButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
         button.isHidden = true
         return button
@@ -123,6 +126,7 @@ class PasswordView: UIViewController{
     //MARK: confirmStackView
     lazy var confirmStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [confirmPasswordTFLabel, confirmPasswordTextField])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 6
         stackView.axis = .vertical
         stackView.backgroundColor = UIColor(named: ColorsBravve.textFieldBackground.rawValue)
@@ -140,12 +144,14 @@ class PasswordView: UIViewController{
     //MARK: - hideConfirmsPasswordButtons
     let hideConfirmPasswordButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
         return button
     }()
     
     let hideWrongConfirmPasswordButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
         button.isHidden = true
         return button
@@ -160,42 +166,49 @@ class PasswordView: UIViewController{
     
     let numberCharEllipse: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
     }()
     
     let upperCaseEllipse: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
     }()
     
     let lowerCaseEllipse: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
     }()
     
     let numberEllipse: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
     }()
     
     let specialCharEllipse: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
     }()
     
     let samePasswordEllipse: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.ellipseGray.rawValue)
         return image
     }()
     //MARK: UILabels
     let confirmPasswordTFLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Repetir senha"
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
@@ -207,6 +220,7 @@ class PasswordView: UIViewController{
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Agora escolha uma senha de sua preferência."
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
@@ -216,6 +230,7 @@ class PasswordView: UIViewController{
     
     let passwordTFLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Senha"
         label.textColor = UIColor(named: ColorsBravve.textFieldLabel.rawValue)
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(15).generateSizeForScreen)
@@ -227,6 +242,7 @@ class PasswordView: UIViewController{
     
     let numberCharLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "No mínimo 6 caracteres"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
@@ -234,6 +250,7 @@ class PasswordView: UIViewController{
     
     let upperCaseLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "1 letra maiúscula"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
@@ -241,6 +258,7 @@ class PasswordView: UIViewController{
     
     let lowerCaseLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "1 letra minúscula"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
@@ -248,6 +266,7 @@ class PasswordView: UIViewController{
     
     let numberLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "1 digito numérico"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
@@ -255,6 +274,7 @@ class PasswordView: UIViewController{
      
     let specialCharLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "1 caractere especial"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
@@ -262,6 +282,7 @@ class PasswordView: UIViewController{
     
     let samePasswordLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Senhas coincidem"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
         return label
@@ -272,6 +293,7 @@ class PasswordView: UIViewController{
     //MARK: UIViews
     let backView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: ColorsBravve.blue_cyan.rawValue)
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
@@ -281,6 +303,7 @@ class PasswordView: UIViewController{
     
     let backViewConfirm: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: ColorsBravve.blue_cyan.rawValue)
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
@@ -339,105 +362,106 @@ class PasswordView: UIViewController{
     
     func addConstraints(){
         
-        descriptionLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        descriptionLabel.constraintInsideTo(.top, view, CGFloat(250).generateSizeForScreen)
-        descriptionLabel.constraintInsideTo(.left, view.safeAreaLayoutGuide)
-        descriptionLabel.constraintInsideTo(.right, view.safeAreaLayoutGuide)
-        
-        backView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-        backView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        backView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        backView.constraintOutsideTo(.top, descriptionLabel, CGFloat(31).generateSizeForScreen)
-        
-        passwordStackView.heightAnchorInSuperview(CGFloat(60).generateSizeForScreen)
-        passwordStackView.constraintInsideTo(.leading, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        passwordStackView.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        passwordStackView.constraintOutsideTo(.top, descriptionLabel, CGFloat(30).generateSizeForScreen)
-        
-        hidePasswordButton.constraintInsideTo(.height, passwordStackView)
-        hidePasswordButton.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
-        hidePasswordButton.constraintInsideTo(.centerY, passwordStackView)
-        hidePasswordButton.constraintInsideTo(.trailing, passwordStackView)
-        
-        backViewConfirm.constraintInsideTo(.height, passwordStackView)
-        backViewConfirm.constraintInsideTo(.leading, passwordStackView)
-        backViewConfirm.constraintInsideTo(.trailing, passwordStackView)
-        backViewConfirm.constraintOutsideTo(.top, passwordStackView, CGFloat(11.4).generateSizeForScreen)
-        
-        confirmStackView.constraintInsideTo(.height, passwordStackView)
-        confirmStackView.constraintInsideTo(.leading, passwordStackView)
-        confirmStackView.constraintInsideTo(.trailing, passwordStackView)
-        confirmStackView.constraintOutsideTo(.top, passwordStackView, CGFloat(10).generateSizeForScreen)
-        
-        hideConfirmPasswordButton.constraintInsideTo(.height, hidePasswordButton)
-        hideConfirmPasswordButton.constraintInsideTo(.width, hidePasswordButton)
-        hideConfirmPasswordButton.constraintInsideTo(.centerY, confirmStackView)
-        hideConfirmPasswordButton.constraintInsideTo(.trailing, confirmStackView)
-        
-        numberCharEllipse.heightAnchorInSuperview(CGFloat(4).generateSizeForScreen)
-        numberCharEllipse.constraintOutsideTo(.width, numberCharEllipse)
-        numberCharEllipse.constraintOutsideTo(.top, confirmStackView, CGFloat(11).generateSizeForScreen)
-        numberCharEllipse.constraintInsideTo(.leading, confirmStackView)
-        
-        numberCharLabel.heightAnchorInSuperview(CGFloat(11).generateSizeForScreen)
-        numberCharLabel.constraintInsideTo(.centerY, numberCharEllipse)
-        numberCharLabel.constraintOutsideTo(.leading, numberCharEllipse, CGFloat(5).generateSizeForScreen)
-        
-        upperCaseEllipse.constraintInsideTo(.height, numberCharEllipse)
-        upperCaseEllipse.constraintOutsideTo(.width, upperCaseEllipse)
-        upperCaseEllipse.constraintOutsideTo(.top, numberCharEllipse, CGFloat(10).generateSizeForScreen)
-        upperCaseEllipse.constraintInsideTo(.leading, numberCharEllipse)
-        
-        upperCaseLabel.constraintInsideTo(.height, numberCharLabel)
-        upperCaseLabel.constraintInsideTo(.centerY, upperCaseEllipse)
-        upperCaseLabel.constraintInsideTo(.leading, numberCharLabel)
-        
-        lowerCaseEllipse.constraintInsideTo(.height, numberCharEllipse)
-        lowerCaseEllipse.constraintOutsideTo(.width, lowerCaseEllipse)
-        lowerCaseEllipse.constraintOutsideTo(.top, upperCaseEllipse, CGFloat(10).generateSizeForScreen)
-        lowerCaseEllipse.constraintInsideTo(.leading, upperCaseEllipse)
-        
-        lowerCaseLabel.constraintInsideTo(.height, numberCharLabel)
-        lowerCaseLabel.constraintInsideTo(.centerY, lowerCaseEllipse)
-        lowerCaseLabel.constraintInsideTo(.leading, numberCharLabel)
-        
-        numberEllipse.constraintInsideTo(.height, numberCharEllipse)
-        numberEllipse.constraintOutsideTo(.width, numberEllipse)
-        numberEllipse.constraintInsideTo(.top, numberCharEllipse)
-        numberEllipse.constraintInsideTo(.trailing, view.safeAreaLayoutGuide, CGFloat(120).generateSizeForScreen)
-        
-        numberLabel.constraintInsideTo(.height, numberCharLabel)
-        numberLabel.constraintInsideTo(.centerY, numberEllipse)
-        numberLabel.constraintOutsideTo(.leading, numberEllipse, CGFloat(5).generateSizeForScreen)
-        
-        specialCharEllipse.constraintInsideTo(.height, numberCharEllipse)
-        specialCharEllipse.constraintOutsideTo(.width, specialCharEllipse)
-        specialCharEllipse.constraintOutsideTo(.top, numberEllipse, CGFloat(10).generateSizeForScreen)
-        specialCharEllipse.constraintInsideTo(.leading, numberEllipse)
-        
-        specialCharLabel.constraintInsideTo(.height, numberCharLabel)
-        specialCharLabel.constraintInsideTo(.centerY, specialCharEllipse)
-        specialCharLabel.constraintInsideTo(.leading, numberLabel)
-        
-        samePasswordEllipse.constraintInsideTo(.height, numberCharEllipse)
-        samePasswordEllipse.constraintOutsideTo(.width, samePasswordEllipse)
-        samePasswordEllipse.constraintOutsideTo(.top, specialCharEllipse, CGFloat(10).generateSizeForScreen)
-        samePasswordEllipse.constraintInsideTo(.leading, specialCharEllipse)
-        
-        samePasswordLabel.constraintInsideTo(.height, numberCharLabel)
-        samePasswordLabel.constraintInsideTo(.centerY, samePasswordEllipse)
-        samePasswordLabel.constraintInsideTo(.leading, numberLabel)
-        
-        hideWrongPasswordButton.constraintInsideTo(.height, passwordStackView)
-        hideWrongPasswordButton.widthAnchorInSuperview(CGFloat(50).generateSizeForScreen)
-        hideWrongPasswordButton.constraintInsideTo(.centerY, passwordStackView)
-        hideWrongPasswordButton.constraintInsideTo(.trailing, passwordStackView)
-        
-        hideWrongConfirmPasswordButton.constraintInsideTo(.height, hideWrongPasswordButton)
-        hideWrongConfirmPasswordButton.constraintInsideTo(.width, hideWrongPasswordButton)
-        hideWrongConfirmPasswordButton.constraintInsideTo(.centerY, confirmStackView)
-        hideWrongConfirmPasswordButton.constraintInsideTo(.trailing, confirmStackView)
-        
+        NSLayoutConstraint.activate([
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(250).generateSizeForScreen),
+            descriptionLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            descriptionLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+
+            backView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            backView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(20).generateSizeForScreen),
+            backView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            backView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: CGFloat(31).generateSizeForScreen),
+
+            passwordStackView.heightAnchor.constraint(equalToConstant: CGFloat(60).generateSizeForScreen),
+            passwordStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen),
+            passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            passwordStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: CGFloat(30).generateSizeForScreen),
+
+            hidePasswordButton.heightAnchor.constraint(equalTo: passwordStackView.heightAnchor),
+            hidePasswordButton.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            hidePasswordButton.centerYAnchor.constraint(equalTo: passwordStackView.centerYAnchor),
+            hidePasswordButton.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor),
+
+            backViewConfirm.heightAnchor.constraint(equalTo: passwordStackView.heightAnchor),
+            backViewConfirm.leadingAnchor.constraint(equalTo: passwordStackView.leadingAnchor),
+            backViewConfirm.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor),
+            backViewConfirm.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor, constant: CGFloat(11.4).generateSizeForScreen),
+
+            confirmStackView.heightAnchor.constraint(equalTo: passwordStackView.heightAnchor),
+            confirmStackView.leadingAnchor.constraint(equalTo: passwordStackView.leadingAnchor),
+            confirmStackView.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor),
+            confirmStackView.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+
+            hideConfirmPasswordButton.heightAnchor.constraint(equalTo: hidePasswordButton.heightAnchor),
+            hideConfirmPasswordButton.widthAnchor.constraint(equalTo: hidePasswordButton.widthAnchor),
+            hideConfirmPasswordButton.centerYAnchor.constraint(equalTo: confirmStackView.centerYAnchor),
+            hideConfirmPasswordButton.trailingAnchor.constraint(equalTo: confirmStackView.trailingAnchor),
+
+            numberCharEllipse.heightAnchor.constraint(equalToConstant: CGFloat(4).generateSizeForScreen),
+            numberCharEllipse.widthAnchor.constraint(equalTo: numberCharEllipse.widthAnchor),
+            numberCharEllipse.topAnchor.constraint(equalTo: confirmStackView.bottomAnchor, constant: CGFloat(11).generateSizeForScreen),
+            numberCharEllipse.leadingAnchor.constraint(equalTo: confirmStackView.leadingAnchor),
+
+            numberCharLabel.heightAnchor.constraint(equalToConstant: CGFloat(11).generateSizeForScreen),
+            numberCharLabel.centerYAnchor.constraint(equalTo: numberCharEllipse.centerYAnchor),
+            numberCharLabel.leadingAnchor.constraint(equalTo: numberCharEllipse.trailingAnchor, constant: CGFloat(5).generateSizeForScreen),
+
+            upperCaseEllipse.heightAnchor.constraint(equalTo: numberCharEllipse.heightAnchor),
+            upperCaseEllipse.widthAnchor.constraint(equalTo: upperCaseEllipse.widthAnchor),
+            upperCaseEllipse.topAnchor.constraint(equalTo: numberCharEllipse.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+            upperCaseEllipse.leadingAnchor.constraint(equalTo: numberCharEllipse.leadingAnchor),
+
+            upperCaseLabel.heightAnchor.constraint(equalTo: numberCharLabel.heightAnchor),
+            upperCaseLabel.centerYAnchor.constraint(equalTo: upperCaseEllipse.centerYAnchor),
+            upperCaseLabel.leadingAnchor.constraint(equalTo: numberCharLabel.leadingAnchor),
+
+            lowerCaseEllipse.heightAnchor.constraint(equalTo: numberCharEllipse.heightAnchor),
+            lowerCaseEllipse.widthAnchor.constraint(equalTo: lowerCaseEllipse.widthAnchor),
+            lowerCaseEllipse.topAnchor.constraint(equalTo: upperCaseEllipse.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+            lowerCaseEllipse.leadingAnchor.constraint(equalTo: upperCaseEllipse.leadingAnchor),
+
+            lowerCaseLabel.heightAnchor.constraint(equalTo: numberCharLabel.heightAnchor),
+            lowerCaseLabel.centerYAnchor.constraint(equalTo: lowerCaseEllipse.centerYAnchor),
+            lowerCaseLabel.leadingAnchor.constraint(equalTo: numberCharLabel.leadingAnchor),
+
+            numberEllipse.heightAnchor.constraint(equalTo: numberCharEllipse.heightAnchor),
+            numberEllipse.widthAnchor.constraint(equalTo: numberEllipse.widthAnchor),
+            numberEllipse.topAnchor.constraint(equalTo: numberCharEllipse.topAnchor),
+            numberEllipse.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-120).generateSizeForScreen),
+
+            numberLabel.heightAnchor.constraint(equalTo: numberCharLabel.heightAnchor),
+            numberLabel.centerYAnchor.constraint(equalTo: numberEllipse.centerYAnchor),
+            numberLabel.leadingAnchor.constraint(equalTo: numberEllipse.trailingAnchor, constant: CGFloat(5).generateSizeForScreen),
+
+            specialCharEllipse.heightAnchor.constraint(equalTo: numberCharEllipse.heightAnchor),
+            specialCharEllipse.widthAnchor.constraint(equalTo: specialCharEllipse.widthAnchor),
+            specialCharEllipse.topAnchor.constraint(equalTo: numberEllipse.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+            specialCharEllipse.leadingAnchor.constraint(equalTo: numberEllipse.leadingAnchor),
+
+            specialCharLabel.heightAnchor.constraint(equalTo: numberCharLabel.heightAnchor),
+            specialCharLabel.centerYAnchor.constraint(equalTo: specialCharEllipse.centerYAnchor),
+            specialCharLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor),
+
+            samePasswordEllipse.heightAnchor.constraint(equalTo: numberCharEllipse.heightAnchor),
+            samePasswordEllipse.widthAnchor.constraint(equalTo: samePasswordEllipse.widthAnchor),
+            samePasswordEllipse.topAnchor.constraint(equalTo: specialCharEllipse.bottomAnchor, constant: CGFloat(10).generateSizeForScreen),
+            samePasswordEllipse.leadingAnchor.constraint(equalTo: specialCharEllipse.leadingAnchor),
+
+            samePasswordLabel.heightAnchor.constraint(equalTo: numberCharLabel.heightAnchor),
+            samePasswordLabel.centerYAnchor.constraint(equalTo: samePasswordEllipse.centerYAnchor),
+            samePasswordLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor),
+
+            hideWrongPasswordButton.heightAnchor.constraint(equalTo: passwordStackView.heightAnchor),
+            hideWrongPasswordButton.widthAnchor.constraint(equalToConstant: CGFloat(50).generateSizeForScreen),
+            hideWrongPasswordButton.centerYAnchor.constraint(equalTo: passwordStackView.centerYAnchor),
+            hideWrongPasswordButton.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor),
+
+            hideWrongConfirmPasswordButton.heightAnchor.constraint(equalTo: hideWrongPasswordButton.heightAnchor),
+            hideWrongConfirmPasswordButton.widthAnchor.constraint(equalTo: hideWrongPasswordButton.widthAnchor),
+            hideWrongConfirmPasswordButton.centerYAnchor.constraint(equalTo: confirmStackView.centerYAnchor),
+            hideWrongConfirmPasswordButton.trailingAnchor.constraint(equalTo: confirmStackView.trailingAnchor),
+        ])
     }
     
     

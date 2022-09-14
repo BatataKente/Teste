@@ -17,7 +17,9 @@ class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
 
+    let sessionManager = SessionManager()
     private var currentReservationId: Int? = nil
+    private var currentSpaceId: Int? = nil
     
     private let cellView: UIView = {
         
@@ -242,13 +244,35 @@ class MyBookingCustomCell: UITableViewCell {
         spaceTypeLabel.text = reservation.space_type?.name
        
         self.currentReservationId = reservation.id
+        self.currentSpaceId = reservation.space_id
     }
     
+
     @objc func actionArrowButton() {
         
         UserReservations.reservationID = currentReservationId
-        self.delegate?.presentViewController(BookingDetailsView())
+        UserReservations.spaceID = currentSpaceId
+        getSpaceDetail()
     }
+    
+    func getSpaceDetail() {
+        
+        guard let currentSpaceId = currentSpaceId else { return }
+
+        sessionManager.getData(id: "\(currentSpaceId)", endpoint: .spacesId, completionHandler: {(statusCode, error, space: SpaceDetail?) in
+            
+            guard let space = space else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            UserReservations.spaceDetail = space
+            self.delegate?.presentViewController(BookingDetailsView())
+       })
+        
+    }
+    
     
     private func setupConstraints() {
         

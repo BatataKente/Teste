@@ -15,7 +15,13 @@ class CheckOutView: UIViewController {
     
     private let customAlertCancel: CustomAlert = CustomAlert()
     private let customAlertOk: CustomAlert = CustomAlert()
-    private var space: SpaceDetail = SpaceDetail()
+    private let customAlertFail = CustomAlert()
+    private var currentReservation: Reservations? {
+        var reservation: Reservations?
+        reservation = checkOutViewModel.getReservation(currentReservation: &reservation)
+        return reservation
+    }
+    private let checkOutViewModel = CheckOutViewModel()
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -92,9 +98,9 @@ class CheckOutView: UIViewController {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 1
-        lb.text = "BOXOFFICE"
+        lb.text = currentReservation?.space_category?.name?.uppercased() ?? " "
         lb.font = UIFont(name: FontsBravve.light.rawValue, size: 13)
-        lb.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        lb.backgroundColor = lb.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? " ")
         lb.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         lb.textAlignment = .center
         return lb
@@ -103,8 +109,8 @@ class CheckOutView: UIViewController {
     lazy var descriptLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Numa esquina\ncharmosa, um hotel"
-        lb.numberOfLines = 0
+        lb.text = currentReservation?.slogan ?? " "
+        lb.numberOfLines = 2
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
         lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         lb.textAlignment = .left
@@ -132,10 +138,10 @@ class CheckOutView: UIViewController {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         
-        guard let pictures = space.pictures else { return pageControl }
+        guard let pictures = currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
-        //        pageControl.backgroundStyle = .prominent
-        pageControl.backgroundColor = .black
+        pageControl.backgroundStyle = .prominent
+//        pageControl.backgroundColor = .black
         pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
@@ -145,7 +151,7 @@ class CheckOutView: UIViewController {
     lazy var infoLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Home by Kamy"
+        lb.text = currentReservation?.local_name ?? " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
         lb.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
@@ -156,7 +162,7 @@ class CheckOutView: UIViewController {
     lazy var nameLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "UM Coffe Co."
+        lb.text = currentReservation?.description ?? " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -186,7 +192,7 @@ class CheckOutView: UIViewController {
     lazy var dayLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09/04/22"
+        lb.text = checkOutViewModel.getDateString(date: currentReservation?.start_dt)
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -219,7 +225,7 @@ class CheckOutView: UIViewController {
     lazy var diaryLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Diária"
+        lb.text = currentReservation?.space_contract_name ?? " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -230,7 +236,7 @@ class CheckOutView: UIViewController {
     lazy var dayDiaryCheckInLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09:00"
+        lb.text = checkOutViewModel.getHourString(date: currentReservation?.start_dt)
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -241,7 +247,8 @@ class CheckOutView: UIViewController {
     lazy var dayDiaryCheckOutLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "20:00"
+        
+        lb.text = checkOutViewModel.getHourString(date: currentReservation?.end_dt)
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -251,7 +258,7 @@ class CheckOutView: UIViewController {
     lazy var checkInRealizedLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-in realizado ás"
+        lb.text = "Check-in realizado às"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -262,7 +269,7 @@ class CheckOutView: UIViewController {
     lazy var checkOutRealizedLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Check-Out realizado ás"
+        lb.text = "Check-Out realizado às"
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -273,7 +280,7 @@ class CheckOutView: UIViewController {
     lazy var hourCheckIn: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "09:04"
+        lb.text = checkOutViewModel.getHourString(date: currentReservation?.checkin_ts)
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -347,7 +354,7 @@ class CheckOutView: UIViewController {
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Total:", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: " R$ 560,87", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " R$ \(currentReservation?.payment_amount?.replacingOccurrences(of: ".", with: ",") ?? " ")", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
@@ -382,7 +389,7 @@ class CheckOutView: UIViewController {
     lazy var contactNumberLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "(11) 99999-9999"
+        lb.text = currentReservation?.space_contact?.phone ?? " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -393,7 +400,7 @@ class CheckOutView: UIViewController {
     lazy var contactEmailLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "giovanna@empresaexe.com.br"
+        lb.text = currentReservation?.space_contact?.email ?? " "
         lb.numberOfLines = 0
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         lb.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -439,13 +446,17 @@ class CheckOutView: UIViewController {
         title.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
         var items = [UIStackView]()
-        var days = ["Segunda: 08:00h - 17:00h", "Terça: 08:00h - 17:00h", "Quarta: 08:00h - 17:00h", "Quinta: 08:00h - 17:00h", "Sexta: 08:00h - 17:00h"]
         
-        items.append(createStackView("Ate 6 pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(createStackView("Av. Sao Joao, CJ. Boulevard, no 900, Sao Paulo. SP 06020-010, BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
+        guard var businessHours = UserReservations.spaceDetail?.space_business_hours else { return UIStackView() }
+        checkOutViewModel.sortBusinessHours(businessHours: &businessHours)
+        
+        var days = checkOutViewModel.createBusinessHoursArray(businessHours: businessHours)
+        
+        items.append(createStackView("Ate \(currentReservation?.seats_qty ?? 0) pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(createStackView("\(currentReservation?.space_address?.street ?? ""), \(currentReservation?.space_address?.neighborhood ?? ""), no \(currentReservation?.space_address?.street_number ?? 0), \(currentReservation?.space_address?.city_name ?? ""). \(currentReservation?.space_address?.state_name ?? "") \(currentReservation?.space_address?.postal_code ?? ""), BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
-        for i in 1...days.count-1 {
+        for i in 0...days.count-1 {
             
             items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
@@ -478,7 +489,7 @@ class CheckOutView: UIViewController {
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
-        let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString1 = NSMutableAttributedString(string: "\(currentReservation?.space_contact?.name ?? " ")\n", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
@@ -502,13 +513,13 @@ class CheckOutView: UIViewController {
         return stackView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         viewInScroll.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         reserveCollection.delegate = self
         reserveCollection.dataSource = self
+        checkOutViewModel.delegate = self
         
         setupViews()
         setupDefaults()
@@ -517,11 +528,11 @@ class CheckOutView: UIViewController {
     }
     
     @objc func buttonMaindoorTap(){
-        print("main door")
+        checkOutViewModel.openDoor()
     }
     
     @objc func buttonOpenSpaceTap(){
-        print("space door")
+        checkOutViewModel.openDoor()
     }
     
     func setupViews(){
@@ -727,13 +738,9 @@ class CheckOutView: UIViewController {
         
         
         customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Após realizar o check-out você não poderá mais abrir a porta do espaço.", enterAttributed: "Confirmar Check-out", enterHandler: UIAction(handler: { _ in
-            self.customAlertOk.dismissAlert()
-            self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
-                let vc = HistoryDetailsView()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-                Flags.shared.flagReservation = 4
-            }), on: self)
+            
+            self.checkOutViewModel.makeCheckOut()
+            
         }), cancelAttributed: "Cancelar Check-out", cancelHandler: UIAction(handler: { _ in
             self.customAlertOk.dismissAlert()
             self.checkOutButton.setTitleColor(UIColor(named: ColorsBravve.label.rawValue), for: .normal)
@@ -750,7 +757,7 @@ class CheckOutView: UIViewController {
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
             }else{
-            self.dismiss(animated: true)
+                self.dismiss(animated: true)
             }
             
         }
@@ -916,11 +923,11 @@ class CheckOutView: UIViewController {
             localDetailsStackView.topAnchor.constraint(equalTo: lineView2.bottomAnchor, constant: 15),
             localDetailsStackView.leadingAnchor.constraint(equalTo: lineView2.leadingAnchor),
             localDetailsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-76).generateSizeForScreen),
-                        
+            
             responsableStackView.topAnchor.constraint(equalTo: lineView3.bottomAnchor, constant: 15),
             responsableStackView.leadingAnchor.constraint(equalTo: lineView3.leadingAnchor),
             responsableStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-78).generateSizeForScreen)
-
+            
             
         ])
     }
@@ -929,20 +936,20 @@ class CheckOutView: UIViewController {
 extension CheckOutView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        guard let pictures = space.pictures else { return 0 }
-        //
-        //        return pictures.count
-        return 3
+        guard let pictures = currentReservation?.picture else { return 0 }
+        
+        return pictures.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CheckOutCustomCell
         
-        //        guard let pictures = space.pictures else { return UICollectionViewCell() }
-        //
-        //        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
-        //
-        //        cell?.imageView.sd_setImage(with: URL(string: picture))
+        guard let pictures = currentReservation?.picture else { return UICollectionViewCell() }
+        
+        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
+        
+        cell?.imageView.sd_setImage(with: URL(string: picture))
         
         return cell ?? UICollectionViewCell()
     }
@@ -959,6 +966,25 @@ extension CheckOutView: UICollectionViewDelegate, UICollectionViewDataSource {
         
         self.pageControl.currentPage = Int(roundedIndex)
     }
+    
+}
+
+extension CheckOutView: CheckOutViewModelProtocol {
+    
+    func showSuccessAlert() {
+        self.customAlertOk.dismissAlert()
+        self.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.checkBlue.rawValue), message: "Check-out realizado com sucesso.\nObrigado pela presença!", enterAttributed: "Ok", enterHandler: UIAction(handler: { _ in
+            let vc = HistoryDetailsView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+            Flags.shared.flagReservation = 4
+        }), on: self)
+    }
+    
+    func showFailAlert(message: String) {
+        customAlertFail.showAlert(message: message, enterAttributed: "Tentar Novamente", on: self)
+    }
+    
     
 }
 
