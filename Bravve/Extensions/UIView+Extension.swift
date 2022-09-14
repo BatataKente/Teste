@@ -592,6 +592,8 @@ extension UIView {
         case "BOXOFFICE": return UIColor(named: ColorsBravve.boxOffice.rawValue) ?? .black
         case "PENDENTE": return UIColor(named: ColorsBravve.reserved.rawValue) ?? .black
         case "COMPLETA": return UIColor(red: 0.435, green: 0.455, blue: 0.475, alpha: 1)
+        case "CHECKOUT REALIZADO": return UIColor(red: 0.235, green: 0.725, blue: 0.988, alpha: 1)
+        case "CANCELADA PELO CLIENTE": return UIColor(red: 1, green: 0, blue: 0, alpha: 0.9)
         //case "Reservado": return UIColor(red: 0.267, green: 0.043, blue: 0.831, alpha: 1)
         case "Cancelada": return UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
         case "Concluída": return UIColor(red: 0.629, green: 0.629, blue: 0.629, alpha: 0.22)
