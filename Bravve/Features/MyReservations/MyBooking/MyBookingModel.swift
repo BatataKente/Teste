@@ -9,4 +9,6 @@
 struct UserReservations {
     static var reservations: [Reservations] = []
     static var reservationID: Int? = nil
+    static var spaceID: Int? = nil
+    static var spaceDetail: SpaceDetail? = nil
 }

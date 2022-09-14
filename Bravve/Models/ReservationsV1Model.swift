@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Reservations: Codable {
+struct Reservations: Codable, Equatable {
     var id: Int?
     var uuid: String?
     var space_id: Int?
@@ -24,6 +24,7 @@ struct Reservations: Codable {
     var reservation_status_id: Int?
     var reservation_status_name: String?
     var space_contract_id: Int?
+    var space_contract_name: String?
     var rent_qty: Int?
     var start_dt: String?
     var end_dt: String?
@@ -42,7 +43,7 @@ struct ReservationsListaParameter: Codable {
     var queryType: String
 }
 
-struct SpaceAddress: Codable {
+struct SpaceAddress: Codable, Equatable {
     var street: String?
     var street_number: Int?
     var neighborhood: String?

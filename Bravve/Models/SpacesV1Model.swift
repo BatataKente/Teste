@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct SpaceType: Codable {
+struct SpaceType: Codable, Equatable {
     var id: Int?
     var name: String?
     var message: String?
 }
 
-struct SpaceClassification: Codable {
+struct SpaceClassification: Codable, Equatable {
     var id: Int?
     var name: String?
     var message: String?
 }
 
-struct SpaceCategory: Codable {
+struct SpaceCategory: Codable, Equatable {
     var id: Int?
     var name: String?
     var message: String?
@@ -31,7 +31,7 @@ struct SpaceFacility: Codable {
     var message: String?
 }
 
-struct SpaceNoise: Codable {
+struct SpaceNoise: Codable, Equatable {
     var id: Int?
     var name: String?
     var message: String?
@@ -96,7 +96,7 @@ struct PartnerAddress: Codable {
     var message: String?
 }
 
-struct SpaceContact: Codable {
+struct SpaceContact: Codable, Equatable {
     var id: Int?
     var name: String?
     var email: String?
@@ -104,7 +104,7 @@ struct SpaceContact: Codable {
     var message: String?
 }
 
-struct SpacePicture: Codable {
+struct SpacePicture: Codable, Equatable {
     var id: Int?
     var space_id: Int?
     var picture_uuid: String?
