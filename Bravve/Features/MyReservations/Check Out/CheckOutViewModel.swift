@@ -54,6 +54,16 @@ class CheckOutViewModel {
             }
 
         }
+        
+        sessionManager.getDataArray(endpoint: .reservationshistory){ (statusCode, error, openReservations: [Reservations]?) in
+
+            guard let openReservations = openReservations else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            UserReservations.reservationsHistory = openReservations
+        }
     }
     
     func openDoor() {

@@ -35,7 +35,6 @@ class BookingHistoryView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("kauehis \(UserReservations.reservationsHistory)")
         view.backgroundColor = UIColor(named: "background")
         
         myTableView.delegate = self
