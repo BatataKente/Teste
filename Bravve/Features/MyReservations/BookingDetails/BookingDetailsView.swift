@@ -223,7 +223,7 @@ class BookingDetailsView: UIViewController {
     
     var items = [UIStackView]()
     
-    var days = ["Segunda", "Terca", "Quarta", "Quinta", "Sexta"]
+    var businessDays = [" "]
     var seatsQty = " "
     var spaceAddress = " "
     
@@ -240,17 +240,20 @@ class BookingDetailsView: UIViewController {
         items.append(createStackView(seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
         items.append(createStackView(spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
-        items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+        items.append(createStackView(businessDays[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
-        for i in 1...days.count-1 {
+        if businessDays != [] {
+        for i in 0...businessDays.count-1 {
 
-            items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+            items.append(createStackView(businessDays[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
                                          textColor: textColor))
         }
+        }
 
         let buttons = createSeeButtonsStackView(3...items.count-1, items: items)
-
+        
+        
         let stackView = UIStackView(arrangedSubviews: [title] + items + [buttons])
         stackView.alignment = .leading
         stackView.axis = .vertical
@@ -452,8 +455,6 @@ class BookingDetailsView: UIViewController {
     override func loadView() {
         super.loadView()
         getReservation()
-        //getSpaceDetail()
-
     }
     
     override func viewDidLoad() {
@@ -466,27 +467,7 @@ class BookingDetailsView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
-        print("kaue \(currentReservation?.id)")
-        print("kaue \(currentReservation?.space_id)")
-        print("kauekaj2 \(UserReservations.spaceDetail)")
     }
-    
-//    func getSpaceDetail() {
-//        
-//        guard let currentSpaceId = currentReservation?.space_id else { return }
-//
-//        sessionManager.getData(id: "\(currentSpaceId)", endpoint: .spacesId, completionHandler: {(statusCode, error, space: SpaceDetail?) in
-//            
-//            guard let space = space else {
-//                print(statusCode as Any)
-//                print(error?.localizedDescription as Any)
-//                return
-//            }
-//            
-//            UserReservations.spaceDetail = space
-//           print("kauekaj \(UserReservations.spaceDetail)")
-//       })
-//    }
     
     func getReservation() {
         
@@ -535,10 +516,32 @@ class BookingDetailsView: UIViewController {
         let startHour = "\(separatedStartHour[0]):\(separatedStartHour[1])"
         let endHour = "\(separatedEndHour[0]):\(separatedEndHour[1])"
         
+        guard var business_hours = currentSpace?.space_business_hours else { return }
+        business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
+            
+            guard let lhsWeekDay = lhs.week_day else { return false }
+            guard let rhsWeekDay = rhs.week_day else { return false }
+            return lhsWeekDay < rhsWeekDay
+        }
         
-        
-        
-        
+        var texts:[String] {
+            var textArray: [String] = []
+            
+            for business_hour in business_hours {
+                
+                if business_hour.flag_closed_day != nil {
+                    if !business_hour.flag_closed_day! {
+                        textArray.append("\(business_hour.day_name ?? ""): \(business_hour.start_time ?? "")h - \(business_hour.end_time ?? "")h")
+                    }
+                }
+            }
+            return textArray
+        }
+        if texts != [] {
+            businessDays = texts
+        } else {
+            businessDays = [" "]
+        }
         
         titleLabel.text = currentReservation?.space_category?.name?.uppercased() ?? ""
         titleLabel.backgroundColor = titleLabel.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
