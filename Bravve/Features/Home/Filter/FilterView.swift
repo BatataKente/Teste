@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 final class FilterScreen: UIViewController {
     
@@ -349,7 +350,8 @@ final class FilterScreen: UIViewController {
     
     //MARK: - exitTap
     @objc private func exitTap() {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     //MARK: - clearTap
@@ -458,8 +460,7 @@ final class FilterScreen: UIViewController {
 
         let HomeOpenView = HomeOpenView(true, filterViewModel.spaceParameters,
                                         filterViewModel.selectedItemsArray)
-        HomeOpenView.modalPresentationStyle = .fullScreen
-        present(HomeOpenView, animated: false)
+        self.navigationController?.pushViewController(HomeOpenView, animated: true)
     }
     
     //MARK: - capacityTap
