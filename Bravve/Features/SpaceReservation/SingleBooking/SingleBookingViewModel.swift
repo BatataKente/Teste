@@ -318,6 +318,7 @@ class SingleBookingViewModel {
                     let timeOut = timeInt + 1
                     hourOutArray.append("\(timeOut):00")
                     hourInArray.append(hourTime)
+                    
                 }
             }
             
@@ -414,8 +415,7 @@ class SingleBookingViewModel {
                 let quitHandler = { (action: UIAction) in
                     
                     timeStack.removeFromSuperview()
-                    hourInArray = []
-                    hourOutArray = []
+                    self.delegate?.reduceDropDown()
                 }
                 trashButton.addAction(UIAction(handler: trashHandler),
                                       for: .touchUpInside)
