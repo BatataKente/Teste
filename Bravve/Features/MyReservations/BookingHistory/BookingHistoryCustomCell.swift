@@ -14,6 +14,7 @@ protocol BookingHistoryCustomCellDelegate: AnyObject {
 class BookingHistoryCustomCell: UITableViewCell {
     
     weak var delegate: BookingHistoryCustomCellDelegate?
+    let sessionManager = SessionManager()
     
     private var currentReservationId: Int? = nil
     private var currentSpaceId: Int? = nil
@@ -165,7 +166,9 @@ class BookingHistoryCustomCell: UITableViewCell {
     }
     
     @objc func actionArrowButton() {
-        self.delegate?.presentViewController(HistoryDetailsView())
+        UserReservations.reservationHistoryID = currentReservationId
+        UserReservations.spaceHistoryID = currentSpaceId
+        getSpaceDetail()
     }
     
     
@@ -217,6 +220,25 @@ class BookingHistoryCustomCell: UITableViewCell {
         self.currentReservationId = reservation.id
         self.currentSpaceId = reservation.space_id
     }
+    
+    func getSpaceDetail() {
+        
+        guard let currentSpaceId = currentSpaceId else { return }
+
+        sessionManager.getData(id: "\(currentSpaceId)", endpoint: .spacesId, completionHandler: {(statusCode, error, space: SpaceDetail?) in
+            
+            guard let space = space else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            UserReservations.spaceHistoryDetail = space
+            self.delegate?.presentViewController(HistoryDetailsView())
+       })
+        
+    }
+
     
     
     func setupConstraints() {

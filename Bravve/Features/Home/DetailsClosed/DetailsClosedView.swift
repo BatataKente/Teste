@@ -41,6 +41,7 @@ class DetailsClosedView: UIViewController {
         let title = UILabel()
         title.textColor = textColor
         title.text = "Detalhes do local"
+        title.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         
         guard var business_hours = space.space_business_hours else { return UIStackView() }
         business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
@@ -83,14 +84,14 @@ class DetailsClosedView: UIViewController {
                 
                 itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                              isHidden: true,
-                                             textColor: textColor))
+                                             textColor: textColor, UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(12).generateSizeForScreen)))
             }
             
             let buttons = createSeeButtonsStackView(3...itens.count-1,
                                                     itens: itens,
                                                     downButtonImages: .arrowDown,
                                                     upButtonImages: .arrowUp)
-
+            
             localDetailsStackView.addArrangedSubviews([title] +
                                                       itens +
                                                       [buttons])
@@ -118,8 +119,8 @@ class DetailsClosedView: UIViewController {
         
         let title = UILabel()
         title.text = "Estrutura"
-        title.font = UIFont(name: FontsBravve.medium.rawValue,
-                            size: 15)
+        title.font = UIFont(name: FontsBravve.koho.rawValue,
+                            size: 24)
         title.textColor = textColor
         
         var texts:[String] {
@@ -141,33 +142,33 @@ class DetailsClosedView: UIViewController {
         
         if texts.count < 7 {
             for text in texts {
-                itens.append(createStackView(text, textColor: textColor))
+                itens.append(createStackView(text, textColor: textColor, UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
             }
             structureStackView.addArrangedSubviews([title] + itens)
         } else {
             for i in 0...5 {
                 
                 itens.append(createStackView(texts[i],
-                                             textColor: textColor))
+                                             textColor: textColor, UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
             }
             
             for i in 6...texts.count - 1 {
                 
                 itens.append(createStackView(texts[i],
                                              isHidden: true,
-                                             textColor: textColor))
+                                             textColor: textColor, UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
             }
             
-            let buttons = createSeeButtonsStackView(6...itens.count-1,
-                                                    itens: itens,
-                                                    titleColor: .capsuleButtonSelected,
-                                                    downButtonImages: .arrowDown,
-                                                    upButtonImages: .arrowUp)
+            let buttons = createSeeButtonsStructureStackView(6...itens.count-1,
+                                                             itens: itens,
+                                                             titleColor: .capsuleButtonSelected,
+                                                             downButtonImages: .arrowDownBlue,
+                                                             upButtonImages: .arrowUpBlue)
             structureStackView.addArrangedSubviews([title] + itens + [buttons])
         }
         
         structureStackView.axis = .vertical
-        structureStackView.spacing = CGFloat(10).generateSizeForScreen
+        structureStackView.spacing = CGFloat(16).generateSizeForScreen
         structureStackView.backgroundColor = UIColor(named: ColorsBravve.cardStructure.rawValue)
         structureStackView.alignment = .leading
         structureStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
@@ -186,8 +187,8 @@ class DetailsClosedView: UIViewController {
         
         let title = UILabel()
         title.text = "Facilities do local"
-        title.font = UIFont(name: FontsBravve.medium.rawValue,
-                            size: 15)
+        title.font = UIFont(name: FontsBravve.koho.rawValue,
+                            size: 24)
         title.textColor = .white
         
         var texts:[String] {
@@ -224,16 +225,16 @@ class DetailsClosedView: UIViewController {
                                              isHidden: true))
             }
             
-            let buttons = createSeeButtonsStackView(6...itens.count-1,
-                                                    itens: itens,
-                                                    titleColor: .capsuleButtonSelected,
-                                                    downButtonImages: .arrowDown,
-                                                    upButtonImages: .arrowUp)
+            let buttons = createSeeButtonsFacilitiesStackView(6...itens.count-1,
+                                                              itens: itens,
+                                                              titleColor: .capsuleButtonSelected,
+                                                              downButtonImages: .arrowDownBlue,
+                                                              upButtonImages: .arrowUpBlue)
             localFacilitiesStackView.addArrangedSubviews([title] + itens + [buttons])
         }
         
         localFacilitiesStackView.axis = .vertical
-        localFacilitiesStackView.spacing = CGFloat(10).generateSizeForScreen
+        localFacilitiesStackView.spacing = CGFloat(16).generateSizeForScreen
         localFacilitiesStackView.backgroundColor = UIColor(named: ColorsBravve.cardFacilities.rawValue)
         localFacilitiesStackView.alignment = .leading
         localFacilitiesStackView.layer.cornerRadius = CGFloat(25).generateSizeForScreen
@@ -265,6 +266,13 @@ class DetailsClosedView: UIViewController {
         spaceCategoryNameLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                              size: CGFloat(13).generateSizeForScreen)
         spaceCategoryNameLabel.text = space.space_category?.name?.uppercased()
+        
+        let separatorView = UIView()
+        separatorView.backgroundColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1)
+        
+        let separatorView2 = UIView()
+        separatorView2.backgroundColor = UIColor(red: 0.882, green: 0.898, blue: 0.922, alpha: 1)
+        
         
         let titleLabelView = UIView()
         titleLabelView.addSubview(spaceCategoryNameLabel)
@@ -306,6 +314,7 @@ class DetailsClosedView: UIViewController {
                                             size: CGFloat(20).generateSizeForScreen))
         
         let descriptionLabel = createLabel(space.description,
+                                           UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen),
                                            textColor: UIColor(named: ColorsBravve.label.rawValue))
         
         let hourlyLabel = createLabel(space.hourly_credits,
@@ -325,22 +334,21 @@ class DetailsClosedView: UIViewController {
                                            strokeColor: UIColor(named: ColorsBravve.pink_cyan.rawValue) ?? UIColor())
         
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
-        tagsStackView.spacing = 5
+        tagsStackView.spacing = 2
         
         let briefingLabel = createLabel("""
-        Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
+            Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
+            
+            Um refúgio paulistano na esquina da Gabriel Monteiro da Silva com a Juquiá,  o paraíso do design. Com uma pegada cultural, o Kamy propicia a seus frequentadores encontrar exposições de diferentes artistas no seu espaço.
+            
+            Trabalho + Café + Cultura, precisa de mais? Então reserve =).
+            """, UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen), textColor: black_White)
         
-        Um refúgio paulistano na esquina da Gabriel Monteiro da Silva com a Juquiá,  o paraíso do design. Com uma pegada cultural, o Kamy propicia a seus frequentadores encontrar exposições de diferentes artistas no seu espaço.
+        let nameLabel = createLabel("Giovanna", UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen))
         
-        Trabalho + Café + Cultura, precisa de mais? Então reserve =).
-        """,
-                                        textColor: black_White)
+        let officeLabel = createLabel("Community Manager", UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen))
         
-        let nameLabel = createLabel("Giovanna")
-        
-        let officeLabel = createLabel("Community Manager")
-        
-        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, localLabel, descriptionLabel, hourlyLabel, creditHourLabel, dailyLabel, creditDayLabel, briefingLabel, nameLabel, officeLabel, localDetailsStackView, structureStackView, localFacilitiesStackView])
+        view.addSubviews([titleLabelView, sloganLabel, photoCollectionView, pageControl, tagsStackView, localLabel, descriptionLabel, hourlyLabel, creditHourLabel, dailyLabel, creditDayLabel, briefingLabel, nameLabel, officeLabel, separatorView , separatorView2,localDetailsStackView,structureStackView, localFacilitiesStackView])
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -381,7 +389,7 @@ class DetailsClosedView: UIViewController {
         localLabel.leadingAnchor.constraint(equalTo: sloganLabel.leadingAnchor).isActive = true
         
         descriptionLabel.topAnchor.constraint(equalTo: localLabel.bottomAnchor,
-                                        constant: CGFloat(7.5).generateSizeForScreen).isActive = true
+                                              constant: CGFloat(7.5).generateSizeForScreen).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         
         hourlyLabel.centerYAnchor.constraint(equalTo: localLabel.centerYAnchor).isActive = true
@@ -407,29 +415,39 @@ class DetailsClosedView: UIViewController {
         tagsStackView.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         tagsStackView.trailingAnchor.constraint(equalTo: creditHourLabel.trailingAnchor).isActive = true
         
-        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor,
-                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
-        briefingLabel.leadingAnchor.constraint(equalTo: tagsStackView.leadingAnchor).isActive = true
-        briefingLabel.trailingAnchor.constraint(equalTo: tagsStackView.trailingAnchor).isActive = true
+        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor, constant: CGFloat(41).generateSizeForScreen).isActive = true
+        briefingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(25.5).generateSizeForScreen).isActive = true
+        briefingLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-27.5).generateSizeForScreen).isActive = true
+        briefingLabel.widthAnchor.constraint(equalToConstant: CGFloat(322).generateSizeForScreen).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor,
-                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: briefingLabel.leadingAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor, constant: CGFloat(18).generateSizeForScreen).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(27).generateSizeForScreen).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: briefingLabel.trailingAnchor).isActive = true
         
         officeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         officeLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
         officeLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
         
-        localDetailsStackView.topAnchor.constraint(equalTo: officeLabel.bottomAnchor,
-                                                   constant: CGFloat(20).generateSizeForScreen).isActive = true
-        localDetailsStackView.leadingAnchor.constraint(equalTo: officeLabel.leadingAnchor).isActive = true
-        localDetailsStackView.trailingAnchor.constraint(equalTo: officeLabel.trailingAnchor).isActive = true
+        separatorView.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen).isActive = true
+        separatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(19).generateSizeForScreen).isActive = true
+        separatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-21).generateSizeForScreen).isActive = true
+        separatorView.topAnchor.constraint(equalTo: officeLabel.bottomAnchor, constant: CGFloat(28.5).generateSizeForScreen).isActive = true
         
-        structureStackView.topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor,
-                                                constant: CGFloat(20).generateSizeForScreen).isActive = true
-        structureStackView.leadingAnchor.constraint(equalTo: localFacilitiesStackView.leadingAnchor).isActive = true
-        structureStackView.trailingAnchor.constraint(equalTo: localFacilitiesStackView.trailingAnchor).isActive = true
+        localDetailsStackView.topAnchor.constraint(equalTo: separatorView.bottomAnchor,
+                                                   constant: CGFloat(29).generateSizeForScreen).isActive = true
+        localDetailsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(19).generateSizeForScreen).isActive = true
+        localDetailsStackView.widthAnchor.constraint(equalToConstant: CGFloat(331).generateSizeForScreen).isActive = true
+        
+        separatorView2.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen).isActive = true
+        separatorView2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(19).generateSizeForScreen).isActive = true
+        separatorView2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-21).generateSizeForScreen).isActive = true
+        separatorView2.topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor, constant: CGFloat(30).generateSizeForScreen).isActive = true
+        
+        structureStackView.topAnchor.constraint(equalTo: separatorView2.bottomAnchor,
+                                                constant: CGFloat(16).generateSizeForScreen).isActive = true
+        structureStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(19).generateSizeForScreen).isActive = true
+        structureStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen).isActive = true
+        structureStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
         
         localFacilitiesStackView.topAnchor.constraint(equalTo: structureStackView.bottomAnchor,
                                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
@@ -474,20 +492,11 @@ class DetailsClosedView: UIViewController {
     private func createStackView(_ text: String,
                                  _ image: UIImage? = nil,
                                  isHidden: Bool = false,
-                                 textColor: UIColor? = .white) -> UIStackView {
+                                 textColor: UIColor? = .white,
+                                 _ font: UIFont? = UIFont(name: FontsBravve.regular.rawValue,
+                                                          size: CGFloat(12).generateSizeForScreen)) -> UIStackView {
         
         let stackView = UIStackView()
-        
-        if let image = image {
-            
-            let imageView = UIImageView()
-            imageView.contentMode = .center
-            imageView.image = image
-            
-            stackView.addArrangedSubview(imageView)
-            
-            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        }
         
         let label = UILabel()
         label.text = text
@@ -500,6 +509,33 @@ class DetailsClosedView: UIViewController {
         stackView.isHidden = isHidden
         
         stackView.addArrangedSubview(label)
+        
+        if let image = image {
+            let imageView = UIImageView()
+            imageView.contentMode = .center
+            imageView.image = image
+            
+            stackView.addArrangedSubviews([imageView, label])
+            stackView.spacing = CGFloat(15).generateSizeForScreen
+            stackView.isHidden = isHidden
+            
+            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        } else {
+            
+            let line = UIView()
+            line.backgroundColor = textColor
+            label.font = UIFont(name: FontsBravve.regular.rawValue,
+                                size: CGFloat(16).generateSizeForScreen)
+            stackView.addArrangedSubviews([label, line])
+            stackView.axis = .vertical
+            stackView.isHidden = isHidden
+            stackView.spacing = CGFloat(8).generateSizeForScreen
+            
+            line.heightAnchor.constraint(equalToConstant: CGFloat(1).generateSizeForScreen).isActive = true
+            line.widthAnchor.constraint(equalToConstant: CGFloat(280).generateSizeForScreen).isActive = true
+        }
+        
+        
         
         return stackView
     }
@@ -525,7 +561,7 @@ class DetailsClosedView: UIViewController {
                                            upButtonImages: ButtonsBravve) -> UIStackView {
         let moreButton = UIButton()
         moreButton.setTitle("Ver Mais", for: .normal)
-        moreButton.setImage(UIImage(named: downButtonImages.rawValue),
+        moreButton.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
                             for: .normal)
         moreButton.imageView?.contentMode = .scaleAspectFit
         moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
@@ -539,10 +575,11 @@ class DetailsClosedView: UIViewController {
         moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
                                                  multiplier: 0.5)
         moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        moreButton.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Mais", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
         
         let lessButton = UIButton()
         lessButton.setTitle("Ver Menos", for: .normal)
-        lessButton.setImage(UIImage(named: upButtonImages.rawValue),
+        lessButton.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
                             for: .normal)
         lessButton.imageView?.contentMode = .scaleAspectFit
         lessButton.isHidden = true
@@ -557,6 +594,150 @@ class DetailsClosedView: UIViewController {
         lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
                                                  multiplier: 0.5)
         lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        lessButton.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Menos", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        
+        let seeMoreHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                itens[i].isHidden = false
+            }
+            moreButton.isHidden = true
+            lessButton.isHidden = false
+        }
+        
+        let seeLessHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                itens[i].isHidden = true
+            }
+            moreButton.isHidden = false
+            lessButton.isHidden = true
+        }
+        
+        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
+        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
+        
+        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
+        
+        return stackView
+    }
+    
+    private func createSeeButtonsStructureStackView(_ range: ClosedRange<Int>,
+                                                    itens: [UIStackView],
+                                                    titleColor: ColorsBravve = .buttonPink,
+                                                    downButtonImages: ButtonsBravve,
+                                                    upButtonImages: ButtonsBravve) -> UIStackView {
+        let moreButton = UIButton()
+        moreButton.setTitle("Ver Mais", for: .normal)
+        moreButton.setImage(UIImage(named: ButtonsBravve.arrowDownBlue.rawValue),
+                            for: .normal)
+        moreButton.imageView?.contentMode = .scaleAspectFit
+        moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        
+        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
+                                                 multiplier: 0.5)
+        moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        moreButton.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Mais", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        
+        let lessButton = UIButton()
+        lessButton.setTitle("Ver Menos", for: .normal)
+        lessButton.setImage(UIImage(named: ButtonsBravve.arrowUpBlue.rawValue),
+                            for: .normal)
+        lessButton.imageView?.contentMode = .scaleAspectFit
+        lessButton.isHidden = true
+        lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
+        lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        
+        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
+                                                 multiplier: 0.5)
+        lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        lessButton.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Menos", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        
+        let seeMoreHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                itens[i].isHidden = false
+            }
+            moreButton.isHidden = true
+            lessButton.isHidden = false
+        }
+        
+        let seeLessHandler = {(action: UIAction) in
+            
+            for i in range {
+                
+                itens[i].isHidden = true
+            }
+            moreButton.isHidden = false
+            lessButton.isHidden = true
+        }
+        
+        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
+        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
+        
+        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
+        
+        return stackView
+    }
+    
+    private func createSeeButtonsFacilitiesStackView(_ range: ClosedRange<Int>,
+                                                     itens: [UIStackView],
+                                                     titleColor: ColorsBravve = .buttonPink,
+                                                     downButtonImages: ButtonsBravve,
+                                                     upButtonImages: ButtonsBravve) -> UIStackView {
+        let moreButton = UIButton()
+        moreButton.setTitle("Ver Mais", for: .normal)
+        moreButton.setImage(UIImage(named: ButtonsBravve.arrowDownWhite.rawValue),
+                            for: .normal)
+        moreButton.imageView?.contentMode = .scaleAspectFit
+        moreButton.setTitleColor(UIColor(named: ColorsBravve.white_white.rawValue), for: .normal)
+        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        
+        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
+                                                 multiplier: 0.5)
+        moreButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        moreButton.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Mais", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+        
+        let lessButton = UIButton()
+        lessButton.setTitle("Ver Menos", for: .normal)
+        lessButton.setImage(UIImage(named: ButtonsBravve.arrowUpWhite.rawValue),
+                            for: .normal)
+        lessButton.imageView?.contentMode = .scaleAspectFit
+        lessButton.isHidden = true
+        lessButton.setTitleColor(UIColor(named: ColorsBravve.white_white.rawValue), for: .normal)
+        lessButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
+                                             size: CGFloat(12).generateSizeForScreen)
+        
+        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        
+        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
+                                                 multiplier: 0.5)
+        lessButton.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
+        
+        lessButton.titleLabel?.attributedText = NSMutableAttributedString(string: "Ver Menos", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
         
         let seeMoreHandler = {(action: UIAction) in
             
@@ -668,3 +849,4 @@ extension DetailsClosedView: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
 }
+
