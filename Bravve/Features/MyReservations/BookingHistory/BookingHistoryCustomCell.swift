@@ -15,6 +15,9 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     weak var delegate: BookingHistoryCustomCellDelegate?
     
+    private var currentReservationId: Int? = nil
+    private var currentSpaceId: Int? = nil
+    
     let cellView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = CGFloat(19).generateSizeForScreen
@@ -25,7 +28,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let typeTagLabel: UILabel = {
         let label = UILabel()
-        label.text = "BOXOFFICE"
+        label.text = " "
         label.backgroundColor = UIColor(named: "boxOffice")
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
@@ -36,33 +39,28 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let topTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Numa esquina"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    let bottomTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "charmosa, um hotel"
-        label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let spaceImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "imageReservs")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+       
+    private let spaceImage: UIImageView = {
+        
+        let spaceImage = UIImageView()
+        spaceImage.translatesAutoresizingMaskIntoConstraints = false
+        spaceImage.clipsToBounds = true
+        spaceImage.layer.cornerRadius = 12
+        spaceImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        
+        return spaceImage
     }()
     
     let spaceNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hotel Saint"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -71,18 +69,25 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let reservedLabel: UILabel = {
         let label = UILabel()
-        label.text = " RESERVADO "
-        label.backgroundColor = UIColor(named: "reserved")
+        label.text = " "
         label.textColor = .white
-        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(11).generateSizeForScreen)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    private let reservedLabelView: UIView = {
+        
+        let reservedLabelView = UIView()
+        reservedLabelView.translatesAutoresizingMaskIntoConstraints = false
+        reservedLabelView.backgroundColor = UIColor(named: ColorsBravve.reserved.rawValue)
+        return reservedLabelView
+    }()
+    
     let spaceSubtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "UM Coffee Co."
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +96,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let locationLabel: UILabel = {
         let label = UILabel()
-        label.text = "São Paulo / Jardim Paulistano"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +105,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "21/01/2022 - 22/01/2022"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +114,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let hourLabel: UILabel = {
         let label = UILabel()
-        label.text = "9h às 18h"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -118,7 +123,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     
     let spaceTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Espaço privativo"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -144,7 +149,7 @@ class BookingHistoryCustomCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
-        cellView.addSubviews([typeTagLabel, topTitleLabel, bottomTitleLabel, spaceImage, spaceNameLabel, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
+        cellView.addSubviews([typeTagLabel, topTitleLabel, spaceImage, spaceNameLabel, reservedLabelView, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
         
         contentView.addSubview(cellView)
         
@@ -163,6 +168,57 @@ class BookingHistoryCustomCell: UITableViewCell {
         self.delegate?.presentViewController(HistoryDetailsView())
     }
     
+    
+    func setupCell(reservation: Reservations) {
+        
+        guard let city = (reservation.space_address?.city_name) else { return }
+        guard let neighborhood = (reservation.space_address?.neighborhood) else { return }
+        
+        guard let pictures = reservation.picture else { return }
+        
+        var picture = ""
+            
+        if pictures.count != 0 {
+            guard let pictureSelected = pictures[0].url else { return }
+            picture = pictureSelected
+        }
+        
+        guard let reservationStartDt = reservation.start_dt else { return }
+        guard let reservationEndDt = reservation.end_dt else { return }
+        
+        let separatedStartDate = reservationStartDt.components(separatedBy: "T")
+        let separatedEndDate = reservationEndDt.components(separatedBy: "T")
+        
+        let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
+        let formatEndDate = separatedEndDate[0].components(separatedBy: "-")
+        
+        let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
+        let endDate = "\(formatEndDate[2])/\(formatEndDate[1])/\(formatEndDate[0])"
+        
+        let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
+        let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
+        
+        let startHour = "\(separatedStartHour[0])"
+        let endHour = "\(separatedEndHour[0])"
+        
+        typeTagLabel.text = reservation.space_category?.name?.uppercased()
+        typeTagLabel.backgroundColor = getTitleLabelBackgroundColor(reservation.space_category?.name?.uppercased() ?? "")
+        topTitleLabel.text = reservation.slogan
+        spaceImage.sd_setImage(with: URL(string: picture), placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+        spaceNameLabel.text = reservation.local_name
+        reservedLabel.text = reservation.reservation_status_name?.uppercased()
+        reservedLabelView.backgroundColor = getTitleLabelBackgroundColor(reservation.reservation_status_name?.uppercased() ?? "")
+        spaceSubtitleLabel.text = reservation.description
+        locationLabel.text = "\(city) / \(neighborhood)"
+        dateLabel.text = "\(startDate) - \(endDate)"
+        hourLabel.text = "\(startHour)h às \(endHour)h"
+        spaceTypeLabel.text = reservation.space_type?.name
+       
+        self.currentReservationId = reservation.id
+        self.currentSpaceId = reservation.space_id
+    }
+    
+    
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
@@ -176,22 +232,24 @@ class BookingHistoryCustomCell: UITableViewCell {
             
             topTitleLabel.topAnchor.constraint(equalTo: typeTagLabel.bottomAnchor, constant: CGFloat(19).generateSizeForScreen),
             topTitleLabel.leadingAnchor.constraint(equalTo: typeTagLabel.leadingAnchor),
-            
-            bottomTitleLabel.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor),
-            bottomTitleLabel.leadingAnchor.constraint(equalTo: topTitleLabel.leadingAnchor),
-            
-            spaceImage.topAnchor.constraint(equalTo: bottomTitleLabel.bottomAnchor, constant: CGFloat(22).generateSizeForScreen),
-            spaceImage.leadingAnchor.constraint(equalTo: bottomTitleLabel.leadingAnchor),
+            topTitleLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.6),
+                       
+            spaceImage.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor, constant: CGFloat(22).generateSizeForScreen),
+            spaceImage.leadingAnchor.constraint(equalTo: topTitleLabel.leadingAnchor),
             spaceImage.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
-            spaceImage.heightAnchor.constraint(equalTo: cellView.heightAnchor, multiplier: 0.39),
+            spaceImage.heightAnchor.constraint(equalToConstant: CGFloat(200).generateSizeForScreen),
             
             spaceNameLabel.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: CGFloat(23).generateSizeForScreen),
             spaceNameLabel.leadingAnchor.constraint(equalTo: spaceImage.leadingAnchor),
             
-            reservedLabel.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: CGFloat(32).generateSizeForScreen),
-            reservedLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: CGFloat(-22).generateSizeForScreen),
-            reservedLabel.heightAnchor.constraint(equalToConstant: CGFloat(23).generateSizeForScreen),
-            
+            reservedLabelView.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: CGFloat(28).generateSizeForScreen),
+            reservedLabelView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: CGFloat(-26).generateSizeForScreen),
+
+            reservedLabel.topAnchor.constraint(equalTo: reservedLabelView.topAnchor, constant: CGFloat(2.5).generateSizeForScreen),
+            reservedLabel.leadingAnchor.constraint(equalTo: reservedLabelView.leadingAnchor, constant: CGFloat(2.5).generateSizeForScreen),
+            reservedLabel.trailingAnchor.constraint(equalTo: reservedLabelView.trailingAnchor, constant: CGFloat(-2.5).generateSizeForScreen),
+            reservedLabel.bottomAnchor.constraint(equalTo: reservedLabelView.bottomAnchor, constant: CGFloat(-2.5).generateSizeForScreen),
+                     
             spaceSubtitleLabel.topAnchor.constraint(equalTo: spaceNameLabel.bottomAnchor, constant: CGFloat(8).generateSizeForScreen),
             spaceSubtitleLabel.leadingAnchor.constraint(equalTo: spaceNameLabel.leadingAnchor),
             
