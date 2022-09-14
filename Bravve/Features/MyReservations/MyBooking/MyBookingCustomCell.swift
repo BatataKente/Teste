@@ -149,7 +149,7 @@ class MyBookingCustomCell: UITableViewCell {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Espaço privativo"
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         
