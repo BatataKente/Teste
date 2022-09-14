@@ -13,6 +13,8 @@ import SDWebImage
 
 class PersonalProfileView: UIViewController{
     
+    var alertEmailDidTapButton: (() -> Void)?
+    
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
         tabBar.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +46,7 @@ class PersonalProfileView: UIViewController{
     
     private lazy var profilePic: UIImageView = {
         let image = UIImageView()
+        image.image = UIImage(named: ImagesBravve.photo.rawValue)
         image.layer.masksToBounds = false
         image.layer.cornerRadius = 61
         image.clipsToBounds = true
@@ -332,6 +335,9 @@ class PersonalProfileView: UIViewController{
         tabBar.selectedItem = tabBar.items?[2]
         
         view.backgroundColor = UIColor(named: "background")
+        view.isHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [self] in view.isHidden = false
+      }
         
         view.addSubviews([ wayImage, profilePic, helloLabel, subtitleLabel, createMyUiView,myWallet,changeWalletButton,personalAccount, userEditIconPic, editProfile ,backView, infoCircleIcon ,bookHistoryLabel , separatorView, helpLabel, nextPageButton, separatorView2, nextPageButton2, separatorView3, bookIcon, policyLabel,nextPageButton3, separatorView4, historyIcon, logoutButton, logoutImage, nextPageButton4,tabBar])
         self.navigationController?.isNavigationBarHidden = true
@@ -405,6 +411,12 @@ class PersonalProfileView: UIViewController{
         let popUp = PersonalProfilePopupView()
         popUp.modalPresentationStyle = .popover
         self.present(popUp,animated: true)
+        
+    }
+    
+    func setAccount(){
+        myWallet.text = "Foursys"
+        personalAccount.text = "Conta corporativa"
         
     }
     
@@ -567,9 +579,11 @@ class PersonalProfileView: UIViewController{
     
     //MARK: popUpChangeWallet
     
-    class PersonalProfilePopupView: UIViewController{
+    class PersonalProfilePopupView: UIViewController, UIGestureRecognizerDelegate{
         
         //MARK: viewElements
+        
+        //MARK: ExpansionView
         
         private lazy var createMyExpansionUiView: UIView = {
             let view = UIView()
@@ -599,7 +613,7 @@ class PersonalProfileView: UIViewController{
             return image
         }()
         
-        private lazy var myWallet: UILabel = {
+        private lazy var myWalletPopup: UILabel = {
             let label = UILabel()
             label.text = "Minha carteira"
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -608,7 +622,7 @@ class PersonalProfileView: UIViewController{
             return label
         }()
         
-        private lazy var personalAccount: UILabel = {
+        private lazy var personalAccountPopup: UILabel = {
             let label = UILabel()
             label.text = "Conta pessoal"
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -723,8 +737,12 @@ class PersonalProfileView: UIViewController{
         override func viewDidLoad() {
             super.viewDidLoad()
             
+            let viewTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+                   viewTapGesture.delegate = self
+                   view.addGestureRecognizer(viewTapGesture)
+            
             view.backgroundColor = .clear
-            view.addSubviews([createMyExpansionUiView,walletIcon,myAccounts,myWallet,personalAccount,infoWalletLabel,subInfoWalletLabel,bravveInfoLabel,subBravveInfoLabel,numberCreditsLabel,numberCreditsLabel2,lineView,lineView2,buttonSelectWallet,buttonSelectWallet2])
+            view.addSubviews([createMyExpansionUiView,walletIcon,myAccounts,myWalletPopup,personalAccountPopup,infoWalletLabel,subInfoWalletLabel,bravveInfoLabel,subBravveInfoLabel,numberCreditsLabel,numberCreditsLabel2,lineView,lineView2,buttonSelectWallet,buttonSelectWallet2])
             setupConstraints()
             
             
@@ -733,19 +751,41 @@ class PersonalProfileView: UIViewController{
         
         //MARK: Objc Funcs PopUp
         
+        @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+            dismiss(animated: true)
+            }
+        
         @objc func dismissPopUpAndSelectWallet(){
+            
+            setValor1()
+//            self.dismiss(animated: true)
+            
+        }
+        
+        func setValor1(){
+            
             let enterProfileElements = PersonalProfileView()
             enterProfileElements.myWallet.text! = "Foursys"
             enterProfileElements.personalAccount.text! = "Conta corporativa"
-            self.dismiss(animated: true)
+            myWalletPopup.text = "Foursys"
+            personalAccountPopup.text = "Conta corporativa"
+            
+        }
+        
+        func setValor2(){
+            
+            let enterProfileElements = PersonalProfileView()
+            enterProfileElements.myWallet.text! = "Bravve"
+            enterProfileElements.personalAccount.text! = "Conta corporativa"
+            myWalletPopup.text = "Bravve"
+            personalAccountPopup.text = "Conta corporativa"
             
         }
         
         @objc func dismissPopUpAndSelectWallet2(){
-            let enterProfileElements = PersonalProfileView()
-            enterProfileElements.myWallet.text! = "Bravve"
-            enterProfileElements.personalAccount.text! = "Conta corporativa"
-            self.dismiss(animated: true)
+            
+            setValor2()
+//            self.dismiss(animated: true)
             
         }
         
@@ -767,13 +807,13 @@ class PersonalProfileView: UIViewController{
                 myAccounts.leadingAnchor.constraint(equalTo: walletIcon.leadingAnchor),
                 myAccounts.topAnchor.constraint(equalTo: walletIcon.bottomAnchor,constant: 14),
                 
-                myWallet.centerXAnchor.constraint(equalTo: createMyExpansionUiView.centerXAnchor),
-                myWallet.topAnchor.constraint(equalTo: myAccounts.bottomAnchor,constant: 21),
+                myWalletPopup.centerXAnchor.constraint(equalTo: createMyExpansionUiView.centerXAnchor),
+                myWalletPopup.topAnchor.constraint(equalTo: myAccounts.bottomAnchor,constant: 21),
                 
-                personalAccount.centerXAnchor.constraint(equalTo: myWallet.centerXAnchor),
-                personalAccount.topAnchor.constraint(equalTo: myWallet.bottomAnchor,constant: 9),
+                personalAccountPopup.centerXAnchor.constraint(equalTo: myWalletPopup.centerXAnchor),
+                personalAccountPopup.topAnchor.constraint(equalTo: myWalletPopup.bottomAnchor,constant: 9),
                 
-                lineView.topAnchor.constraint(equalTo: personalAccount.bottomAnchor,constant: 22),
+                lineView.topAnchor.constraint(equalTo: personalAccountPopup.bottomAnchor,constant: 22),
                 lineView.leadingAnchor.constraint(equalTo: createMyExpansionUiView.leadingAnchor,constant: 17),
                 lineView.trailingAnchor.constraint(equalTo: createMyExpansionUiView.trailingAnchor,constant: -17),
                 lineView.heightAnchor.constraint(equalToConstant: 1),
@@ -820,6 +860,8 @@ class PersonalProfileView: UIViewController{
     
     
 }
+
+
 
 
 
