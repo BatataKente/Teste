@@ -451,13 +451,12 @@ class CheckOutView: UIViewController {
         checkOutViewModel.sortBusinessHours(businessHours: &businessHours)
         
         var days = checkOutViewModel.createBusinessHoursArray(businessHours: businessHours)
-//        var days = ["Segunda: 08:00h - 17:00h", "Terça: 08:00h - 17:00h", "Quarta: 08:00h - 17:00h", "Quinta: 08:00h - 17:00h", "Sexta: 08:00h - 17:00h"]
         
         items.append(createStackView("Ate \(currentReservation?.seats_qty ?? 0) pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
         items.append(createStackView("\(currentReservation?.space_address?.street ?? ""), \(currentReservation?.space_address?.neighborhood ?? ""), no \(currentReservation?.space_address?.street_number ?? 0), \(currentReservation?.space_address?.city_name ?? ""). \(currentReservation?.space_address?.state_name ?? "") \(currentReservation?.space_address?.postal_code ?? ""), BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
-        for i in 1...days.count-1 {
+        for i in 0...days.count-1 {
             
             items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,

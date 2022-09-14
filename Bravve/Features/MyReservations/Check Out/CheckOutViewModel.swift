@@ -163,7 +163,11 @@ class CheckOutViewModel {
                 }
             }
         }
+        if !textArray.isEmpty {
+            return textArray
+        } else {
+            return [" "]
+        }
        
-        return textArray
     }
 }
