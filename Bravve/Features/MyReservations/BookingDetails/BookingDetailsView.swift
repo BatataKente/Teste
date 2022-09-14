@@ -242,13 +242,11 @@ class BookingDetailsView: UIViewController {
         
         items.append(createStackView(businessDays[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
-        if businessDays != [] {
         for i in 0...businessDays.count-1 {
 
             items.append(createStackView(businessDays[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
                                          textColor: textColor))
-        }
         }
 
         let buttons = createSeeButtonsStackView(3...items.count-1, items: items)
@@ -801,8 +799,6 @@ class BookingDetailsView: UIViewController {
             guard let reservations = reservations else {
                 print(statusCode as Any)
                 print(error?.localizedDescription as Any)
-                print("kaj \(parameters)")
-                print("kaj \(reservations)")
                 return
             }
             
