@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftUI
 
 class HomeOpenView: UIViewController {
     
@@ -19,6 +21,8 @@ class HomeOpenView: UIViewController {
     
     private var cells: [Space] = []
     
+    private var searchCells: [Space] = []
+    
     private var filterButtons = [UIButton]()
     
     private let cellIdentifier = "Cell"
@@ -26,6 +30,8 @@ class HomeOpenView: UIViewController {
     private let titleLabel = UILabel()
     
     private let customBar = UIView()
+    
+    private var searchController = UISearchController(searchResultsController: nil)
     
     private lazy var filterStackView: UIStackView = {
         
@@ -191,13 +197,39 @@ class HomeOpenView: UIViewController {
         setupView()
         setupConstraints()
         setupDefaults()
+        searchSetup()
     }
  
     
     override func viewDidDisappear(_ animated: Bool) {
         navigationSetup()
         super.viewDidDisappear(animated)
+        self.searchController.isActive = false
         tabBar.selectedItem = tabBar.items?[0]
+        print("Disappear")
+    }
+    
+    //MARK: - Search Controller Methods
+    
+    private func searchSetup(){
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+    }
+    
+    private func filterContentForSearchText(searchText: String){
+        searchCells = cells.filter({ (space: Space) -> Bool in
+            guard let city = space.partner_site_address?.address?.city_name else {return false}
+            guard let state = space.partner_site_address?.address?.state_name else {return false}
+            guard let postal = space.partner_site_address?.address?.postal_code else {return false}
+            guard let address = space.partner_site_address?.address?.street else {return false}
+            let cityName = city.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            let stateName = state.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            let postalCode = postal.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            let addressName = address.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+           
+            return cityName != nil || stateName != nil || postalCode != nil || addressName != nil
+        })
     }
     
     //MARK: - Navigation Methods
@@ -227,13 +259,41 @@ class HomeOpenView: UIViewController {
     }
     
     @objc func searchBarButtonTapped(){
-        let logo = UIImage(named: ImagesBravve.example_1.rawValue)
-        let centerImageView = UIImageView(image: logo)
-        centerImageView.contentMode = .scaleToFill
-        self.navigationItem.titleView = centerImageView
+        let searchBar: UISearchBar = self.searchController.searchBar
+        searchBar.placeholder = "Busque CEP, endereço, cidade ou estado"
+        searchBar.delegate = self
+        searchBar.isTranslucent = false
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = false
+        searchBar.showsBookmarkButton = true
+        
+        let searchTextField = searchBar.searchTextField
+        searchTextField.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
+        searchTextField.leftView = UIView()
+        searchTextField.clearButtonMode = .never
+        searchTextField.backgroundColor = .white
+        
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        config.image = UIImage(named: ButtonsBravve.mostButton.rawValue)
+        
+        DispatchQueue.main.async {
+            searchTextField.rightViewMode = .always
+            let searchButton = UIButton(configuration: config, primaryAction: UIAction(handler: {[weak self] action in
+                self?.searchBarBookmarkButtonClicked(searchBar)
+            }))
+            searchButton.layer.cornerRadius = 12
+            searchTextField.rightView = searchButton
+            
+        }
+        self.navigationItem.titleView = searchBar
         
         self.navigationItem.leftBarButtonItems = [UIBarButtonItem(systemItem: UIBarButtonItem.SystemItem.fixedSpace, primaryAction: nil, menu: nil)]
-        print("search")
+       let barButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.filterWhiteFull.rawValue)?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(filterButtonTapped))
+        barButtonItem.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        
+        self.navigationItem.rightBarButtonItem = barButtonItem
+        
     }
     
     @objc func menuBarButtonTapped(){
@@ -241,6 +301,12 @@ class HomeOpenView: UIViewController {
         let centerImageView = UIImageView(image: logo)
         self.navigationItem.titleView = centerImageView
         print("menu")
+    }
+    
+    @objc func filterButtonTapped(){
+        let filterView = FilterScreen(self.spaceParameters, self.selectedItemsArray)
+        self.navigationController?.pushViewController(filterView, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     
@@ -374,8 +440,11 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return cells.count + 1
+        if self.searchController.isActive{
+            return searchCells.count + 1
+        }else{
+            return cells.count + 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -397,7 +466,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
-                cell?.setup(cells[indexPath.row - 1])
+                let space = (searchController.isActive) ? searchCells[indexPath.row - 1] : cells[indexPath.row - 1]
+                cell?.setup(space)
                 
                 return cell ?? UITableViewCell()
             }
@@ -439,8 +509,7 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
     
     
     func presentOtherView(_ viewController: UIViewController) {
-        
-        present(viewController, animated: false)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func setSpaces(_ spaces: [Space]) {
@@ -469,5 +538,20 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
     func setupRightDropDown(_ buttons: [UIButton]){
         
         rightDropDown.turnIntoAList(buttons)
+    }
+}
+
+extension HomeOpenView: UISearchBarDelegate{
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+extension HomeOpenView: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text{
+            self.filterContentForSearchText(searchText: searchText)
+            self.tableView.reloadData()
+        }
     }
 }
