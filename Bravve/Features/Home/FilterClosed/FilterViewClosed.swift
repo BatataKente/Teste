@@ -9,6 +9,14 @@ import UIKit
 
 final class FilterViewClosed: UIViewController {
     
+    //MARK: - prefersStatusBarHidden
+    override var prefersStatusBarHidden: Bool {
+        
+        true
+    }
+    
+    
+    //MARK: - init
     init(_ spaceParameters: SpaceListParameters = SpaceListParameters(space_state_id: nil, space_city_id: nil, allow_workpass: nil, seats_qty: nil, space_type_id: nil, space_classification_id: nil, space_category_id: nil, space_facilities_id: nil, space_noise_level_id: nil, space_contract_Type: nil), _ seletedItemsArray: [String] = []) {
         
         self.spaceParameters = spaceParameters
@@ -24,6 +32,9 @@ final class FilterViewClosed: UIViewController {
         
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    //MARK: - var and let
     
     let sessionManager = SessionManager()
     
@@ -67,12 +78,19 @@ final class FilterViewClosed: UIViewController {
         
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         return scrollView
     }()
     
     
-    let uiview = UIView()
+    private lazy var  uiview: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    
     private lazy var tabBar = TabBarClosed(self)
     
     //MARK: - filterButton
@@ -83,6 +101,7 @@ final class FilterViewClosed: UIViewController {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.xmarkBlue.rawValue), for: .normal)
         view.addTarget(self, action: #selector(exitTap), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -93,6 +112,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Filtrar"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -111,6 +131,7 @@ final class FilterViewClosed: UIViewController {
         button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue, size: 12)
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(clearTap), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -122,6 +143,7 @@ final class FilterViewClosed: UIViewController {
         view.layer.borderColor = UIColor(named: ColorsBravve.textFieldBorder.rawValue)?.cgColor
         view.layer.cornerRadius = 8
         view.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -132,6 +154,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Capacidade"
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 11)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -140,6 +163,7 @@ final class FilterViewClosed: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 15)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -148,11 +172,11 @@ final class FilterViewClosed: UIViewController {
         let view = UIButton()
         view.setImage(UIImage(named: ButtonsBravve.arrowDown.rawValue), for: .normal)
         view.addTarget(self, action: #selector(capacityTap), for: .touchUpInside)
-        
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    //MARK: capacityDropDown
+    //MARK: - capacityDropDown
     private lazy var capacityDropDown: UIScrollView = {
         
         let capacityDropDown = UIScrollView()
@@ -171,7 +195,8 @@ final class FilterViewClosed: UIViewController {
             
             let handler = {(action: UIAction) in
                 
-                self.numberLabel.text = button.currentTitle
+                
+                self.numberLabel.text =  button.currentTitle
                 self.capacityDropDown.frame.size = .zero
             }
             
@@ -194,6 +219,7 @@ final class FilterViewClosed: UIViewController {
             
             let line = UIImageView()
             line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+            line.translatesAutoresizingMaskIntoConstraints = false
             lines.append(line)
         }
         
@@ -206,6 +232,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Tipo de Espaço"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -216,6 +243,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -225,6 +253,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Classificação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -234,6 +263,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -243,6 +273,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Categoria"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -252,6 +283,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -261,6 +293,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Facilities"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -270,6 +303,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -279,6 +313,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Conforto Auditivo"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -288,6 +323,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.axis = .horizontal
         view.distribution = .fillProportionally
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -297,6 +333,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -306,6 +343,7 @@ final class FilterViewClosed: UIViewController {
         label.text = "Tipo de Contratação"
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: 14)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -315,6 +353,7 @@ final class FilterViewClosed: UIViewController {
         view.spacing = 4
         view.alignment = .leading
         view.axis = .vertical
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -323,11 +362,11 @@ final class FilterViewClosed: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: views)
         
-            stackView.spacing = 4
+        stackView.spacing = 4
         stackView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
-        
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }
     
@@ -356,18 +395,16 @@ final class FilterViewClosed: UIViewController {
         return stackViews
     }
     
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
-    
+   
     //MARK: - loadView
     override func loadView() {
         super.loadView()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-        view.heightAnchor.constraint(equalToConstant: 1500).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1700).isActive = true
         setupView()
         setupConstrains()
+        
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
     }
     
     //MARK: - setupView
@@ -967,169 +1004,178 @@ final class FilterViewClosed: UIViewController {
     
     //MARK: setupConstrains
     private func setupConstrains() {
+    
         
-        let spacing = CGFloat(19).generateSizeForScreen
+        NSLayoutConstraint.activate([
         
-        //MARK: scrollView
-        scrollView.constraintInsideTo(.top, view.safeAreaLayoutGuide)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, filterButton)
+            //MARK: scrollView
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            
+            //MARK: uiview
+            uiview.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            uiview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            uiview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            uiview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            uiview.widthAnchor.constraint(equalTo: view.widthAnchor),
+            uiview.heightAnchor.constraint(equalToConstant: 1680),
+            
+            
+            //MARK: exitButton
+            exitButton.topAnchor.constraint(equalTo: uiview.topAnchor, constant: 20),
+            exitButton.leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            exitButton.widthAnchor.constraint(equalToConstant: 14),
+            exitButton.heightAnchor.constraint(equalToConstant: 14),
+            
+            
+            //MARK: filterLabel
+            filterLabel.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 19),
+            filterLabel.leadingAnchor.constraint(equalTo: exitButton.leadingAnchor),
+            filterLabel.widthAnchor.constraint(equalToConstant: 120),
+            
+            
+            //MARK: clearLabel
+            clearButton.centerYAnchor.constraint(equalTo: filterLabel.centerYAnchor),
+            clearButton.trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -35),
+            
+            
+            //MARK: capacityView
+            capacityView.topAnchor.constraint(equalTo: filterLabel.bottomAnchor, constant: 19),
+            capacityView.leadingAnchor.constraint(equalTo: filterLabel.leadingAnchor),
+           
         
-        //MARK: Filter & Capacity & Clear
-        uiview.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        uiview.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        uiview.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        uiview.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        uiview.constraintInsideTo(.width, scrollView.frameLayoutGuide)
-        
-        //MARK: exitButton
-        exitButton.constraintInsideTo(.top, uiview)
-        exitButton.constraintInsideTo(.leading, uiview,
-                                      CGFloat(20).generateSizeForScreen)
-        exitButton.heightAnchorInSuperview(CGFloat(14).generateSizeForScreen)
-        exitButton.constraintOutsideTo(.width, exitButton)
-        
-        //MARK: filterLabel
-        filterLabel.constraintOutsideTo(.top, exitButton, spacing)
-        filterLabel.constraintInsideTo(.leading, exitButton)
-        
-        //MARK: clearLabel
-        clearButton.constraintInsideTo(.centerY, filterLabel)
-        clearButton.constraintInsideTo(.trailing, uiview,
-                                       CGFloat(35).generateSizeForScreen)
-        
-        //MARK: capacityView
-        capacityView.constraintOutsideTo(.top, filterLabel, spacing)
-        capacityView.constraintInsideTo(.leading, filterLabel)
-        
-        //MARK: capacityLabel
-        capacityLabel.constraintInsideTo(.top, capacityView,
-                                         CGFloat(12).generateSizeForScreen)
-        capacityLabel.constraintInsideTo(.leading, capacityView,
-                                         CGFloat(16).generateSizeForScreen)
-        capacityLabel.constraintInsideTo(.trailing, capacityView,
-                                         CGFloat(48).generateSizeForScreen)
-        
-        //MARK: numberLabel
-        numberLabel.constraintOutsideTo(.top, capacityLabel,
-                                        CGFloat(7).generateSizeForScreen)
-        numberLabel.constraintInsideTo(.leading, capacityView,
-                                       CGFloat(16).generateSizeForScreen)
-        numberLabel.constraintInsideTo(.bottom, capacityView,
-                                       CGFloat(11).generateSizeForScreen)
-        
-        //MARK: capacityButton
-        capacityButton.constraintInsideTo(.top, capacityView)
-        capacityButton.constraintOutsideTo(.leading, capacityLabel,
-                                           CGFloat(10).generateSizeForScreen)
-        capacityButton.constraintInsideTo(.trailing, capacityView)
-        capacityButton.constraintInsideTo(.bottom, capacityView)
-        
-        //MARK: lines[0]
-        lines[0].constraintOutsideTo(.top, capacityView,
-                                      CGFloat(16).generateSizeForScreen)
-        lines[0].constraintInsideTo(.leading, capacityView)
-        lines[0].constraintInsideTo(.trailing, uiview,
-                                     CGFloat(20).generateSizeForScreen)
-        lines[0].heightAnchorInSuperview(1)
-        
-        //MARK: spaceType
-        spaceType.constraintOutsideTo(.top, lines[0], spacing)
-        spaceType.constraintInsideTo(.leading, lines[0])
-        
-        //MARK: roomsStackspaceType
-        roomsStackspaceType.constraintOutsideTo(.top, spaceType, spacing)
-        roomsStackspaceType.constraintInsideTo(.leading, lines[0])
-        roomsStackspaceType.constraintInsideTo(.trailing, lines[0])
-        
-        //MARK: lineImage2
-        lines[1].constraintOutsideTo(.top, roomsStackspaceType, spacing)
-        lines[1].constraintInsideTo(.leading, lines[0])
-        lines[1].constraintInsideTo(.trailing, lines[0])
-        lines[1].constraintInsideTo(.height, lines[0])
-        
-        //MARK: classificationLabel
-        classificationLabel.constraintOutsideTo(.top, lines[1], spacing)
-        classificationLabel.constraintInsideTo(.leading, lines[0])
-        
-        //MARK: roomsStackClassification
-        roomsStackClassification.constraintOutsideTo(.top, classificationLabel, spacing)
-        roomsStackClassification.constraintInsideTo(.leading, lines[0])
-        roomsStackClassification.constraintInsideTo(.trailing, lines[0])
-        
-        //MARK: lineImage3
-        lines[2].constraintOutsideTo(.top, roomsStackClassification, spacing)
-        lines[2].constraintInsideTo(.leading, lines[0])
-        lines[2].constraintInsideTo(.trailing, lines[0])
-        lines[2].constraintInsideTo(.height, lines[0])
-        
-        //MARK: categoryLabel
-        categoryLabel.constraintOutsideTo(.top, lines[2], spacing)
-        categoryLabel.constraintInsideTo(.leading, lines[0])
-        
-        //MARK: roomsStackCategory
-        roomsStackCategory.constraintOutsideTo(.top, categoryLabel, spacing)
-        roomsStackCategory.constraintInsideTo(.leading, lines[0])
-        roomsStackCategory.constraintInsideTo(.trailing, lines[0])
-        
-        //MARK: lineImage4
-        lines[3].constraintOutsideTo(.top, roomsStackCategory, spacing)
-        lines[3].constraintInsideTo(.leading, lines[0])
-        lines[3].constraintInsideTo(.trailing, lines[0])
-        lines[3].constraintInsideTo(.height, lines[0])
-        
-        //MARK: facilitiesLabel
-        facilitiesLabel.constraintOutsideTo(.top, lines[3], spacing)
-        facilitiesLabel.constraintInsideTo(.leading, lines[0])
-        
-        //MARK: roomsStackFacilities
-        roomsStackFacilities.constraintOutsideTo(.top, facilitiesLabel, spacing)
-        roomsStackFacilities.constraintInsideTo(.leading, lines[0])
-        roomsStackFacilities.constraintInsideTo(.trailing, lines[0])
-        
-        //MARK: lineImage5
-        lines[4].constraintOutsideTo(.top, roomsStackFacilities, spacing)
-        lines[4].constraintInsideTo(.leading, lines[0])
-        lines[4].constraintInsideTo(.trailing, lines[0])
-        lines[4].constraintInsideTo(.height, lines[0])
-        
-        //MARK: NoiseLabel
-        NoiseLabel.constraintOutsideTo(.top, lines[4], spacing)
-        NoiseLabel.constraintInsideTo(.leading, lines[0])
-        
-        //MARK: roomsStackNoise
-        roomsStackNoise.constraintOutsideTo(.top, NoiseLabel, spacing)
-        roomsStackNoise.constraintInsideTo(.leading, lines[0])
-        roomsStackNoise.constraintInsideTo(.trailing, lines[0])
-        
-        //MARK: lineImage6
-        lines[5].constraintOutsideTo(.top, roomsStackNoise, spacing)
-        lines[5].constraintInsideTo(.leading, lines[0])
-        lines[5].constraintInsideTo(.trailing, lines[0])
-        lines[5].constraintInsideTo(.height, lines[0])
-        
-        //MARK: typeOfContarctLabel
-        typeOfContarctLabel.constraintOutsideTo(.top, lines[5], spacing)
-        typeOfContarctLabel.constraintInsideTo(.leading, lines[0])
-        
-        //MARK: lineImage6
-        roomsStackContract.constraintOutsideTo(.top, typeOfContarctLabel, spacing)
-        roomsStackContract.constraintInsideTo(.leading, lines[0])
-        roomsStackContract.constraintInsideTo(.trailing, lines[0])
-        
-        //MARK: lineImage6
-        lines[6].constraintOutsideTo(.top, roomsStackContract, spacing)
-        lines[6].constraintInsideTo(.leading, lines[0])
-        lines[6].constraintInsideTo(.trailing, lines[0])
-        lines[6].constraintInsideTo(.bottom, uiview, spacing)
-        lines[6].constraintInsideTo(.height, lines[0])
-        
-        //MARK: tabBar
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-    }
+            //MARK: capacityLabel
+            capacityLabel.topAnchor.constraint(equalTo: capacityView.topAnchor, constant: 12),
+            capacityLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
+            
+            
+            capacityButton.centerYAnchor.constraint(equalTo: capacityView.centerYAnchor),
+            capacityButton.trailingAnchor.constraint(equalTo: capacityView.trailingAnchor, constant: -12),
+            
+            //MARK: lines[0]
+            lines[0].topAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: 19),
+            lines[0].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[0].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[0].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: spaceType
+            spaceType.topAnchor.constraint(equalTo: lines[0].bottomAnchor, constant: 19),
+            spaceType.leadingAnchor.constraint(equalTo: lines[0].leadingAnchor),
+            
+            //MARK: roomsStackspaceType
+            roomsStackspaceType.topAnchor.constraint(equalTo: spaceType.bottomAnchor, constant: 19),
+            roomsStackspaceType.leadingAnchor.constraint(equalTo: lines[0].leadingAnchor),
+            roomsStackspaceType.trailingAnchor.constraint(equalTo: lines[0].trailingAnchor),
+            
+            
+            //MARK: lines[1]
+            lines[1].topAnchor.constraint(equalTo: roomsStackspaceType.bottomAnchor, constant: 19),
+            lines[1].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[1].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[1].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            classificationLabel.topAnchor.constraint(equalTo: lines[1].bottomAnchor, constant: 19),
+            classificationLabel.leadingAnchor.constraint(equalTo: lines[1].leadingAnchor),
+            
+            
+            //MARK: roomsStackClassification
+            roomsStackClassification.topAnchor.constraint(equalTo: classificationLabel.bottomAnchor, constant: 19),
+            roomsStackClassification.leadingAnchor.constraint(equalTo: lines[1].leadingAnchor),
+            roomsStackClassification.trailingAnchor.constraint(equalTo: lines[1].trailingAnchor),
+            
+            
+            //MARK: lines[2]
+            lines[2].topAnchor.constraint(equalTo: roomsStackClassification.bottomAnchor, constant: 19),
+            lines[2].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[2].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[2].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: categoryLabel
+            categoryLabel.topAnchor.constraint(equalTo: lines[2].bottomAnchor, constant: 19),
+            categoryLabel.leadingAnchor.constraint(equalTo: lines[2].leadingAnchor),
+            
+            
+            //MARK: roomsStackCategory
+            roomsStackCategory.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 19),
+            roomsStackCategory.leadingAnchor.constraint(equalTo: lines[2].leadingAnchor),
+            roomsStackCategory.trailingAnchor.constraint(equalTo: lines[2].trailingAnchor),
+            
+            
+            //MARK: lines[3]
+            lines[3].topAnchor.constraint(equalTo: roomsStackCategory.bottomAnchor, constant: 19),
+            lines[3].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[3].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[3].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: facilitiesLabel
+            facilitiesLabel.topAnchor.constraint(equalTo: lines[3].bottomAnchor, constant: 19),
+            facilitiesLabel.leadingAnchor.constraint(equalTo: lines[3].leadingAnchor),
+            
+            
+            //MARK: roomsStackFacilities
+            roomsStackFacilities.topAnchor.constraint(equalTo: facilitiesLabel.bottomAnchor, constant: 19),
+            roomsStackFacilities.leadingAnchor.constraint(equalTo: lines[3].leadingAnchor),
+            roomsStackFacilities.trailingAnchor.constraint(equalTo: lines[3].trailingAnchor),
+            
+            
+            //MARK: lines[4]
+            lines[4].topAnchor.constraint(equalTo: roomsStackFacilities.bottomAnchor, constant: 19),
+            lines[4].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[4].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[4].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: NoiseLabel
+            NoiseLabel.topAnchor.constraint(equalTo: lines[4].bottomAnchor, constant: 19),
+            NoiseLabel.leadingAnchor.constraint(equalTo: lines[4].leadingAnchor),
+            
+            
+            //MARK: roomsStackNoise
+            roomsStackNoise.topAnchor.constraint(equalTo: NoiseLabel.bottomAnchor, constant: 19),
+            roomsStackNoise.leadingAnchor.constraint(equalTo: lines[4].leadingAnchor),
+            roomsStackNoise.trailingAnchor.constraint(equalTo: lines[4].trailingAnchor),
+            
+            
+            //MARK: lines[5]
+            lines[5].topAnchor.constraint(equalTo: roomsStackNoise.bottomAnchor, constant: 19),
+            lines[5].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[5].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[5].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: typeOfContarctLabel
+            typeOfContarctLabel.topAnchor.constraint(equalTo: lines[5].bottomAnchor, constant: 19),
+            typeOfContarctLabel.leadingAnchor.constraint(equalTo: lines[5].leadingAnchor),
+            
+            
+            //MARK: roomsStackContract
+            roomsStackContract.topAnchor.constraint(equalTo: typeOfContarctLabel.bottomAnchor, constant: 19),
+            roomsStackContract.leadingAnchor.constraint(equalTo: lines[5].leadingAnchor),
+            roomsStackContract.trailingAnchor.constraint(equalTo: lines[5].trailingAnchor),
+            
+            
+            //MARK: lines[6]
+            lines[6].topAnchor.constraint(equalTo: roomsStackContract.bottomAnchor, constant: 19),
+            lines[6].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
+            lines[6].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
+            lines[6].heightAnchor.constraint(equalToConstant: 1),
+            
+            
+            //MARK: tabBar
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
+        ])
+}
+    
 }
 
 extension FilterViewClosed: UIScrollViewDelegate {
