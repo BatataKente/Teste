@@ -170,7 +170,10 @@ class SingleBookingView: UIViewController {
         
         self.view.setToDefaultBackgroundColor()
         
-        view.createReservationCustomBarAPI(spaceName: spaceDetails.space_name, localName: spaceDetails.local_name, imageURL: spaceDetails.pictures?[0].url, progressBarButtons: buttons) { _ in
+        view.createReservationCustomBar(spaceName: spaceDetails.space_name,
+                                        localName: spaceDetails.local_name,
+                                        spacePictures: spaceDetails.pictures,
+                                        progressBarButtons: buttons) { _ in
             
             self.dismiss(animated: true)
         }
