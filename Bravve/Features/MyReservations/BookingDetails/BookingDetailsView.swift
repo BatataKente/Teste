@@ -17,6 +17,9 @@ class BookingDetailsView: UIViewController {
     private let customAlertOk: CustomAlert = CustomAlert()
     private var space: SpaceDetail = SpaceDetail()
     public var currentReservation: Reservations?
+    public var currentSpace = UserReservations.spaceDetail
+    
+    let sessionManager = SessionManager()
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -115,7 +118,7 @@ class BookingDetailsView: UIViewController {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         
-        guard let pictures = space.pictures else { return pageControl }
+        guard let pictures = currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
         pageControl.isEnabled = false
@@ -218,32 +221,36 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
+    var items = [UIStackView]()
+    
+    var days = ["Segunda", "Terca", "Quarta", "Quinta", "Sexta"]
+    var seatsQty = " "
+    var spaceAddress = " "
+    
     lazy var localDetailsStackView: UIStackView = {
-        
+
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
-        
+
         let title = UILabel()
         title.textColor = textColor
         title.text = "Detalhes do local"
         title.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
         title.textColor = UIColor(named: ColorsBravve.label.rawValue)
+
+        items.append(createStackView(seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(createStackView(spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
-        var items = [UIStackView]()
-        var days = ["Segunda", "Terca", "Quarta", "Quinta", "Sexta"]
-        
-        items.append(createStackView("Ate 6 pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(createStackView("Av. Sao Joao, CJ. Boulevard, no 900, Sao Paulo. SP 06020-010, BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
         for i in 1...days.count-1 {
-            
+
             items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
                                          textColor: textColor))
         }
-        
+
         let buttons = createSeeButtonsStackView(3...items.count-1, items: items)
-        
+
         let stackView = UIStackView(arrangedSubviews: [title] + items + [buttons])
         stackView.alignment = .leading
         stackView.axis = .vertical
@@ -251,6 +258,9 @@ class BookingDetailsView: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    var spaceContactName = " "
+    var spaceContactRole = " "
     
     lazy var responsableStackView: UIStackView = {
         
@@ -268,8 +278,8 @@ class BookingDetailsView: UIViewController {
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
 
-        let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atritutedString1 = NSMutableAttributedString(string: "\(spaceContactName)\n", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: spaceContactRole, attributes: attrs2 as [NSAttributedString.Key : Any])
 
         atritutedString1.append(atritutedString2)
         responsableLabel.attributedText = atritutedString1
@@ -277,12 +287,12 @@ class BookingDetailsView: UIViewController {
         
         
         let informations = UILabel()
-        informations.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp."
+        informations.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através dos contatos abaixo."
         informations.numberOfLines = 0
         informations.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
         informations.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let button = createSeeButton(smallText: informations.text ?? "", fullText: "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através de mensagem via Whatsapp. aaaaaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaa, cade a API? Tem que fazer a tratativa para que o fullText receba da API e o corte um trecho para a smallText.", actionLabel: informations)
+        let button = createSeeButton(smallText: informations.text ?? "", fullText: " ", actionLabel: informations)
    
         let stackView = UIStackView(arrangedSubviews: [title, responsableLabel, informations, button] )
         stackView.alignment = .leading
@@ -291,6 +301,9 @@ class BookingDetailsView: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    var spaceContactPhone = " "
+    var spaceContactEmail = " "
     
     lazy var contactsStackView: UIStackView = {
         
@@ -304,8 +317,8 @@ class BookingDetailsView: UIViewController {
         
         var contacts = [UIStackView]()
         
-        contacts.append(createStackView("(11) 99999-9999", UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
-        contacts.append(createStackView("email", UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
+        contacts.append(createStackView(spaceContactPhone, UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
+        contacts.append(createStackView(spaceContactEmail, UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
         
         let stackView = UIStackView(arrangedSubviews: [title] + contacts)
         stackView.alignment = .leading
@@ -372,6 +385,8 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
+    var paymentAmount = " "
+    
     lazy var totalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -380,7 +395,7 @@ class BookingDetailsView: UIViewController {
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Total:", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: " R$ 560,87", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " R$ \(paymentAmount)", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
@@ -393,7 +408,7 @@ class BookingDetailsView: UIViewController {
     lazy var creditCardTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.text = "    **** **** **** 4679"
+        tf.text = " "
         tf.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
         tf.backgroundColor = UIColor(named: ColorsBravve.backgroundCard.rawValue)
         tf.isUserInteractionEnabled = false
@@ -434,6 +449,13 @@ class BookingDetailsView: UIViewController {
         true
     }
     
+    override func loadView() {
+        super.loadView()
+        getReservation()
+        //getSpaceDetail()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
@@ -444,11 +466,27 @@ class BookingDetailsView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
-        getReservation()
-        print("kaue \(currentReservation)")
         print("kaue \(currentReservation?.id)")
+        print("kaue \(currentReservation?.space_id)")
+        print("kauekaj2 \(UserReservations.spaceDetail)")
     }
     
+//    func getSpaceDetail() {
+//        
+//        guard let currentSpaceId = currentReservation?.space_id else { return }
+//
+//        sessionManager.getData(id: "\(currentSpaceId)", endpoint: .spacesId, completionHandler: {(statusCode, error, space: SpaceDetail?) in
+//            
+//            guard let space = space else {
+//                print(statusCode as Any)
+//                print(error?.localizedDescription as Any)
+//                return
+//            }
+//            
+//            UserReservations.spaceDetail = space
+//           print("kauekaj \(UserReservations.spaceDetail)")
+//       })
+//    }
     
     func getReservation() {
         
@@ -458,46 +496,70 @@ class BookingDetailsView: UIViewController {
             }
         }
         
-        guard let city = (currentReservation?.space_address?.city_name) else { return }
-        guard let neighborhood = (currentReservation?.space_address?.neighborhood) else { return }
-       
+        guard let bookingTypeLabel = currentReservation?.space_contract_id else { return }
+        var bookingTypeName = ""
+        
+        switch bookingTypeLabel {
+            case 1: bookingTypeName = "Por 30 min"
+            case 2: bookingTypeName = "Por hora"
+            case 3: bookingTypeName = "Diária"
+            case 4: bookingTypeName = "Mensal"
+            case 5: bookingTypeName = "Por hora - Workpass"
+            case 6: bookingTypeName = "Diária - Workpass"
+            case 7: bookingTypeName = "Mensal - Workpass"
+            default: bookingTypeName = " "
+        }
+        
+        guard let seats = currentReservation?.seats_qty else { return }
+        guard let street = currentReservation?.space_address?.street else { return }
+        guard let streetNumber = currentReservation?.space_address?.street_number else { return }
+        guard let neighborhood = currentReservation?.space_address?.neighborhood else { return }
+        guard let complement = currentReservation?.space_address?.complement else { return }
+        guard let postalCode = currentReservation?.space_address?.postal_code else { return }
+        guard let city = currentReservation?.space_address?.city_name else { return }
+        guard let state = currentReservation?.space_address?.state_name else { return }
         guard let reservationStartDt = currentReservation?.start_dt else { return }
         guard let reservationEndDt = currentReservation?.end_dt else { return }
+        guard let payment = currentReservation?.payment_amount else { return }
         
         let separatedStartDate = reservationStartDt.components(separatedBy: "T")
         let separatedEndDate = reservationEndDt.components(separatedBy: "T")
         
         let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
-        let formatEndDate = separatedEndDate[0].components(separatedBy: "-")
         
         let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
-        let endDate = "\(formatEndDate[2])/\(formatEndDate[1])/\(formatEndDate[0])"
-        
+  
         let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
         let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
         
         let startHour = "\(separatedStartHour[0]):\(separatedStartHour[1])"
         let endHour = "\(separatedEndHour[0]):\(separatedEndHour[1])"
         
+        
+        
+        
+        
+        
         titleLabel.text = currentReservation?.space_category?.name?.uppercased() ?? ""
-        //titleLabel.backgroundColor = getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
+        titleLabel.backgroundColor = titleLabel.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
         descriptLabel.text = currentReservation?.slogan
         infoLocalLabel.text = currentReservation?.local_name
         nameLocalLabel.text = currentReservation?.description
         bdStackDataLabel.text = startDate
-        //stackBookingTypeLabel.text = currentReservation.  AINDA NÃO ENCONTRADA RESPOSTA DA API - Talvez tenha que fazer uma trataiva pelo id do tipo.
+        bdStackViewBookingTypeLabel.text = bookingTypeName
         checkInStackViewHourLabel.text = startHour
         checkOutStackViewHourLabel.text = endHour
-        localDetailsStackView
-//        responsableStackView(textColor, responsableLabel,informations button)
-//        contactsStackView(title, contacts )
-//        payFormLabel
-//        creditCard
-//        totalLabel
-//        creditCardTextField
-        
-        
+        seatsQty = "Até \(seats) pessoas"
+        spaceAddress = "\(street), \(complement), \(streetNumber), \(neighborhood), \(city) \n \(state) \(postalCode), BR"
+        spaceContactName = currentReservation?.space_contact?.name ?? " "
+        spaceContactRole = " "
+        spaceContactPhone = currentReservation?.space_contact?.phone ?? " "
+        spaceContactEmail = currentReservation?.space_contact?.email ?? " "
+        paymentAmount = payment.replacingOccurrences(of: ".", with: ",")
+        creditCard.text = currentReservation?.payment_type_name ?? ""
     }
+    
+
     
     /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
     @objc func buttonCheckInTap(){
@@ -711,6 +773,9 @@ class BookingDetailsView: UIViewController {
         customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
             self.customAlertCancel.dismissAlert()
         }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
+            
+            self.cancelReservation()
+            
             let vc = BookingHistoryView()
             vc.modalPresentationStyle = .fullScreen
             self.customAlertCancel.dismissAlert()
@@ -718,6 +783,29 @@ class BookingDetailsView: UIViewController {
         }), on: self)
         Flags.shared.flagReservation = 2
     }
+    
+    func cancelReservation() {
+        
+        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return }
+        guard let reservationId = self.currentReservation?.id else {
+            return
+        }
+
+        let parameters = CancelReservationParameters(uuid: uuid, reservations_id: [reservationId])
+        
+        self.sessionManager.postDataWithResponse(endpoint: .reservationsCancellations, parameters: parameters) {(statusCode, error, reservations: CancelReservationParameters?) in
+            
+            guard let reservations = reservations else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                print("kaj \(parameters)")
+                print("kaj \(reservations)")
+                return
+            }
+            
+        }
+    }
+    
     
     /// This function deals with the customBar, its title, its back button and the action it has
     private func setupDefaults(){
@@ -861,8 +949,6 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? BookingDetailsCollectionViewCell
         
-
-        
         guard let pictures = currentReservation?.picture else { return UICollectionViewCell() }
         guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
         
@@ -886,6 +972,8 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
+
+
 
 
 
