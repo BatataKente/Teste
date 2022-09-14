@@ -44,6 +44,7 @@ class CheckOutViewModel {
             }
             
             if statusCode == 204 {
+                UserReservations.reservationCheckOutHour = checkOutTs
                 self.delegate?.showSuccessAlert()
             } else {
                 guard let message = message?.message else {
