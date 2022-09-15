@@ -10,6 +10,11 @@ import SDWebImage
 
 class OpenDetailsView: UIViewController {
     
+    struct ViewElements {
+        
+        let scroll: UIScrollView, photoCollectionView: UICollectionView
+    }
+    
     private var space: SpaceDetail
     
     private let customBar = UIView()
@@ -130,13 +135,13 @@ class OpenDetailsView: UIViewController {
         guard let pictures = space.pictures else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
-        pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        pageControl.addTarget(self, action: #selector(pageControlTarget), for: .touchUpInside)
         
         return pageControl
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    private lazy var viewElements: ViewElements = {
         
         let itemSize = 300
         let black_White = UIColor(named: ColorsBravve.textField.rawValue)
@@ -144,7 +149,7 @@ class OpenDetailsView: UIViewController {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
@@ -187,6 +192,7 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
+        photoCollectionView.showsHorizontalScrollIndicator = false
         
         let localLabel = detailsOpenViewModel.createLabel(space.local_name,
                                                           UIFont(name: FontsBravve.bold.rawValue,
@@ -335,7 +341,8 @@ class OpenDetailsView: UIViewController {
                                                          constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
         
-        return scrollView
+        return ViewElements(scroll: scrollView,
+                            photoCollectionView: photoCollectionView)
     }()
     
     let reserveButton = UIButton()
@@ -378,7 +385,7 @@ class OpenDetailsView: UIViewController {
     private func setupView() {
         
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-        view.addSubviews([customBar, scrollView, reserveButton, tabBar])
+        view.addSubviews([customBar, viewElements.scroll, reserveButton, tabBar])
         tabBar.selectedItem = tabBar.items?[0]
     }
     
@@ -402,19 +409,30 @@ class OpenDetailsView: UIViewController {
     
     private func setupConstraints() {
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        viewElements.scroll.translatesAutoresizingMaskIntoConstraints = false
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         customBar.translatesAutoresizingMaskIntoConstraints = false
         reserveButton.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
+        viewElements.scroll.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        viewElements.scroll.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        viewElements.scroll.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        viewElements.scroll.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
         
         tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    @objc func pageControlTarget(_ sender: UIPageControl) {
+        
+        DispatchQueue.main.async {
+            
+            self.viewElements.photoCollectionView.scrollToItem(at: IndexPath(row: sender.currentPage,
+                                                                             section: 0),
+                                                               at: .centeredHorizontally,
+                                                               animated: true)
+        }
     }
 }
 
@@ -459,7 +477,7 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         
         for subview in scrollView.subviews {
             
-            if subview.frame.origin.x != 0 || subview.frame.origin.y != 0 {
+            if subview.frame.origin.y != 0 {
                     
                 subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
             }
