@@ -1045,12 +1045,18 @@ final class FilterViewClosed: UIViewController {
             //MARK: capacityView
             capacityView.topAnchor.constraint(equalTo: filterLabel.bottomAnchor, constant: 19),
             capacityView.leadingAnchor.constraint(equalTo: filterLabel.leadingAnchor),
-           
+            capacityView.widthAnchor.constraint(equalToConstant: 121),
+            capacityView.heightAnchor.constraint(equalToConstant: 60),
         
             //MARK: capacityLabel
             capacityLabel.topAnchor.constraint(equalTo: capacityView.topAnchor, constant: 12),
             capacityLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
             
+            
+            //MARK: numberLabel
+            numberLabel.topAnchor.constraint(equalTo: capacityLabel.bottomAnchor, constant: 7),
+            numberLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
+            numberLabel.bottomAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: -11),
             
             capacityButton.centerYAnchor.constraint(equalTo: capacityView.centerYAnchor),
             capacityButton.trailingAnchor.constraint(equalTo: capacityView.trailingAnchor, constant: -12),
@@ -1172,6 +1178,7 @@ final class FilterViewClosed: UIViewController {
             tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
             
         ])
 }
