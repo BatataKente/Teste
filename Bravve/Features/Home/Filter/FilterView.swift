@@ -13,6 +13,7 @@ final class FilterScreen: UIViewController {
     //MARK: - prefersStatusBarHidden
     override var prefersStatusBarHidden: Bool {
         true
+        
     }
     
     
@@ -563,7 +564,7 @@ final class FilterScreen: UIViewController {
             //MARK: numberLabel
             numberLabel.topAnchor.constraint(equalTo: capacityLabel.bottomAnchor, constant: 7),
             numberLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
-            numberLabel.bottomAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: 11),
+            numberLabel.bottomAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: -11),
             
             capacityButton.centerYAnchor.constraint(equalTo: capacityView.centerYAnchor),
             capacityButton.trailingAnchor.constraint(equalTo: capacityView.trailingAnchor, constant: -12),
