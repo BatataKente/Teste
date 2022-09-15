@@ -141,7 +141,6 @@ class CheckOutView: UIViewController {
         guard let pictures = currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
-//        pageControl.backgroundColor = .black
         pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
@@ -447,7 +446,8 @@ class CheckOutView: UIViewController {
         
         var items = [UIStackView]()
         
-        guard var businessHours = UserReservations.spaceDetail?.space_business_hours else { return UIStackView() }
+        var businessHours = UserReservations.spaceDetail?.space_business_hours ?? []
+        
         checkOutViewModel.sortBusinessHours(businessHours: &businessHours)
         
         var days = checkOutViewModel.createBusinessHoursArray(businessHours: businessHours)
