@@ -79,14 +79,14 @@ class LoginViewModel{
                     guard let openReservations = openReservations else {
                         print(statusCode as Any)
                         print(error?.localizedDescription as Any)
+                        self.delegate?.presentNextScreen()
                         return
                     }
-                    
+
                     UserReservations.reservations = openReservations
-                   
+
                     self.delegate?.presentNextScreen()
                 }
-                
             }
         }
     }
