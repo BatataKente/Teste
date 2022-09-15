@@ -17,25 +17,22 @@ class HomeMapKitViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     
     //MARK: - var and let
     private var userLocation: CLLocationManager?
-    var userRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.337207, longitude: -121.887082), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    var userRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -23.5888, longitude: -46.658890), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
     
     //MARK: - checkLocation
     //This func is used to check if the user accepts to show his location
     ///
     func checkIfLocationIsEnabled(){
-        
-        
+    
         if CLLocationManager.locationServicesEnabled(){
             userLocation = CLLocationManager()
             userLocation!.delegate = self
     
-            
         }else{
             
             print("This app needs the permition to show you location, please accept")
             
         }
-        
     }
     
     //MARK: - setUserRegion
