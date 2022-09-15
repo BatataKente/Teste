@@ -10,6 +10,11 @@ import SDWebImage
 
 class DetailsClosedView: UIViewController {
     
+    struct ViewElements {
+        
+        let scroll: UIScrollView, photoCollectionView: UICollectionView
+    }
+    
     let sessionManager = SessionManager()
     private let space: SpaceDetail
     private let spaceId: Int
@@ -29,8 +34,9 @@ class DetailsClosedView: UIViewController {
         guard let pictures = space.pictures else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
-        pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        pageControl.addTarget(self, action: #selector(pageControlTarget),
+                              for: .touchUpInside)
         
         return pageControl
     }()
@@ -141,7 +147,7 @@ class DetailsClosedView: UIViewController {
         return localFacilitiesStackView
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    private lazy var viewElements: ViewElements = {
         
         let itemSize = 300
         let black_White = UIColor(named: ColorsBravve.textField.rawValue)
@@ -149,7 +155,7 @@ class DetailsClosedView: UIViewController {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
@@ -341,7 +347,8 @@ class DetailsClosedView: UIViewController {
                                                          constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
         
-        return scrollView
+        return ViewElements(scroll: scrollView,
+                            photoCollectionView: photoCollectionView)
     }()
     
     let detailsClosedViewModel = DetailsClosedViewModel()
@@ -381,7 +388,7 @@ class DetailsClosedView: UIViewController {
     private func setupView() {
         
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-        view.addSubviews([customBar, scrollView, reserveButton, tabBar])
+        view.addSubviews([customBar, viewElements.scroll, reserveButton, tabBar])
         tabBar.selectedItem = tabBar.items?[0]
     }
     
@@ -406,19 +413,29 @@ class DetailsClosedView: UIViewController {
     
     private func setupConstraints() {
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        viewElements.scroll.translatesAutoresizingMaskIntoConstraints = false
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         customBar.translatesAutoresizingMaskIntoConstraints = false
         reserveButton.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
+        viewElements.scroll.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        viewElements.scroll.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        viewElements.scroll.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        viewElements.scroll.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
         
         tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    @objc func pageControlTarget(_ sender: UIPageControl) {
+        
+        DispatchQueue.main.async {
+            
+            self.viewElements.photoCollectionView.scrollToItem(at: IndexPath(row: sender.currentPage,
+                                                                             section: 0),
+                                                               at: .centeredHorizontally, animated: true)
+        }
     }
 }
 
