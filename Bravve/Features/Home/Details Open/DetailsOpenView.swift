@@ -29,21 +29,24 @@ class OpenDetailsView: UIViewController {
         
         detailsOpenViewModel.sortBusinessHours(businessHours: &business_hours)
         
-        var texts:[String] = detailsOpenViewModel.createBusinessHoursArray(businessHours: business_hours)
-        
+        var attributedTexts:[NSAttributedString] = detailsOpenViewModel.createBusinessHoursArray(businessHours: business_hours)
    
         var itens = [UIStackView]()
         let localDetailsStackView = UIStackView(arrangedSubviews: [title])
         
-        detailsOpenViewModel.createItensStackView(itens: &itens, texts: texts, textColor: textColor ?? UIColor(), seats_qty: space.seats_qty ?? 0, street: space.partner_site_address?.address?.street ?? "", neighborhood: space.partner_site_address?.address?.neighborhood ?? "", streetNumber: space.partner_site_address?.address?.street_number ?? 0, cityName: space.partner_site_address?.address?.city_name ?? "", stateName: space.partner_site_address?.address?.state_name ?? "", postalCode: space.partner_site_address?.address?.postal_code ?? "")
+        detailsOpenViewModel.createItensStackView(itens: &itens,
+                                                  attributedTexts: attributedTexts,
+                                                  textColor: textColor ?? UIColor(), seats_qty: space.seats_qty ?? 0, street: space.partner_site_address?.address?.street ?? "", neighborhood: space.partner_site_address?.address?.neighborhood ?? "", streetNumber: space.partner_site_address?.address?.street_number ?? 0, cityName: space.partner_site_address?.address?.city_name ?? "", stateName: space.partner_site_address?.address?.state_name ?? "", postalCode: space.partner_site_address?.address?.postal_code ?? "")
         
-        if !texts.isEmpty {
+        if !attributedTexts.isEmpty {
         let button = detailsOpenViewModel.createSeeButtonsStackView(3...itens.count-1,
                                                                     itens: itens, arrowDownImage: UIImage(named: ButtonsBravve.arrowDownPink.rawValue), arrowUpImage: UIImage(named: ButtonsBravve.arrowUpPink.rawValue))
             
         
             localDetailsStackView.addArrangedSubviews(itens + [button])
-        }else {
+        }
+        else {
+            
             localDetailsStackView.addArrangedSubviews(itens)
         }
         
@@ -145,6 +148,7 @@ class OpenDetailsView: UIViewController {
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
+        scrollView.delegate = self
         
         let spaceCategoryNameLabel = UILabel()
         spaceCategoryNameLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
@@ -162,14 +166,6 @@ class OpenDetailsView: UIViewController {
         spaceCategoryNameLabel.leadingAnchor.constraint(equalTo: titleLabelView.leadingAnchor, constant: CGFloat(2.5).generateSizeForScreen).isActive = true
         spaceCategoryNameLabel.trailingAnchor.constraint(equalTo: titleLabelView.trailingAnchor, constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
         spaceCategoryNameLabel.bottomAnchor.constraint(equalTo: titleLabelView.bottomAnchor, constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
-//        spaceCategoryNameLabel.constraintInsideTo(.top, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
-//        spaceCategoryNameLabel.constraintInsideTo(.leading, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
-//        spaceCategoryNameLabel.constraintInsideTo(.trailing, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
-//        spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
         
         let sloganLabel = detailsOpenViewModel.createLabel(space.slogan,
                                                            UIFont(name: FontsBravve.regular.rawValue,
@@ -227,7 +223,14 @@ class OpenDetailsView: UIViewController {
         """,
                                                              textColor: black_White)
         
-        let nameLabel = detailsOpenViewModel.createLabel("Giovanna")
+        let spaceContact = detailsOpenViewModel.verifyContacts(space.contact)
+//        necessario verificar todas as informacoes que serao apresentadas na tela returando informacoes mocadas, porem nao consegui verificar ainda, API vem incompleta
+//        print(spaceContact,"$$$")
+//        print(space,"$$$")
+        
+        let nameLabel = detailsOpenViewModel.createLabel(spaceContact[0].name,
+                                                         UIFont(name: FontsBravve.bold.rawValue,
+                                                                size: CGFloat(12).generateSizeForScreen))
         
         let officeLabel = detailsOpenViewModel.createLabel("Community Manager")
         
@@ -298,12 +301,13 @@ class OpenDetailsView: UIViewController {
         tagsStackView.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         tagsStackView.trailingAnchor.constraint(equalTo: creditHourLabel.trailingAnchor).isActive = true
         
-        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor).isActive = true
+        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor,
+                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
         briefingLabel.leadingAnchor.constraint(equalTo: tagsStackView.leadingAnchor).isActive = true
-        briefingLabel.widthAnchor.constraint(equalToConstant: CGFloat(322).generateSizeForScreen).isActive = true
-        briefingLabel.heightAnchor.constraint(equalToConstant: CGFloat(234).generateSizeForScreen).isActive = true
+        briefingLabel.trailingAnchor.constraint(equalTo: tagsStackView.trailingAnchor).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor,
+                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: briefingLabel.leadingAnchor).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: briefingLabel.trailingAnchor).isActive = true
         
@@ -320,15 +324,16 @@ class OpenDetailsView: UIViewController {
                                                 constant: CGFloat(20).generateSizeForScreen).isActive = true
         structureStackView.leadingAnchor.constraint(equalTo: localFacilitiesStackView.leadingAnchor).isActive = true
         structureStackView.trailingAnchor.constraint(equalTo: localFacilitiesStackView.trailingAnchor).isActive = true
-        structureStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
         
         localFacilitiesStackView.topAnchor.constraint(equalTo: structureStackView.bottomAnchor,
-                                                      constant: CGFloat(16).generateSizeForScreen).isActive = true
+                                                      constant: CGFloat(20).generateSizeForScreen).isActive = true
         localFacilitiesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                          constant: CGFloat(19).generateSizeForScreen).isActive = true
+                                                          constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                           constant: CGFloat(-20).generateSizeForScreen).isActive = true
         localFacilitiesStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                                         constant: CGFloat(-50).generateSizeForScreen).isActive = true
-        localFacilitiesStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
+                                                         constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        
         
         return scrollView
     }()
@@ -433,10 +438,14 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         
         cell?.imageView.sd_setImage(with: URL(string: picture))
         
+        guard let workpass = space.allow_workpass else {return cell ?? UICollectionViewCell()}
+        if workpass {cell?.createWorkPassLabel()}
+        
         return cell ?? UICollectionViewCell()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
         let index = scrollView.contentOffset.x / witdh
         var roundedIndex = 0.0
@@ -447,7 +456,14 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         }
         
         self.pageControl.currentPage = Int(roundedIndex)
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.x != 0 || subview.frame.origin.y != 0 {
+                    
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
-    
 }
 
