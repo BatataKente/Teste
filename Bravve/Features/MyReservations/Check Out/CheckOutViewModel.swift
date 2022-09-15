@@ -44,7 +44,16 @@ class CheckOutViewModel {
             }
             
             if statusCode == 204 {
-                UserReservations.reservationCheckOutHour = checkOutTs
+                for reservation in UserReservations.reservations {
+                    if reservation.id == reservationID {
+                        guard let index = UserReservations.reservations.firstIndex(of: reservation) else {
+                            print("Unable to unwrap reservation index.")
+                            return
+                        }
+                        
+                        UserReservations.reservations[index].checkout_ts = checkOutTs
+                    }
+                }
                 self.delegate?.showSuccessAlert()
             } else {
                 guard let message = message?.message else {
