@@ -9,7 +9,24 @@ import UIKit
 
 class DetailsOpenViewModel {
     
-    func createStackView(_ text: String,
+    func verifyContacts(_ contacts: [SpaceContact]?) -> [SpaceContact] {
+        
+        if let spaceContact = contacts {
+
+            if !spaceContact.isEmpty {
+
+                return spaceContact
+            }
+        }
+        
+        return [SpaceContact(id: 0,
+                             name: " ",
+                             email: " ",
+                             phone: " ",
+                             message: " ")]
+    }
+    
+    func createStackView(_ text: String? = nil, attributedText: NSAttributedString? = nil,
                          _ image: UIImage? = nil,
                          isHidden: Bool = false,
                          textColor: UIColor? = .white,
@@ -19,10 +36,14 @@ class DetailsOpenViewModel {
         let stackView = UIStackView()
         
         let label = UILabel()
-        label.text = text
+        if let text = text {
+            
+            label.text = text
+            label.font = font
+            label.textColor = textColor
+        }
+        if let attributedText = attributedText {label.attributedText = attributedText}
         label.numberOfLines = 0
-        label.font = font
-        label.textColor = textColor
         
         
         if let image = image {
@@ -133,20 +154,36 @@ class DetailsOpenViewModel {
         }
     }
     
-    func createBusinessHoursArray(businessHours: [SpaceBusinessHours]) -> [String] {
-        
-        var textArray: [String] = []
-        
+    func createBusinessHoursArray(businessHours: [SpaceBusinessHours]) -> [NSMutableAttributedString] {
+
+        var texts: [NSMutableAttributedString] = []
+
+        let regularFont = UIFont(name: FontsBravve.regular.rawValue,
+                                 size: CGFloat(12).generateSizeForScreen)
+        let boldFont = UIFont(name: FontsBravve.bold.rawValue,
+                              size: CGFloat(12).generateSizeForScreen)
+
         for business_hour in businessHours {
 
             if business_hour.flag_closed_day != nil {
+
                 if !business_hour.flag_closed_day! {
-                    textArray.append("\(business_hour.day_name ?? ""): \(business_hour.start_time ?? "")h - \(business_hour.end_time ?? "")h")
+
+                    let text = NSMutableAttributedString(string: "\(business_hour.day_name ?? ""): ",
+                                                         attributes: [.font: regularFont as Any])
+                    text.append(NSMutableAttributedString(string: "\(business_hour.start_time ?? "")h",
+                                                          attributes: [.font: boldFont as Any]))
+                    text.append(NSMutableAttributedString(string: " - ",
+                                                          attributes: [.font: regularFont as Any]))
+                    text.append(NSMutableAttributedString(string: "\(business_hour.end_time ?? "")h",
+                                                          attributes: [.font: boldFont as Any]))
+
+                    texts.append(text)
                 }
             }
         }
-       
-        return textArray
+
+        return texts
     }
     
     func createFacilitiesArray(facilities: [SpaceFacility]?) -> [String] {
@@ -165,22 +202,46 @@ class DetailsOpenViewModel {
         return textArray
     }
     
-    func createItensStackView(itens: inout [UIStackView], texts: [String], textColor: UIColor, seats_qty: Int, street: String, neighborhood: String, streetNumber: Int, cityName: String, stateName: String, postalCode: String) {
-        itens.append(createStackView("Até \(seats_qty) pessoas",
-                                     UIImage(named: IconsBravve.users.rawValue),
-                                     textColor: textColor))
-        itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
-                                     UIImage(named: IconsBravve.map.rawValue),
-                                     textColor: textColor))
-        if !texts.isEmpty {
-        itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                     textColor: textColor))
+    func createItensStackView(itens: inout [UIStackView], texts: [String]? = nil, attributedTexts: [NSAttributedString]? = nil, textColor: UIColor, seats_qty: Int, street: String, neighborhood: String, streetNumber: Int, cityName: String, stateName: String, postalCode: String) {
         
-        for i in 1...texts.count-1 {
+        if let texts = texts {
             
-            itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         isHidden: true,
+            itens.append(createStackView("Até \(seats_qty) pessoas",
+                                         UIImage(named: IconsBravve.users.rawValue),
                                          textColor: textColor))
+            itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
+                                         UIImage(named: IconsBravve.map.rawValue),
+                                         textColor: textColor))
+            if !texts.isEmpty {
+            itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         textColor: textColor))
+            
+            for i in 1...texts.count-1 {
+                
+                itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+                }
+            }
+        }
+        if let attributedTexts = attributedTexts {
+
+            itens.append(createStackView("Até \(seats_qty) pessoas",
+                                         UIImage(named: IconsBravve.users.rawValue),
+                                         textColor: textColor))
+            itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
+                                         UIImage(named: IconsBravve.map.rawValue),
+                                         textColor: textColor))
+            if !attributedTexts.isEmpty {
+                itens.append(createStackView(attributedText: attributedTexts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         textColor: textColor))
+
+            for i in 1...attributedTexts.count-1 {
+
+                itens.append(createStackView(attributedText: attributedTexts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+                }
             }
         }
     }

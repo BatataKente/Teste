@@ -10,6 +10,11 @@ import SDWebImage
 
 class OpenDetailsView: UIViewController {
     
+    struct ViewElements {
+        
+        let scroll: UIScrollView, photoCollectionView: UICollectionView
+    }
+    
     private var space: SpaceDetail
     
     private let customBar = UIView()
@@ -29,21 +34,24 @@ class OpenDetailsView: UIViewController {
         
         detailsOpenViewModel.sortBusinessHours(businessHours: &business_hours)
         
-        var texts:[String] = detailsOpenViewModel.createBusinessHoursArray(businessHours: business_hours)
-        
+        var attributedTexts:[NSAttributedString] = detailsOpenViewModel.createBusinessHoursArray(businessHours: business_hours)
    
         var itens = [UIStackView]()
         let localDetailsStackView = UIStackView(arrangedSubviews: [title])
         
-        detailsOpenViewModel.createItensStackView(itens: &itens, texts: texts, textColor: textColor ?? UIColor(), seats_qty: space.seats_qty ?? 0, street: space.partner_site_address?.address?.street ?? "", neighborhood: space.partner_site_address?.address?.neighborhood ?? "", streetNumber: space.partner_site_address?.address?.street_number ?? 0, cityName: space.partner_site_address?.address?.city_name ?? "", stateName: space.partner_site_address?.address?.state_name ?? "", postalCode: space.partner_site_address?.address?.postal_code ?? "")
+        detailsOpenViewModel.createItensStackView(itens: &itens,
+                                                  attributedTexts: attributedTexts,
+                                                  textColor: textColor ?? UIColor(), seats_qty: space.seats_qty ?? 0, street: space.partner_site_address?.address?.street ?? "", neighborhood: space.partner_site_address?.address?.neighborhood ?? "", streetNumber: space.partner_site_address?.address?.street_number ?? 0, cityName: space.partner_site_address?.address?.city_name ?? "", stateName: space.partner_site_address?.address?.state_name ?? "", postalCode: space.partner_site_address?.address?.postal_code ?? "")
         
-        if !texts.isEmpty {
+        if !attributedTexts.isEmpty {
         let button = detailsOpenViewModel.createSeeButtonsStackView(3...itens.count-1,
                                                                     itens: itens, arrowDownImage: UIImage(named: ButtonsBravve.arrowDownPink.rawValue), arrowUpImage: UIImage(named: ButtonsBravve.arrowUpPink.rawValue))
             
         
             localDetailsStackView.addArrangedSubviews(itens + [button])
-        }else {
+        }
+        else {
+            
             localDetailsStackView.addArrangedSubviews(itens)
         }
         
@@ -127,13 +135,13 @@ class OpenDetailsView: UIViewController {
         guard let pictures = space.pictures else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
-        pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        pageControl.addTarget(self, action: #selector(pageControlTarget), for: .touchUpInside)
         
         return pageControl
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    private lazy var viewElements: ViewElements = {
         
         let itemSize = 300
         let black_White = UIColor(named: ColorsBravve.textField.rawValue)
@@ -141,10 +149,11 @@ class OpenDetailsView: UIViewController {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = false
+        scrollView.delegate = self
         
         let spaceCategoryNameLabel = UILabel()
         spaceCategoryNameLabel.textColor = UIColor(named: ColorsBravve.progressBarLabel.rawValue)
@@ -162,14 +171,6 @@ class OpenDetailsView: UIViewController {
         spaceCategoryNameLabel.leadingAnchor.constraint(equalTo: titleLabelView.leadingAnchor, constant: CGFloat(2.5).generateSizeForScreen).isActive = true
         spaceCategoryNameLabel.trailingAnchor.constraint(equalTo: titleLabelView.trailingAnchor, constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
         spaceCategoryNameLabel.bottomAnchor.constraint(equalTo: titleLabelView.bottomAnchor, constant: CGFloat(-2.5).generateSizeForScreen).isActive = true
-//        spaceCategoryNameLabel.constraintInsideTo(.top, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
-//        spaceCategoryNameLabel.constraintInsideTo(.leading, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
-//        spaceCategoryNameLabel.constraintInsideTo(.trailing, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
-//        spaceCategoryNameLabel.constraintInsideTo(.bottom, titleLabelView,
-//                                      CGFloat(2.5).generateSizeForScreen)
         
         let sloganLabel = detailsOpenViewModel.createLabel(space.slogan,
                                                            UIFont(name: FontsBravve.regular.rawValue,
@@ -191,6 +192,7 @@ class OpenDetailsView: UIViewController {
         photoCollectionView.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
+        photoCollectionView.showsHorizontalScrollIndicator = false
         
         let localLabel = detailsOpenViewModel.createLabel(space.local_name,
                                                           UIFont(name: FontsBravve.bold.rawValue,
@@ -217,6 +219,7 @@ class OpenDetailsView: UIViewController {
         
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = CGFloat(5).generateSizeForScreen
+        tagsStackView.distribution = .fillProportionally
         
         let briefingLabel = detailsOpenViewModel.createLabel("""
         Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
@@ -227,7 +230,14 @@ class OpenDetailsView: UIViewController {
         """,
                                                              textColor: black_White)
         
-        let nameLabel = detailsOpenViewModel.createLabel("Giovanna")
+        let spaceContact = detailsOpenViewModel.verifyContacts(space.contact)
+//        necessario verificar todas as informacoes que serao apresentadas na tela returando informacoes mocadas, porem nao consegui verificar ainda, API vem incompleta
+//        print(spaceContact,"$$$")
+//        print(space,"$$$")
+        
+        let nameLabel = detailsOpenViewModel.createLabel(spaceContact[0].name,
+                                                         UIFont(name: FontsBravve.bold.rawValue,
+                                                                size: CGFloat(12).generateSizeForScreen))
         
         let officeLabel = detailsOpenViewModel.createLabel("Community Manager")
         
@@ -298,12 +308,13 @@ class OpenDetailsView: UIViewController {
         tagsStackView.leadingAnchor.constraint(equalTo: localLabel.leadingAnchor).isActive = true
         tagsStackView.trailingAnchor.constraint(equalTo: creditHourLabel.trailingAnchor).isActive = true
         
-        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor).isActive = true
+        briefingLabel.topAnchor.constraint(equalTo: tagsStackView.bottomAnchor,
+                                           constant: CGFloat(20).generateSizeForScreen).isActive = true
         briefingLabel.leadingAnchor.constraint(equalTo: tagsStackView.leadingAnchor).isActive = true
-        briefingLabel.widthAnchor.constraint(equalToConstant: CGFloat(322).generateSizeForScreen).isActive = true
-        briefingLabel.heightAnchor.constraint(equalToConstant: CGFloat(234).generateSizeForScreen).isActive = true
+        briefingLabel.trailingAnchor.constraint(equalTo: tagsStackView.trailingAnchor).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor,
+                                       constant: CGFloat(20).generateSizeForScreen).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: briefingLabel.leadingAnchor).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: briefingLabel.trailingAnchor).isActive = true
         
@@ -320,17 +331,19 @@ class OpenDetailsView: UIViewController {
                                                 constant: CGFloat(20).generateSizeForScreen).isActive = true
         structureStackView.leadingAnchor.constraint(equalTo: localFacilitiesStackView.leadingAnchor).isActive = true
         structureStackView.trailingAnchor.constraint(equalTo: localFacilitiesStackView.trailingAnchor).isActive = true
-        structureStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
         
         localFacilitiesStackView.topAnchor.constraint(equalTo: structureStackView.bottomAnchor,
-                                                      constant: CGFloat(16).generateSizeForScreen).isActive = true
+                                                      constant: CGFloat(20).generateSizeForScreen).isActive = true
         localFacilitiesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                          constant: CGFloat(19).generateSizeForScreen).isActive = true
+                                                          constant: CGFloat(20).generateSizeForScreen).isActive = true
+        localFacilitiesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                           constant: CGFloat(-20).generateSizeForScreen).isActive = true
         localFacilitiesStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                                         constant: CGFloat(-50).generateSizeForScreen).isActive = true
-        localFacilitiesStackView.widthAnchor.constraint(equalToConstant: CGFloat(334).generateSizeForScreen).isActive = true
+                                                         constant: CGFloat(-20).generateSizeForScreen).isActive = true
         
-        return scrollView
+        
+        return ViewElements(scroll: scrollView,
+                            photoCollectionView: photoCollectionView)
     }()
     
     let reserveButton = UIButton()
@@ -373,7 +386,7 @@ class OpenDetailsView: UIViewController {
     private func setupView() {
         
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-        view.addSubviews([customBar, scrollView, reserveButton, tabBar])
+        view.addSubviews([customBar, viewElements.scroll, reserveButton, tabBar])
         tabBar.selectedItem = tabBar.items?[0]
     }
     
@@ -397,19 +410,30 @@ class OpenDetailsView: UIViewController {
     
     private func setupConstraints() {
         
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        viewElements.scroll.translatesAutoresizingMaskIntoConstraints = false
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         customBar.translatesAutoresizingMaskIntoConstraints = false
         reserveButton.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
+        viewElements.scroll.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
+        viewElements.scroll.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        viewElements.scroll.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        viewElements.scroll.bottomAnchor.constraint(equalTo: reserveButton.topAnchor).isActive = true
         
         tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    @objc func pageControlTarget(_ sender: UIPageControl) {
+        
+        DispatchQueue.main.async {
+            
+            self.viewElements.photoCollectionView.scrollToItem(at: IndexPath(row: sender.currentPage,
+                                                                             section: 0),
+                                                               at: .centeredHorizontally,
+                                                               animated: true)
+        }
     }
 }
 
@@ -433,10 +457,14 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         
         cell?.imageView.sd_setImage(with: URL(string: picture))
         
+        guard let workpass = space.allow_workpass else {return cell ?? UICollectionViewCell()}
+        if workpass {cell?.createWorkPassLabel()}
+        
         return cell ?? UICollectionViewCell()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
         let index = scrollView.contentOffset.x / witdh
         var roundedIndex = 0.0
@@ -447,7 +475,14 @@ extension OpenDetailsView: UICollectionViewDataSource, UICollectionViewDelegate 
         }
         
         self.pageControl.currentPage = Int(roundedIndex)
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.y != 0 {
+                    
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
-    
 }
 

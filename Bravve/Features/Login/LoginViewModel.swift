@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewModel{
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     private var reservations: [Reservations] = []
     
@@ -79,14 +79,14 @@ class LoginViewModel{
                     guard let openReservations = openReservations else {
                         print(statusCode as Any)
                         print(error?.localizedDescription as Any)
+                        self.delegate?.presentNextScreen()
                         return
                     }
-                    
+
                     UserReservations.reservations = openReservations
-                   
+
                     self.delegate?.presentNextScreen()
                 }
-                
             }
         }
     }

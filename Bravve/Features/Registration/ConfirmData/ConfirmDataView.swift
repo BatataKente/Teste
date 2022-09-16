@@ -9,7 +9,7 @@ import UIKit
 
 class ConfirmDataView: UIViewController {
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     var userToRegister: UserParameters
     

@@ -17,11 +17,14 @@ class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
 
+    let sessionManager = APIService()
     private var currentReservationId: Int? = nil
+    private var currentSpaceId: Int? = nil
     
     private let cellView: UIView = {
         
         let cellView = UIView()
+        cellView.translatesAutoresizingMaskIntoConstraints = false
         cellView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
         cellView.backgroundColor = UIColor(named: ColorsBravve.cards.rawValue)
         
@@ -31,6 +34,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let typeTagLabel: UILabel = {
         
         let typeTagLabel = UILabel()
+        typeTagLabel.translatesAutoresizingMaskIntoConstraints = false
         typeTagLabel.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         typeTagLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         typeTagLabel.textAlignment = .center
@@ -41,6 +45,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let topTitleLabel: UILabel = {
         
         let topTitleLabel = UILabel()
+        topTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         topTitleLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         topTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         topTitleLabel.numberOfLines = 0
@@ -51,6 +56,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let bottomTitleLabel: UILabel = {
         
         let bottomTitleLabel = UILabel()
+        bottomTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         bottomTitleLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         bottomTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(20).generateSizeForScreen)
         
@@ -60,6 +66,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let spaceImage: UIImageView = {
         
         let spaceImage = UIImageView()
+        spaceImage.translatesAutoresizingMaskIntoConstraints = false
         spaceImage.clipsToBounds = true
         spaceImage.layer.cornerRadius = 12
         spaceImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
@@ -70,6 +77,7 @@ class MyBookingCustomCell: UITableViewCell {
     let spaceNameLabel: UILabel = {
         
         let spaceNameLabel = UILabel()
+        spaceNameLabel.translatesAutoresizingMaskIntoConstraints = false
         spaceNameLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         spaceNameLabel.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
         
@@ -79,6 +87,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let reservedLabel: UILabel = {
         
         let reservedLabel = UILabel()
+        reservedLabel.translatesAutoresizingMaskIntoConstraints = false
         reservedLabel.textColor = .white
         reservedLabel.font = UIFont(name: FontsBravve.light.rawValue,
                                  size: CGFloat(13).generateSizeForScreen)
@@ -90,6 +99,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let reservedLabelView: UIView = {
         
         let reservedLabelView = UIView()
+        reservedLabelView.translatesAutoresizingMaskIntoConstraints = false
         reservedLabelView.backgroundColor = UIColor(named: ColorsBravve.reserved.rawValue)
         return reservedLabelView
     }()
@@ -98,6 +108,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let spaceSubtitleLabel: UILabel = {
         
         let spaceSubtitleLabel = UILabel()
+        spaceSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         spaceSubtitleLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         spaceSubtitleLabel.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         
@@ -107,6 +118,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let locationLabel: UILabel = {
         
         let locationLabel = UILabel()
+        locationLabel.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         locationLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         
@@ -116,6 +128,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let dateLabel: UILabel = {
         
         let dateLabel = UILabel()
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         dateLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         
@@ -125,6 +138,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let hourLabel: UILabel = {
         
         let hourLabel = UILabel()
+        hourLabel.translatesAutoresizingMaskIntoConstraints = false
         hourLabel.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         hourLabel.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         
@@ -134,7 +148,8 @@ class MyBookingCustomCell: UITableViewCell {
     private let spaceTypeLabel: UILabel = {
         
         let label = UILabel()
-        label.text = "Espaço privativo"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = " "
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.font = UIFont(name:  FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
         
@@ -144,6 +159,7 @@ class MyBookingCustomCell: UITableViewCell {
     private lazy var locationInfoStackView: UIStackView = {
         
         let stackView = UIStackView(arrangedSubviews: [locationLabel, dateLabel, hourLabel, spaceTypeLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 5
         stackView.setCustomSpacing(8, after: hourLabel)
@@ -155,6 +171,7 @@ class MyBookingCustomCell: UITableViewCell {
     private let arrowButton: UIButton = {
         
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: ButtonsBravve.arrowPink.rawValue), for: .normal)
         button.contentMode = .scaleToFill
         
@@ -227,74 +244,78 @@ class MyBookingCustomCell: UITableViewCell {
         spaceTypeLabel.text = reservation.space_type?.name
        
         self.currentReservationId = reservation.id
+        self.currentSpaceId = reservation.space_id
     }
     
+
     @objc func actionArrowButton() {
         
         UserReservations.reservationID = currentReservationId
-        self.delegate?.presentViewController(BookingDetailsView())
+        UserReservations.spaceID = currentSpaceId
+        getSpaceDetail()
     }
+    
+    func getSpaceDetail() {
+        
+        guard let currentSpaceId = currentSpaceId else { return }
+
+        sessionManager.getData(id: "\(currentSpaceId)", endpoint: .spacesId, completionHandler: {(statusCode, error, space: SpaceDetail?) in
+            
+            guard let space = space else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+            UserReservations.spaceDetail = space
+            self.delegate?.presentViewController(BookingDetailsView())
+       })
+        
+    }
+    
     
     private func setupConstraints() {
         
-        cellView.constraintInsideTo(.top, contentView,
-                                    CGFloat(20).generateSizeForScreen)
-        cellView.constraintInsideTo(.leading, contentView,
-                                    CGFloat(20).generateSizeForScreen)
-        cellView.constraintInsideTo(.trailing, contentView,
-                                    CGFloat(20).generateSizeForScreen)
-        cellView.constraintInsideTo(.bottom, contentView,
-                                    CGFloat(20).generateSizeForScreen)
-        
-        typeTagLabel.constraintInsideTo(.top, cellView)
-        typeTagLabel.constraintInsideTo(.leading, cellView,
-                                        CGFloat(17).generateSizeForScreen)
-        
-        topTitleLabel.constraintOutsideTo(.top, typeTagLabel,
-                                          CGFloat(19).generateSizeForScreen)
-        topTitleLabel.constraintInsideTo(.leading, cellView,
-                                         CGFloat(17).generateSizeForScreen)
-        topTitleLabel.constraintInsideTo(.width, cellView, multiplier: 0.6)
-        
-        spaceImage.constraintOutsideTo(.top, topTitleLabel,
-                                       CGFloat(22).generateSizeForScreen)
-        spaceImage.constraintInsideTo(.leading, topTitleLabel)
-        spaceImage.constraintInsideTo(.trailing, cellView)
-        spaceImage.constraintInsideTo(.height, cellView, multiplier: 0.39)
-        spaceImage.heightAnchorInSuperview(CGFloat(200).generateSizeForScreen)
-        
-        spaceNameLabel.constraintOutsideTo(.top, spaceImage,
-                                           CGFloat(23).generateSizeForScreen)
-        spaceNameLabel.constraintInsideTo(.leading, spaceImage)
-        
-        reservedLabelView.constraintOutsideTo(.top, spaceImage,
-                                          CGFloat(28).generateSizeForScreen)
-        reservedLabelView.constraintInsideTo(.trailing, cellView,
-                                         CGFloat(26).generateSizeForScreen)
-        
-        reservedLabel.constraintInsideTo(.top, reservedLabelView,
-                                          CGFloat(2.5).generateSizeForScreen)
-        reservedLabel.constraintInsideTo(.trailing, reservedLabelView,
-                                         CGFloat(2.5).generateSizeForScreen)
-        reservedLabel.constraintInsideTo(.bottom, reservedLabelView,
-                                         CGFloat(2.5).generateSizeForScreen)
-        reservedLabel.constraintInsideTo(.leading, reservedLabelView,
-                                         CGFloat(2.5).generateSizeForScreen)
-        
-        spaceSubtitleLabel.constraintOutsideTo(.top, spaceNameLabel,
-                                               CGFloat(8).generateSizeForScreen)
-        spaceSubtitleLabel.constraintInsideTo(.leading, spaceNameLabel)
-        
-        locationInfoStackView.constraintOutsideTo(.top, spaceSubtitleLabel,
-                                                  CGFloat(9).generateSizeForScreen)
-        locationInfoStackView.constraintInsideTo(.leading, spaceSubtitleLabel)
-        locationInfoStackView.constraintInsideTo(.bottom, cellView,
-                                                 CGFloat(23).generateSizeForScreen)
-        
-        arrowButton.constraintInsideTo(.trailing, cellView,
-                                       CGFloat(25).generateSizeForScreen)
-        arrowButton.constraintInsideTo(.bottom, cellView,
-                                       CGFloat(18).generateSizeForScreen)
+        NSLayoutConstraint.activate([
+
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(20).generateSizeForScreen),
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+
+            typeTagLabel.topAnchor.constraint(equalTo: cellView.topAnchor),
+            typeTagLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: CGFloat(17).generateSizeForScreen),
+
+            topTitleLabel.topAnchor.constraint(equalTo: typeTagLabel.bottomAnchor, constant: CGFloat(19).generateSizeForScreen),
+            topTitleLabel.leadingAnchor.constraint(equalTo: typeTagLabel.leadingAnchor),
+            topTitleLabel.widthAnchor.constraint(equalTo: cellView.widthAnchor, multiplier: 0.6),
+
+            spaceImage.topAnchor.constraint(equalTo: topTitleLabel.bottomAnchor, constant: CGFloat(22).generateSizeForScreen),
+            spaceImage.leadingAnchor.constraint(equalTo: topTitleLabel.leadingAnchor),
+            spaceImage.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
+            spaceImage.heightAnchor.constraint(equalToConstant: CGFloat(200).generateSizeForScreen),
+
+            spaceNameLabel.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: CGFloat(23).generateSizeForScreen),
+            spaceNameLabel.leadingAnchor.constraint(equalTo: spaceImage.leadingAnchor),
+
+            reservedLabelView.topAnchor.constraint(equalTo: spaceImage.bottomAnchor, constant: CGFloat(28).generateSizeForScreen),
+            reservedLabelView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: CGFloat(-26).generateSizeForScreen),
+
+            reservedLabel.topAnchor.constraint(equalTo: reservedLabelView.topAnchor, constant: CGFloat(2.5).generateSizeForScreen),
+            reservedLabel.leadingAnchor.constraint(equalTo: reservedLabelView.leadingAnchor, constant: CGFloat(2.5).generateSizeForScreen),
+            reservedLabel.trailingAnchor.constraint(equalTo: reservedLabelView.trailingAnchor, constant: CGFloat(-2.5).generateSizeForScreen),
+            reservedLabel.bottomAnchor.constraint(equalTo: reservedLabelView.bottomAnchor, constant: CGFloat(-2.5).generateSizeForScreen),
+
+            spaceSubtitleLabel.topAnchor.constraint(equalTo: spaceNameLabel.bottomAnchor, constant: CGFloat(8).generateSizeForScreen),
+            spaceSubtitleLabel.leadingAnchor.constraint(equalTo: spaceNameLabel.leadingAnchor),
+
+            locationInfoStackView.topAnchor.constraint(equalTo: spaceSubtitleLabel.bottomAnchor, constant: CGFloat(9).generateSizeForScreen),
+            locationInfoStackView.leadingAnchor.constraint(equalTo: spaceSubtitleLabel.leadingAnchor),
+            locationInfoStackView.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: CGFloat(-23).generateSizeForScreen),
+            
+            arrowButton.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: CGFloat(-25).generateSizeForScreen),
+            arrowButton.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: CGFloat(-18).generateSizeForScreen),
+        ])
     }
 }
 

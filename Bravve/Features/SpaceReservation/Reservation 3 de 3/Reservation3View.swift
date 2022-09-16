@@ -604,7 +604,10 @@ final class ReservationsThreeViewController: UIViewController, UIScrollViewDeleg
         
         viewModel.delegate = self
         
-        view.createReservationCustomBarAPI(spaceName: spaceDetail?.space_name, localName: spaceDetail?.local_name, imageURL: spaceDetail?.pictures?[0].url) { _ in
+        view.createReservationCustomBar(spaceName: spaceDetail?.space_name,
+                                        localName: spaceDetail?.local_name,
+                                        spacePictures: spaceDetail?.pictures) {_ in
+            
             self.dismiss(animated: true)
         }
     

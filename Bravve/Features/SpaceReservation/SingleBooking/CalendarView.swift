@@ -136,6 +136,15 @@ class CalendarView: UIView {
         return day == 1 ? 8 : day
     }
     
+    var indexPath = IndexPath()
+    
+    func deselectCell() {
+        
+        let cell = myCollectionView.cellForItem(at: indexPath)
+        
+        selectCell(cell)
+    }
+    
     private func selectCell(_ cell: UICollectionViewCell?) {
         
         guard let cell = cell as? DateCell else {return}
@@ -168,6 +177,7 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath)
+        self.indexPath = indexPath
         
         selectCell(cell)
     }

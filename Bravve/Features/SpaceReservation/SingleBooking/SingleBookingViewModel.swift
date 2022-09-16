@@ -7,6 +7,17 @@
 
 import UIKit
 
+protocol SingleBookingViewModelProtocol {
+    
+    func deselectCell()
+    func reduceDropDown()
+    func setupDropDown(_ dropDownButton: UIButton,_ buttons: [UIButton])
+    func changeCollectionViewState()
+    func getSpaceContractId(spaceContractId: Int)
+    func showAlert()
+}
+
+
 class SingleBookingViewModel {
     
     private let spaceId: Int
@@ -18,7 +29,7 @@ class SingleBookingViewModel {
     private let timeStacksSize = CGSize(width: CGFloat(131).generateSizeForScreen,
                                         height: CGFloat(65).generateSizeForScreen)
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     struct TimeStack {
         
@@ -316,9 +327,27 @@ class SingleBookingViewModel {
                     guard let timeInt = Int(hourTime.split(separator: ":")[0]) else { return }
                     
                     let timeOut = timeInt + 1
-                    hourOutArray.append("\(timeOut):00")
+                     
+                    if timeOut < 10 {
+                        
+                        hourOutArray.append("0\(timeOut):00")
+                    }
+                    else {
+                        
+                        hourOutArray.append("\(timeOut):00")
+                    }
+                    
                     hourInArray.append(hourTime)
+                    
                 }
+            }
+            
+            if hours.isEmpty {
+                
+                self.delegate?.changeCollectionViewState()
+                self.delegate?.showAlert()
+                self.delegate?.deselectCell()
+                return
             }
             
             self.delegate?.changeCollectionViewState()
@@ -414,8 +443,7 @@ class SingleBookingViewModel {
                 let quitHandler = { (action: UIAction) in
                     
                     timeStack.removeFromSuperview()
-                    hourInArray = []
-                    hourOutArray = []
+                    self.delegate?.reduceDropDown()
                 }
                 trashButton.addAction(UIAction(handler: trashHandler),
                                       for: .touchUpInside)
@@ -515,15 +543,4 @@ class SingleBookingViewModel {
             return "\(year)-\(month)-\(day)T\(hour):00.000Z"
         }
     }
-}
-
-protocol SingleBookingViewModelProtocol {
-    
-    func reduceDropDown()
-    
-    func setupDropDown(_ dropDownButton: UIButton,_ buttons: [UIButton])
-    
-    func changeCollectionViewState()
-    
-    func getSpaceContractId(spaceContractId: Int)
 }

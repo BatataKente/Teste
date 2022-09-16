@@ -36,6 +36,7 @@ class FotoView: UIViewController {
                                                 IconsBravve.hobbiesGray.rawValue,
                                                 IconsBravve.activitiesGray.rawValue])
         let stackView = UIStackView(arrangedSubviews: buttons)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
     }()
@@ -43,6 +44,7 @@ class FotoView: UIViewController {
     private let infoLabel: UILabel = {
         
         let infoLabel = UILabel()
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
         infoLabel.setToDefault(text: "Quer adicionar uma foto ao seu perfil, agora? Esse passo é opcional!")
         
         return infoLabel
@@ -51,6 +53,7 @@ class FotoView: UIViewController {
     private let tutorialLabel: UILabel = {
         
         let infoLabel = UILabel()
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
         infoLabel.setToDefault(text: "Recomendado: 512x512\nMáximo: 2MB")
         
         return infoLabel
@@ -59,6 +62,7 @@ class FotoView: UIViewController {
     private let imageView: UIImageView = {
         
         let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = false
         imageView.image = UIImage(named: ImagesBravve.photo.rawValue)
         imageView.clipsToBounds = true
@@ -69,6 +73,7 @@ class FotoView: UIViewController {
     private let editButton: UIButton = {
         
         let editButton = UIButton()
+        editButton.translatesAutoresizingMaskIntoConstraints = false
         editButton.setImage(UIImage(named: ButtonsBravve.photoButtonPink.rawValue),
                             for: .normal)
         
@@ -77,7 +82,7 @@ class FotoView: UIViewController {
     
     let imagePicker = UIImagePickerController()
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     override var prefersStatusBarHidden: Bool {
         
@@ -143,32 +148,33 @@ class FotoView: UIViewController {
        
         registerButton.setToBottomButtonKeyboardDefault(backgroundColor: .buttonPink)
     }
-    
+
     private func setupConstraints() {
         
-        progressBarStackView.constraintOutsideTo(.top, bravveIcon,
-                                                 CGFloat(50).generateSizeForScreen)
-        progressBarStackView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
+        let height = view.frame.size.height
+        imageView.layer.cornerRadius = height/10
         
-        infoLabel.constraintOutsideTo(.top, progressBarStackView,
-                                      CGFloat(50).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.leading, view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.trailing, view.safeAreaLayoutGuide,
-                                     CGFloat(40).generateSizeForScreen)
-        
-        imageView.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        imageView.constraintInsideTo(.centerY, view.safeAreaLayoutGuide,
-                                     CGFloat(30).generateSizeForScreen)
-        imageView.sizeAnchorInSuperview(view.frame.size.height/5)
-        imageView.layer.cornerRadius = view.frame.size.height/10
-        
-        tutorialLabel.constraintOutsideTo(.top, imageView, 25)
-        tutorialLabel.constraintOutsideTo(.centerX, view)
-        
-        editButton.sizeAnchorInSuperview(CGFloat(32).generateSizeForScreen)
-        editButton.constraintInsideTo(.centerX, imageView, view.frame.size.height/15)
-        editButton.constraintInsideTo(.centerY, imageView, view.frame.size.height/15)
+        NSLayoutConstraint.activate([
+            progressBarStackView.topAnchor.constraint(equalTo: bravveIcon.bottomAnchor, constant: 50),
+            progressBarStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+            infoLabel.topAnchor.constraint(equalTo: progressBarStackView.bottomAnchor, constant: 50),
+            infoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            infoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            
+            imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: height/5),
+            imageView.heightAnchor.constraint(equalToConstant: height/5),
+            
+            tutorialLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            tutorialLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            editButton.widthAnchor.constraint(equalToConstant: 32),
+            editButton.heightAnchor.constraint(equalToConstant: 32),
+            editButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor, constant: height/15),
+            editButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor, constant: height/15),
+        ])
         
     }
     

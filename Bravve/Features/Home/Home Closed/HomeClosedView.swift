@@ -13,7 +13,7 @@ class HomeClosedView: UIViewController {
     
     var selectedItemsArray: [String]
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     private var seletedFilterItems: [String] = []
     
@@ -338,8 +338,7 @@ extension HomeClosedView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeClosedTableViewCell
                 cell?.delegate = self
 
-                cell?.setup(cells[indexPath.row - 1], IndexPath(row: indexPath.row - 1,
-                                                                section: indexPath.section - 1))
+                cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }
@@ -365,23 +364,18 @@ extension HomeClosedView: UIScrollViewDelegate {
 
 extension HomeClosedView: HomeClosedTableViewCellProtocol {
     
-    func chosePlace(_ indexPath: IndexPath) {
-        guard let spaceId = cells[indexPath.row].id else { return }
-        
-        sessionManager.getOpenData(id: "\(spaceId)", endpoint: .spacesId) { (statusCode, error, space: SpaceDetail?) in
-            guard let space = space else {
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-            }
-            let detailsClosedView = DetailsClosedView(space, spaceId: spaceId)
-            detailsClosedView.modalPresentationStyle = .fullScreen
-            self.present(detailsClosedView, animated: false)
-        }
+    func chosePlace(_ id: Int?) {
+            
+        homeClosedViewModel.loadChosedPlace(id)
     }
 }
 
 extension HomeClosedView: HomeClosedViewModelProtocol {
+    
+    func presentOtherView(_ viewController: UIViewController) {
+        
+        present(viewController, animated: false)
+    }
     
     func setSpaces(_ spaces: [Space]) {
         self.cells = spaces

@@ -21,7 +21,7 @@ class HobbiesViewModel {
     /// This function creates capsuleButtons that are allocated inside a horizontal StackView from API data.
     func setupHobbiesArray() {
         
-        let sessionManager = SessionManager()
+        let sessionManager = APIService()
 
         sessionManager.getDataArray(endpoint: .usersHobbies) { (statusCode, error, hobbiesList: [Hobbies]? ) in
 

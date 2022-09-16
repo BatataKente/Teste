@@ -112,63 +112,82 @@ extension UIView {
     
 /// This function creates a standard bar that appears in the Reservation part, this bar contains a back button the logo, and also comes with a progressbar
 /// - Parameters:
+///   - spaceName: The name o space
+///   - localName: The name of local
+///   - spacePictures: The array of space pictures
 ///   - progressBarButtons: The progress bar buttons to be placed in a stackview below the logo
 ///   - backHandler: The action of back button
-    func createReservationCustomBar(progressBarButtons: [UIButton]? = nil,
+    func createReservationCustomBar(spaceName: String?,
+                                    localName: String?,
+                                    spacePictures: [SpacePicture]?,
+                                    progressBarButtons: [UIButton]? = nil,
                                     _ backHandler: @escaping UIActionHandler) {
-        
+       
         let backButton = UIButton()
         backButton.configuration = .plain()
         backButton.configuration?.image = UIImage(named: ButtonsBravve.backWhite.rawValue)
-        
+       
         let titleLabel = UILabel()
-        titleLabel.text = "Nome do espaço"
+        titleLabel.text = spaceName
         titleLabel.textColor = .white
         titleLabel.font = UIFont(name: FontsBravve.bold.rawValue,
                                  size: CGFloat(16).generateSizeForScreen)
-        
+       
         let subTitleLabel = UILabel()
-        subTitleLabel.text = "Nome do local parceiro"
+        subTitleLabel.text = localName
         subTitleLabel.textColor = .white
         subTitleLabel.font = UIFont(name: FontsBravve.regular.rawValue,
                                     size: CGFloat(16).generateSizeForScreen)
-        
+       
         backButton.addAction(UIAction(handler: backHandler), for: .touchUpInside)
-        
+       
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ImagesBravve.imageReservsNav.rawValue)
         
-        self.addSubviews([imageView, backButton, titleLabel, subTitleLabel])
+        guard let spacePictures = spacePictures else {return}
         
-        if let progressBarButtons = progressBarButtons {
+        if spacePictures.count == 0 {
             
-            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
-            
-            self.addSubview(progressBarStackView)
-            
-            progressBarStackView.constraintOutsideTo(.top, imageView,
-                                                     CGFloat(20).generateSizeForScreen)
-            progressBarStackView.constraintInsideTo(.centerX,
-                                                    self.safeAreaLayoutGuide)
+            imageView.image = UIImage(named: ImagesBravve.imageNotFound.rawValue)
         }
-        
+        else {
+            
+            let imageURL = spacePictures[0].url
+            guard let imageURL = imageURL else {return}
+
+            imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: ImagesBravve.imageNotFound.rawValue))
+        }
+       
+        self.addSubviews([imageView, backButton, titleLabel, subTitleLabel])
+       
+        if let progressBarButtons = progressBarButtons {
+           
+            let progressBarStackView = UIStackView(arrangedSubviews: progressBarButtons)
+           
+            self.addSubview(progressBarStackView)
+           
+            progressBarStackView.constraintOutsideTo(.top, imageView,
+                                                    CGFloat(20).generateSizeForScreen)
+            progressBarStackView.constraintInsideTo(.centerX,
+                                                   self.safeAreaLayoutGuide)
+        }
+       
         imageView.constraintInsideTo(.top, self)
         imageView.constraintInsideTo(.leading, self)
         imageView.constraintInsideTo(.trailing, self)
-        
+       
         imageView.heightAnchorInSuperview(CGFloat(150).generateSizeForScreen)
-        
+       
         backButton.imageView?.heightAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         backButton.imageView?.constraintOutsideTo(.width, backButton.imageView,
                                                   multiplier: 0.6)
         backButton.imageView?.constraintInsideTo(.centerY, backButton)
-        
+       
         titleLabel.constraintInsideTo(.centerX, imageView)
         titleLabel.constraintOutsideTo(.bottom, subTitleLabel, CGFloat(5).generateSizeForScreen)
-        
+       
         subTitleLabel.constraintInsideTo(.centerX, imageView)
         subTitleLabel.constraintInsideTo(.bottom, imageView, CGFloat(20).generateSizeForScreen)
-        
+       
         backButton.constraintInsideTo(.centerY, imageView)
         backButton.constraintInsideTo(.height, imageView)
         backButton.constraintOutsideTo(.width, backButton)
@@ -202,7 +221,7 @@ extension UIView {
             return
         }
 
-        imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: ImagesBravve.imageReservsNav.rawValue))
+        imageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: ImagesBravve.imageNotFound.rawValue))
         
         self.addSubviews([imageView, backButton, titleLabel, subTitleLabel])
         
@@ -572,7 +591,10 @@ extension UIView {
         case "HOTEL": return UIColor(named: ColorsBravve.hotel.rawValue) ?? .black
         case "BOXOFFICE": return UIColor(named: ColorsBravve.boxOffice.rawValue) ?? .black
         case "PENDENTE": return UIColor(named: ColorsBravve.reserved.rawValue) ?? .black
+        case "CONFIRMADA": return UIColor(red: 0.467, green: 0.718, blue: 0.341, alpha: 1)
         case "COMPLETA": return UIColor(red: 0.435, green: 0.455, blue: 0.475, alpha: 1)
+        case "CHECKOUT REALIZADO": return UIColor(red: 0.235, green: 0.725, blue: 0.988, alpha: 1)
+        case "CANCELADA PELO CLIENTE": return UIColor(red: 1, green: 0, blue: 0, alpha: 0.9)
         //case "Reservado": return UIColor(red: 0.267, green: 0.043, blue: 0.831, alpha: 1)
         case "Cancelada": return UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
         case "Concluída": return UIColor(red: 0.629, green: 0.629, blue: 0.629, alpha: 0.22)

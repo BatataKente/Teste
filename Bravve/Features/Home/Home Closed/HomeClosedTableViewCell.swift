@@ -27,7 +27,7 @@ class HomeClosedTableViewCell: UITableViewCell {
     
     var delegate: HomeClosedTableViewCellProtocol?
     
-    var indexPath: IndexPath = IndexPath()
+    var id: Int? = nil
     
     private lazy var viewElements: ViewElements = {
         
@@ -245,9 +245,10 @@ class HomeClosedTableViewCell: UITableViewCell {
         viewElements.view.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: CGFloat(-10).generateSizeForScreen).isActive = true
     }
     
-    func setup(_ space: Space,_ indexPath: IndexPath) {
+    func setup(_ space: Space) {
         
         viewElements.sloganLabel.text = space.slogan
+        id = space.id
         
         guard let pictures = space.space_pictures else {return}
         
@@ -259,7 +260,7 @@ class HomeClosedTableViewCell: UITableViewCell {
         }
         
         viewElements.photoView.sd_setImage(with: URL(string: picture),
-                                           placeholderImage: UIImage(named: ImagesBravve.homeOpen_1.rawValue))
+                                           placeholderImage: UIImage(named: ImagesBravve.imageNotFound.rawValue))
         viewElements.localNameLabel.text = space.local_name
         viewElements.descriptionLabel.text = space.description
         viewElements.hourlyCreditsLabel.text = "\(space.hourly_credits ?? " ")"
@@ -281,8 +282,6 @@ class HomeClosedTableViewCell: UITableViewCell {
             
             viewElements.photoLabelView.isHidden = true
         }
-        
-        self.indexPath = indexPath
     }
     
     /// create a Label with default of editing profile View
@@ -309,11 +308,11 @@ class HomeClosedTableViewCell: UITableViewCell {
     
     @objc func showDetails() {
         
-        delegate?.chosePlace(indexPath)
+        delegate?.chosePlace(id)
     }
 }
 
 protocol HomeClosedTableViewCellProtocol {
     
-    func chosePlace(_ indexPath: IndexPath)
+    func chosePlace(_ id: Int?)
 }

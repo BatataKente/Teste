@@ -162,7 +162,7 @@ class ProfessionView: UIViewController {
     
     let professionViewModel = ProfessionViewModel()
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     override var prefersStatusBarHidden: Bool {
         

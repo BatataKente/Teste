@@ -35,8 +35,6 @@ class BookingHistoryView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         view.backgroundColor = UIColor(named: "background")
         
         myTableView.delegate = self
@@ -93,13 +91,18 @@ class BookingHistoryView: UIViewController {
 extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        UserReservations.reservationsHistory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BookingHistoryCustomCell
+        
+        
         cell?.delegate = self
         cell?.selectionStyle = .none
+        
+        cell?.setupCell(reservation: UserReservations.reservationsHistory[indexPath.row])
+        
         return cell ?? UITableViewCell()
     }
 }

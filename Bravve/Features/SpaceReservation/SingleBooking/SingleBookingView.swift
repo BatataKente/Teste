@@ -20,6 +20,8 @@ class SingleBookingView: UIViewController {
     private let spaceId: Int
     private var spaceContractId: Int
     
+    private let alert = CustomAlert()
+    
     private var userUUID: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return "User UUID unavailable"}
         
@@ -170,7 +172,10 @@ class SingleBookingView: UIViewController {
         
         self.view.setToDefaultBackgroundColor()
         
-        view.createReservationCustomBarAPI(spaceName: spaceDetails.space_name, localName: spaceDetails.local_name, imageURL: spaceDetails.pictures?[0].url, progressBarButtons: buttons) { _ in
+        view.createReservationCustomBar(spaceName: spaceDetails.space_name,
+                                        localName: spaceDetails.local_name,
+                                        spacePictures: spaceDetails.pictures,
+                                        progressBarButtons: buttons) { _ in
             
             self.dismiss(animated: true)
         }
@@ -326,6 +331,19 @@ extension SingleBookingView: SingleBookingViewModelProtocol {
     }
     
     func getSpaceContractId(spaceContractId: Int) {
+        
         self.spaceContractId = spaceContractId
+    }
+    
+    func showAlert() {
+        
+        alert.showAlert(message: "Não ha horários para esse dia",
+                        enterAttributed: "Ok",
+                        on: self)
+    }
+    
+    func deselectCell() {
+        
+        calendarView.deselectCell()
     }
 }

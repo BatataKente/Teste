@@ -14,7 +14,7 @@ protocol PasswordRecoverySMSViewModelProtocol {
 
 class PasswordRecoverySMSViewModel {
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     var delegate: PasswordRecoverySMSViewModelProtocol?
     

@@ -327,13 +327,10 @@ class LoginView: UIViewController {
         } else{
             loginLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
             passwordLabel.textColor = UIColor(named: ColorsBravve.redAlertLabel.rawValue)
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
+            eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .selected)
             loginEmpty()
             passwordEmpty()
-            if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeOpen.rawValue){
-                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpenRed.rawValue), for: .normal)
-            }   else if eyeButton.currentImage == UIImage(named: ButtonsBravve.eyeClose.rawValue){
-                eyeButton.setImage(UIImage(named: ButtonsBravve.eyeCloseRed.rawValue), for: .normal)
-            }
             emptyAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
                                  message: "Usuário e/ou senha incorretos",
                                  enterAttributed: "Tentar Novamente",
@@ -343,6 +340,8 @@ class LoginView: UIViewController {
     
     //MARK: - loginStackViewTapped
     @objc func loginStackViewTapped() {
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         loginIsTapped()
     }
     
@@ -388,6 +387,8 @@ class LoginView: UIViewController {
     
     //MARK: - passwordStackViewTapped
     @objc func passwordStackViewTapped() {
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeClose.rawValue), for: .normal)
+        eyeButton.setImage(UIImage(named: ButtonsBravve.eyeOpen.rawValue), for: .selected)
         passwordIsTapped()
     }
     
@@ -439,6 +440,8 @@ class LoginView: UIViewController {
            passwordStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 15),
            passwordStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
            passwordStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+           
+           passwordTextField.trailingAnchor.constraint(equalTo: passwordStackView.trailingAnchor, constant: -45),
            
            eyeButton.heightAnchor.constraint(equalToConstant: 15),
            eyeButton.centerYAnchor.constraint(equalTo: passwordStackView.centerYAnchor),

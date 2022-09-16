@@ -19,7 +19,7 @@ class PersonalProfileViewModel {
     
     var delegate : PersonalProfileViewModelProtocol?
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     var uuid: String {
         
@@ -83,6 +83,16 @@ class PersonalProfileViewModel {
                     }
                 }
             }
+        }
+        
+        sessionManager.getDataArray(endpoint: .reservationshistory){ (statusCode, error, openReservations: [Reservations]?) in
+
+            guard let openReservations = openReservations else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            UserReservations.reservationsHistory = openReservations
         }
     }
 }

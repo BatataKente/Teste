@@ -19,7 +19,7 @@ final class ReservationsViewModel {
     
     var delegate: ReservationsViewModelProtocol?
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     func makeApiCall(reservations: [Int], cardNumber: String, cardExpiration: String, cardSecurityCode: String, holderName: String, holderDocument: String, chargedAmount: Double, countryCode: String) {
         

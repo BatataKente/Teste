@@ -14,7 +14,7 @@ protocol ReservationCompletedViewModelProtocol {
 
 class ReservationCompletedViewModel {
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     var delegate: ReservationCompletedViewModelProtocol?
     

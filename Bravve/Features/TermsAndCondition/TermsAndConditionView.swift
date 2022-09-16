@@ -4,8 +4,22 @@ import UIKit
 class TermsAndConditionViewController: UIViewController {
     
     private let customBar = UIView()
-    private let myTableView = UITableView()
     
+    //MARK: myTableView
+    private lazy var myTableView: UITableView = {
+        let myTableView = UITableView()
+        myTableView.frame = view.bounds
+      
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
+        myTableView.register(TermsAndConditionCell.self, forCellReuseIdentifier: "Cell")
+        myTableView.separatorStyle = .none
+        myTableView.showsVerticalScrollIndicator = false
+        myTableView.layer.cornerRadius = CGFloat(16).generateSizeForScreen
+        return myTableView
+    }()
+    
+    //MARK: shadowView
     private let shadowView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -15,7 +29,7 @@ class TermsAndConditionViewController: UIViewController {
         view.frame = view.frame
         return view
     }()
-    
+    //MARK: WayImage1 e 2
     private lazy var wayImage1: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "wayTerms")
@@ -31,7 +45,7 @@ class TermsAndConditionViewController: UIViewController {
         view.contentMode = .scaleToFill
         return view
     }()
-    
+    //MARK: tabBar
     private lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
         tabBar.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +56,7 @@ class TermsAndConditionViewController: UIViewController {
         
         true
     }
-    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,14 +64,6 @@ class TermsAndConditionViewController: UIViewController {
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.tableFooterView = UIView()
-        myTableView.frame = view.bounds
-        myTableView.rowHeight = 1092
-        myTableView.translatesAutoresizingMaskIntoConstraints = false
-        myTableView.backgroundColor = UIColor(named: ColorsBravve.backgroundTerms.rawValue)
-        myTableView.register(TermsAndConditionCell.self, forCellReuseIdentifier: "Cell")
-        myTableView.separatorStyle = .none
-        myTableView.showsVerticalScrollIndicator = false
-        myTableView.layer.cornerRadius = CGFloat(16).generateSizeForScreen
         tabBar.selectedItem = tabBar.items?[2]
         view.addSubviews([shadowView,wayImage1,wayImage2, customBar, myTableView,tabBar])
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Termos de privacidade") { _ in
@@ -67,7 +73,7 @@ class TermsAndConditionViewController: UIViewController {
         setConstraints()
         
     }
-    
+    //MARK: Constraints
     private func setConstraints() {
         
         for subview in view.subviews {
@@ -102,7 +108,7 @@ class TermsAndConditionViewController: UIViewController {
         ])
     }
 }
-
+//MARK: extensions
 extension TermsAndConditionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

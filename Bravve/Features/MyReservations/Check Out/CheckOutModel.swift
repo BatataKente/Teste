@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct CheckOutErrorMessage: Codable {
+    var message: String?
+}

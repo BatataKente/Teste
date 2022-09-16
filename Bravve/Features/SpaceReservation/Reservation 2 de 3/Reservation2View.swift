@@ -8,8 +8,8 @@
 import UIKit
 
 class Reservation2View: UIViewController {
-   
-
+    
+    
     //MARK: - preferredStatusBarStyle
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -20,7 +20,13 @@ class Reservation2View: UIViewController {
     private lazy var tabBar = TabBarClosed(self)
     
     var spaceDetail: SpaceDetail?
-
+    
+    //MARK: - tabBar
+    private lazy var tabBar: TabBarClosed = {
+        let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        return tabBar
+    }()
     
     //MARK: - tableview
     private let tableview: UITableView = {
@@ -29,11 +35,10 @@ class Reservation2View: UIViewController {
         table.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         table.bounces = true
         table.translatesAutoresizingMaskIntoConstraints = false
-       return table
+        return table
     }()
     
     
-
     //MARK: - buttons
     private lazy var buttons: [UIButton] = {
         
@@ -61,7 +66,7 @@ class Reservation2View: UIViewController {
         
         return buttons
     }()
-
+    
     
     //MARK: - confirmReservationButton
     private let confirmReservationButton: UIButton = {
@@ -95,13 +100,17 @@ class Reservation2View: UIViewController {
         tableview.dataSource = self
         
         tableview.addSubviews([
-                                     
-                                    ])
+            
+        ])
         
         setupConstrains()
         tabBar.selectedItem = tabBar.items?[0]
         
-        view.createReservationCustomBarAPI(spaceName: spaceDetail?.space_name, localName: spaceDetail?.local_name, imageURL: spaceDetail?.pictures?[0].url, progressBarButtons: buttons) { _ in
+        view.createReservationCustomBar(spaceName: spaceDetail?.space_name,
+                                        localName: spaceDetail?.local_name,
+                                        spacePictures: spaceDetail?.pictures,
+                                        progressBarButtons: buttons) {_ in
+            
             self.dismiss(animated: true)
         }
         
@@ -112,27 +121,26 @@ class Reservation2View: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            //MARK: - tableview Consrtaints
+            //MARK: - tableview Constraints
             tableview.topAnchor.constraint(equalTo: view.topAnchor, constant: 210),
             tableview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableview.bottomAnchor.constraint(equalTo: confirmReservationButton.topAnchor),
             
             
-            //MARK: - confirmReservationButton Consrtaints
+            //MARK: - confirmReservationButton Constraints
             confirmReservationButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             confirmReservationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             confirmReservationButton.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
-            confirmReservationButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen)
+            confirmReservationButton.heightAnchor.constraint(equalToConstant: CGFloat(52).generateSizeForScreen),
+            
+            
+            //MARK: - tabBar Constraints
+            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
         ])
-        
-        //MARK: - tabBar Consrtaints
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
-        
     }
     
     //MARK: - confirmButtonTapped
@@ -154,9 +162,9 @@ class Reservation2View: UIViewController {
 extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return UITableView.automaticDimension
-        }
-
+        return UITableView.automaticDimension
+    }
+    
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -166,13 +174,13 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if !dates.isEmpty {
-        return 3 + dates.count
+            return 3 + dates.count
         } else {
             return 2
         }
-    
+        
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
@@ -198,7 +206,7 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
             
             cellDataDayFirst.setupCell(dates[indexPath.row - 2])
             return cellDataDayFirst
-
+            
         default:
             guard let cellValueTotal = tableview.dequeueReusableCell(withIdentifier: TotalPayableBookingReviewCustomCell.reuseIdPayable, for: indexPath) as?
                     TotalPayableBookingReviewCustomCell else {
@@ -208,7 +216,7 @@ extension Reservation2View: UITableViewDelegate, UITableViewDataSource {
             cellValueTotal.setupCell(total: totalValueString)
             return cellValueTotal
         }
-}
+    }
     func setupTotalValue(dates: [ReservationDate]) -> String {
         var totalPrice = 0.0
         for date in dates {
