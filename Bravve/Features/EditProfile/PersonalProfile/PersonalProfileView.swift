@@ -11,10 +11,7 @@ import SDWebImage
 
 class PersonalProfileView: UIViewController{
     
-    private lazy var tabBar = TabBarClosed(self, itemImagesNames: [ButtonsBravve.locationGray.rawValue,
-                                                                   ButtonsBravve.calendarButtonGray.rawValue,
-                                                                   ButtonsBravve.userLoginPink.rawValue
-                                                                  ])
+    private lazy var tabBar = TabBarClosed.init(self)
     
     //MARK: - wayImage
     let wayImage: UIImageView = {
@@ -300,6 +297,12 @@ class PersonalProfileView: UIViewController{
     
     //MARK: - personalProfileViewModel
     private let personalProfileViewModel = PersonalProfileViewModel()
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[2]
+    }
     
     //MARK: - loadView
     override func viewDidLoad() {
