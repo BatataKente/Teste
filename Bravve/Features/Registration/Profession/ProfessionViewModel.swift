@@ -9,7 +9,7 @@ import UIKit
 
 class ProfessionViewModel {
     
-    let sessionManager =  SessionManager()
+    let sessionManager =  APIService()
     
     func selectAreaMenu(label: UILabel, scrollView: UIScrollView) {
         

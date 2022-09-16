@@ -18,8 +18,6 @@ class ReservationCompletedView: UIViewController {
     }
     
     //MARK: - variables to inherit values
-    private var clientName = "Ana"
-    private var locationAddress = "Av. São João, Cj. Boulevard, nº900, Sâo Paulo. SP 06020-010, BR"
     private var schedulingData: [String] {
         reservationCompletedViewModel.getReservationArray()
     }
@@ -62,7 +60,6 @@ class ReservationCompletedView: UIViewController {
          let titleLabel = UILabel()
          titleLabel.font = UIFont(name: "KoHo-Bold", size: CGFloat(45).generateSizeForScreen)
         titleLabel.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-         titleLabel.text = "Parabéns, \(clientName)!"
          titleLabel.numberOfLines = 0
          titleLabel.translatesAutoresizingMaskIntoConstraints = false
          return titleLabel
@@ -158,28 +155,32 @@ class ReservationCompletedView: UIViewController {
     
     //MARK: - locationIcon
     private let locationIcon: UIImageView = {
-       let locationIcon = UIImageView(image: UIImage(named: "locationBlue"))
+        
+       let locationIcon = UIImageView(image: UIImage(named: IconsBravve.locationBlue.rawValue))
         locationIcon.translatesAutoresizingMaskIntoConstraints = false
         return locationIcon
     }()
     
     //MARK: - schedulingIcon
     private let schedulingIcon: UIImageView = {
-        let schedulingIcon = UIImageView(image: UIImage(named: "clock"))
+        
+        let schedulingIcon = UIImageView(image: UIImage(named: IconsBravve.clock.rawValue))
         schedulingIcon.translatesAutoresizingMaskIntoConstraints = false
         return schedulingIcon
     }()
     
     //MARK: - logoIcon
     private let logoIcon: UIImageView = {
-        let logoIcon = UIImageView(image: UIImage(named: "logoWhite"))
+        
+        let logoIcon = UIImageView(image: UIImage(named: ImagesBravve.logoWhite.rawValue))
         logoIcon.translatesAutoresizingMaskIntoConstraints = false
         return logoIcon
     }()
     
     //MARK: - waveIcon
     private let waveIcon: UIImageView = {
-        let waveIcon = UIImageView(image: UIImage(named: "wayLogin"))
+        
+        let waveIcon = UIImageView(image: UIImage(named: ImagesBravve.wayLogin.rawValue))
         waveIcon.translatesAutoresizingMaskIntoConstraints = false
         return waveIcon
     }()

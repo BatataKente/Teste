@@ -35,7 +35,7 @@ class TokenView: UIViewController {
     
     var code = ""
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     let messageSentLabel: UILabel = {
         let label = UILabel()

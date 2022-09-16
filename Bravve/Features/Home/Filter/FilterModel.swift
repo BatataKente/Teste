@@ -30,7 +30,7 @@ class FilterViewModel {
     var spaceParameters: SpaceListParameters
     var selectedItemsArray: [String]
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     var sortedTypesArray: [SpaceType] = []
     var sortedClassificationsArray: [SpaceClassification] = []

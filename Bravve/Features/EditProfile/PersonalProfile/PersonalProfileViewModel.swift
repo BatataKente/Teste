@@ -19,7 +19,7 @@ class PersonalProfileViewModel {
     
     var delegate : PersonalProfileViewModelProtocol?
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     var uuid: String {
         

@@ -14,7 +14,7 @@ class HomeClosedView: UIViewController {
     
     var selectedItemsArray: [String]
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     private var seletedFilterItems: [String] = []
     

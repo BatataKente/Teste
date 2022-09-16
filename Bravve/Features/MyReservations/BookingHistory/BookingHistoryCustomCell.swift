@@ -14,7 +14,7 @@ protocol BookingHistoryCustomCellDelegate: AnyObject {
 class BookingHistoryCustomCell: UITableViewCell {
     
     weak var delegate: BookingHistoryCustomCellDelegate?
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     private var currentReservationId: Int? = nil
     private var currentSpaceId: Int? = nil

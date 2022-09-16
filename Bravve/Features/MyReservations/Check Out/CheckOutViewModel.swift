@@ -14,7 +14,7 @@ protocol CheckOutViewModelProtocol {
 
 class CheckOutViewModel {
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     var delegate: CheckOutViewModelProtocol?
     

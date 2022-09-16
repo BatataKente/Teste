@@ -29,7 +29,7 @@ class SingleBookingViewModel {
     private let timeStacksSize = CGSize(width: CGFloat(131).generateSizeForScreen,
                                         height: CGFloat(65).generateSizeForScreen)
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     struct TimeStack {
         
@@ -327,7 +327,16 @@ class SingleBookingViewModel {
                     guard let timeInt = Int(hourTime.split(separator: ":")[0]) else { return }
                     
                     let timeOut = timeInt + 1
-                    hourOutArray.append("\(timeOut):00")
+                     
+                    if timeOut < 10 {
+                        
+                        hourOutArray.append("0\(timeOut):00")
+                    }
+                    else {
+                        
+                        hourOutArray.append("\(timeOut):00")
+                    }
+                    
                     hourInArray.append(hourTime)
                     
                 }

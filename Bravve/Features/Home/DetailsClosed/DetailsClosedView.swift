@@ -15,7 +15,7 @@ class DetailsClosedView: UIViewController {
         let scroll: UIScrollView, photoCollectionView: UICollectionView
     }
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     private let space: SpaceDetail
     private let spaceId: Int
     private let cellIdentifier = "Cell"
