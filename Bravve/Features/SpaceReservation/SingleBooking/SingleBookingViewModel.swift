@@ -7,6 +7,17 @@
 
 import UIKit
 
+protocol SingleBookingViewModelProtocol {
+    
+    func deselectCell()
+    func reduceDropDown()
+    func setupDropDown(_ dropDownButton: UIButton,_ buttons: [UIButton])
+    func changeCollectionViewState()
+    func getSpaceContractId(spaceContractId: Int)
+    func showAlert()
+}
+
+
 class SingleBookingViewModel {
     
     private let spaceId: Int
@@ -322,6 +333,14 @@ class SingleBookingViewModel {
                 }
             }
             
+            if hours.isEmpty {
+                
+                self.delegate?.changeCollectionViewState()
+                self.delegate?.showAlert()
+                self.delegate?.deselectCell()
+                return
+            }
+            
             self.delegate?.changeCollectionViewState()
             
             let handler = {(action: UIAction) in
@@ -515,15 +534,4 @@ class SingleBookingViewModel {
             return "\(year)-\(month)-\(day)T\(hour):00.000Z"
         }
     }
-}
-
-protocol SingleBookingViewModelProtocol {
-    
-    func reduceDropDown()
-    
-    func setupDropDown(_ dropDownButton: UIButton,_ buttons: [UIButton])
-    
-    func changeCollectionViewState()
-    
-    func getSpaceContractId(spaceContractId: Int)
 }

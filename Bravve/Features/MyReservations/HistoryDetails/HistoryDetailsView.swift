@@ -13,7 +13,12 @@ class HistoryDetailsView: UIViewController {
     
     private let customAlertCancel: CustomAlert = CustomAlert()
     private let customAlertOk: CustomAlert = CustomAlert()
-    private var space: SpaceDetail = SpaceDetail()
+    private let historyDetailsViewModel = HistoryDetailsViewModel()
+    private var currentReservation: Reservations? {
+        var reservation: Reservations?
+        reservation = historyDetailsViewModel.getReservation(currentReservation: &reservation)
+        return reservation
+    }
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -60,9 +65,9 @@ class HistoryDetailsView: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.text = "BOXOFFICE"
+        label.text = currentReservation?.space_category?.name ?? " "
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.backgroundColor = UIColor(named: ColorsBravve.boxOffice.rawValue)
+        label.backgroundColor = label.getTitleLabelBackgroundColor(currentReservation?.space_category?.name ?? " ")
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
         label.textAlignment = .center
         return label
@@ -75,7 +80,7 @@ class HistoryDetailsView: UIViewController {
         label.lineBreakMode = .byWordWrapping
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.31
-        label.attributedText = NSMutableAttributedString(string: "Numa esquina charmosa, um hotel", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        label.attributedText = NSMutableAttributedString(string: currentReservation?.slogan ?? " ", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 20)
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
         label.textAlignment = .left
@@ -103,7 +108,7 @@ class HistoryDetailsView: UIViewController {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         
-        guard let pictures = space.pictures else { return pageControl }
+        guard let pictures = currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
         pageControl.isEnabled = false
@@ -115,7 +120,7 @@ class HistoryDetailsView: UIViewController {
     lazy var infoLocalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Home by Kamy"
+        label.text = currentReservation?.local_name ?? " "
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(20).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.blue_white.rawValue)
@@ -125,7 +130,7 @@ class HistoryDetailsView: UIViewController {
     lazy var nameLocalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "UM Coffe Co."
+        label.text = currentReservation?.description ?? " "
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -152,7 +157,7 @@ class HistoryDetailsView: UIViewController {
     lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "09/04/22"
+        label.text = historyDetailsViewModel.getDateString(date: currentReservation?.start_dt)
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -179,7 +184,7 @@ class HistoryDetailsView: UIViewController {
     lazy var diaryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Diária"
+        label.text = currentReservation?.space_contract_name ?? " "
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -189,7 +194,7 @@ class HistoryDetailsView: UIViewController {
     lazy var dayDiaryCheckInLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "09:00"
+        label.text = historyDetailsViewModel.getHourString(date: currentReservation?.start_dt)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
@@ -198,7 +203,7 @@ class HistoryDetailsView: UIViewController {
     lazy var dayDiaryCheckOutLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "20:00"
+        label.text = historyDetailsViewModel.getHourString(date: currentReservation?.end_dt)
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
@@ -253,7 +258,7 @@ class HistoryDetailsView: UIViewController {
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(13).generateSizeForScreen), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.textField.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Total:", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: " R$ 560,87", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " R$ \(currentReservation?.payment_amount?.replacingOccurrences(of: ".", with: ",") ?? " ")", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
@@ -288,7 +293,7 @@ class HistoryDetailsView: UIViewController {
     lazy var contactNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "(11) 99999-9999"
+        label.text = currentReservation?.space_contact?.phone ?? " "
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -299,7 +304,7 @@ class HistoryDetailsView: UIViewController {
     lazy var contactEmailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "giovanna@empresaexe.com.br"
+        label.text = currentReservation?.space_contact?.email ?? " "
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(12).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -324,7 +329,7 @@ class HistoryDetailsView: UIViewController {
     lazy var checkInRealizedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Check-in realizado ás"
+        label.text = "Check-in realizado às"
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -334,7 +339,7 @@ class HistoryDetailsView: UIViewController {
     lazy var checkOutRealizedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Check-Out realizado ás"
+        label.text = "Check-Out realizado às"
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.medium.rawValue, size: 13)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -344,7 +349,7 @@ class HistoryDetailsView: UIViewController {
     lazy var hourCheckIn: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "09:04"
+        label.text = historyDetailsViewModel.getHourString(date: currentReservation?.checkin_ts)
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -354,7 +359,7 @@ class HistoryDetailsView: UIViewController {
     lazy var hourCheckOut: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "20:00"
+        label.text = historyDetailsViewModel.getHourString(date: currentReservation?.checkout_ts)
         label.numberOfLines = 0
         label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
         label.textColor = UIColor(named: ColorsBravve.label.rawValue)
@@ -379,13 +384,18 @@ class HistoryDetailsView: UIViewController {
         title.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
         var items = [UIStackView]()
-        var days = ["Segunda: 08:00h - 17:00h", "Terça: 08:00h - 17:00h", "Quarta: 08:00h - 17:00h", "Quinta: 08:00h - 17:00h", "Sexta: 08:00h - 17:00h"]
         
-        items.append(createStackView("Ate 6 pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(createStackView("Av. Sao Joao, CJ. Boulevard, no 900, Sao Paulo. SP 06020-010, BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
+        var businessHours = UserReservations.spaceHistoryDetail?.space_business_hours ?? []
+        
+        historyDetailsViewModel.sortBusinessHours(businessHours: &businessHours)
+        
+        var days = historyDetailsViewModel.createBusinessHoursArray(businessHours: businessHours)
+        
+        items.append(createStackView("Ate \(currentReservation?.seats_qty ?? 0) pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(createStackView("\(currentReservation?.space_address?.street ?? " "), \(currentReservation?.space_address?.neighborhood ?? " "), no \(currentReservation?.space_address?.street_number ?? 0), \(currentReservation?.space_address?.city_name ?? " "). \(currentReservation?.space_address?.state_name ?? " ") \(currentReservation?.space_address?.postal_code ?? " "), BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
-        for i in 1...days.count-1 {
+        for i in 0...days.count-1 {
             
             items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
@@ -418,7 +428,7 @@ class HistoryDetailsView: UIViewController {
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
-        let atritutedString1 = NSMutableAttributedString(string: "Ana Maria\n", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString1 = NSMutableAttributedString(string: "\(currentReservation?.space_contact?.name ?? " ")\n", attributes: attrs1 as [NSAttributedString.Key : Any])
         let atritutedString2 = NSMutableAttributedString(string: "Community Manager", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
@@ -461,14 +471,6 @@ class HistoryDetailsView: UIViewController {
         setupDefaults()
         setupContraints()
         
-    }
-    
-    @objc func buttonMaindoorTap(){
-        print("main door")
-    }
-    
-    @objc func buttonOpenSpaceTap(){
-        print("space door")
     }
     
     func setupViews(){
@@ -820,20 +822,19 @@ class HistoryDetailsView: UIViewController {
 extension HistoryDetailsView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        guard let pictures = space.pictures else { return 0 }
-        //
-        //        return pictures.count
-        return 3
+        guard let pictures = currentReservation?.picture else { return 0 }
+        
+        return pictures.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? HistoryDetailsCollectionViewCell
         
-        //        guard let pictures = space.pictures else { return UICollectionViewCell() }
-        //
-        //        guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
-        //
-        //        cell?.imageView.sd_setImage(with: URL(string: picture))
+                guard let pictures = currentReservation?.picture else { return UICollectionViewCell() }
+        
+                guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
+        
+                cell?.imageView.sd_setImage(with: URL(string: picture))
         
         return cell ?? UICollectionViewCell()
     }

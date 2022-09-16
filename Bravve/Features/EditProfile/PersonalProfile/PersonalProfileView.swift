@@ -327,6 +327,13 @@ class PersonalProfileView: UIViewController{
     
     //MARK: viewDidLoad
     
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[2]
+    }
+    
+    //MARK: - loadView
     override func viewDidLoad() {
         super.viewDidLoad()
         

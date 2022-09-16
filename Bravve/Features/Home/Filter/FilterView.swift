@@ -14,6 +14,7 @@ final class FilterScreen: UIViewController {
     //MARK: - prefersStatusBarHidden
     override var prefersStatusBarHidden: Bool {
         true
+        
     }
     
     
@@ -326,7 +327,6 @@ final class FilterScreen: UIViewController {
     override func loadView() {
         super.loadView()
         view.backgroundColor = UIColor(named: ColorsBravve.white_black.rawValue)
-        view.heightAnchor.constraint(equalToConstant: 1700).isActive = true
         setupView()
         setupConstrains()
         
@@ -517,19 +517,16 @@ final class FilterScreen: UIViewController {
         NSLayoutConstraint.activate([
         
             //MARK: scrollView
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            
+            scrollView.bottomAnchor.constraint(equalTo: filterButton.topAnchor),
+                   
             //MARK: uiview
+            uiview.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            uiview.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             uiview.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            uiview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            uiview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             uiview.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            uiview.widthAnchor.constraint(equalTo: view.widthAnchor),
-            uiview.heightAnchor.constraint(equalToConstant: 1680),
             
             
             //MARK: exitButton
@@ -564,7 +561,7 @@ final class FilterScreen: UIViewController {
             //MARK: numberLabel
             numberLabel.topAnchor.constraint(equalTo: capacityLabel.bottomAnchor, constant: 7),
             numberLabel.leadingAnchor.constraint(equalTo: capacityView.leadingAnchor, constant: 16),
-            numberLabel.bottomAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: 11),
+            numberLabel.bottomAnchor.constraint(equalTo: capacityView.bottomAnchor, constant: -11),
             
             capacityButton.centerYAnchor.constraint(equalTo: capacityView.centerYAnchor),
             capacityButton.trailingAnchor.constraint(equalTo: capacityView.trailingAnchor, constant: -12),
@@ -677,6 +674,7 @@ final class FilterScreen: UIViewController {
             
             //MARK: lines[6]
             lines[6].topAnchor.constraint(equalTo: roomsStackContract.bottomAnchor, constant: 19),
+            lines[6].bottomAnchor.constraint(equalTo: uiview.bottomAnchor),
             lines[6].leadingAnchor.constraint(equalTo: uiview.leadingAnchor, constant: 20),
             lines[6].trailingAnchor.constraint(equalTo: uiview.trailingAnchor, constant: -20),
             lines[6].heightAnchor.constraint(equalToConstant: 1),
