@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class BookingDetailsView: UIViewController {
     
@@ -103,13 +102,14 @@ class BookingDetailsView: UIViewController {
         let layoutCollection = UICollectionViewFlowLayout()
         layoutCollection.scrollDirection = .horizontal
         layoutCollection.itemSize = CGSize(width: itemsize, height: itemsize)
-        layoutCollection.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        layoutCollection.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
 
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layoutCollection )
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         collection.register(BookingDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-
+        collection.showsHorizontalScrollIndicator = false
+        
         return collection
     }()
     
@@ -121,8 +121,8 @@ class BookingDetailsView: UIViewController {
         guard let pictures = currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
-        pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        pageControl.addTarget(self, action: #selector(pageControlTarget), for: .touchUpInside)
         
         return pageControl
     }()
@@ -223,9 +223,11 @@ class BookingDetailsView: UIViewController {
     
     var items = [UIStackView]()
     
-    var businessDays = [" "]
+    var businessDays = [SpaceBusinessHours]()
     var seatsQty = " "
     var spaceAddress = " "
+    
+    private let bookingDetailsViewModel = BookingDetailsViewModel()
     
     lazy var localDetailsStackView: UIStackView = {
 
@@ -236,20 +238,22 @@ class BookingDetailsView: UIViewController {
         title.text = "Detalhes do local"
         title.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
         title.textColor = UIColor(named: ColorsBravve.label.rawValue)
-
-        items.append(createStackView(seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(createStackView(spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
-        items.append(createStackView(businessDays[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+        let texts = bookingDetailsViewModel.createBusinessHoursArray(businessHours: businessDays)
+
+        items.append(bookingDetailsViewModel.createStackView(seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(bookingDetailsViewModel.createStackView(spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
+        
+        items.append(bookingDetailsViewModel.createStackView(attributedText: texts[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
         for i in 0...businessDays.count-1 {
 
-            items.append(createStackView(businessDays[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+            items.append(bookingDetailsViewModel.createStackView(attributedText: texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
                                          textColor: textColor))
         }
 
-        let buttons = createSeeButtonsStackView(3...items.count-1, items: items)
+        let buttons = bookingDetailsViewModel.createSeeButtonsStackView(3...items.count-1, items: items)
         
         
         let stackView = UIStackView(arrangedSubviews: [title] + items + [buttons])
@@ -286,14 +290,15 @@ class BookingDetailsView: UIViewController {
         responsableLabel.attributedText = atritutedString1
         responsableLabel.numberOfLines = 0
         
-        
         let informations = UILabel()
         informations.text = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através dos contatos abaixo."
         informations.numberOfLines = 0
         informations.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
         informations.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let button = createSeeButton(smallText: informations.text ?? "", fullText: " ", actionLabel: informations)
+        let fullText = "Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através dos contatos abaixo. Estarei disponível para esclarecer suas dúvidas e ajudar no que for possível através dos contatos abaixo."
+        
+        let button = bookingDetailsViewModel.createSeeButton(smallText: informations.text ?? "", fullText: fullText, actionLabel: informations)
    
         let stackView = UIStackView(arrangedSubviews: [title, responsableLabel, informations, button] )
         stackView.alignment = .leading
@@ -318,8 +323,8 @@ class BookingDetailsView: UIViewController {
         
         var contacts = [UIStackView]()
         
-        contacts.append(createStackView(spaceContactPhone, UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
-        contacts.append(createStackView(spaceContactEmail, UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
+        contacts.append(bookingDetailsViewModel.createStackView(spaceContactPhone, UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
+        contacts.append(bookingDetailsViewModel.createStackView(spaceContactEmail, UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
         
         let stackView = UIStackView(arrangedSubviews: [title] + contacts)
         stackView.alignment = .leading
@@ -426,7 +431,7 @@ class BookingDetailsView: UIViewController {
         button.setTitleColor(UIColor(named: ColorsBravve.white_white.rawValue), for: .normal)
         
         button.addTarget(self, action: #selector(cancelBooking), for: .touchUpInside)
-        
+        			
         return button
     }()
     
@@ -440,7 +445,7 @@ class BookingDetailsView: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.isScrollEnabled = true
+        scroll.delegate = self
         
         return scroll
     }()
@@ -522,24 +527,7 @@ class BookingDetailsView: UIViewController {
             return lhsWeekDay < rhsWeekDay
         }
         
-        var texts:[String] {
-            var textArray: [String] = []
-            
-            for business_hour in business_hours {
-                
-                if business_hour.flag_closed_day != nil {
-                    if !business_hour.flag_closed_day! {
-                        textArray.append("\(business_hour.day_name ?? ""): \(business_hour.start_time ?? "")h - \(business_hour.end_time ?? "")h")
-                    }
-                }
-            }
-            return textArray
-        }
-        if texts != [] {
-            businessDays = texts
-        } else {
-            businessDays = [" "]
-        }
+        businessDays = business_hours
         
         titleLabel.text = currentReservation?.space_category?.name?.uppercased() ?? ""
         titleLabel.backgroundColor = titleLabel.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
@@ -559,8 +547,6 @@ class BookingDetailsView: UIViewController {
         paymentAmount = payment.replacingOccurrences(of: ".", with: ",")
         creditCard.text = currentReservation?.payment_type_name ?? ""
     }
-    
-
     
     /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
     @objc func buttonCheckInTap(){
@@ -589,184 +575,6 @@ class BookingDetailsView: UIViewController {
                           responsableStackView, contactsStackView
                          ])
         
-    }
-    
-    /// This function creates StackView for Location Details, where each StackView has a description image and a text with the details
-    /// - Parameters:
-    ///   - text: text description
-    ///   - image: image description
-    ///   - isHidden: StackView with image and text
-    ///   - textColor:Label's color
-    /// - Returns: This funtion returns StackViews with images and text with local details
-    private func createStackView(_ text: String,
-                                 _ image: UIImage? = nil,
-                                 isHidden: Bool = false,
-                                 textColor: UIColor? = .white) -> UIStackView {
-        
-        let stackView = UIStackView()
-        
-        if let image = image {
-            
-            let imageView = UIImageView()
-            imageView.contentMode = .center
-            imageView.image = image
-            
-            stackView.addArrangedSubview(imageView)
-            
-            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        }
-        
-        let label = UILabel()
-        label.text = text
-        label.numberOfLines = 0
-        label.font = UIFont(name: FontsBravve.regular.rawValue,
-                            size: CGFloat(12).generateSizeForScreen)
-        label.textColor = textColor
-        
-        stackView.spacing = CGFloat(10).generateSizeForScreen
-        stackView.isHidden = isHidden
-        
-        stackView.addArrangedSubview(label)
-        
-        return stackView
-    }
-    
-    /// This function creates the action of the see more and see less button, displaying from the data that comes from the API, the days and hours of operation of the place
-    /// - Parameters:
-    ///   - range: The range is the days and hours of operation of the place
-    ///   - items: StackView
-    ///   - titleColor: button's color
-    ///   - downButtonImages: the arrow corresponding to the action of the button (down arrow)
-    ///   - upButtonImages: the arrow corresponding to the action of the button (up arrow)
-    /// - Returns: This function returns the action on the button and displays the data, days and hours of operation of the place or not
-    private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
-                                           items: [UIStackView],
-                                           titleColor: ColorsBravve = .buttonPink,
-                                           downButtonImages: ButtonsBravve = .arrowDownPink,
-                                           upButtonImages: ButtonsBravve = .arrowUpPink) -> UIStackView {
-
-        let moreButton = UIButton()
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        var attributeString = NSMutableAttributedString(
-            string: "Ver Mais ",
-            attributes: yourAttributes)
-        moreButton.setAttributedTitle(attributeString, for: .normal)
-        moreButton.setImage(UIImage(named: downButtonImages.rawValue),
-                            for: .normal)
-        moreButton.imageView?.contentMode = .scaleAspectFit
-        moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        moreButton.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-
-        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-
-        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
-                                                 multiplier: 0.5)
-        moreButton.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
-
-        let lessButton = UIButton()
-        attributeString = NSMutableAttributedString(
-            string: "Ver Menos ",
-            attributes: yourAttributes)
-        lessButton.setAttributedTitle(attributeString, for: .normal)
-        lessButton.setImage(UIImage(named: upButtonImages.rawValue),
-                            for: .normal)
-        lessButton.imageView?.contentMode = .scaleAspectFit
-        lessButton.isHidden = true
-        lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        lessButton.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-
-        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-
-        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
-                                                 multiplier: 0.5)
-        lessButton.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
-        
-        let seeMoreHandler = {(action: UIAction) in
-
-            for i in range {
-
-                items[i].isHidden = false
-            }
-            moreButton.isHidden = true
-            lessButton.isHidden = false
-        }
-
-        let seeLessHandler = {(action: UIAction) in
-
-            for i in range {
-
-                items[i].isHidden = true
-            }
-            moreButton.isHidden = false
-            lessButton.isHidden = true
-        }
-
-        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
-        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
-
-        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
-
-        return stackView
-    }
-    
-    /// This function creates the action of the see more and see less button, modifying the way of displaying the text that comes from the API
-    /// - Parameters:
-    ///   - smallText: compressed form of the text coming from the API
-    ///   - fullText: full form of the text coming from the API
-    ///   - actionLabel: Toggles between smallText and full depending on the action the button currently has
-    /// - Returns: The button that is modified to see more or less and the text that obeys the command of the button
-    private func createSeeButton(smallText: String, fullText: String, actionLabel: UILabel) -> UIButton {
-        let button = UIButton()
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        var attributeString = NSMutableAttributedString(
-            string: "Ver Mais ",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .normal)
-        attributeString = NSMutableAttributedString(
-            string: "Ver Menos ",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .selected)
-        
-        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
-                            for: .normal)
-        button.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
-                            for: .selected)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-        
-        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        
-        button.imageView?.constraintInsideTo(.height, button.titleLabel,
-                                                 multiplier: 0.5)
-        button.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
-        let handler = {(action: UIAction) in
-            button.isSelected = !button.isSelected
-            if button.isSelected {
-                actionLabel.text = fullText
-            } else {
-                actionLabel.text = smallText
-            }
-        }
-        button.addAction(UIAction(handler: handler), for: .touchUpInside)
-        return button
     }
     
     /// This function handles the cancelbooking button alert. The message, buttons and their actions
@@ -935,6 +743,16 @@ class BookingDetailsView: UIViewController {
             
         ])
     }
+    
+    @objc func pageControlTarget(_ sender: UIPageControl) {
+        
+        DispatchQueue.main.async {
+            
+            self.reserveCollection.scrollToItem(at: IndexPath(row: sender.currentPage,
+                                                              section: 0),
+                                                at: .centeredHorizontally, animated: true)
+        }
+    }
 }
 
 extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -954,6 +772,9 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
 
         cell?.imageView.sd_setImage(with: URL(string: picture))
         
+        guard let allowWorkpass = space.allow_workpass else {return cell ?? UICollectionViewCell()}
+        if allowWorkpass {cell?.createWorkPassLabel()}
+        
         return cell ?? UICollectionViewCell()
     }
     
@@ -966,10 +787,18 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             roundedIndex = ceil(index)
         }
-        
+
         self.pageControl.currentPage = Int(roundedIndex)
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.y != 0 {
+                    
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
-    
+
 }
 
 
