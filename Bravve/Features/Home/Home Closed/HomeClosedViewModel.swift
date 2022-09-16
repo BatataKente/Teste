@@ -28,7 +28,7 @@ class HomeClosedViewModel {
     
     var delegate: HomeClosedViewModelProtocol?
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     var spaceParameters: SpaceListParameters
     

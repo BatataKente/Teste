@@ -16,7 +16,7 @@ class CheckInViewModel {
     
     var delegate: CheckInViewModelProtocol?
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     func makeCheckin() {
         

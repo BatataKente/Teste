@@ -82,7 +82,7 @@ class FotoView: UIViewController {
     
     let imagePicker = UIImagePickerController()
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     override var prefersStatusBarHidden: Bool {
         

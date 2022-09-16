@@ -9,7 +9,7 @@ import UIKit
 
 class MyBookingView: UIViewController {
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     private let customBar = UIView()
     

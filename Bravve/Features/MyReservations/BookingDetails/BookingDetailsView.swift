@@ -19,7 +19,7 @@ class BookingDetailsView: UIViewController {
     public var currentReservation: Reservations?
     public var currentSpace = UserReservations.spaceDetail
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)

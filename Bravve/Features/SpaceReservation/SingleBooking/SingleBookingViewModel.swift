@@ -29,7 +29,7 @@ class SingleBookingViewModel {
     private let timeStacksSize = CGSize(width: CGFloat(131).generateSizeForScreen,
                                         height: CGFloat(65).generateSizeForScreen)
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     struct TimeStack {
         

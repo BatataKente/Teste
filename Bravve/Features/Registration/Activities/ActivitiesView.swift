@@ -89,7 +89,7 @@ class ActivitiesView: UIViewController {
     
     var arrayItems: [String] = []
     var interestArray: [String] = []
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     let activitiesViewModel = ActivitiesViewModel()
     
