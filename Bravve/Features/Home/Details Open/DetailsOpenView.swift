@@ -219,6 +219,7 @@ class OpenDetailsView: UIViewController {
         
         let tagsStackView = UIStackView(arrangedSubviews: buttons)
         tagsStackView.spacing = CGFloat(5).generateSizeForScreen
+        tagsStackView.distribution = .fillProportionally
         
         let briefingLabel = detailsOpenViewModel.createLabel("""
         Sentiu o cheirinho de café e já veio aquela energia extra? Pois é bem assim que a gente se sente neste espaço: renovado. Se é porquê a decoração suave e orgânica nos deixa mais concentrados ou por conta do silêncio da localização você que vai nos dizer.
