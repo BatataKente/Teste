@@ -20,6 +20,8 @@ class SingleBookingView: UIViewController {
     private let spaceId: Int
     private var spaceContractId: Int
     
+    private let alert = CustomAlert()
+    
     private var userUUID: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return "User UUID unavailable"}
         
@@ -329,6 +331,19 @@ extension SingleBookingView: SingleBookingViewModelProtocol {
     }
     
     func getSpaceContractId(spaceContractId: Int) {
+        
         self.spaceContractId = spaceContractId
+    }
+    
+    func showAlert() {
+        
+        alert.showAlert(message: "Não ha horários para esse dia",
+                        enterAttributed: "Ok",
+                        on: self)
+    }
+    
+    func deselectCell() {
+        
+        calendarView.deselectCell()
     }
 }
