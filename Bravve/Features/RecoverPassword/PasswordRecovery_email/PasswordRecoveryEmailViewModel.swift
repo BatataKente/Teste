@@ -9,7 +9,7 @@ import UIKit
 
 class PasswordRecoveryEmailViewModel {
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     var delegate: PasswordRecoveryEmailViewProtocol?
     

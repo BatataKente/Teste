@@ -17,7 +17,7 @@ class MyBookingCustomCell: UITableViewCell {
     
     weak var delegate: MyBookingCustomCellDelegate?
 
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     private var currentReservationId: Int? = nil
     private var currentSpaceId: Int? = nil
     

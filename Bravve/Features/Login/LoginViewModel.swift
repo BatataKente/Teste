@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewModel{
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     private var reservations: [Reservations] = []
     

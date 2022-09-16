@@ -11,7 +11,7 @@ class HobbiesView: UIViewController {
     
     let networkManager = NetworkManager()
     
-    let sessionManager = SessionManager()
+    let sessionManager = APIService()
     
     let hobbiesViewModel = HobbiesViewModel()
 

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 /// Class to manage API Requests
-class SessionManager {
+class APIService {
     
     var accessToken: String? {
         return UserDefaults.standard.string(forKey: "access_token")

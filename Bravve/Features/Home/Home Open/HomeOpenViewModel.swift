@@ -27,7 +27,7 @@ class HomeOpenViewModel {
     
     var delegate: HomeOpenViewModelProtocol?
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     var spaceParameters: SpaceListParameters
     
