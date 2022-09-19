@@ -14,9 +14,20 @@ protocol BookingDetailsViewModelProtocol {
 
 class BookingDetailsViewModel {
     
+    let customAlertCancel = CustomAlert()
+    let customAlertOk = CustomAlert()
+    
+    var items = [UIStackView]()
+    let customBar = UIView()
+    
+    var spaceContactName = " "
+    var spaceContactRole = " "
+    var paymentAmount = " "
     var businessDays = [SpaceBusinessHours]()
     var seatsQty = " "
     var spaceAddress = " "
+    var spaceContactPhone = " "
+    var spaceContactEmail = " "
     
     var space: SpaceDetail = SpaceDetail()
     var currentReservation: Reservations?
@@ -24,23 +35,102 @@ class BookingDetailsViewModel {
     
     var delegate: BookingDetailsViewModelProtocol?
     
-    let sessionManager = APIService()
+    private let sessionManager = APIService()
     
-    func verifyContacts(_ contacts: [SpaceContact]?) -> [SpaceContact] {
+    private func sortBusinessHours(businessHours: inout [SpaceBusinessHours]) {
+        businessHours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
+            
+            guard let lhsWeekDay = lhs.week_day else { return false }
+            guard let rhsWeekDay = rhs.week_day else { return false }
+            
+            print(lhs)
+            print(rhs)
+            return lhsWeekDay < rhsWeekDay
+        }
+    }
+    
+    private func createFacilitiesArray(facilities: [SpaceFacility]?) -> [String] {
         
-        if let spaceContact = contacts {
+        var textArray: [String] = []
+        
+        guard let facilities = facilities else {
+            return []
+        }
 
-            if !spaceContact.isEmpty {
-
-                return spaceContact
+        for facility in facilities {
+            guard let facilityName = facility.name else { return [] }
+            textArray.append(facilityName)
+        }
+       
+        return textArray
+    }
+    
+    private func addItemsInStructureStackView(texts: [String], items: inout [UIStackView], structureStackView: UIStackView, textColor: UIColor?, title: UILabel, seeMoreColor: ColorsBravve, arrowUpImage: UIImage?, arrowDownImage: UIImage?) {
+        
+        if texts.count < 7 {
+            for text in texts {
+                items.append(createStackView(text, textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
+                
+            }
+            structureStackView.addArrangedSubviews([title] + items)
+        } else {
+            for i in 0...5 {
+                
+                items.append(createStackView(texts[i], textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
+            }
+            
+            for i in 6...texts.count - 1 {
+                
+                items.append(createStackView(texts[i], isHidden: true, textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
+            }
+            
+            let button = createSeeButtonsStackView(6...items.count-1, items: items, titleColor: seeMoreColor, arrowDownImage: arrowDownImage, arrowUpImage: arrowUpImage)
+            structureStackView.addArrangedSubviews([title] + items + [button])
+        }
+    }
+    
+    private func createItensStackView(itens: inout [UIStackView], texts: [String]? = nil, attributedTexts: [NSAttributedString]? = nil, textColor: UIColor, seats_qty: Int, street: String, neighborhood: String, streetNumber: Int, cityName: String, stateName: String, postalCode: String) {
+        
+        if let texts = texts {
+            
+            itens.append(createStackView("Até \(seats_qty) pessoas",
+                                         UIImage(named: IconsBravve.users.rawValue),
+                                         textColor: textColor))
+            itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
+                                         UIImage(named: IconsBravve.map.rawValue),
+                                         textColor: textColor))
+            if !texts.isEmpty {
+            itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         textColor: textColor))
+            
+            for i in 1...texts.count-1 {
+                
+                itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+                }
             }
         }
-        
-        return [SpaceContact(id: 0,
-                             name: " ",
-                             email: " ",
-                             phone: " ",
-                             message: " ")]
+        if let attributedTexts = attributedTexts {
+
+            itens.append(createStackView("Até \(seats_qty) pessoas",
+                                         UIImage(named: IconsBravve.users.rawValue),
+                                         textColor: textColor))
+            itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
+                                         UIImage(named: IconsBravve.map.rawValue),
+                                         textColor: textColor))
+            if !attributedTexts.isEmpty {
+                itens.append(createStackView(attributedText: attributedTexts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                         textColor: textColor))
+
+            for i in 1...attributedTexts.count-1 {
+
+                itens.append(createStackView(attributedText: attributedTexts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+                }
+            }
+        }
     }
     
     func createStackView(_ text: String? = nil, attributedText: NSAttributedString? = nil,
@@ -209,18 +299,6 @@ class BookingDetailsViewModel {
         return label
     }
     
-    func sortBusinessHours(businessHours: inout [SpaceBusinessHours]) {
-        businessHours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
-            
-            guard let lhsWeekDay = lhs.week_day else { return false }
-            guard let rhsWeekDay = rhs.week_day else { return false }
-            
-            print(lhs)
-            print(rhs)
-            return lhsWeekDay < rhsWeekDay
-        }
-    }
-    
     func createBusinessHoursArray(businessHours: [SpaceBusinessHours]) -> [NSMutableAttributedString] {
 
         var texts: [NSMutableAttributedString] = []
@@ -251,90 +329,6 @@ class BookingDetailsViewModel {
         }
 
         return texts
-    }
-    
-    func createFacilitiesArray(facilities: [SpaceFacility]?) -> [String] {
-        
-        var textArray: [String] = []
-        
-        guard let facilities = facilities else {
-            return []
-        }
-
-        for facility in facilities {
-            guard let facilityName = facility.name else { return [] }
-            textArray.append(facilityName)
-        }
-       
-        return textArray
-    }
-    
-    func createItensStackView(itens: inout [UIStackView], texts: [String]? = nil, attributedTexts: [NSAttributedString]? = nil, textColor: UIColor, seats_qty: Int, street: String, neighborhood: String, streetNumber: Int, cityName: String, stateName: String, postalCode: String) {
-        
-        if let texts = texts {
-            
-            itens.append(createStackView("Até \(seats_qty) pessoas",
-                                         UIImage(named: IconsBravve.users.rawValue),
-                                         textColor: textColor))
-            itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
-                                         UIImage(named: IconsBravve.map.rawValue),
-                                         textColor: textColor))
-            if !texts.isEmpty {
-            itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         textColor: textColor))
-            
-            for i in 1...texts.count-1 {
-                
-                itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                             isHidden: true,
-                                             textColor: textColor))
-                }
-            }
-        }
-        if let attributedTexts = attributedTexts {
-
-            itens.append(createStackView("Até \(seats_qty) pessoas",
-                                         UIImage(named: IconsBravve.users.rawValue),
-                                         textColor: textColor))
-            itens.append(createStackView("\(street), \(neighborhood), nº\(streetNumber), \(cityName). \(stateName) \(postalCode), BR",
-                                         UIImage(named: IconsBravve.map.rawValue),
-                                         textColor: textColor))
-            if !attributedTexts.isEmpty {
-                itens.append(createStackView(attributedText: attributedTexts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         textColor: textColor))
-
-            for i in 1...attributedTexts.count-1 {
-
-                itens.append(createStackView(attributedText: attributedTexts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                             isHidden: true,
-                                             textColor: textColor))
-                }
-            }
-        }
-    }
-    
-    func addItemsInStructureStackView(texts: [String], items: inout [UIStackView], structureStackView: UIStackView, textColor: UIColor?, title: UILabel, seeMoreColor: ColorsBravve, arrowUpImage: UIImage?, arrowDownImage: UIImage?) {
-        
-        if texts.count < 7 {
-            for text in texts {
-                items.append(createStackView(text, textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
-                
-            }
-            structureStackView.addArrangedSubviews([title] + items)
-        } else {
-            for i in 0...5 {
-                
-                items.append(createStackView(texts[i], textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
-            }
-            
-            for i in 6...texts.count - 1 {
-                
-                items.append(createStackView(texts[i], isHidden: true, textColor: textColor, font: UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)))
-            }
-            
-            let button = createSeeButtonsStackView(6...items.count-1, items: items, titleColor: seeMoreColor, arrowDownImage: arrowDownImage, arrowUpImage: arrowUpImage)
-            structureStackView.addArrangedSubviews([title] + items + [button])
-        }
     }
     
     func cancelReservation() {

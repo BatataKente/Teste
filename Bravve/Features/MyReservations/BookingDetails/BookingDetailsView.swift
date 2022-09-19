@@ -10,8 +10,6 @@ import UIKit
 
 class BookingDetailsView: UIViewController {
     
-    var items = [UIStackView]()
-    
     private lazy var bookingDetailsViewModel: BookingDetailsViewModel = {
         
         let bookingDetailsViewModel = BookingDetailsViewModel()
@@ -20,18 +18,15 @@ class BookingDetailsView: UIViewController {
         return bookingDetailsViewModel
     }()
     
-    private let customAlertCancel: CustomAlert = CustomAlert()
-    private let customAlertOk: CustomAlert = CustomAlert()
-    
-    let customBar = UIView()
-    
-    lazy var tabBar: TabBarClosed = {
+    private lazy var tabBar: TabBarClosed = {
+        
         let tabBar = TabBarClosed(self)
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
     
-    lazy var checkIN: UIButton = {
+    private lazy var checkIN: UIButton = {
+        
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Check-in", for: .normal)
@@ -43,42 +38,23 @@ class BookingDetailsView: UIViewController {
         return button
     }()
     
-    lazy var lineView1:UIView = {
-        let line = UIView()
-        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        return line
+    private lazy var lines: [UIView] = {
+        
+        let createLine = {() -> UIView in
+            
+            let line = UIView()
+            line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
+            line.translatesAutoresizingMaskIntoConstraints = false
+            return line
+        }
+        
+        let lines: [UIView] = [createLine(), createLine(), createLine(), createLine(), createLine()]
+        
+        return lines
     }()
     
-    lazy var lineView2:UIView = {
-        let line = UIView()
-        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        return line
-    }()
-    
-    lazy var lineView3:UIView = {
-        let line = UIView()
-        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        return line
-    }()
-    
-    lazy var lineView4:UIView = {
-        let line = UIView()
-        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        return line
-    }()
-    
-    lazy var lineView5:UIView = {
-        let line = UIView()
-        line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        return line
-    }()
-    
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
+        
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 1
@@ -90,7 +66,8 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var descriptLabel: UILabel = {
+    private lazy var descriptLabel: UILabel = {
+        
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = " "
@@ -132,7 +109,8 @@ class BookingDetailsView: UIViewController {
         return pageControl
     }()
     
-    lazy var infoLocalLabel: UILabel = {
+    private lazy var infoLocalLabel: UILabel = {
+        
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = " "
@@ -143,7 +121,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var nameLocalLabel: UILabel = {
+    private lazy var nameLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = " "
@@ -154,7 +132,8 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var bdStackDataLabel: UILabel = {
+    private lazy var bdStackDataLabel: UILabel = {
+        
         let lb = UILabel()
         lb.text = " "
         lb.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
@@ -162,7 +141,8 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var bdStackViewBookingTypeLabel: UILabel = {
+    private lazy var bdStackViewBookingTypeLabel: UILabel = {
+        
         let lb = UILabel()
         lb.text = " "
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
@@ -170,7 +150,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var bookingDetailsDataStackView: UIStackView = {
+    private lazy var bookingDetailsDataStackView: UIStackView = {
 
         let stackView = UIStackView(arrangedSubviews: [bdStackDataLabel, bdStackViewBookingTypeLabel])
         stackView.alignment = .leading
@@ -180,7 +160,8 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    lazy var checkOutStackViewHourLabel: UILabel = {
+    private lazy var checkOutStackViewHourLabel: UILabel = {
+        
         let lb = UILabel()
         lb.text = " "
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
@@ -188,7 +169,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var checkOutStackView: UIStackView = {
+    private lazy var checkOutStackView: UIStackView = {
         
         let checkOut = UILabel()
         checkOut.text = "Check-out"
@@ -203,7 +184,8 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    lazy var checkInStackViewHourLabel: UILabel = {
+    private lazy var checkInStackViewHourLabel: UILabel = {
+        
         let lb = UILabel()
         lb.text = " "
         lb.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
@@ -211,7 +193,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var checkInStackView: UIStackView = {
+    private lazy var checkInStackView: UIStackView = {
         
         let checkIn = UILabel()
         checkIn.text = "Check-in"
@@ -226,7 +208,7 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    lazy var localDetailsStackView: UIStackView = {
+    private lazy var localDetailsStackView: UIStackView = {
 
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
 
@@ -238,22 +220,27 @@ class BookingDetailsView: UIViewController {
         
         let texts = bookingDetailsViewModel.createBusinessHoursArray(businessHours: bookingDetailsViewModel.businessDays)
 
-        items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
+        bookingDetailsViewModel.items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        bookingDetailsViewModel.items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
-        items.append(bookingDetailsViewModel.createStackView(attributedText: texts[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+        let stackView = UIStackView(arrangedSubviews: [title] + bookingDetailsViewModel.items)
         
-        for i in 0...bookingDetailsViewModel.businessDays.count-1 {
+        if !texts.isEmpty {
+            
+            bookingDetailsViewModel.items.append(bookingDetailsViewModel.createStackView(attributedText: texts[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+            
+            for i in 0...bookingDetailsViewModel.businessDays.count-1 {
 
-            items.append(bookingDetailsViewModel.createStackView(attributedText: texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         isHidden: true,
-                                         textColor: textColor))
+                bookingDetailsViewModel.items.append(bookingDetailsViewModel.createStackView(attributedText: texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+            }
+
+            let buttons = bookingDetailsViewModel.createSeeButtonsStackView(3...bookingDetailsViewModel.items.count-1, items: bookingDetailsViewModel.items)
+            
+            stackView.addArrangedSubview(buttons)
         }
-
-        let buttons = bookingDetailsViewModel.createSeeButtonsStackView(3...items.count-1, items: items)
         
-        
-        let stackView = UIStackView(arrangedSubviews: [title] + items + [buttons])
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.spacing = CGFloat(10).generateSizeForScreen
@@ -261,10 +248,7 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    var spaceContactName = " "
-    var spaceContactRole = " "
-    
-    lazy var responsableStackView: UIStackView = {
+    private lazy var responsableStackView: UIStackView = {
         
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
         
@@ -280,8 +264,8 @@ class BookingDetailsView: UIViewController {
         let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
 
-        let atritutedString1 = NSMutableAttributedString(string: "\(spaceContactName)\n", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: spaceContactRole, attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atritutedString1 = NSMutableAttributedString(string: "\(bookingDetailsViewModel.spaceContactName)\n", attributes: attrs1 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: bookingDetailsViewModel.spaceContactRole, attributes: attrs2 as [NSAttributedString.Key : Any])
 
         atritutedString1.append(atritutedString2)
         responsableLabel.attributedText = atritutedString1
@@ -305,10 +289,7 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    var spaceContactPhone = " "
-    var spaceContactEmail = " "
-    
-    lazy var contactsStackView: UIStackView = {
+    private lazy var contactsStackView: UIStackView = {
         
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
         
@@ -320,8 +301,8 @@ class BookingDetailsView: UIViewController {
         
         var contacts = [UIStackView]()
         
-        contacts.append(bookingDetailsViewModel.createStackView(spaceContactPhone, UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
-        contacts.append(bookingDetailsViewModel.createStackView(spaceContactEmail, UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
+        contacts.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.spaceContactPhone, UIImage(named: IconsBravve.cellphone.rawValue), textColor: textColor))
+        contacts.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.spaceContactEmail, UIImage(named: IconsBravve.email.rawValue), textColor: textColor))
         
         let stackView = UIStackView(arrangedSubviews: [title] + contacts)
         stackView.alignment = .leading
@@ -331,7 +312,7 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    lazy var detailLocalLabel: UILabel = {
+    private lazy var detailLocalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Detalhes da sua reserva"
@@ -342,7 +323,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var imageDetail: UIImageView = {
+    private lazy var imageDetail: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.calendar.rawValue)
@@ -350,7 +331,7 @@ class BookingDetailsView: UIViewController {
         return image
     }()
     
-    lazy var payFormLabel: UILabel = {
+    private lazy var payFormLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Forma de pagamento"
@@ -361,7 +342,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var imagePay: UIImageView = {
+    private lazy var imagePay: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.receipt.rawValue)
@@ -369,7 +350,7 @@ class BookingDetailsView: UIViewController {
         return image
     }()
     
-    lazy var numberPeopleImage: UIImageView = {
+    private lazy var numberPeopleImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.users.rawValue)
@@ -377,7 +358,7 @@ class BookingDetailsView: UIViewController {
         return image
     }()
     
-    lazy var creditCard: UILabel = {
+    private lazy var creditCard: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.text = "Cartão de crédito"
@@ -388,9 +369,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    var paymentAmount = " "
-    
-    lazy var totalLabel: UILabel = {
+    private lazy var totalLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         
@@ -398,7 +377,7 @@ class BookingDetailsView: UIViewController {
         let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 13), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
         
         let atritutedString1 = NSMutableAttributedString(string: "Total:", attributes: attrs1 as [NSAttributedString.Key : Any])
-        let atritutedString2 = NSMutableAttributedString(string: " R$ \(paymentAmount)", attributes: attrs2 as [NSAttributedString.Key : Any])
+        let atritutedString2 = NSMutableAttributedString(string: " R$ \(bookingDetailsViewModel.paymentAmount)", attributes: attrs2 as [NSAttributedString.Key : Any])
         
         atritutedString1.append(atritutedString2)
         atritutedString2.append(atritutedString1)
@@ -408,7 +387,7 @@ class BookingDetailsView: UIViewController {
         return lb
     }()
     
-    lazy var creditCardTextField: UITextField = {
+    private lazy var creditCardTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.text = " "
@@ -418,7 +397,7 @@ class BookingDetailsView: UIViewController {
         return tf
     }()
     
-    lazy var cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Cancelar Reserva", for: .normal)
@@ -428,7 +407,7 @@ class BookingDetailsView: UIViewController {
         button.setTitleColor(UIColor(named: ColorsBravve.white_white.rawValue), for: .normal)
         
         button.addTarget(self, action: #selector(cancelBooking), for: .touchUpInside)
-        			
+                    
         return button
     }()
     
@@ -467,55 +446,25 @@ class BookingDetailsView: UIViewController {
         setupContraints()
     }
     
-    /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
-    @objc func buttonCheckInTap(){
-        customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Para realizar o Check-in, é necessário permissão de uso da câmera do celular.", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
-            let vc = CheckInQrCodeViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }), cancelAttributed: "Negar", cancelHandler: UIAction(handler: { _ in
-            self.customAlertOk.dismissAlert()
-        }), on: self)
-    }
-    
     
     /// This function adds view elements
     func setupViews(){
         view.addSubview(checkIN)
         tabBar.selectedItem = tabBar.items?[1]
-        view.addSubview(customBar)
+        view.addSubview(bookingDetailsViewModel.customBar)
         view.addSubview(tabBar)
         view.addSubview(scrollView)
         scrollView.addSubview(viewInScroll)
-        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, pageControl, infoLocalLabel,
-                          nameLocalLabel, detailLocalLabel, imageDetail, lineView1, lineView2, imagePay, payFormLabel,
-                          creditCard, creditCardTextField, totalLabel, lineView3, lineView4, bookingDetailsDataStackView,
-                          checkInStackView, checkOutStackView, lineView5, cancelButton, localDetailsStackView,
-                          responsableStackView, contactsStackView
-                         ])
-        
+        viewInScroll.addSubviews([titleLabel, descriptLabel, reserveCollection, pageControl,
+                                  infoLocalLabel, nameLocalLabel, detailLocalLabel, imageDetail,
+                                  imagePay, payFormLabel, creditCard, creditCardTextField, totalLabel,
+                                  bookingDetailsDataStackView, checkInStackView, checkOutStackView,
+                                  cancelButton, localDetailsStackView, responsableStackView, contactsStackView] + lines)
     }
-    
-    /// This function handles the cancelbooking button alert. The message, buttons and their actions
-    @objc func cancelBooking(){
-        customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
-            self.customAlertCancel.dismissAlert()
-        }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
-            
-            self.bookingDetailsViewModel.cancelReservation()
-            
-            let vc = BookingHistoryView()
-            vc.modalPresentationStyle = .fullScreen
-            self.customAlertCancel.dismissAlert()
-            self.present(vc, animated: true)
-        }), on: self)
-        Flags.shared.flagReservation = 2
-    }
-    
     
     /// This function deals with the customBar, its title, its back button and the action it has
     private func setupDefaults(){
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
+        bookingDetailsViewModel.customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
             _ in
             self.dismiss(animated: true)
             
@@ -525,18 +474,18 @@ class BookingDetailsView: UIViewController {
     /// This function has all the constraints of the BookingDetails view elements
     func setupContraints(){
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, checkIN)
-
-        viewInScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
-        
         NSLayoutConstraint.activate([
+            
+            scrollView.topAnchor.constraint(equalTo: bookingDetailsViewModel.customBar.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: checkIN.topAnchor),
+            
+            viewInScroll.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            viewInScroll.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            viewInScroll.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            viewInScroll.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            viewInScroll.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor,constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),
@@ -574,13 +523,13 @@ class BookingDetailsView: UIViewController {
             checkOutStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-24).generateSizeForScreen),
                         
             payFormLabel.leadingAnchor.constraint(equalTo: imagePay.trailingAnchor,constant: 9),
-            payFormLabel.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 20.5),
+            payFormLabel.topAnchor.constraint(equalTo: lines[0].bottomAnchor,constant: 20.5),
             
             imageDetail.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
             imageDetail.centerYAnchor.constraint(equalTo: detailLocalLabel.centerYAnchor),
             
             imagePay.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 25),
-            imagePay.topAnchor.constraint(equalTo: lineView1.bottomAnchor,constant: 21),
+            imagePay.topAnchor.constraint(equalTo: lines[0].bottomAnchor,constant: 21),
             
             creditCard.topAnchor.constraint(equalTo: imagePay.bottomAnchor,constant: 26),
             creditCard.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
@@ -593,37 +542,37 @@ class BookingDetailsView: UIViewController {
             totalLabel.topAnchor.constraint(equalTo: creditCardTextField.bottomAnchor,constant: 14),
             totalLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
             
-            lineView1.topAnchor.constraint(equalTo: bookingDetailsDataStackView.bottomAnchor,constant: 17),
-            lineView1.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
-            lineView1.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            lineView1.heightAnchor.constraint(equalToConstant: 0.5),
+            lines[0].topAnchor.constraint(equalTo: bookingDetailsDataStackView.bottomAnchor,constant: 17),
+            lines[0].leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lines[0].trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            lines[0].heightAnchor.constraint(equalToConstant: 0.5),
             
-            lineView2.topAnchor.constraint(equalTo: totalLabel.bottomAnchor,constant: 17),
-            lineView2.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
-            lineView2.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            lineView2.heightAnchor.constraint(equalToConstant: 0.5),
+            lines[1].topAnchor.constraint(equalTo: totalLabel.bottomAnchor,constant: 17),
+            lines[1].leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lines[1].trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            lines[1].heightAnchor.constraint(equalToConstant: 0.5),
             
-            localDetailsStackView.topAnchor.constraint(equalTo: lineView2.bottomAnchor, constant: 15),
-            localDetailsStackView.leadingAnchor.constraint(equalTo: lineView2.leadingAnchor),
+            localDetailsStackView.topAnchor.constraint(equalTo: lines[1].bottomAnchor, constant: 15),
+            localDetailsStackView.leadingAnchor.constraint(equalTo: lines[1].leadingAnchor),
             localDetailsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-76).generateSizeForScreen),
             
-            lineView3.topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor,constant: 16),
-            lineView3.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
-            lineView3.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            lineView3.heightAnchor.constraint(equalToConstant: 0.5),
+            lines[2].topAnchor.constraint(equalTo: localDetailsStackView.bottomAnchor,constant: 16),
+            lines[2].leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lines[2].trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            lines[2].heightAnchor.constraint(equalToConstant: 0.5),
             
-            responsableStackView.topAnchor.constraint(equalTo: lineView3.bottomAnchor, constant: 15),
-            responsableStackView.leadingAnchor.constraint(equalTo: lineView3.leadingAnchor),
+            responsableStackView.topAnchor.constraint(equalTo: lines[2].bottomAnchor, constant: 15),
+            responsableStackView.leadingAnchor.constraint(equalTo: lines[2].leadingAnchor),
             responsableStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-78).generateSizeForScreen),
             
-            lineView4.topAnchor.constraint(equalTo: responsableStackView.bottomAnchor,constant: CGFloat(16).generateSizeForScreen),
-            lineView4.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
-            lineView4.trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            lineView4.heightAnchor.constraint(equalToConstant: 0.5),
+            lines[3].topAnchor.constraint(equalTo: responsableStackView.bottomAnchor,constant: CGFloat(16).generateSizeForScreen),
+            lines[3].leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
+            lines[3].trailingAnchor.constraint(equalTo: viewInScroll.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            lines[3].heightAnchor.constraint(equalToConstant: 0.5),
             
-            contactsStackView.topAnchor.constraint(equalTo: lineView4.bottomAnchor, constant: 15),
-            contactsStackView.leadingAnchor.constraint(equalTo: lineView4.leadingAnchor),
-            contactsStackView.trailingAnchor.constraint(equalTo: lineView4.trailingAnchor),
+            contactsStackView.topAnchor.constraint(equalTo: lines[3].bottomAnchor, constant: 15),
+            contactsStackView.leadingAnchor.constraint(equalTo: lines[3].leadingAnchor),
+            contactsStackView.trailingAnchor.constraint(equalTo: lines[3].trailingAnchor),
             
             cancelButton.topAnchor.constraint(equalTo: contactsStackView.bottomAnchor,constant: 21.5),
             cancelButton.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: CGFloat(20).generateSizeForScreen),
@@ -651,6 +600,17 @@ class BookingDetailsView: UIViewController {
                                                               section: 0),
                                                 at: .centeredHorizontally, animated: true)
         }
+    }
+    
+    /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
+    @objc func buttonCheckInTap(){
+        bookingDetailsViewModel.customAlertOk.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Para realizar o Check-in, é necessário permissão de uso da câmera do celular.", enterAttributed: "Permitir", enterHandler: UIAction(handler: { _ in
+            let vc = CheckInQrCodeViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }), cancelAttributed: "Negar", cancelHandler: UIAction(handler: { _ in
+            self.bookingDetailsViewModel.customAlertOk.dismissAlert()
+        }), on: self)
     }
 }
 
@@ -697,7 +657,22 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
     }
-
+    
+    /// This function handles the cancelbooking button alert. The message, buttons and their actions
+    @objc func cancelBooking(){
+        bookingDetailsViewModel.customAlertCancel.showAlert(image: UIImage(named: IconsBravve.questionCircleBlue_1.rawValue), message: "Certeza que deseja cancelar essa reserva? Entraremos em contato para confirmar o cancelamento!", enterAttributed: "Voltar", enterHandler: UIAction(handler: { _ in
+            self.bookingDetailsViewModel.customAlertCancel.dismissAlert()
+        }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
+            
+            self.bookingDetailsViewModel.cancelReservation()
+            
+            let vc = BookingHistoryView()
+            vc.modalPresentationStyle = .fullScreen
+            self.bookingDetailsViewModel.customAlertCancel.dismissAlert()
+            self.present(vc, animated: true)
+        }), on: self)
+        Flags.shared.flagReservation = 2
+    }
 }
 
 extension BookingDetailsView: BookingDetailsViewModelProtocol {
@@ -713,11 +688,11 @@ extension BookingDetailsView: BookingDetailsViewModelProtocol {
         bdStackViewBookingTypeLabel.text = bookingTypeName
         checkInStackViewHourLabel.text = startHour
         checkOutStackViewHourLabel.text = endHour
-        spaceContactName = currentReservation?.space_contact?.name ?? " "
-        spaceContactRole = " "
-        spaceContactPhone = currentReservation?.space_contact?.phone ?? " "
-        spaceContactEmail = currentReservation?.space_contact?.email ?? " "
-        paymentAmount = currentReservation?.payment_amount?.replacingOccurrences(of: ".", with: ",") ?? ""
+        bookingDetailsViewModel.spaceContactName = currentReservation?.space_contact?.name ?? " "
+        bookingDetailsViewModel.spaceContactRole = " "
+        bookingDetailsViewModel.spaceContactPhone = currentReservation?.space_contact?.phone ?? " "
+        bookingDetailsViewModel.spaceContactEmail = currentReservation?.space_contact?.email ?? " "
+        bookingDetailsViewModel.paymentAmount = currentReservation?.payment_amount?.replacingOccurrences(of: ".", with: ",") ?? ""
         creditCard.text = currentReservation?.payment_type_name ?? ""
     }
 }
