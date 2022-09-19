@@ -91,8 +91,8 @@ struct PartnerAddress: Codable {
     var state_name: String?
     var city_id: Int?
     var city_name: String?
-    var latitude: String?
-    var longitude: String?
+    var latitude: Double?
+    var longitude: Double?
     var message: String?
 }
 
