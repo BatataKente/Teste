@@ -23,7 +23,7 @@ class PersonalProfileView: UIViewController{
     
     //MARK: SessionManager
     
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     var uuid: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
@@ -337,7 +337,7 @@ class PersonalProfileView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userData()
+//        userData()
         
         tabBar.selectedItem = tabBar.items?[2]
         
@@ -360,54 +360,54 @@ class PersonalProfileView: UIViewController{
     func userData() {
         
         sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: User?) in
-            
+
             guard let user = user else {
                 print(user?.message as Any)
                 print(statusCode as Any)
                 print(error?.localizedDescription as Any)
                 return
             }
-            
+
             DispatchQueue.main.async {
                 self.subtitleLabel.text = user.email
-                
+
                 guard let userName = user.name else {return}
                 let firstName = String(userName.split(separator: " ")[0])
-                
+
                 self.helloLabel.text = "Olá, \(firstName)!"
-                
+
             }
         }
-        
+
         sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
-            
+
             guard let pictures = pictures else {
                 print(statusCode as Any)
                 return
             }
-            
+
             if !pictures.isEmpty {
-                
+
                 guard let pictureUuid = pictures[0].picture else {
                     print(pictures[0].message as Any)
                     return
                 }
-                
+
                 self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
-                    
+
                     guard let pictureURL = pictureURL?.picture_url else {
                         print(pictureURL?.message as Any)
                         print(statusCode as Any)
                         return
                     }
-                    
+
                     DispatchQueue.main.async {
                         self.profilePic.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
                     }
-                    
+
                 }
             }
-            
+
         }
     }
     

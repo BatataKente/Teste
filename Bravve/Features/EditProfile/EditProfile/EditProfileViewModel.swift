@@ -31,7 +31,7 @@ class EditProfileViewModel {
     ///   - color: the collor of text(default is Collorsbravve.label.rawValue)
     ///   - font: font(default: FontsBravve.medium.rawValue)
     /// - Returns: the label
-    private let sessionManager = SessionManager()
+    private let sessionManager = APIService()
     
     private var password: String {
         guard let uuid = UserDefaults.standard.string(forKey: "userPassword") else {
