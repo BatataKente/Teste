@@ -16,6 +16,7 @@ class HomeOpenTableViewCell: UITableViewCell {
             spaceCategoryLabel: UILabel,
             titleLabelView: UIView,
             sloganLabel: UILabel,
+            mapButton: UIButton,
             photoView: UIImageView,
             localNameLabel: UILabel,
             descriptionLabel: UILabel,
@@ -48,6 +49,12 @@ class HomeOpenTableViewCell: UITableViewCell {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 8
+        
+        let mapButton = UIButton()
+        mapButton.backgroundColor = UIColor(named: ColorsBravve.white_white.rawValue)
+        mapButton.setImage(UIImage(named: IconsBravve.locationBlue.rawValue), for: .normal)
+        mapButton.layer.cornerRadius = 10
+        mapButton.layer.zPosition = 1
         
         let photoView = UIImageView()
         photoView.clipsToBounds = true
@@ -121,7 +128,7 @@ class HomeOpenTableViewCell: UITableViewCell {
                                 action: #selector(showDetails),
                                 for: .touchUpInside)
         
-        view.addSubviews([titleLabelView, sloganLabel, detailsButton, photoView, localNameLabel, descriptionLabel, priceView, addressLabel])
+        view.addSubviews([titleLabelView, sloganLabel, detailsButton, mapButton, photoView, localNameLabel, descriptionLabel, priceView, addressLabel])
         
         let spacing = CGFloat(20).generateSizeForScreen
         
@@ -153,9 +160,16 @@ class HomeOpenTableViewCell: UITableViewCell {
         photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         photoView.heightAnchor.constraint(equalToConstant: CGFloat(200).generateSizeForScreen).isActive = true
         
+        mapButton.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: -30).isActive = true
+        mapButton.leadingAnchor.constraint(equalTo: priceView.trailingAnchor, constant: -10).isActive = true
+        mapButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        mapButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
         localNameLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: spacing).isActive = true
         localNameLabel.leadingAnchor.constraint(equalTo: photoView.leadingAnchor).isActive = true
         localNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        
+        
         
         priceView.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: spacing).isActive = true
         priceView.trailingAnchor.constraint(equalTo: photoView.trailingAnchor,
@@ -178,6 +192,7 @@ class HomeOpenTableViewCell: UITableViewCell {
                             spaceCategoryLabel: spaceCategoryLabel,
                             titleLabelView: titleLabelView,
                             sloganLabel: sloganLabel,
+                            mapButton: mapButton,
                             photoView: photoView,
                             localNameLabel: localNameLabel,
                             descriptionLabel: descriptionLabel,
