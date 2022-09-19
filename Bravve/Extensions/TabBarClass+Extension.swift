@@ -21,17 +21,15 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
             let homeOpenView = HomeOpenView()
             
             if actualView != homeOpenView{
-                
-            }else{
                 actualView.navigationController?.pushViewController(homeOpenView, animated: true)
+                actualView.navigationController?.isNavigationBarHidden = false
             }
             
         default:
             let loginView = LoginView()
-            if actualView == loginView{
-                
-            }else{
+            if actualView != loginView{
                 actualView.navigationController?.pushViewController(loginView, animated: true)
+                actualView.navigationController?.isNavigationBarHidden = true
             }
         }
     }

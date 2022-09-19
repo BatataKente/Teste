@@ -499,6 +499,14 @@ extension HomeOpenView: HomeOpenTableViewCellProtocol {
         
         homeOpenViewModel.loadChosedPlace(id)
     }
+    
+    func loadMapView(latitude: Double?, longitude: Double?) {
+        let mapView = HomeMapKitView()
+        mapView.latitude = latitude
+        mapView.longitude = longitude
+        mapView.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(mapView, animated: true)
+    }
 }
 
 extension HomeOpenView: HomeOpenViewModelProtocol {

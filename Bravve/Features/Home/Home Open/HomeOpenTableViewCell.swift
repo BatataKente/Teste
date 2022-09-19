@@ -28,6 +28,10 @@ class HomeOpenTableViewCell: UITableViewCell {
     
     var id:Int? = nil
     
+    var latitude: Double?
+    
+    var longitude: Double?
+    
     private lazy var viewElements: ViewElements = {
         
         let spaceCategoryLabel = createLabel(color: .blue,
@@ -55,6 +59,7 @@ class HomeOpenTableViewCell: UITableViewCell {
         mapButton.setImage(UIImage(named: IconsBravve.locationBlue.rawValue), for: .normal)
         mapButton.layer.cornerRadius = 10
         mapButton.layer.zPosition = 1
+        mapButton.addTarget(self, action: #selector(showMapKit), for: .touchUpInside)
         
         let photoView = UIImageView()
         photoView.clipsToBounds = true
@@ -262,6 +267,10 @@ class HomeOpenTableViewCell: UITableViewCell {
             
             createWorkPassLabel(viewElements.view, at: viewElements.photoView)
         }
+        
+        latitude = space.partner_site_address?.address?.latitude
+        longitude = space.partner_site_address?.address?.longitude
+        
     }
     
     /// create a Label with default of editing profile View
@@ -321,9 +330,15 @@ class HomeOpenTableViewCell: UITableViewCell {
         
         delegate?.chosePlace(id)
     }
+    
+    @objc func showMapKit() {
+        delegate?.loadMapView(latitude: latitude, longitude: longitude)
+    }
 }
 
 protocol HomeOpenTableViewCellProtocol {
     
     func chosePlace(_ id: Int?)
+    
+    func loadMapView(latitude: Double?, longitude: Double?)
 }

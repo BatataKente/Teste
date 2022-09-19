@@ -13,6 +13,9 @@ class HomeMapKitView: UIViewController {
     //MARK: - var and let
     private var viewModel = HomeMapKitViewModel()
     
+    var latitude: Double?
+    var longitude: Double?
+    
     //MARK: - mapView
         private lazy var mapView: MKMapView = {
             
@@ -37,13 +40,15 @@ class HomeMapKitView: UIViewController {
     }()
     
     //MARK: - tabBar
-       private lazy var tabBar: TabBarClosed = {
-           
-        let tabBar = TabBarClosed(self)
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
-           
-        return tabBar
-    }()
+    
+        private lazy var tabBar: BravveTabBar = {
+            
+            let tabBar = BravveTabBar(self)
+            
+            tabBar.translatesAutoresizingMaskIntoConstraints = false
+            
+            return tabBar
+        }()
     
     //MARK: - alertDenied
     func alertDenied() {
@@ -80,12 +85,12 @@ class HomeMapKitView: UIViewController {
         
         setupView()
         setupConstraints()
-        tabBar.selectedItem = tabBar.items?[1]
+        tabBar.selectedItem = tabBar.items?[0]
         viewModel.checkIfLocationIsEnabled()
         setAlerts()
+        viewModel.setupUserRegion(latitude: latitude, longitude: longitude)
         mapView.setRegion(viewModel.userRegion, animated: true)
-        viewModel.setUserRegion(map: mapView)
-        
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     //MARK: - func setAlerts

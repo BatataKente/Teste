@@ -19,6 +19,18 @@ class HomeMapKitViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
     private var userLocation: CLLocationManager?
     var userRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -23.5888, longitude: -46.658890), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
     
+    func setupUserRegion(latitude: Double?, longitude: Double?) {
+        guard let userLatitude = latitude else {
+            print("Unable to unwrap user latitude")
+            return
+        }
+        guard let userLongitude = longitude else {
+            print("Unable to unwrap user longitude")
+            return
+        }
+        userRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: userLatitude, longitude: userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    }
+    
     //MARK: - checkLocation
     //This func is used to check if the user accepts to show his location
     ///
