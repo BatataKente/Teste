@@ -10,15 +10,20 @@ import UIKit
 
 class BookingDetailsView: UIViewController {
     
-    let customBar = UIView()
+    var items = [UIStackView]()
+    
+    private lazy var bookingDetailsViewModel: BookingDetailsViewModel = {
+        
+        let bookingDetailsViewModel = BookingDetailsViewModel()
+        bookingDetailsViewModel.delegate = self
+        
+        return bookingDetailsViewModel
+    }()
     
     private let customAlertCancel: CustomAlert = CustomAlert()
     private let customAlertOk: CustomAlert = CustomAlert()
-    private var space: SpaceDetail = SpaceDetail()
-    public var currentReservation: Reservations?
-    public var currentSpace = UserReservations.spaceDetail
     
-    let sessionManager = APIService()
+    let customBar = UIView()
     
     lazy var tabBar: TabBarClosed = {
         let tabBar = TabBarClosed(self)
@@ -118,7 +123,7 @@ class BookingDetailsView: UIViewController {
         let pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         
-        guard let pictures = currentReservation?.picture else { return pageControl }
+        guard let pictures = bookingDetailsViewModel.currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
@@ -221,14 +226,6 @@ class BookingDetailsView: UIViewController {
         return stackView
     }()
     
-    var items = [UIStackView]()
-    
-    var businessDays = [SpaceBusinessHours]()
-    var seatsQty = " "
-    var spaceAddress = " "
-    
-    private let bookingDetailsViewModel = BookingDetailsViewModel()
-    
     lazy var localDetailsStackView: UIStackView = {
 
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
@@ -239,14 +236,14 @@ class BookingDetailsView: UIViewController {
         title.font = UIFont(name: FontsBravve.medium.rawValue, size: 15)
         title.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let texts = bookingDetailsViewModel.createBusinessHoursArray(businessHours: businessDays)
+        let texts = bookingDetailsViewModel.createBusinessHoursArray(businessHours: bookingDetailsViewModel.businessDays)
 
-        items.append(bookingDetailsViewModel.createStackView(seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(bookingDetailsViewModel.createStackView(spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
+        items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
         items.append(bookingDetailsViewModel.createStackView(attributedText: texts[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
         
-        for i in 0...businessDays.count-1 {
+        for i in 0...bookingDetailsViewModel.businessDays.count-1 {
 
             items.append(bookingDetailsViewModel.createStackView(attributedText: texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
                                          isHidden: true,
@@ -450,14 +447,12 @@ class BookingDetailsView: UIViewController {
         return scroll
     }()
     
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
+    override var prefersStatusBarHidden: Bool {true}
     
     override func loadView() {
         super.loadView()
-        getReservation()
+        
+        bookingDetailsViewModel.getReservation()
     }
     
     override func viewDidLoad() {
@@ -470,82 +465,6 @@ class BookingDetailsView: UIViewController {
         setupViews()
         setupDefaults()
         setupContraints()
-    }
-    
-    func getReservation() {
-        
-        for reservation in UserReservations.reservations {
-            if reservation.id == UserReservations.reservationID {
-                currentReservation = reservation
-            }
-        }
-        
-        guard let bookingTypeLabel = currentReservation?.space_contract_id else { return }
-        var bookingTypeName = ""
-        
-        switch bookingTypeLabel {
-            case 1: bookingTypeName = "Por 30 min"
-            case 2: bookingTypeName = "Por hora"
-            case 3: bookingTypeName = "Diária"
-            case 4: bookingTypeName = "Mensal"
-            case 5: bookingTypeName = "Por hora - Workpass"
-            case 6: bookingTypeName = "Diária - Workpass"
-            case 7: bookingTypeName = "Mensal - Workpass"
-            default: bookingTypeName = " "
-        }
-        
-        guard let seats = currentReservation?.seats_qty else { return }
-        guard let street = currentReservation?.space_address?.street else { return }
-        guard let streetNumber = currentReservation?.space_address?.street_number else { return }
-        guard let neighborhood = currentReservation?.space_address?.neighborhood else { return }
-        guard let complement = currentReservation?.space_address?.complement else { return }
-        guard let postalCode = currentReservation?.space_address?.postal_code else { return }
-        guard let city = currentReservation?.space_address?.city_name else { return }
-        guard let state = currentReservation?.space_address?.state_name else { return }
-        guard let reservationStartDt = currentReservation?.start_dt else { return }
-        guard let reservationEndDt = currentReservation?.end_dt else { return }
-        guard let payment = currentReservation?.payment_amount else { return }
-        
-        let separatedStartDate = reservationStartDt.components(separatedBy: "T")
-        let separatedEndDate = reservationEndDt.components(separatedBy: "T")
-        
-        let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
-        
-        let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
-  
-        let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
-        let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
-        
-        let startHour = "\(separatedStartHour[0]):\(separatedStartHour[1])"
-        let endHour = "\(separatedEndHour[0]):\(separatedEndHour[1])"
-        
-        guard var business_hours = currentSpace?.space_business_hours else { return }
-        business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
-            
-            guard let lhsWeekDay = lhs.week_day else { return false }
-            guard let rhsWeekDay = rhs.week_day else { return false }
-            return lhsWeekDay < rhsWeekDay
-        }
-        
-        businessDays = business_hours
-        
-        titleLabel.text = currentReservation?.space_category?.name?.uppercased() ?? ""
-        titleLabel.backgroundColor = titleLabel.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
-        descriptLabel.text = currentReservation?.slogan
-        infoLocalLabel.text = currentReservation?.local_name
-        nameLocalLabel.text = currentReservation?.description
-        bdStackDataLabel.text = startDate
-        bdStackViewBookingTypeLabel.text = bookingTypeName
-        checkInStackViewHourLabel.text = startHour
-        checkOutStackViewHourLabel.text = endHour
-        seatsQty = "Até \(seats) pessoas"
-        spaceAddress = "\(street), \(complement), \(streetNumber), \(neighborhood), \(city) \n \(state) \(postalCode), BR"
-        spaceContactName = currentReservation?.space_contact?.name ?? " "
-        spaceContactRole = " "
-        spaceContactPhone = currentReservation?.space_contact?.phone ?? " "
-        spaceContactEmail = currentReservation?.space_contact?.email ?? " "
-        paymentAmount = payment.replacingOccurrences(of: ".", with: ",")
-        creditCard.text = currentReservation?.payment_type_name ?? ""
     }
     
     /// This function creates the checkIN Button alert, as well as the alert message, its response buttons and their action
@@ -583,7 +502,7 @@ class BookingDetailsView: UIViewController {
             self.customAlertCancel.dismissAlert()
         }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
             
-            self.cancelReservation()
+            self.bookingDetailsViewModel.cancelReservation()
             
             let vc = BookingHistoryView()
             vc.modalPresentationStyle = .fullScreen
@@ -591,26 +510,6 @@ class BookingDetailsView: UIViewController {
             self.present(vc, animated: true)
         }), on: self)
         Flags.shared.flagReservation = 2
-    }
-    
-    func cancelReservation() {
-        
-        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return }
-        guard let reservationId = self.currentReservation?.id else {
-            return
-        }
-
-        let parameters = CancelReservationParameters(uuid: uuid, reservations_id: [reservationId])
-        
-        self.sessionManager.postDataWithResponse(endpoint: .reservationsCancellations, parameters: parameters) {(statusCode, error, reservations: CancelReservationParameters?) in
-            
-            guard let reservations = reservations else {
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-            }
-            
-        }
     }
     
     
@@ -758,7 +657,7 @@ class BookingDetailsView: UIViewController {
 extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let pictures = currentReservation?.picture else { return 0 }
+        guard let pictures = bookingDetailsViewModel.currentReservation?.picture else { return 0 }
 
         return pictures.count
     }
@@ -766,13 +665,13 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? BookingDetailsCollectionViewCell
         
-        guard let pictures = currentReservation?.picture else { return UICollectionViewCell() }
+        guard let pictures = bookingDetailsViewModel.currentReservation?.picture else { return UICollectionViewCell() }
         guard let picture = pictures[indexPath.row].url else { return UICollectionViewCell() }
         
 
         cell?.imageView.sd_setImage(with: URL(string: picture))
         
-        guard let allowWorkpass = space.allow_workpass else {return cell ?? UICollectionViewCell()}
+        guard let allowWorkpass = bookingDetailsViewModel.space.allow_workpass else {return cell ?? UICollectionViewCell()}
         if allowWorkpass {cell?.createWorkPassLabel()}
         
         return cell ?? UICollectionViewCell()
@@ -801,7 +700,24 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
 
 }
 
-
-
-
-
+extension BookingDetailsView: BookingDetailsViewModelProtocol {
+    
+    func updateView(_ currentReservation: Reservations?, startDate: String, bookingTypeName: String, startHour: String, endHour: String) {
+        
+        titleLabel.text = currentReservation?.space_category?.name?.uppercased() ?? ""
+        titleLabel.backgroundColor = titleLabel.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? "")
+        descriptLabel.text = currentReservation?.slogan
+        infoLocalLabel.text = currentReservation?.local_name
+        nameLocalLabel.text = currentReservation?.description
+        bdStackDataLabel.text = startDate
+        bdStackViewBookingTypeLabel.text = bookingTypeName
+        checkInStackViewHourLabel.text = startHour
+        checkOutStackViewHourLabel.text = endHour
+        spaceContactName = currentReservation?.space_contact?.name ?? " "
+        spaceContactRole = " "
+        spaceContactPhone = currentReservation?.space_contact?.phone ?? " "
+        spaceContactEmail = currentReservation?.space_contact?.email ?? " "
+        paymentAmount = currentReservation?.payment_amount?.replacingOccurrences(of: ".", with: ",") ?? ""
+        creditCard.text = currentReservation?.payment_type_name ?? ""
+    }
+}

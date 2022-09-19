@@ -7,7 +7,24 @@
 
 import UIKit
 
+protocol BookingDetailsViewModelProtocol {
+    
+    func updateView(_ currentReservation: Reservations?, startDate: String, bookingTypeName: String, startHour: String, endHour: String)
+}
+
 class BookingDetailsViewModel {
+    
+    var businessDays = [SpaceBusinessHours]()
+    var seatsQty = " "
+    var spaceAddress = " "
+    
+    var space: SpaceDetail = SpaceDetail()
+    var currentReservation: Reservations?
+    public var currentSpace = UserReservations.spaceDetail
+    
+    var delegate: BookingDetailsViewModelProtocol?
+    
+    let sessionManager = APIService()
     
     func verifyContacts(_ contacts: [SpaceContact]?) -> [SpaceContact] {
         
@@ -318,5 +335,87 @@ class BookingDetailsViewModel {
             let button = createSeeButtonsStackView(6...items.count-1, items: items, titleColor: seeMoreColor, arrowDownImage: arrowDownImage, arrowUpImage: arrowUpImage)
             structureStackView.addArrangedSubviews([title] + items + [button])
         }
+    }
+    
+    func cancelReservation() {
+        
+        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else { return }
+        guard let reservationId = self.currentReservation?.id else {
+            return
+        }
+
+        let parameters = CancelReservationParameters(uuid: uuid, reservations_id: [reservationId])
+        
+        self.sessionManager.postDataWithResponse(endpoint: .reservationsCancellations, parameters: parameters) {(statusCode, error, reservations: CancelReservationParameters?) in
+            
+            guard let reservations = reservations else {
+                print(statusCode as Any)
+                print(error?.localizedDescription as Any)
+                return
+            }
+            
+        }
+    }
+    
+    func getReservation() {
+        
+        for reservation in UserReservations.reservations {
+            if reservation.id == UserReservations.reservationID {
+                currentReservation = reservation
+            }
+        }
+        
+        guard let bookingTypeLabel = currentReservation?.space_contract_id else { return }
+        var bookingTypeName = ""
+        
+        switch bookingTypeLabel {
+            case 1: bookingTypeName = "Por 30 min"
+            case 2: bookingTypeName = "Por hora"
+            case 3: bookingTypeName = "Diária"
+            case 4: bookingTypeName = "Mensal"
+            case 5: bookingTypeName = "Por hora - Workpass"
+            case 6: bookingTypeName = "Diária - Workpass"
+            case 7: bookingTypeName = "Mensal - Workpass"
+            default: bookingTypeName = " "
+        }
+        
+        guard let seats = currentReservation?.seats_qty else { return }
+        guard let street = currentReservation?.space_address?.street else { return }
+        guard let streetNumber = currentReservation?.space_address?.street_number else { return }
+        guard let neighborhood = currentReservation?.space_address?.neighborhood else { return }
+        guard let complement = currentReservation?.space_address?.complement else { return }
+        guard let postalCode = currentReservation?.space_address?.postal_code else { return }
+        guard let city = currentReservation?.space_address?.city_name else { return }
+        guard let state = currentReservation?.space_address?.state_name else { return }
+        guard let reservationStartDt = currentReservation?.start_dt else { return }
+        guard let reservationEndDt = currentReservation?.end_dt else { return }
+        guard let payment = currentReservation?.payment_amount else { return }
+        
+        let separatedStartDate = reservationStartDt.components(separatedBy: "T")
+        let separatedEndDate = reservationEndDt.components(separatedBy: "T")
+        
+        let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
+        
+        let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
+  
+        let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
+        let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
+        
+        let startHour = "\(separatedStartHour[0]):\(separatedStartHour[1])"
+        let endHour = "\(separatedEndHour[0]):\(separatedEndHour[1])"
+        
+        guard var business_hours = currentSpace?.space_business_hours else { return }
+        business_hours.sort { (lhs: SpaceBusinessHours, rhs: SpaceBusinessHours) in
+            
+            guard let lhsWeekDay = lhs.week_day else { return false }
+            guard let rhsWeekDay = rhs.week_day else { return false }
+            return lhsWeekDay < rhsWeekDay
+        }
+        
+        delegate?.updateView(currentReservation, startDate: startDate, bookingTypeName: bookingTypeName, startHour: startHour, endHour: endHour)
+        
+        businessDays = business_hours
+        seatsQty = "Até \(seats) pessoas"
+        spaceAddress = "\(street), \(complement), \(streetNumber), \(neighborhood), \(city) \n \(state) \(postalCode), BR"
     }
 }
