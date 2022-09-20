@@ -10,12 +10,16 @@ import UIKit
 protocol BookingDetailsViewModelProtocol {
     
     func updateView(_ currentReservation: Reservations?, startDate: String, bookingTypeName: String, startHour: String, endHour: String)
+    func goToBookingHistory()
+    func unableToCancelMessage(message: String)
+    
 }
 
 class BookingDetailsViewModel {
     
     let customAlertCancel = CustomAlert()
     let customAlertOk = CustomAlert()
+    let unableToCancelMessageAlert = CustomAlert()
     
     var items = [UIStackView]()
     let customBar = UIView()
@@ -56,12 +60,12 @@ class BookingDetailsViewModel {
         guard let facilities = facilities else {
             return []
         }
-
+        
         for facility in facilities {
             guard let facilityName = facility.name else { return [] }
             textArray.append(facilityName)
         }
-       
+        
         return textArray
     }
     
@@ -100,19 +104,19 @@ class BookingDetailsViewModel {
                                          UIImage(named: IconsBravve.map.rawValue),
                                          textColor: textColor))
             if !texts.isEmpty {
-            itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         textColor: textColor))
-            
-            for i in 1...texts.count-1 {
-                
-                itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                             isHidden: true,
+                itens.append(createStackView(texts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
                                              textColor: textColor))
+                
+                for i in 1...texts.count-1 {
+                    
+                    itens.append(createStackView(texts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                                 isHidden: true,
+                                                 textColor: textColor))
                 }
             }
         }
         if let attributedTexts = attributedTexts {
-
+            
             itens.append(createStackView("Até \(seats_qty) pessoas",
                                          UIImage(named: IconsBravve.users.rawValue),
                                          textColor: textColor))
@@ -121,13 +125,13 @@ class BookingDetailsViewModel {
                                          textColor: textColor))
             if !attributedTexts.isEmpty {
                 itens.append(createStackView(attributedText: attributedTexts[0], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         textColor: textColor))
-
-            for i in 1...attributedTexts.count-1 {
-
-                itens.append(createStackView(attributedText: attributedTexts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                             isHidden: true,
                                              textColor: textColor))
+                
+                for i in 1...attributedTexts.count-1 {
+                    
+                    itens.append(createStackView(attributedText: attributedTexts[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                                 isHidden: true,
+                                                 textColor: textColor))
                 }
             }
         }
@@ -204,22 +208,22 @@ class BookingDetailsViewModel {
             string: "Ver Menos ",
             attributes: yourAttributes)
         button.setAttributedTitle(attributeString, for: .selected)
-
+        
         button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
-                            for: .normal)
+                        for: .normal)
         button.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
-                            for: .selected)
+                        for: .selected)
         button.imageView?.contentMode = .scaleAspectFit
         button.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
         button.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-
+                                         size: CGFloat(12).generateSizeForScreen)
+        
         button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-
+        
         button.imageView?.constraintInsideTo(.height, button.titleLabel,
-                                                 multiplier: 0.5)
+                                             multiplier: 0.5)
         button.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
         let handler = {(action: UIAction) in
             button.isSelected = !button.isSelected
@@ -261,20 +265,20 @@ class BookingDetailsViewModel {
         button.imageView?.contentMode = .scaleAspectFit
         button.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
         button.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
+                                         size: CGFloat(12).generateSizeForScreen)
         
         button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-
+        
         button.imageView?.constraintInsideTo(.height, button.titleLabel,
-                                                 multiplier: 0.5)
+                                             multiplier: 0.5)
         button.imageView?.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
         
         let handler = {(action: UIAction) in
             
             for i in range {
-
+                
                 items[i].isHidden = !items[i].isHidden
             }
             button.isSelected = !button.isSelected
@@ -300,20 +304,20 @@ class BookingDetailsViewModel {
     }
     
     func createBusinessHoursArray(businessHours: [SpaceBusinessHours]) -> [NSMutableAttributedString] {
-
+        
         var texts: [NSMutableAttributedString] = []
-
+        
         let regularFont = UIFont(name: FontsBravve.regular.rawValue,
                                  size: CGFloat(12).generateSizeForScreen)
         let boldFont = UIFont(name: FontsBravve.bold.rawValue,
                               size: CGFloat(12).generateSizeForScreen)
-
+        
         for business_hour in businessHours {
-
+            
             if business_hour.flag_closed_day != nil {
-
+                
                 if !business_hour.flag_closed_day! {
-
+                    
                     let text = NSMutableAttributedString(string: "\(business_hour.day_name ?? ""): ",
                                                          attributes: [.font: regularFont as Any])
                     text.append(NSMutableAttributedString(string: "\(business_hour.start_time ?? "")h",
@@ -322,12 +326,12 @@ class BookingDetailsViewModel {
                                                           attributes: [.font: regularFont as Any]))
                     text.append(NSMutableAttributedString(string: "\(business_hour.end_time ?? "")h",
                                                           attributes: [.font: boldFont as Any]))
-
+                    
                     texts.append(text)
                 }
             }
         }
-
+        
         return texts
     }
     
@@ -337,17 +341,33 @@ class BookingDetailsViewModel {
         guard let reservationId = self.currentReservation?.id else {
             return
         }
-
+        
         let parameters = CancelReservationParameters(uuid: uuid, reservations_id: [reservationId])
         
-        self.sessionManager.postDataWithResponse(endpoint: .reservationsCancellations, parameters: parameters) {(statusCode, error, reservations: CancelReservationParameters?) in
+        self.sessionManager.postDataWithResponse(endpoint: .reservationsCancellations, parameters: parameters) {(statusCode, error, message: AlertMessage?) in
             
-            guard let reservations = reservations else {
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
+            guard let statusCode = statusCode else { return }
+            if statusCode == 204 {
+                
+                self.sessionManager.getDataArray(endpoint: .reservationshistory){ (statusCode, error, historyReservations: [Reservations]?) in
+                    
+                    guard let historyReservations = historyReservations else {
+                        print(statusCode as Any)
+                        print(error?.localizedDescription as Any)
+                        return
+                    }
+                    UserReservations.reservationsHistory = historyReservations
+                    self.delegate?.goToBookingHistory()
+                }
+                
+            } else {
+                guard let cancelMessage = message?.message else {
+                    print(statusCode as Any)
+                    print(error?.localizedDescription as Any)
+                    return
+                }
+                self.delegate?.unableToCancelMessage(message: cancelMessage)
             }
-            
         }
     }
     
@@ -363,14 +383,14 @@ class BookingDetailsViewModel {
         var bookingTypeName = ""
         
         switch bookingTypeLabel {
-            case 1: bookingTypeName = "Por 30 min"
-            case 2: bookingTypeName = "Por hora"
-            case 3: bookingTypeName = "Diária"
-            case 4: bookingTypeName = "Mensal"
-            case 5: bookingTypeName = "Por hora - Workpass"
-            case 6: bookingTypeName = "Diária - Workpass"
-            case 7: bookingTypeName = "Mensal - Workpass"
-            default: bookingTypeName = " "
+        case 1: bookingTypeName = "Por 30 min"
+        case 2: bookingTypeName = "Por hora"
+        case 3: bookingTypeName = "Diária"
+        case 4: bookingTypeName = "Mensal"
+        case 5: bookingTypeName = "Por hora - Workpass"
+        case 6: bookingTypeName = "Diária - Workpass"
+        case 7: bookingTypeName = "Mensal - Workpass"
+        default: bookingTypeName = " "
         }
         
         guard let seats = currentReservation?.seats_qty else { return }
@@ -391,7 +411,7 @@ class BookingDetailsViewModel {
         let formatStartDate = separatedStartDate[0].components(separatedBy: "-")
         
         let startDate = "\(formatStartDate[2])/\(formatStartDate[1])/\(formatStartDate[0])"
-  
+        
         let separatedStartHour = separatedStartDate[1].components(separatedBy: ":")
         let separatedEndHour = separatedEndDate[1].components(separatedBy: ":")
         

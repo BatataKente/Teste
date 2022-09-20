@@ -9,58 +9,57 @@ import UIKit
 
 class BookingHistoryView: UIViewController {
     
-    let customBar = UIView()
+    private let customBar = UIView()
+    private let topRightWay = UIImageView()
+    private let bottomLeftWay = UIImageView()
     
-    let topRightWay = UIImageView()
-    
-    let bottomLeftWay = UIImageView()
-    
-    let myTableView: UITableView = {
+    private lazy var myTableView: UITableView = {
         
         let myTableView = UITableView()
-        
-        return myTableView
-    }()
-    
-    private lazy var tabBar: TabBarClosed = {
-        let tabBar = TabBarClosed(self)
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
-        return tabBar
-    }()
-    
-    override var prefersStatusBarHidden: Bool {
-        
-        true
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "background")
-        
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.translatesAutoresizingMaskIntoConstraints = false
-        myTableView.backgroundColor = UIColor(named: "background")
         
         myTableView.register(BookingHistoryCustomCell.self, forCellReuseIdentifier: "Cell")
         
         myTableView.rowHeight = CGFloat(538).generateSizeForScreen
         
         myTableView.separatorStyle = .none
+        myTableView.backgroundColor = .clear
         
-        myTableView.layer.cornerRadius = CGFloat(12).generateSizeForScreen
+        return myTableView
+    }()
+    
+    private lazy var tabBar: TabBarClosed = {
+        
+        let tabBar = TabBarClosed(self)
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        return tabBar
+    }()
+    
+    override var prefersStatusBarHidden: Bool {true}
+
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        view.setToDefaultBackgroundColor()
         
         view.addSubviews([topRightWay, bottomLeftWay, customBar, myTableView, tabBar])
         
         tabBar.selectedItem = tabBar.items?[1]
         
-        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") { _ in
+        customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Histórico de Reservas") {_ in
+            
             if Flags.shared.flagReservation == 2 {
+                
                 let vc = HomeClosedView()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
-            }else{
-            self.dismiss(animated: true)
+            }
+            else {
+                
+                self.dismiss(animated: true)
             }
         }
         
@@ -70,15 +69,18 @@ class BookingHistoryView: UIViewController {
 
     
     func setDefaults() {
+        
         topRightWay.setWayToDefault(.wayReserv_2)
         bottomLeftWay.setWayToDefault(.wayReserv_1)
     }
     
     func setConstraints() {
+        
         NSLayoutConstraint.activate([
-            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor, constant: CGFloat(13).generateSizeForScreen),
-            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  CGFloat(20).generateSizeForScreen),
-            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            
+            myTableView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
+            myTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            myTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             myTableView.bottomAnchor.constraint(equalTo: tabBar.topAnchor),
             
             tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -91,15 +93,17 @@ class BookingHistoryView: UIViewController {
 extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         UserReservations.reservationsHistory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BookingHistoryCustomCell
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BookingHistoryCustomCell
         
         cell?.delegate = self
         cell?.selectionStyle = .none
+        cell?.backgroundColor = .clear
         
         cell?.setupCell(reservation: UserReservations.reservationsHistory[indexPath.row])
         
@@ -110,7 +114,23 @@ extension BookingHistoryView: UITableViewDelegate, UITableViewDataSource {
 extension BookingHistoryView: BookingHistoryCustomCellDelegate {
     
     func presentViewController(_ viewController: UIViewController) {
+        
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true)
     }
 }
+
+extension BookingHistoryView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.y != 0 {
+                
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
+    }
+}
+                                

@@ -8,6 +8,7 @@
 import UIKit
 
 protocol BookingHistoryCustomCellDelegate: AnyObject {
+    
     func presentViewController(_ viewController: UIViewController)
 }
 
@@ -147,8 +148,8 @@ class BookingHistoryCustomCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         
         cellView.addSubviews([typeTagLabel, topTitleLabel, spaceImage, spaceNameLabel, reservedLabelView, reservedLabel, spaceSubtitleLabel, locationInfoStackView, arrowButton])
         
@@ -166,6 +167,7 @@ class BookingHistoryCustomCell: UITableViewCell {
     }
     
     @objc func actionArrowButton() {
+        
         UserReservations.reservationHistoryID = currentReservationId
         UserReservations.spaceHistoryID = currentSpaceId
         getSpaceDetail()
@@ -236,18 +238,15 @@ class BookingHistoryCustomCell: UITableViewCell {
             UserReservations.spaceHistoryDetail = space
             self.delegate?.presentViewController(HistoryDetailsView())
        })
-        
     }
 
-    
-    
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            cellView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: CGFloat(-26).generateSizeForScreen),
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(20).generateSizeForScreen),
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             typeTagLabel.topAnchor.constraint(equalTo: cellView.topAnchor),
             typeTagLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: CGFloat(17).generateSizeForScreen),
