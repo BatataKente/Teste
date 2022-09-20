@@ -765,18 +765,17 @@ class CheckOutView: UIViewController {
     
     func setupContraints(){
         
-        scrollView.constraintOutsideTo(.top, customBar)
-        scrollView.constraintInsideTo(.leading, view)
-        scrollView.constraintInsideTo(.trailing, view)
-        scrollView.constraintOutsideTo(.bottom, buttonMainDoor)
-        
-        viewInScroll.constraintInsideTo(.top, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.leading, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.trailing, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.bottom, scrollView.contentLayoutGuide)
-        viewInScroll.constraintInsideTo(.width, scrollView.frameLayoutGuide)
-        
         NSLayoutConstraint.activate([
+            
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: customBar.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: buttonMainDoor.topAnchor),
+
+            viewInScroll.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            viewInScroll.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            viewInScroll.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            viewInScroll.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),
