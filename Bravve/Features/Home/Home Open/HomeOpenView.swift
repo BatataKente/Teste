@@ -253,8 +253,8 @@ class HomeOpenView: UIViewController {
         self.navigationItem.titleView = centerImageView
         
         //Bar Button Items Left and Right
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(self.searchBarButtonTapped))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(self.menuBarButtonTapped))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.search.rawValue), style: .plain, target: self, action: #selector(self.searchBarButtonTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(self.menuBarButtonTapped))
         self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
     }
     
@@ -275,7 +275,7 @@ class HomeOpenView: UIViewController {
         
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        config.image = UIImage(named: ButtonsBravve.mostButton.rawValue)
+        config.image = UIImage(named: ButtonsBravve.search.rawValue)
         
         DispatchQueue.main.async {
             searchTextField.rightViewMode = .always
@@ -289,7 +289,7 @@ class HomeOpenView: UIViewController {
         self.navigationItem.titleView = searchBar
         
         self.navigationItem.leftBarButtonItems = [UIBarButtonItem(systemItem: UIBarButtonItem.SystemItem.fixedSpace, primaryAction: nil, menu: nil)]
-       let barButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.filterWhiteFull.rawValue)?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(filterButtonTapped))
+       let barButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.searchFilterPink.rawValue), style: .plain, target: self, action: #selector(filterButtonTapped))
         barButtonItem.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
         
         self.navigationItem.rightBarButtonItem = barButtonItem
