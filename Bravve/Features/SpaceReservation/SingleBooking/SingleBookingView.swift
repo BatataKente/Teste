@@ -134,7 +134,7 @@ class SingleBookingView: UIViewController {
         let nextButton = UIButton()
         nextButton.setTitle("Próxima Etapa", for: .normal)
         nextButton.setTitleColor(UIColor(named: "white"), for: .normal)
-        nextButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        nextButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
         nextButton.titleLabel?.font = UIFont(name: FontsBravve.bold.rawValue,size: CGFloat(16).generateSizeForScreen)
         return nextButton
     }()
@@ -167,8 +167,7 @@ class SingleBookingView: UIViewController {
         
         tabBar.selectedItem = tabBar.items?[0]
         
-        nextButton.addTarget(nil, action: #selector(nextTarget),
-                             for: .touchUpInside)
+        checkValidReservation()
         
         self.view.setToDefaultBackgroundColor()
         
@@ -251,13 +250,13 @@ class SingleBookingView: UIViewController {
         calendarView.myCollectionView.collectionViewLayout.invalidateLayout()
     }
     
+       
     @objc func nextTarget() {
         
         let reservation2View = Reservation2View()
         reservation2View.modalPresentationStyle = .fullScreen
         reservation2View.spaceDetail = self.spaceDetails
-        
-            self.present(reservation2View, animated: true)
+        self.present(reservation2View, animated: true)
     }
 }
 
@@ -345,5 +344,17 @@ extension SingleBookingView: SingleBookingViewModelProtocol {
     func deselectCell() {
         
         calendarView.deselectCell()
+    }
+    
+    func checkValidReservation() {
+        if ReservationList.reservationList != [] {
+            nextButton.addTarget(nil, action: #selector(nextTarget),
+                                 for: .touchUpInside)
+            nextButton.backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        } else {
+            nextButton.removeTarget(nil, action: #selector(nextTarget),
+                                 for: .touchUpInside)
+            nextButton.backgroundColor = UIColor(named: ColorsBravve.buttonGray.rawValue)
+        }
     }
 }
