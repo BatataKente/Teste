@@ -40,31 +40,55 @@ class ConfirmDataView: UIViewController {
         // MARK: Alterações
         let fourDismissHandler = {(action: UIAction) in
             
-            let nomeView = NomeView()
-            nomeView.modalPresentationStyle = .fullScreen
-            self.present(nomeView, animated: true)
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController,
+                let passwordView = nomeView.presentingViewController{
+                
+                
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.view.isHidden = true
+                passwordView.dismiss(animated: false)
+                
+            }
         }
         
         let tripleDismissHandler = {(action: UIAction) in
-            let phoneView = PhoneView()
-            phoneView.modalPresentationStyle = .fullScreen
-            self.present(phoneView, animated: true)
+            
+            if let emailView = self.presentingViewController,
+               let phoneView = emailView.presentingViewController,
+               let nomeView = phoneView.presentingViewController{
+                
+                emailView.view.isHidden = true
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+            Flags.shared.flag = 0
         }
         
         let doubleDismissHandler = {(action: UIAction) in
             
-            let emailView = EmailView()
-            emailView.modalPresentationStyle = .fullScreen
-            self.present(emailView, animated: true)
+//            let emailView = EmailView()
+//            emailView.modalPresentationStyle = .fullScreen
+//            self.present(emailView, animated: true)
+            if let phoneView = self.presentingViewController,
+               let nomeView = phoneView.presentingViewController {
+                
+                phoneView.view.isHidden = true
+                nomeView.dismiss(animated: false)
+            }
+            Flags.shared.flag = 0
             
         }
         
         let dismissHandler = {(action: UIAction) in
             
-            let passwordView = PasswordView(self.userToRegister)
-            passwordView.modalPresentationStyle = .fullScreen
-            self.present(passwordView, animated: true)
-            
+//            let passwordView = PasswordView(self.userToRegister)
+//            passwordView.modalPresentationStyle = .fullScreen
+//            self.present(passwordView, animated: true)
+            self.dismiss(animated: true)
+            Flags.shared.flag = 0
             
         }
         
