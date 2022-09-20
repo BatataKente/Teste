@@ -219,11 +219,11 @@ class BookingDetailsView: UIViewController {
         title.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
         let texts = bookingDetailsViewModel.createBusinessHoursArray(businessHours: bookingDetailsViewModel.businessDays)
-
+        
         bookingDetailsViewModel.items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.seatsQty, UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
         bookingDetailsViewModel.items.append(bookingDetailsViewModel.createStackView(bookingDetailsViewModel.spaceAddress, UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
-        let stackView = UIStackView(arrangedSubviews: [title] + bookingDetailsViewModel.items)
+        let stackView = UIStackView(arrangedSubviews: [title])
         
         if !texts.isEmpty {
             
@@ -238,7 +238,11 @@ class BookingDetailsView: UIViewController {
 
             let buttons = bookingDetailsViewModel.createSeeButtonsStackView(3...bookingDetailsViewModel.items.count-1, items: bookingDetailsViewModel.items)
             
-            stackView.addArrangedSubview(buttons)
+            stackView.addArrangedSubviews(bookingDetailsViewModel.items + [buttons])
+        }
+        else {
+            
+            stackView.addArrangedSubviews(bookingDetailsViewModel.items)
         }
         
         stackView.alignment = .leading
