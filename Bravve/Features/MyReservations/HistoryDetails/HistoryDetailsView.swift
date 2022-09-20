@@ -9,59 +9,67 @@ import UIKit
 
 class HistoryDetailsView: UIViewController {
     
-    let customBar = UIView()
+    private let customBar = UIView()
     
     private let customAlertCancel: CustomAlert = CustomAlert()
     private let customAlertOk: CustomAlert = CustomAlert()
     private let historyDetailsViewModel = HistoryDetailsViewModel()
+    
     private var currentReservation: Reservations? {
         var reservation: Reservations?
         reservation = historyDetailsViewModel.getReservation(currentReservation: &reservation)
         return reservation
     }
     
-    lazy var tabBar: TabBarClosed = {
+    private lazy var tabBar: TabBarClosed = {
+        
         let tabBar = TabBarClosed(self)
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
     
-    lazy var lineView1:UIView = {
+    private lazy var lineView1:UIView = {
+        
         let line = UIView()
         line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var lineView2:UIView = {
+    private lazy var lineView2:UIView = {
+        
         let line = UIView()
         line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var lineView3:UIView = {
+    private lazy var lineView3:UIView = {
+        
         let line = UIView()
         line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var lineView4:UIView = {
+    private lazy var lineView4:UIView = {
+        
         let line = UIView()
         line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var lineView5:UIView = {
+    private lazy var lineView5:UIView = {
+        
         let line = UIView()
         line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
@@ -73,7 +81,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var descriptLabel: UILabel = {
+    private lazy var descriptLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
@@ -99,6 +108,7 @@ class HistoryDetailsView: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         collection.register(HistoryDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collection.showsHorizontalScrollIndicator = false
         
         return collection
     }()
@@ -111,13 +121,14 @@ class HistoryDetailsView: UIViewController {
         guard let pictures = currentReservation?.picture else { return pageControl }
         pageControl.numberOfPages = pictures.count
         pageControl.backgroundStyle = .prominent
-        pageControl.isEnabled = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+        pageControl.addTarget(self, action: #selector(pageControlTarget), for: .touchUpInside)
         
         return pageControl
     }()
     
-    lazy var infoLocalLabel: UILabel = {
+    private lazy var infoLocalLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = currentReservation?.local_name ?? " "
@@ -127,7 +138,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var nameLocalLabel: UILabel = {
+    private lazy var nameLocalLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = currentReservation?.description ?? " "
@@ -137,7 +149,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var detailLocalLabel: UILabel = {
+    private lazy var detailLocalLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Detalhes da sua reserva"
@@ -147,14 +160,16 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var imageDetail: UIImageView = {
+    private lazy var imageDetail: UIImageView = {
+        
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.calendar.rawValue)
         return image
     }()
     
-    lazy var dayLabel: UILabel = {
+    private lazy var dayLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = historyDetailsViewModel.getDateString(date: currentReservation?.start_dt)
@@ -164,7 +179,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var checkInLabel: UILabel = {
+    private lazy var checkInLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Check-in"
@@ -172,7 +188,9 @@ class HistoryDetailsView: UIViewController {
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
-    lazy var checkOutLabel: UILabel = {
+    
+    private lazy var checkOutLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Check-Out"
@@ -181,7 +199,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var diaryLabel: UILabel = {
+    private lazy var diaryLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = currentReservation?.space_contract_name ?? " "
@@ -191,7 +210,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var dayDiaryCheckInLabel: UILabel = {
+    private lazy var dayDiaryCheckInLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = historyDetailsViewModel.getHourString(date: currentReservation?.start_dt)
@@ -200,7 +220,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var dayDiaryCheckOutLabel: UILabel = {
+    private lazy var dayDiaryCheckOutLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = historyDetailsViewModel.getHourString(date: currentReservation?.end_dt)
@@ -209,7 +230,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var payFormLabel: UILabel = {
+    private lazy var payFormLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Forma de pagamento"
@@ -219,38 +241,32 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var imagePay: UIImageView = {
+    private lazy var imagePay: UIImageView = {
+        
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.receipt.rawValue)
         return image
     }()
     
-    lazy var cellIconImage: UIImageView = {
+    private lazy var cellIconImage: UIImageView = {
+        
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "cellphone")
         return image
     }()
     
-    lazy var emailIconImage: UIImageView = {
+    private lazy var emailIconImage: UIImageView = {
+        
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: IconsBravve.email.rawValue)
         return image
     }()
     
-    lazy var creditCard: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Cartão de crédito"
-        label.numberOfLines = 0
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
-        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-        return label
-    }()
-    
-    lazy var totalLabel: UILabel = {
+    private lazy var totalLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -267,9 +283,22 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var creditCardTextField: UITextField = {
+    private lazy var creditCard: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = currentReservation?.payment_type_name
+        label.numberOfLines = 0
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 13)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
+    
+    private lazy var creditCardTextField: UITextField = {
+        
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+//      DADO DE PAGAMENTO AINDA MOCADO, PENDENTE DE FAZER REQUISICAO DADO AINDA NAO VEM
         textField.text = "    **** **** **** 4679"
         textField.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(15).generateSizeForScreen)
         textField.backgroundColor = UIColor(named: ColorsBravve.backgroundCard.rawValue)
@@ -279,8 +308,8 @@ class HistoryDetailsView: UIViewController {
         return textField
     }()
     
-    
-    lazy var contactsLabel: UILabel = {
+    private lazy var contactsLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Contatos"
@@ -290,7 +319,8 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var contactNumberLabel: UILabel = {
+    private lazy var contactNumberLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = currentReservation?.space_contact?.phone ?? " "
@@ -301,7 +331,7 @@ class HistoryDetailsView: UIViewController {
         return label
     }()
     
-    lazy var contactEmailLabel: UILabel = {
+    private lazy var contactEmailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = currentReservation?.space_contact?.email ?? " "
@@ -312,6 +342,7 @@ class HistoryDetailsView: UIViewController {
     }()
     
     private let viewInScroll: UIView = {
+        
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -319,14 +350,17 @@ class HistoryDetailsView: UIViewController {
     }()
     
     private lazy var scrollView: UIScrollView = {
+        
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.isScrollEnabled = true
+        scroll.delegate = self
         
         return scroll
     }()
     
-    lazy var checkInRealizedLabel: UILabel = {
+    private lazy var checkInRealizedLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Check-in realizado às"
@@ -336,7 +370,9 @@ class HistoryDetailsView: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    lazy var checkOutRealizedLabel: UILabel = {
+    
+    private lazy var checkOutRealizedLabel: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Check-Out realizado às"
@@ -346,7 +382,9 @@ class HistoryDetailsView: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    lazy var hourCheckIn: UILabel = {
+    
+    private lazy var hourCheckIn: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = historyDetailsViewModel.getHourString(date: currentReservation?.checkin_ts)
@@ -356,7 +394,9 @@ class HistoryDetailsView: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    lazy var hourCheckOut: UILabel = {
+    
+    private lazy var hourCheckOut: UILabel = {
+        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = historyDetailsViewModel.getHourString(date: currentReservation?.checkout_ts)
@@ -366,14 +406,16 @@ class HistoryDetailsView: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    lazy var lineView6:UIView = {
+    
+    private lazy var lineView6:UIView = {
+        
         let line = UIView()
         line.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
     
-    lazy var localDetailsStackView: UIStackView = {
+    private lazy var localDetailsStackView: UIStackView = {
         
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
         
@@ -389,22 +431,33 @@ class HistoryDetailsView: UIViewController {
         
         historyDetailsViewModel.sortBusinessHours(businessHours: &businessHours)
         
-        var days = historyDetailsViewModel.createBusinessHoursArray(businessHours: businessHours)
+        let days = historyDetailsViewModel.createBusinessHoursArray(businessHours: businessHours)
         
-        items.append(createStackView("Ate \(currentReservation?.seats_qty ?? 0) pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
-        items.append(createStackView("\(currentReservation?.space_address?.street ?? " "), \(currentReservation?.space_address?.neighborhood ?? " "), no \(currentReservation?.space_address?.street_number ?? 0), \(currentReservation?.space_address?.city_name ?? " "). \(currentReservation?.space_address?.state_name ?? " ") \(currentReservation?.space_address?.postal_code ?? " "), BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
-        items.append(createStackView(days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+        items.append(historyDetailsViewModel.createStackView("Ate \(currentReservation?.seats_qty ?? 0) pessoas", UIImage(named: IconsBravve.users.rawValue), textColor: textColor))
+        items.append(historyDetailsViewModel.createStackView("\(currentReservation?.space_address?.street ?? " "), \(currentReservation?.space_address?.neighborhood ?? " "), no \(currentReservation?.space_address?.street_number ?? 0), \(currentReservation?.space_address?.city_name ?? " "). \(currentReservation?.space_address?.state_name ?? " ") \(currentReservation?.space_address?.postal_code ?? " "), BR", UIImage(named: IconsBravve.map.rawValue), textColor: textColor))
         
-        for i in 0...days.count-1 {
+        let stackView = UIStackView()
+        
+        if !days.isEmpty {
             
-            items.append(createStackView(days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
-                                         isHidden: true,
-                                         textColor: textColor))
+            items.append(historyDetailsViewModel.createStackView(attributedText: days[0], UIImage(named: IconsBravve.clockReserv.rawValue), textColor: textColor))
+            
+            for i in 1...days.count-1 {
+                
+                items.append(historyDetailsViewModel.createStackView(attributedText: days[i], UIImage(named: IconsBravve.clockReserv.rawValue),
+                                             isHidden: true,
+                                             textColor: textColor))
+            }
+            
+            let buttons = historyDetailsViewModel.createSeeButtonsStackView(3...items.count-1, items: items)
+            
+            stackView.addArrangedSubviews([title] + items + [buttons])
+        }
+        else {
+            
+            stackView.addArrangedSubviews([title] + items)
         }
         
-        let buttons = createSeeButtonsStackView(3...items.count-1, items: items)
-        
-        let stackView = UIStackView(arrangedSubviews: [title] + items + [buttons])
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.spacing = CGFloat(10).generateSizeForScreen
@@ -412,7 +465,7 @@ class HistoryDetailsView: UIViewController {
         return stackView
     }()
     
-    lazy var responsableStackView: UIStackView = {
+    private lazy var responsableStackView: UIStackView = {
         
         let textColor = UIColor(named: ColorsBravve.textField.rawValue)
         
@@ -442,7 +495,7 @@ class HistoryDetailsView: UIViewController {
         informations.font = UIFont(name: FontsBravve.light.rawValue, size: 12)
         informations.textColor = UIColor(named: ColorsBravve.label.rawValue)
         
-        let button = createSeeButton(smallText: informations.text ?? "", fullText: "Estarei disponível para esclarecer suas dúvidas e\najudar no que for possível através de mensagem via\nWhatsapp. Garanto que tem tudo para seu conforto\ne melhor rendimento em seu trabalho. Sou casada,\ntenho 3 filhos e 1 cachorro, moro em São Paulo por\nopção. Apaixonada pelo mundo corporativo, resolvi\ncompartilhar um pouco do meu espaço com vocês.", actionLabel: informations)
+        let button = historyDetailsViewModel.createSeeButton(smallText: informations.text ?? "", fullText: "Estarei disponível para esclarecer suas dúvidas e\najudar no que for possível através de mensagem via\nWhatsapp. Garanto que tem tudo para seu conforto\ne melhor rendimento em seu trabalho. Sou casada,\ntenho 3 filhos e 1 cachorro, moro em São Paulo por\nopção. Apaixonada pelo mundo corporativo, resolvi\ncompartilhar um pouco do meu espaço com vocês.", actionLabel: informations)
         
         let stackView = UIStackView(arrangedSubviews: [title, responsableLabel, informations, button] )
         stackView.alignment = .leading
@@ -489,164 +542,6 @@ class HistoryDetailsView: UIViewController {
                                   hourCheckIn, hourCheckOut, lineView6
                                  ])
     }
-    
-    
-    private func createStackView(_ text: String,
-                                 _ image: UIImage? = nil,
-                                 isHidden: Bool = false,
-                                 textColor: UIColor? = .white) -> UIStackView {
-        
-        let stackView = UIStackView()
-        
-        if let image = image {
-            
-            let imageView = UIImageView()
-            imageView.contentMode = .center
-            imageView.image = image
-            
-            stackView.addArrangedSubview(imageView)
-            
-            imageView.widthAnchorInSuperview(CGFloat(20).generateSizeForScreen)
-        }
-        
-        let label = UILabel()
-        label.text = text
-        label.numberOfLines = 0
-        label.font = UIFont(name: FontsBravve.regular.rawValue,
-                            size: CGFloat(12).generateSizeForScreen)
-        label.textColor = textColor
-        
-        stackView.spacing = CGFloat(10).generateSizeForScreen
-        stackView.isHidden = isHidden
-        
-        stackView.addArrangedSubview(label)
-        
-        return stackView
-    }
-    
-    private func createSeeButtonsStackView(_ range: ClosedRange<Int>,
-                                           items: [UIStackView],
-                                           titleColor: ColorsBravve = .buttonPink,
-                                           downButtonImages: ButtonsBravve = .arrowDownPink,
-                                           upButtonImages: ButtonsBravve = .arrowUpPink) -> UIStackView {
-        let moreButton = UIButton()
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        var attributeString = NSMutableAttributedString(
-            string: "Ver Mais ",
-            attributes: yourAttributes)
-        moreButton.setAttributedTitle(attributeString, for: .normal)
-        moreButton.setImage(UIImage(named: downButtonImages.rawValue),
-                            for: .normal)
-        moreButton.imageView?.contentMode = .scaleAspectFit
-        moreButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        moreButton.titleLabel?.font = UIFont(name: FontsBravve.regular.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-        
-        moreButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        moreButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        moreButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        
-        moreButton.imageView?.constraintInsideTo(.height, moreButton.titleLabel,
-                                                 multiplier: 0.5)
-        moreButton.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
-        
-        let lessButton = UIButton()
-        attributeString = NSMutableAttributedString(
-            string: "Ver Menos ",
-            attributes: yourAttributes)
-        lessButton.setAttributedTitle(attributeString, for: .normal)
-        lessButton.setImage(UIImage(named: upButtonImages.rawValue),
-                            for: .normal)
-        lessButton.imageView?.contentMode = .scaleAspectFit
-        lessButton.isHidden = true
-        lessButton.setTitleColor(UIColor(named: titleColor.rawValue), for: .normal)
-        lessButton.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
-                                             size: CGFloat(12).generateSizeForScreen)
-        
-        lessButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        lessButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        lessButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        
-        lessButton.imageView?.constraintInsideTo(.height, lessButton.titleLabel,
-                                                 multiplier: 0.5)
-        lessButton.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
-        
-        let seeMoreHandler = {(action: UIAction) in
-            
-            for i in range {
-                
-                items[i].isHidden = false
-            }
-            moreButton.isHidden = true
-            lessButton.isHidden = false
-        }
-        
-        let seeLessHandler = {(action: UIAction) in
-            
-            for i in range {
-                
-                items[i].isHidden = true
-            }
-            moreButton.isHidden = false
-            lessButton.isHidden = true
-        }
-        
-        moreButton.addAction(UIAction(handler: seeMoreHandler), for: .touchUpInside)
-        lessButton.addAction(UIAction(handler: seeLessHandler), for: .touchUpInside)
-        
-        let stackView = UIStackView(arrangedSubviews: [moreButton, lessButton])
-        
-        return stackView
-    }
-    
-    private func createSeeButton(smallText: String, fullText: String, actionLabel: UILabel) -> UIButton {
-        let button = UIButton()
-        let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(named: ColorsBravve.buttonPink.rawValue) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-        var attributeString = NSMutableAttributedString(
-            string: "Ver Mais ",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .normal)
-        attributeString = NSMutableAttributedString(
-            string: "Ver Menos ",
-            attributes: yourAttributes)
-        button.setAttributedTitle(attributeString, for: .selected)
-        
-        button.setImage(UIImage(named: ButtonsBravve.arrowDownPink.rawValue),
-                        for: .normal)
-        button.setImage(UIImage(named: ButtonsBravve.arrowUpPink.rawValue),
-                        for: .selected)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.light.rawValue,
-                                         size: CGFloat(12).generateSizeForScreen)
-        
-        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        
-        button.imageView?.constraintInsideTo(.height, button.titleLabel,
-                                             multiplier: 0.5)
-        button.imageView?.widthAnchorInSuperview(CGFloat(9).generateSizeForScreen)
-        let handler = {(action: UIAction) in
-            button.isSelected = !button.isSelected
-            if button.isSelected {
-                actionLabel.text = fullText
-            } else {
-                actionLabel.text = smallText
-            }
-        }
-        button.addAction(UIAction(handler: handler), for: .touchUpInside)
-        return button
-    }
-    
     
     private func setupDefaults(){
         customBar.setToDefaultCustomBarWithBackButton(viewTitle: "Espaço"){
@@ -817,6 +712,16 @@ class HistoryDetailsView: UIViewController {
             
         ])
     }
+    
+    @objc func pageControlTarget(_ sender: UIPageControl) {
+        
+        DispatchQueue.main.async {
+            
+            self.reserveCollection.scrollToItem(at: IndexPath(row: sender.currentPage,
+                                                              section: 0),
+                                                at: .centeredHorizontally, animated: true)
+        }
+    }
 }
 
 extension HistoryDetailsView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -840,18 +745,30 @@ extension HistoryDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
         let index = scrollView.contentOffset.x / witdh
         var roundedIndex = 0.0
+        
         if index < 0.2 {
+            
             roundedIndex = round(index)
-        } else {
+        }
+        else {
+            
             roundedIndex = ceil(index)
         }
         
         self.pageControl.currentPage = Int(roundedIndex)
+        
+        for subview in scrollView.subviews {
+            
+            if subview.frame.origin.y != 0 {
+                    
+                subview.subviews[0].backgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
+            }
+        }
     }
-    
 }
 
 
