@@ -16,7 +16,7 @@ class LoginView: UIViewController {
     
     //MARK: - var and let
     
-    let backButton = UIButton()
+    private let backButton = UIButton()
     
     private let viewModel: LoginViewModel = LoginViewModel()
     
@@ -466,28 +466,31 @@ class LoginView: UIViewController {
 
         ])
     }
+}
 
+
+extension LoginView: UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        loginLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        passwordLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         if textField == loginTextField{
+            
             passwordTextField.isHidden = false
             passwordIsTapped()
             passwordTextField.becomeFirstResponder()
         }
         else {
+            
             passwordTextField.resignFirstResponder()
         }
         return true
-}
-}
-
-
-extension LoginView: UITextFieldDelegate{
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        loginLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-        passwordLabel.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-        
     }
-    
 }
     
     
@@ -513,7 +516,8 @@ extension UIStackView {
     }
 }
 
-extension LoginView: LoginViewModelProtocol {    
+extension LoginView: LoginViewModelProtocol {
+    
     func showCustomAlert(message: String) {
         self.customAlert.showAlert(image: UIImage(named: ButtonsBravve.xmarkBlue.rawValue),
                                    message: message,
@@ -532,5 +536,10 @@ extension LoginView: LoginViewModelProtocol {
         let vc = HomeClosedView()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: false)
+    }
+    
+    func freezeButton() {
+        
+        enterButton.isEnabled = !enterButton.isEnabled
     }
 }

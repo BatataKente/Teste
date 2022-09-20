@@ -5,8 +5,15 @@
 //  Created by user218260 on 7/15/22.
 //
 
-import Foundation
 import UIKit
+
+protocol LoginViewModelProtocol {
+    
+    func showCustomAlert(message: String)
+    func showAlertCustom(message: String)
+    func presentNextScreen()
+    func freezeButton()
+}
 
 class LoginViewModel{
     
@@ -31,6 +38,7 @@ class LoginViewModel{
     func loginUser(email: String, password: String) {
         let parameters = LoginParameters(email: email, password: password)
         
+        self.delegate?.freezeButton()
         sessionManager.postDataWithOpenResponse(endpoint: .auth, parameters: parameters) { (statusCode, error, token: Token?) in
             
             guard let tokenResponse = token?.token else {
@@ -45,11 +53,13 @@ class LoginViewModel{
                     
                     guard let message = token?.message else { return }
                     
+                    self.delegate?.freezeButton()
                     self.delegate?.showCustomAlert(message: message)
                     
                 } else if statusCode == 404 {
                     guard let message = token?.message else { return }
                     
+                    self.delegate?.freezeButton()
                     self.delegate?.showAlertCustom(message: message)
                     
                 }
@@ -70,7 +80,10 @@ class LoginViewModel{
                     if userEmail == email {
                         
                         guard let userUUID = user.uuid else { return }
+                        guard let name = user.name else { return }
+                        
                         UserDefaults.standard.setValue(userUUID, forKey: "userUUID")
+                        UserDefaults.standard.setValue(name, forKey: "name")
                     }
                 }
                 
@@ -90,11 +103,4 @@ class LoginViewModel{
             }
         }
     }
-    
-}
-
-protocol LoginViewModelProtocol {
-    func showCustomAlert(message: String)
-    func showAlertCustom(message: String)
-    func presentNextScreen()
 }
