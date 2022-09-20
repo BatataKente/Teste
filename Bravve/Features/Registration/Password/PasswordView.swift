@@ -222,8 +222,9 @@ class PasswordView: UIViewController{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Agora escolha uma senha de sua preferência."
+        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
         label.numberOfLines = 0
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
         label.textAlignment = .center
         return label
     }()
