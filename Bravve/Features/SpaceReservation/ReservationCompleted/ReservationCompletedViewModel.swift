@@ -113,6 +113,8 @@ class ReservationCompletedViewModel {
             
             UserReservations.reservations = openReservations
             
+            ReservationList.reservationList = []
+            
             self.delegate?.goToNextScreen()
         }
     }
