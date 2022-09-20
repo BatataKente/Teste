@@ -17,7 +17,6 @@ class Reservation2View: UIViewController {
     
     
     //MARK: - var and let
-    private lazy var tabBar = TabBarClosed(self)
     
     var spaceDetail: SpaceDetail?
     
