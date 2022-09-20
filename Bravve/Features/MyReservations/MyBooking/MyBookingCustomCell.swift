@@ -278,10 +278,10 @@ class MyBookingCustomCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
 
-            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(20).generateSizeForScreen),
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(10).generateSizeForScreen),
             cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen),
             cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen),
-            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: CGFloat(-10).generateSizeForScreen),
 
             typeTagLabel.topAnchor.constraint(equalTo: cellView.topAnchor),
             typeTagLabel.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: CGFloat(17).generateSizeForScreen),

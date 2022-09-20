@@ -88,7 +88,6 @@ class BookingDetailsView: UIViewController {
 
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layoutCollection )
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         collection.register(BookingDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collection.showsHorizontalScrollIndicator = false
         
@@ -668,18 +667,26 @@ extension BookingDetailsView: UICollectionViewDelegate, UICollectionViewDataSour
             self.bookingDetailsViewModel.customAlertCancel.dismissAlert()
         }), cancelAttributed: "Cancelar Reserva", cancelHandler: UIAction(handler: { _ in
             
+            self.bookingDetailsViewModel.customAlertCancel.dismissAlert()
             self.bookingDetailsViewModel.cancelReservation()
             
-            let vc = BookingHistoryView()
-            vc.modalPresentationStyle = .fullScreen
-            self.bookingDetailsViewModel.customAlertCancel.dismissAlert()
-            self.present(vc, animated: true)
         }), on: self)
         Flags.shared.flagReservation = 2
     }
 }
 
 extension BookingDetailsView: BookingDetailsViewModelProtocol {
+    func unableToCancelMessage(message: String) {
+        bookingDetailsViewModel.unableToCancelMessageAlert.showAlert(message: message, enterAttributed: "OK", on: self)
+    }
+    
+    func goToBookingHistory() {
+       
+        let vc = BookingHistoryView()
+        vc.modalPresentationStyle = .fullScreen
+        self.bookingDetailsViewModel.customAlertCancel.dismissAlert()
+        self.present(vc, animated: true)
+    }
     
     func updateView(_ currentReservation: Reservations?, startDate: String, bookingTypeName: String, startHour: String, endHour: String) {
         
