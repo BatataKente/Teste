@@ -15,6 +15,7 @@ protocol SingleBookingViewModelProtocol {
     func changeCollectionViewState()
     func getSpaceContractId(spaceContractId: Int)
     func showAlert()
+    func checkValidReservation()
 }
 
 
@@ -205,6 +206,7 @@ class SingleBookingViewModel {
                     let reservationDate = ReservationDate(day: "\(day)-\(month)-\(year)", hours: [Hour(start_dt: "01:00", end_dt: "23:00", hour_price: totalPrice, reservationId: reservationId)], isEntireDay: true)
                     
                     ReservationList.reservationList.append(reservationDate)
+                    self.delegate?.checkValidReservation()
                     print(ReservationList.reservationList)
                     
                     addtimeButton.isHidden = true
@@ -267,6 +269,7 @@ class SingleBookingViewModel {
                                             guard let index = ReservationList.reservationList.firstIndex(of: reservation) else {
                                                 return }
                                             ReservationList.reservationList.remove(at: index)
+                                            self.delegate?.checkValidReservation()
                                             print(ReservationList.reservationList)
                                         }
                                     }
@@ -419,6 +422,7 @@ class SingleBookingViewModel {
                                                 guard let index = reservation.hours.firstIndex(of: hour) else { return }
                                                 reservation.hours.remove(at: index)
                                                 ReservationList.reservationList[reservationIndex] = reservation
+                                                self.delegate?.checkValidReservation()
                                                 print(ReservationList.reservationList)
                                             }
                                         }
@@ -427,6 +431,7 @@ class SingleBookingViewModel {
                                             guard let index = ReservationList.reservationList.firstIndex(of: reservation) else {
                                                 return }
                                             ReservationList.reservationList.remove(at: index)
+                                            self.delegate?.checkValidReservation()
                                             print(ReservationList.reservationList)
                                         }
                                     }
@@ -486,6 +491,7 @@ class SingleBookingViewModel {
                             
                             if ReservationList.reservationList.isEmpty {
                                 ReservationList.reservationList.append(reservationDate)
+                                self.delegate?.checkValidReservation()
                                 hasReservation = true
                             } else {
                                 for var reservation in ReservationList.reservationList {
@@ -500,6 +506,7 @@ class SingleBookingViewModel {
                             
                             if !hasReservation {
                                 ReservationList.reservationList.append(reservationDate)
+                                self.delegate?.checkValidReservation()
                                 hasReservation = true
                             }
                             
