@@ -388,150 +388,182 @@ class PersonalProfileView: UIViewController{
     
     //MARK: - addConstraints
     func addConstraints(){
+
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive =  true
         
-        tabBar.constraintInsideTo(.leading, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.trailing, view.safeAreaLayoutGuide)
-        tabBar.constraintInsideTo(.bottom, view.safeAreaLayoutGuide)
-        
+        profilePic.translatesAutoresizingMaskIntoConstraints = false
         profilePic.widthAnchor.constraint(equalToConstant: CGFloat(121).generateSizeForScreen).isActive = true
-        profilePic.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        profilePic.constraintInsideTo(.top, view.safeAreaLayoutGuide, CGFloat(39).generateSizeForScreen)
+        profilePic.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        profilePic.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(39).generateSizeForScreen).isActive = true
         profilePic.sizeAnchorInSuperview(CGFloat(121).generateSizeForScreen)
         profilePic.layer.cornerRadius = view.frame.size.height / 14
         
-        helloLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        helloLabel.constraintOutsideTo(.top, profilePic, CGFloat(9).generateSizeForScreen)
+        helloLabel.translatesAutoresizingMaskIntoConstraints = false
+        helloLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        helloLabel.topAnchor.constraint(equalTo: profilePic.bottomAnchor, constant: CGFloat(9).generateSizeForScreen).isActive = true
         
-        subtitleLabel.constraintInsideTo(.centerX, view.safeAreaLayoutGuide)
-        subtitleLabel.constraintOutsideTo(.top, helloLabel, CGFloat(10).generateSizeForScreen)
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: CGFloat(9).generateSizeForScreen).isActive = true
         subtitleLabel.heightAnchor.constraint(equalToConstant: CGFloat(18.13).generateSizeForScreen).isActive = true
         
-        backView.constraintOutsideTo(.top, subtitleLabel, CGFloat(40).generateSizeForScreen)
-        backView.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        backView.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
+        backView.translatesAutoresizingMaskIntoConstraints =  false
+        backView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: CGFloat(40).generateSizeForScreen).isActive = true
+        backView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        backView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
         backView.heightAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
         
-        infoLabel.constraintInsideTo(.top, backView, CGFloat(20).generateSizeForScreen)
-        infoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+        infoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         infoLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
         
-        subInfoLabel.constraintOutsideTo(.top, infoLabel, CGFloat(10).generateSizeForScreen)
-        subInfoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        subInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        subInfoLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen).isActive = true
+        subInfoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         subInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(15).generateSizeForScreen).isActive = true
         
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
-        separatorView.constraintInsideTo(.right, backView, CGFloat(-20).generateSizeForScreen)
-        separatorView.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
-        separatorView.constraintInsideTo(.top, backView, CGFloat(75).generateSizeForScreen)
+        separatorView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant:  CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView.topAnchor.constraint(equalTo: backView.topAnchor, constant:  CGFloat(75).generateSizeForScreen).isActive = true
         
-        bravveInfoLabel.constraintOutsideTo(.top, separatorView, CGFloat(15).generateSizeForScreen)
-        bravveInfoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        bravveInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        bravveInfoLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: CGFloat(15).generateSizeForScreen).isActive = true
+        bravveInfoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         bravveInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
         
-        subBravveInfoLabel.constraintOutsideTo(.top, bravveInfoLabel, CGFloat(10).generateSizeForScreen)
-        subBravveInfoLabel.constraintInsideTo(.left, backView, CGFloat(20).generateSizeForScreen)
+        subBravveInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        subBravveInfoLabel.topAnchor.constraint(equalTo: bravveInfoLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen).isActive = true
+        subBravveInfoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         subBravveInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(15).generateSizeForScreen).isActive = true
         
-        infoImage.constraintOutsideTo(.top, backView, CGFloat(38).generateSizeForScreen)
-        infoImage.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        infoImage.translatesAutoresizingMaskIntoConstraints = false
+        infoImage.topAnchor.constraint(equalTo: backView.bottomAnchor, constant: CGFloat(38).generateSizeForScreen).isActive = true
+        infoImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(33).generateSizeForScreen).isActive = true
         infoImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         infoImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        reservationLabel.constraintOutsideTo(.top, backView, CGFloat(38).generateSizeForScreen)
-        reservationLabel.constraintOutsideTo(.left, infoImage, CGFloat(27).generateSizeForScreen)
+        reservationLabel.translatesAutoresizingMaskIntoConstraints = false
+        reservationLabel.topAnchor.constraint(equalTo: backView.bottomAnchor, constant: CGFloat(38).generateSizeForScreen).isActive = true
+        reservationLabel.leadingAnchor.constraint(equalTo: infoImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
         reservationLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
         
-        nextPageButton.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
-        nextPageButton.constraintOutsideTo(.top, backView, CGFloat(35).generateSizeForScreen)
+        nextPageButton.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton.topAnchor.constraint(equalTo: backView.bottomAnchor, constant: CGFloat(35).generateSizeForScreen).isActive = true
         nextPageButton.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         nextPageButton.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
+        separatorView2.translatesAutoresizingMaskIntoConstraints = false
         separatorView2.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
-        separatorView2.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        separatorView2.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        separatorView2.constraintOutsideTo(.top, reservationLabel, CGFloat(20).generateSizeForScreen)
+        separatorView2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView2.topAnchor.constraint(equalTo: reservationLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
 
-        helpImage.constraintOutsideTo(.top, separatorView2, CGFloat(25).generateSizeForScreen)
-        helpImage.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        helpImage.translatesAutoresizingMaskIntoConstraints = false
+        helpImage.topAnchor.constraint(equalTo: separatorView2.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        helpImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  CGFloat(33).generateSizeForScreen).isActive = true
         helpImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         helpImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        helpLabel.constraintOutsideTo(.top, separatorView2, CGFloat(25).generateSizeForScreen)
-        helpLabel.constraintOutsideTo(.left, helpImage, CGFloat(27).generateSizeForScreen)
+        helpLabel.translatesAutoresizingMaskIntoConstraints = false
+        helpLabel.topAnchor.constraint(equalTo: separatorView2.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        helpLabel.leadingAnchor.constraint(equalTo: helpImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
         helpLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
         
-        nextPageButton2.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
-        nextPageButton2.constraintOutsideTo(.top, separatorView2, CGFloat(22).generateSizeForScreen)
+        nextPageButton2.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton2.topAnchor.constraint(equalTo: separatorView2.bottomAnchor, constant: CGFloat(22).generateSizeForScreen).isActive = true
         nextPageButton2.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         nextPageButton2.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
+        separatorView3.translatesAutoresizingMaskIntoConstraints = false
         separatorView3.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
-        separatorView3.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        separatorView3.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        separatorView3.constraintOutsideTo(.top, helpLabel, CGFloat(20).generateSizeForScreen)
+        separatorView3.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView3.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView3.topAnchor.constraint(equalTo: helpLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        policyImage.constraintOutsideTo(.top, separatorView3, CGFloat(25).generateSizeForScreen)
-        policyImage.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        policyImage.translatesAutoresizingMaskIntoConstraints = false
+        policyImage.topAnchor.constraint(equalTo: separatorView3.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        policyImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(33).generateSizeForScreen).isActive = true
         policyImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         policyImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        policyLabel.constraintOutsideTo(.top, separatorView3, CGFloat(25).generateSizeForScreen)
-        policyLabel.constraintOutsideTo(.left, policyImage, CGFloat(27).generateSizeForScreen)
+        policyLabel.translatesAutoresizingMaskIntoConstraints = false
+        policyLabel.topAnchor.constraint(equalTo: separatorView3.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        policyLabel.leadingAnchor.constraint(equalTo: policyImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
         policyLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
         
-        nextPageButton3.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
-        nextPageButton3.constraintOutsideTo(.top, separatorView3, CGFloat(22).generateSizeForScreen)
+        nextPageButton3.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton3.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton3.topAnchor.constraint(equalTo: separatorView3.bottomAnchor, constant:  CGFloat(22).generateSizeForScreen).isActive = true
         nextPageButton3.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         nextPageButton3.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
+        separatorView4.translatesAutoresizingMaskIntoConstraints = false
         separatorView4.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
-        separatorView4.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        separatorView4.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        separatorView4.constraintOutsideTo(.top, policyLabel, CGFloat(20).generateSizeForScreen)
+        separatorView4.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView4.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView4.topAnchor.constraint(equalTo: policyLabel.bottomAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
 
-        logoutImage.constraintOutsideTo(.top, separatorView4, CGFloat(25).generateSizeForScreen)
-        logoutImage.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(33).generateSizeForScreen)
+        logoutImage.translatesAutoresizingMaskIntoConstraints = false
+        logoutImage.topAnchor.constraint(equalTo: separatorView4.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        logoutImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(33).generateSizeForScreen).isActive = true
         logoutImage.heightAnchor.constraint(equalToConstant: CGFloat(12).generateSizeForScreen).isActive = true
         logoutImage.widthAnchor.constraint(equalToConstant: CGFloat(16).generateSizeForScreen).isActive = true
         
-        logoutLabel.constraintOutsideTo(.top, separatorView4, CGFloat(23).generateSizeForScreen)
-        logoutLabel.constraintOutsideTo(.left, logoutImage, CGFloat(27).generateSizeForScreen)
+        logoutLabel.translatesAutoresizingMaskIntoConstraints = false
+        logoutLabel.topAnchor.constraint(equalTo: separatorView4.bottomAnchor, constant: CGFloat(23).generateSizeForScreen).isActive = true
+        logoutLabel.leadingAnchor.constraint(equalTo: logoutImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
         logoutLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
         
-        nextPageButton4.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-33).generateSizeForScreen)
-        nextPageButton4.constraintOutsideTo(.top, separatorView4, CGFloat(22).generateSizeForScreen)
+        nextPageButton4.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton4.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton4.topAnchor.constraint(equalTo: separatorView4.bottomAnchor, constant: CGFloat(22).generateSizeForScreen).isActive = true
         nextPageButton4.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         nextPageButton4.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
         
+        separatorView5.translatesAutoresizingMaskIntoConstraints = false
         separatorView5.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
-        separatorView5.constraintInsideTo(.right, view.safeAreaLayoutGuide, CGFloat(-20).generateSizeForScreen)
-        separatorView5.constraintInsideTo(.left, view.safeAreaLayoutGuide, CGFloat(20).generateSizeForScreen)
-        separatorView5.constraintOutsideTo(.top, logoutLabel, CGFloat(20).generateSizeForScreen)
+        separatorView5.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView5.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView5.topAnchor.constraint(equalTo: logoutLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
         
-        smallView.constraintInsideTo(.top, backView, CGFloat(29.67).generateSizeForScreen)
-        smallView.constraintInsideTo(.right, backView, CGFloat(-17).generateSizeForScreen)
+        smallView.translatesAutoresizingMaskIntoConstraints = false
+        smallView.topAnchor.constraint(equalTo: backView.topAnchor, constant: CGFloat(29.67).generateSizeForScreen).isActive = true
+        smallView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: CGFloat(-17).generateSizeForScreen).isActive = true
         smallView.heightAnchor.constraint(equalToConstant: CGFloat(29).generateSizeForScreen).isActive = true
         smallView.widthAnchor.constraint(equalToConstant: CGFloat(94).generateSizeForScreen).isActive = true
         
-        numberLabel.constraintInsideTo(.left, smallView, CGFloat(12).generateSizeForScreen)
-        numberLabel.constraintInsideTo(.top, smallView, CGFloat(6.69).generateSizeForScreen)
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel.leadingAnchor.constraint(equalTo: smallView.leadingAnchor, constant: CGFloat(12).generateSizeForScreen).isActive = true
+        numberLabel.topAnchor.constraint(equalTo: smallView.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
         numberLabel.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
         
-        creditLabel.constraintInsideTo(.right, smallView, CGFloat(-12).generateSizeForScreen)
-        creditLabel.constraintInsideTo(.top, smallView,  CGFloat(6.69).generateSizeForScreen)
+        creditLabel.translatesAutoresizingMaskIntoConstraints = false
+        creditLabel.trailingAnchor.constraint(equalTo: smallView.trailingAnchor, constant: CGFloat(-12).generateSizeForScreen).isActive = true
+        creditLabel.topAnchor.constraint(equalTo: smallView.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
         creditLabel.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
         
-        smallView2.constraintInsideTo(.top, separatorView, CGFloat(18.87).generateSizeForScreen)
-        smallView2.constraintInsideTo(.right, backView, CGFloat(-17).generateSizeForScreen)
+        smallView2.translatesAutoresizingMaskIntoConstraints = false
+        smallView2.topAnchor.constraint(equalTo: separatorView.topAnchor, constant: CGFloat(18.87).generateSizeForScreen).isActive = true
+        smallView2.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: CGFloat(-17).generateSizeForScreen).isActive = true
         smallView2.heightAnchor.constraint(equalToConstant: CGFloat(29).generateSizeForScreen).isActive = true
         smallView2.widthAnchor.constraint(equalToConstant: CGFloat(94).generateSizeForScreen).isActive = true
         
-        numberLabel2.constraintInsideTo(.left, smallView2, CGFloat(12).generateSizeForScreen)
-        numberLabel2.constraintInsideTo(.top, smallView2, CGFloat(6.69).generateSizeForScreen)
+        numberLabel2.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel2.leadingAnchor.constraint(equalTo: smallView2.leadingAnchor, constant: CGFloat(12).generateSizeForScreen).isActive = true
+        numberLabel2.topAnchor.constraint(equalTo: smallView2.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
         numberLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
 
-        creditLabel2.constraintInsideTo(.right, smallView2, CGFloat(-12).generateSizeForScreen)
-        creditLabel2.constraintInsideTo(.top, smallView2, CGFloat(6.69).generateSizeForScreen)
+        creditLabel2.translatesAutoresizingMaskIntoConstraints = false
+        creditLabel2.trailingAnchor.constraint(equalTo: smallView2.trailingAnchor, constant: CGFloat(-12).generateSizeForScreen).isActive = true
+        creditLabel2.topAnchor.constraint(equalTo: smallView2.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
         creditLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
     }
 }
