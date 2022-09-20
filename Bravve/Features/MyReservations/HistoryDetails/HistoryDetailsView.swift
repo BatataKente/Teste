@@ -72,12 +72,11 @@ class HistoryDetailsView: UIViewController {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
-        label.text = currentReservation?.space_category?.name ?? " "
+        label.text = currentReservation?.space_category?.name?.uppercased() ?? " "
         label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(13).generateSizeForScreen)
-        label.backgroundColor = label.getTitleLabelBackgroundColor(currentReservation?.space_category?.name ?? " ")
+        label.backgroundColor = label.getTitleLabelBackgroundColor(currentReservation?.space_category?.name?.uppercased() ?? " ")
         label.textColor = UIColor(named: ColorsBravve.blue.rawValue)
-        label.textAlignment = .center
+
         return label
     }()
     
@@ -102,11 +101,10 @@ class HistoryDetailsView: UIViewController {
         let layoutCollection = UICollectionViewFlowLayout()
         layoutCollection.scrollDirection = .horizontal
         layoutCollection.itemSize = CGSize(width: itemsize, height: itemsize)
-        layoutCollection.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        layoutCollection.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layoutCollection )
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
         collection.register(HistoryDetailsCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collection.showsHorizontalScrollIndicator = false
         
@@ -572,8 +570,6 @@ class HistoryDetailsView: UIViewController {
             
             titleLabel.topAnchor.constraint(equalTo: viewInScroll.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 24),
-            titleLabel.widthAnchor.constraint(equalToConstant: CGFloat(76).generateSizeForScreen),
-            titleLabel.heightAnchor.constraint(equalToConstant: CGFloat(23).generateSizeForScreen),
             
             descriptLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 16),
             descriptLabel.leadingAnchor.constraint(equalTo: viewInScroll.leadingAnchor,constant: 20),
