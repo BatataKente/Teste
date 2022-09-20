@@ -749,4 +749,3 @@ extension FilterScreen: UIScrollViewDelegate {
         }
     }
 }
-
