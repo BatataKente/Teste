@@ -39,7 +39,7 @@ class APIService {
         ]
         
         AF.request(url, headers: headers).responseDecodable(of: [T].self) { response in
-            //print(response.debugDescription)
+            print(response.debugDescription)
             if let data = response.value {
                 completionHandler(response.response?.statusCode, nil, data)
             } else {
