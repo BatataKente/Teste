@@ -31,20 +31,12 @@ class ReservationCompletedViewModel {
     
     func getUserName() {
         
-        guard let userUUID = UserDefaults.standard.string(forKey: "userUUID") else {
+        guard let name = UserDefaults.standard.string(forKey: "name") else {
             print("Unable to unwrap user UUID")
             return
         }
         
-        sessionManager.getData(uuid: userUUID, endpoint: .usersUuid) { (statusCode, error, user: User?) in
-            guard let userName = user?.name else {
-                print("Unable to unwrap username")
-                return
-            }
-            
-            let firstName = String(userName.split(separator: " ")[0])
-            self.delegate?.changeUserNameTo(firstName)
-        }
+        self.delegate?.changeUserNameTo(String(name.split(separator: " ")[0]))
     }
     
     func getSpaceFacilities(spaceDetails: SpaceDetail?) -> [String] {
@@ -118,5 +110,4 @@ class ReservationCompletedViewModel {
             self.delegate?.goToNextScreen()
         }
     }
-    
 }
