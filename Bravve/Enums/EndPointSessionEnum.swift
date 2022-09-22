@@ -75,8 +75,8 @@ enum EndPoints: String {
     //Reservations
     case reservationsHours = "/reservations/hours"
     case reservations = "/reservations/"
-    case reservationsOpen = "/reservations?queryType=abertas"
-    case reservationshistory = "/reservations?queryType=historico"
+    case reservationsOpen = "/reservations?queryType=ABERTAS"
+    case reservationshistory = "/reservations?queryType=HISTORICO"
     case reservationsId = "/reservationsId"
     case reservationsCancellations = "/reservations/cancellations"
     case reservationsCheckins = "/reservations/checkins"
