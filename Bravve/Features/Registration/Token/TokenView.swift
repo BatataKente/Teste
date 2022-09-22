@@ -9,12 +9,14 @@ import UIKit
 
 class TokenView: UIViewController {
     
+    //MARK: - Private Var and Lets
     private var userUUID: String
     
     private let userEmail: String
     
     private let userPassword: String
     
+    //MARK: - Init
     init(userUUID: String, userEmail: String, userPassword: String) {
         self.userUUID = userUUID
         self.userEmail = userEmail
@@ -26,7 +28,7 @@ class TokenView: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: - Lets and Vars
     let backgroundImage = UIImageView()
     
     let continueButton = UIButton()
@@ -37,6 +39,7 @@ class TokenView: UIViewController {
     
     let sessionManager = APIService()
     
+    //MARK: - messageSentLabel
     let messageSentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +51,7 @@ class TokenView: UIViewController {
         return label
     }()
     
+    //MARK: - codeImage
     let codeImage: UIImageView = {
         let image = UIImage(named: "recoveryPassword")
         let imageView = UIImageView(image: image)
@@ -56,6 +60,7 @@ class TokenView: UIViewController {
         return imageView
     }()
     
+    //MARK: - insertCodeLabel
     let insertCodeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +71,7 @@ class TokenView: UIViewController {
         return label
     }()
     
+    //MARK: - code1TextField
     lazy var code1TextField: UITextField = {
         let textField = UITextField()
         textField.tag = 1
@@ -81,6 +87,7 @@ class TokenView: UIViewController {
         return textField
     }()
     
+    //MARK: - code2TextField
     lazy var code2TextField: UITextField = {
         let textField = UITextField()
         textField.tag = 2
@@ -95,6 +102,7 @@ class TokenView: UIViewController {
         return textField
     }()
     
+    //MARK: - code3TextField
     lazy var code3TextField: UITextField = {
         let textField = UITextField()
         textField.tag = 3
@@ -109,6 +117,7 @@ class TokenView: UIViewController {
         return textField
     }()
     
+    //MARK: - code4TextField
     lazy var code4TextField: UITextField = {
         let textField = UITextField()
         textField.tag = 4
@@ -123,6 +132,7 @@ class TokenView: UIViewController {
         return textField
     }()
     
+    //MARK: - code5TextField
     lazy var code5TextField: UITextField = {
         let textField = UITextField()
         textField.tag = 5
@@ -137,6 +147,7 @@ class TokenView: UIViewController {
         return textField
     }()
     
+    //MARK: - code6TextField
     lazy var code6TextField: UITextField = {
         let textField = UITextField()
         textField.tag = 6
@@ -151,6 +162,7 @@ class TokenView: UIViewController {
         return textField
     }()
     
+    //MARK: - textFieldStackView
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [code1TextField, code2TextField, code3TextField, code4TextField, code5TextField,code6TextField])
         stackView.axis = .horizontal
@@ -161,6 +173,7 @@ class TokenView: UIViewController {
         return stackView
     }()
     
+    //MARK: - messageNotReceivedLabel
     let messageNotReceivedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -180,6 +193,7 @@ class TokenView: UIViewController {
         return label
     }()
     
+    //MARK: - resendCodeButton
     let resendCodeButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 109, height: 17))
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -199,7 +213,7 @@ class TokenView: UIViewController {
         
         true
     }
-    
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         
         setupView()
@@ -216,6 +230,9 @@ class TokenView: UIViewController {
         
     }
     
+    //MARK: - ACTIONS AND METHODS
+    
+    //MARK: - filledCode
     func filledCode() {
         
         if code1TextField.text != "" && code2TextField.text != "" && code3TextField.text != "" && code4TextField.text != "" && code5TextField.text != "" && code6TextField.text != "" {
@@ -240,6 +257,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - continueButtonTapped
     @objc func continueButtonTapped() {
         
         let parameters = ValidateUserParameter(code: self.code)
@@ -270,6 +288,8 @@ class TokenView: UIViewController {
         }
     }
     
+    
+    //MARK: - resendCodeButtonTapped
     @objc func resendCodeButtonTapped() {
         
         let parameters = ValidateUserParameter()
@@ -281,6 +301,8 @@ class TokenView: UIViewController {
         print("Novo código enviado")
     }
     
+    
+    //MARK: - updateCounter
     @objc func updateCounter() {
         
         if counter > 0 {
@@ -294,6 +316,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - textFieldDidBeginEditing
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         textField.layer.borderWidth = CGFloat(1).generateSizeForScreen
@@ -301,12 +324,14 @@ class TokenView: UIViewController {
         textField.layer.cornerRadius = CGFloat(5).generateSizeForScreen
     }
     
+    //MARK: - textFieldDidEndEditing
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         textField.layer.borderWidth = 0
         filledCode()
     }
     
+    //MARK: - setupView
     func setupView() {
         
         view.addSubviews([backgroundImage, messageSentLabel, codeImage, insertCodeLabel, textFieldStackView, messageNotReceivedLabel, continueButton, resendCodeButton])
@@ -332,12 +357,14 @@ class TokenView: UIViewController {
         
     }
     
+    //MARK: - setupDefaults
     func setupDefaults() {
         
         backgroundImage.setWayToDefault(ImagesBravve.wayEmail)
         continueButton.setToBottomButtonKeyboardDefault()
     }
     
+    //MARK: - setupConstraints
     private func setupConstraints() {
         
         setMessageSentLabelConstraints()
@@ -348,7 +375,9 @@ class TokenView: UIViewController {
         setMessageNotReceivedLabelConstraints()
         setResendCodeButtonConstraints()
     }
+    //MARK: - Constraints
     
+    //MARK: - setMessageSentLabelConstraints
     private func setMessageSentLabelConstraints() {
         
         let constraint = [
@@ -360,7 +389,7 @@ class TokenView: UIViewController {
             item.isActive = true
         }
     }
-    
+    //MARK: - setCodeImageConstraints
     private func setCodeImageConstraints() {
         
         let constraint = [
@@ -374,6 +403,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - setInsertCodeLabelConstraints
     private func setInsertCodeLabelConstraints() {
         
         let constraint = [
@@ -385,6 +415,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - setCodeTextFieldConstraints
     private func setCodeTextFieldConstraints() {
         
         let constraint = [
@@ -406,6 +437,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - setTextFieldStackViewConstraints
     private func setTextFieldStackViewConstraints() {
         
         let constraint = [
@@ -418,6 +450,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - setMessageNotReceivedLabelConstraints
     private func setMessageNotReceivedLabelConstraints() {
         
         let constraint = [
@@ -429,6 +462,7 @@ class TokenView: UIViewController {
         }
     }
     
+    //MARK: - setResendCodeButtonConstraints
     private func setResendCodeButtonConstraints() {
         
         let constraint = [
@@ -441,14 +475,16 @@ class TokenView: UIViewController {
     }
     
 }
-
+    //MARK: - Delegate
 extension TokenView: UITextFieldDelegate {
     
+    //MARK: - textFieldDidChangeSelection
     func textFieldDidChangeSelection(_ textField: UITextField) {
         additionalCellTextFieldSetup(textField)
         
     }
     
+    //MARK: - textField
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
@@ -456,6 +492,7 @@ extension TokenView: UITextFieldDelegate {
         
     }
     
+    //MARK: - additionalCellTextFieldSetup
     func additionalCellTextFieldSetup(_ textField: UITextField?) {
         textField?.text = textField?.text?.formatMask(mask: "#")
         
