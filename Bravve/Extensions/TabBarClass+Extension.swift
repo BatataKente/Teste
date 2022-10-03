@@ -18,19 +18,20 @@ class BravveTabBar: UITabBar, UITabBarDelegate {
         switch item {
             
         case tabBar.items?[0]:
-            let homeOpenView = HomeOpenView()
             
-            if actualView != homeOpenView{
-                actualView.navigationController?.pushViewController(homeOpenView, animated: true)
-                actualView.navigationController?.isNavigationBarHidden = false
-            }
+            if let _ = actualView as? HomeOpenView {return}
+            
+            let homeOpenView = HomeOpenView()
+            homeOpenView.modalPresentationStyle = .fullScreen
+            actualView.present(homeOpenView, animated: true)
             
         default:
+            
+            if let _ = actualView as? LoginView {return}
+            
             let loginView = LoginView()
-            if actualView != loginView{
-                actualView.navigationController?.pushViewController(loginView, animated: true)
-                actualView.navigationController?.isNavigationBarHidden = true
-            }
+            loginView.modalPresentationStyle = .fullScreen
+            actualView.present(loginView, animated: true)
         }
     }
     

@@ -317,7 +317,7 @@ class LoginView: UIViewController {
         
         backButton.setToBackButtonDefault {_ in
             
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -419,9 +419,11 @@ class LoginView: UIViewController {
     }
     
     //MARK: - forgotPasswordButtonTapped
-    @objc func forgotPasswordButtonTapped(){
-        let vc = PasswordRecoveryEmailView()
-        self.navigationController?.pushViewController(vc, animated: true)
+    @objc func forgotPasswordButtonTapped() {
+        
+        let passwordRecoveryEmailView = PasswordRecoveryEmailView()
+        passwordRecoveryEmailView.modalPresentationStyle = .fullScreen
+        present(passwordRecoveryEmailView, animated: true)
     }
     
     
@@ -543,8 +545,10 @@ extension LoginView: LoginViewModelProtocol {
     }
     
     func presentNextScreen() {
-        let homeClosedViewController = HomeClosedView()
-        self.navigationController?.pushViewController(homeClosedViewController, animated: true)
+        
+        let homeClosedView = HomeClosedView()
+        homeClosedView.modalPresentationStyle =  .fullScreen
+        present(homeClosedView, animated: true)
     }
     
     func freezeButton() {

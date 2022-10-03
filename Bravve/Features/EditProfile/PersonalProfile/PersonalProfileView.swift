@@ -9,154 +9,49 @@ import UIKit
 import SwiftUI
 import SDWebImage
 
-//MARK: TabBar
-
 class PersonalProfileView: UIViewController{
     
-    var alertEmailDidTapButton: (() -> Void)?
+    private lazy var tabBar = TabBarClosed.init(self)
     
-    lazy var tabBar: TabBarClosed = {
-        let tabBar = TabBarClosed(self)
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
-        return tabBar
-    }()
-    
-    //MARK: SessionManager
-    
-    private let sessionManager = APIService()
-    
-    var uuid: String {
-        guard let uuid = UserDefaults.standard.string(forKey: "userUUID") else {
-            print("Unable to get user uuid")
-            return ""
-        }
-        return uuid
-    }
-    
-    //MARK: wayImage
-    
-    private lazy var wayImage: UIImageView = {
+    //MARK: - wayImage
+    let wayImage: UIImageView = {
         let image = UIImageView()
         image.setWayToDefault(.wayPassword)
         image.contentMode = .scaleAspectFill
         return image
     }()
     
-    //MARK: profilePic
-    
-    private lazy var profilePic: UIImageView = {
+    //MARK: - profilePic
+    let profilePic: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ImagesBravve.photo.rawValue)
-        image.layer.masksToBounds = false
-        image.layer.cornerRadius = 61
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    //MARK: userEditIcon
-    
-    private lazy var userEditIconPic: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.user.rawValue)
+        image.image = UIImage(named: "photo")
         image.contentMode = .scaleToFill
         image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
+        
         return image
     }()
     
-    //MARK: InfoCircle
-    
-    private lazy var infoCircleIcon: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.info_circle.rawValue)
-        image.contentMode = .scaleToFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    //MARK: HelloLabel
-    
-    private lazy var helloLabel: UILabel = {
+    //MARK: - helloLabel
+    let helloLabel: UILabel = {
         let label = UILabel()
         label.text = "Olá, Ana!"
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(30).generateSizeForScreen)
         label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
-    //MARK: SubtitleLabel
-    
-    private lazy var subtitleLabel: UILabel = {
+    //MARK: - subtitleLabel
+    let subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "ana.maria@teste.com.br"
+        label.font = UIFont(name: FontsBravve.bold.rawValue, size: CGFloat(15).generateSizeForScreen)
+        label.textColor = UIColor(named: "profileLabel")
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(16).generateSizeForScreen)
-        label.textColor = UIColor(named: ColorsBravve.black_black.rawValue)
         return label
     }()
     
-    //MARK: myWallet
-    
-    private lazy var myWallet: UILabel = {
-        let label = UILabel()
-        label.text = "Minha carteira"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(14).generateSizeForScreen)
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        return label
-    }()
-    
-    //MARK: personalAccount
-    
-    private lazy var personalAccount: UILabel = {
-        let label = UILabel()
-        label.text = "Conta pessoal"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(12).generateSizeForScreen)
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        return label
-    }()
-    
-    //MARK: changeWalletButton
-    
-    private lazy var changeWalletButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Alternar carteira", for: .normal)
-        button.titleLabel?.font = UIFont(name: FontsBravve.medium.rawValue , size: 13)
-        button.setTitleColor(UIColor(named: ColorsBravve.buttonPink.rawValue), for: .normal)
-        button.addTarget(self, action: #selector(changeWalletTap), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    //MARK: createMyUiView
-    
-    private lazy var createMyUiView: UIView = {
-        let view = UIView()
-        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-        view.layer.borderWidth = 0.3
-        view.layer.cornerRadius = 12
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    //MARK: EditProfile
-    
-    private lazy var editProfile: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 16)
-        label.text = "Editar perfil"
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        return label
-    }()
-    
-    //MARK: backView
-    
-    private lazy var backView: UIView = {
+    //MARK: - backView
+    var backView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "background")
         view.layer.borderColor = UIColor(named: "borderAccounts")?.cgColor
@@ -166,166 +61,242 @@ class PersonalProfileView: UIViewController{
         return view
     }()
     
-    //MARK: separatorView
+    //MARK: - infoLabel
+    let infoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Foursys"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
     
-    private lazy var separatorView: UIView = {
+    //MARK: - subInfoLabel
+    let subInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Conta corporativa"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
+    
+    //MARK: - separatorView
+    var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: ColorsBravve.gray_gray.rawValue)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(named: "background")
         view.layer.borderColor =  UIColor(named: "borderAccounts")?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
     
-    //MARK: helpLabel
-    
-    private lazy var helpLabel: UILabel = {
+    //MARK: - bravveInfoLabel
+    let bravveInfoLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Ajuda"
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-        label.font = UIFont(name: FontsBravve.regular.rawValue, size: 16)
+        label.text = "Bravve"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
-    //MARK: nextPageButton
-    
-    private lazy var nextPageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.arrowProfile.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    //MARK: separatorView2
-    
-    private lazy var separatorView2: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "Background")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-        view.layer.borderWidth = 1
-        return view
-    }()
-    
-    //MARK: nextPageButton2
-    
-    private lazy var nextPageButton2: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: ButtonsBravve.arrowProfile.rawValue), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    //MARK: separatorView3
-    
-    private lazy var separatorView3: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "Background")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-        view.layer.borderWidth = 1
-        return view
-    }()
-    
-    //MARK: bookIcon
-    
-    private lazy var bookIcon: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.book.rawValue)
-        image.contentMode = .scaleToFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    //MARK: policyLabel
-    
-    private lazy var policyLabel: UILabel = {
+    //MARK: - subBravveInfoLabel
+    let subBravveInfoLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Política e Termos de uso"
-        label.font = UIFont(name: FontsBravve.regular.rawValue , size: 16)
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.text = "Conta corporativa"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
-    //MARK: historyIcon
-    
-    private lazy var historyIcon: UIImageView = {
+    //MARK: - infoImage
+    let infoImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "historyClock")
-        image.contentMode = .scaleToFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "info-circle")
         return image
     }()
     
-    //MARK: bookHistoryLabel
-    
-    private lazy var bookHistoryLabel: UILabel = {
+    //MARK: - reservationLabel
+    let reservationLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Histórico de reservas"
-        label.font = UIFont(name: FontsBravve.regular.rawValue , size: 16)
-        label.textColor = UIColor(named: ColorsBravve.label.rawValue)
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
         return label
     }()
     
-    //MARK: nextPageButton3
-    
-    private lazy var nextPageButton3: UIButton = {
+    //MARK: - nextPageButton
+    let nextPageButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowProfile.rawValue), for: .normal)
+        button.setImage(UIImage(named: "arrowProfile"), for: .normal)
         return button
     }()
-    
-    //MARK: separatorView4
-    
-    private lazy var separatorView4: UIView = {
+
+    //MARK: - separatorView2
+    var separatorView2: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: "Background")
         view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
         view.layer.borderWidth = 1
         return view
     }()
     
-    //MARK: logouButton
-    
-    private lazy var logoutButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    //MARK: logoutImage
-    
-    private lazy var logoutImage: UIImageView = {
+    //MARK: - helpImage
+    let helpImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: IconsBravve.exitProfile.rawValue)
-        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "info-circle")
         return image
     }()
     
-    //MARK: nextPageButton4
+    //MARK: - helpLabel
+    let helpLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Ajuda"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
     
-    private lazy var nextPageButton4: UIButton = {
+    //MARK: - nextPageButton2
+    let nextPageButton2: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: ButtonsBravve.arrowProfile.rawValue), for: .normal)
+        button.setImage(UIImage(named: "arrowProfile"), for: .normal)
         return button
     }()
     
+    //MARK: - separatorView3
+    var separatorView3: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    //MARK: - policyImage
+    let policyImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "book")
+        return image
+    }()
+    
+    //MARK: - policyLabel
+    let policyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Política e Termos de uso"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
+    
+    //MARK: - nextPageButton3
+    let nextPageButton3: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrowProfile"), for: .normal)
+        return button
+    }()
+    
+    //MARK: - separatorView4
+    var separatorView4: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    //MARK: - logoutImage
+    let logoutImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "exitProfile")
+        return image
+    }()
+    
+    //MARK: - logoutLabel
+    let logoutLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sair"
+        label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(16).generateSizeForScreen)
+        label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
+        return label
+    }()
+
+    //MARK: - nextPageButton4
+    let nextPageButton4: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrowProfile"), for: .normal)
+        return button
+    }()
+    
+    //MARK: - separatorView5
+    var separatorView5: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    //MARK: - smallview
+    var smallView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(named: "borderCredit")?.cgColor
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    //MARK: - numberLabel
+    var numberLabel: UILabel = {
+        let label = UILabel()
+        label.text = "112"
+        label.textColor = UIColor(named: "buttonPink")
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    //MARK: - creditLabel
+    var creditLabel: UILabel = {
+        let label = UILabel()
+        label.text = "créditos"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    //MARK: - smallView2
+    var smallView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "Background")
+        view.layer.borderColor = UIColor(named: "borderCredit")?.cgColor
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    //MARK: - numberLabel2
+    var numberLabel2: UILabel = {
+        let label = UILabel()
+        label.text = "312"
+        label.textColor = UIColor(named: "buttonPink")
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
+    
+    //MARK: - creditLabel2
+    var creditLabel2: UILabel = {
+        let label = UILabel()
+        label.text = "créditos"
+        label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(12).generateSizeForScreen)
+        return label
+    }()
     
     override var prefersStatusBarHidden: Bool {
         
         true
     }
     
-    //MARK: viewDidLoad
+    //MARK: - personalProfileViewModel
+    private let personalProfileViewModel = PersonalProfileViewModel()
     
     override func viewDidDisappear(_ animated: Bool) {
         
@@ -336,541 +307,283 @@ class PersonalProfileView: UIViewController{
     //MARK: - loadView
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        userData()
-        
+        personalProfileViewModel.delegate = self
+        personalProfileViewModel.userData()
         tabBar.selectedItem = tabBar.items?[2]
-        
+
         view.backgroundColor = UIColor(named: "background")
-        view.isHidden = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [self] in view.isHidden = false
-      }
         
-        view.addSubviews([ wayImage, profilePic, helloLabel, subtitleLabel, createMyUiView,myWallet,changeWalletButton,personalAccount, userEditIconPic, editProfile ,backView, infoCircleIcon ,bookHistoryLabel , separatorView, helpLabel, nextPageButton, separatorView2, nextPageButton2, separatorView3, bookIcon, policyLabel,nextPageButton3, separatorView4, historyIcon, logoutButton, logoutImage, nextPageButton4,tabBar])
-        self.navigationController?.isNavigationBarHidden = true
-        nextPageButton.addTarget(self, action: #selector(editProfileTap), for: .touchUpInside)
-        nextPageButton2.addTarget(self, action: #selector(helpTap), for: .touchUpInside)
+        view.addSubviews([tabBar,
+                          wayImage,
+                          profilePic,
+                          helloLabel,
+                          subtitleLabel,
+                          backView,
+                          infoLabel,
+                          subInfoLabel,
+                          separatorView,
+                          bravveInfoLabel,
+                          subBravveInfoLabel,
+                          infoImage,
+                          reservationLabel,
+                          nextPageButton,
+                          separatorView2,
+                          helpImage,
+                          helpLabel,
+                          nextPageButton2,
+                          separatorView3,
+                          policyImage,
+                          policyLabel,
+                          nextPageButton3,
+                          separatorView4,
+                          logoutImage,
+                          logoutLabel,
+                          nextPageButton4,
+                          separatorView5,
+                          smallView,
+                          numberLabel,
+                          creditLabel,
+                          smallView2,
+                          numberLabel2,
+                          creditLabel2])
+        
+        nextPageButton.addTarget(self, action: #selector(reservationPage), for: .touchUpInside)
+        nextPageButton2.addTarget(self, action: #selector(helpPage), for: .touchUpInside)
         nextPageButton3.addTarget(self, action: #selector(policyPage), for: .touchUpInside)
-        nextPageButton4.addTarget(self, action: #selector(bookingHistory), for: .touchUpInside)
+        nextPageButton4.addTarget(self, action: #selector(goOutPage), for: .touchUpInside)
         addConstraints()
-    }
+          }
     
-    //MARK: userData
+    //MARK: - ACTIONS AND METHODS
     
-    func userData() {
+    //MARK: - reservationPage
+    @objc func reservationPage(){
         
-        sessionManager.getData(uuid: uuid, endpoint: .usersUuid){ (statusCode, error, user: User?) in
-
-            guard let user = user else {
-                print(user?.message as Any)
-                print(statusCode as Any)
-                print(error?.localizedDescription as Any)
-                return
-            }
-
-            DispatchQueue.main.async {
-                self.subtitleLabel.text = user.email
-
-                guard let userName = user.name else {return}
-                let firstName = String(userName.split(separator: " ")[0])
-
-                self.helloLabel.text = "Olá, \(firstName)!"
-
-            }
-        }
-
-        sessionManager.getDataArray(uuid: uuid, endpoint: .usersPictures) { (statusCode, error, pictures: [Pictures]?) in
-
-            guard let pictures = pictures else {
-                print(statusCode as Any)
-                return
-            }
-
-            if !pictures.isEmpty {
-
-                guard let pictureUuid = pictures[0].picture else {
-                    print(pictures[0].message as Any)
-                    return
-                }
-
-                self.sessionManager.getData(uuid: self.uuid, picture: pictureUuid, endpoint: .usersPicture) { (statusCode, error, pictureURL: PictureURL?) in
-
-                    guard let pictureURL = pictureURL?.picture_url else {
-                        print(pictureURL?.message as Any)
-                        print(statusCode as Any)
-                        return
-                    }
-
-                    DispatchQueue.main.async {
-                        self.profilePic.sd_setImage(with: URL(string: pictureURL), placeholderImage: UIImage(named: "photo"))
-                    }
-
-                }
-            }
-
-        }
-    }
-    
-    //MARK: Objc funcs
-    
-    @objc func changeWalletTap(){
-        
-        let popUp = PersonalProfilePopupView()
-        popUp.modalPresentationStyle = .popover
-        self.present(popUp,animated: true)
+            let lastReservations = BookingHistoryView()
+            lastReservations.modalPresentationStyle = .fullScreen
+            self.present(lastReservations, animated: true)
         
     }
     
-    func setAccount(){
-        myWallet.text = "Foursys"
-        personalAccount.text = "Conta corporativa"
-        
-    }
-    
-    
-    @objc func editProfileTap(){
-        
-        let editProfileTap = EditProfileView()
-        editProfileTap.modalPresentationStyle = .fullScreen
-        self.present(editProfileTap, animated: true)
-        
-    }
-    
-    @objc func helpTap(sender: UIButton){
+    //MARK: - helpPage
+    @objc func helpPage(sender: UIButton){
         let vc = HelpViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
+    //MARK: - policyPage
     @objc func policyPage(sender: UIButton){
         let vc = TermsAndConditionViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
-    @objc func bookingHistory(sender: UIButton){
-        let vc = BookingHistoryView()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
-    }
-    
+    //MARK: - goOutPage
     @objc func goOutPage(sender: UIButton){
         let vc = HomeOpenView()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
-    //MARK: setupConstraints
-    
+    //MARK: - addConstraints
     func addConstraints(){
+
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive =  true
         
-        NSLayoutConstraint.activate([
-            wayImage.topAnchor.constraint(equalTo: view.topAnchor),
-            wayImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            
-            profilePic.topAnchor.constraint(equalTo: view.topAnchor,constant: 39),
-            profilePic.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profilePic.widthAnchor.constraint(equalToConstant: 121),
-            profilePic.heightAnchor.constraint(equalToConstant: 121),
-            
-            helloLabel.topAnchor.constraint(equalTo: profilePic.bottomAnchor,constant: 7),
-            helloLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            subtitleLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor,constant: 13),
-            subtitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            logoutButton.topAnchor.constraint(equalTo: subtitleLabel.topAnchor,constant: -22),
-            logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -43),
-            logoutButton.widthAnchor.constraint(equalToConstant: 23),
-            logoutButton.heightAnchor.constraint(equalToConstant: 17),
-            
-            logoutImage.centerXAnchor.constraint(equalTo: logoutButton.centerXAnchor),
-            logoutImage.centerYAnchor.constraint(equalTo: logoutButton.centerYAnchor),
-            logoutImage.widthAnchor.constraint(equalToConstant: 23),
-            logoutImage.heightAnchor.constraint(equalToConstant: 17),
-            
-            createMyUiView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,constant: 37),
-            createMyUiView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 21),
-            createMyUiView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
-            createMyUiView.heightAnchor.constraint(equalToConstant: 82),
-            
-            
-            myWallet.topAnchor.constraint(equalTo: createMyUiView.topAnchor,constant: 21),
-            myWallet.leadingAnchor.constraint(equalTo: createMyUiView.leadingAnchor,constant: 22),
-            
-            personalAccount.leadingAnchor.constraint(equalTo: myWallet.leadingAnchor),
-            personalAccount.topAnchor.constraint(equalTo: myWallet.bottomAnchor,constant: 9),
-            
-            changeWalletButton.topAnchor.constraint(equalTo: createMyUiView.topAnchor,constant: 33),
-            changeWalletButton.trailingAnchor.constraint(equalTo: createMyUiView.trailingAnchor,constant: -32),
-            
-            
-            userEditIconPic.topAnchor.constraint(equalTo: createMyUiView.bottomAnchor,constant: 37),
-            userEditIconPic.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 33),
-            userEditIconPic.widthAnchor.constraint(equalToConstant: 15),
-            userEditIconPic.heightAnchor.constraint(equalToConstant: 15),
-            
-            editProfile.centerYAnchor.constraint(equalTo: userEditIconPic.centerYAnchor),
-            editProfile.leadingAnchor.constraint(equalTo: userEditIconPic.trailingAnchor,constant: 13),
-            
-            
-            nextPageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -37),
-            nextPageButton.topAnchor.constraint(equalTo: createMyUiView.bottomAnchor,constant: 35),
-            nextPageButton.widthAnchor.constraint(equalToConstant: 20),
-            nextPageButton.heightAnchor.constraint(equalToConstant: 20),
-            
-            separatorView.topAnchor.constraint(equalTo: editProfile.bottomAnchor,constant: 16),
-            separatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 21),
-            separatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -21),
-            separatorView.heightAnchor.constraint(equalToConstant: 1),
-            
-            infoCircleIcon.topAnchor.constraint(equalTo: separatorView.bottomAnchor,constant: 25),
-            infoCircleIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 33),
-            infoCircleIcon.widthAnchor.constraint(equalToConstant: 15),
-            infoCircleIcon.heightAnchor.constraint(equalToConstant: 15),
-            
-            helpLabel.leadingAnchor.constraint(equalTo: infoCircleIcon.trailingAnchor,constant: 13),
-            helpLabel.centerYAnchor.constraint(equalTo: infoCircleIcon.centerYAnchor),
-            
-            nextPageButton2.centerXAnchor.constraint(equalTo: nextPageButton.centerXAnchor),
-            nextPageButton2.topAnchor.constraint(equalTo: separatorView.bottomAnchor,constant: 22),
-            nextPageButton2.widthAnchor.constraint(equalToConstant: 20),
-            nextPageButton2.heightAnchor.constraint(equalToConstant: 20),
-            
-            separatorView2.topAnchor.constraint(equalTo: helpLabel.bottomAnchor,constant: 21),
-            separatorView2.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 21),
-            separatorView2.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
-            separatorView2.heightAnchor.constraint(equalToConstant: 1),
-            
-            bookIcon.topAnchor.constraint(equalTo: separatorView2.bottomAnchor,constant: 16),
-            bookIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 33),
-            bookIcon.widthAnchor.constraint(equalToConstant: 14),
-            bookIcon.heightAnchor.constraint(equalToConstant: 16),
-            
-            policyLabel.leadingAnchor.constraint(equalTo: bookIcon.trailingAnchor,constant: 13),
-            policyLabel.centerYAnchor.constraint(equalTo: bookIcon.centerYAnchor),
-            
-            nextPageButton3.centerXAnchor.constraint(equalTo: nextPageButton.centerXAnchor),
-            nextPageButton3.topAnchor.constraint(equalTo: separatorView2.bottomAnchor,constant: 22),
-            nextPageButton3.widthAnchor.constraint(equalToConstant: 20),
-            nextPageButton3.heightAnchor.constraint(equalToConstant: 20),
-            
-            separatorView3.topAnchor.constraint(equalTo: policyLabel.bottomAnchor,constant: 21),
-            separatorView3.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 21),
-            separatorView3.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
-            separatorView3.heightAnchor.constraint(equalToConstant: 1),
-            
-            historyIcon.topAnchor.constraint(equalTo: separatorView3.bottomAnchor,constant: 22),
-            historyIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 33),
-            historyIcon.widthAnchor.constraint(equalToConstant: 14),
-            historyIcon.heightAnchor.constraint(equalToConstant: 16),
-            
-            bookHistoryLabel.leadingAnchor.constraint(equalTo: historyIcon.trailingAnchor,constant: 13),
-            bookHistoryLabel.centerYAnchor.constraint(equalTo: historyIcon.centerYAnchor),
-            
-            nextPageButton4.centerXAnchor.constraint(equalTo: nextPageButton.centerXAnchor),
-            nextPageButton4.topAnchor.constraint(equalTo: separatorView3.bottomAnchor,constant: 22),
-            nextPageButton4.widthAnchor.constraint(equalToConstant: 20),
-            nextPageButton4.heightAnchor.constraint(equalToConstant: 20),
-            
-            separatorView4.topAnchor.constraint(equalTo: bookHistoryLabel.bottomAnchor,constant: 21),
-            separatorView4.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 21),
-            separatorView4.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
-            separatorView4.heightAnchor.constraint(equalToConstant: 1),
-            
-            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+        profilePic.translatesAutoresizingMaskIntoConstraints = false
+        profilePic.widthAnchor.constraint(equalToConstant: CGFloat(121).generateSizeForScreen).isActive = true
+        profilePic.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        profilePic.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(39).generateSizeForScreen).isActive = true
+        profilePic.sizeAnchorInSuperview(CGFloat(121).generateSizeForScreen)
+        profilePic.layer.cornerRadius = view.frame.size.height / 14
+        
+        helloLabel.translatesAutoresizingMaskIntoConstraints = false
+        helloLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        helloLabel.topAnchor.constraint(equalTo: profilePic.bottomAnchor, constant: CGFloat(9).generateSizeForScreen).isActive = true
+        
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: CGFloat(9).generateSizeForScreen).isActive = true
+        subtitleLabel.heightAnchor.constraint(equalToConstant: CGFloat(18.13).generateSizeForScreen).isActive = true
+        
+        backView.translatesAutoresizingMaskIntoConstraints =  false
+        backView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: CGFloat(40).generateSizeForScreen).isActive = true
+        backView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        backView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        backView.heightAnchor.constraint(equalToConstant: CGFloat(150).generateSizeForScreen).isActive = true
+        
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+        infoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        infoLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        subInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        subInfoLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen).isActive = true
+        subInfoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        subInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(15).generateSizeForScreen).isActive = true
+        
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant:  CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView.topAnchor.constraint(equalTo: backView.topAnchor, constant:  CGFloat(75).generateSizeForScreen).isActive = true
+        
+        bravveInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        bravveInfoLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: CGFloat(15).generateSizeForScreen).isActive = true
+        bravveInfoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        bravveInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        subBravveInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        subBravveInfoLabel.topAnchor.constraint(equalTo: bravveInfoLabel.bottomAnchor, constant: CGFloat(10).generateSizeForScreen).isActive = true
+        subBravveInfoLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        subBravveInfoLabel.heightAnchor.constraint(equalToConstant: CGFloat(15).generateSizeForScreen).isActive = true
+        
+        infoImage.translatesAutoresizingMaskIntoConstraints = false
+        infoImage.topAnchor.constraint(equalTo: backView.bottomAnchor, constant: CGFloat(38).generateSizeForScreen).isActive = true
+        infoImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(33).generateSizeForScreen).isActive = true
+        infoImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        infoImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        reservationLabel.translatesAutoresizingMaskIntoConstraints = false
+        reservationLabel.topAnchor.constraint(equalTo: backView.bottomAnchor, constant: CGFloat(38).generateSizeForScreen).isActive = true
+        reservationLabel.leadingAnchor.constraint(equalTo: infoImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
+        reservationLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton.topAnchor.constraint(equalTo: backView.bottomAnchor, constant: CGFloat(35).generateSizeForScreen).isActive = true
+        nextPageButton.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView2.translatesAutoresizingMaskIntoConstraints = false
+        separatorView2.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView2.topAnchor.constraint(equalTo: reservationLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+
+        helpImage.translatesAutoresizingMaskIntoConstraints = false
+        helpImage.topAnchor.constraint(equalTo: separatorView2.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        helpImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  CGFloat(33).generateSizeForScreen).isActive = true
+        helpImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        helpImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        helpLabel.translatesAutoresizingMaskIntoConstraints = false
+        helpLabel.topAnchor.constraint(equalTo: separatorView2.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        helpLabel.leadingAnchor.constraint(equalTo: helpImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
+        helpLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton2.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton2.topAnchor.constraint(equalTo: separatorView2.bottomAnchor, constant: CGFloat(22).generateSizeForScreen).isActive = true
+        nextPageButton2.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton2.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView3.translatesAutoresizingMaskIntoConstraints = false
+        separatorView3.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView3.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView3.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView3.topAnchor.constraint(equalTo: helpLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        policyImage.translatesAutoresizingMaskIntoConstraints = false
+        policyImage.topAnchor.constraint(equalTo: separatorView3.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        policyImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(33).generateSizeForScreen).isActive = true
+        policyImage.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        policyImage.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        policyLabel.translatesAutoresizingMaskIntoConstraints = false
+        policyLabel.topAnchor.constraint(equalTo: separatorView3.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        policyLabel.leadingAnchor.constraint(equalTo: policyImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
+        policyLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton3.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton3.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton3.topAnchor.constraint(equalTo: separatorView3.bottomAnchor, constant:  CGFloat(22).generateSizeForScreen).isActive = true
+        nextPageButton3.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton3.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView4.translatesAutoresizingMaskIntoConstraints = false
+        separatorView4.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView4.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView4.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView4.topAnchor.constraint(equalTo: policyLabel.bottomAnchor, constant:  CGFloat(20).generateSizeForScreen).isActive = true
+
+        logoutImage.translatesAutoresizingMaskIntoConstraints = false
+        logoutImage.topAnchor.constraint(equalTo: separatorView4.bottomAnchor, constant: CGFloat(25).generateSizeForScreen).isActive = true
+        logoutImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(33).generateSizeForScreen).isActive = true
+        logoutImage.heightAnchor.constraint(equalToConstant: CGFloat(12).generateSizeForScreen).isActive = true
+        logoutImage.widthAnchor.constraint(equalToConstant: CGFloat(16).generateSizeForScreen).isActive = true
+        
+        logoutLabel.translatesAutoresizingMaskIntoConstraints = false
+        logoutLabel.topAnchor.constraint(equalTo: separatorView4.bottomAnchor, constant: CGFloat(23).generateSizeForScreen).isActive = true
+        logoutLabel.leadingAnchor.constraint(equalTo: logoutImage.trailingAnchor, constant: CGFloat(12.5).generateSizeForScreen).isActive = true
+        logoutLabel.heightAnchor.constraint(equalToConstant: CGFloat(17).generateSizeForScreen).isActive = true
+        
+        nextPageButton4.translatesAutoresizingMaskIntoConstraints = false
+        nextPageButton4.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-33).generateSizeForScreen).isActive = true
+        nextPageButton4.topAnchor.constraint(equalTo: separatorView4.bottomAnchor, constant: CGFloat(22).generateSizeForScreen).isActive = true
+        nextPageButton4.heightAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        nextPageButton4.widthAnchor.constraint(equalToConstant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        separatorView5.translatesAutoresizingMaskIntoConstraints = false
+        separatorView5.heightAnchor.constraint(equalToConstant: CGFloat(2).generateSizeForScreen).isActive = true
+        separatorView5.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: CGFloat(-20).generateSizeForScreen).isActive = true
+        separatorView5.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        separatorView5.topAnchor.constraint(equalTo: logoutLabel.bottomAnchor, constant: CGFloat(20).generateSizeForScreen).isActive = true
+        
+        smallView.translatesAutoresizingMaskIntoConstraints = false
+        smallView.topAnchor.constraint(equalTo: backView.topAnchor, constant: CGFloat(29.67).generateSizeForScreen).isActive = true
+        smallView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: CGFloat(-17).generateSizeForScreen).isActive = true
+        smallView.heightAnchor.constraint(equalToConstant: CGFloat(29).generateSizeForScreen).isActive = true
+        smallView.widthAnchor.constraint(equalToConstant: CGFloat(94).generateSizeForScreen).isActive = true
+        
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel.leadingAnchor.constraint(equalTo: smallView.leadingAnchor, constant: CGFloat(12).generateSizeForScreen).isActive = true
+        numberLabel.topAnchor.constraint(equalTo: smallView.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
+        numberLabel.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+        
+        creditLabel.translatesAutoresizingMaskIntoConstraints = false
+        creditLabel.trailingAnchor.constraint(equalTo: smallView.trailingAnchor, constant: CGFloat(-12).generateSizeForScreen).isActive = true
+        creditLabel.topAnchor.constraint(equalTo: smallView.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
+        creditLabel.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+        
+        smallView2.translatesAutoresizingMaskIntoConstraints = false
+        smallView2.topAnchor.constraint(equalTo: separatorView.topAnchor, constant: CGFloat(18.87).generateSizeForScreen).isActive = true
+        smallView2.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: CGFloat(-17).generateSizeForScreen).isActive = true
+        smallView2.heightAnchor.constraint(equalToConstant: CGFloat(29).generateSizeForScreen).isActive = true
+        smallView2.widthAnchor.constraint(equalToConstant: CGFloat(94).generateSizeForScreen).isActive = true
+        
+        numberLabel2.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel2.leadingAnchor.constraint(equalTo: smallView2.leadingAnchor, constant: CGFloat(12).generateSizeForScreen).isActive = true
+        numberLabel2.topAnchor.constraint(equalTo: smallView2.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
+        numberLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
+
+        creditLabel2.translatesAutoresizingMaskIntoConstraints = false
+        creditLabel2.trailingAnchor.constraint(equalTo: smallView2.trailingAnchor, constant: CGFloat(-12).generateSizeForScreen).isActive = true
+        creditLabel2.topAnchor.constraint(equalTo: smallView2.topAnchor, constant: CGFloat(6.69).generateSizeForScreen).isActive = true
+        creditLabel2.heightAnchor.constraint(equalToConstant: CGFloat(16.73).generateSizeForScreen).isActive = true
     }
-    
-    //MARK: popUpChangeWallet
-    
-    class PersonalProfilePopupView: UIViewController, UIGestureRecognizerDelegate{
-        
-        //MARK: viewElements
-        
-        //MARK: ExpansionView
-        
-        private lazy var createMyExpansionUiView: UIView = {
-            let view = UIView()
-            view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-            view.layer.borderWidth = 0.3
-            view.layer.cornerRadius = 12
-            view.backgroundColor = UIColor(named: ColorsBravve.background.rawValue)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        
-        private lazy var myAccounts: UILabel = {
-            let label = UILabel()
-            label.text = "Minhas contas"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.medium.rawValue, size: 18)
-            label.textColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-            return label
-        }()
-        
-        private lazy var walletIcon: UIImageView = {
-            let image = UIImageView()
-            image.image = UIImage(named: IconsBravve.wallet.rawValue)
-            image.contentMode = .scaleToFill
-            image.clipsToBounds = true
-            image.translatesAutoresizingMaskIntoConstraints = false
-            return image
-        }()
-        
-        private lazy var myWalletPopup: UILabel = {
-            let label = UILabel()
-            label.text = "Minha carteira"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(14).generateSizeForScreen)
-            label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-            return label
-        }()
-        
-        private lazy var personalAccountPopup: UILabel = {
-            let label = UILabel()
-            label.text = "Conta pessoal"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.light.rawValue, size: CGFloat(12).generateSizeForScreen)
-            label.textColor = UIColor(named: ColorsBravve.label.rawValue)
-            return label
-        }()
-        
-        
-        private lazy var infoWalletLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Foursys"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
-            label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-            return label
-        }()
-        
-        private lazy var subInfoWalletLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Conta corporativa"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-            label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-            return label
-        }()
-        
-        private lazy var bravveInfoLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Bravve"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.medium.rawValue, size: CGFloat(13).generateSizeForScreen)
-            label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-            return label
-        }()
-        
-        private lazy var subBravveInfoLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Conta corporativa"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: FontsBravve.regular.rawValue, size: CGFloat(10).generateSizeForScreen)
-            label.textColor = UIColor(named: ColorsBravve.textField.rawValue)
-            return label
-        }()
-        
-        private lazy var numberCreditsLabel: UILabel = {
-            let label = UILabel()
-            let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.pink_cyan.rawValue)]
-            let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-            
-            let atritutedString1 = NSMutableAttributedString(string: "112 ", attributes: attrs1 as [NSAttributedString.Key : Any])
-            let atritutedString2 = NSMutableAttributedString(string: " Créditos", attributes: attrs2 as [NSAttributedString.Key : Any])
-            
-            atritutedString1.append(atritutedString2)
-            
-            label.attributedText = atritutedString1
-            label.layer.borderWidth = 0.3
-            label.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        private lazy var numberCreditsLabel2: UILabel = {
-            let label = UILabel()
-            let attrs1 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.medium.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.pink_cyan.rawValue)]
-            let attrs2 = [NSAttributedString.Key.font : UIFont(name: FontsBravve.regular.rawValue, size: 12), NSAttributedString.Key.foregroundColor : UIColor(named: ColorsBravve.label.rawValue)]
-            
-            let atritutedString1 = NSMutableAttributedString(string: "312 ", attributes: attrs1 as [NSAttributedString.Key : Any])
-            let atritutedString2 = NSMutableAttributedString(string: " Créditos", attributes: attrs2 as [NSAttributedString.Key : Any])
-            
-            atritutedString1.append(atritutedString2)
-            
-            label.attributedText = atritutedString1
-            label.layer.borderWidth = 0.3
-            label.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        private lazy var lineView: UIView = {
-            let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-            view.layer.borderWidth = 1
-            return view
-        }()
-        
-        private lazy var lineView2: UIView = {
-            let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.layer.borderColor = UIColor(named: ColorsBravve.gray_gray.rawValue)?.cgColor
-            view.layer.borderWidth = 1
-            return view
-        }()
-        
-        private lazy var buttonSelectWallet: UIButton = {
-            let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.addTarget(self, action: #selector(dismissPopUpAndSelectWallet), for: .touchUpInside)
-            return button
-        }()
-        
-        private lazy var buttonSelectWallet2: UIButton = {
-            let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.addTarget(self, action: #selector(dismissPopUpAndSelectWallet2), for: .touchUpInside)
-            return button
-        }()
-        
-        //MARK: popUpViewDidLoad
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            let viewTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-                   viewTapGesture.delegate = self
-                   view.addGestureRecognizer(viewTapGesture)
-            
-            view.backgroundColor = .clear
-            view.addSubviews([createMyExpansionUiView,walletIcon,myAccounts,myWalletPopup,personalAccountPopup,infoWalletLabel,subInfoWalletLabel,bravveInfoLabel,subBravveInfoLabel,numberCreditsLabel,numberCreditsLabel2,lineView,lineView2,buttonSelectWallet,buttonSelectWallet2])
-            setupConstraints()
-            
-            
-            
-        }
-        
-        //MARK: Objc Funcs PopUp
-        
-        @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
-            dismiss(animated: true)
-            }
-        
-        @objc func dismissPopUpAndSelectWallet(){
-            
-            setValor1()
-//            self.dismiss(animated: true)
-            
-        }
-        
-        func setValor1(){
-            
-            let enterProfileElements = PersonalProfileView()
-            enterProfileElements.myWallet.text! = "Foursys"
-            enterProfileElements.personalAccount.text! = "Conta corporativa"
-            myWalletPopup.text = "Foursys"
-            personalAccountPopup.text = "Conta corporativa"
-            
-        }
-        
-        func setValor2(){
-            
-            let enterProfileElements = PersonalProfileView()
-            enterProfileElements.myWallet.text! = "Bravve"
-            enterProfileElements.personalAccount.text! = "Conta corporativa"
-            myWalletPopup.text = "Bravve"
-            personalAccountPopup.text = "Conta corporativa"
-            
-        }
-        
-        @objc func dismissPopUpAndSelectWallet2(){
-            
-            setValor2()
-//            self.dismiss(animated: true)
-            
-        }
-        
-        //MARK: setupConstraints PopUp
-        
-        private func setupConstraints(){
-            NSLayoutConstraint.activate([
-                
-                createMyExpansionUiView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                createMyExpansionUiView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                createMyExpansionUiView.widthAnchor.constraint(equalToConstant: 334),
-                createMyExpansionUiView.heightAnchor.constraint(equalToConstant: 330),
-                
-                walletIcon.leadingAnchor.constraint(equalTo: createMyExpansionUiView.leadingAnchor,constant: 22.03),
-                walletIcon.topAnchor.constraint(equalTo: createMyExpansionUiView.topAnchor,constant: 22),
-                walletIcon.widthAnchor.constraint(equalToConstant: 19),
-                walletIcon.heightAnchor.constraint(equalToConstant: 19),
-                
-                myAccounts.leadingAnchor.constraint(equalTo: walletIcon.leadingAnchor),
-                myAccounts.topAnchor.constraint(equalTo: walletIcon.bottomAnchor,constant: 14),
-                
-                myWalletPopup.centerXAnchor.constraint(equalTo: createMyExpansionUiView.centerXAnchor),
-                myWalletPopup.topAnchor.constraint(equalTo: myAccounts.bottomAnchor,constant: 21),
-                
-                personalAccountPopup.centerXAnchor.constraint(equalTo: myWalletPopup.centerXAnchor),
-                personalAccountPopup.topAnchor.constraint(equalTo: myWalletPopup.bottomAnchor,constant: 9),
-                
-                lineView.topAnchor.constraint(equalTo: personalAccountPopup.bottomAnchor,constant: 22),
-                lineView.leadingAnchor.constraint(equalTo: createMyExpansionUiView.leadingAnchor,constant: 17),
-                lineView.trailingAnchor.constraint(equalTo: createMyExpansionUiView.trailingAnchor,constant: -17),
-                lineView.heightAnchor.constraint(equalToConstant: 1),
-                
-                infoWalletLabel.topAnchor.constraint(equalTo: lineView.bottomAnchor,constant: 22),
-                infoWalletLabel.leadingAnchor.constraint(equalTo: walletIcon.leadingAnchor),
-                
-                numberCreditsLabel.trailingAnchor.constraint(equalTo: createMyExpansionUiView.trailingAnchor,constant: -31),
-                numberCreditsLabel.topAnchor.constraint(equalTo: lineView.bottomAnchor,constant: 36),
-                
-                subInfoWalletLabel.leadingAnchor.constraint(equalTo: walletIcon.leadingAnchor),
-                subInfoWalletLabel.topAnchor.constraint(equalTo: infoWalletLabel.bottomAnchor,constant: 9),
-                
-                lineView2.topAnchor.constraint(equalTo: subInfoWalletLabel.bottomAnchor,constant: 22),
-                lineView2.leadingAnchor.constraint(equalTo: createMyExpansionUiView.leadingAnchor,constant: 17),
-                lineView2.trailingAnchor.constraint(equalTo: createMyExpansionUiView.trailingAnchor,constant: -17),
-                lineView2.heightAnchor.constraint(equalToConstant: 1),
-                
-                bravveInfoLabel.leadingAnchor.constraint(equalTo: walletIcon.leadingAnchor),
-                bravveInfoLabel.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 22),
-                
-                subBravveInfoLabel.leadingAnchor.constraint(equalTo: walletIcon.leadingAnchor),
-                subBravveInfoLabel.topAnchor.constraint(equalTo: bravveInfoLabel.bottomAnchor,constant: 9),
-                
-                numberCreditsLabel2.topAnchor.constraint(equalTo: lineView2.bottomAnchor,constant: 30),
-                numberCreditsLabel2.centerXAnchor.constraint(equalTo: numberCreditsLabel.centerXAnchor),
-                
-                buttonSelectWallet.topAnchor.constraint(equalTo: lineView.bottomAnchor),
-                buttonSelectWallet.leadingAnchor.constraint(equalTo: createMyExpansionUiView.leadingAnchor),
-                buttonSelectWallet.trailingAnchor.constraint(equalTo: createMyExpansionUiView.trailingAnchor),
-                buttonSelectWallet.bottomAnchor.constraint(equalTo: lineView2.topAnchor),
-                
-                buttonSelectWallet2.topAnchor.constraint(equalTo: lineView2.bottomAnchor),
-                buttonSelectWallet2.leadingAnchor.constraint(equalTo: createMyExpansionUiView.leadingAnchor),
-                buttonSelectWallet2.trailingAnchor.constraint(equalTo: createMyExpansionUiView.trailingAnchor),
-                buttonSelectWallet2.bottomAnchor.constraint(equalTo: subBravveInfoLabel.bottomAnchor),
-                
-                
-                
-                
-            ])
-        }
-    }
-    
-    
 }
 
-
-
-
-
-
+//MARK: - PersonalProfileView
+extension PersonalProfileView: PersonalProfileViewModelProtocol {
+    
+    //MARK: - setupPic
+    func setupPic(URL: URL?, placeholderImage: UIImage?) {
+        
+        self.profilePic.sd_setImage(with: URL, placeholderImage: placeholderImage)
+        
+    }
+    
+    //MARK: - setupLabels
+    func setupLabels(email: String?, firstName: String) {
+        
+        self.helloLabel.text = "Olá, \(firstName)!"
+        self.subtitleLabel.text = email
+        
+    }
+}
 

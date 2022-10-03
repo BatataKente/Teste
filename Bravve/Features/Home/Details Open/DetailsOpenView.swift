@@ -375,52 +375,7 @@ class OpenDetailsView: UIViewController {
         setupView()
         setupDefaults()
         setupConstraints()
-        navigationSetup()
         reserveButton.addTarget(self, action: #selector(reserveButtonTapped), for: .touchUpInside)
-    }
-    
-    //MARK: - Navigation Setup
-    private func navigationSetup(){
-        let navigationStatusBarView = UIView()
-        navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
-        navigationStatusBarView.backgroundColor = UIColor(named: "blueBravve")
-        self.view.addSubview(navigationStatusBarView)
-         
-        NSLayoutConstraint.activate([
-            navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-//            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.scrollView.topAnchor),
-            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
-        ])
-        
-        let label = UILabel()
-        label.text = "Espaço"
-        label.font = UIFont(name: FontsBravve.bold.rawValue, size: 20)
-        label.textColor = UIColor(named: ColorsBravve.white_white.rawValue)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let titleView = UIView()
-        titleView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: titleView.centerYAnchor)
-        ])
-    
-        
-        self.navigationItem.titleView = titleView
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.mostButton.rawValue), style: .plain, target: self, action: #selector(searchBarButtonTapped))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.backWhite.rawValue), style: .plain, target: self, action: #selector(menuBarButtonTapped))
-        self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
-    }
-    
-    @objc func searchBarButtonTapped(){
-        print("right")
-    }
-    
-    @objc func menuBarButtonTapped(){
-        self.navigationController?.popViewController(animated: true)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -447,9 +402,11 @@ class OpenDetailsView: UIViewController {
        
     }
     
-    @objc func reserveButtonTapped(){
-        let reserveViewController = LoginView()
-        self.navigationController?.pushViewController(reserveViewController, animated: true)
+    @objc func reserveButtonTapped() {
+        
+        let loginView = LoginView()
+        loginView.modalPresentationStyle = .fullScreen
+        present(loginView, animated: true)
     }
     
     private func setupConstraints() {
