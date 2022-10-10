@@ -15,7 +15,6 @@ protocol HomeOpenViewModelProtocol {
     func reduceDropDowns()
     func setupLeftDropDown(_ buttons: [UIButton])
     func setupRightDropDown(_ buttons: [UIButton])
-    func showNavigation()
 }
 
 class HomeOpenViewModel {
@@ -157,9 +156,8 @@ class HomeOpenViewModel {
                                     
                                     UIView.animate(withDuration: 0.6,
                                                    delay: 0.3) {
-                                        
+
                                         self.delegate?.setCoverView(0)
-                                        self.delegate?.showNavigation()
                                     }
                                 }
                             }
@@ -198,7 +196,6 @@ class HomeOpenViewModel {
                            delay: 0.3) {
 
                 self.delegate?.setCoverView(0)
-                self.delegate?.showNavigation()
             }
         }
     }
@@ -243,7 +240,6 @@ class HomeOpenViewModel {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-    
-}
 
+}
 

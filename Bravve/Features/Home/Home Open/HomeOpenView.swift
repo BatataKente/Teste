@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftUI
 
 class HomeOpenView: UIViewController {
     
@@ -21,8 +19,6 @@ class HomeOpenView: UIViewController {
     
     private var cells: [Space] = []
     
-    private var searchCells: [Space] = []
-    
     private var filterButtons = [UIButton]()
     
     private let cellIdentifier = "Cell"
@@ -30,8 +26,6 @@ class HomeOpenView: UIViewController {
     private let titleLabel = UILabel()
     
     private let customBar = UIView()
-    
-    private var searchController = UISearchController(searchResultsController: nil)
     
     private lazy var filterStackView: UIStackView = {
         
@@ -45,9 +39,9 @@ class HomeOpenView: UIViewController {
         view.axis = .vertical
         view.isLayoutMarginsRelativeArrangement = true
         view.layoutMargins = UIEdgeInsets(top: margins,
-                                          left: margins,
-                                          bottom: margins,
-                                          right: margins)
+                                         left: margins,
+                                         bottom: margins,
+                                         right: margins)
         return view
     }()
     
@@ -105,16 +99,16 @@ class HomeOpenView: UIViewController {
     }()
     
     private lazy var leftDropDown: UIScrollView = {
-        
+
         let leftDropDown = UIScrollView()
         leftDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         leftDropDown.delegate = self
-        
+
         return leftDropDown
     }()
     
     private lazy var rightDropDown: UIScrollView = {
-        
+
         let rightDropDown = UIScrollView()
         rightDropDown.layer.cornerRadius = CGFloat(8).generateSizeForScreen
         rightDropDown.delegate = self
@@ -180,145 +174,35 @@ class HomeOpenView: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
+        
         true
     }
     
-
-    //MARK: - View Lifecycle
-    
-    override func loadView() {
-        super.loadView()
-        self.navigationController?.navigationBar.isHidden = true
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        tabBar.selectedItem = tabBar.items?[0]
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         seletedFilterItems = selectedItemsArray
+        
         setupView()
         setupConstraints()
         setupDefaults()
-        searchSetup()
     }
- 
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        navigationSetup()
-        super.viewDidDisappear(animated)
-        self.searchController.isActive = false
-        tabBar.selectedItem = tabBar.items?[0]
-        print("Disappear")
-    }
-    
-    //MARK: - Search Controller Methods
-    
-    private func searchSetup(){
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchResultsUpdater = self
-        self.searchController.obscuresBackgroundDuringPresentation = false
-    }
-    
-    private func filterContentForSearchText(searchText: String){
-        searchCells = cells.filter({ (space: Space) -> Bool in
-            guard let city = space.partner_site_address?.address?.city_name else {return false}
-            guard let state = space.partner_site_address?.address?.state_name else {return false}
-            guard let postal = space.partner_site_address?.address?.postal_code else {return false}
-            guard let address = space.partner_site_address?.address?.street else {return false}
-            let cityName = city.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            let stateName = state.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            let postalCode = postal.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            let addressName = address.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-           
-            return cityName != nil || stateName != nil || postalCode != nil || addressName != nil
-        })
-    }
-    
-    //MARK: - Navigation Methods
-    
-    private func navigationSetup(){
-        //The view that covers the statusBar
-        let navigationStatusBarView = UIView()
-        navigationStatusBarView.translatesAutoresizingMaskIntoConstraints = false
-        navigationStatusBarView.backgroundColor = UIColor(named: "blueBravve")
-        self.view.addSubview(navigationStatusBarView)
-        
-        NSLayoutConstraint.activate([
-            navigationStatusBarView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            navigationStatusBarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            navigationStatusBarView.bottomAnchor.constraint(equalTo: self.stackView.topAnchor),
-            navigationStatusBarView.heightAnchor.constraint(equalToConstant: 115)
-        ])
-        //Center View
-        let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
-        let centerImageView = UIImageView(image: logo)
-        self.navigationItem.titleView = centerImageView
-        
-        //Bar Button Items Left and Right
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.search.rawValue), style: .plain, target: self, action: #selector(self.searchBarButtonTapped))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(self.menuBarButtonTapped))
-        self.navigationController?.navigationBar.tintColor = UIColor(named: ColorsBravve.white_white.rawValue)
-    }
-    
-    @objc func searchBarButtonTapped(){
-        let searchBar: UISearchBar = self.searchController.searchBar
-        searchBar.placeholder = "Busque CEP, endereço, cidade ou estado"
-        searchBar.delegate = self
-        searchBar.isTranslucent = false
-        searchBar.sizeToFit()
-        searchBar.showsCancelButton = false
-        searchBar.showsBookmarkButton = true
-        
-        let searchTextField = searchBar.searchTextField
-        searchTextField.font = UIFont(name: FontsBravve.regular.rawValue, size: 15)
-        searchTextField.leftView = UIView()
-        searchTextField.clearButtonMode = .never
-        searchTextField.backgroundColor = .white
-        
-        var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        config.image = UIImage(named: ButtonsBravve.search.rawValue)
-        
-        DispatchQueue.main.async {
-            searchTextField.rightViewMode = .always
-            let searchButton = UIButton(configuration: config, primaryAction: UIAction(handler: {[weak self] action in
-                self?.searchBarBookmarkButtonClicked(searchBar)
-            }))
-            searchButton.layer.cornerRadius = 12
-            searchTextField.rightView = searchButton
-            
-        }
-        self.navigationItem.titleView = searchBar
-        
-        self.navigationItem.leftBarButtonItems = [UIBarButtonItem(systemItem: UIBarButtonItem.SystemItem.fixedSpace, primaryAction: nil, menu: nil)]
-       let barButtonItem = UIBarButtonItem(image: UIImage(named: ButtonsBravve.searchFilterPink.rawValue), style: .plain, target: self, action: #selector(filterButtonTapped))
-        barButtonItem.tintColor = UIColor(named: ColorsBravve.buttonPink.rawValue)
-        
-        self.navigationItem.rightBarButtonItem = barButtonItem
-        
-    }
-    
-    @objc func menuBarButtonTapped(){
-        let logo = UIImage(named: ImagesBravve.logoWhite.rawValue)
-        let centerImageView = UIImageView(image: logo)
-        self.navigationItem.titleView = centerImageView
-        print("menu")
-    }
-    
-    @objc func filterButtonTapped(){
-        let filterView = FilterScreen(self.spaceParameters, self.selectedItemsArray)
-        self.navigationController?.pushViewController(filterView, animated: true)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-
     
     //MARK: - createStackView
     private func createStackView(_ views: [UIView]) -> UIStackView {
         
         let stackView = UIStackView(arrangedSubviews: views)
         
-        stackView.spacing = 4
-        stackView.backgroundColor = .white
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+            stackView.spacing = 4
+            stackView.backgroundColor = .white
+            stackView.axis = .horizontal
+            stackView.distribution = .fillProportionally
         
         return stackView
     }
@@ -354,8 +238,8 @@ class HomeOpenView: UIViewController {
     }
     
     private func setupView() {
-        
-        view.addSubviews([stackView, tabBar, coverView, imageView, leftDropDown, rightDropDown])
+
+        view.addSubviews([stackView, customBar, tabBar, coverView, imageView, leftDropDown, rightDropDown])
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -363,7 +247,7 @@ class HomeOpenView: UIViewController {
         if self.seletedFilterItems.isEmpty {
             self.filterStackView.isHidden = true
         }
-        
+
         setupSelectedButtons(filterStackView)
         
         for button in filterButtons {
@@ -375,20 +259,20 @@ class HomeOpenView: UIViewController {
             
             button.addAction(UIAction(handler: handler), for: .touchUpInside)
         }
-        
+
         tabBar.selectedItem = tabBar.items?[0]
     }
     
     func setupSelectedButtons(_ stackView: UIStackView) {
         
         filterButtons = createCapsuleButtons(seletedFilterItems,
-                                             ColorsBravve.capsuleButtonSelected)
+                                      ColorsBravve.capsuleButtonSelected)
         
         stackView.addArrangedSubviews(self.setupStackView(self.filterButtons))
     }
     
     private func setupDefaults() {
-        
+
         view.setToDefaultBackgroundColor()
         
         homeOpenViewModel.delegate = self
@@ -404,8 +288,7 @@ class HomeOpenView: UIViewController {
         coverView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        // scrollView.topAnchor.contraint(equalTo: self.view.contentLayoutGuide.topAchor),
-        
+        stackView.topAnchor.constraint(equalTo: customBar.bottomAnchor).isActive = true
 //        homeOpenViewModel.constraint(the: stackView, to: view, by: [.leading, .trailing])
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -440,11 +323,8 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.searchController.isActive{
-            return searchCells.count + 1
-        }else{
-            return cells.count + 1
-        }
+        
+        return cells.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -466,8 +346,7 @@ extension HomeOpenView: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? HomeOpenTableViewCell
                 cell?.delegate = self
                 
-                let space = (searchController.isActive) ? searchCells[indexPath.row - 1] : cells[indexPath.row - 1]
-                cell?.setup(space)
+                cell?.setup(cells[indexPath.row - 1])
                 
                 return cell ?? UITableViewCell()
             }
@@ -495,29 +374,26 @@ extension HomeOpenView: UIScrollViewDelegate {
 
 extension HomeOpenView: HomeOpenTableViewCellProtocol {
     
-    func chosePlace(_ id: Int?) {
-        
-        homeOpenViewModel.loadChosedPlace(id)
-    }
-    
     func loadMapView(latitude: Double?, longitude: Double?) {
+        
         let mapView = HomeMapKitView()
         mapView.latitude = latitude
         mapView.longitude = longitude
         mapView.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(mapView, animated: true)
+        present(mapView, animated: true)
+    }
+    
+    func chosePlace(_ id: Int?) {
+        
+        homeOpenViewModel.loadChosedPlace(id)
     }
 }
 
 extension HomeOpenView: HomeOpenViewModelProtocol {
-    func showNavigation() {
-        self.navigationController?.navigationBar.isHidden = false
-        navigationSetup()
-    }
-    
     
     func presentOtherView(_ viewController: UIViewController) {
-        self.navigationController?.pushViewController(viewController, animated: true)
+        
+        present(viewController, animated: false)
     }
     
     func setSpaces(_ spaces: [Space]) {
@@ -527,6 +403,7 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
     }
     
     func setCoverView(_ alpha: CGFloat) {
+        
         self.coverView.alpha = alpha
         self.imageView.alpha = alpha
     }
@@ -549,17 +426,4 @@ extension HomeOpenView: HomeOpenViewModelProtocol {
     }
 }
 
-extension HomeOpenView: UISearchBarDelegate{
-    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-}
 
-extension HomeOpenView: UISearchResultsUpdating{
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text{
-            self.filterContentForSearchText(searchText: searchText)
-            self.tableView.reloadData()
-        }
-    }
-}
