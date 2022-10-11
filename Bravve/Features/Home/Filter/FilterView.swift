@@ -387,8 +387,8 @@ final class FilterScreen: UIViewController {
     
     //MARK: - exitTap
     @objc private func exitTap() {
-        self.navigationController?.popViewController(animated: true)
-        self.navigationController?.navigationBar.isHidden = false
+        
+        dismiss(animated: true)
     }
     
     //MARK: - clearTap
@@ -497,7 +497,8 @@ final class FilterScreen: UIViewController {
 
         let HomeOpenView = HomeOpenView(true, filterViewModel.spaceParameters,
                                         filterViewModel.selectedItemsArray)
-        self.navigationController?.pushViewController(HomeOpenView, animated: true)
+        HomeOpenView.modalPresentationStyle = .fullScreen
+        present(HomeOpenView, animated: true)
     }
     
     //MARK: - capacityTap
